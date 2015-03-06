@@ -155,7 +155,7 @@ a:hover{
 }
 .mapCountries{
         margin: 0px auto;
-        margin-top: 50px;
+        margin-top: 25px;
     
 }
 #blob{
@@ -235,34 +235,28 @@ a:hover{
 	font: 14pt 'Open Sans';
         font-weight: 600;
 	color: rgb(87,105,143);
+        transition: 0.5s;
 }
 .newsName a:hover{
     color: rgb(87,105,143);
     opacity: 0.7;
+    transition: 0.5s;
 }
 .newsText{
 	font: 12pt calibri, regular;
 	margin-bottom: 25px;
 	color: rgb(87,105,143);
         width: 100%;
+        transition: 0.5s;
 }
 .newsText:hover{
 	opacity: 0.7;
-}
-
-.footerLogo{
-	padding-top: 25px;
-	padding-bottom: 25px;
+        transition: 0.5s;
 }
 
 .footerRights{
 	font: 11pt calibri, regular;
 	color: white;
-}
-
-.footerPartnership{
-	padding-top: 35px;
-	padding-bottom: 20px;
 }
 
 .footerRightImage{
@@ -433,13 +427,25 @@ article .intendNews .post-image .post-heading{
     margin-top: -20px;
 }
 .partnershipWithout{
-    padding-left: 43px;
-    margin-top: -13px;
     color: white;
     font-weight: 200;
+    font-size: 14pt;
+    margin-top: -10px;
+}
+.leftHelp{
+    text-align: left;
+    color: white;
+    font: 8.5pt 'Open Sans';
+    font-weight: 200;
+    width: 300px;
+}
+.leftHelp img{
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
 }
 .footerHeight{
-    height: 140px;
+    height: 290px;
 }
 .footerRights a:visited{
     color: white;
@@ -457,6 +463,13 @@ article .intendNews .post-image .post-heading{
 }
 .s-new .s-newsImageDiv1 .footerRights{
     margin-left: 0;
+}
+
+.footerRights{
+    text-align: center;
+    width: 330px;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 .s-new{
 }
@@ -534,6 +547,7 @@ li a:visited{
 	left: 300px;
 	top: -30px;
 	z-index: 999;
+  border-left:  3px solid rgb(84,182,157);
 }
 .dropDownMenu li ul li:hover ul {
     border-left-style: solid;
@@ -590,16 +604,20 @@ li a:visited{
 a:hover{
     color: rgb(177,216,66);
     text-decoration: none;
+    transition: color 0.5s;
 }
 
 .s-newsText{
     padding-left: 19px;
+    transition: color 0.5s;
 }
 .s-newsText a{
     color: rgb(84,182,157);
+    transition: color 0.5s;
 }
 .s-newsText a:hover{
     color: rgb(177,216,66);
+    transition: color 0.5s;
 }
 .logInInput{
     width: 100%;
@@ -639,6 +657,9 @@ body {
 	width: 100%;
 	height: 4px;
 	background-color: rgb(84,182,157);
+}
+.menuLineExtraSmall{
+    width: 84%;
 }
 .sliderArrows{
     width: 980px;
@@ -689,9 +710,8 @@ body {
     width: 0px;
     overflow: hidden;
     position: absolute;
-    margin-top: 19px;
+    margin-top: -8px;
     height: 35px;
-    margin-left: -328px;
     transition: 2s;
 }
 .enter-block input{
@@ -761,11 +781,11 @@ body {
 #cssmenu ul li ul li {
   max-height: 0;
   position: absolute;
-  -webkit-transition: max-height 0.4s ease-out;
-  -moz-transition: max-height 0.4s ease-out;
-  -ms-transition: max-height 0.4s ease-out;
-  -o-transition: max-height 0.4s ease-out;
-  transition: max-height 0.4s ease-out;
+  -webkit-transition: max-height 1s ease-out;
+  -moz-transition: max-height 1s ease-out;
+  -ms-transition: max-height 1s ease-out;
+  -o-transition: max-height 1s ease-out;
+  transition: max-height 1s ease-out;
 }
 #cssmenu ul li ul li:hover > ul {
   left: 100%;
@@ -829,6 +849,50 @@ p{
 }
 .bottom-article{
     margin-top: -20px;
+}
+.footerLeft{
+    float: left;
+    width: 50%;
+    text-align: center;
+    margin-top: 25px;
+}
+.footerLeftTop{
+    float: left;
+    width: 25%;
+    text-align: center;
+    margin-top: 35px;
+}
+.footerRightTop{
+    float: left;
+    width: 75%;
+    text-align: right;
+    margin-top: 21px;
+}
+.leftEuText{
+    margin-left: 5px;
+}
+.s-footerRightImage{
+    margin-right: 30px;
+}
+.footerLogo img{
+    width: 100%;
+    float: left;
+}
+
+.logos{
+    text-align: center;
+    float: left;
+    margin-top: 0;
+}
+.logos img{
+    width: 10%;
+}
+.projectFunded{
+    width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    margin-top: 20px;
 }
 
 
