@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <c:set var="url" scope="session" value="/Carpath/"/>
-
+<jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
 <html>
 <head>
     <link href="${Constants.URL}img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
