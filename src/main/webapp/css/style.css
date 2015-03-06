@@ -1,0 +1,43 @@
+.menuIndexLogo{
+	width: 100%;
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+.indexMenu{
+	background-color: rgb(86,105,143);
+}
+
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li{
+	display: inline;
+}
+
+a{
+	color: white;
+}
+
+.searchIndex{
+	padding-left: 20px;
+}
+
+.searchButton{
+	margin-left: -41px;
+}
+
+.searchBox{
+	width: 80%;
+}
+
+.socialLogo{
+	width:40%;
+}
+
+.indexNav{
+	padding-left:20px;
+}

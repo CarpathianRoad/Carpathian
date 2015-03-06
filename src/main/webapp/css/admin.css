@@ -1,0 +1,308 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 23, 2015, 5:59:14 PM
+    Author     : kiwi
+*/
+a {
+    color: #428bca;
+}
+.margintop10 {
+    margin-top: 30px;
+}
+.margintop20 {
+    margin-top: 30px;
+}
+.margintop30 {
+    margin-top: 30px;
+}
+.margintop-button {
+    margin-top: 23px;
+}
+.marginbottom30 {
+    margin-bottom: 30px;
+}
+.mini-bar .navbar-collapse  ul.navbar-nav {
+    margin-top: 0px;
+}
+.index-page .mini-bar {
+    top:0;
+}
+.black-color {
+    background-color: #000;
+    padding-top: 3px;
+    height: 30px;
+}
+.admin-panel-container {
+    padding: 10px 35px 0 35px;
+width: 100%;
+}
+.user-info-admin {
+    color: #fff;
+    margin-left: 10px;
+    width: 7%;
+    float: right;
+}
+.user-info-admin a {
+    margin-left: 10px;
+    margin-top: -10px;
+    font-weight: 700;
+    color: #fff;
+}
+.user-info-admin a img {
+    width:20px;
+}
+.admin-functions {
+    width: 75%;
+float: left;
+}
+.admin-functions a {
+    font-weight: 700;
+    color: #fff;
+    margin-left: 20px;
+}
+.admin-functions a.active {
+    border-bottom: 3px solid #428bca;
+}
+.black-top-line a img.home-icon {
+    width: 20px;
+    margin-left: 5px;
+    margin-top: 2px;
+    float: left;
+}
+.user-info-admin span {
+    font-weight: 400;
+    color: #68A4C4;
+}
+.admin-panel-container .table {
+    font-size: 12px;
+}
+img.edit-delete {
+    width: 20px;
+}
+.admin-panel-container .table th {
+    background-color: #f8f8f8;
+color: #68A4C4;
+}
+.add-row {
+    margin-bottom: 0px;
+}
+.list-block li {
+    list-style-type: none;
+}
+.list-block ul {
+   float:left; 
+}
+.img-upl #sendimg {
+margin-top: 3px;
+}
+.img-content img {
+    height: 120px;
+}
+.image-upload img {
+    height: 120px;
+    border: 2px dashed;
+}
+.image-upload-modal input {
+    display: none;
+}
+.image-upload button {
+    padding: 0;
+background-color: #fff;
+color: #000;
+border-color: #fff;
+}
+.img-content {
+    width: 100%;
+}
+.img-content a {
+    margin-left: 10px;
+    display: block;
+    float: left;
+    padding-bottom: 5px;
+}
+.image-upload {
+    float: left;
+}
+.image-upload-modal {
+    width: 100%;
+text-align: right;
+margin-bottom: 20px;
+}
+.img-content-show-all img {
+min-height: 100px;
+width: 160px;
+margin: 0px 3px 15px 3px
+}
+.modal-dialog {
+    width: 710px;
+}
+.ui-autocomplete {
+    background-color: white;
+    width: 300px;
+    border: 1px solid #cfcfcf;
+    list-style-type: none;
+    padding-left: 0px;
+}
+#map_canvas {
+width: 500px;
+height: 300px;
+position: relative;
+overflow: hidden;
+transform: translateZ(0px);
+background-color: rgb(229, 227, 223);
+}
+.main-address {
+width: 550px;
+margin-left: 20px;
+}
+.map-block {
+    margin-left: 20px;
+}
+.map-field {
+    margin-top: 50px;
+}
+.remove-icon {
+width: 20px;
+height: 20px !important;
+margin-left: -10px;
+vertical-align: top;
+margin-top: -10px;
+}
+.admin-panel-country li {
+    display: inline;
+color: #68A4C4;
+font-weight: 600;
+padding-right: 10px;
+text-decoration: underline;
+}
+.admin-panel-filters .field {
+    width: 17%;
+float: left;
+}
+.admin-panel-filters select {
+    width:80px;
+}
+.admin-panel-th {
+    width: 83px;
+    text-align: center;
+}
+.admin-panel-filters {
+    width: 37%;
+    height: 55px;
+    float: right;
+}
+.admin-table-cell{
+    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.admin-table-count {
+    width: 30px;
+}
+.add-button-panel button {
+    margin-top: 15px;
+}
+.add-button-panel button a {
+    color:#fff;
+}
+.admin-table-cell-title {
+    width: 722px;
+    max-width: 722px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}
+.image-box-index {
+    padding: 20px 0 20px 0;
+    text-align: center;
+    margin: 15px;
+    background-color: #fcfcfc;
+}
+.image-box-index img {
+    width: 90%;
+    border: 5px solid #fff;
+}
+.main-image-box-index {
+    margin-top: -20px;
+}
+.coutry-box {
+    margin: 20px 15px 0px 15px;
+}
+.coutry-box li {
+    display: inline;
+    color: #68A4C4;
+    font-weight: 600;
+    padding-right: 10px;
+}
+.add-button-panel {
+    width: 10%;
+    float: left;
+    margin-bottom: 10px;
+}
+.list-block .field {
+    width: 100%;
+}
+.list-block ul {
+    margin-left: 30px;
+}
+.list-block li {
+    display: block;
+    float: left;
+    width: 20%;
+    height: 40px;
+}
+.list-block li img {
+    width: 20px;
+    margin-right: 10px;
+}
+.red-star {
+    color: #EC1515;
+    margin-left: 5px;
+}
+.pagination {
+    text-align: center;
+}
+.pagination a {
+    width: 10px;
+    height: 10px;
+    background-color: #428bca;
+    color: #fff;
+    margin-left: 10px;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+}
+.loader-block {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 850px;
+    top: 32%;
+    padding-top: 10%;
+    background-color: #fff;
+    z-index: 100;
+    text-align: center;
+}
+#page_number {
+    float: right;
+    width: 50px;
+    margin-top: -47px;
+    margin-right: 10px;
+}
+.textarea-msg {
+    display:none;
+}
+.modal-dialog {
+    z-index: 1500;
+}
+.disabled-input {
+   background-color: #FFF !important;
+border: 1px solid #FFF;
+box-shadow: none;
+cursor: default !important;
+}

@@ -1,0 +1,157 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ua.aits.Carpath.controller;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.model.ArticleModel;
+import ua.aits.Carpath.model.MapModel;
+import ua.aits.Carpath.model.MenuModel;
+import ua.aits.Carpath.model.RouteModel;
+
+/**
+ *
+ * @author kiwi
+ */
+@Controller
+@Scope("session")
+public class SinglePageController {
+    
+    MapModel map = new MapModel();
+    
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public ModelAndView accesssDenied() {
+ 
+	  ModelAndView model = new ModelAndView();
+ 
+	  //check if user is login
+	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	  if (!(auth instanceof AnonymousAuthenticationToken)) {
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();	
+		model.addObject("username", userDetail.getUsername());
+	  }
+ 
+	  model.setViewName("403");
+	  return model;
+ 
+	}
+    
+    
+    @RequestMapping(value = {"/index", "/main", "/home"}, method = RequestMethod.GET)
+    protected ModelAndView handleRequestInternal(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		 ArticleModel content = new ArticleModel();
+                 MapModel map = new MapModel();
+                 ModelAndView modelAndView = new ModelAndView("Index");
+                 modelAndView.addObject("content", content.getLastTenArticle());
+                 modelAndView.addObject("points", map.getLastTenPoints());
+                 modelAndView.addObject("images", map.getImages());
+                 return modelAndView;
+	}
+    @RequestMapping(value = {"/routes/{id}", "/routes/{id}/"})
+    public ModelAndView routes(@PathVariable("id") String id, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RouteModel route = new RouteModel();
+            ModelAndView modelAndView = new ModelAndView("Routes");
+            modelAndView.addObject("route", route.getOneRoute(id));
+            modelAndView.addObject("imagesRoute", route.getRouteImages(id));
+            return modelAndView;
+	}
+    @RequestMapping(value = {"/routesList","/routesList/"})
+    public ModelAndView routesList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RouteModel route = new RouteModel();
+                List<RouteModel> routes = route.getAllRoutes();
+                
+		for (RouteModel temp : routes) {
+                        if(temp.getImages() == null || "".equals(temp.getImages())) {
+                            temp.setImages("img/logo2.png");
+                        }
+                        if(temp.getTextUA() == null || "".equals(temp.getTextUA())) {
+                            temp.setTextUA("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
+                        }
+		}    
+                
+		ModelAndView model = new ModelAndView("RoutesList");
+		model.addObject("routesList", routes);
+		
+		return model;
+	}
+    @RequestMapping(value = {"/contact","/contact/"})
+    public ModelAndView contact(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		ModelAndView model = new ModelAndView("Contact");
+		model.addObject("msg", "WelcomeController");
+		
+		return model;
+	}
+    @RequestMapping(value = {"/partners","/partners/"})
+    public ModelAndView partners(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		ModelAndView model = new ModelAndView("Partners");
+		model.addObject("msg", "WelcomeController");
+		
+		return model;
+	}
+    @RequestMapping(value = {"/map/{country}","/map/{country}/"})
+    public ModelAndView mapCountry(@PathVariable("country") String country, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+                List<MapModel> maps = map.getAllPoints();
+		ModelAndView model = new ModelAndView("Map");
+                model.addObject("country",country);
+		model.addObject("markers", maps);
+		return model;
+	}
+    @RequestMapping(value = {"/map/","/map"})
+    public ModelAndView map(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+                List<MapModel> maps = map.getAllPoints();
+		ModelAndView model = new ModelAndView("Map");
+		model.addObject("markers", maps);
+		return model;
+	}
+    @RequestMapping(value = {"/map/markers/{id}","/map/markers/{id}/"})
+    public ModelAndView marker(@PathVariable("id") String id, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+        MapModel ret  = map.getMarker(id);
+        if(ret.getMarkerIcon() == null || "".equals(ret.getMarkerIcon())) {
+                            ret.setMarkerIcon("gardens");
+                        }
+                        if(ret.getImage() == null || "".equals(ret.getImage())) {
+                            ret.setImage("img/logo2.png");
+                        }
+                        if(ret.getTextEN() == null || "".equals(ret.getTextEN())) {
+                            ret.setTextEN("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
+                        }
+        String[] arrayMessage = ret.getImage().split(",");
+        ModelAndView modelAndView = new ModelAndView("Markers");
+        modelAndView.addObject("marker", ret);
+        modelAndView.addObject("images", arrayMessage);
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = {"/kiwi/test"})
+    public ModelAndView kiwi(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+                MenuModel menu = new MenuModel();
+		ModelAndView model = new ModelAndView("TestPage");
+		model.addObject("menu", menu.getMenuRow("0"));
+		return model;
+	}
+}

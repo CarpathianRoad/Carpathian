@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-Run in Tomcat</actionName>
+            <displayName>Run in Tomcat</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>tomcat:run</goal>
+            </goals>
+        </action>
+    </actions>
