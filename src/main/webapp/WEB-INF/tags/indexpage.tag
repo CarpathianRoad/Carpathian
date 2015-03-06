@@ -21,10 +21,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/spasticNav.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/jssor.slider.mini.js"></script>
-    <script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
+    <script src="${Constants.URL}/js/slider/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
-    <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="${Constants.URL}/js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -92,7 +92,7 @@
                     <div class="s-clear"></div>
                     <div class="s-bot" id='cssmenu'>
                         <ul class="dropDownMenu">
-                            <li><a href="${Constants.URL}index">HOME<div class="bottom-caret"></div></a>
+                            <li><a href="${Constants.URL}index">HOME<div class="bottom-caret"></div><div id="homeMenu"></div></a>
                                 <ul>
                                     <div class="menuLine"></div>
                                     <li><a href="#">ABOUT CARPATHIAN REGION</a></li>
@@ -100,7 +100,7 @@
                                     <li><a href="#">ABOUT COUNTRIES AND CITIES</a></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div></a>
+                            <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div><div id="infoMenu"></div></a>
                                 <ul>
                                     <div class="menuLine"></div>
                                     <li><a href="#">ACCOMODATION<span class="right-caret"></span></a>
@@ -134,7 +134,7 @@
                                     <li><a href="#">TOURIST INFORMATION CENTERS</a></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}article/category/4">LEISURE<div class="bottom-caret"></div></a>
+                            <li><a href="${Constants.URL}article/category/4">LEISURE<div class="bottom-caret"></div><div id="leisureMenu"></div></a>
                                 <ul>
                                     <div class="menuLine"></div>
                                     <li><a href="#">ACTIVE REST<span class="right-caret"></span></a>
@@ -208,26 +208,26 @@
                                     <li><a href="#">BUISENESS TOURISM</a></li>
                                 </ul>
                             </li>
-                            <li><a href="${Constants.URL}article/news">NEWS</a>
+                            <li><a href="${Constants.URL}article/news">NEWS<div id="homeMenu"></div><div id="newsMenu"></div></a>
                                 <ul class="s-newsMenu">
                                     <div class="menuLineSmall"></div>
                                     <li></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}map">MAP</a>
+                            <li><a href="${Constants.URL}map">MAP<div id="homeMenu"></div><div id="mapMenu"></div></a>
 				<ul class="s-mapMenu">
                                     <div class="menuLineSmall"></div>
                                     <li></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}routesList">TOURIST ROADS<div class="bottom-caret"></div></a>
+                            <li><a href="${Constants.URL}routesList">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
                                 <ul>
                                     <div class="menuLine"></div>
                                     <li><a href="#">TRAILS</a></li>
                                     <li><a href="#">THEMATIC ROUTES</a></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}contact">ABOUT US<div class="bottom-caret"></div></a>
+                            <li><a href="${Constants.URL}contact">ABOUT US<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
                                 <ul class="s-menu">
                                     <div class="menuLine"></div>
                                     <li class="s-menu"><a href="#">PARTNERS</a></li>
@@ -241,43 +241,47 @@
 	<div class="s-clear"></div>
         </div>
         <div class="mainMenuIntend"></div>
-        
+        <div class="contentIntend"></div>
         <jsp:doBody/> 
-        
+        <div class="contentIntend"></div>
         <footer class="indexNavBarFooter footerHeight">
             <div class="s-new s-footer">
-                <div class="s-newsImageDiv1">
-                    <img class="footerLogo" src="${Constants.URL}img/logoWhite.png">
-                    <div class="footerRights">
-                        <div class="enter-icon"><img src="${Constants.URL}img/enter-icon.png"></div>
-                        <a id="copyright" href="http://www.aits.ua" target="_blank">&#169; Carpathian tourist road 2015 All right reserved</a>
+                <div class="footerLeftTop">
+                    <div class="leftHelp">
+                        <img src="${Constants.URL}img/euFlag.png">
+                        The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu      
                     </div>
                 </div>
-                <div class="s-newsImageDiv2">
-                    <div class="s-big">
-                        <div class="footerRights">
-                            <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euLogo.png"></a>
-                        </div>                                    
-                    </div>
-                    <div class="enter-block">
-                        <div>
-                            <form action="${Constants.URL}system/login.do" method="POST" id="loginForm" name="auth">
-                                    <input id="loginInput" type="text" id="login" name="username" placeholder="* Enter login" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
-                                    <input id="loginInputPass" type="password" id="passwd" name="password" placeholder="* Enter password" data-rule="email" data-msg="Please enter a valid email" />
-                                    <button id="logInButton" class="btn btn-mini logInButton" onclick="madeAjaxCall();">Log In</button>
-                                    <button id="cancelButton" class="btn btn-mini cancelButton" type="button">Cancel</button>
-                                <div class="validation"></div>
-                            </form>
-                        </div>
-                    </div>
+                <div class="footerRightTop rightHelp">
+                    <a class="s-footerRightImage" href="http://huskroua-cbc.net/" target="_blank"><img src="${Constants.URL}img/rightImageFooter.png"></a>
+                    <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euLogo.png"></a>
                 </div>
-                <div class="s-newsImageDiv3">
-                    <a href="http://huskroua-cbc.net/" target="_blank"><img class="s-footerRightImage" src="${Constants.URL}img/rightImageFooter.png"></a>
+                <div class="footerLeft logos">
+                    <div class="footerLogo"><img src="${Constants.URL}img/logo1.png"></div>               
+                    <div class="footerLogo"><img src="${Constants.URL}img/logo2.png"></div>
+                </div>
+                <div class="footerLeft">
                     <div class="partnershipWithout">
                         Partnership without borders
                     </div>
                 </div>
                 <div class="s-clear"></div>
+                <div class="projectFunded">
+                    The project is funded by the European Union. This website has been developed with the assistance of the European Union. The content of this website can in no way be taken to reflect the views of the European Union.
+                </div>       
+                <div class="footerRights">
+                            <div class="enter-icon"><img src="${Constants.URL}img/enter-icon.png"></div>
+                            <a id="copyright" href="http://www.aits.ua" target="_blank">&#169; Carpathian tourist road 2015 All right reserved</a>
+                        <div class="enter-block">
+                                <form action="${Constants.URL}system/login.do" method="POST" id="loginForm" name="auth">
+                                        <input id="loginInput" type="text" id="login" name="username" placeholder="* Enter login" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
+                                        <input id="loginInputPass" type="password" id="passwd" name="password" placeholder="* Enter password" data-rule="email" data-msg="Please enter a valid email" />
+                                        <button id="logInButton" class="btn btn-mini logInButton" onclick="madeAjaxCall();">Log In</button>
+                                        <button id="cancelButton" class="btn btn-mini cancelButton" type="button">Cancel</button>
+                                    <div class="validation"></div>
+                                </form>
+                        </div>
+                </div>
             </div>
         </footer>
     </div>
@@ -295,6 +299,30 @@
             maxSlides: 3,
             slideMargin: 40
         });
+        var x = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
+        switch(x){
+            case "index":
+                $('#homeMenu').addClass('menuLine');
+                break;
+            case "6":
+                $('#infoMenu').addClass('menuLine');
+                break;
+            case "4":
+                $('#leisureMenu').addClass('menuLine');
+                break;
+            case "news":
+                $('#newsMenu').addClass('menuLine');
+                break;
+            case "map":
+                $('#mapMenu').addClass('menuLine');
+                break;
+            case "routesList":
+                $('#routesMenu').addClass('menuLine');
+                break;
+            case "contact":
+                $('#contactsMenu').addClass('menuLine');
+                break;
+        }
     });
     
     function borderButton(button){
@@ -471,6 +499,7 @@
             $('.s-rightNavBar').addClass('s-rightNavBarSmall');
             $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
             $('.dropDownMenu a').addClass('scrollSmallerText');
+            $('.menuLineSmall').addClass('menuLineExtraSmall');
         } 
         else {
             $('.s-top').show();
@@ -480,6 +509,7 @@
             $('.s-rightNavBarSmall').addClass('s-rightNavBar');
             $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
             $('.dropDownMenu a').removeClass('scrollSmallerText');
+            $('.menuLineSmall').removeClass('menuLineExtraSmall');
         }
     });
 }

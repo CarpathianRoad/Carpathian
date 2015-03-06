@@ -337,7 +337,7 @@
         $(button).addClass( "buttonBorderClassMapPage" );
     }
 </script>
-<div style="width:100%;height:700px; margin-top: -50px; margin-bottom: 50px;">
+<div style="width:100%;height:700px; margin-top: -50px;">
     <div class="mapCountries">
         <div class="indexMapMenu">
             <div class="countriesMapWidth">

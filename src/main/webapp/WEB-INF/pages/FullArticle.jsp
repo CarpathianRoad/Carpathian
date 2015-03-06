@@ -35,37 +35,37 @@
 						<p>
 						${article.textEN}
                                                 </p>
-						<div class="bottom-article">
-							<ul class="meta-post">
-								<li><i class="icon-calendar"></i><a href="#">${article.date}</a></li>
-                                                                <li>${article.country}</li>
-                                                                <li>${article.region}</li>
-                                                                <li>${article.district}</li>
-                                                                <li>${article.town}</li>
-							</ul>
-						</div>
 				</article>
                                 
 				
 			</div>
+                                    <c:if test="not empty ${article.x}">
 			<div class="col-lg-4">
                             <aside class="right-sidebar" >
                                 <div class="widget">
                                     <div id="widget-map" style="height: 250px;">
                                         
                                     </div>
-                                    <c:if test="not empty ${article.x}">
 					<h5>Coordinates</h5>
                                         <div class="coords-block">
                                             <strong>X:</strong> 48.626451 
                                             &nbsp&nbsp&nbsp&nbsp
                                             <strong>Y:</strong> 22.288817
                                         </div>
-                                     </c:if>
                                         
                                 </div>
 				</aside>
+						<div class="bottom-articleFull">
+							<ul class="meta-post">
+								<li><i class="icon-calendar"></i>${article.date}</li>
+                                                                <li>${article.country}</li>
+                                                                <li>${article.region}</li>
+                                                                <li>${article.district}</li>
+                                                                <li>${article.town}</li>
+							</ul>
+						</div>
 			</div>
+                                     </c:if>
 		</div>
 	</div>
 	</section>
