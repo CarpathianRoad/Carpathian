@@ -8,7 +8,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:indexpage>
-    <div class="contentIntend"></div>
 	<section style="display: none" id="inner-headline">
 	<div class="container">
 		<div class="row">
