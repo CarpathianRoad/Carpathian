@@ -21,10 +21,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/spasticNav.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/jssor.slider.mini.js"></script>
-    <script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
+    <script src="${Constants.URL}/js/slider/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
-    <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="${Constants.URL}/js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
     <style>
 	label.css-label {
@@ -314,28 +314,6 @@
                 $('#newsMenu').addClass('menuLine');
                 break;
             case "map":
-                mapPageMenu();
-                break;
-            case "map#":
-                mapPageMenu();
-                break;
-            case "allMap":
-                mapPageMenu();
-                break;
-            case "Romania":
-                mapPageMenu();
-                break;
-            case "Poland":
-                mapPageMenu();
-                break;
-            case "Ukraine":
-                mapPageMenu();
-                break;
-            case "Slovakia":
-                mapPageMenu();
-                break;
-            case "Hungary":
-                mapPageMenu();
                 break;
             case "routesList":
                 $('#routesMenu').addClass('menuLine');
@@ -543,6 +521,36 @@
             $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
             $('.dropDownMenu a').addClass('scrollSmallerText');
             $('.menuLineSmall').addClass('menuLineExtraSmall');
+                mapPageMenu();
+                break;
+            case "map#":
+                mapPageMenu();
+                break;
+            case "allMap":
+                mapPageMenu();
+                break;
+            case "Romania":
+                mapPageMenu();
+                break;
+            case "Poland":
+                mapPageMenu();
+                break;
+            case "Ukraine":
+                mapPageMenu();
+                break;
+            case "Slovakia":
+                mapPageMenu();
+                break;
+            case "Hungary":
+                mapPageMenu();
+                $('#mapMenu').addClass('menuLine');
+        }
+    });
+}
+window.onload = init();
+</script>
+</body>
+</html>
             $('.carpathName').addClass('carpathNameSmall');
             $('.carpathNameSmall').removeClass('carpathName');
         } 
@@ -559,10 +567,13 @@
                 $('.carpathNameSmall').addClass('carpathName');
                 $('.carpathName').removeClass('carpathNameSmall');
             }
-        }
-    });
-}
-window.onload = init();
-</script>
-</body>
-</html>
+        } 
+        else {
+            $('.s-top').show();
+            $('.topMenu').removeClass('topMenuSmall');
+            $('.s-logoIndexSmall').addClass('s-logoIndex');
+            $('.s-logoIndex').removeClass('s-logoIndexSmall');
+            $('.s-rightNavBarSmall').addClass('s-rightNavBar');
+            $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
+            $('.dropDownMenu a').removeClass('scrollSmallerText');
+            $('.menuLineSmall').removeClass('menuLineExtraSmall');
