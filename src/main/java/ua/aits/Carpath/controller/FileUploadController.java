@@ -12,8 +12,6 @@ package ua.aits.Carpath.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.LinkedList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
  
 import org.slf4j.Logger;
@@ -25,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ua.aits.Carpath.functions.Constants;
-import ua.aits.Carpath.functions.Helpers;
  
 /**
  * Handles requests for the application file upload requests
@@ -39,12 +36,13 @@ public class FileUploadController {
     /**
      * Upload single file using Spring Controller
      * @param file
+     * @param path
      * @param request
      * @return 
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadFileHandler(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
+    String uploadFileHandler(@RequestParam("upload") MultipartFile file, @RequestParam("path") String path, HttpServletRequest request) {
  
                 String name = file.getOriginalFilename();
         if (!file.isEmpty()) {
@@ -52,7 +50,7 @@ public class FileUploadController {
                 byte[] bytes = file.getBytes();
                 // Creating the directory to store file
                 String rootPath = System.getProperty("catalina.home");
-                File dir = new File(Constants.FILE_URL);
+                File dir = new File(Constants.home+path);
                 if (!dir.exists())
                     dir.mkdirs();
  
@@ -67,8 +65,8 @@ public class FileUploadController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
  
-                return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+"img/markerImages/" + name + "'>"
-                        + "<img src='"+Constants.URL+"img/content/" + name + "' alt='" + name + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
+                return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+path + name + "'>"
+                        + "<img src='"+Constants.URL+path + name + "' alt='" + name + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
@@ -105,16 +103,53 @@ public class FileUploadController {
                     + " because the file was empty.";
         }
     }
-    @RequestMapping(value = "/showImages")
+    @RequestMapping(value = "/showImages", method = RequestMethod.GET)
     public @ResponseBody
     String showGalery(HttpServletRequest request) {
-        final File folder = new File(Constants.FILE_URL);
-        List<String> imgName = Helpers.listFilesForFolder(folder);
-        String htmlText = "";
-        for (String temp : imgName) {
-            htmlText = htmlText + "<img name=\""+temp+"\" src=\""+Constants.URL+"img/content/"+temp+"\"/>";
+        String folder_name = request.getParameter("name");
+        String parent = request.getParameter("parent");
+        String curll = "";
+        if("".equals(parent) && "".equals(folder_name)){
+            curll = Constants.FILE_URL;
         }
-        return htmlText;
+        else if("".equals(folder_name) && !"".equals(parent)) {
+            curll = parent;
+        }
+        else {
+            curll = parent + folder_name+"/";
+        }
+        final File directory = new File(curll);
+        File[] fList = directory.listFiles();
+        String htmlImg = "";
+        String htmlFolder = "";
+        String link_path = curll.replace(Constants.home,"");
+        for (File file : fList) {
+            if (file.isFile()) {
+                htmlImg = htmlImg + "<div class='galery-item'><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></div>";
+            } else if(file.isDirectory()){
+                htmlFolder = htmlFolder + "<div class='galery-item'><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+file.getName()+"</span><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></div>";
+            }
+        }
+        return htmlFolder+htmlImg;
+    }
+    @RequestMapping(value = "/addFolder", method = RequestMethod.GET)
+    public @ResponseBody
+    String addfolder(HttpServletRequest request) {
+        String folder_name = request.getParameter("name");
+        String path = request.getParameter("path");
+        
+            boolean result = false;
+
+            try{
+                 final boolean directory = new File(path+folder_name).mkdirs();
+                result = true;
+             } catch(SecurityException se){
+                //handle it
+             }        
+             if(result) {    
+               System.out.println("DIR created");  
+             }
+        return "work";
     }
     
 }

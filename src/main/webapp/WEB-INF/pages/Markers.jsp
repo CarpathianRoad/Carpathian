@@ -151,7 +151,7 @@ display: none !important;
             };
             var  map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
             var pinIcon = new google.maps.MarkerImage(
-                "${Constants.URL}img/brownmarkers/${marker.markerIcon}.png",
+                "${Constants.URL}img/markers/${marker.markerIcon}.png",
                 null, 
                 null, 
                 null, 
@@ -219,7 +219,7 @@ display: none !important;
                                                         </div>
                                                                 <div class="showOnMap">
                                                                     <div class="showOnMapImage">
-                                                                        <img src="${Constants.URL}img/brownmarkers/${marker.markerIcon}.png">
+                                                                        <img src="${Constants.URL}img/markers/${marker.markerIcon}.png">
                                                                     </div>
                                                                     <div class="showOnMapText">
                                                                         <h5><a href="#">Display on map</a></h5>
@@ -228,7 +228,7 @@ display: none !important;
 						</div>
                                                 <div class="descr">
                                                     <div id="descrImage">
-                                                        <img src="${Constants.URL}img/brownmarkers/${marker.markerIcon}.png">
+                                                        <img src="${Constants.URL}img/markers/${marker.markerIcon}.png">
                                                     </div>
                                                     <div class="descrText">
                                                         <p>

@@ -83,20 +83,20 @@ public class FormController {
         String img = request.getParameter("real-img-path");
         String x = request.getParameter("x");
         String y = request.getParameter("y");
-        String country = StringEscapeUtils.unescapeHtml(request.getParameter("country").replace("'","\\'"));
-        String region = StringEscapeUtils.unescapeHtml(request.getParameter("region").replace("'","\\'"));
-        String district = StringEscapeUtils.unescapeHtml(request.getParameter("district").replace("'","\\'"));
-        String town = StringEscapeUtils.unescapeHtml(request.getParameter("town").replace("'","\\'"));
+        String country = StringEscapeUtils.unescapeHtml(request.getParameter("country"));
+        String region = StringEscapeUtils.unescapeHtml(request.getParameter("region"));
+        String district = StringEscapeUtils.unescapeHtml(request.getParameter("district"));
+        String town = StringEscapeUtils.unescapeHtml(request.getParameter("town"));
         String markerType = request.getParameter("marker-type-all");
         String filter = request.getParameter("filter-type-all");
-        String textEN = StringEscapeUtils.unescapeHtml(request.getParameter("textEN").replace("'","\\'"));
-        String textUA = StringEscapeUtils.unescapeHtml(request.getParameter("textUA").replace("'","\\'"));
-        String textHU = StringEscapeUtils.unescapeHtml(request.getParameter("textHU").replace("'","\\'"));
-        String textSK = StringEscapeUtils.unescapeHtml(request.getParameter("textSK").replace("'","\\'"));
-        String textPL = StringEscapeUtils.unescapeHtml(request.getParameter("textPL").replace("'","\\'"));
-        String textRO = StringEscapeUtils.unescapeHtml(request.getParameter("textRO").replace("'","\\'"));
-        String textGE = StringEscapeUtils.unescapeHtml(request.getParameter("textGE").replace("'","\\'"));
-        String textCZ = StringEscapeUtils.unescapeHtml(request.getParameter("textCZ").replace("'","\\'"));
+        String textEN = StringEscapeUtils.unescapeHtml(request.getParameter("textEN"));
+        String textUA = StringEscapeUtils.unescapeHtml(request.getParameter("textUA"));
+        String textHU = StringEscapeUtils.unescapeHtml(request.getParameter("textHU"));
+        String textSK = StringEscapeUtils.unescapeHtml(request.getParameter("textSK"));
+        String textPL = StringEscapeUtils.unescapeHtml(request.getParameter("textPL"));
+        String textRO = StringEscapeUtils.unescapeHtml(request.getParameter("textRO"));
+        String textGE = StringEscapeUtils.unescapeHtml(request.getParameter("textGE"));
+        String textCZ = StringEscapeUtils.unescapeHtml(request.getParameter("textCZ"));
         String textSRB = StringEscapeUtils.unescapeHtml(request.getParameter("textSRB"));
         String result = article.insertArticle(title, date, actDate, type, author, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
@@ -178,6 +178,37 @@ public class FormController {
             logger.info("You failed to upload " + name + " because the file was empty.");
         }
         markers.addMarker(short_title, full_title);
+        return new ModelAndView("redirect:" + "/system/markers");
+    }
+    @RequestMapping(value = "/system/editmarker.do", method = RequestMethod.POST)
+    public ModelAndView doEditMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, @RequestParam("full_title") String full_title, @RequestParam("id") String id, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String name = "";
+        if (!file.isEmpty()) {
+        name = file.getOriginalFilename();
+            try {
+                File files = new File(Constants.FILE_URL_ICON+short_title+".png");
+                if(files.delete()){
+    			System.out.println(files.getName() + " is deleted!");
+    		}else{
+    			System.out.println("Delete operation is failed.");
+    		}
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.FILE_URL_ICON);
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + short_title+".png");
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                
+            } catch (Exception e) {
+                logger.info( "You failed to upload " + name + " => " + e.getMessage());
+            }
+        } else {
+            logger.info("You failed to upload " + name + " because the file was empty.");
+        }
+        markers.updateMarker(id, short_title, full_title);
         return new ModelAndView("redirect:" + "/system/markers");
     }
 }
