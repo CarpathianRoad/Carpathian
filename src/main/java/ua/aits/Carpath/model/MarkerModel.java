@@ -42,7 +42,7 @@ public class MarkerModel {
     }
     
     public List<MarkerModel> getAllMarkers() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from markers order by id desc;");
+        ResultSet result = DB.getResultSet("select * from markers;");
         List<MarkerModel> resultList = new LinkedList<>();
         while (result.next()) {
             MarkerModel temp = new MarkerModel();
@@ -53,9 +53,21 @@ public class MarkerModel {
         } 
         return resultList;
     }
-    
+    public MarkerModel getOneMarker(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from markers where id="+id+";");
+        MarkerModel temp = new MarkerModel();
+        while (result.next()) {
+            temp.setId(result.getInt("id"));
+            temp.setShortTitle(result.getString("title"));
+            temp.setFullTitle(result.getString("descr"));
+        } 
+        return temp;
+    }
     public void addMarker(String title, String descr) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DB.runQuery("INSERT INTO `markers`(`title`, `descr`) VALUES ('"+title+"','"+descr+"');");
+    }
+    public void updateMarker(String id, String title, String descr) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `markers` SET title='"+title+"', descr='"+descr+"' WHERE id="+id+";");
     }
     
     public void deleteMarker(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

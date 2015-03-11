@@ -123,6 +123,13 @@ public class SystemController {
             modelAndView.addObject("markers", markers.getAllMarkers());
             return modelAndView;
     }
+    @RequestMapping(value = {"/system/markers/edit/{id}", "/system/markers/edit/{id}", "/Carpath/system/markers/edit/{id}", "/Carpath/system/markers/edit/{id}"})
+    public ModelAndView editMarkers(@PathVariable("id") String id,HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            ModelAndView modelAndView = new ModelAndView("/system/MarkerEdit");
+            modelAndView.addObject("marker", markers.getOneMarker(id));
+            return modelAndView;
+    }
     @RequestMapping(value = {"/system/filters", "/system/filters/", "/Carpath/system/filters", "/Carpath/system/filters/"})
     public ModelAndView showFilters(HttpServletRequest request,
 		HttpServletResponse response) throws Exception {

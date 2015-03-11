@@ -192,7 +192,7 @@
                         <c:forEach items="${markers}" var="item">
                             <li>
                                 <div class="checkbox">  
-                                <label><img src="${Constants.URL}img/brownmarkers/${item.shortTitle}.png"/><input type="checkbox" value="${item.shortTitle}">${item.fullTitle}</label>
+                                <label><img src="${Constants.URL}img/markers/${item.shortTitle}.png"/><input type="checkbox" value="${item.shortTitle}">${item.fullTitle}</label>
                               
                               </div>
                             </li>

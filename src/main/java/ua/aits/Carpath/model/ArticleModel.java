@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.lang.StringEscapeUtils;
 import ua.aits.Carpath.functions.DB;
 import ua.aits.Carpath.functions.Helpers;
 
@@ -443,8 +444,9 @@ public class ArticleModel {
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
         DB.runQuery("INSERT INTO content (title, date, type, author, image, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete)"
-                    + "values ('"+ title +"','"+  date +"',"+  type +",'"+  author +"','"+  img +"',"+  x +","+  y +","+ 
-"                '"+ public_country +"','"+ country +"','"+  region +"','"+ district +"','"+  town +"','"+  markerType +"','"+  filters +"', 0, '"+  textEN +"', '"+  textUA +"', '"+  textHU +"', '"+  textSK +"', '"+  textRO +"', '"+  textPL +"', '"+  textGE +"', '"+  textCZ +"', '"+  textSRB +"','"+  actDate +"','"+  menuCat +"', 0);");
+                    + "values ('"+ StringEscapeUtils.escapeSql(title) +"','"+  date +"',"+  type +",'"+  author +"','"+  img +"',"+  x +","+  y +","+ 
+"                '"+ public_country +"','"+ StringEscapeUtils.escapeSql(country) +"','"+  StringEscapeUtils.escapeSql(region) +"','"+ StringEscapeUtils.escapeSql(district) +"','"+  StringEscapeUtils.escapeSql(town) +"','"+  markerType +"','"+  filters +"', 0, '"+  
+                StringEscapeUtils.escapeSql(textEN) +"', '"+  StringEscapeUtils.escapeSql(textUA) +"', '"+  StringEscapeUtils.escapeSql(textHU) +"', '"+  StringEscapeUtils.escapeSql(textSK) +"', '"+  StringEscapeUtils.escapeSql(textRO) +"', '"+  StringEscapeUtils.escapeSql(textPL) +"', '"+  StringEscapeUtils.escapeSql(textGE) +"', '"+  StringEscapeUtils.escapeSql(textCZ) +"', '"+  StringEscapeUtils.escapeSql(textSRB) +"','"+  actDate +"','"+  menuCat +"', 0);");
             ResultSet result = DB.getResultSet("SELECT * FROM content WHERE type="+  type +" AND date='"+  date +"' AND author='"+  author +"' ORDER BY id DESC LIMIT 1;");
             Integer temp = 1;
             while (result.next()) {

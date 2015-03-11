@@ -173,7 +173,7 @@
                         </div>
 
                         <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
-                        <div class="newsName"><a href="${Constants.URL}markers/map/${markers.id}">${markers.title}</a></div>
+                        <div class="newsName"><a href="${Constants.URL}map/markers/${markers.id}">${markers.title}</a></div>
                         <a href="${Constants.URL}markers/map/${markers.id}"><div class="newsText">${markers.textEN}</div></a>
                     </div>
                 </div>
@@ -307,6 +307,14 @@
                         counter++;
                     }
                 }, 5000);
+                
+            $('.slider1').bxSlider({
+                auto: false,
+                slideWidth: 300,
+                minSlides: 3,
+                maxSlides: 3,
+                slideMargin: 40
+            });
         });
     </script>
     <script type="text/javascript">

@@ -7,8 +7,8 @@
 <%@tag description="Index Page Template" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
-<c:set var="url" scope="session" value="/Carpath/"/>
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
+
 <html>
 <head>
     <link href="${Constants.URL}img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -26,23 +26,27 @@
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
     <link href="${Constants.URL}/js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-60469558-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+    <style>
+	label.css-label {
+            background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_cf6353ab7cdbfbd4f8cf2b5189d35a11.png);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+	}
+    </style>
 </head>
 <body>
     <div class="">
 	<div class="row indexNavbar topMenu">
-            <div class='s-new'>
+            <div class='s-new' id="mainMenuWidth">
 		<div class="s-logoIndex">
-                    <a href="${Constants.URL}index"><img class="" src="${Constants.URL}img/logo.png"></a>
+                    <a href="${Constants.URL}index">
+                        <img class="" src="${Constants.URL}img/logoWhite2.png">
+                        <div class="carpathName">Carpathian<br>Tourist Road</div>
+                    </a>
 		</div>
 		<div class="s-rightNavBar">
                     <div class="s-top">
@@ -59,14 +63,14 @@
 			<div class="s-two">
                             <a href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
                                 <img class="s-socialLogo intendSocial" src="${Constants.URL}img/fb_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/fb_icon_hover.png';$(this).fadeIn(300);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/fb_icon.png';$(this).fadeIn(300);" 
+                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/fb_icon_hover.png';$(this).fadeIn(100);" 
+                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/fb_icon.png';$(this).fadeIn(100);" 
                                     border="0">
                             </a>
                             <a href="https://twitter.com/CarpathianRoad" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/tw_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/tw_icon_hover.png';$(this).fadeIn(300);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/tw_icon.png';$(this).fadeIn(300);" 
+                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/tw_icon_hover.png';$(this).fadeIn(100);" 
+                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/tw_icon.png';$(this).fadeIn(100);" 
                                     border="0">
                             </a>
 			</div>
@@ -74,9 +78,9 @@
                             <form class="searchMenu">
 				<button type="button" id="searchButton" onclick="showButton()">
                                     <div class=""><img src="${Constants.URL}img/search_icon.png"
-                                        onmouseover="$(this).hide();this.src='${Constants.URL}img/search_icon_hover.png';$(this).fadeIn(300);
+                                        onmouseover="$(this).hide();this.src='${Constants.URL}img/search_icon_hover.png';$(this).fadeIn(100);
                                             $('#searchButton').css('top','4px')"
-                                        onmouseout="$(this).hide();this.src='${Constants.URL}img/search_icon.png';$(this).fadeIn(300);
+                                        onmouseout="$(this).hide();this.src='${Constants.URL}img/search_icon.png';$(this).fadeIn(100);
                                             $('#searchButton').css('top','3px')">
                                     </div>
 				</button>
@@ -243,8 +247,9 @@
         <div class="mainMenuIntend"></div>
         <div class="contentIntend"></div>
         <jsp:doBody/> 
-        <div class="contentIntend"></div>
+        <div class="contentIntendBottom"></div>
         <footer class="indexNavBarFooter footerHeight">
+            <div class="footerSmallIntend"></div>
             <div class="s-new s-footer">
                 <div class="footerLeftTop">
                     <div class="leftHelp">
@@ -256,11 +261,13 @@
                     <a class="s-footerRightImage" href="http://huskroua-cbc.net/" target="_blank"><img src="${Constants.URL}img/rightImageFooter.png"></a>
                     <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euLogo.png"></a>
                 </div>
+                <!--
                 <div class="footerLeft logos">
                     <div class="footerLogo"><img src="${Constants.URL}img/logo1.png"></div>               
                     <div class="footerLogo"><img src="${Constants.URL}img/logo2.png"></div>
                 </div>
-                <div class="footerLeft">
+                -->
+                <div class="footerLeft partnershipWidth">
                     <div class="partnershipWithout">
                         Partnership without borders
                     </div>
@@ -292,13 +299,6 @@
     
     $( document ).ready(function() {
         $('#searchButtonActive').hide(); 
-        $('.slider1').bxSlider({
-            auto: true,
-            slideWidth: 300,
-            minSlides: 3,
-            maxSlides: 3,
-            slideMargin: 40
-        });
         var x = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(x){
             case "index":
@@ -314,7 +314,6 @@
                 $('#newsMenu').addClass('menuLine');
                 break;
             case "map":
-                $('#mapMenu').addClass('menuLine');
                 break;
             case "routesList":
                 $('#routesMenu').addClass('menuLine');
@@ -324,6 +323,28 @@
                 break;
         }
     });
+    
+    function mapPageMenu(){
+                $('#mapMenu').addClass('menuLine');
+                $('.s-top').hide();
+                $('.topMenu').addClass('topMenuSmall');
+                $('.topMenu').addClass('mapMenuSmall');
+                $('.s-logoIndex').addClass('s-logoIndexSmall');
+                $('.s-logoIndex').addClass('mapLogoSmall');
+                $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                $('.s-rightNavBar').addClass('menuMapCenterSmall');
+                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                $('.dropDownMenu a').addClass('scrollSmallerText');
+                $('.menuLineSmall').addClass('menuLineExtraSmall');
+                $('#mainMenuWidth').addClass('s-newMap');
+                $('.mainMenuIntend').addClass('mainMenuIntendMap');
+                $('.contentIntend').addClass('contentIntendMap');
+                $('.contentIntendMap').removeClass('contentIntend');
+                $('.mainMenuIntend').removeClass('mainMenuIntend');
+                $('.carpathName').addClass('carpathNameSmall');
+                $('.carpathNameSmall').removeClass('carpathName');
+    }
     
     function borderButton(button){
         $('#allBorder').hide();
@@ -500,6 +521,52 @@
             $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
             $('.dropDownMenu a').addClass('scrollSmallerText');
             $('.menuLineSmall').addClass('menuLineExtraSmall');
+                mapPageMenu();
+                break;
+            case "map#":
+                mapPageMenu();
+                break;
+            case "allMap":
+                mapPageMenu();
+                break;
+            case "Romania":
+                mapPageMenu();
+                break;
+            case "Poland":
+                mapPageMenu();
+                break;
+            case "Ukraine":
+                mapPageMenu();
+                break;
+            case "Slovakia":
+                mapPageMenu();
+                break;
+            case "Hungary":
+                mapPageMenu();
+                $('#mapMenu').addClass('menuLine');
+        }
+    });
+}
+window.onload = init();
+</script>
+</body>
+</html>
+            $('.carpathName').addClass('carpathNameSmall');
+            $('.carpathNameSmall').removeClass('carpathName');
+        } 
+        else {
+            if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
+                $('.s-top').show();
+                $('.topMenu').removeClass('topMenuSmall');
+                $('.s-logoIndexSmall').addClass('s-logoIndex');
+                $('.s-logoIndex').removeClass('s-logoIndexSmall');
+                $('.s-rightNavBarSmall').addClass('s-rightNavBar');
+                $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
+                $('.dropDownMenu a').removeClass('scrollSmallerText');
+                $('.menuLineSmall').removeClass('menuLineExtraSmall');
+                $('.carpathNameSmall').addClass('carpathName');
+                $('.carpathName').removeClass('carpathNameSmall');
+            }
         } 
         else {
             $('.s-top').show();
@@ -510,10 +577,3 @@
             $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
             $('.dropDownMenu a').removeClass('scrollSmallerText');
             $('.menuLineSmall').removeClass('menuLineExtraSmall');
-        }
-    });
-}
-window.onload = init();
-</script>
-</body>
-</html>
