@@ -99,7 +99,7 @@
                     <!-- !!!MAP BLOCK!!! -->
                     
     <div class="s-new">
-        <div class="indexMap" onmouseover="stopIntervalFunc()" onmouseout="startIntervalFunc()" id="mainMap">
+        <div class="indexMap" id="mainMap">
             <div class="indexMapMenu">
                 <ul id="nav">
                     <li id="allMenu">
@@ -167,14 +167,22 @@
                 <div class="s-cell slide">
                     <div class="s-block">
                         <div class="newsImage" onmouseover="" onmouseout="">
-                            <a href="${Constants.URL}markers/map/${markers.id}">
-                            <div class="imageHover"></div>
-                            <img src="${Constants.URL}${markers.image}" /></a>
+                            <a href="${Constants.URL}map/markers/${markers.id}">
+                                <div class="imageHover">
+                                    <div class="imageHoverDate">
+                                        ${markers.date}
+                                    </div>
+                                    <div class="imageHoverCountry">
+                                        <div class="newsCountryText">${markers.country}</div><img src="${Constants.URL}img/newsImageHover.png">
+                                    </div>
+                                </div>
+                                <img src="${Constants.URL}${markers.image}" alt="image"/>
+                            </a>
                         </div>
 
                         <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
                         <div class="newsName"><a href="${Constants.URL}map/markers/${markers.id}">${markers.title}</a></div>
-                        <a href="${Constants.URL}markers/map/${markers.id}"><div class="newsText">${markers.textEN}</div></a>
+                        <a href="${Constants.URL}map/markers/${markers.id}"><div class="newsText">${markers.textEN}</div></a>
                     </div>
                 </div>
             </c:forEach>
@@ -188,12 +196,21 @@
             <c:forEach items="${content}" var="item">
                 <div class="s-cell slide">
                     <div class="s-block">
-                        <div class="newsImage"><a href="${Constants.URL}article/full/${item.id}">
-                            <div class="imageHover"></div>
-                            <img src="${Constants.URL}${item.image}" /></a>
+                        <div class="newsImage">
+                            <a href="${Constants.URL}article/full/${item.id}">
+                                <div class="imageHover">
+                                    <div class="imageHoverDate">
+                                        ${item.date}
+                                    </div>
+                                    <div class="imageHoverCountry">
+                                        <div class="newsCountryText">${item.country}</div><img src="${Constants.URL}img/newsImageHover.png">
+                                    </div>
+                                </div>
+                                <img src="${Constants.URL}${item.image}" />
+                            </a>
                         </div>
 
-                        <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
+                        <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png" alt="image">
                         <div class="newsName"><a href="${Constants.URL}article/full/${item.id}">${item.title}</a></div>
                         <a href="${Constants.URL}article/full/${item.id}"><div class="newsText">${item.textEN}</div></a>
                     </div>
@@ -270,6 +287,7 @@
             $('#slovakiaBorder').hide();
             $('#ukraineBorder').hide();
             $("#allMap").addClass( "buttonBorderClass" );
+            /*
                 mapSlider = setInterval(function(){
                     for(var i = 0; i < countries.length; i++)
                     {
@@ -307,7 +325,8 @@
                         counter++;
                     }
                 }, 5000);
-                
+                */
+               
             $('.slider1').bxSlider({
                 auto: false,
                 slideWidth: 300,
@@ -316,8 +335,5 @@
                 slideMargin: 40
             });
         });
-    </script>
-    <script type="text/javascript">
-        $('#nav').spasticNav();
     </script>
 </t:indexpage>

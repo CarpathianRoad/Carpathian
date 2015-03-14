@@ -42,14 +42,13 @@ public class FileUploadController {
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadFileHandler(@RequestParam("upload") MultipartFile file, @RequestParam("path") String path, HttpServletRequest request) {
+    String uploadFileHandler(@RequestParam("upload") MultipartFile file, @RequestParam("path") String path,  HttpServletRequest request) {
  
                 String name = file.getOriginalFilename();
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
                 File dir = new File(Constants.home+path);
                 if (!dir.exists())
                     dir.mkdirs();
@@ -61,12 +60,12 @@ public class FileUploadController {
                         new FileOutputStream(serverFile))) {
                     stream.write(bytes);
                 }
- 
+                String link_path = serverFile.getAbsolutePath().replace(Constants.home,"");
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
  
                 return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+path + name + "'>"
-                        + "<img src='"+Constants.URL+path + name + "' alt='" + name + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
+                        + "<img src='"+Constants.URL+path + name + "' realpath='"+link_path+"'  alt='" + name + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }
