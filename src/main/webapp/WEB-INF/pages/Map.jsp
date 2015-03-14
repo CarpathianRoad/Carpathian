@@ -12,81 +12,6 @@
 <t:indexpage>
     
 	<style>
-		.markerName{
-                    padding: 10px 10px 0px 8px;
-                    font-size:30px;
-                    font-weight: bold;
-                    color: #353535;
-                    line-height:120%;
-                    width: 90%;
-                    float: left;
-		}
-                #descriptionHideButton{
-                    width: 10%;
-                    margin-top: 20px;
-                    float: right;
-                    height: 100%;
-                }
-		.markerDescr{
-                    padding: 5px 10px 12px 10px;
-                    text-align: justify;
-                    font-size:15px;
-                    color: grey;
-		}
-		.coords{
-                    padding: 0px 10px 12px 10px;
-                    text-align: justify;
-                    font-size:15px;
-                    color: grey;
-		}
-		.markerImage{
-                    padding: 10px 0px 0px 10px;
-                    margin-right: 15px;
-                    margin-bottom: 5px;
-                    width: 50%;
-                    float: left;
-                    box-shadow: 10px 10px 5px #888888;
-		}
-		.infoBlock{
-                    width: 100%;
-                    height: 100%;
-		}
-		#legend {
-                    background: white;
-                    padding: 10px;
-                    color: #754719;
-                    font-size:15px;
-                    opacity: 0.9;
-                }
-		html body div#markerDescription {
-                    background: white;
-                    padding: 10px;
-                    color: #754719;
-                    font-size:15px;
-                    opacity: 0.9;
-                    margin-bottom: 80px;
-                    overflow: visible;
-                    width:500px;
-                    height: 500px;
-		}
-                #filterHide {
-                    background: white;
-                    color: #754719;
-                    font-size:15px;
-                    opacity: 0.9;
-                }
-                #descHide {
-                    background: white;
-                    color: #754719;
-                    font-size:15px;
-                    opacity: 0.9;
-                    float: left;
-                    margin-left: 10px;
-                    margin-top: -15%;
-                }
-                li{
-                    line-height: 0.6em;
-                }
                 #googleMap .gm-style .gmnoprint .gmnoprint div img {
                     content:url("${Constants.URL}img/biggerSmallerMap.png") !important;
                     width: 20px !important;
@@ -100,6 +25,7 @@
                 }
 	</style>
     <script>
+        var center;
         var icons = ['church','hotels','info','militaries',
             'museums','restaurants','ruins','swimming','tasting_hall',
             'yacht'];
@@ -108,6 +34,7 @@
         var markerCluster;
 	var count = 1;
         var mapProp;
+        var zoomMap;
         var mapStyles = [{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},
             {"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},
             {"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},
@@ -121,9 +48,10 @@
 	function initialize() {
             var styledMap = new google.maps.StyledMapType(mapStyles,
                 {name: "Styled Map"});
+                
             mapProp = {
-                center:new google.maps.LatLng(48.6,22.5),
-                zoom:9,
+                center: center,
+                zoom: zoomMap,
                 mapTypeControl: false,
                 panControl: false,
                 zoomControl: true,
@@ -150,11 +78,11 @@
                     markerIcons.splice(0,0,'info');
                 }
                 var pinIcon = new google.maps.MarkerImage(
-                    "${Constants.URL}img/greenmarkers/"+markerIcons[0]+".png",
+                    "${Constants.URL}img/markers/"+markerIcons[0]+".png",
                     null, 
                     null, 
                     null, 
-                    new google.maps.Size(30, 40)
+                    new google.maps.Size(42, 58)
                 ); 
                 var photos = "${marker.image}".split(",");
                 var images = "";
@@ -164,12 +92,12 @@
                 };
                 var x = "${marker.x}".substring(0, 7);
                 var y = "${marker.y}".substring(0, 7);
-                var info = '<div class="markerName">${marker.title}</div>' +
-                    '<div id="descriptionHideButton"><img src="${Constants.URL}img/leftArrow.png" style="width: 50%; float: right; margin-right:15px;margin-top:-5px;"></div>' +
+                var info = '<div id="descriptionHideButton"><img src="${Constants.URL}img/hideDescrButton.png" onclick="hideDescr()"></div>' +
                     images +
-                    '<div class="infoBlock"><div class="markerDescr">${marker.textEN}</div>'+
-                    '<div class="coords">GPS('+x+','+y+')</div>'+
-                    '<div class="coords"><h4><a class="btn btn-theme detailsButton" href="${Constants.URL}map/markers/${marker.id}">Details</a></h4></div></div>';
+                    '<div class="descrImageUnderline"></div>' +
+                    '<div class="markerName">${marker.title}</div>' +
+                    '<div class="infoBlock"><div class="markerDescr">'+'${marker.textEN}'.substr(0,200)+'...</div>'+
+                    '<div class="detailsButtonContainer"><a class="btn btn-theme detailsButton" href="${Constants.URL}map/markers/${marker.id}">DETAILS</a></div></div>';
 			
 		var myLatlng = new google.maps.LatLng(${marker.x}, ${marker.y});
 		var marker = new google.maps.Marker({
@@ -185,7 +113,20 @@
                 bindDescription(marker,map, info);
                 //bindInfoWindow(marker, map, infowindow, info);
             </c:forEach>
-            
+            var clusterStyles = [
+                { 
+                    anchor:[10,0],
+                    textColor: "white",
+                    textSize: 15,
+                    height: 68, 
+                    width: 42, 
+                    url: '${Constants.URL}img/group_marker.png' 
+                }
+            ];
+
+            var mcOptions = {
+                styles: clusterStyles
+            };
             filterNames = filterNames.unique();
             var filterHtml = "";
             for(var i = 0; i< filterNames.length; i++){
@@ -204,7 +145,7 @@
             map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
 		document.getElementById('markerDescription'));
 		
-            markerCluster = new MarkerClusterer(map, markers);
+            markerCluster = new MarkerClusterer(map, markers,mcOptions);
             map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
                 document.getElementById('sliderDiv'));
             map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
@@ -250,10 +191,8 @@
         
         function bindDescription(marker, map, info) {
 		google.maps.event.addListener(marker, 'click', function() {
-                    $("#markerDescription").animate({width: 'hide'});
-                    setTimeout(function(){ 
-                        document.getElementById("markerDescription").innerHTML = info; }, 250);
-                    $("#markerDescription").animate({width: 'show'});
+                    document.getElementById("markerDescription").innerHTML = info;
+                    $("#markerDescription").show("slow");
 		});
 	}
         
@@ -266,7 +205,9 @@
                 $( "#"+id.substring(0,id.length-6)+"Hide").attr('src', '${Constants.URL}img/hideMinus.png');
             }
         }
-        
+        function hideDescr(){
+            $('#markerDescription').hide("slow");
+        }
 	function Markers(type){
             if(type.length == 1){
 		if (document.getElementById(type[0]).checked==false) {
@@ -317,10 +258,19 @@
 		}
             } else {
                 for(var k=1;k<type.length;k++){
-                    if(document.getElementById(type[0]).checked == true){
-                        document.getElementById(type[k]).checked = false;
-                    }else{
-                        document.getElementById(type[k]).checked = true;
+                    if(type[0]=='markAll'){
+                        if(document.getElementById(type[0]).checked == true){
+                            document.getElementById(type[k]).checked = true;
+                        }else{
+                            document.getElementById(type[k]).checked = false;
+                        }
+                    }
+                    else{
+                        if(document.getElementById(type[0]).checked == true){
+                            document.getElementById(type[k]).checked = false;
+                        }else{
+                            document.getElementById(type[k]).checked = true;
+                        }
                     }
                 }
                 for(var k=1;k<type.length;k++){
@@ -388,7 +338,7 @@
                 $('#mapControls').removeClass('mapControlsBig');
                 $('.indexMapContainer').fadeOut(100);
                 $('.indexMapMenu').fadeOut(100);
-                $('#mapControlsImage').attr("src","${Constants.URL}img/mapControlsImage.png");
+                $('#mapControlsImage').attr("src","${Constants.URL}img/marker"+countryChooser+".png");
             }
             else{
                 rightMapContainerCounter = true;
@@ -396,15 +346,21 @@
                 $('#mapControls').addClass('mapControlsBig');
                 $('.indexMapContainer').fadeIn(100);
                 $('.indexMapMenu').fadeIn(100);
-                $('#mapControlsImage').attr("src","${Constants.URL}img/mapControlsImageSelected.png");
+                $('#mapControlsImage').attr("src","${Constants.URL}img/marker_active_map.png");
+                $('#sliderDiv').addClass('sliderDiv');
+                $('#sliderDiv').removeClass('sliderDivScroll');
+                $('#mapControls').addClass('mapControls');
+                $('#mapControls').removeClass('mapControlsScroll');
+                $('#pushRightConrainer').addClass('pushRightConrainer');
+                $('#pushRightConrainer').removeClass('pushRightConrainerScroll');
             }
         }
 	$( document ).ready(function() {
             $("#markerDescription").animate({width: 'hide'});
-            var descriptionDiv = document.getElementById('markerDescription');
-            google.maps.event.addDomListener(descriptionDiv, 'click', function() {
+            var descriptionDiv = document.getElementById('descriptionHideButton');
+            /*google.maps.event.addDomListener(descriptionDiv, 'click', function() {
                 $("#markerDescription").animate({width: 'hide'});
-            });
+            });*/
             $('.indexMapContainer').fadeOut(1);
             $('.indexMapMenu').fadeOut(1);
             $('#filtersContainer').fadeOut(1);
@@ -422,6 +378,12 @@
                 $('#filtersContainer').fadeIn(100);
                 $('#pushRightConrainer').addClass('pushRightConrainerFilters');
                 $('#mainImageRightContaineMap').attr("src","${Constants.URL}img/filtersImageActive.png");
+                $('#sliderDiv').addClass('sliderDiv');
+                $('#sliderDiv').removeClass('sliderDivScroll');
+                $('#mapControls').addClass('mapControls');
+                $('#mapControls').removeClass('mapControlsScroll');
+                $('#pushRightConrainer').addClass('pushRightConrainer');
+                $('#pushRightConrainer').removeClass('pushRightConrainerScroll');
             }
         }
         
@@ -494,17 +456,17 @@
         <area href="${Constants.URL}map/Poland" shape="poly"  onmouseover="showMapHover('#poland')"
               coords="580,0,321,0,310,12,332,14,353,21,364,39,371,53,388,38,405,41,413,60,453,54,481,50,508,56,526,70,551,86,543,70,538,56,542,40"/>
     </map>
-<div style="width:100%;height:700px; margin-top: -50px; margin-bottom:-45px;">
-    <div id="sliderDiv">
+<div style="width:100%;height:768px; margin-top: -50px; margin-bottom:-45px;">
+    <div id="sliderDiv" class="sliderDiv">
         <label id="sliderLabel" onclick="changeStyle()">
             <input type="checkbox" />
             <span id="slider"></span>
         </label>
     </div>
-    <div id="mapControls">
+    <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
-             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapControlsImageHover.png';$(this).fadeIn(100);}"
-             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapControlsImage.png';$(this).fadeIn(100);}">
+             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(100);}"
+             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker'+countryChooser+'.png';$(this).fadeIn(100);}">
             <div class="indexMapMenu">
                 <ul id="nav">
                     <li id="allMenu">
@@ -534,7 +496,7 @@
                 </ul>
             </div>
     </div>
-    <div id="pushRightConrainer">
+    <div id="pushRightConrainer" class="pushRightConrainer">
         <img onclick="hideFilters()" id="mainImageRightContaineMap" src="${Constants.URL}img/mapRightContainer.png"
              onmouseover="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(100);}"
              onmouseout="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(100);}">
@@ -549,11 +511,24 @@
                 <img src="${Constants.URL}img/mapHoverImage.png" usemap="#mainMap">
             </div>
             <div id='filtersContainer'>
-                <div class="filtersName">Filters</div>
+                <div class="filtersName">
+                    <input type="checkbox" id="markAll" name="markAll"
+                        onclick="Markers(['markAll',
+                            'main1','ruins','museums','castle','palace','residense','village_tourism','skansens','techMon','warMon','church','unesco','arch',
+                            'main2','zoo','mountains','geoparks','caves','ornithology','lakes','waterfall','forest_food','gardens','visual',
+                            'main3','theaters','music','visualArt','movies','tradition','car','transportConn',
+                            'main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral','rescue',
+                            'main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding',
+                            'main6','restaurant','specialRestaurant','cafe','bar','nightBar','winery','vine_bunker','tasting_hall',
+                            'main7','hotels','apartments','campings','quest','motels','cottages','info','equipment'
+                        ])" 
+                        class="css-checkbox" checked="checked" />
+                    <label for="markAll" class="css-label">Filters</label>
+                </div>
                     <ul class='filtersMainContainer'>
                         <li class="filterMap"><input type="checkbox" id="main1" class="css-checkbox" checked="checked" />
                         <label for="main1" class="css-label"
-                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansens','techMon','warMon','church','unesco','arch'])">Monuments and architecture</label><a><div id="filtersCaret1" onclick="rotateCaret('1')" class="bottom-caret"></div></a>
+                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansens','techMon','warMon','church','unesco','arch'])">Monuments and architecture</label><a><div class="filterClickIntend" onclick="rotateCaret('1')"><div id="filtersCaret1" class="bottom-caret"></div></div></a>
                     <ul id="MonAndArchFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="museums" name="museums" onclick="Markers(['museums'])" class="css-checkbox" checked="checked" /><label for="museums" class="css-label">Museums</label>
@@ -594,7 +569,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main2" class="css-checkbox" checked="checked" />
-                <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes','waterfall','forest_food','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div id="filtersCaret2" onclick="rotateCaret('2')" class="bottom-caret"></div></a>
+                    <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes','waterfall','forest_food','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
                    <ul id="natureFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="forest_food" name="forest_food" onclick="Markers(['forest_food'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
@@ -629,7 +604,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main3" class="css-checkbox" checked="checked" />
-                <label onclick="Markers(['main3','theaters','music','visualArt','movies','tradition'])" for="main3" class="css-label">Culture and traditions</label><a><div id="filtersCaret3" onclick="rotateCaret('3')" class="bottom-caret"></div></a>
+                    <label onclick="Markers(['main3','theaters','music','visualArt','movies','tradition'])" for="main3" class="css-label">Culture and traditions</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret3" class="bottom-caret"></div></div></a>
                     <ul id="cultureFilter">
                         <li class="subFilterMap" class="subFilterMap">
                             <input type="checkbox" id="theaters"  onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="theaters" class="css-label">Theaters</label>
@@ -649,7 +624,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main4" class="css-checkbox" checked="checked" />
-                <label onclick="Markers(['main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral'])" for="main4" class="css-label">SPA</label><a><div id="filtersCaret4" onclick="rotateCaret('4')" class="bottom-caret"></div></a>
+                    <label onclick="Markers(['main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral'])" for="main4" class="css-label">SPA</label><a><div class="filterClickIntend" onclick="rotateCaret('4')"><div id="filtersCaret4" class="bottom-caret"></div></div></a>
                     <ul id="spaFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="sauna" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="sauna" class="css-label">Sauna</label>
@@ -675,7 +650,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main5" class="css-checkbox" checked="checked" />
-                <label onclick="Markers(['main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding'])" for="main5" class="css-label">Active rest</label><a><div id="filtersCaret5" onclick="rotateCaret('5')" class="bottom-caret"></div></a>
+                    <label onclick="Markers(['main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding'])" for="main5" class="css-label">Active rest</label><a><div class="filterClickIntend" onclick="rotateCaret('5')"><div id="filtersCaret5" class="bottom-caret"></div></div></a>
                     <ul id="actFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="ski" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="ski" class="css-label">Ski and freeride</label>
@@ -719,7 +694,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main6" class="css-checkbox" checked="checked" />
-                <label onclick="Markers(['main6','restaurant','specialRestaurant','cafe','bar','nightBar','winery','vine_bunker','tasting_hall'])" for="main6" class="css-label">Gastronomy</label><a><div id="filtersCaret6" onclick="rotateCaret('6')" class="bottom-caret"></div></a>
+                    <label onclick="Markers(['main6','restaurant','specialRestaurant','cafe','bar','nightBar','winery','vine_bunker','tasting_hall'])" for="main6" class="css-label">Gastronomy</label><a><div class="filterClickIntend" onclick="rotateCaret('6')"><div id="filtersCaret6" class="bottom-caret"></div></div></a>
                     <ul id="gastronomyFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="restaurant" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="restaurant" class="css-label">Restaurant</label>
@@ -748,7 +723,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main7" class="css-checkbox" checked="checked" />
-                <label onclick="Markers(['main7','hotels','apartments','campings','quest','motels','cottages'])" for="main7" class="css-label">Accomodations</label><a><div id="filtersCaret7" onclick="rotateCaret('7')" class="bottom-caret"></div></a>
+                    <label onclick="Markers(['main7','hotels','apartments','campings','quest','motels','cottages'])" for="main7" class="css-label">Accomodations</label><a><div class="filterClickIntend" onclick="rotateCaret('7')"><div id="filtersCaret7" class="bottom-caret"></div></div></a>
                     <ul id="accFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="hotels" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="hotels" class="css-label">Hotels</label>
@@ -775,12 +750,10 @@
                 <li class="filterMap"><input type="checkbox" id="car" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="car" class="css-label">Car rental</label></li>
                 <li class="filterMap"><input type="checkbox" id="transportConn" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="transportConn" class="css-label">Transport connection</label></li>
                 <li class="filterMap"><input type="checkbox" id="info" class="css-checkbox" onclick="Markers(['info'])" checked="checked" /><label for="info" class="css-label">Tourist information centers</label><br>
-            </ul></div>
+            </ul>
+            </div>
     </div>
-    <div id="googleMap" style="overflow: visible;width: 100%;height:700px;padding-top: 75px;"></div>
+    <div id="googleMap" style="overflow: visible;width: 100%;height:768px;min-height:720px;padding-top: 75px;"></div>
     <div style="overflow: visible;" id="markerDescription"></div>
 </div>    
-    <script type="text/javascript">
-        $('#nav').spasticNav();
-    </script>
  </t:indexpage>

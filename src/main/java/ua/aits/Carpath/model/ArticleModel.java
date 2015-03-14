@@ -253,7 +253,7 @@ public class ArticleModel {
     
     
     public List<ArticleModel> getAllNews() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by date desc;");
+        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc;");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
@@ -266,6 +266,9 @@ public class ArticleModel {
             temp.setTextEN(str);
             temp.setDate(result.getString("date"));
             temp.setImage(result.getString("image"));
+            if("".equals(temp.getImage())){
+                temp.setImage("img/no-photo.png");
+            }
             temp.setActDate(result.getString("actual"));
             temp.setCountry(result.getString("country")); 
             temp.setAuthor(result.getString("author"));
@@ -290,6 +293,7 @@ public class ArticleModel {
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
+            temp.setCountry(result.getString("country")); 
             temp.setDate(result.getString("date"));
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){
@@ -458,7 +462,7 @@ public class ArticleModel {
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
-        DB.runQuery("UPDATE content SET title = '"+ title +"', date = '"+  date +"', author = '"+  author +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ country +"', region = '"+  region +"', district = '"+ district +"', town = '"+  town +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ textEN +"', textUA = '"+ textUA +"', textHU = '"+ textHU +"', textSK = '"+ textSK +"', textRO = '"+ textRO +"', textPL = '"+ textPL +"', textGE = '"+ textGE +"', textCZ = '"+ textCZ +"', textSRB = '"+ textSRB +"', actual = '"+  actDate +"', menuCat = '"+  menuCat +"' where id = '"+id+"'");
+        DB.runQuery("UPDATE content SET title = '"+ title +"', date = '"+  date +"', author = '"+  author +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +"', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +"', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +"', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +"', textPL = '"+ StringEscapeUtils.escapeSql(textPL) +"', textGE = '"+ StringEscapeUtils.escapeSql(textGE) +"', textCZ = '"+ StringEscapeUtils.escapeSql(textCZ) +"', textSRB = '"+ StringEscapeUtils.escapeSql(textSRB) +"', actual = '"+  actDate +"', menuCat = '"+  menuCat +"' where id = '"+id+"'");
             return id;
     }
     public Boolean deleteArticle(String id) throws SQLException{

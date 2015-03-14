@@ -20,13 +20,6 @@
                                                 <div class="validation"></div>
                                               </div>
 						</div>
-                                            <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Full title:</label>
-                                                <input type="text" name="full_title" class="form-control" id="fullTitle">
-                                                <div class="validation"></div>
-                                              </div>
-					</div>
                 <div class="col-lg-2 field">
                     <div class="form-group">
                                                 <label for="tlt">Marker icon:</label>
@@ -50,7 +43,6 @@
       <th>#</th>
       <th>Icon</th>
       <th>Short title</th>
-      <th>Full title</th>
       <th></th>
       <th></th>
     </tr>
@@ -63,7 +55,6 @@
         <td>${count}</td>
       <td><img class="edit-delete" src="${Constants.URL}img/markers/${title.shortTitle}.png"/></td>
       <td>${title.shortTitle}</td>
-      <td>${title.fullTitle}</td>
       <td><a href="<c:url value="/system/markers/edit/${title.id}"/>"><img class="edit-delete" src="${Constants.URL}img/edit.png" /></a></td>
       <td><a href="<c:url value="/system/markers/delete/${title.id}"/>"><img class="edit-delete" src="${Constants.URL}img/delete.png" /></a></td>
     </tr>

@@ -20,14 +20,7 @@
                                                 <div class="validation"></div>
                                               </div>
 						</div>
-                                                </div> <div class="row">
-                                            <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Full title:</label>
-                                                <input type="text" name="full_title" class="form-control" id="fullTitle" value="${marker.fullTitle}">
-                                                <div class="validation"></div>
-                                              </div>
-					</div></div>
+                                                </div> <div class="row"></div>
                                                 <div class="row">
                                                     <div class="col-lg-2 field">
                     <div class="form-group">

@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.commons.lang.StringEscapeUtils;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
@@ -83,21 +82,21 @@ public class FormController {
         String img = request.getParameter("real-img-path");
         String x = request.getParameter("x");
         String y = request.getParameter("y");
-        String country = StringEscapeUtils.unescapeHtml(request.getParameter("country"));
-        String region = StringEscapeUtils.unescapeHtml(request.getParameter("region"));
-        String district = StringEscapeUtils.unescapeHtml(request.getParameter("district"));
-        String town = StringEscapeUtils.unescapeHtml(request.getParameter("town"));
+        String country = request.getParameter("country");
+        String region = request.getParameter("region");
+        String district = request.getParameter("district");
+        String town = request.getParameter("town");
         String markerType = request.getParameter("marker-type-all");
         String filter = request.getParameter("filter-type-all");
-        String textEN = StringEscapeUtils.unescapeHtml(request.getParameter("textEN"));
-        String textUA = StringEscapeUtils.unescapeHtml(request.getParameter("textUA"));
-        String textHU = StringEscapeUtils.unescapeHtml(request.getParameter("textHU"));
-        String textSK = StringEscapeUtils.unescapeHtml(request.getParameter("textSK"));
-        String textPL = StringEscapeUtils.unescapeHtml(request.getParameter("textPL"));
-        String textRO = StringEscapeUtils.unescapeHtml(request.getParameter("textRO"));
-        String textGE = StringEscapeUtils.unescapeHtml(request.getParameter("textGE"));
-        String textCZ = StringEscapeUtils.unescapeHtml(request.getParameter("textCZ"));
-        String textSRB = StringEscapeUtils.unescapeHtml(request.getParameter("textSRB"));
+        String textEN = request.getParameter("textEN");
+        String textUA = request.getParameter("textUA");
+        String textHU = request.getParameter("textHU");
+        String textSK = request.getParameter("textSK");
+        String textPL = request.getParameter("textPL");
+        String textRO = request.getParameter("textRO");
+        String textGE = request.getParameter("textGE");
+        String textCZ = request.getParameter("textCZ");
+        String textSRB = request.getParameter("textSRB");
         String result = article.insertArticle(title, date, actDate, type, author, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/panel");
@@ -156,7 +155,7 @@ public class FormController {
         return new ModelAndView("redirect:" + "/system/filters");
     }
     @RequestMapping(value = "/system/addmarker.do", method = RequestMethod.POST)
-    public ModelAndView doAddMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, @RequestParam("full_title") String full_title, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public ModelAndView doAddMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
        
         String name = file.getOriginalFilename();
         if (!file.isEmpty()) {
@@ -177,11 +176,11 @@ public class FormController {
         } else {
             logger.info("You failed to upload " + name + " because the file was empty.");
         }
-        markers.addMarker(short_title, full_title);
+        markers.addMarker(short_title);
         return new ModelAndView("redirect:" + "/system/markers");
     }
     @RequestMapping(value = "/system/editmarker.do", method = RequestMethod.POST)
-    public ModelAndView doEditMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, @RequestParam("full_title") String full_title, @RequestParam("id") String id, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public ModelAndView doEditMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, @RequestParam("id") String id, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String name = "";
         if (!file.isEmpty()) {
         name = file.getOriginalFilename();
@@ -208,7 +207,7 @@ public class FormController {
         } else {
             logger.info("You failed to upload " + name + " because the file was empty.");
         }
-        markers.updateMarker(id, short_title, full_title);
+        markers.updateMarker(id, short_title);
         return new ModelAndView("redirect:" + "/system/markers");
     }
 }

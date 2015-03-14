@@ -91,8 +91,7 @@ public class SystemController {
                     session.invalidate();
                 }
                 
-                ModelAndView modelAndView = new ModelAndView("/system/Logout");
-                return modelAndView;
+                return new ModelAndView("redirect:" + "/login");
 	}
     @RequestMapping(value = {"/system/users", "/system/users/", "/Carpath/system/users", "/Carpath/system/users/"})
     public ModelAndView showUsers(HttpServletRequest request,
