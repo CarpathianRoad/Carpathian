@@ -31,6 +31,7 @@ public class MapModel {
     String district;
     String town;
     String image; 
+    String date;
     Integer publish;
     
     public Integer getId() {
@@ -104,6 +105,13 @@ public class MapModel {
     }
     public void setTown(String town) {
         this.town = town;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
     }
     
     
@@ -207,6 +215,8 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
+            temp.setDate(result.getString("date"));
+            temp.setCountry(result.getString("country")); 
             temp.setTitle(f_title);
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){

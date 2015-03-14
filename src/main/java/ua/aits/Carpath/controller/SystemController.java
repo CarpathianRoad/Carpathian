@@ -91,8 +91,7 @@ public class SystemController {
                     session.invalidate();
                 }
                 
-                ModelAndView modelAndView = new ModelAndView("/system/Logout");
-                return modelAndView;
+                return new ModelAndView("redirect:" + "/login");
 	}
     @RequestMapping(value = {"/system/users", "/system/users/", "/Carpath/system/users", "/Carpath/system/users/"})
     public ModelAndView showUsers(HttpServletRequest request,
@@ -121,6 +120,13 @@ public class SystemController {
 		HttpServletResponse response) throws Exception {
             ModelAndView modelAndView = new ModelAndView("/system/Markers");
             modelAndView.addObject("markers", markers.getAllMarkers());
+            return modelAndView;
+    }
+    @RequestMapping(value = {"/system/markers/edit/{id}", "/system/markers/edit/{id}", "/Carpath/system/markers/edit/{id}", "/Carpath/system/markers/edit/{id}"})
+    public ModelAndView editMarkers(@PathVariable("id") String id,HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            ModelAndView modelAndView = new ModelAndView("/system/MarkerEdit");
+            modelAndView.addObject("marker", markers.getOneMarker(id));
             return modelAndView;
     }
     @RequestMapping(value = {"/system/filters", "/system/filters/", "/Carpath/system/filters", "/Carpath/system/filters/"})

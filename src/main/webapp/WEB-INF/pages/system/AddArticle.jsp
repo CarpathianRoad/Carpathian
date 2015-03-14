@@ -27,6 +27,7 @@
                                         </div>
                 <hr>
                                     <div class="row add-row">
+                                        
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="sel1">Content type<span class="red-star">*</span></label>
@@ -42,9 +43,6 @@
                                               </div>
 							
                                                 </div>
-                                    </div>
-                <hr>
-                                    <div class="row add-row">
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="sel3">Publication country<span class="red-star">*</span></label>
@@ -60,9 +58,7 @@
 							</div>
                                               </div>
                                                 </div>
-                                    </div>
-                <hr>
-                                    <div class="row add-row">
+                                        
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="sel3">Category (menu)<span class="red-star">*</span></label>
@@ -105,14 +101,22 @@
     <div class="modal-content">
       <div class="modal-body">
           <div class="image-upload-modal">
+              <span class="arrow-left-img" aria-hidden="true"><img src="${Constants.URL}img/arrow-left-icon.png" /></span>
             <label class="btn" for="file-input">
-                <button class="btn btn-primary" disabled="disabled">Upload from computer</button>
+                <button class="btn btn-primary" disabled="disabled" style="opacity: 100">Upload from computer</button>
             </label>
-                <input class="" id="file-input" type="file"/>
-                
+                <input class="" id="file-input" type="file"  accept="image/*" multiple/>
+        <button class="btn btn-primary" id="createfolder" type="button" style="margin-right: 10px;">Create folder</button>       
         <button type="button" id="close-modal" class="btn btn-danger" data-dismiss="modal">Close</button>
        </div>
+            <div class="image-upload-folder">
+                <hr>
+                <input type="text" class="form-control" id="foldernametext" value="New Folder" name="name" />
+                <button class="btn btn-primary" id="create-folder" type="button">Create folder</button>  
+                <button class="btn btn-danger" id="close-add-folder" type="button">Cancel</button>  
+            </div>
           <hr>
+          <span class="info-folder">Maximum download size - 3 MB</span>
           <div class="img-content-show-all"></div>
       </div>
     </div>
@@ -122,7 +126,7 @@
                                                         <div class="img-content">
                                                             <div class="image-upload">
                                                                 <button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">
-                    <img src="${Constants.URL}img/add-image.png"/>
+                    Upload image
                 </button>
                                                             </div>                                     
                 
@@ -168,25 +172,25 @@
                                              <div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="cnt">Country</label>
-                                                <input type="text" class="form-control disabled-input" name="country" id="cnt" disabled>
+                                                <input type="text" class="form-control disabled-input" name="country" id="cnt">
                                               </div>
                                                 </div>
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="rgn">Region</label>
-                                                <input type="text" class="form-control disabled-input" name="region" id="rgn" disabled>
+                                                <input type="text" class="form-control disabled-input" name="region" id="rgn">
                                               </div>
 						</div>
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="dstr">District</label>
-                                                <input type="text" class="form-control disabled-input" name="district" id="dstr" disabled>
+                                                <input type="text" class="form-control disabled-input" name="district" id="dstr">
                                               </div>
 						</div>
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="twn">Town</label>
-                                                <input type="text" class="form-control disabled-input" name="town" id="twn" disabled>
+                                                <input type="text" class="form-control disabled-input" name="town" id="twn">
                                               </div>
 						</div>
                                             </div> 
@@ -198,7 +202,7 @@
                         <c:forEach items="${markers}" var="item">
                             <li>
                                 <div class="checkbox">  
-                                <label><img src="${Constants.URL}img/brownmarkers/${item.shortTitle}.png"/><input type="checkbox" value="${item.shortTitle}">${item.fullTitle}</label>
+                                <label><img src="${Constants.URL}img/markers/${item.shortTitle}.png"/><input type="checkbox" value="${item.shortTitle}">${item.shortTitle}</label>
                               
                               </div>
                             </li>
@@ -340,7 +344,7 @@
     $(document).ready(function () { 
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
-        
+        initGalerry();
         var myDate = new Date();
         var currentMonth = (myDate.getMonth()+1);
         var currentDate = myDate.getDate();
@@ -361,11 +365,19 @@ var prettyDate = currentMonth + '/' + currentDate + '/' +
             $("#cke_71_textInput").val("s2as1");
         });
 });
+
+$("#createfolder").click(function(){
+    $(".image-upload-folder").toggle("slow");
+});
+
+$("#close-add-folder").click(function(){
+    $(".image-upload-folder").toggle("slow");
+});
 $('.img-upl').on('change', '#file-input', function() {
     
     var data = new FormData();
     data.append('upload', jQuery('#file-input')[0].files[0]);
-
+    data.append("path", $(".img-content-show-all").attr("realpath"));
 jQuery.ajax({
             url: '${Constants.URL}uploadFile',
             data: data,
@@ -375,43 +387,118 @@ jQuery.ajax({
             type: 'POST',
             success: function(data){
                 $(".img-content").append(data);
-                var tmp = $(data).find("img").attr("alt");
+                var path = $(data).find("img").attr("realpath");
                 var real = $("#real-img-path").val();
-                $("#real-img-path").val(real + "," + "img/content/"+tmp);
+                $("#real-img-path").val(real + "," + path);
                 $(".img-input-box").remove();
-                $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal"><img src="${Constants.URL}img/add-image.png"/></button>');
+                $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
                 initRemove();
+                initGalerry();
                 $("#close-modal").trigger("click");
 }
         });
 });
+function initGalerry(){
 $(".btn-lg").click(function(){
-    jQuery.ajax({
-            url: '${Constants.URL}showImages',
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            success: function(data){
-               $(".img-content-show-all").append(data);
-               insertImage();
-                }
-        });
+    getFiles("","");
 });
+}
+
 function insertImage(){
 
 $(".img-content-show-all img").click(function() {
     var name = $(this).attr("name");
+    var path = $(this).attr("realpath");
+    if($(this).attr("type") === "img"){
     $(".img-content").append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
-                        + "<img src='"+"${Constants.URL}"+"img/content/" + name + "' alt='" + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
-    
+                        + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
     var real = $("#real-img-path").val();
-    $("#real-img-path").val(real + "," + "img/content/"+name);
+    $("#real-img-path").val(real + "," + path +name);
     $(".img-input-box").remove();
-    $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal"><img src="${Constants.URL}img/add-image.png"/></button>');
-initRemove();
-$("#close-modal").trigger("click");
+    $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+    initRemove();
+    initGalerry();
+    $(".img-content-show-all").removeAttr("current");
+    $(".img-content-show-all").removeAttr("realpath");
+    $("#close-modal").trigger("click");
+    }
+    else {
+        getFiles($(this).attr("name"), $(this).attr("parent"));
+    }
 });
+
+
+
+}
+$(".arrow-left-img").click(function(){
+    var path = $(".img-content-show-all").attr("current");
+    var real = $(".img-content-show-all").attr("realpath");
+    var spl =  path.split("/");
+    var back = "";
+    var spl2 =  real.split("/");
+    var back2 = "";
+    $.each(spl.slice(0, -2), function( index, value ) {
+        back = back + value + "/";
+      });
+    $.each(spl2.slice(0, -2), function( index, value ) {
+        back2 = back2 + value + "/";
+      });
+   $(".img-content-show-all").attr("current",back);
+   $(".img-content-show-all").attr("realpath",back2);
+   getFiles("", back, true);
+});
+$("#create-folder").click(function(){
+var name = $("#foldernametext").val();
+var path = $(".img-content-show-all").attr("current");
+        jQuery.ajax({
+            url: '${Constants.URL}addFolder',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'GET',
+            data: 'name='+name+'&path='+path,
+            success: function(data){
+                getFiles("", path, true);
+                console.log("create");
+                $(".image-upload-folder").hide();
+                $(".image-upload-folder input").val("New Folder");
+                }
+        });
+});
+function getFiles(temp_fold, parent, isFolder) {
+        isFolder = isFolder || false;
+        $(".img-content-show-all").html("");
+        jQuery.ajax({
+            url: '${Constants.URL}showImages',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'GET',
+            data: 'name='+temp_fold+'&parent='+parent,
+            success: function(data){
+               $(".img-content-show-all").append(data);
+               insertImage();
+               var attr = $(".img-content-show-all").attr("current");
+                if (typeof attr === typeof undefined || attr === false) {
+                    $(".img-content-show-all").attr("current",$(".galery-item img").attr("parent"));
+                    $(".img-content-show-all").attr("realpath",$(".galery-item img").attr("realpath"));
+                }
+                else {
+                    
+               if(!isFolder){
+                   console.log("not folder");
+                    $(".img-content-show-all").attr("current",$(".img-content-show-all").attr("current")+temp_fold+"/");
+                    $(".img-content-show-all").attr("realpath",$(".img-content-show-all").attr("realpath")+temp_fold+"/");
+                }
+                }
+                $(".arrow-left-img").show();
+               if($(".img-content-show-all").attr("realpath") === "img/content/"){
+                   $(".arrow-left-img").hide();
+               }
+               $(".img-breadcrumps").remove();
+               $("<span class='img-breadcrumps'>"+$(".img-content-show-all").attr("realpath").replace(/\//g," > ")+"</span>").insertBefore(".img-content-show-all");
+                }
+        });
 }
 function initRemove(){
 
@@ -553,22 +640,22 @@ $("#sudmitData").click(function(){
                         for (var p = address.length-1; p >= 0; p--) {
                             if (address[p].types.indexOf("country") != -1) {
                                 //console.log("country = " + address[p].long_name);
-                                $('#cnt').val(address[p].long_name);
+                                $('#cnt').attr("value",address[p].long_name);
                             }
                             if (address[p].types.indexOf("locality") != -1) {
                                 //console.log("town = " + address[p].long_name);
-                                $('#twn').val(address[p].long_name);
+                                $('#twn').attr("value",address[p].long_name);
                             }
                             if (address[p].types.indexOf("route") != -1) {
                                 //console.log("route = " + address[p].long_name);
                             }
                             if (address[p].types.indexOf("administrative_area_level_2") != -1) {
                                 //console.log("district = " + address[p].long_name);
-                                $('#dstr').val(address[p].long_name);
+                                $('#dstr').attr("value",address[p].long_name);
                             }
                             if (address[p].types.indexOf("administrative_area_level_1") != -1) {
                                 //console.log("region = " + address[p].long_name);
-                                $('#rgn').val(address[p].long_name);
+                                $('#rgn').attr("value",address[p].long_name);
                             }
                             if (address[p].types.indexOf("street_number") != -1) {
                                 //console.log("street number = " + address[p].long_name);
