@@ -131,7 +131,7 @@
                         content: ""
                     });
                     var pinIcon = new google.maps.MarkerImage(
-                       "${Constants.URL}img/brownmarkers/trailsign.png",
+                       "${Constants.URL}img/markers/trailsign.png",
                         null, 
                         null, 
                         null, 
@@ -289,7 +289,7 @@
                 google.visualization.events.addListener(chart, 'onmouseover', function(e) {
                     if (mousemarker == null) {
                         var pinIcon = new google.maps.MarkerImage(
-                            "${Constants.URL}img/brownmarkers/walking.png",
+                            "${Constants.URL}img/markers/walking.png",
                             null, 
                             null, 
                             null, 

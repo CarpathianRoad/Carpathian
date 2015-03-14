@@ -1,5 +1,6 @@
 html{
     min-height: 100%;
+    overflow-x: hidden;
 }
 body{
     min-height: 100%;
@@ -21,6 +22,11 @@ body{
 .mainMenuIntend{
     width: 100%;
     height:110px;
+    background-color: rgb(86,105,143);
+}
+.mainMenuIntendMap{
+    width: 100%;
+    height:95px;
     background-color: rgb(86,105,143);
 }
 
@@ -78,15 +84,29 @@ body{
     margin-right: 10px;
 }
 
-ul{
-    list-style-type: none;
+.indexNavbar ul{
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
+#filtersContainer ul{
     margin: 0;
     padding: 0;
     z-index: 2;
 }
 
-li{
+.indexNavbar li{
     display: inline;
+    z-index: 2;
+}
+.indexMapMenu li{
+    display: inline;
+    z-index: 2;
+}
+.indexMapMenu ul{  
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     z-index: 2;
 }
 
@@ -127,7 +147,7 @@ a:hover{
     float: left;
     height: 39px;
     margin: 3px 18px;
-    padding-top: 8px;
+    padding-top: 11px;
     font-size: 11pt;
     font-weight: 600; 
     letter-spacing: 1px;
@@ -176,7 +196,7 @@ a:hover{
     position: relative;
 }
 
-.buttonBorderClassMapPage{
+.buttonBorderMapClass{
     border: rgb(84,182,157) solid 3px;
     padding: 15px 12px 12px 7px;
     color: white;
@@ -184,6 +204,9 @@ a:hover{
 .buttonBorderClass{
     color: white;
     z-index: 2;
+    padding: 11px 12px 28px 15px;
+    margin: 0;
+    border: rgb(84,182,157) solid 3px;
 }
 .countriesMapWidth{
     width: 590px;
@@ -204,26 +227,32 @@ a:hover{
     height: 195px;
     width: 300px;
     white-space: nowrap;
-    display: block;
+    vertical-align: middle;
     position: relative;
 }
 .newsImage img {
-    height: 195px;
     width: 300px;
     transition: 1s;
     overflow: hidden;
-    transform: scale(1);
     z-index: 1;
 }
 .newsImage:hover img{
-    transform: scale(1.5);
     transition: 1s;
     overflow: hidden;
 }
 .newsImage:hover .imageHover{
-    background-color: rgb(177,216,66);
-    opacity: 0.8;
-    transition: 0.3s;
+    transition: 0.5s;
+    height: 300px;
+}
+.imageHoverCountry img{
+    width: 8px;
+    height: 11px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.newsCountryText{
+    float: right;
 }
 .newsName{
 	padding-top: 10px;
@@ -255,8 +284,8 @@ a:hover{
 }
 
 .footerRights{
-	font: 11pt calibri, regular;
-	color: white;
+    color: white;
+    font: 7pt 'Open Sans';
 }
 
 .footerRightImage{
@@ -300,6 +329,18 @@ a:hover{
 	width: 236px;
     transition: 1s;
 }
+.s-new  .s-logoIndex img{
+    float: left;
+    width: 215px;
+    transition: 1s;
+}
+.carpathName{
+	font: 16pt 'Open Sans';
+        font-weight: 800;
+        margin-top: 2px;
+        transition: 1s;
+}
+
 .s-newsMenu{
 	width: 46px;
 	margin-left: 35px !important;
@@ -359,6 +400,14 @@ article .intendNews .post-image .post-heading{
     width: 100%;
     overflow: hidden;
 }
+.newsOverflow{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.newsHeight{
+    //height: 445px;
+}
 .s-new .countriesFilter a{
     color:rgb(86,105,143);
     padding-left: 10px;
@@ -390,12 +439,20 @@ article .intendNews .post-image .post-heading{
 }
 .s-new  .s-logoIndexSmall{
 	float: left;
-	margin: 10px 0px;
+	margin: 6px 0px;
 	width: 150px;
     transition: 1s;
 }
 .s-new  .s-logoIndexSmall img{
-	width: 100%;
+	width: 155px;
+        float: left;
+        transition: 1s;
+}
+.carpathNameSmall{
+	font: 12pt 'Open Sans';
+        font-weight: 600;
+        margin-top: -5px;
+        transition: 1s;
 }
 .s-new  .s-rightNavBarSmall{
     float: right;
@@ -426,11 +483,18 @@ article .intendNews .post-image .post-heading{
     margin-left: -27px;
     margin-top: -20px;
 }
+.partnershipIntend{
+    
+}
 .partnershipWithout{
     color: white;
-    font-weight: 200;
-    font-size: 14pt;
+    font-weight: 600;
+    font-size: 9.5pt;
     margin-top: -10px;
+}
+.filterClickIntend{
+    margin-top: -21px;
+    padding-bottom: 20px;
 }
 .leftHelp{
     text-align: left;
@@ -439,13 +503,16 @@ article .intendNews .post-image .post-heading{
     font-weight: 200;
     width: 300px;
 }
+.leftHelp a{
+    text-align: left;
+}
 .leftHelp img{
     float: left;
     margin-top: 2px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .footerHeight{
-    height: 290px;
+    height: 148px;
 }
 .footerRights a:visited{
     color: white;
@@ -455,7 +522,14 @@ article .intendNews .post-image .post-heading{
 	padding-bottom: 25px;
 }
 .s-menu{
-	width: 133px !important;
+	width: 100px !important;
+}
+.routesMenu{
+	width: 160px !important;
+        overflow: hidden;
+}
+.homeSub{
+    width: 300px !important;
 }
 
 .s-new .s-newsImageDiv2 .footerRights{
@@ -466,10 +540,9 @@ article .intendNews .post-image .post-heading{
 }
 
 .footerRights{
-    text-align: center;
-    width: 330px;
-    margin: 0 auto;
-    margin-top: 10px;
+    margin-right: 15px;
+    margin-top: 15px;
+    float: left;
 }
 .s-new{
 }
@@ -505,7 +578,20 @@ li a:visited{
     color: white;
 }
 .detailsButton{
-    background-color: rgb(86,105,143);
+    background-color: #8291B0;
+    border-radius: 0px;
+    font: 11pt 'Open Sans';
+    font-weight: 600;
+    width: 100px;
+}
+.detailsButtonContainer{
+    width: 310px;
+    margin: 0 auto;
+    text-align: right;
+    margin-top: 25px;
+    position: absolute;
+    bottom: 25px;
+    right: 20px;
 }
 .dropDownMenu a:visited {
 	color: white;
@@ -533,7 +619,7 @@ li a:visited{
 	padding: 10px 0px 10px 10px;
 }
 .dropDownMenu li ul li {
-	width: 300px;
+	width: 290px;
 }
 .dropDownMenu li ul li a {
 	font: 10pt 'Open Sans';
@@ -569,7 +655,6 @@ li a:visited{
 .scrollSmallerText{
     font-size: 9pt !important;
 }
-
 .right-caret {
 	display: inline-block;
 	margin-left: 2px;
@@ -594,11 +679,31 @@ li a:visited{
 }
 
 .imageHover{
+    font: 12pt 'Open Sans';
+    font-weight: 400;
     height: 195px;
     position: absolute;
     width: 300px;
     height: 0px;
     transition: 0.5s;
+    overflow: hidden;
+    background-color: rgb(177,216,66);
+    opacity: 0.9;
+}
+.imageHoverDate{
+    text-align: right;
+    float: right;
+    width: 100%;
+    padding-right: 30px;
+    padding-top: 30px;
+    color: white;
+}
+.imageHoverCountry{
+    text-align: right;
+    float: right;
+    padding-right: 30px;
+    width: 100%;
+    color: white;
 }
 
 a:hover{
@@ -641,6 +746,13 @@ body {
   width: 100%;
   height: 160px;
 }
+.developpedText{
+    margin: 0 auto;
+    font: 7pt 'Open Sans';
+    font-weight: 200;
+    float: left;
+    margin-top: 15px;
+}
 
 .menuLine{
 	width: 100%;
@@ -651,7 +763,13 @@ body {
 	width: 100%;
 	height: 4px;
 	background-color: rgb(84,182,157);
-        margin-left: -10px;
+        margin-left: -14px;
+}
+.menuLineSmallMap{
+	width: 100%;
+	height: 4px;
+	background-color: rgb(84,182,157);
+        margin-left: -14.5px;
 }
 .menuLineHome{
 	width: 100%;
@@ -730,7 +848,7 @@ body {
   border: 1px solid rgba(81, 203, 238, 1);
 }
 .enterBlockWidth{
-    width: 1000px;
+    width: 582px;
 }
 .enter-blockInput{
     width: 200px !important;
@@ -743,9 +861,10 @@ body {
 #cancelButton{
     margin-bottom: 5.5px;
     color: rgb(86,105,143);
+    transition: 2s;
 }
 .middleButton{
-    text-align: center;
+    text-align: center; 
 }
 .logInButton{
     width: 0;
@@ -758,6 +877,7 @@ body {
 }
 .widthClass{
     width: 1020px;
+    display: table;
 }
 .row{
     margin: 0;
@@ -814,13 +934,22 @@ body {
   position: relative;
 }
 #cssmenu > ul > li:hover > ul {
-  left: 0;
+  left: 5px;
 }
 #cssmenu > ul > li:hover > ul > li {
   max-height: 72px;
   position: relative;
 }
 .contentIntend{
+    width: 100%;
+    height: 25px;
+}
+.contentIntendMap{
+    width: 100%;
+    height: 25px;
+    background-color: rgb(86,105,143);
+}
+.contentIntendBottom{
     width: 100%;
     height: 25px;
 }
@@ -858,21 +987,40 @@ p{
 }
 .footerLeftTop{
     float: left;
-    width: 25%;
-    text-align: center;
+    width: 33.33333333%;
+    text-align: left;
     margin-top: 35px;
+}
+.footerLeftTop img{
+    height: 42px;
 }
 .footerRightTop{
     float: left;
-    width: 75%;
+    width: 33.33333333%;
     text-align: right;
-    margin-top: 21px;
+    margin-top: 35px;
+}
+.footerRightTop img{
+    height: 42px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+.footerRightTop a{
+    font: 8.5pt 'Open Sans';
+    font-weight: 200;
+    text-align: left;
+}
+.footerMiddleTop{
+    float: left;
+    width: 33.33333333%;
+    text-align: center;
+    margin-top: 25px;
+}
+.footerMiddleTop img{
+    height: 62px;
 }
 .leftEuText{
     margin-left: 5px;
-}
-.s-footerRightImage{
-    margin-right: 30px;
 }
 .footerLogo img{
     width: 100%;
@@ -888,13 +1036,453 @@ p{
     width: 10%;
 }
 .projectFunded{
-    width: 650px;
+    width: 100%;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
     color: white;
     margin-top: 20px;
+    font: 7pt 'Open Sans';
+    font-weight: 200;
+    margin-top: 10px;
+}
+.s-newMap{
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+#sliderLabel {
+    border: none;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: block;
+    height: 16px;
+    margin: 0px auto;
+    overflow: hidden;
+    position: relative;
+    width: 25px;
+    background: white;
+}
+#sliderLabel input {
+    display: none;
+}
+#sliderLabel input:checked + #slider {
+    left: 11px;
+}
+#slider {
+    background: rgb(84,182,157);
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    display: block;
+    height: 12px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    -moz-transition: left .25s ease-out;
+    -webkit-transition: left .25s ease-out;
+    transition: left .25s ease-out;
+    width: 12px;
+    z-index: 1;
+}
+.mapControls{
+    right: 50px !important;
+    top: 95px !important;
+    width: 45px;
+    height: 45px;
+    background: rgb(86,105,143);
+    transition: 0.5s;
+}
+.mapControlsScroll{
+    right: 50px !important;
+    width: 45px;
+    height: 45px;
+    background: rgb(86,105,143);
+    transition: 0.5s;
+}
+.mapControlsBig{
+    width: 1025px !important;
+}
+#mapControls img{
+    float: right;
+    width: 21px;
+    height: 29px;
+    cursor: pointer;
+    margin-right: 12px;
+    margin-top: 8px;
+}
+.indexMapContainer img{
+    position: absolute;
+}
+#mapControls .indexMapMenu{
+    background: rgba(0,0,0,0);
+}
+.sliderDiv {
+    background: rgb(86,105,143);
+    right: 50px !important;
+    top: 45px !important;
+    padding: 14.5px 10px;
+    transition: 0.5s;
+}
+.sliderDivScroll {
+    background: rgb(86,105,143);
+    right: 50px !important;
+    padding: 14.5px 10px;
+    transition: 0.5s;
+}
+.pushRightConrainer{
+    right: 50px !important;
+    top: 145px !important;
+    width: 45px;
+    height: 45px;
+    background: rgb(86,105,143);
+    width: 45px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.pushRightConrainerScroll{
+    right: 50px !important;
+    width: 45px;
+    height: 45px;
+    background: rgb(86,105,143);
+    width: 45px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.pushRightConrainerBig{
+    width: 1025px !important;
+    height: 410px !important;
+    transition: 0.5s;
+}
+.pushRightConrainerFilters{
+    width: 365px !important;
+    height: 510px !important;
+    transition: 0.5s;
+    background-color: rgb(84,182,157) !important;
+}
+#filtersContainer{
+    height: 510px;
+    width: 320px;
+    background: rgb(86,105,143);
+    padding: 20px;
+    overflow-y: auto;
+    position: absolute;
+}
+#filtersContainer ul li{
+    display: block;
+    padding: 1px 10px;
+    transition: color 0.5s;
+}
+#filtersContainer ul ul {
+    display: none;
+    background-color: #8291B0;
+    width: 265px;
+    margin-left: -10px;
+    margin-bottom: 5px;
+}
+#filtersContainer ul li:hover {
+    background-color: rgb(174,214,43);
+    transition: 0.5s;
+}
+.activeFilter{
+    background-color: rgb(84,182,157) !important;
+}footerLeftMain
+#filtersContainer ul li ul{
+    width: 350px;
+    margin-left: -10px;
+    margin-top: -5px;
+    background: #8291B0;
 }
 
+		.markerName{
+                    font: 14pt 'Open Sans';
+                    font-weight: 600;
+                    color: white;
+                    line-height:120%;
+                    width: 310px;
+                    margin: 0 auto;
+                    margin-top: 15px;
+		}
+                #descriptionHideButton{
+                    width: 100%;
+                    height: 30px;
+                    margin-top: -10px;
+                }
+                #descriptionHideButton img{
+                    float: right;
+                    width: 27px;
+                    margin-right: -10px;
+                    cursor: pointer;
+                }
+		.markerDescr{
+                    font: 11pt 'Open Sans';
+                    font-weight: 200;
+                    color: white;
+                    margin: 0 auto;
+                    width: 310px;
+                    margin-top: 15px;
+		}
+		.markerDescr p{
+                    font: 11pt 'Open Sans';
+                    font-weight: 200;
+                    color: white;
+                    margin: 0 auto;
+                    width: 310px;
+                    margin-top: 15px;
+		}
+                .descrImageUnderline{
+                    width: 310px;
+                    height: 5px;
+                    background-color: rgb(84,182,157);
+                    margin: 0 auto;
+                }
+		.coords{
+                    padding: 0px 10px 12px 5px;
+                    text-align: justify;
+                    font-size:15px;
+                    color: white;
+		}
+		.markerImage{
+                    margin: 0 auto;
+                    width: 310px;
+                    margin-top: 15px;
+                    height: 150px;
+                    overflow: hidden;
+		}
+		#markerDescription {
+                    background-color: rgb(86,105,143);
+                    padding: 10px;
+                    color: white;
+                    font-size:15px;
+                    opacity: 0.9;
+                    overflow: visible;
+                    width:350px;
+                    height: 510px;
+                    left: 50 !important;
+                    top: 150;
+		}
+                .newsImageIndex:hover img{
+                    transform: scale(1.5); 
+                }
+#filtersContainer ul li ul li{
+    padding-left: 30px;
+    margin-top: 2px;
+    margin-bottom: -5px;
+}
+.subFilterMap{
+    font-weight: 200;
+}
+#filtersContainer ul li:hover ul{
+    background-color: #8291B0;
+}
+.filtersName{
+    color: white;
+    font: 12pt 'Open Sans';
+    font-weight: 600;
+}
+.filterMap{
+    padding: 5px;
+    margin-top: 5px;
+    background-color: #8291B0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.filterMap a{
+    font: 11pt 'Open Sans';
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.filterMap{
+    font: 14px 'Open Sans';
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+.filterMap a:hover{
+    color: white;
+}
+#pushRightConrainer img{
+    cursor: pointer;
+}
+#pushRightConrainer #mainImageRightContaineMap{
+    width: 45px;
+    float: right;
+}
+#pushRightConrainer .indexMapContainer{
+    padding-top: 0;
+}
+.filtersMainContainer{
+    margin-top: 15px;
+    width: 265px;
+}
+input[type=checkbox].css-checkbox {
+    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:17px;
+    height:12px; 
+    display:inline-block;
+    line-height:12px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    margin: 5px 0;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -12px;
+}
+.filterMap .bottom-caret{
+    margin-top: 5.5px;
+    width: 5px;
+    height: 10px;
+    padding: 0px;
+    transition: 0.5s;
+}
+.rotatedCaret{
+    transition: 0.5s;
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+.filterMap .bottom-caret:hover{
+    transition: 0.5s;
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+label{
+    margin-bottom: 0;
+}
+.partnershipWidth{
+    width: 66%;
+    float: right;
+}
+.filterClickIntend:hover .bottom-caret{
+    transition: 0.5s;
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+.footerLeftMain{
+    width: 60%;
+}
+.footerNew{
+	width: 980px;
+	margin: 0 auto;
+	heigth: 150px;
+	background-color: rgb(86,105,143);
+}
+.footerLeftMain{
+	width: 610px;
+	float: left;
+	height: 69px;
+	border: 2px solid rgb(122,144,180);
+}
+.footerPartnership{
+	background: rgb(122,144,180);
+	height: 100%;
+	width: 33.333333%;
+	float: left;
+}
+.footerPartnership{
+	height: 100%;
+	width: 33.333333%;
+	float: left;
+	font: 9.5pt calibri;
+	font-weight: 200;
+	color: white;
+	text-align: center;
+        padding-top: 27px;
+}
+.footerCoFin{
+	height: 100%;
+	width: 33.333333%;
+	float: left;
+	text-align: center;
+	font: 7pt calibri;
+	font-weight: 200;
+        padding-top: 27px;
+}
+.rightTopText{
+    float: right;
+    text-align: left;
+    width: 140px;
+    margin-top: 5px;
+    margin-left: -10px;
+}
+.rightTopText a{
+    margin-top: 8.5px;
+    font: 7pt calibri;
+}
+.footerEU{
+    margin-top: 5px;
+    width: 33px;
+    height: 23px;
+}
+.huskrouaFooter{
+    padding-top: 7px;
+    height: 100%;
+    width: 33.333333%;
+    float: left;
+    font: 7pt calibri;
+    font-weight: 600;
+}
+.countriesStar{
+    margin-left: 27px;
+    margin-top: -7px;
+}
+.countriesStarSmall{
+    font: 7pt calibri;
+    margin-left: 27px;
+}
+.huskrouaFooter img{
+    height: 31px;
+    width: 33px;
+}
+.footerRightMain{
+	margin-left: 15px;
+	width: 355px;
+	float: left;
+	height: 69px;
+	border: 2px solid rgb(122,144,180);
+        padding-top: 32px;
+        text-align: center;
+        padding-left: 24px;
+}
+.fundedLink{
+    margin: 0 auto;
+    text-align: left;
+    color: white;
+    font: 7pt calibri;
+    font-weight: 200;
+}
+.fundedLink a{
+    text-align: left;
+}
+.fundedLink img{
+    width: 33px;
+    height: 23px;
+    margin-right: 10px;
+    float: left;
+}
+.fundedLink{
+    float: left;
+    width: 310px;
+}
+.fundedText{
+    margin-top: 0px;
+}
+.footerIntentInside{
+    width: 100%;
+    height: 15px;
+}
 
 
 
@@ -920,6 +1508,12 @@ p{
 	.s-new .s-cell .s-block{
 		margin-top: 0px;
 	}
+        .bx-wrapper {
+            width: 700px;
+        }
+        .widthClass{
+            width: 100%;
+        }
 }
 @media (max-width: 760px){
 	.s-newsText{
@@ -963,6 +1557,18 @@ p{
 	.dropDownMenu li ul li ul{
 		left: 200px;
 	}
+        #searchButton {
+            display: none;
+        }
+        #s-textbox{
+            visibility: visible;
+            width: 304px;
+            margin-right: 30px;
+        }
+        #searchButtonActive{
+            visibility: visible;
+            display: block !important;
+        }
 }
 
 @media (max-width: 1248px) and (min-width: 556px){
@@ -972,13 +1578,55 @@ p{
 		float: none;
 	}
 	.s-new .s-rightNavBar{
-		width: 611px;
+		width: 700px;
 		margin: 0 auto;
 		float: none;
 	}
         .topMenu{
-            height: 216px;
+            height: 220px;
         }
+        .topMenuSmall {
+            height: 100px;
+        }
+        .contentIntend {
+            height: 135px;
+        }
+        .dropDownMenu{
+            width: 100%;
+        }
+        .mapMenuSmall{
+            height: 70px;
+        }
+        #searchButtonActive{
+            top: 134px;
+        }
+        .widthClass{
+            width: 100%;
+        }
+}
+
+@media (max-width: 1020px){
+    .s-new .s-rightNavBarSmall {
+        width: 600px;
+        float: none;
+        margin: 0 auto;
+    }
+    .topMenuSmall {
+        height: 100px;
+    }
+    .s-new .s-logoIndexSmall {
+        float: none;
+        margin: 0 auto;
+    }
+    .s-newsText {
+        padding-left: 0;
+    }
+    .s-new {
+        width: auto;
+    }
+    .s-new .s-cell .s-block {
+        width: 100%;
+    }
 }
 
 @media (max-width: 701px){
@@ -1002,4 +1650,202 @@ p{
 		width: 150px;
 		float: none;
 	}
+        .projectFunded {
+            width: auto;
+        }
+        .topMenu {
+            height: 305px;
+        }
+        .contentIntend {
+            height: 195px;
+        }
+        .topMenuSmall {
+            height: 100px;
+        }
+        #searchButtonActive {
+            top: 174px;
+        }
+        .footerRightTop{
+            width: 100%;
+            text-align: center;
+        }
 }
+@media (max-width: 859px){
+        .mapMenuSmall{
+            height: 140px;
+        }
+        .contentIntendMap{
+            height: 95px;
+            width: 100%;
+        }
+        .mapLogoSmall{
+            float: none !important;
+            margin: 0 auto !important;
+        }
+        .menuMapCenterSmall{
+            float: none !important;
+            width: 100% !important;
+            text-align: center;
+        }
+        .enterBlockWidth {
+            width: 200px;
+            text-align: center;
+            height: 75px;
+        }
+}
+@media (max-width: 995px){
+    .footerLeftTop {
+        float: none;
+        margin: 0 auto;
+        margin-top: 25px;
+        width: 290px;
+    }
+    .logos img{
+        width: 60px;
+    }
+    .footerHeight {
+        height: 310px;
+    }
+    .footerLeft{
+        width: 100%;
+    }
+    .logos{
+        float: none;
+        text-align: right;
+        margin: 0 auto;
+        width: 120px;
+    }
+    .footerSmallIntend{
+        width: 100%;
+        height: 25px;
+    }
+}
+@media (max-width: 615px){
+    .s-new .s-rightNavBarSmall{
+        width: auto;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .topMenuSmall{
+        height: 145px;
+    }
+    .footerHeight{
+        height: 385px;
+    }
+    .footerLeft{
+        width: 100%;
+    }
+    .logos{
+        width: 120px;
+    }
+}
+@media (max-width: 695px){
+    .s-new .s-rightNavBar .s-bot{
+        width: 400px;
+        text-align: center;
+    }
+    .enterBlockWidth {
+        width: 200px;
+        text-align: center;
+        height: 75px;
+    }
+}
+/* ==========ERIK========= */
+.breadcrumbs a
+    {
+        color: rgb(86,105,143) !important;
+        text-decoration: none;
+    }
+
+.news_text_box
+    {
+        height: 6.4em;
+        max-height: 6.4em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    
+.breadcrumbs a:hover
+    {
+        color: rgb(174,214,43) !important;
+        transition: color 0.5s;
+    }
+
+.breadcrumbs_ul li
+    {
+        /*padding-left: 1em;*/
+        display: inline;
+    }
+    
+.breadcrumbs 
+    {
+        height: 10px;
+        position: relative;
+        float: left;
+        left: -1.7em;
+        font: 9pt 'Open Sans';
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+.right_arrow 
+    {
+        transition: 0.5s;
+        display: inline-block;
+        margin-left: 5px;
+        vertical-align: middle;
+        border-bottom: 4px solid transparent;
+        border-top: 4px solid transparent;
+        border-left: 4px solid rgb(86,105,143);
+        margin-top: -0.1em;
+        /*margin-left: 1.5em;*/
+    }
+.countriesFilter
+    {
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        font: 9pt 'Open Sans';
+        font-weight: 600;
+        position: relative;
+        left: 15.2em;
+        text-transform: uppercase;
+    }
+
+.countriesFilter a
+    {
+        margin-left: 10px;
+        padding: 4px 4px 4px 4px !important;
+    }
+    
+.selected_country
+    {
+        border: 0.2em solid rgb(84, 182, 157);
+        color: rgb(84, 182, 157) !important;
+    }
+.news_title
+    {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-top: 10px;
+        font: 18pt 'Open Sans';
+        font-weight: 600;
+        color: rgb(87,105,143);
+        max-height: 2.5em;
+        min-height: 30px;
+    }
+.news_title a
+    {
+        font: 13pt 'Open Sans';
+        font-weight: 600;
+        color: rgb(87,105,143);
+        transition: 0.5s;
+    }
+.news_text
+    {
+        font: 12pt calibri, regular;
+        margin-bottom: 25px;
+        color: rgb(87,105,143);
+        width: 100%;
+    }
+/*=========END_ERIK========*/

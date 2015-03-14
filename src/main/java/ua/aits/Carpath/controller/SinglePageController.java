@@ -154,4 +154,10 @@ public class SinglePageController {
 		model.addObject("menu", menu.getMenuRow("0"));
 		return model;
 	}
+    @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
+    public ModelAndView login(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView model = new ModelAndView("LogIn");
+		return model;
+	}
 }

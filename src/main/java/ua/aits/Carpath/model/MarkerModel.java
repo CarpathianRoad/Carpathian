@@ -18,7 +18,6 @@ import ua.aits.Carpath.functions.DB;
 public class MarkerModel {
     public Integer id;
     public String shortTitle;
-    public String fullTitle;
     
     public Integer getId() {
         return id;
@@ -34,28 +33,31 @@ public class MarkerModel {
         this.shortTitle = shortTitle;
     }
     
-    public String getFullTitle() {
-        return fullTitle;
-    }
-    public void setFullTitle(String fullTitle) {
-        this.fullTitle = fullTitle;
-    }
-    
     public List<MarkerModel> getAllMarkers() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from markers order by id desc;");
+        ResultSet result = DB.getResultSet("select * from markers;");
         List<MarkerModel> resultList = new LinkedList<>();
         while (result.next()) {
             MarkerModel temp = new MarkerModel();
             temp.setId(result.getInt("id"));
             temp.setShortTitle(result.getString("title"));
-            temp.setFullTitle(result.getString("descr"));
             resultList.add(temp);
         } 
         return resultList;
     }
-    
-    public void addMarker(String title, String descr) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        DB.runQuery("INSERT INTO `markers`(`title`, `descr`) VALUES ('"+title+"','"+descr+"');");
+    public MarkerModel getOneMarker(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from markers where id="+id+";");
+        MarkerModel temp = new MarkerModel();
+        while (result.next()) {
+            temp.setId(result.getInt("id"));
+            temp.setShortTitle(result.getString("title"));
+        } 
+        return temp;
+    }
+    public void addMarker(String title) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("INSERT INTO `markers`(`title`) VALUES ('"+title+"');");
+    }
+    public void updateMarker(String id, String title) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `markers` SET title='"+title+"' WHERE id="+id+";");
     }
     
     public void deleteMarker(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

@@ -12,7 +12,7 @@
 <link href="${Constants.URL}css/style.css" rel="stylesheet" />
 <link href="${Constants.URL}css/admin.css" rel="stylesheet" />
 <link href="${Constants.URL}css/bootstrap-switch.css" rel="stylesheet" />
-<link href="${Constants.URL}img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
 
 
 <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@
 
 </head>
 <c:if test="${sessionScope.user == null}">
-    <script>window.location.href = "${Constants.URL}index";</script>
+    <script>window.location.href = "${Constants.URL}login";</script>
 </c:if>
 <body>
 <div class="wrapper">

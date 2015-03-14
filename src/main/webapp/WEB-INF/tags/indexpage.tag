@@ -7,11 +7,11 @@
 <%@tag description="Index Page Template" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
-<c:set var="url" scope="session" value="/Carpath/"/>
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
+
 <html>
 <head>
-    <link href="${Constants.URL}img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
     <title>Carpathian Tourist Road</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"
         type="text/javascript"></script>
@@ -21,28 +21,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/spasticNav.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/jssor.slider.mini.js"></script>
-    <script src="${Constants.URL}/js/slider/jquery.bxslider.min.js"></script>
+    <script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
-    <link href="${Constants.URL}/js/slider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-60469558-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+    <style>
+	label.css-label {
+            background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_cf6353ab7cdbfbd4f8cf2b5189d35a11.png);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+	}
+    </style>
 </head>
 <body>
     <div class="">
 	<div class="row indexNavbar topMenu">
-            <div class='s-new'>
+            <div class='s-new' id="mainMenuWidth">
 		<div class="s-logoIndex">
-                    <a href="${Constants.URL}index"><img class="" src="${Constants.URL}img/logo.png"></a>
+                    <a href="${Constants.URL}index">
+                        <img src="${Constants.URL}img/logo_4.png">
+                    </a>
 		</div>
 		<div class="s-rightNavBar">
                     <div class="s-top">
@@ -52,21 +55,23 @@
                                 <li class="paddingLang"><a href="#">UA</a></li>
 				<li class="paddingLang"><a href="#">SK</a></li>
 				<li class="paddingLang"><a href="#">HU</a></li>
-				<li class="paddingLang"><a href="#">PL</a></li>
+				<!--
+                                <li class="paddingLang"><a href="#">PL</a></li>
 				<li class="paddingLang"><a href="#">RO</a></li>
+    -->
                             </ul>
 			</div>
 			<div class="s-two">
                             <a href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
                                 <img class="s-socialLogo intendSocial" src="${Constants.URL}img/fb_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/fb_icon_hover.png';$(this).fadeIn(300);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/fb_icon.png';$(this).fadeIn(300);" 
+                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/fb_icon_hover.png';$(this).fadeIn(100);" 
+                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/fb_icon.png';$(this).fadeIn(100);" 
                                     border="0">
                             </a>
                             <a href="https://twitter.com/CarpathianRoad" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/tw_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/tw_icon_hover.png';$(this).fadeIn(300);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/tw_icon.png';$(this).fadeIn(300);" 
+                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/tw_icon_hover.png';$(this).fadeIn(100);" 
+                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/tw_icon.png';$(this).fadeIn(100);" 
                                     border="0">
                             </a>
 			</div>
@@ -74,9 +79,9 @@
                             <form class="searchMenu">
 				<button type="button" id="searchButton" onclick="showButton()">
                                     <div class=""><img src="${Constants.URL}img/search_icon.png"
-                                        onmouseover="$(this).hide();this.src='${Constants.URL}img/search_icon_hover.png';$(this).fadeIn(300);
+                                        onmouseover="$(this).hide();this.src='${Constants.URL}img/search_icon_hover.png';$(this).fadeIn(100);
                                             $('#searchButton').css('top','4px')"
-                                        onmouseout="$(this).hide();this.src='${Constants.URL}img/search_icon.png';$(this).fadeIn(300);
+                                        onmouseout="$(this).hide();this.src='${Constants.URL}img/search_icon.png';$(this).fadeIn(100);
                                             $('#searchButton').css('top','3px')">
                                     </div>
 				</button>
@@ -95,9 +100,9 @@
                             <li><a href="${Constants.URL}index">HOME<div class="bottom-caret"></div><div id="homeMenu"></div></a>
                                 <ul>
                                     <div class="menuLine"></div>
-                                    <li><a href="#">ABOUT CARPATHIAN REGION</a></li>
-                                    <li><a href="#">ABOUT "CARPATHIAN TOURIST ROAD"</a></li>
-                                    <li><a href="#">ABOUT COUNTRIES AND CITIES</a></li>
+                                    <li class="homeSub"><a href="#">ABOUT CARPATHIAN REGION</a></li>
+                                    <li class="homeSub"><a href="#">ABOUT "CARPATHIAN TOURIST ROAD"</a></li>
+                                    <li class="homeSub"><a href="#">ABOUT COUNTRIES AND CITIES</a></li>
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div><div id="infoMenu"></div></a>
@@ -135,7 +140,7 @@
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}article/category/4">LEISURE<div class="bottom-caret"></div><div id="leisureMenu"></div></a>
-                                <ul>
+                                <ul class="leisureMenu">
                                     <div class="menuLine"></div>
                                     <li><a href="#">ACTIVE REST<span class="right-caret"></span></a>
                                         <ul>
@@ -216,22 +221,22 @@
                             </li>
                             <li><a href="${Constants.URL}map">MAP<div id="homeMenu"></div><div id="mapMenu"></div></a>
 				<ul class="s-mapMenu">
-                                    <div class="menuLineSmall"></div>
+                                    <div class="menuLineSmallMap"></div>
                                     <li></li>
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}routesList">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
-                                <ul>
+                                <ul class="routesMenu">
                                     <div class="menuLine"></div>
                                     <li><a href="#">TRAILS</a></li>
                                     <li><a href="#">THEMATIC ROUTES</a></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}contact">ABOUT US<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
+                            <li><a href="${Constants.URL}contact">CONTACTS<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
                                 <ul class="s-menu">
                                     <div class="menuLine"></div>
                                     <li class="s-menu"><a href="#">PARTNERS</a></li>
-                                    <li class="s-menu"><a href="#">CONTACTS</a></li>
+                                    <li class="s-menu"><a href="#">ABOUT US</a></li>
 				</ul>
                             </li>
 			</ul>
@@ -243,35 +248,64 @@
         <div class="mainMenuIntend"></div>
         <div class="contentIntend"></div>
         <jsp:doBody/> 
-        <div class="contentIntend"></div>
+        <div class="contentIntendBottom"></div>
         <footer class="indexNavBarFooter footerHeight">
+            <div class="footerSmallIntend"></div>
             <div class="s-new s-footer">
-                <div class="footerLeftTop">
-                    <div class="leftHelp">
-                        <img src="${Constants.URL}img/euFlag.png">
-                        The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu      
+                <div class="footerIntentInside"></div>
+                <div class="footerNew">
+                    <div class="footerLeftMain">
+                            <div class="footerPartnership">
+                                <a href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
+                            </div>
+                            <div class="footerCoFin">
+                                <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
+                                    <div class="rightTopText">The Programme is con-financed by the European Union</div>
+                                </a>
+                            </div>
+                            <div class="huskrouaFooter">
+                                <a href="http://huskroua-cbc.net/" target="_blank">
+                                    <img src="${Constants.URL}img/star_logo.png">
+                                    <div class="countriesStar">Hungary-Slovakia-Romani-Ukraine</div>
+                                    <div class="countriesStarSmall">ENPI Cross-border Cooperation Programme</div>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="footerRightMain">
+                        <a class="fundedLink" href="http://www.surdp.eu" target="_blank">
+                            <img src="${Constants.URL}img/euFlag.png">
+                            <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
+                        </a>
                     </div>
                 </div>
-                <div class="footerRightTop rightHelp">
-                    <a class="s-footerRightImage" href="http://huskroua-cbc.net/" target="_blank"><img src="${Constants.URL}img/rightImageFooter.png"></a>
-                    <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euLogo.png"></a>
+                <!--
+                <div class="footerLeftTop">
                 </div>
+                <div class="footerMiddleTop">
+                </div>
+                <div class="footerRightTop rightHelp">
+                    
+                </div>
+                <!--
                 <div class="footerLeft logos">
                     <div class="footerLogo"><img src="${Constants.URL}img/logo1.png"></div>               
                     <div class="footerLogo"><img src="${Constants.URL}img/logo2.png"></div>
                 </div>
-                <div class="footerLeft">
+                -->
+                <!--<div class="footerLeft partnershipWidth">
                     <div class="partnershipWithout">
-                        Partnership without borders
+                        <!--<img src="${Constants.URL}img/partnership.png">--><!--
+                        <a href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                     </div>
                 </div>
+                -->
                 <div class="s-clear"></div>
                 <div class="projectFunded">
                     The project is funded by the European Union. This website has been developed with the assistance of the European Union. The content of this website can in no way be taken to reflect the views of the European Union.
                 </div>       
                 <div class="footerRights">
-                            <div class="enter-icon"><img src="${Constants.URL}img/enter-icon.png"></div>
-                            <a id="copyright" href="http://www.aits.ua" target="_blank">&#169; Carpathian tourist road 2015 All right reserved</a>
+                            <!--<div class="enter-icon"><img src="${Constants.URL}img/enter-icon.png"></div>-->
+                            <div id="copyright">&#169; Carpathian tourist road 2015 All right reserved</div>
                         <div class="enter-block">
                                 <form action="${Constants.URL}system/login.do" method="POST" id="loginForm" name="auth">
                                         <input id="loginInput" type="text" id="login" name="username" placeholder="* Enter login" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
@@ -282,6 +316,11 @@
                                 </form>
                         </div>
                 </div>
+                                        <div class="developpedText">
+                                            <a href="http://www.aits.ua" target="_blank">
+                                                Developped by AITS
+                                            </a>
+                                        </div>
             </div>
         </footer>
     </div>
@@ -289,18 +328,11 @@
 </html>
 
 <script>
-    
+    var countryChooser;
     $( document ).ready(function() {
         $('#searchButtonActive').hide(); 
-        $('.slider1').bxSlider({
-            auto: true,
-            slideWidth: 300,
-            minSlides: 3,
-            maxSlides: 3,
-            slideMargin: 40
-        });
-        var x = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
-        switch(x){
+        countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
+        switch(countryChooser){
             case "index":
                 $('#homeMenu').addClass('menuLine');
                 break;
@@ -314,7 +346,53 @@
                 $('#newsMenu').addClass('menuLine');
                 break;
             case "map":
-                $('#mapMenu').addClass('menuLine');
+                mapPageMenu();
+                center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
+                countryChooser = "allMap";
+                zoomMap = 7;
+                break;
+            case "map#":
+                mapPageMenu();
+                center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
+                countryChooser = "allMap";
+                break;
+            case "allMap":
+                mapPageMenu();
+                zoomMap = 7;
+                center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
+                break;
+            case "Romania":
+                mapPageMenu();
+                zoomMap = 8;
+                center = new google.maps.LatLng(46.07323062540838,24.708251953125);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerRomania.png');
+                break;
+            case "Poland":
+                mapPageMenu();
+                zoomMap = 8;
+                center = new google.maps.LatLng(50.00067775723633,21.4068603515625);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerPoland.png');
+                break;
+            case "Ukraine":
+                mapPageMenu();
+                zoomMap = 9;
+                center = new google.maps.LatLng(48.705462895790596,23.895263671875);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerUkraine.png');
+                break;
+            case "Slovakia":
+                mapPageMenu();
+                zoomMap = 8;
+                center = new google.maps.LatLng(48.828565527993234,19.9346923828125);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerSlovakia.png');
+                break;
+            case "Hungary":
+                mapPageMenu();
+                zoomMap = 8;
+                center = new google.maps.LatLng(47.21210577562242,19.5611572265625);
+                $('#mapControlsImage').attr('src','${Constants.URL}img/markerHungary.png');
                 break;
             case "routesList":
                 $('#routesMenu').addClass('menuLine');
@@ -324,6 +402,29 @@
                 break;
         }
     });
+    
+    function mapPageMenu(){
+                //$('#contactsMenu').addClass('menuLine');
+                $('#mapMenu').addClass('menuLine');
+                /*$('.s-top').hide();
+                $('.topMenu').addClass('topMenuSmall');
+                $('.topMenu').addClass('mapMenuSmall');
+                $('.s-logoIndex').addClass('s-logoIndexSmall');
+                $('.s-logoIndex').addClass('mapLogoSmall');
+                $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                $('.s-rightNavBar').addClass('menuMapCenterSmall');
+                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                $('.dropDownMenu a').addClass('scrollSmallerText');
+                $('.menuLineSmall').addClass('menuLineExtraSmall');
+                $('#mainMenuWidth').addClass('s-newMap');
+                $('.mainMenuIntend').addClass('mainMenuIntendMap');
+                $('.contentIntend').addClass('contentIntendMap');
+                $('.contentIntendMap').removeClass('contentIntend');
+                $('.mainMenuIntend').removeClass('mainMenuIntend');
+                $('.carpathName').addClass('carpathNameSmall');
+                $('.carpathNameSmall').removeClass('carpathName');*/
+    }
     
     function borderButton(button){
         $('#allBorder').hide();
@@ -350,18 +451,9 @@
         $('#ukraineBorder').fadeOut(800);
         $(button+"Border").fadeIn(700);
         $(button+"Map").addClass( "buttonBorderClass" );
-        frame.animate(
-           {
-                left : $('li'+button+'Menu').position().left,
-                width : $('li'+button+'Menu').width()
-            },
-            {
-                duration : 500,
-                queue : false
-            }
-        );
     }
     
+    /*
     function stopIntervalFunc(){
         clearInterval(mapSlider);
     }
@@ -406,7 +498,8 @@
             }
         }, 5000);
     }
-    
+    */
+   
     function showButton(){
         $('#searchButtonActive').fadeIn("fast"); 
         $("#s-textbox").attr("id", "textBoxWidth");
@@ -489,6 +582,7 @@
     
     function init() {
     window.addEventListener('scroll', function(e){
+        var urlMap = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 1;
         if (distanceY > shrinkOn) {
@@ -500,16 +594,22 @@
             $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
             $('.dropDownMenu a').addClass('scrollSmallerText');
             $('.menuLineSmall').addClass('menuLineExtraSmall');
+            $('.carpathName').addClass('carpathNameSmall');
+            $('.carpathNameSmall').removeClass('carpathName');
         } 
         else {
-            $('.s-top').show();
-            $('.topMenu').removeClass('topMenuSmall');
-            $('.s-logoIndexSmall').addClass('s-logoIndex');
-            $('.s-logoIndex').removeClass('s-logoIndexSmall');
-            $('.s-rightNavBarSmall').addClass('s-rightNavBar');
-            $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
-            $('.dropDownMenu a').removeClass('scrollSmallerText');
-            $('.menuLineSmall').removeClass('menuLineExtraSmall');
+            //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
+                $('.s-top').show();
+                $('.topMenu').removeClass('topMenuSmall');
+                $('.s-logoIndexSmall').addClass('s-logoIndex');
+                $('.s-logoIndex').removeClass('s-logoIndexSmall');
+                $('.s-rightNavBarSmall').addClass('s-rightNavBar');
+                $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
+                $('.dropDownMenu a').removeClass('scrollSmallerText');
+                $('.menuLineSmall').removeClass('menuLineExtraSmall');
+                $('.carpathNameSmall').addClass('carpathName');
+                $('.carpathName').removeClass('carpathNameSmall');
+            //}
         }
     });
 }
