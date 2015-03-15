@@ -25,6 +25,15 @@ public class ArticleModel {
     public Double x;
     public Double y;
     public String title;
+    public String titleEN;
+    public String titleUA;
+    public String titleHU;
+    public String titleSK;
+    public String titlePL;
+    public String titleRO;
+    public String titleGE;
+    public String titleCZ;
+    public String titleSRB;
     public String textEN;
     public String textUA;
     public String textHU;
@@ -94,6 +103,69 @@ public class ArticleModel {
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    public String getTitleEN() {
+        return titleEN;
+    }
+    public void setTitleEN(String titleEN) {
+        this.titleEN = titleEN;
+    }
+    
+    public String getTitleUA() {
+        return titleUA;
+    }
+    public void setTitleUA(String titleUA) {
+        this.titleUA = titleUA;
+    }
+    
+    public String getTitleHU() {
+        return titleHU;
+    }
+    public void setTitleHU(String titleHU) {
+        this.titleHU = titleHU;
+    }
+    
+    public String getTitleSK() {
+        return titleSK;
+    }
+    public void setTitleSK(String titleSK) {
+        this.titleSK = titleSK;
+    }
+    
+    public String getTitlePL() {
+        return titlePL;
+    }
+    public void setTitlePL(String titlePL) {
+        this.titlePL = titlePL;
+    }
+    
+    public String getTitleRO() {
+        return titleRO;
+    }
+    public void setTitleRO(String titleRO) {
+        this.titleRO = titleRO;
+    }
+    
+    public String getTitleGE() {
+        return titleGE;
+    }
+    public void setTitleGE(String titleGE) {
+        this.titleGE = titleGE;
+    }
+    
+    public String getTitleCZ() {
+        return titleCZ;
+    }
+    public void setTitleCZ(String titleCZ) {
+        this.titleCZ = titleCZ;
+    }
+    
+    public String getTitleSRB() {
+        return titleSRB;
+    }
+    public void setTitleSRB(String titleSRB) {
+        this.titleSRB = titleSRB;
     }
     
     public String getPublic_country() {
@@ -262,7 +334,7 @@ public class ArticleModel {
                 str = str.substring(0,400);
             }
             temp.setId(result.getInt("id"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(str);
             temp.setDate(result.getString("date"));
             temp.setImage(result.getString("image"));
@@ -282,7 +354,7 @@ public class ArticleModel {
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
-            String f_title = result.getString("title");
+            String f_title = result.getString("titleEN");
             if(f_title.length() > 30){
                 f_title = f_title.substring(0,30) + "...";
             }
@@ -316,7 +388,7 @@ public class ArticleModel {
                 str = str.substring(0,400);
             }
             temp.setId(result.getInt("id"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitleEN(result.getString("titleEN"));
             temp.setTextEN(str);
             temp.setDate(result.getString("date"));
             temp.setActDate(result.getString("actual"));
@@ -336,7 +408,7 @@ public class ArticleModel {
                 str = str.substring(0,100);
             }
             temp.setId(result.getInt("id"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(str);
             temp.setDate(result.getString("date"));
             temp.setActDate(result.getString("actual"));
@@ -354,7 +426,16 @@ public class ArticleModel {
             temp.setY(result.getDouble("y"));
             temp.setType(result.getInt("type"));
             temp.setPublic_country(result.getString("public_country"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
+            temp.setTitleEN(result.getString("titleEN"));
+            temp.setTitleUA(result.getString("titleUA"));
+            temp.setTitleHU(result.getString("titleHU"));
+            temp.setTitleSK(result.getString("titleSK"));
+            temp.setTitlePL(result.getString("titlePL"));
+            temp.setTitleRO(result.getString("titleRO"));
+            temp.setTitleGE(result.getString("titleGE"));
+            temp.setTitleCZ(result.getString("titleCZ"));
+            temp.setTitleSRB(result.getString("titleSRB"));
             temp.setTextEN(result.getString("textEN"));
             temp.setTextUA(result.getString("textUA"));
             temp.setTextHU(result.getString("textHU"));
@@ -387,7 +468,7 @@ public class ArticleModel {
             ArticleModel temp = new ArticleModel();
             temp.setId(result.getInt("id"));
             temp.setType(result.getInt("type"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(result.getString("textEN"));
             temp.setDate(result.getString("date"));
             temp.setActDate(result.getString("actual"));
@@ -422,7 +503,7 @@ public class ArticleModel {
             ArticleModel temp = new ArticleModel();
             temp.setId(result.getInt("id"));
             temp.setType(result.getInt("type"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
             temp.setPublic_country(result.getString("public_country"));
             temp.setDate(result.getString("date"));
             temp.setActDate(result.getString("actual"));
@@ -447,7 +528,7 @@ public class ArticleModel {
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
-        DB.runQuery("INSERT INTO content (title, date, type, author, image, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete)"
+        DB.runQuery("INSERT INTO content (titleEN, date, type, author, image, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete)"
                     + "values ('"+ StringEscapeUtils.escapeSql(title) +"','"+  date +"',"+  type +",'"+  author +"','"+  img +"',"+  x +","+  y +","+ 
 "                '"+ public_country +"','"+ StringEscapeUtils.escapeSql(country) +"','"+  StringEscapeUtils.escapeSql(region) +"','"+ StringEscapeUtils.escapeSql(district) +"','"+  StringEscapeUtils.escapeSql(town) +"','"+  markerType +"','"+  filters +"', 0, '"+  
                 StringEscapeUtils.escapeSql(textEN) +"', '"+  StringEscapeUtils.escapeSql(textUA) +"', '"+  StringEscapeUtils.escapeSql(textHU) +"', '"+  StringEscapeUtils.escapeSql(textSK) +"', '"+  StringEscapeUtils.escapeSql(textRO) +"', '"+  StringEscapeUtils.escapeSql(textPL) +"', '"+  StringEscapeUtils.escapeSql(textGE) +"', '"+  StringEscapeUtils.escapeSql(textCZ) +"', '"+  StringEscapeUtils.escapeSql(textSRB) +"','"+  actDate +"','"+  menuCat +"', 0);");
@@ -462,7 +543,7 @@ public class ArticleModel {
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
-        DB.runQuery("UPDATE content SET title = '"+ title +"', date = '"+  date +"', author = '"+  author +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +"', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +"', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +"', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +"', textPL = '"+ StringEscapeUtils.escapeSql(textPL) +"', textGE = '"+ StringEscapeUtils.escapeSql(textGE) +"', textCZ = '"+ StringEscapeUtils.escapeSql(textCZ) +"', textSRB = '"+ StringEscapeUtils.escapeSql(textSRB) +"', actual = '"+  actDate +"', menuCat = '"+  menuCat +"' where id = '"+id+"'");
+        DB.runQuery("UPDATE content SET titleEN = '"+ title +"', date = '"+  date +"', author = '"+  author +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +"', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +"', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +"', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +"', textPL = '"+ StringEscapeUtils.escapeSql(textPL) +"', textGE = '"+ StringEscapeUtils.escapeSql(textGE) +"', textCZ = '"+ StringEscapeUtils.escapeSql(textCZ) +"', textSRB = '"+ StringEscapeUtils.escapeSql(textSRB) +"', actual = '"+  actDate +"', menuCat = '"+  menuCat +"' where id = '"+id+"'");
             return id;
     }
     public Boolean deleteArticle(String id) throws SQLException{
