@@ -16,14 +16,32 @@
 
                                 <form action="${Constants.URL}system/updatedata.do" name="editArticleForm" id="editForm" method="POST" type="multipart/form-data">
                                     <input type="hidden" value="${article.id}" name="id" />
-            <div class="row add-row">
-						<div class="col-lg-6 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Title<span class="red-star">*</span></label>
-                                                <input type="text" name="title" class="form-control" id="tlt" value="${article.title}">
+            <div class="row add-row"><div class="col-lg-12 margintop30 field">
+                                                        <label for="tlt">Title<span class="red-star">*</span></label><br/>
+                                            <div class="btn-group lang-switch-title" role="group" aria-label="...">
+                                                <button type="button" id="titleEN" class="btn btn-default active">In English</button>
+                                                <button type="button" id="titleUA" class="btn btn-default">In Ukrainian</button>
+                                                <button type="button" id="titleHU" class="btn btn-default">In Hungarian</button>
+                                                <button type="button" id="titleSK" class="btn btn-default">In Slovak</button>
+                                                <button type="button" id="titleRO" class="btn btn-default">In Romanian</button>
+                                                <button type="button" id="titlePL" class="btn btn-default">In Polish</button>
+                                                <button type="button" id="titleGE" class="btn btn-default">In German</button>
+                                                <button type="button" id="titleCZ" class="btn btn-default">In Czech</button>
+                                                <button type="button" id="titleSRB" class="btn btn-default">In Serbian</button>
+                                              </div>
+                                        </div>
+						<div class="col-lg-6 margintop10 field">
+                                                <input type="text" name="titleEN" class="form-control input-title-lang" value="${article.titleEN}" lang="titleEN" id="tlt">
+                                                <input type="text" name="titleUA" class="form-control input-title-lang" value="${article.titleUA}" lang="titleUA" id="tlt">
+                                                <input type="text" name="titleHU" class="form-control input-title-lang" value="${article.titleHU}" lang="titleHU" id="tlt">
+                                                <input type="text" name="titleSK" class="form-control input-title-lang" value="${article.titleSK}" lang="titleSK" id="tlt">
+                                                <input type="text" name="titlePL" class="form-control input-title-lang" value="${article.titlePL}" lang="titlePL" id="tlt">
+                                                <input type="text" name="titleRO" class="form-control input-title-lang" value="${article.titleRO}" lang="titleRO" id="tlt">
+                                                <input type="text" name="titleGE" class="form-control input-title-lang" value="${article.titleGE}" lang="titleGE" id="tlt">
+                                                <input type="text" name="titleCZ" class="form-control input-title-lang" value="${article.titleCZ}" lang="titleCZ" id="tlt">
+                                                <input type="text" name="titleSRB" class="form-control input-title-lang" value="${article.titleSRB}" lang="titleSRB" id="tlt">
                                                 <div class="validation"></div>
                                               </div>
-						</div>
                                         </div>
                 <hr>
                                                 
@@ -337,6 +355,8 @@
         initGalerry();
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
+        var currentLangT = $(".lang-switch-title button.active").attr("id");
+        $(".input-title-lang[lang='"+currentLangT+"']").show();
         
         $("#sel1").val('${article.type}');
         $("#sel2").val('${article.menuCat}');
@@ -523,6 +543,13 @@ $(".lang-switch-text button").click(function(){
     var currentLang = $(this).attr("id");
     $(".textareas .textarea-msg").hide();
     $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
+});
+$(".lang-switch-title button").click(function(){
+    $(".lang-switch-title button").removeClass("active");
+    $(this).addClass("active");
+    var currentLangT = $(this).attr("id");
+    $(".input-title-lang").hide();
+    $(".input-title-lang[lang='"+currentLangT+"']").show();
 });
 $("#sudmitData").click(function(){
     var isValidate = true;

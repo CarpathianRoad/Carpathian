@@ -18,6 +18,7 @@ import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MarkerModel;
 import ua.aits.Carpath.model.MenuModel;
+import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.UserModel;
 
 /**
@@ -32,6 +33,7 @@ public class SystemController {
     UserModel users = new UserModel();
     MarkerModel markers = new MarkerModel();
     FilterModel filters = new FilterModel();
+    RouteModel routes = new RouteModel();
     
     @RequestMapping(value = {"/system/add", "/system/add/","/Carpath/system/add", "/Carpath/system/add/"})
         public ModelAndView addArticle (HttpServletRequest request,
@@ -115,6 +117,28 @@ public class SystemController {
             ModelAndView modelAndView = new ModelAndView("/system/Routes");
             return modelAndView;
     }
+    @RequestMapping(value = {"/system/routes/add", "/system/routes/add/","/Carpath/system/routes/add", "/Carpath/system/routes/add/"})
+        public ModelAndView addRoute (HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            request.setCharacterEncoding("UTF-8");
+            ModelAndView modelAndView = new ModelAndView("/system/AddRoute");
+            return modelAndView;
+	}
+    @RequestMapping(value = {"/system/routes/delete/{id}/","/system/routes/delete/{id}","/Carpath/system/routes/delete/{id}/","/Carpath/system/routes/delete/{id}"})
+    public ModelAndView deleteRoute(@PathVariable("id") String id, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+        Boolean result = routes.deleteRoute(id);
+        
+        return new ModelAndView("redirect:" + "/system/routes");
+    }
+    @RequestMapping(value = {"/system/routes/edit/{id}", "/system/routes/edit/{id}/","/Carpath/system/routes/edit/{id}", "/Carpath/system/routes/edit/{id}/"})
+        public ModelAndView editRoute(@PathVariable("id") String id, HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            request.setCharacterEncoding("UTF-8");
+            ModelAndView modelAndView = new ModelAndView("/system/EditRoute");
+            modelAndView.addObject("route",routes.getOneRoute(id));
+            return modelAndView;
+	}
     @RequestMapping(value = {"/system/markers", "/system/markers/", "/Carpath/system/markers", "/Carpath/system/markers/"})
     public ModelAndView showMarkers(HttpServletRequest request,
 		HttpServletResponse response) throws Exception {

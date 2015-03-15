@@ -16,14 +16,32 @@
 
                                 <form action="${Constants.URL}system/insertdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
                                     
-            <div class="row add-row">
-						<div class="col-lg-6 field">
-                                                    <div class="form-group">
-                                                        <label for="tlt">Title<span class="red-star">*</span></label>
-                                                <input type="text" name="title" class="form-control" id="tlt">
+            <div class="row add-row"><div class="col-lg-12 margintop30 field">
+                                                        <label for="tlt">Title<span class="red-star">*</span></label><br/>
+                                            <div class="btn-group lang-switch-title" role="group" aria-label="...">
+                                                <button type="button" id="titleEN" class="btn btn-default active">In English</button>
+                                                <button type="button" id="titleUA" class="btn btn-default">In Ukrainian</button>
+                                                <button type="button" id="titleHU" class="btn btn-default">In Hungarian</button>
+                                                <button type="button" id="titleSK" class="btn btn-default">In Slovak</button>
+                                                <button type="button" id="titleRO" class="btn btn-default">In Romanian</button>
+                                                <button type="button" id="titlePL" class="btn btn-default">In Polish</button>
+                                                <button type="button" id="titleGE" class="btn btn-default">In German</button>
+                                                <button type="button" id="titleCZ" class="btn btn-default">In Czech</button>
+                                                <button type="button" id="titleSRB" class="btn btn-default">In Serbian</button>
+                                              </div>
+                                        </div>
+						<div class="col-lg-6 margintop10 field">
+                                                <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt">
+                                                <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt">
+                                                <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt">
+                                                <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt">
+                                                <input type="text" name="titlePL" class="form-control input-title-lang" lang="titlePL" id="tlt">
+                                                <input type="text" name="titleRO" class="form-control input-title-lang" lang="titleRO" id="tlt">
+                                                <input type="text" name="titleGE" class="form-control input-title-lang" lang="titleGE" id="tlt">
+                                                <input type="text" name="titleCZ" class="form-control input-title-lang" lang="titleCZ" id="tlt">
+                                                <input type="text" name="titleSRB" class="form-control input-title-lang" lang="titleSRB" id="tlt">
                                                 <div class="validation"></div>
                                               </div>
-						</div>
                                         </div>
                 <hr>
                                     <div class="row add-row">
@@ -235,7 +253,7 @@
             </div>
                 <hr>
                                     <div class="row add-row">
-                                        <div class="col-lg-12 margintop10 field">
+                                        <div class="col-lg-12 margintop30 field">
                                             <div class="btn-group lang-switch-text" role="group" aria-label="...">
                                                 <button type="button" id="textEN" class="btn btn-default active">In English</button>
                                                 <button type="button" id="textUA" class="btn btn-default">In Ukrainian</button>
@@ -264,7 +282,7 @@
 					</div>
         </form>
 							<p>
-								<button class="btn btn-primary btn-mini margintop10 marginbottom30" id="sudmitData" type="submit">Save</button>
+								<button class="btn btn-primary btn-mini margintop30 marginbottom30" id="sudmitData" type="submit">Save</button>
 							</p>
             <script> 
                 CKEDITOR.replace('editorEN', {
@@ -344,6 +362,8 @@
     $(document).ready(function () { 
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
+        var currentLangT = $(".lang-switch-title button.active").attr("id");
+        $(".input-title-lang[lang='"+currentLangT+"']").show();
         initGalerry();
         var myDate = new Date();
         var currentMonth = (myDate.getMonth()+1);
@@ -517,6 +537,13 @@ $(".lang-switch-text button").click(function(){
     var currentLang = $(this).attr("id");
     $(".textareas .textarea-msg").hide();
     $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
+});
+$(".lang-switch-title button").click(function(){
+    $(".lang-switch-title button").removeClass("active");
+    $(this).addClass("active");
+    var currentLangT = $(this).attr("id");
+    $(".input-title-lang").hide();
+    $(".input-title-lang[lang='"+currentLangT+"']").show();
 });
 $("#sudmitData").click(function(){
     $("div.validation").html('');

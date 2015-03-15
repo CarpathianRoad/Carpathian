@@ -138,7 +138,7 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(str3);
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setCountry(result.getString("country")); 
@@ -167,7 +167,7 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(result.getString("title"));
+            temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(result.getString("textEN"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setCountry(result.getString("country")); 
@@ -203,7 +203,7 @@ public class MapModel {
         mapList = new LinkedList<>();
         while (result.next()) { 
             MapModel temp = new MapModel();
-            String f_title = result.getString("title");
+            String f_title = result.getString("titleEN");
             if(f_title.length() > 30){
                 f_title = f_title.substring(0,30) + "...";
             }
