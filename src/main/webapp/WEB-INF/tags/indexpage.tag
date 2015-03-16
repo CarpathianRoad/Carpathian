@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="${Constants.URL}css/style1.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/spasticNav.js"></script>
+    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/jssor.slider.mini.js"></script>
     <script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
