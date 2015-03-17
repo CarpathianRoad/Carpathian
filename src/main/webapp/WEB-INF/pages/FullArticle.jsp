@@ -9,6 +9,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:indexpage>
+    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
 	<section  id="inner-headline">
 	<div class="container">
             <div class="breadcrumbs">
@@ -52,7 +53,8 @@
                                     <!--image_slider ======================================-->
                                     <!-- Jssor Slider Begin -->
                                     <!-- You can move inline styles to css file or css block. -->
-                                    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
+                                    
+                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
 
                                         <!-- Loading Screen -->
                                         <div u="loading" style="position: absolute; top: 0px; left: 0px;">
