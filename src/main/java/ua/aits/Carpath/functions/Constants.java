@@ -11,7 +11,7 @@ package ua.aits.Carpath.functions;
  */
 public class Constants
 {
-    public static final String home = "/home/project/Carpath/src/main/webapp/"; // change /home/project/Kiwi to your project folder path
+    public static final String home = "/home/project/erik/"; // change /home/project/Kiwi to your project folder path
     public static final String URL = "/Carpath/";
     public static final String FILE_URL = home+"img/content/";
     public static final String FILE_URL_ICON = home+"img/markers/";
