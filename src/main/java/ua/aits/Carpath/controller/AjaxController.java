@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MenuModel;
+import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.UserModel;
 
 /**
@@ -33,7 +34,7 @@ import ua.aits.Carpath.model.UserModel;
 public class AjaxController {
     
     ArticleModel content =  new ArticleModel();
-    
+    RouteModel routes =  new RouteModel();
     @RequestMapping(value = {"/system/checkLoginPass/", "/system/checkLoginPass"}, method = RequestMethod.GET)
     public @ResponseBody
     String checkLoginPass(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -118,6 +119,64 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
     
+    }
+    @RequestMapping(value = {"/system/changePublishRoute/", "/system/changePublishRoute"}, method = RequestMethod.GET)
+    public @ResponseBody
+    String changePublishRoute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("id");
+        String status = request.getParameter("status");
+        if(routes.publishRoute(id, status)) {return "true";}
+        else {return "false";}
+    }
+    @RequestMapping(value = {"/system/routesByType/", "/system/routesByType"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<String> routesByType(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String type = request.getParameter("type");
+        String value = request.getParameter("value");
+        int countPage = Integer.parseInt(request.getParameter("count"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        List<RouteModel> tempRoutes = routes.getAllRoutesSystem(type, value);
+        String returnHTML = "";
+        String pagination = "<tr><td colspan=\"10\" class=\"pagination\">";
+        int first = (countPage*page)-countPage;
+        int second = countPage*page;
+        if(countPage*page > tempRoutes.size()){
+            first = (page-1)*countPage;
+            second = tempRoutes.size();
+        }
+        Integer count = tempRoutes.size()-(first);
+        List<RouteModel> tempS = tempRoutes.subList(first, second);
+        for (RouteModel temp : tempS) {
+        String check = "checked";
+        String is_publish = "publish";
+        System.out.println(temp.id);
+        if(temp.publish == 0){ check = ""; is_publish = "";}
+        returnHTML = returnHTML + "<tr><td class=\"admin-table-count\">"+count.toString()+"</td>" +
+"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"routes/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
+"      <td class=\"admin-table-cell\">"+temp.country+"</td>" +
+"      <td class=\"article-type admin-table-cell\">"+temp.textType+"</td>" +
+"      <td class=\"article-publish "+is_publish+"\"><input type=\"checkbox\" data-size=\"mini\" class=\"publish-checkbox\" data-id=\""+temp.id+"\" name=\"my-checkbox\" "+check+"></td>"
+                + "<td class=\""+is_publish+"\">" +
+"          <a class=\"edit-button\" href=\""+Constants.URL+"system/routes/edit/"+temp.id+"\"><img class=\"edit-delete\" src=\""+Constants.URL+"img/edit.png\" /></a>" +
+"      </td>" +
+"      <td class=\""+is_publish+"\">" +
+"          <a href=\""+Constants.URL+"system/routes/delete/"+temp.id+"\"><img class=\"edit-delete\" src=\""+Constants.URL+"img/delete.png\" /></a>" +
+"      </td>"+
+"    </tr>";
+        count--;
+        }
+        Double x = Math.ceil((double)tempRoutes.size() / countPage);
+        int pages = x.intValue();
+        System.out.println(x + "///" + count/countPage + "///" + pages + "///" + count + "////" + countPage);
+        for(int i = 1; i <= pages; i++){
+            pagination = pagination + "<a>"+i+"</a>";
+        }
+        returnHTML = returnHTML + pagination+"</td></tr>";
+        HttpHeaders responseHeaders = new HttpHeaders(); 
+        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+        return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
     }
     @RequestMapping(value = {"/upload/type/image/", "/upload/type/image"}, method = RequestMethod.POST)
     public @ResponseBody String handleFileUpload(@RequestParam("name") String name,

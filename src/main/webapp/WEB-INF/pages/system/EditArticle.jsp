@@ -16,14 +16,32 @@
 
                                 <form action="${Constants.URL}system/updatedata.do" name="editArticleForm" id="editForm" method="POST" type="multipart/form-data">
                                     <input type="hidden" value="${article.id}" name="id" />
-            <div class="row add-row">
-						<div class="col-lg-6 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Title<span class="red-star">*</span></label>
-                                                <input type="text" name="title" class="form-control" id="tlt" value="${article.title}">
+            <div class="row add-row"><div class="col-lg-12 margintop30 field">
+                                                        <label for="tlt">Title<span class="red-star">*</span></label><br/>
+                                            <div class="btn-group lang-switch-title" role="group" aria-label="...">
+                                                <button type="button" id="titleEN" class="btn btn-default active">In English</button>
+                                                <button type="button" id="titleUA" class="btn btn-default">In Ukrainian</button>
+                                                <button type="button" id="titleHU" class="btn btn-default">In Hungarian</button>
+                                                <button type="button" id="titleSK" class="btn btn-default">In Slovak</button>
+                                                <button type="button" id="titleRO" class="btn btn-default">In Romanian</button>
+                                                <button type="button" id="titlePL" class="btn btn-default">In Polish</button>
+                                                <button type="button" id="titleGE" class="btn btn-default">In German</button>
+                                                <button type="button" id="titleCZ" class="btn btn-default">In Czech</button>
+                                                <button type="button" id="titleSRB" class="btn btn-default">In Serbian</button>
+                                              </div>
+                                        </div>
+						<div class="col-lg-6 margintop10 field">
+                                                <input type="text" name="titleEN" class="form-control input-title-lang" value="${article.titleEN}" lang="titleEN" id="tlt">
+                                                <input type="text" name="titleUA" class="form-control input-title-lang" value="${article.titleUA}" lang="titleUA" id="tlt">
+                                                <input type="text" name="titleHU" class="form-control input-title-lang" value="${article.titleHU}" lang="titleHU" id="tlt">
+                                                <input type="text" name="titleSK" class="form-control input-title-lang" value="${article.titleSK}" lang="titleSK" id="tlt">
+                                                <input type="text" name="titlePL" class="form-control input-title-lang" value="${article.titlePL}" lang="titlePL" id="tlt">
+                                                <input type="text" name="titleRO" class="form-control input-title-lang" value="${article.titleRO}" lang="titleRO" id="tlt">
+                                                <input type="text" name="titleGE" class="form-control input-title-lang" value="${article.titleGE}" lang="titleGE" id="tlt">
+                                                <input type="text" name="titleCZ" class="form-control input-title-lang" value="${article.titleCZ}" lang="titleCZ" id="tlt">
+                                                <input type="text" name="titleSRB" class="form-control input-title-lang" value="${article.titleSRB}" lang="titleSRB" id="tlt">
                                                 <div class="validation"></div>
                                               </div>
-						</div>
                                         </div>
                 <hr>
                                                 
@@ -337,6 +355,8 @@
         initGalerry();
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
+        var currentLangT = $(".lang-switch-title button.active").attr("id");
+        $(".input-title-lang[lang='"+currentLangT+"']").show();
         
         $("#sel1").val('${article.type}');
         $("#sel2").val('${article.menuCat}');
@@ -412,7 +432,7 @@ $(".btn-lg").click(function(){
 
 function insertImage(){
 
-$(".img-content-show-all img").click(function() {
+$(".img-content-show-all img:not(.remove-icon)").click(function() {
     var name = $(this).attr("name");
     var path = $(this).attr("realpath");
     if($(this).attr("type") === "img"){
@@ -486,8 +506,8 @@ function getFiles(temp_fold, parent, isFolder) {
                insertImage();
                var attr = $(".img-content-show-all").attr("current");
                 if (typeof attr === typeof undefined || attr === false) {
-                    $(".img-content-show-all").attr("current",$(".galery-item img").attr("parent"));
-                    $(".img-content-show-all").attr("realpath",$(".galery-item img").attr("realpath"));
+                    $(".img-content-show-all").attr("current",$(".galery-item img:not(.remove-icon)").attr("parent"));
+                    $(".img-content-show-all").attr("realpath",$(".galery-item img:not(.remove-icon)").attr("realpath"));
                 }
                 else {
                     
@@ -503,7 +523,8 @@ function getFiles(temp_fold, parent, isFolder) {
                }
                $(".img-breadcrumps").remove();
                $("<span class='img-breadcrumps'>"+$(".img-content-show-all").attr("realpath").replace(/\//g," > ")+"</span>").insertBefore(".img-content-show-all");
-                }
+                initRemoveFile(); 
+            }
         });
 }
 function initRemove(){
@@ -517,12 +538,37 @@ $(".remove-icon").click(function(){
     $("#real-img-path").val(newurl);
 });
 }
+function initRemoveFile(){
+$(".img-content-show-all img.remove-icon").click(function(){
+    var name = $(this).next("img").attr("name");
+    var path = $(".img-content-show-all").attr("current");
+        jQuery.ajax({
+            url: '${Constants.URL}removeFileOrDir',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'GET',
+            data: 'name='+name+'&path='+path,
+            success: function(data){
+                console.log(data);
+                getFiles("", path, true);
+                }
+        });
+});
+}
 $(".lang-switch-text button").click(function(){
     $(".lang-switch-text button").removeClass("active");
     $(this).addClass("active");
     var currentLang = $(this).attr("id");
     $(".textareas .textarea-msg").hide();
     $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
+});
+$(".lang-switch-title button").click(function(){
+    $(".lang-switch-title button").removeClass("active");
+    $(this).addClass("active");
+    var currentLangT = $(this).attr("id");
+    $(".input-title-lang").hide();
+    $(".input-title-lang[lang='"+currentLangT+"']").show();
 });
 $("#sudmitData").click(function(){
     var isValidate = true;
