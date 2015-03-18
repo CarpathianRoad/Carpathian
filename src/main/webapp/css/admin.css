@@ -130,7 +130,7 @@ margin-bottom: 20px;
 }
 .img-content-show-all {
     height: 100%;
-    margin-top: 15px;
+    margin-top: 60px;
 }
 .img-content-show-all img {
     width: 100%;
@@ -363,15 +363,12 @@ margin-bottom: 10px;
 display: block;
 }
 .img-content-show-all .remove-icon {
-    float: left;
-    margin-top: -10px;
-    margin-bottom: -10px;
 }
-#cke_1_contents{
+cke_contents{
     height: 590px !important;
 }
 .img-content-show-all .remove-icon {
-    display: none;
+    position: absolute;
 }
 .info-folder {
       display: block;
@@ -394,4 +391,7 @@ display: block;
 .route-filter .checkbox {
     overflow:visible;
     text-overflow: none;
+}
+.cke_contents {
+    height: 590px !important;
 }

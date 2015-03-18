@@ -124,9 +124,9 @@ public class FileUploadController {
         String link_path = curll.replace(Constants.home,"");
         for (File file : fList) {
             if (file.isFile()) {
-                htmlImg = htmlImg + "<div class='galery-item'><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></div>";
+                htmlImg = htmlImg + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/></div>";
             } else if(file.isDirectory()){
-                htmlFolder = htmlFolder + "<div class='galery-item'><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+file.getName()+"</span><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></div>";
+                htmlFolder = htmlFolder + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+file.getName()+"</span></div>";
             }
         }
         return htmlFolder+htmlImg;
@@ -149,6 +149,16 @@ public class FileUploadController {
                System.out.println("DIR created");  
              }
         return "work";
+    }
+    @RequestMapping(value = "/removeFileOrDir", method = RequestMethod.GET)
+    public @ResponseBody
+    String removeFileOrDir(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String path = request.getParameter("path");
+            File temp = new File(path+name);
+            Boolean result = temp.delete();
+            System.out.println(temp.getAbsolutePath());
+        return result.toString();
     }
     
 }

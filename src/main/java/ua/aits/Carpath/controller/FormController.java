@@ -72,7 +72,15 @@ public class FormController {
      @RequestMapping(value = "/system/insertdata.do", method = RequestMethod.POST)
     public ModelAndView doInsertData(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
-        String title = request.getParameter("title");
+        String titleEN = request.getParameter("titleEN");
+        String titleUA = request.getParameter("titleUA");
+        String titleHU = request.getParameter("titleHU");
+        String titleSK = request.getParameter("titleSK");
+        String titlePL = request.getParameter("titlePL");
+        String titleRO = request.getParameter("titleRO");
+        String titleGE = request.getParameter("titleGE");
+        String titleCZ = request.getParameter("titleCZ");
+        String titleSRB = request.getParameter("titleSRB");
         String type = request.getParameter("type");
         String public_country = request.getParameter("public_country");
         String menuCat = request.getParameter("menuCat");
@@ -97,7 +105,7 @@ public class FormController {
         String textGE = request.getParameter("textGE");
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
-        String result = article.insertArticle(title, date, actDate, type, author, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
+        String result = article.insertArticle(titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/panel");
        
@@ -106,7 +114,15 @@ public class FormController {
     public ModelAndView doUpdateData(HttpServletRequest request,HttpServletResponse response) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
-        String title = request.getParameter("title");
+        String titleEN = request.getParameter("titleEN");
+        String titleUA = request.getParameter("titleUA");
+        String titleHU = request.getParameter("titleHU");
+        String titleSK = request.getParameter("titleSK");
+        String titlePL = request.getParameter("titlePL");
+        String titleRO = request.getParameter("titleRO");
+        String titleGE = request.getParameter("titleGE");
+        String titleCZ = request.getParameter("titleCZ");
+        String titleSRB = request.getParameter("titleSRB");
         String type = request.getParameter("type");
         String menuCat = request.getParameter("menuCat");
         String date = request.getParameter("date");
@@ -131,7 +147,7 @@ public class FormController {
         String textGE = request.getParameter("textGE");
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
-        String result = article.updateArticle(id,title, date, actDate, type, author, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
+        String result = article.updateArticle(id,titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/panel");
        
