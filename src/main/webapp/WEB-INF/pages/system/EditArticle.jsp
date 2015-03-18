@@ -432,7 +432,7 @@ $(".btn-lg").click(function(){
 
 function insertImage(){
 
-$(".img-content-show-all img").click(function() {
+$(".img-content-show-all img:not(.remove-icon)").click(function() {
     var name = $(this).attr("name");
     var path = $(this).attr("realpath");
     if($(this).attr("type") === "img"){
@@ -506,8 +506,8 @@ function getFiles(temp_fold, parent, isFolder) {
                insertImage();
                var attr = $(".img-content-show-all").attr("current");
                 if (typeof attr === typeof undefined || attr === false) {
-                    $(".img-content-show-all").attr("current",$(".galery-item img").attr("parent"));
-                    $(".img-content-show-all").attr("realpath",$(".galery-item img").attr("realpath"));
+                    $(".img-content-show-all").attr("current",$(".galery-item img:not(.remove-icon)").attr("parent"));
+                    $(".img-content-show-all").attr("realpath",$(".galery-item img:not(.remove-icon)").attr("realpath"));
                 }
                 else {
                     
@@ -523,7 +523,8 @@ function getFiles(temp_fold, parent, isFolder) {
                }
                $(".img-breadcrumps").remove();
                $("<span class='img-breadcrumps'>"+$(".img-content-show-all").attr("realpath").replace(/\//g," > ")+"</span>").insertBefore(".img-content-show-all");
-                }
+                initRemoveFile(); 
+            }
         });
 }
 function initRemove(){
@@ -535,6 +536,24 @@ $(".remove-icon").click(function(){
         newurl = newurl +"," + $(this).children("img").attr("alt");
     });
     $("#real-img-path").val(newurl);
+});
+}
+function initRemoveFile(){
+$(".img-content-show-all img.remove-icon").click(function(){
+    var name = $(this).next("img").attr("name");
+    var path = $(".img-content-show-all").attr("current");
+        jQuery.ajax({
+            url: '${Constants.URL}removeFileOrDir',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'GET',
+            data: 'name='+name+'&path='+path,
+            success: function(data){
+                console.log(data);
+                getFiles("", path, true);
+                }
+        });
 });
 }
 $(".lang-switch-text button").click(function(){

@@ -225,11 +225,11 @@
                                     <li></li>
 				</ul>
                             </li>
-                            <li><a href="${Constants.URL}routesList">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
+                            <li><a href="">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
                                 <ul class="routesMenu">
                                     <div class="menuLine"></div>
-                                    <li><a href="#">TRAILS</a></li>
-                                    <li><a href="#">THEMATIC ROUTES</a></li>
+                                    <li><a href="${Constants.URL}routesList">TRAILS</a></li>
+                                    <li><a href="">THEMATIC ROUTES</a></li>
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}contact">CONTACTS<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
