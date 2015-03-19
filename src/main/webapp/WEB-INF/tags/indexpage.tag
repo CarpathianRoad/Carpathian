@@ -102,7 +102,6 @@
                                     <div class="menuLine"></div>
                                     <li class="homeSub"><a href="#">ABOUT CARPATHIAN REGION</a></li>
                                     <li class="homeSub"><a href="#">ABOUT "CARPATHIAN TOURIST ROAD"</a></li>
-                                    <li class="homeSub"><a href="#">ABOUT COUNTRIES AND CITIES</a></li>
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div><div id="infoMenu"></div></a>

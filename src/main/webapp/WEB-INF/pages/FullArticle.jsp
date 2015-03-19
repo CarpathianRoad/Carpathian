@@ -40,7 +40,7 @@
                                             <div class="article_sub_title">
                                                 <div class="article_sub_title_date">${article.date}</div>
                                                 <div class="article_sub_title_country">
-                                                    <img src="/Carpath/img/mapControlsImageSelected.png"/>
+                                                    <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
                                                     ${article.public_country}
                                                 </div>
                                             </div> 
