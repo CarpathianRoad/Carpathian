@@ -63,6 +63,7 @@ public class ArticleController {
             modelAndView.addObject("articles", news.getLastTenArticle());
             ArticleModel tempArt  = news.getOneArticle(id);
             String[] tempImg = tempArt.getImage().split(",");
+            modelAndView.addObject("main_image", tempImg[0]);
             modelAndView.addObject("article", news.getOneArticle(id));
             modelAndView.addObject("images", tempImg);
             return modelAndView;

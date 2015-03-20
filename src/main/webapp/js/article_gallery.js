@@ -9,7 +9,14 @@ function set_main_picture(path)
         jQuery("#main_image").attr('src', path);
     }
 jQuery(document).ready(function ($) {
-    jQuery(".article_side_news").css("max-height", jQuery(".col-lg-8").height());
+    var main_block_height = jQuery(".col-lg-8").height();
+    var news_item_height = 295;
+    var news_count = main_block_height / news_item_height;
+    var result = parseInt(news_count, 10);
+    result = result * news_item_height*1;
+    //console.log("result = " + result);
+    //console.log("111111");
+    jQuery(".article_side_news").css("max-height", result);
             var options = {
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
                 $AutoPlaySteps: 3,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1

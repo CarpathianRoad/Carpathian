@@ -407,6 +407,7 @@ article .intendNews .post-image .post-heading{
 }
 .newsHeight{
     //height: 445px;
+    width: 300px;
 }
 .s-new .countriesFilter a{
     color:rgb(86,105,143);
@@ -1929,5 +1930,18 @@ label{
 .article_side_news  
     {
         overflow: hidden;
+        position: relative;
+        left: 1em;
+    }
+.article_news_item 
+    {
+        position: relative;
+        top: 20px;
+        margin-bottom: 2em;
+        height: 295px;
+    }
+.article_container
+    {
+        margin-top: 2em;
     }
 /*=========END_ERIK========*/
