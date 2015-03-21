@@ -169,6 +169,7 @@ public class MapModel {
             temp.setY(result.getString("y"));
             temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(result.getString("textEN"));
+            temp.setDate(result.getString("date"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setCountry(result.getString("country")); 
             temp.setRegion(result.getString("region")); 
