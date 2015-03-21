@@ -299,6 +299,14 @@ a:hover{
 }
 .s-new .s-cell{
 	width: 33.3333333%;
+	float: right;
+}
+.s-new .s-cellFullArticle .s-block{
+	float: right;
+        width: 300px;
+}
+.s-cellFullArticle{
+	width: 100%;
 	float: left;
 }
 .s-new .s-clear{
@@ -564,7 +572,6 @@ article .intendNews .post-image .post-heading{
 	font: 11pt 'Open Sans';
         font-weight: 600;
 	line-height: 25px;
-	padding: 10px 0px 10px 25px;
 	float: left;
 	text-decoration: none;
         letter-spacing: 1px;
@@ -613,20 +620,21 @@ li a:visited{
 	left: -10px;
 	z-index: 999;
 	margin-left: 10px;
-	margin-top: 35px;
-}
-.dropDownMenu li ul a{
-	padding: 10px 0px 10px 10px;
+	margin-top: 25px;
 }
 .dropDownMenu li ul li {
-	width: 290px;
+    white-space: nowrap;
+    width: 100%;
 }
 .dropDownMenu li ul li a {
 	font: 10pt 'Open Sans';
         font-weight: 600;
-	margin: 0 !important;
 	width: 100%;
 	background-color: rgb(122,144,180);
+}
+.dropDownMenu li ul a{
+	padding: 10px 5px 10px 10px;
+        margin-right: 15px !important;
 }
 .dropDownMenu li ul li ul {
 	width: 300px;
@@ -643,6 +651,7 @@ li a:visited{
 
 .dropDownMenu li ul li ul li {
 	float: left;
+        white-space: normal;
 }
 .dropDownMenu li ul li ul li a {
 	margin: 0 !important;
@@ -897,6 +906,7 @@ body {
 #cssmenu ul li ul {
   position: absolute;
   left: -9999px;
+  background-color: rgb(122,144,180);
 }
 #cssmenu ul li ul li {
   max-height: 0;
@@ -916,6 +926,7 @@ body {
 }
 #cssmenu > ul > li {
   float: left;
+	margin: 10px 0px 10px 25px;
 }
 #cssmenu > ul > li:after {
   display: block;
@@ -934,7 +945,8 @@ body {
   position: relative;
 }
 #cssmenu > ul > li:hover > ul {
-  left: 5px;
+  left: -10px;
+  min-width: 100%;
 }
 #cssmenu > ul > li:hover > ul > li {
   max-height: 72px;
@@ -1483,7 +1495,214 @@ label{
     width: 100%;
     height: 15px;
 }
-
+.markerLeftDescr{
+    width: 63%;
+    float: left;
+}
+.markerRightDescr{
+    width: 33.33333333%;
+    float: left;
+    margin-left: 3.6666%
+}
+.markerPageTitle{
+    font: 18pt 'Open Sans';
+    font-weight: 600;
+    color: rgb(86,105,143);
+}
+.markerPageDate{
+    font: 12pt 'Open Sans';
+    font-weight: 200;
+    color: rgb(84, 182, 157);
+    float: left;
+}
+.markerPageCountry{
+    font: 12pt 'Open Sans';
+    font-weight: 200;
+    color: rgb(84, 182, 157);
+    margin-left: 100px;
+}
+.markerPageCountry img{
+    width: 21px;
+    height: 20px;
+    margin-bottom: 3px;
+    margin-right: -7px;
+}
+.markerPageUnderHeading{
+    margin-top: 15px;
+}
+.markerPageTable{
+    display: table;
+}
+.markerPageText{
+    font: 10pt 'Open Sans';
+    font-weight: 100;
+    color: rgb(86,105,143);
+    float: none;
+    padding-top: 15px;
+}
+.markerPageText p{
+    font: 10pt 'Open Sans';
+    font-weight: 100;
+    color: rgb(86,105,143);
+}
+.mainImageSliderLine{
+    width: 100%;
+    margin-top: 14px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    background: rgb(84, 182, 157);
+    font: 14pt 'Open Sans';
+    font-weight: 600;
+    color: white;
+}
+.markerPageBottomLine{
+    width: 100%;
+    height: 6px;
+    margin-top: 30px;
+    background: rgb(84, 182, 157);
+}
+.imageHoverMarkerPage{
+    font: 12pt 'Open Sans';
+    font-weight: 400;
+    height: 195px;
+    position: absolute;
+    width: 300px;
+    height: 0px;
+    transition: 0.5s;
+    overflow: hidden;
+    background-color: rgb(177,216,66);
+    opacity: 0.9;
+    z-index: 99999999999999;
+}
+.imageHoverMarkerPage:hover{
+    height: 150px;
+}
+.sliderHover{
+    height: 150px;
+}
+.sliderHover:hover .imageHoverMarkerPage{
+    height: 150px;
+}
+.markerPageSocial{
+    margin-top: 10px;
+    width: 100%;
+    transition: 0.5s;
+}
+.fbMarker{
+    border: rgb(84,182,157) solid 3px;
+    width: 120px;
+    height: 40px;
+    float: left;
+    transition: 0.5s;
+}
+.twMarker{
+    border: rgb(84,182,157) solid 3px;
+    width: 120px;
+    height: 40px;
+    float: left;
+    margin-left: 30px;
+    transition: 0.5s;
+}
+.markerPageSocialIcon{
+    width: 40px;
+    background-color: rgb(84,182,157);
+    height: 34px;
+    float: left;
+    transition: 0.5s;
+}
+.markerPageSocialIcon img{
+    width: 20px;
+    height: 20px;
+    margin-left: 7px;
+    margin-top: 7px;
+    transition: 0.5s;
+}
+.markerPageSocialNumber{
+    width: 74px;
+    color: rgb(84,182,157);
+    font: 14pt 'Open Sans';
+    font-weight: 600;
+    text-align: center;
+    margin-left: 40px;
+    margin-top: 4px;
+    transition: 0.5s;
+}
+.markerPageSocialHover{
+    cursor: pointer;
+}
+.markerPageSocialHover:hover .markerPageSocialNumber{
+    color: rgb(174,214,43) !important;
+}
+.markerPageSocialHover:hover {
+    border-color: rgb(174,214,43) !important;
+}
+.markerPageSocialHover:hover .markerPageSocialIcon{    
+    background-color: rgb(174,214,43) !important;
+}
+.breadcrumbsMarker{
+    width: 100%;
+    height: 30px;
+}
+.breadcrumbsMarker li a{
+    color: rgb(84, 182, 157) !important;
+    font-weight: 600;
+}
+.breadcrumbsMarker li a:hover{
+    color: rgb(174,214,43) !important;
+}
+.breadcrumbsUlMarker{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 480px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.breadcrumbsUlMarker li{
+    display: inline;
+}
+.countriesFilterMarker{
+    margin-left: 4px;
+    width: 100%;
+    text-align: right;
+    font-size: 15px;
+    font: 9pt 'Open Sans';
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.countriesFilterMarker a{
+    margin-left: 10px;
+    padding: 4px 4px 4px 4px !important;
+    color: rgb(86,105,143);
+    text-decoration: none;
+    transition: 0.5s;
+}
+.countriesFilterMarker a:hover{
+    color: rgb(174,214,43);
+}
+.otherNewsHeading{
+    width: 300px;
+    height: 24px;  
+    background-color: rgb(84, 182, 157);
+    margin-top: 2px;
+    padding-left: 10px;
+    padding-top: 1px;
+    font: 12pt 'Open Sans';
+    font-weight: 600;
+    color: white;
+    float: right;
+    margin-bottom: 25px;
+}
+#imageCount{
+    float:left;
+}
+.galleryTitle{
+}
+#article_slider1_container{
+    margin-top: 30px;
+}
 
 
 @media (min-width: 760px) and (max-width: 950px){
@@ -1796,11 +2015,11 @@ label{
     {
         transition: 0.5s;
         display: inline-block;
-        margin-left: 5px;
+        margin: 0px 5px 2px 8px;
         vertical-align: middle;
         border-bottom: 4px solid transparent;
         border-top: 4px solid transparent;
-        border-left: 4px solid rgb(86,105,143);
+        border-left: 4px solid rgb(84, 182, 157);
         margin-top: -0.1em;
         /*margin-left: 1.5em;*/
     }

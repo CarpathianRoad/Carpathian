@@ -30,6 +30,7 @@ import ua.aits.Carpath.model.RouteModel;
 public class SinglePageController {
     
     MapModel map = new MapModel();
+    ArticleModel news = new ArticleModel();
     
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accesssDenied() {
@@ -55,7 +56,7 @@ public class SinglePageController {
 		 ArticleModel content = new ArticleModel();
                  MapModel map = new MapModel();
                  ModelAndView modelAndView = new ModelAndView("Index");
-                 modelAndView.addObject("content", content.getLastTenArticle());
+                 modelAndView.addObject("content", content.getArticleByCount("9"));
                  modelAndView.addObject("points", map.getLastTenPoints());
                  modelAndView.addObject("images", map.getImages());
                  return modelAndView;
@@ -142,6 +143,7 @@ public class SinglePageController {
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
         modelAndView.addObject("marker", ret);
+        modelAndView.addObject("articles", news.getArticleByCount("3"));
         modelAndView.addObject("images", arrayMessage);
         return modelAndView;
     }

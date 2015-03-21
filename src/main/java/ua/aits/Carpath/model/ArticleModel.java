@@ -349,8 +349,8 @@ public class ArticleModel {
         DB.closeCon();
     return newsList;
     }
-    public List<ArticleModel> getLastTenArticle() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and publish = 1 order by id desc limit 9;");
+    public List<ArticleModel> getArticleByCount(String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and publish = 1 order by id desc limit "+count+";");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();

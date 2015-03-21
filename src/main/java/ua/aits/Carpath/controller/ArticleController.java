@@ -60,9 +60,10 @@ public class ArticleController {
  
             ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("FullArticle");
-            modelAndView.addObject("articles", news.getLastTenArticle());
+            modelAndView.addObject("articles", news.getArticleByCount("3"));
             ArticleModel tempArt  = news.getOneArticle(id);
             String[] tempImg = tempArt.getImage().split(",");
+            modelAndView.addObject("main_image", tempImg[0]);
             modelAndView.addObject("article", news.getOneArticle(id));
             modelAndView.addObject("images", tempImg);
             return modelAndView;

@@ -429,9 +429,10 @@ function insertImage(){
 $(".img-content-show-all img:not(.remove-icon)").click(function() {
     var name = $(this).attr("name");
     var path = $(this).attr("realpath");
+    console.log(path + name);
     if($(this).attr("type") === "img"){
     $(".img-content").append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
-                        + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
+                        + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
     var real = $("#real-img-path").val();
     $("#real-img-path").val(real + "," + path +name);
     $(".img-input-box").remove();
