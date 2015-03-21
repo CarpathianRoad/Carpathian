@@ -52,9 +52,9 @@
                                                 </div>
                                             </c:forEach>
                                         </div>
-                                        <span class="markerPageArrowLeft" style="width: 50px; height: 95px; top: 28px; left: 20px;">
+                                        <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
                                         </span>
-                                        <span class="markerPageArrowRight" style="width: 50px; height: 95px; top: 28px; right: 20px">
+                                        <span u="arrowright" class="markerPageArrowRight jssora03r" style="width: 50px; height: 95px; top: 28px; right: 20px">
                                         </span>
                                     </div>
                                     <div class="article_main_image">
