@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="${Constants.URL}css/style1.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${Constants.URL}js/spasticNav.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/jssor.slider.mini.js"></script>
     <script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -36,6 +35,26 @@
             -ms-user-select: none;
             user-select: none;
 	}
+        .markerPageArrowRight{
+            position: absolute;
+            cursor: pointer;
+            display: block;
+            background: url(${Constants.URL}img/arrow_right.png) no-repeat;
+            overflow:hidden;
+        }
+        .markerPageArrowRight:hover{
+            background: url(${Constants.URL}img/arrow_right_hover.png) no-repeat;
+        }
+        .markerPageArrowLeft{
+            position: absolute;
+            cursor: pointer;
+            display: block;
+            background: url(${Constants.URL}img/arrow_left.png) no-repeat;
+            overflow:hidden;
+        }
+        .markerPageArrowLeft:hover{
+            background: url(${Constants.URL}img/arrow_left_hover.png) no-repeat;
+        }
     </style>
 </head>
 <body>
@@ -107,7 +126,7 @@
                             <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div><div id="infoMenu"></div></a>
                                 <ul>
                                     <div class="menuLine"></div>
-                                    <li><a href="#">ACCOMODATION<span class="right-caret"></span></a>
+                                    <li><a href="#">ACCOMODATION<div class="right-caret"></div></a>
                                         <ul>
                                             <li><a href="#">APARTMENTS</a></li>
                                             <li><a href="#">CAMPINGS</a></li>
@@ -117,7 +136,7 @@
                                             <li><a href="#">MOTELS</a></li>
 					</ul>
                                     </li>
-                                    <li><a href="#">SHOPPING AND TOURIST SUPPLY<span class="right-caret"></span></a>
+                                    <li><a href="#">SHOPPING AND TOURIST SUPPLY<div class="right-caret"></div></a>
                                         <ul>
                                             <li><a href="#">24/7</a></li>
                                             <li><a href="#">BIKE POINTS</a></li>
@@ -139,9 +158,9 @@
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}article/category/4">LEISURE<div class="bottom-caret"></div><div id="leisureMenu"></div></a>
-                                <ul class="leisureMenu">
+                                <ul>
                                     <div class="menuLine"></div>
-                                    <li><a href="#">ACTIVE REST<span class="right-caret"></span></a>
+                                    <li><a href="#">ACTIVE REST<div class="right-caret"></div></a>
                                         <ul>
                                             <li><a href="#">SKI AND FREERIDE</a></li>
                                             <li><a href="#">HORSES RIDE</a></li>
@@ -157,7 +176,7 @@
                                             <li><a href="#">ZIP LINES</a></li>
 					</ul>
                                     </li>
-                                    <li><a href="#">GASTRONOMY<span class="right-caret"></span></a>
+                                    <li><a href="#">GASTRONOMY<div class="right-caret"></div></a>
                                         <ul>
                                             <li><a href="#">CHEES</a></li>
                                             <li><a href="#">VINE</a></li>
@@ -166,7 +185,7 @@
 					</ul>
                                     </li>
                                     <li><a href="#">RELIGION</a></li>
-                                    <li><a href="#">NATURE<span class="right-caret"></span></a>
+                                    <li><a href="#">NATURE<div class="right-caret"></div></a>
                                         <ul>
                                             <li><a href="#">CAVES</a></li>
                                             <li><a href="#">LAKES</a></li>
@@ -177,7 +196,7 @@
                                             <li><a href="#">SPECIFIC NATURAL WONDERS</a></li>
 					</ul>
                                     </li>
-                                    <li><a href="#">ARCHITECTURE AND MONUMENTS<span class="right-caret"></span></a>
+                                    <li><a href="#">ARCHITECTURE AND MONUMENTS<div class="right-caret"></div></a>
 					<ul>
                                             <li><a href="#">ADMINISTRATIVE BUILDINGS</a></li>
                                             <li><a href="#">CASTLES</a></li>
@@ -188,7 +207,7 @@
                                             <li><a href="#">UNESCO</a></li>
 					</ul>
                                     </li>
-                                    <li><a href="#">SPA AND RECREATIONS<span class="right-caret"></span></a>
+                                    <li><a href="#">SPA AND RECREATIONS<div class="right-caret"></div></a>
 					<ul>
                                             <li><a href="#">BEAUTY AND BARBERS</a></li>
                                             <li><a href="#">SANATORIUM</a></li>
@@ -200,7 +219,7 @@
 					</ul>
                                     </li>
                                     <li><a href="#">EVENT TOURISM</a></li>
-                                    <li><a href="#">DOMESTIC AND CULTURE TOURISM<span class="right-caret"></span></a>
+                                    <li><a href="#">DOMESTIC AND CULTURE TOURISM<div class="right-caret"></div></a>
 					<ul>
                                             <li><a href="#">FEEDS AND TRADITIONS</a></li>
                                             <li><a href="#">FOLKLORE</a></li>
@@ -213,29 +232,29 @@
                                 </ul>
                             </li>
                             <li><a href="${Constants.URL}article/news">NEWS<div id="homeMenu"></div><div id="newsMenu"></div></a>
-                                <ul class="s-newsMenu">
-                                    <div class="menuLineSmall"></div>
+                                <ul>
+                                    <div class="menuLine"></div>
                                     <li></li>
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}map">MAP<div id="homeMenu"></div><div id="mapMenu"></div></a>
-				<ul class="s-mapMenu">
-                                    <div class="menuLineSmallMap"></div>
+				<ul>
+                                    <div class="menuLine"></div>
                                     <li></li>
 				</ul>
                             </li>
                             <li><a href="">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
-                                <ul class="routesMenu">
+                                <ul>
                                     <div class="menuLine"></div>
                                     <li><a href="${Constants.URL}routesList">TRAILS</a></li>
                                     <li><a href="">THEMATIC ROUTES</a></li>
 				</ul>
                             </li>
                             <li><a href="${Constants.URL}contact">CONTACTS<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
-                                <ul class="s-menu">
+                                <ul>
                                     <div class="menuLine"></div>
-                                    <li class="s-menu"><a href="#">PARTNERS</a></li>
-                                    <li class="s-menu"><a href="#">ABOUT US</a></li>
+                                    <li><a href="#">PARTNERS</a></li>
+                                    <li><a href="#">ABOUT US</a></li>
 				</ul>
                             </li>
 			</ul>

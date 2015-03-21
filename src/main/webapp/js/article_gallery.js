@@ -4,19 +4,13 @@
  * and open the template in the editor.
  
 */
-function set_main_picture(path)
+function set_main_picture(path,num)
     {
         jQuery("#main_image").attr('src', path);
+        $('#imageCount').html(parseFloat(num)+1);
     }
 jQuery(document).ready(function ($) {
-    var main_block_height = jQuery(".col-lg-8").height();
-    var news_item_height = 295;
-    var news_count = main_block_height / news_item_height;
-    var result = parseInt(news_count, 10);
-    result = result * news_item_height*1;
-    //console.log("result = " + result);
-    //console.log("111111");
-    jQuery(".article_side_news").css("max-height", result);
+    jQuery(".article_side_news").css("max-height", jQuery(".col-lg-8").height());
             var options = {
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
                 $AutoPlaySteps: 3,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
@@ -26,9 +20,9 @@ jQuery(document).ready(function ($) {
                 $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
                 $SlideDuration: 160,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
                 $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
-                $SlideWidth: 270,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                $SlideWidth: 206,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
                 //$SlideHeight: 150,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
-                $SlideSpacing: 3, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
                 $DisplayPieces: 3,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
                 $ParkingPosition: 0,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
                 $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
@@ -61,7 +55,7 @@ jQuery(document).ready(function ($) {
             function ScaleSlider() {
                 var bodyWidth = document.body.clientWidth;
                 if (bodyWidth)
-                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 750));
+                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 617));
                 else
                     window.setTimeout(ScaleSlider, 30);
             }
