@@ -30,7 +30,7 @@
 	</div>
 	</section>
 	<section id="content">
-	<div class="container">
+	<div class="container article_container">
 		<div class="row">
 			<div class="col-lg-8">
 				<article>
@@ -54,7 +54,7 @@
                                     <!-- Jssor Slider Begin -->
                                     <!-- You can move inline styles to css file or css block. -->
                                     
-                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
+                                    <div id="article_slider1_container" style="position: relative; top: 17px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
 
                                         <!-- Loading Screen -->
                                         <div u="loading" style="position: absolute; top: 0px; left: 0px;">
@@ -94,7 +94,7 @@
                         </div>
                     <div class="article_side_news">
                         <c:forEach items="${articles}" var="news">
-                            <div class="news_item">
+                            <div class="article_news_item">
                                 <div class="s-cell">
                                     <div class="s-block newsHeight">
                                         <div class="newsImage">
