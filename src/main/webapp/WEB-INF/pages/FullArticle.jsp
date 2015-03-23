@@ -69,18 +69,22 @@
                 </c:if>
                                     <div class="markerPageBottomLine"></div>
                                     <div class="markerPageSocial">
+                                        <a target="_blank" id="share" href="http://www.facebook.com/sharer.php?u=http://bit.ly/FBshareArticle">
                                         <div class="fbMarker markerPageSocialHover">
                                             <div class="markerPageSocialIcon">
-                                                <img src="${Constants.URL}img/fb_icon_marker.png">
+                                                <img src="${Constants.URL}img/fb_icon_marker.png"/>
                                             </div>
                                             <div class="markerPageSocialNumber">25</div>
                                         </div>
+                                        </a>
+                                        <a target="_blank" href="https://twitter.com/share">
                                         <div class="twMarker markerPageSocialHover">
                                             <div class="markerPageSocialIcon">
                                                 <img src="${Constants.URL}img/tw_icon_marker.png">
                                             </div>
                                             <div class="markerPageSocialNumber">117</div>
                                         </div>
+                                        </a>
                                     </div>
             </div>
             <div class="markerRightDescr">
