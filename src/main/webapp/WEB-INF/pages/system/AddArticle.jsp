@@ -285,6 +285,7 @@
 								<button class="btn btn-primary btn-mini margintop30 marginbottom30" id="sudmitData" type="submit">Save</button>
 							</p>
             <script> 
+                CKEDITOR.config.extraPlugins = 'justify';
                 CKEDITOR.replace('editorEN', {
                     filebrowserBrowseUrl : '/browser/browse/type/all',
                     filebrowserUploadUrl : '/browser/upload/type/all',
