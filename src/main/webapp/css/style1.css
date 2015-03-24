@@ -50,14 +50,13 @@ body{
     padding-left: 5px;
     color: rgb(174,214,43);
     font-weight: 200;
-    margin-right: 30px;
-    width: 304px;
+    width: 404px;
     transition: 1s;
     float: right;
 }
 .searchMenu{
     overflow: hidden;
-    width: 334px;
+    width: 404px;
 }
 
 #searchButton{
@@ -78,7 +77,7 @@ body{
     position: absolute;
     top: 10px;
     height: 30px;
-    margin-left: 300px;
+    margin-left: 374px;
 }
 .intendSocial{
     margin-right: 10px;
@@ -261,7 +260,7 @@ a:hover{
 	color: rgb(87,105,143);
 }
 .newsName a {
-	font: 14pt 'Open Sans';
+	font: 13pt 'Open Sans';
         font-weight: 600;
 	color: rgb(87,105,143);
         transition: 0.5s;
@@ -272,11 +271,20 @@ a:hover{
     transition: 0.5s;
 }
 .newsText{
-	font: 12pt calibri, regular;
-	margin-bottom: 25px;
-	color: rgb(87,105,143);
-        width: 100%;
-        transition: 0.5s;
+    font: 11pt 'Open Sans';
+    margin-bottom: 25px;
+    color: rgb(87,105,143);
+    width: 100%;
+    transition: 0.5s;
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+.newsText:after{
+    content: "...";
 }
 .newsText:hover{
 	opacity: 0.7;
@@ -634,7 +642,7 @@ li a:visited{
 }
 .dropDownMenu li ul a{
 	padding: 10px 5px 10px 10px;
-        margin-right: 15px !important;
+        margin-right: 25px !important;
 }
 .dropDownMenu li ul li ul {
 	width: 300px;
@@ -1168,12 +1176,12 @@ p{
 }
 .pushRightConrainerFilters{
     width: 365px !important;
-    height: 510px !important;
+    height: 403px !important;
     transition: 0.5s;
     background-color: rgb(84,182,157) !important;
 }
 #filtersContainer{
-    height: 510px;
+    height: 403px;
     width: 320px;
     background: rgb(86,105,143);
     padding: 20px;
@@ -1233,6 +1241,7 @@ p{
                     margin: 0 auto;
                     width: 310px;
                     margin-top: 15px;
+                    text-align: justify;
 		}
 		.markerDescr p{
                     font: 11pt 'Open Sans';
@@ -1241,6 +1250,7 @@ p{
                     margin: 0 auto;
                     width: 310px;
                     margin-top: 15px;
+                    text-align: justify;
 		}
                 .descrImageUnderline{
                     width: 310px;
@@ -1496,16 +1506,16 @@ label{
     height: 15px;
 }
 .markerLeftDescr{
-    width: 63%;
+    width: 66%;
     float: left;
 }
 .markerRightDescr{
     width: 33.33333333%;
     float: left;
-    margin-left: 3.6666%
+    margin-left: 0.6666%
 }
 .markerPageTitle{
-    font: 18pt 'Open Sans';
+    font: 17pt 'Open Sans';
     font-weight: 600;
     color: rgb(86,105,143);
 }
@@ -1534,16 +1544,18 @@ label{
     display: table;
 }
 .markerPageText{
-    font: 10pt 'Open Sans';
+    font: 11pt 'Open Sans';
     font-weight: 100;
     color: rgb(86,105,143);
     float: none;
     padding-top: 15px;
+    text-align: justify;
 }
 .markerPageText p{
-    font: 10pt 'Open Sans';
+    font: 11pt 'Open Sans';
     font-weight: 100;
     color: rgb(86,105,143);
+    text-align: justify;
 }
 .mainImageSliderLine{
     width: 100%;
@@ -1655,7 +1667,7 @@ label{
     margin: 0;
     padding: 0;
     float: left;
-    width: 480px;
+    width: 380px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2065,13 +2077,28 @@ label{
         font-weight: 600;
         color: rgb(87,105,143);
         transition: 0.5s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        /* number of lines to show */
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    .news_title a:after{
+        content:" ...";
     }
 .news_text
     {
-        font: 12pt calibri, regular;
+        font: 10.5pt 'Open Sans';
         margin-bottom: 25px;
         color: rgb(87,105,143);
         width: 100%;
+        display: block; /* Fallback for non-webkit */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 .article_sub_title
     {

@@ -143,7 +143,7 @@ public class SinglePageController {
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
         modelAndView.addObject("marker", ret);
-        modelAndView.addObject("articles", news.getArticleByCount("3"));
+        modelAndView.addObject("articles", map.getPointsByCount("3"));
         modelAndView.addObject("images", arrayMessage);
         return modelAndView;
     }
