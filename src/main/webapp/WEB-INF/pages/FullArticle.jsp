@@ -93,7 +93,7 @@
                     <div class="s-cellFullArticle slide">
                     <div class="s-block">
                         <div class="newsImage">
-                            <a href="${Constants.URL}${lan}/article/full/${item.id}">
+                            <a href="${Constants.URL}article/full/${item.id}">
                                 <div class="imageHover">
                                     <div class="imageHoverDate">
                                         ${item.date}
@@ -107,8 +107,8 @@
                         </div>
 
                         <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png" alt="image">
-                        <div class="newsName"><a href="${Constants.URL}${lan}article/full/${item.id}">${item.title}</a></div>
-                        <a href="${Constants.URL}${lan}article/full/${item.id}"><div class="newsText">${item.textEN}</div></a>
+                        <div class="newsName"><a href="${Constants.URL}article/full/${item.id}">${item.title}</a></div>
+                        <a href="${Constants.URL}article/full/${item.id}"><div class="newsText">${item.textEN}</div></a>
                     </div>
                 </div>
                 </c:forEach>

@@ -60,8 +60,8 @@ public class SinglePageController {
                  modelAndView.addObject("images", map.getImages());
                  return modelAndView;
 	}
-    @RequestMapping(value = {"/routes/{id}", "/routes/{id}/"})
-    public ModelAndView routes(@PathVariable("id") String id, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/routes/{id}", "/{lan}/routes/{id}/"})
+    public ModelAndView routes(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		RouteModel route = new RouteModel();
@@ -70,8 +70,8 @@ public class SinglePageController {
             modelAndView.addObject("imagesRoute", route.getRouteImages(id));
             return modelAndView;
 	}
-    @RequestMapping(value = {"/routesList","/routesList/"})
-    public ModelAndView routesList(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/routesList","/{lan}/routesList/"})
+    public ModelAndView routesList(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		RouteModel route = new RouteModel();
@@ -91,8 +91,8 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/contact","/contact/"})
-    public ModelAndView contact(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/contact","/{lan}/contact/"})
+    public ModelAndView contact(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("Contact");
@@ -100,8 +100,8 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/partners","/partners/"})
-    public ModelAndView partners(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/partners","/{lan}/partners/"})
+    public ModelAndView partners(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("Partners");
@@ -109,8 +109,8 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/map/{country}","/map/{country}/"})
-    public ModelAndView mapCountry(@PathVariable("country") String country, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/{country}","/{lan}/map/{country}/"})
+    public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("country") String country, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints();
 		ModelAndView model = new ModelAndView("Map");
@@ -118,8 +118,8 @@ public class SinglePageController {
 		model.addObject("markers", maps);
 		return model;
 	}
-    @RequestMapping(value = {"/map/","/map"})
-    public ModelAndView map(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/","/{lan}/map"})
+    public ModelAndView map(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints();
 		ModelAndView model = new ModelAndView("Map");
@@ -141,7 +141,6 @@ public class SinglePageController {
                         }
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
-        modelAndView.addObject("lan", lan);
         modelAndView.addObject("marker", ret);
         modelAndView.addObject("articles", map.getPointsByCount(lan,"3"));
         modelAndView.addObject("images", arrayMessage);
