@@ -54,17 +54,18 @@ public class ArticleController {
             return modelAndView;
 	}
         
-        @RequestMapping(value = {"/article/full/{id}", "/article/full/{id}/"})
-	public ModelAndView full(@PathVariable("id") String id, HttpServletRequest request,
+        @RequestMapping(value = {"/{lan}/article/full/{id}", "/{lan}/article/full/{id}/"})
+	public ModelAndView full(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
  
             ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("FullArticle");
-            modelAndView.addObject("articles", news.getArticleByCount("3"));
-            ArticleModel tempArt  = news.getOneArticle(id);
+            modelAndView.addObject("articles", news.getArticleByCount(lan,"3"));
+            ArticleModel tempArt  = news.getOneArticle(lan, id);
             String[] tempImg = tempArt.getImage().split(",");
+            modelAndView.addObject("lan", lan);
             modelAndView.addObject("main_image", tempImg[0]);
-            modelAndView.addObject("article", news.getOneArticle(id));
+            modelAndView.addObject("article", news.getOneArticle(lan,id));
             modelAndView.addObject("images", tempImg);
             return modelAndView;
  
