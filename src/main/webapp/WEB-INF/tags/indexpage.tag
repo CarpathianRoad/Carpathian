@@ -72,10 +72,10 @@
                     <div class="s-top">
 			<div class="s-three">
                             <ul>
-				<li class="paddingLang"><a id="lang-switch-ua" href="${Constants.URL}ua/index">UA</a></li>
-				<li class="paddingLang"><a id="lang-switch-en" href="${Constants.URL}en/index">EN</a></li>
-				<li class="paddingLang"><a id="lang-switch-sk" href="${Constants.URL}sk/index">SK</a></li>
-				<li class="paddingLang"><a id="lang-switch-hu" href="${Constants.URL}hu/index">HU</a></li>
+				<li class="paddingLang"><a id="lang-switch-ua" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
+				<li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
+				<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
+				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
 				<!--
                                 <li class="paddingLang"><a href="#">PL</a></li>
 				<li class="paddingLang"><a href="#">RO</a></li>
@@ -355,7 +355,7 @@
             $("#lang-switch-"+str_url[4]).css("color","rgb(174,214,43)");
             $("#lang-switch-"+str_url[3]).css("color","rgb(174,214,43)");
             // style="color:rgb(174,214,43)"
-        $( "a" ).each(function( index ) {
+        $( "a:not(.lang-sw)" ).each(function( index ) {
             console.log($(this).attr("href"));
             if($(this).attr("href").toLowerCase().indexOf("/carpath/") >= 0){
                 $(this).attr("href", $(this).attr("href").replace("Carpath","Carpath/"+str_url[4]));
