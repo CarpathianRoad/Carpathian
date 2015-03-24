@@ -4,8 +4,8 @@
             <actionName>CUSTOM-Run in Tomcat</actionName>
             <displayName>Run in Tomcat</displayName>
             <goals>
-                <goal>grep</goal>
-                <goal>tomcat</goal>
+                <goal>clean</goal>
+                <goal>tomcat:run</goal>
                 
             </goals>
         </action>
