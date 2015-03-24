@@ -30,6 +30,7 @@ public class MapModel {
     String region;
     String district;
     String town;
+    public String public_country;
     String image; 
     String date;
     Integer publish;
@@ -114,6 +115,13 @@ public class MapModel {
         this.date = date;
     }
     
+    public String getPublic_country() {
+        return public_country;
+    }
+    public void setPublic_country(String public_country) {
+        this.public_country = public_country;
+    }
+    
     
     public String getImage() {
         return image;
@@ -141,6 +149,7 @@ public class MapModel {
             temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(str3);
             temp.setMarkerIcon(result.getString("markerIcon")); 
+            temp.setPublic_country(result.getString("public_country"));
             temp.setCountry(result.getString("country")); 
             temp.setRegion(result.getString("region")); 
             temp.setDistrict(result.getString("district")); 
@@ -159,7 +168,34 @@ public class MapModel {
         } 
     return mapList;
     }
-    
+    public List<MapModel> getPointsByCount(String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from content where type = 2 and publish = 1 order by id desc limit "+count+";");
+        List<MapModel> newsList = new LinkedList<>();
+        while (result.next()) { 
+            MapModel temp = new MapModel();
+            String f_title = result.getString("titleEN");
+            if(f_title.length() > 30){
+                f_title = f_title.substring(0,30) + "...";
+            }
+            String text = Helpers.html2text(result.getString("textEN"));
+            if(text.length() > 175){
+                text = text.substring(0,175) + "...";
+            }
+            temp.setTextEN(text);
+            temp.setId(result.getInt("id"));
+            temp.setTitle(f_title);
+            temp.setCountry(result.getString("country")); 
+            temp.setDate(result.getString("date"));
+            String [] arr = result.getString("image").split(",");
+            if("".equals(arr[0])){
+                arr[0] = "img/zak.png";
+            }
+            temp.setImage(arr[0]); 
+            newsList.add(temp);
+        } 
+        DB.closeCon();
+    return newsList;
+    }
     public MapModel getMarker(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
         MapModel temp = new MapModel();
@@ -170,6 +206,7 @@ public class MapModel {
             temp.setTitle(result.getString("titleEN"));
             temp.setTextEN(result.getString("textEN"));
             temp.setDate(result.getString("date"));
+            temp.setPublic_country(result.getString("public_country"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setCountry(result.getString("country")); 
             temp.setRegion(result.getString("region")); 
@@ -216,6 +253,7 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
+            temp.setPublic_country(result.getString("public_country"));
             temp.setDate(result.getString("date"));
             temp.setCountry(result.getString("country")); 
             temp.setTitle(f_title);
