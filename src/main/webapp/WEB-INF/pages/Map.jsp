@@ -96,7 +96,7 @@
                     images +
                     '<div class="descrImageUnderline"></div>' +
                     '<div class="markerName">${marker.title}</div>' +
-                    '<div class="infoBlock"><div class="markerDescr">'+'${marker.textEN}'.substr(0,200)+'...</div>'+
+                    '<div class="infoBlock"><div class="markerDescr">'+'${marker.textEN}'.substr(0,300)+'...</div>'+
                     '<div class="detailsButtonContainer"><a class="btn btn-theme detailsButton" href="${Constants.URL}map/markers/${marker.id}">DETAILS</a></div></div>';
 			
 		var myLatlng = new google.maps.LatLng(${marker.x}, ${marker.y});
@@ -105,7 +105,7 @@
                     map: map,
                     icon: pinIcon,
                     props: markerIcons,
-                    country: "${marker.country}",
+                    country: "${marker.public_country}",
                     title: "${marker.title}"
 		});
 		markers.push(marker);
