@@ -50,14 +50,13 @@ public class SinglePageController {
 	}
     
     
-    @RequestMapping(value = {"/index", "/main", "/home"}, method = RequestMethod.GET)
-    protected ModelAndView handleRequestInternal(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/index", "/{lan}/main", "/{lan}/home"}, method = RequestMethod.GET)
+    protected ModelAndView handleRequestInternal(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		 ArticleModel content = new ArticleModel();
-                 MapModel map = new MapModel();
                  ModelAndView modelAndView = new ModelAndView("Index");
-                 modelAndView.addObject("content", content.getArticleByCount("9"));
-                 modelAndView.addObject("points", map.getLastTenPoints());
+                 modelAndView.addObject("content", content.getArticleByCount(lan,"9"));
+                 modelAndView.addObject("points", map.getPointsByCount(lan,"9"));
                  modelAndView.addObject("images", map.getImages());
                  return modelAndView;
 	}
@@ -127,8 +126,8 @@ public class SinglePageController {
 		model.addObject("markers", maps);
 		return model;
 	}
-    @RequestMapping(value = {"/map/markers/{id}","/map/markers/{id}/"})
-    public ModelAndView marker(@PathVariable("id") String id, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/markers/{id}","/{lan}/map/markers/{id}/"})
+    public ModelAndView marker(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
         MapModel ret  = map.getMarker(id);
         if(ret.getMarkerIcon() == null || "".equals(ret.getMarkerIcon())) {
@@ -142,8 +141,9 @@ public class SinglePageController {
                         }
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
+        modelAndView.addObject("lan", lan);
         modelAndView.addObject("marker", ret);
-        modelAndView.addObject("articles", map.getPointsByCount("3"));
+        modelAndView.addObject("articles", map.getPointsByCount(lan,"3"));
         modelAndView.addObject("images", arrayMessage);
         return modelAndView;
     }

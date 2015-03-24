@@ -72,10 +72,10 @@
                     <div class="s-top">
 			<div class="s-three">
                             <ul>
-				<li class="paddingLang"><a style="color:rgb(174,214,43)" href="#">EN</a></li>
-                                <li class="paddingLang"><a href="#">UA</a></li>
-				<li class="paddingLang"><a href="#">SK</a></li>
-				<li class="paddingLang"><a href="#">HU</a></li>
+				<li class="paddingLang"><a id="lang-switch-ua" href="${Constants.URL}ua/index">UA</a></li>
+				<li class="paddingLang"><a id="lang-switch-en" href="${Constants.URL}en/index">EN</a></li>
+				<li class="paddingLang"><a id="lang-switch-sk" href="${Constants.URL}sk/index">SK</a></li>
+				<li class="paddingLang"><a id="lang-switch-hu" href="${Constants.URL}hu/index">HU</a></li>
 				<!--
                                 <li class="paddingLang"><a href="#">PL</a></li>
 				<li class="paddingLang"><a href="#">RO</a></li>
@@ -338,7 +338,7 @@
                 </div>
                                         <div class="developpedText">
                                             <a href="http://www.aits.ua" target="_blank">
-                                                Developped by AITS
+                                                Developed by AITS
                                             </a>
                                         </div>
             </div>
@@ -350,6 +350,22 @@
 <script>
     var countryChooser;
     $( document ).ready(function() {
+            var str_url = window.location.href.split('/'); 
+            $("li.paddingLang a").css("color", "#fff");
+            $("#lang-switch-"+str_url[4]).css("color","rgb(174,214,43)");
+            $("#lang-switch-"+str_url[3]).css("color","rgb(174,214,43)");
+            // style="color:rgb(174,214,43)"
+        $( "a" ).each(function( index ) {
+            console.log($(this).attr("href"));
+            if($(this).attr("href").toLowerCase().indexOf("/carpath/") >= 0){
+                $(this).attr("href", $(this).attr("href").replace("Carpath","Carpath/"+str_url[4]));
+            }
+            else {
+                $(this).attr("href", "/"+str_url[3]+$(this).attr("href"));
+            }
+        });
+        
+        
         $('#searchButtonActive').hide(); 
         countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(countryChooser){

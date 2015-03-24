@@ -168,16 +168,22 @@ public class MapModel {
         } 
     return mapList;
     }
-    public List<MapModel> getPointsByCount(String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<MapModel> getPointsByCount(String lan, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type = 2 and publish = 1 order by id desc limit "+count+";");
         List<MapModel> newsList = new LinkedList<>();
         while (result.next()) { 
             MapModel temp = new MapModel();
-            String f_title = result.getString("titleEN");
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
             if(f_title.length() > 30){
                 f_title = f_title.substring(0,30) + "...";
             }
-            String text = Helpers.html2text(result.getString("textEN"));
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = result.getString("textEN");
+            }
             if(text.length() > 175){
                 text = text.substring(0,175) + "...";
             }
