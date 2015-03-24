@@ -356,12 +356,15 @@
             $("#lang-switch-"+str_url[3]).css("color","rgb(174,214,43)");
             // style="color:rgb(174,214,43)"
         $( "a:not(.lang-sw)" ).each(function( index ) {
+            
+            if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
             console.log($(this).attr("href"));
-            if($(this).attr("href").toLowerCase().indexOf("/carpath/") >= 0){
+            if($(this).attr("href").toLowerCase().indexOf("/carpath/") != -1){
                 $(this).attr("href", $(this).attr("href").replace("Carpath","Carpath/"+str_url[4]));
             }
             else {
                 $(this).attr("href", "/"+str_url[3]+$(this).attr("href"));
+            }
             }
         });
         
