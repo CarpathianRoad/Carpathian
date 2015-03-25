@@ -97,7 +97,7 @@
                     '<div class="descrImageUnderline"></div>' +
                     '<div class="markerName">${marker.title}</div>' +
                     '<div class="infoBlock"><div class="markerDescr">'+'${marker.textEN}'.substr(0,300)+'...</div>'+
-                    '<div class="detailsButtonContainer"><a class="btn btn-theme detailsButton" href="${Constants.URL}map/markers/${marker.id}">DETAILS</a></div></div>';
+                    '<div class="detailsButtonContainer"><a class="btn btn-theme detailsButton" href="${Constants.URL}${lan}/map/markers/${marker.id}">DETAILS</a></div></div>';
 			
 		var myLatlng = new google.maps.LatLng(${marker.x}, ${marker.y});
 		var marker = new google.maps.Marker({

@@ -142,15 +142,15 @@
     </div>
 
     <map name="mainMap">
-        <area href="${Constants.URL}map/Hungary" shape="poly" onmouseover="showMapHover('#hungary')"
+        <area href="${Constants.URL}${lan}/map/Hungary" shape="poly" onmouseover="showMapHover('#hungary')"
               coords="456,127,468,136,488,138,503,151,525,147,550,166,521,181,504,207,497,231,485,255,469,282,426,295,392,290,368,308,329,318,304,317,283,294,259,272,238,248,253,210,277,181,300,191,326,196,351,195,374,183,370,173,404,163,422,165,438,156"/>
-        <area href="${Constants.URL}map/Romania" shape="poly"  onmouseover="showMapHover('#romania')"
+        <area href="${Constants.URL}${lan}/map/Romania" shape="poly"  onmouseover="showMapHover('#romania')"
               coords="577,170,558,184,531,200,512,231,498,261,488,290,479,306,447,312,459,330,471,351,494,363,512,406,846,408,852,378,813,357,814,299,820,282,817,259,806,248,808,232,789,218,778,199,776,185,761,153,744,149,733,162,722,173,690,178,682,188,664,190,650,187,637,183,624,177"/>
-        <area href="${Constants.URL}map/Ukraine" shape="poly"  onmouseover="showMapHover('#ukraine')"
+        <area href="${Constants.URL}${lan}/map/Ukraine" shape="poly"  onmouseover="showMapHover('#ukraine')"
               coords="546,95,537,132,561,152,580,150,598,159,614,163,633,158,658,164,682,159,717,151,738,129,747,118,796,111,840,129,869,145,881,169,883,194,906,214,909,239,929,266,979,262,979,3,597,1,559,42,560,70,574,86,566,99"/>
-        <area href="${Constants.URL}map/Slovakia" shape="poly"  onmouseover="showMapHover('#slovakia')"
+        <area href="${Constants.URL}${lan}/map/Slovakia" shape="poly"  onmouseover="showMapHover('#slovakia')"
               coords="533,89,527,108,515,118,512,132,498,123,484,119,468,119,443,118,436,122,426,137,400,143,388,144,378,150,360,156,350,161,348,174,306,177,285,153,271,139,273,117,276,108,313,105,333,79,350,61,370,71,389,66,408,84,439,77,469,80,479,69,506,73,513,87"/>
-        <area href="${Constants.URL}map/Poland" shape="poly"  onmouseover="showMapHover('#poland')"
+        <area href="${Constants.URL}${lan}/map/Poland" shape="poly"  onmouseover="showMapHover('#poland')"
               coords="580,0,321,0,310,12,332,14,353,21,364,39,371,53,388,38,405,41,413,60,453,54,481,50,508,56,526,70,551,86,543,70,538,56,542,40"/>
     </map>
             
