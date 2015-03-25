@@ -50,12 +50,10 @@
                     <div class="s-top">
 			<div class="s-three">
                             <ul>
-				<li class="paddingLang"><a style="color:rgb(174,214,43)" href="#">EN</a></li>
-                                <li class="paddingLang"><a href="#">UA</a></li>
-				<li class="paddingLang"><a href="#">SK</a></li>
-				<li class="paddingLang"><a href="#">HU</a></li>
-				<li class="paddingLang"><a href="#">PL</a></li>
-				<li class="paddingLang"><a href="#">RO</a></li>
+                                <li class="paddingLang"><a id="lang-switch-ua" style="color:rgb(174,214,43)" href="${Constants.URL}ua/index">UA</a></li>
+				<li class="paddingLang"><a id="lang-switch-en" href="${Constants.URL}en/index">EN</a></li>
+				<li class="paddingLang"><a id="lang-switch-sk" href="${Constants.URL}sk/index">SK</a></li>
+				<li class="paddingLang"><a id="lang-switch-hu" href="${Constants.URL}hu/index">HU</a></li>
                             </ul>
 			</div>
 			<div class="s-two">

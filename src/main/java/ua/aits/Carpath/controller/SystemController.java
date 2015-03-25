@@ -51,7 +51,7 @@ public class SystemController {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/EditArticle");
             modelAndView.addObject("menuList", menu.getAllCat());
-            modelAndView.addObject("article",article.getOneArticle(id));
+            modelAndView.addObject("article",article.getOneArticle("en",id));
             modelAndView.addObject("markers", markers.getAllMarkers());
             modelAndView.addObject("filters", filters.getAllFilters());
             return modelAndView;

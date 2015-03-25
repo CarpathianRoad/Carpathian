@@ -21,8 +21,8 @@ import ua.aits.Carpath.model.ArticleModel;
 @Controller
 public class ArticleController {
     
-        @RequestMapping(value = {"/article/news", "/article/news/"})
-        public ModelAndView showNews (HttpServletRequest request,
+        @RequestMapping(value = {"/{lan}/article/news", "/{lan}/article/news/"})
+        public ModelAndView showNews (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("NewsPage");
@@ -36,8 +36,8 @@ public class ArticleController {
 	}
     
         
-        @RequestMapping(value = {"/article/advs", "/article/advs/"})
-        public ModelAndView showAdv (HttpServletRequest request,
+        @RequestMapping(value = {"/{lan}/article/advs", "/{lan}/article/advs/"})
+        public ModelAndView showAdv (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("AdvsPage");
@@ -45,8 +45,8 @@ public class ArticleController {
             return modelAndView;
 	}
         
-        @RequestMapping(value = {"/article/category/{id}", "/article/category/{id}/"})
-        public ModelAndView showCategory (@PathVariable("id") String id,HttpServletRequest request,
+        @RequestMapping(value = {"/{lan}/article/category/{id}", "/{lan}/article/category/{id}/"})
+        public ModelAndView showCategory (@PathVariable("lan") String lan, @PathVariable("id") String id,HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("CategoryPage");
@@ -54,17 +54,17 @@ public class ArticleController {
             return modelAndView;
 	}
         
-        @RequestMapping(value = {"/article/full/{id}", "/article/full/{id}/"})
-	public ModelAndView full(@PathVariable("id") String id, HttpServletRequest request,
+        @RequestMapping(value = {"/{lan}/article/full/{id}", "/{lan}/article/full/{id}/"})
+	public ModelAndView full(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
  
             ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("FullArticle");
-            modelAndView.addObject("articles", news.getArticleByCount("3"));
-            ArticleModel tempArt  = news.getOneArticle(id);
+            modelAndView.addObject("articles", news.getArticleByCount(lan,"3"));
+            ArticleModel tempArt  = news.getOneArticle(lan, id);
             String[] tempImg = tempArt.getImage().split(",");
             modelAndView.addObject("main_image", tempImg[0]);
-            modelAndView.addObject("article", news.getOneArticle(id));
+            modelAndView.addObject("article", news.getOneArticle(lan,id));
             modelAndView.addObject("images", tempImg);
             return modelAndView;
  

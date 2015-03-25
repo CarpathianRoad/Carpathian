@@ -6,6 +6,14 @@
             <goals>
                 <goal>clean</goal>
                 <goal>tomcat:run</goal>
+                
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-Stop Tomcat</actionName>
+            <displayName>Stop Tomcat</displayName>
+            <goals>
+                <goal>tomcat:stop</goal>
             </goals>
         </action>
     </actions>
