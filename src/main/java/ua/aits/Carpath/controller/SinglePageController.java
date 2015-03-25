@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
 import ua.aits.Carpath.model.MenuModel;
@@ -31,7 +32,7 @@ public class SinglePageController {
     
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
-    
+    Helpers helpers = new Helpers();
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accesssDenied() {
  
@@ -50,19 +51,19 @@ public class SinglePageController {
 	}
     
     
-    @RequestMapping(value = {"/index", "/main", "/home"}, method = RequestMethod.GET)
-    protected ModelAndView handleRequestInternal(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/index", "/{lan}/main", "/{lan}/home"}, method = RequestMethod.GET)
+    protected ModelAndView handleRequestInternal(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		 ArticleModel content = new ArticleModel();
-                 MapModel map = new MapModel();
                  ModelAndView modelAndView = new ModelAndView("Index");
-                 modelAndView.addObject("content", content.getArticleByCount("9"));
-                 modelAndView.addObject("points", map.getLastTenPoints());
+                 modelAndView.addObject("lan", lan);
+                 modelAndView.addObject("content", content.getArticleByCount(lan,"9"));
+                 modelAndView.addObject("points", map.getPointsByCount(lan,"9"));
                  modelAndView.addObject("images", map.getImages());
                  return modelAndView;
 	}
-    @RequestMapping(value = {"/routes/{id}", "/routes/{id}/"})
-    public ModelAndView routes(@PathVariable("id") String id, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/routes/{id}", "/{lan}/routes/{id}/"})
+    public ModelAndView routes(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		RouteModel route = new RouteModel();
@@ -71,8 +72,8 @@ public class SinglePageController {
             modelAndView.addObject("imagesRoute", route.getRouteImages(id));
             return modelAndView;
 	}
-    @RequestMapping(value = {"/routesList","/routesList/"})
-    public ModelAndView routesList(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/routesList","/{lan}/routesList/"})
+    public ModelAndView routesList(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		RouteModel route = new RouteModel();
@@ -92,8 +93,8 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/contact","/contact/"})
-    public ModelAndView contact(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/contact","/{lan}/contact/"})
+    public ModelAndView contact(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("Contact");
@@ -101,8 +102,8 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/partners","/partners/"})
-    public ModelAndView partners(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/partners","/{lan}/partners/"})
+    public ModelAndView partners(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("Partners");
@@ -110,8 +111,8 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/map/{country}","/map/{country}/"})
-    public ModelAndView mapCountry(@PathVariable("country") String country, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/{country}","/{lan}/map/{country}/"})
+    public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("country") String country, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints();
 		ModelAndView model = new ModelAndView("Map");
@@ -119,16 +120,17 @@ public class SinglePageController {
 		model.addObject("markers", maps);
 		return model;
 	}
-    @RequestMapping(value = {"/map/","/map"})
-    public ModelAndView map(HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/","/{lan}/map"})
+    public ModelAndView map(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints();
 		ModelAndView model = new ModelAndView("Map");
 		model.addObject("markers", maps);
+                model.addObject("lan", lan);
 		return model;
 	}
-    @RequestMapping(value = {"/map/markers/{id}","/map/markers/{id}/"})
-    public ModelAndView marker(@PathVariable("id") String id, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/markers/{id}","/{lan}/map/markers/{id}/"})
+    public ModelAndView marker(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
         MapModel ret  = map.getMarker(id);
         if(ret.getMarkerIcon() == null || "".equals(ret.getMarkerIcon())) {
@@ -143,7 +145,7 @@ public class SinglePageController {
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
         modelAndView.addObject("marker", ret);
-        modelAndView.addObject("articles", map.getPointsByCount("3"));
+        modelAndView.addObject("articles", map.getPointsByCount(lan,"3"));
         modelAndView.addObject("images", arrayMessage);
         return modelAndView;
     }
@@ -151,9 +153,9 @@ public class SinglePageController {
     @RequestMapping(value = {"/kiwi/test"})
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-                MenuModel menu = new MenuModel();
+                String html = helpers.getRowHtml("0");
 		ModelAndView model = new ModelAndView("TestPage");
-		model.addObject("menu", menu.getMenuRow("0"));
+		model.addObject("menu", html);
 		return model;
 	}
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})

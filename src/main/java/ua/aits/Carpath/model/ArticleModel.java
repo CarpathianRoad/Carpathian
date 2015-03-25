@@ -349,16 +349,22 @@ public class ArticleModel {
         DB.closeCon();
     return newsList;
     }
-    public List<ArticleModel> getArticleByCount(String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> getArticleByCount(String lan,String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and publish = 1 order by id desc limit "+count+";");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
-            String f_title = result.getString("titleEN");
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
             if(f_title.length() > 30){
                 f_title = f_title.substring(0,30) + "...";
             }
-            String text = Helpers.html2text(result.getString("textEN"));
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = result.getString("textEN");
+            }
             if(text.length() > 175){
                 text = text.substring(0,175) + "...";
             }
@@ -417,7 +423,7 @@ public class ArticleModel {
         DB.closeCon();
     return advList;
     }
-    public ArticleModel getOneArticle(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public ArticleModel getOneArticle(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
         ArticleModel temp = new ArticleModel();
         while (result.next()) { 
@@ -426,25 +432,14 @@ public class ArticleModel {
             temp.setY(result.getDouble("y"));
             temp.setType(result.getInt("type"));
             temp.setPublic_country(result.getString("public_country"));
-            temp.setTitle(result.getString("titleEN"));
-            temp.setTitleEN(result.getString("titleEN"));
-            temp.setTitleUA(result.getString("titleUA"));
-            temp.setTitleHU(result.getString("titleHU"));
-            temp.setTitleSK(result.getString("titleSK"));
-            temp.setTitlePL(result.getString("titlePL"));
-            temp.setTitleRO(result.getString("titleRO"));
-            temp.setTitleGE(result.getString("titleGE"));
-            temp.setTitleCZ(result.getString("titleCZ"));
-            temp.setTitleSRB(result.getString("titleSRB"));
-            temp.setTextEN(result.getString("textEN"));
-            temp.setTextUA(result.getString("textUA"));
-            temp.setTextHU(result.getString("textHU"));
-            temp.setTextSK(result.getString("textSK"));
-            temp.setTextPL(result.getString("textPL"));
-            temp.setTextRO(result.getString("textRO"));
-            temp.setTextGE(result.getString("textGE"));
-            temp.setTextCZ(result.getString("textCZ"));
-            temp.setTextSRB(result.getString("textSRB"));
+            temp.setTitle(result.getString("title"+lan));
+            temp.setTextEN(result.getString("text"+lan));
+            if("".equals(temp.getTitle()) || temp.getTitle() == null){
+                temp.setTitle(result.getString("titleEN"));
+            }
+            if("".equals(temp.getTextEN()) || temp.getTextEN() == null){
+                temp.setTextEN(result.getString("textEN"));
+            }
             temp.setDate(result.getString("date"));
             temp.setActDate(result.getString("actual"));
             temp.setImage(result.getString("image"));
