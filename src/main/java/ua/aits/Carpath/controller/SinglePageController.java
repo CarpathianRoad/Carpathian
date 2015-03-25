@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
 import ua.aits.Carpath.model.MenuModel;
@@ -31,7 +32,7 @@ public class SinglePageController {
     
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
-    
+    Helpers helpers = new Helpers();
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accesssDenied() {
  
@@ -55,6 +56,7 @@ public class SinglePageController {
 			HttpServletResponse response) throws Exception {
 		 ArticleModel content = new ArticleModel();
                  ModelAndView modelAndView = new ModelAndView("Index");
+                 modelAndView.addObject("lan", lan);
                  modelAndView.addObject("content", content.getArticleByCount(lan,"9"));
                  modelAndView.addObject("points", map.getPointsByCount(lan,"9"));
                  modelAndView.addObject("images", map.getImages());
@@ -124,6 +126,7 @@ public class SinglePageController {
                 List<MapModel> maps = map.getAllPoints();
 		ModelAndView model = new ModelAndView("Map");
 		model.addObject("markers", maps);
+                model.addObject("lan", lan);
 		return model;
 	}
     @RequestMapping(value = {"/{lan}/map/markers/{id}","/{lan}/map/markers/{id}/"})
@@ -150,9 +153,9 @@ public class SinglePageController {
     @RequestMapping(value = {"/kiwi/test"})
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-                MenuModel menu = new MenuModel();
+                String html = helpers.getRowHtml("0");
 		ModelAndView model = new ModelAndView("TestPage");
-		model.addObject("menu", menu.getMenuRow("0"));
+		model.addObject("menu", html);
 		return model;
 	}
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
