@@ -15,7 +15,7 @@
             <div class="breadcrumbsMarker">
                 <ul class="breadcrumbsUlMarker">
                     <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    <li><a href="#">News</a><div class="right_arrow"> </div></li>
+                    <li><a href="${Constants.URL}article/news">News</a><div class="right_arrow"> </div></li>
                     <li><a>${article.title}</a></li>
                 </ul>
                 <div class="countriesFilterMarker">
@@ -43,12 +43,12 @@
                 </div>
                 <c:if test="${fn:length(images[0])!=''}">
     <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
-                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 617px; height: 150px; overflow: hidden;">
-                                        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 617px; height: 150px; overflow: hidden;">
+                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
                                             <c:forEach items="${images}" var="image" varStatus="loop">
                                                 <div onclick="set_main_picture('${Constants.URL}${image}','${loop.index}')">
                                                     <div class="sliderHover">
-                                                        <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image}" style="height: 250px"/>
+                                                        <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image}" style="height: 150px"/>
                                                     </div>
                                                 </div>
                                             </c:forEach>
