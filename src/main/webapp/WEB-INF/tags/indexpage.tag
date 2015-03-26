@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
+<jsp:useBean id="Menu" class="ua.aits.Carpath.functions.BuildMenu" scope="session" />
 
 <html>
 <head>
@@ -57,9 +58,26 @@
         .markerPageArrowLeft:hover{
             background: url(${Constants.URL}img/arrow_left_hover.png) no-repeat;
         }
+        #status {
+            background-image:url(${Constants.URL}img/status.gif); /* path to your loading animation */
+        }
     </style>
+    
 </head>
+<script type="text/javascript">
+	//<![CDATA[
+		$(window).load(function() { // makes sure the whole site is loaded
+			$('#status').fadeOut(); // will first fade out the loading animation
+			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			$('body').delay(350).css({'overflow':'visible'});
+		})
+	//]]>
+</script>
 <body>
+    <!-- Preloader -->
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
     <div class="">
 	<div class="row indexNavbar topMenu">
             <div class='s-new' id="mainMenuWidth">
@@ -83,27 +101,31 @@
                             </ul>
 			</div>
 			<div class="s-two">
-                            <a href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
-                                <img class="s-socialLogo intendSocial" src="${Constants.URL}img/fb_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/fb_icon_hover.png';$(this).fadeIn(100);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/fb_icon.png';$(this).fadeIn(100);" 
+                            <a class="socialHeaderDiv intendSocial"
+                                    onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
+                                    onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
+                                    href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
+                                <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
-                            <a href="https://twitter.com/CarpathianRoad" target="_blank">
+                            <a class="socialHeaderDiv"
+                                    onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
+                                    onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
+                                    href="https://twitter.com/CarpathianRoad" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/tw_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/tw_icon_hover.png';$(this).fadeIn(100);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/tw_icon.png';$(this).fadeIn(100);" 
                                     border="0">
                             </a>
 			</div>
 			<div class="s-one">
                             <form class="searchMenu">
 				<button type="button" id="searchButton" onclick="showButton()">
-                                    <div class=""><img src="${Constants.URL}img/search_icon.png"
-                                        onmouseover="$(this).hide();this.src='${Constants.URL}img/search_icon_hover.png';$(this).fadeIn(100);
+                                    <div class="socialHeaderDiv"
+                                        onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
                                             $('#searchButton').css('top','4px')"
-                                        onmouseout="$(this).hide();this.src='${Constants.URL}img/search_icon.png';$(this).fadeIn(100);
+                                        onmouseout="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');$(this).find('img').fadeIn(100);
                                             $('#searchButton').css('top','3px')">
+                                        <img src="${Constants.URL}img/search_icon.png"
+                                        >
                                     </div>
 				</button>
                                 <input type="text" id="s-textbox">
@@ -117,149 +139,8 @@
                     </div>
                     <div class="s-clear"></div>
                     <div class="s-bot" id='cssmenu'>
-                        <ul class="dropDownMenu">
-                            <li><a href="${Constants.URL}index">HOME<div class="bottom-caret"></div><div id="homeMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li class="homeSub"><a href="#">ABOUT CARPATHIAN REGION</a></li>
-                                    <li class="homeSub"><a href="#">ABOUT "CARPATHIAN TOURIST ROAD"</a></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div><div id="infoMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="#">ACCOMODATION<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">APARTMENTS</a></li>
-                                            <li><a href="#">CAMPINGS</a></li>
-                                            <li><a href="#">QUEST HOUSES</a></li>
-                                            <li><a href="#">HOSTELS</a></li>
-                                            <li><a href="#">HOTELS</a></li>
-                                            <li><a href="#">MOTELS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">SHOPPING AND TOURIST SUPPLY<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">24/7</a></li>
-                                            <li><a href="#">BIKE POINTS</a></li>
-                                            <li><a href="#">INTERNET CLUBS</a></li>
-                                            <li><a href="#">MARKETS</a></li>
-                                            <li><a href="#">EMERGENCY AND PHARMACY</a></li>
-                                            <li><a href="#">PETROL STATIONS</a></li>
-                                            <li><a href="#">SHOPS</a></li>
-                                            <li><a href="#">SOUVENIRS</a></li>
-                                            <li><a href="#">SUPERMARKETS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">TOURIST EQUIPMENT RENTAL</a></li>
-                                    <li><a href="#">RESCUE TEAM</a></li>
-                                    <li><a href="#">CAR RENTAL</a></li>
-                                    <li><a href="#">INFORMATION ABOUT VISUM</a></li>
-                                    <li><a href="#">TRANSPORT CONNECTION</a></li>
-                                    <li><a href="#">TOURIST INFORMATION CENTERS</a></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}article/category/4">LEISURE<div class="bottom-caret"></div><div id="leisureMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="#">ACTIVE REST<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">SKI AND FREERIDE</a></li>
-                                            <li><a href="#">HORSES RIDE</a></li>
-                                            <li><a href="#">BOULDERING STANDS</a></li>
-                                            <li><a href="#">CARTING</a></li>
-                                            <li><a href="#">DIVING</a></li>
-                                            <li><a href="#">EXTREME BIKE TRACKS</a></li>
-                                            <li><a href="#">PARAGLIDING</a></li>
-                                            <li><a href="#">RAFTING</a></li>
-                                            <li><a href="#">RALLY TRACKS(FOR RALLY CARS, AUTO, ETC)</a></li>
-                                            <li><a href="#">ROCK CLIMBING</a></li>
-                                            <li><a href="#">ROPE JUMPING</a></li>
-                                            <li><a href="#">ZIP LINES</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">GASTRONOMY<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">CHEES</a></li>
-                                            <li><a href="#">VINE</a></li>
-                                            <li><a href="#">HONEY</a></li>
-                                            <li><a href="#">TRADITIONAL FOOD FESTIVAL</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">RELIGION</a></li>
-                                    <li><a href="#">NATURE<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">CAVES</a></li>
-                                            <li><a href="#">LAKES</a></li>
-                                            <li><a href="#">MONTAINS</a></li>
-                                            <li><a href="#">NATIONAL PARKS</a></li>
-                                            <li><a href="#">WATERFALLS</a></li>
-                                            <li><a href="#">ZOO AND ANIMAL PARKS</a></li>
-                                            <li><a href="#">SPECIFIC NATURAL WONDERS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">ARCHITECTURE AND MONUMENTS<div class="right-caret"></div></a>
-					<ul>
-                                            <li><a href="#">ADMINISTRATIVE BUILDINGS</a></li>
-                                            <li><a href="#">CASTLES</a></li>
-                                            <li><a href="#">CHURCHES AND MONASTERIES</a></li>
-                                            <li><a href="#">PALACES</a></li>
-                                            <li><a href="#">RESIDENCES</a></li>
-                                            <li><a href="#">RUINS</a></li>
-                                            <li><a href="#">UNESCO</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">SPA AND RECREATIONS<div class="right-caret"></div></a>
-					<ul>
-                                            <li><a href="#">BEAUTY AND BARBERS</a></li>
-                                            <li><a href="#">SANATORIUM</a></li>
-                                            <li><a href="#">SAUNA</a></li>
-                                            <li><a href="#">SPA</a></li>
-                                            <li><a href="#">SWIMMING POOLS AND AQUA PARKS</a></li>
-                                            <li><a href="#">THERMAL WATERS</a></li>
-                                            <li><a href="#">MINERAL SPRINGS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">EVENT TOURISM</a></li>
-                                    <li><a href="#">DOMESTIC AND CULTURE TOURISM<div class="right-caret"></div></a>
-					<ul>
-                                            <li><a href="#">FEEDS AND TRADITIONS</a></li>
-                                            <li><a href="#">FOLKLORE</a></li>
-                                            <li><a href="#">MUSIC TRADITIONS</a></li>
-                                            <li><a href="#">RELIGIONS</a></li>
-                                            <li><a href="#">CALENDAR EVENT TRADITIONS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">BUISENESS TOURISM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="${Constants.URL}article/news">NEWS<div id="homeMenu"></div><div id="newsMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}map">MAP<div id="homeMenu"></div><div id="mapMenu"></div></a>
-				<ul>
-                                    <div class="menuLine"></div>
-                                    <li></li>
-				</ul>
-                            </li>
-                            <li><a href="">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="${Constants.URL}routesList">TRAILS</a></li>
-                                    <li><a href="">THEMATIC ROUTES</a></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}contact">CONTACTS<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="#">PARTNERS</a></li>
-                                    <li><a href="#">ABOUT US</a></li>
-				</ul>
-                            </li>
-			</ul>
+                        
+                        ${Menu.menuRow}
                     </div>
 		</div>
             </div>
@@ -540,9 +421,9 @@
     */
    
     function showButton(){
-        $('#searchButtonActive').fadeIn("fast"); 
-        $("#s-textbox").attr("id", "textBoxWidth");
-        $('#searchButton').fadeOut(10); 
+        $('#searchButtonActive').fadeIn(200); 
+        $("#s-textbox").addClass("textBoxWidth");
+        $('#searchButton').fadeOut(1); 
     }
 
 
@@ -625,7 +506,7 @@
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 1;
         if (distanceY > shrinkOn) {
-            $('.s-top').hide();
+            $('.s-top').slideUp(300);
             $('.topMenu').addClass('topMenuSmall');
             $('.s-logoIndex').addClass('s-logoIndexSmall');
             $('.s-logoIndexSmall').removeClass('s-logoIndex');
@@ -638,7 +519,7 @@
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                $('.s-top').show();
+                $('.s-top').fadeIn("slow");
                 $('.topMenu').removeClass('topMenuSmall');
                 $('.s-logoIndexSmall').addClass('s-logoIndex');
                 $('.s-logoIndex').removeClass('s-logoIndexSmall');

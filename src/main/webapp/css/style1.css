@@ -33,7 +33,7 @@ body{
 #s-textbox{
     width: 0px;
     height: 30px;
-    margin-top: 2px;
+    margin-top: 3px;
     padding-left: 5px;
     color: rgb(174,214,43);
     font-weight: 200;
@@ -42,21 +42,43 @@ body{
     border:none;
     visibility: hidden;
     float: right;
+    transition: 2s;
+    margin-right: 30px;
 }
-#textBoxWidth{
-    height: 30px;
-    margin-top: 2px;
-    border:none;
-    padding-left: 5px;
-    color: rgb(174,214,43);
-    font-weight: 200;
-    width: 404px;
-    transition: 1s;
-    float: right;
+.textBoxWidth{
+    width: 374px !important;
+    visibility: visible !important;
 }
 .searchMenu{
     overflow: hidden;
     width: 404px;
+}
+
+body {
+	overflow: hidden;
+}
+
+/* Preloader */
+
+#preloader {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#fff; /* change if the mask should have another color then white */
+    z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%; /* centers the loading animation horizontally one the screen */
+    top:50%; /* centers the loading animation vertically one the screen */
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 
 #searchButton{
@@ -66,7 +88,7 @@ body{
     border: none;
     position: relative;
     top: 3px;
-    left: -5px;
+    left: 0px;
     height: 28px;
     float: right;
 }
@@ -75,7 +97,7 @@ body{
     text-decoration: none;
     border: none;
     position: absolute;
-    top: 10px;
+    top: 11px;
     height: 30px;
     margin-left: 374px;
 }
@@ -374,6 +396,11 @@ a:hover{
 	width: 18px;
         cursor: pointer;
 }
+.s-top{
+    width: 100%;
+    height: 33px;
+    text-align: right;
+}
 .s-new  .s-rightNavBar .s-top .s-one{
 	float: right;
         margin-top:3px;
@@ -567,6 +594,13 @@ article .intendNews .post-image .post-heading{
 }
 .s-new .s-rightNavBar .s-top .s-three{
 	margin-top: 12px;
+}
+.s-three a:hover{
+    color: white;
+}
+.socialHeaderDiv{
+    width: 18px;
+    height: 18px;
 }
 .paddingLang{
     padding-left: 12px;

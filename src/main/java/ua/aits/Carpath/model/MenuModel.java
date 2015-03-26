@@ -20,7 +20,9 @@ public class MenuModel {
     public Integer parentID;
     public String titleEN;
     public String add;
-    
+    public String caret;
+    public String url;
+    public Integer level;
     
     
     public Integer getId() {
@@ -51,15 +53,38 @@ public class MenuModel {
         this.add = add;
     }
     
+    public String getCaret() {
+        return caret;
+    }
+    public void setCaret(String caret) {
+        this.caret = caret;
+    }
+    
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
+    public Integer getLevel() {
+        return level;
+    }
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+    
     public List<MenuModel> getMenuRow(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from category where parentID = "+id+" ;");
+        ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ;");
         List<MenuModel> menuList = new LinkedList<>();
         while (result.next()) { 
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
-            temp.setParentID(result.getInt("parentID"));
-            temp.setTitleEN(result.getString("titleen"));
-            temp.setAdd(result.getString("add"));
+            temp.setParentID(result.getInt("parentId"));
+            temp.setTitleEN(result.getString("titleEN"));
+            temp.setCaret(result.getString("caret"));
+            temp.setUrl(result.getString("url"));
+            temp.setLevel(result.getInt("level"));
             menuList.add(temp);
         } 
         DB.closeCon();
@@ -67,21 +92,20 @@ public class MenuModel {
     }
     
     public List<MenuModel> getAllCat() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from category;");
+        ResultSet result = DB.getResultSet("select * from menu;");
         List<MenuModel> menuList = new LinkedList<>();
         while (result.next()) { 
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
-            temp.setParentID(result.getInt("parentID"));
+            temp.setParentID(result.getInt("parentId"));
             temp.setTitleEN(result.getString("titleen"));
-            temp.setAdd(result.getString("add"));
             menuList.add(temp);
         } 
         DB.closeCon();
     return menuList;
     }
     public String getCatTitle(String id)  throws SQLException{ 
-        ResultSet result = DB.getResultSet("select * from category where id = '" + id + "';");
+        ResultSet result = DB.getResultSet("select * from menu where id = '" + id + "';");
         String temp = "";
         while (result.next()) { 
             temp = result.getString("titleEN");
