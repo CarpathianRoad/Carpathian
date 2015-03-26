@@ -492,7 +492,7 @@ public class ArticleModel {
             where = "c.isDelete = 0 AND c."+type+"='"+value+"'";
         }
         
-        ResultSet result = DB.getResultSet("SELECT t.titleEN as 'menuText', c. * FROM content c LEFT JOIN category t ON c.menuCat = t.id WHERE "+ where + user +" order by id desc;");
+        ResultSet result = DB.getResultSet("SELECT t.titleEN as 'menuText', c. * FROM content c LEFT JOIN menu t ON c.menuCat = t.id WHERE "+ where + user +" order by id desc;");
         List<ArticleModel> contentList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();

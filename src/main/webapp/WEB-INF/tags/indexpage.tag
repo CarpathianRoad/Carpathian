@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
-<jsp:useBean id="Helpers" class="ua.aits.Carpath.functions.Helpers" scope="session" />
+<jsp:useBean id="Menu" class="ua.aits.Carpath.functions.BuildMenu" scope="session" />
 
 <html>
 <head>
@@ -140,7 +140,7 @@
                     <div class="s-clear"></div>
                     <div class="s-bot" id='cssmenu'>
                         
-    ${Helpers.getRowHtml("0")}
+                        ${Menu.menuRow}
                     </div>
 		</div>
             </div>

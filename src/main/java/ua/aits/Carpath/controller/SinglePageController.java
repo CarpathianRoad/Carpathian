@@ -153,9 +153,8 @@ public class SinglePageController {
     @RequestMapping(value = {"/kiwi/test"})
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-                String html = helpers.getRowHtml("0");
 		ModelAndView model = new ModelAndView("TestPage");
-		model.addObject("menu", html);
+		model.addObject("menu", "s");
 		return model;
 	}
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
