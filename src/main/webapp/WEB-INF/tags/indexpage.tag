@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
+<jsp:useBean id="Helpers" class="ua.aits.Carpath.functions.Helpers" scope="session" />
 
 <html>
 <head>
@@ -117,149 +118,8 @@
                     </div>
                     <div class="s-clear"></div>
                     <div class="s-bot" id='cssmenu'>
-                        <ul class="dropDownMenu">
-                            <li><a href="${Constants.URL}index">HOME<div class="bottom-caret"></div><div id="homeMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li class="homeSub"><a href="#">ABOUT CARPATHIAN REGION</a></li>
-                                    <li class="homeSub"><a href="#">ABOUT "CARPATHIAN TOURIST ROAD"</a></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}article/category/6">INFO<div class="bottom-caret"></div><div id="infoMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="#">ACCOMODATION<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">APARTMENTS</a></li>
-                                            <li><a href="#">CAMPINGS</a></li>
-                                            <li><a href="#">QUEST HOUSES</a></li>
-                                            <li><a href="#">HOSTELS</a></li>
-                                            <li><a href="#">HOTELS</a></li>
-                                            <li><a href="#">MOTELS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">SHOPPING AND TOURIST SUPPLY<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">24/7</a></li>
-                                            <li><a href="#">BIKE POINTS</a></li>
-                                            <li><a href="#">INTERNET CLUBS</a></li>
-                                            <li><a href="#">MARKETS</a></li>
-                                            <li><a href="#">EMERGENCY AND PHARMACY</a></li>
-                                            <li><a href="#">PETROL STATIONS</a></li>
-                                            <li><a href="#">SHOPS</a></li>
-                                            <li><a href="#">SOUVENIRS</a></li>
-                                            <li><a href="#">SUPERMARKETS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">TOURIST EQUIPMENT RENTAL</a></li>
-                                    <li><a href="#">RESCUE TEAM</a></li>
-                                    <li><a href="#">CAR RENTAL</a></li>
-                                    <li><a href="#">INFORMATION ABOUT VISUM</a></li>
-                                    <li><a href="#">TRANSPORT CONNECTION</a></li>
-                                    <li><a href="#">TOURIST INFORMATION CENTERS</a></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}article/category/4">LEISURE<div class="bottom-caret"></div><div id="leisureMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="#">ACTIVE REST<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">SKI AND FREERIDE</a></li>
-                                            <li><a href="#">HORSES RIDE</a></li>
-                                            <li><a href="#">BOULDERING STANDS</a></li>
-                                            <li><a href="#">CARTING</a></li>
-                                            <li><a href="#">DIVING</a></li>
-                                            <li><a href="#">EXTREME BIKE TRACKS</a></li>
-                                            <li><a href="#">PARAGLIDING</a></li>
-                                            <li><a href="#">RAFTING</a></li>
-                                            <li><a href="#">RALLY TRACKS(FOR RALLY CARS, AUTO, ETC)</a></li>
-                                            <li><a href="#">ROCK CLIMBING</a></li>
-                                            <li><a href="#">ROPE JUMPING</a></li>
-                                            <li><a href="#">ZIP LINES</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">GASTRONOMY<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">CHEES</a></li>
-                                            <li><a href="#">VINE</a></li>
-                                            <li><a href="#">HONEY</a></li>
-                                            <li><a href="#">TRADITIONAL FOOD FESTIVAL</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">RELIGION</a></li>
-                                    <li><a href="#">NATURE<div class="right-caret"></div></a>
-                                        <ul>
-                                            <li><a href="#">CAVES</a></li>
-                                            <li><a href="#">LAKES</a></li>
-                                            <li><a href="#">MONTAINS</a></li>
-                                            <li><a href="#">NATIONAL PARKS</a></li>
-                                            <li><a href="#">WATERFALLS</a></li>
-                                            <li><a href="#">ZOO AND ANIMAL PARKS</a></li>
-                                            <li><a href="#">SPECIFIC NATURAL WONDERS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">ARCHITECTURE AND MONUMENTS<div class="right-caret"></div></a>
-					<ul>
-                                            <li><a href="#">ADMINISTRATIVE BUILDINGS</a></li>
-                                            <li><a href="#">CASTLES</a></li>
-                                            <li><a href="#">CHURCHES AND MONASTERIES</a></li>
-                                            <li><a href="#">PALACES</a></li>
-                                            <li><a href="#">RESIDENCES</a></li>
-                                            <li><a href="#">RUINS</a></li>
-                                            <li><a href="#">UNESCO</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">SPA AND RECREATIONS<div class="right-caret"></div></a>
-					<ul>
-                                            <li><a href="#">BEAUTY AND BARBERS</a></li>
-                                            <li><a href="#">SANATORIUM</a></li>
-                                            <li><a href="#">SAUNA</a></li>
-                                            <li><a href="#">SPA</a></li>
-                                            <li><a href="#">SWIMMING POOLS AND AQUA PARKS</a></li>
-                                            <li><a href="#">THERMAL WATERS</a></li>
-                                            <li><a href="#">MINERAL SPRINGS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">EVENT TOURISM</a></li>
-                                    <li><a href="#">DOMESTIC AND CULTURE TOURISM<div class="right-caret"></div></a>
-					<ul>
-                                            <li><a href="#">FEEDS AND TRADITIONS</a></li>
-                                            <li><a href="#">FOLKLORE</a></li>
-                                            <li><a href="#">MUSIC TRADITIONS</a></li>
-                                            <li><a href="#">RELIGIONS</a></li>
-                                            <li><a href="#">CALENDAR EVENT TRADITIONS</a></li>
-					</ul>
-                                    </li>
-                                    <li><a href="#">BUISENESS TOURISM</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="${Constants.URL}article/news">NEWS<div id="homeMenu"></div><div id="newsMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}map">MAP<div id="homeMenu"></div><div id="mapMenu"></div></a>
-				<ul>
-                                    <div class="menuLine"></div>
-                                    <li></li>
-				</ul>
-                            </li>
-                            <li><a href="">TOURIST ROADS<div class="bottom-caret"></div><div id="routesMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="${Constants.URL}routesList">TRAILS</a></li>
-                                    <li><a href="">THEMATIC ROUTES</a></li>
-				</ul>
-                            </li>
-                            <li><a href="${Constants.URL}contact">CONTACTS<div class="bottom-caret"></div><div id="contactsMenu"></div></a>
-                                <ul>
-                                    <div class="menuLine"></div>
-                                    <li><a href="#">PARTNERS</a></li>
-                                    <li><a href="#">ABOUT US</a></li>
-				</ul>
-                            </li>
-			</ul>
+                        
+    ${Helpers.getRowHtml("0")}
                     </div>
 		</div>
             </div>
