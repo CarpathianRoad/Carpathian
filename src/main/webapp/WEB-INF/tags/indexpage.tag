@@ -130,7 +130,7 @@
 				</button>
                                 <input type="text" id="s-textbox">
 				</input>
-                                <button id="searchButtonActive" class="activeSearch">
+                                <button type="button" id="searchButtonActive" class="activeSearch">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png">
                                     </div>
 				</button>
