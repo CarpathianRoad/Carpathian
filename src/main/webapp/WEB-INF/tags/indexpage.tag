@@ -58,9 +58,26 @@
         .markerPageArrowLeft:hover{
             background: url(${Constants.URL}img/arrow_left_hover.png) no-repeat;
         }
+        #status {
+            background-image:url(${Constants.URL}img/status.gif); /* path to your loading animation */
+        }
     </style>
+    
 </head>
+<script type="text/javascript">
+	//<![CDATA[
+		$(window).load(function() { // makes sure the whole site is loaded
+			$('#status').fadeOut(); // will first fade out the loading animation
+			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			$('body').delay(350).css({'overflow':'visible'});
+		})
+	//]]>
+</script>
 <body>
+    <!-- Preloader -->
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
     <div class="">
 	<div class="row indexNavbar topMenu">
             <div class='s-new' id="mainMenuWidth">
@@ -84,27 +101,31 @@
                             </ul>
 			</div>
 			<div class="s-two">
-                            <a href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
-                                <img class="s-socialLogo intendSocial" src="${Constants.URL}img/fb_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/fb_icon_hover.png';$(this).fadeIn(100);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/fb_icon.png';$(this).fadeIn(100);" 
+                            <a class="socialHeaderDiv intendSocial"
+                                    onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
+                                    onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
+                                    href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
+                                <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
-                            <a href="https://twitter.com/CarpathianRoad" target="_blank">
+                            <a class="socialHeaderDiv"
+                                    onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
+                                    onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
+                                    href="https://twitter.com/CarpathianRoad" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/tw_icon.png"
-                                    onmouseover="$(this).hide();this.src='${Constants.URL}img/tw_icon_hover.png';$(this).fadeIn(100);" 
-                                    onmouseout="$(this).hide();this.src='${Constants.URL}img/tw_icon.png';$(this).fadeIn(100);" 
                                     border="0">
                             </a>
 			</div>
 			<div class="s-one">
                             <form class="searchMenu">
 				<button type="button" id="searchButton" onclick="showButton()">
-                                    <div class=""><img src="${Constants.URL}img/search_icon.png"
-                                        onmouseover="$(this).hide();this.src='${Constants.URL}img/search_icon_hover.png';$(this).fadeIn(100);
+                                    <div class="socialHeaderDiv"
+                                        onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
                                             $('#searchButton').css('top','4px')"
-                                        onmouseout="$(this).hide();this.src='${Constants.URL}img/search_icon.png';$(this).fadeIn(100);
+                                        onmouseout="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');$(this).find('img').fadeIn(100);
                                             $('#searchButton').css('top','3px')">
+                                        <img src="${Constants.URL}img/search_icon.png"
+                                        >
                                     </div>
 				</button>
                                 <input type="text" id="s-textbox">
@@ -400,9 +421,9 @@
     */
    
     function showButton(){
-        $('#searchButtonActive').fadeIn("fast"); 
-        $("#s-textbox").attr("id", "textBoxWidth");
-        $('#searchButton').fadeOut(10); 
+        $('#searchButtonActive').fadeIn(200); 
+        $("#s-textbox").addClass("textBoxWidth");
+        $('#searchButton').fadeOut(1); 
     }
 
 
@@ -485,7 +506,7 @@
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 1;
         if (distanceY > shrinkOn) {
-            $('.s-top').hide();
+            $('.s-top').slideUp(300);
             $('.topMenu').addClass('topMenuSmall');
             $('.s-logoIndex').addClass('s-logoIndexSmall');
             $('.s-logoIndexSmall').removeClass('s-logoIndex');
@@ -498,7 +519,7 @@
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                $('.s-top').show();
+                $('.s-top').fadeIn("slow");
                 $('.topMenu').removeClass('topMenuSmall');
                 $('.s-logoIndexSmall').addClass('s-logoIndex');
                 $('.s-logoIndex').removeClass('s-logoIndexSmall');
