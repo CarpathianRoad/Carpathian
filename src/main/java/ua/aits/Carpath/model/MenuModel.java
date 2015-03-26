@@ -21,6 +21,7 @@ public class MenuModel {
     public String titleEN;
     public String add;
     public String caret;
+    public String url;
     public Integer level;
     
     
@@ -59,6 +60,13 @@ public class MenuModel {
         this.caret = caret;
     }
     
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
     public Integer getLevel() {
         return level;
     }
@@ -75,6 +83,7 @@ public class MenuModel {
             temp.setParentID(result.getInt("parentId"));
             temp.setTitleEN(result.getString("titleEN"));
             temp.setCaret(result.getString("caret"));
+            temp.setUrl(result.getString("url"));
             temp.setLevel(result.getInt("level"));
             menuList.add(temp);
         } 
@@ -90,7 +99,6 @@ public class MenuModel {
             temp.setId(result.getInt("id"));
             temp.setParentID(result.getInt("parentId"));
             temp.setTitleEN(result.getString("titleen"));
-            temp.setAdd(result.getString("add"));
             menuList.add(temp);
         } 
         DB.closeCon();
