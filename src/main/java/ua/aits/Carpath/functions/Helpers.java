@@ -36,10 +36,22 @@ public class Helpers {
     }
     public String getRowHtml(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<MenuModel> tempMenu = menu.getMenuRow(id);
-        String html = "<ul class=\"leisureMenu\">\n" +
-"                                    <div class=\"menuLine\"></div>";
+        String clas = "";
+        String clas2 ="";
+        String clas3 = "";
+        if("0".equals(id)){
+            clas2 = "DropDownMenu";
+        }
+        if(tempMenu.size() > 0){
+        
+        MenuModel first = tempMenu.get(0);
+        if(first.level == 2){
+            clas = "menuLine";
+        }
+        }
+        String html = "<ul class=\""+clas2+"\">\n<div class=\""+clas+"\"></div>" ;
                 for(MenuModel temp : tempMenu) {
-                    html = html + "<li><a href=\""+Constants.URL+"article/category/"+temp.id+"\">"+temp.titleEN+"<div class=\"bottom-caret\"></div><div id=\"leisureMenu\"></div></a>";
+                    html = html + "<li><a href=\""+Constants.URL+"article/category/"+temp.id+"\">"+temp.titleEN+"<div class=\""+temp.caret+"\"></div><div id=\"leisureMenu\"></div></a>";
                     html = html + this.getRowHtml(temp.id.toString());
                     html = html + "</li>";
                 }
