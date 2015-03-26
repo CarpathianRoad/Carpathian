@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
                 $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
                 $SlideDuration: 160,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
                 $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
-                $SlideWidth: 206,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                $SlideWidth: 214,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
                 //$SlideHeight: 150,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
                 $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
                 $DisplayPieces: 3,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
@@ -55,7 +55,7 @@ jQuery(document).ready(function ($) {
             function ScaleSlider() {
                 var bodyWidth = document.body.clientWidth;
                 if (bodyWidth)
-                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 617));
+                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 640));
                 else
                     window.setTimeout(ScaleSlider, 30);
             }
