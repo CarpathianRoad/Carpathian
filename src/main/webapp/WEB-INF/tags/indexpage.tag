@@ -130,7 +130,7 @@
 				</button>
                                 <input type="text" id="s-textbox">
 				</input>
-                                <button id="searchButtonActive">
+                                <button type="button" id="searchButtonActive" class="activeSearch">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png">
                                     </div>
 				</button>
@@ -421,6 +421,7 @@
     */
    
     function showButton(){
+        $('#searchButtonActive').removeClass('activeSearch');
         $('#searchButtonActive').fadeIn(200); 
         $("#s-textbox").addClass("textBoxWidth");
         $('#searchButton').fadeOut(1); 
