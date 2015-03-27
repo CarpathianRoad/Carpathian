@@ -65,7 +65,7 @@ public class FileUploadController {
                         + serverFile.getAbsolutePath());
  
                 return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+path + name + "'>"
-                        + "<img src=\""+Constants.URL+link_path+name+"\" realpath='"+link_path+"'  alt='" + link_path+file.getName() + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
+                        + "<img src=\""+Constants.URL+link_path+"\" realpath='"+link_path+"'  alt='" + link_path+file.getName() + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }

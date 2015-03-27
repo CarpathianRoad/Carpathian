@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.model.ArticleModel;
+import ua.aits.Carpath.model.MenuModel;
 
 /**
  *
@@ -20,13 +21,15 @@ import ua.aits.Carpath.model.ArticleModel;
  */
 @Controller
 public class ArticleController {
-    
+        
+        ArticleModel news = new ArticleModel();
+        MenuModel menu = new MenuModel();
+        
         @RequestMapping(value = {"/{lan}/article/news", "/{lan}/article/news/"})
         public ModelAndView showNews (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
-            ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("NewsPage");
-            List<ArticleModel> articles = news.getAllNews();
+            List<ArticleModel> articles = news.getAllNews(lan);
             for(ArticleModel temp: articles) {
                 String[] img  = temp.image.split(",");
                 temp.setImage(img[0]);
@@ -39,7 +42,6 @@ public class ArticleController {
         @RequestMapping(value = {"/{lan}/article/advs", "/{lan}/article/advs/"})
         public ModelAndView showAdv (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
-            ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("AdvsPage");
             modelAndView.addObject("advsList", news.getAllAdv());
             return modelAndView;
@@ -48,17 +50,29 @@ public class ArticleController {
         @RequestMapping(value = {"/{lan}/article/category/{id}", "/{lan}/article/category/{id}/"})
         public ModelAndView showCategory (@PathVariable("lan") String lan, @PathVariable("id") String id,HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
-            ArticleModel news = new ArticleModel();
-            ModelAndView modelAndView = new ModelAndView("CategoryPage");
-            modelAndView.addObject("contentList", news.getByCategory(id));
+            String page;
+            Object content;
+            if(!news.isHaveArticle(id)){
+                page = "CategoryArticles";
+                List<ArticleModel> articles = news.getByCategory(lan, id);
+                for(ArticleModel temp: articles) {
+                    String[] img  = temp.image.split(",");
+                    temp.setImage(img[0]);
+                }
+                content = articles;
+            }
+            else {
+                page = "CategoryPage";
+                content = menu.getSubCategories(lan, id);
+            }
+            ModelAndView modelAndView = new ModelAndView(page);
+            modelAndView.addObject("contentList", content);
             return modelAndView;
 	}
         
         @RequestMapping(value = {"/{lan}/article/full/{id}", "/{lan}/article/full/{id}/"})
 	public ModelAndView full(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
- 
-            ArticleModel news = new ArticleModel();
             ModelAndView modelAndView = new ModelAndView("FullArticle");
             modelAndView.addObject("articles", news.getArticleByCount(lan,"3"));
             ArticleModel tempArt  = news.getOneArticle(lan, id);

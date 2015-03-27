@@ -5,9 +5,6 @@
  */
 package ua.aits.Carpath.functions;
 
-import java.sql.SQLException;
-import java.util.List;
-import ua.aits.Carpath.model.MenuModel;
 
 /**
  *
