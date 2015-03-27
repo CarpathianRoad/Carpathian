@@ -42,10 +42,11 @@ body{
     border:none;
     visibility: hidden;
     float: right;
-    transition: 2s;
+    transition: 0.5s;
     margin-right: 30px;
 }
 .textBoxWidth{
+    transition: 1s;
     width: 374px !important;
     visibility: visible !important;
 }
@@ -91,6 +92,7 @@ body {
     left: 0px;
     height: 28px;
     float: right;
+    outline: none;
 }
 #searchButtonActive{
     background-color: rgb(84,182,157);
@@ -100,6 +102,10 @@ body {
     top: 11px;
     height: 30px;
     margin-left: 374px;
+    outline: none;
+}
+.activeSearch{
+    visibility: hidden;
 }
 .intendSocial{
     margin-right: 10px;
@@ -1540,13 +1546,13 @@ label{
     height: 15px;
 }
 .markerLeftDescr{
-    width: 66%;
+    width: 640px;
     float: left;
 }
 .markerRightDescr{
-    width: 33.33333333%;
+    width: 300px;
     float: left;
-    margin-left: 0.6666%
+    margin-left: 40px;
 }
 .markerPageTitle{
     font: 17pt 'Open Sans';
@@ -1572,7 +1578,7 @@ label{
     margin-right: -7px;
 }
 .markerPageUnderHeading{
-    margin-top: 15px;
+    margin-top: 5px;
 }
 .markerPageTable{
     display: table;
@@ -1582,7 +1588,7 @@ label{
     font-weight: 100;
     color: rgb(86,105,143);
     float: none;
-    padding-top: 15px;
+    margin-top: 15px;
     text-align: justify;
 }
 .markerPageText p{
@@ -1598,13 +1604,13 @@ label{
     padding-bottom: 6px;
     padding-left: 10px;
     background: rgb(84, 182, 157);
-    font: 14pt 'Open Sans';
+    font: 12pt 'Open Sans';
     font-weight: 600;
     color: white;
 }
 .markerPageBottomLine{
     width: 100%;
-    height: 6px;
+    height: 5px;
     margin-top: 30px;
     background: rgb(84, 182, 157);
 }
@@ -1637,23 +1643,23 @@ label{
 }
 .fbMarker{
     border: rgb(84,182,157) solid 3px;
-    width: 120px;
-    height: 40px;
+    width: 96px;
+    height: 36px;
     float: left;
     transition: 0.5s;
 }
 .twMarker{
     border: rgb(84,182,157) solid 3px;
-    width: 120px;
-    height: 40px;
+    width: 96px;
+    height: 36px;
     float: left;
-    margin-left: 30px;
+    margin-left: 15px;
     transition: 0.5s;
 }
 .markerPageSocialIcon{
     width: 40px;
     background-color: rgb(84,182,157);
-    height: 34px;
+    height: 33px;
     float: left;
     transition: 0.5s;
 }
@@ -1661,13 +1667,12 @@ label{
     width: 20px;
     height: 20px;
     margin-left: 7px;
-    margin-top: 7px;
+    margin-top: 5px;
     transition: 0.5s;
 }
 .markerPageSocialNumber{
-    width: 74px;
     color: rgb(84,182,157);
-    font: 14pt 'Open Sans';
+    font: 12pt 'Open Sans';
     font-weight: 600;
     text-align: center;
     margin-left: 40px;
