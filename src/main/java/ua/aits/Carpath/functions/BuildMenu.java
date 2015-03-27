@@ -15,24 +15,32 @@ import ua.aits.Carpath.model.MenuModel;
  */
 public final class BuildMenu {
     
-    public static String menuRow = "";
+    public static String menuRowen = "";
+    public static String menuRowua = "";
     
     Helpers helpers = new Helpers();
     MenuModel menu = new MenuModel();
     
-    public String getMenuRow() {
-        return menuRow;
+    public String getMenuRowen() {
+        return menuRowen;
     }
-    public void setMenuRow(String menuRow) {
-        BuildMenu.menuRow = menuRow;
+    public void setMenuRowen(String menuRowen) {
+        BuildMenu.menuRowen = menuRowen;
+    }
+    public String getMenuRowua() {
+        return menuRowua;
+    }
+    public void setMenuRowua(String menuRowua) {
+        BuildMenu.menuRowua = menuRowua;
     }
     
     public BuildMenu() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        this.setMenuRow(this.getRowHtml("0"));
+        this.setMenuRowen(this.getRowHtml("0"));
+        this.setMenuRowua(this.getRowHtml("0"));
     }
     
     public String getRowHtml(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List<MenuModel> tempMenu = menu.getMenuRow(id);
+        List<MenuModel> tempMenu = menu.getMenuRow("en",id);
         String clas = "";
         String clas2 ="";
         if("0".equals(id)){

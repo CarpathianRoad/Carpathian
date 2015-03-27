@@ -6,6 +6,7 @@
 package ua.aits.Carpath.functions;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import org.jsoup.Jsoup;
@@ -35,6 +36,33 @@ public class Helpers {
             }
         }
         return imageList;
+    }
+    public String getRowHtml(String lang, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<MenuModel> tempMenu = menu.getMenuRow(lang, id);
+        String clas = "";
+        String clas2 ="";
+        if("0".equals(id)){
+            clas2 = "DropDownMenu";
+        }
+        if(tempMenu.size() > 0){
+        
+        MenuModel first = tempMenu.get(0);
+        if(first.level == 2){
+            clas = "menuLine";
+        }
+        }
+        String html = "<ul class=\""+clas2+"\">\n<div class=\""+clas+"\"></div>" ;
+                for(MenuModel temp : tempMenu) {
+                    String tempUrl = "article/category/"+temp.id;
+                    if(!"".equals(temp.url) && temp.url != null){
+                        tempUrl = temp.url;
+                    }
+                    html = html + "<li><a href=\""+Constants.URL+tempUrl+"\">"+temp.titleEN+"<div class=\""+temp.caret+"\"></div><div id=\"leisureMenu\"></div></a>";
+                    html = html + this.getRowHtml(lang, temp.id.toString());
+                    html = html + "</li>";
+                }
+                html = html + "</ul>";
+        return html;
     }
     
 }

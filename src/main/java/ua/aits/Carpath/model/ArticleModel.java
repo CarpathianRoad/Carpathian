@@ -324,18 +324,26 @@ public class ArticleModel {
     }
     
     
-    public List<ArticleModel> getAllNews() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> getAllNews(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc;");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
-            String str  = result.getString("textEN").replaceAll("\\<.*?>","");
-            if(str.length() > 400){
-                str = str.substring(0,400);
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
             }
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = result.getString("textEN");
+            }
+            if(text.length() > 400){
+                text = text.substring(0,400) + "...";
+            }
+            
+            temp.setTextEN(text);
             temp.setId(result.getInt("id"));
-            temp.setTitle(result.getString("titleEN"));
-            temp.setTextEN(str);
+            temp.setTitle(f_title);
             temp.setDate(result.getString("date"));
             temp.setImage(result.getString("image"));
             if("".equals(temp.getImage())){
@@ -456,25 +464,44 @@ public class ArticleModel {
         return temp;
     }
     
-    public List<ArticleModel> getByCategory(String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Boolean isHaveArticle(String id) throws SQLException{
+        ResultSet result = DB.getResultSet("SELECT * FROM menu WHERE parentId="+id+";");
+        return result.isBeforeFirst();
+    }
+    
+    public List<ArticleModel> getByCategory(String lan, String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where menuCat = "+catID+" and publish = 1 order by date desc;");
         List<ArticleModel> contentList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = result.getString("textEN");
+            }
+            if(text.length() > 400){
+                text = text.substring(0,400) + "...";
+            }
+            
+            temp.setTextEN(text);
             temp.setId(result.getInt("id"));
-            temp.setType(result.getInt("type"));
-            temp.setTitle(result.getString("titleEN"));
-            temp.setTextEN(result.getString("textEN"));
+            temp.setTitle(f_title);
             temp.setDate(result.getString("date"));
+            temp.setImage(result.getString("image"));
+            if("".equals(temp.getImage())){
+                temp.setImage("img/no-photo.png");
+            }
             temp.setActDate(result.getString("actual"));
+            temp.setCountry(result.getString("country")); 
             temp.setAuthor(result.getString("author"));
-            temp.setPublish(result.getInt("publish"));
             contentList.add(temp);
         } 
         DB.closeCon();
     return contentList;
     }
-    
     
     public List<ArticleModel> getAllContentByType(String username, String type, String value) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String where;

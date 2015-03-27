@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ua.aits.Carpath.functions.Constants;
+import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
@@ -35,6 +36,9 @@ public class AjaxController {
     
     ArticleModel content =  new ArticleModel();
     RouteModel routes =  new RouteModel();
+    Helpers helpers = new Helpers();
+    MenuModel menu = new MenuModel();
+    
     @RequestMapping(value = {"/system/checkLoginPass/", "/system/checkLoginPass"}, method = RequestMethod.GET)
     public @ResponseBody
     String checkLoginPass(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -51,7 +55,6 @@ public class AjaxController {
     public @ResponseBody
     String returnCatTitle(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
-        MenuModel menu = new MenuModel();
         String temp = menu.getCatTitle(request.getParameter("id"));
         return temp;
     }
@@ -194,5 +197,13 @@ public class AjaxController {
         } else {
             return "You failed to upload " + name + " because the file was empty.";
         }
+    }
+    @RequestMapping(value = {"/build/menu/", "/build/menu"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<String> returnMenuHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        HttpHeaders responseHeaders = new HttpHeaders(); 
+        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+        return new ResponseEntity<>(helpers.getRowHtml(request.getParameter("lang"), "0"), responseHeaders, HttpStatus.CREATED);
     }
 }

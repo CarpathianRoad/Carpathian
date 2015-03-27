@@ -29,6 +29,9 @@
     <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
     <style>
+        .lang-sw.active {
+            color: rgb(174, 214, 43);
+        }
 	label.css-label {
             background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_cf6353ab7cdbfbd4f8cf2b5189d35a11.png);
             -webkit-touch-callout: none;
@@ -130,7 +133,7 @@
 				</button>
                                 <input type="text" id="s-textbox">
 				</input>
-                                <button type="button" id="searchButtonActive" class="activeSearch">
+                                <button id="searchButtonActive">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png">
                                     </div>
 				</button>
@@ -140,7 +143,6 @@
                     <div class="s-clear"></div>
                     <div class="s-bot" id='cssmenu'>
                         
-                        ${Menu.menuRow}
                     </div>
 		</div>
             </div>
@@ -229,25 +231,49 @@
 </html>
 
 <script>
-    var countryChooser;
-    $( document ).ready(function() {
-            var str_url = window.location.href.split('/'); 
-            $("li.paddingLang a").css("color", "#fff");
-            $("#lang-switch-"+str_url[4]).css("color","rgb(174,214,43)");
-            $("#lang-switch-"+str_url[3]).css("color","rgb(174,214,43)");
-            // style="color:rgb(174,214,43)"
-        $( "a:not(.lang-sw)" ).each(function( index ) {
+    function buildMenu(lang){
+        console.log(lang);
+        $.ajax({
+            type: "get",
+            url: "${Constants.URL}/build/menu",
+            cache: false,    
+            data:'lang='+lang+'',
+            mimeType:"text/html; charset=UTF-8",
+            success: function(response){
+             $("#cssmenu").html(response).css("width","");
+             if(lang === "UA" || lang === "ua") {
+                 $("#cssmenu").css("width","106%");
+             }
+             addLangToLink(lang.toLowerCase());
+            },
+            error: function(response){      
+             console.log(response);
+            }
+        });
+    }
+    function addLangToLink(lang){
+    $( "a:not(.lang-sw)" ).each(function( index ) {
             
             if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
-            console.log($(this).attr("href"));
-            if($(this).attr("href").toLowerCase().indexOf("/carpath/") != -1){
-                $(this).attr("href", $(this).attr("href").replace("Carpath","Carpath/"+str_url[4]));
+            if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){
+                $(this).attr("href", $(this).attr("href").replace("Carpath","Carpath/"+lang));
             }
             else {
-                $(this).attr("href", "/"+str_url[3]+$(this).attr("href"));
+                $(this).attr("href", "/"+lang+$(this).attr("href"));
             }
             }
         });
+    }
+    var countryChooser;
+    $( document ).ready(function() {
+            var str_url = window.location.href.split('/'); 
+            $("li.paddingLang a").removeClass("active");
+            $("#lang-switch-"+str_url[4]).addClass("active");
+            $("#lang-switch-"+str_url[3]).addClass("active");
+            // style="color:rgb(174,214,43)"
+            
+            buildMenu($(".lang-sw.active").html());
+        
         
         
         $('#searchButtonActive').hide(); 
@@ -421,7 +447,6 @@
     */
    
     function showButton(){
-        $('#searchButtonActive').removeClass('activeSearch');
         $('#searchButtonActive').fadeIn(200); 
         $("#s-textbox").addClass("textBoxWidth");
         $('#searchButton').fadeOut(1); 
