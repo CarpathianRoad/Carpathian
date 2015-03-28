@@ -415,6 +415,8 @@ a:hover{
 .s-new  .s-rightNavBar .s-top .s-two{
 	float: right;
 	margin: 0px 30px;
+        width: 50px;
+        height: 18px;
 }
 .s-new  .s-rightNavBar .s-top .s-three{
 	float: right;
