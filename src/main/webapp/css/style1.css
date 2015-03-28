@@ -1754,6 +1754,31 @@ label{
 #article_slider1_container{
     margin-top: 30px;
 }
+.routesListText{
+    padding-top: 0;
+}
+.routesLinks a{
+    color: rgb(86,105,143);
+}
+.routesLinks a:hover{
+    color: rgb(174,214,43);
+}
+.routesListCell{
+    height: 120px;
+}
+.routesListMap{
+    height: 110px;
+    background: rgb(86,105,143);
+    width: 300px;
+    margin-top: 10px;
+}
+.routeListText{
+    font: 11pt 'Open Sans';
+    font-weight: 100;
+    color: rgb(86,105,143);
+    float: none;
+    text-align: justify;
+}
 
 
 @media (min-width: 760px) and (max-width: 950px){
