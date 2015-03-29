@@ -243,10 +243,16 @@ public class RouteModel {
         ResultSet result = DB.getResultSet("select * from routes where publish = 1 order by id desc;;");
         routeList = new LinkedList<>();
         while (result.next()) { 
+            String str  = result.getString("textUA").replaceAll("'\\<.*?>","");
+            String str2 = str.replaceAll("[\\x00-\\x1F]", "");
+            String str3 = str2.replaceAll("'", "\\\\'");
+            if(str3.length() > 250){
+                str3 = str3.substring(0,250);
+            }
             RouteModel temp = new RouteModel();
             temp.setId(result.getInt("id"));
             temp.setTitle(result.getString("titleEN"));
-            temp.setTextUA(result.getString("textUA"));
+            temp.setTextUA(str3);
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
             routeList.add(temp);
