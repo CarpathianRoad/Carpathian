@@ -335,7 +335,7 @@ a:hover{
 }
 .s-new .s-cell{
 	width: 33.3333333%;
-	float: right;
+	float: left;
 }
 .s-new .s-cellFullArticle .s-block{
 	float: right;
