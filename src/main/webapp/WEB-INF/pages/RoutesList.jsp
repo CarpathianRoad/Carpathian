@@ -45,7 +45,7 @@
             <div class="markerRightDescr">
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
                     <script>files.push("${route.file}");</script>
-                    <div class="routesListMap" id="map${loop.index}"></div>
+                    <a href="${Constants.URL}routes/${route.id}"><div class="routesListMap" id="map${loop.index}"></div></a>
                 </c:forEach>
             </div>
                         
