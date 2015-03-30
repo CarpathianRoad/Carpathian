@@ -114,7 +114,7 @@ public class SinglePageController {
     @RequestMapping(value = {"/{lan}/map/{country}","/{lan}/map/{country}/"})
     public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("country") String country, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-                List<MapModel> maps = map.getAllPoints();
+                List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
                 model.addObject("country",country);
 		model.addObject("markers", maps);
@@ -123,7 +123,7 @@ public class SinglePageController {
     @RequestMapping(value = {"/{lan}/map/","/{lan}/map"})
     public ModelAndView map(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-                List<MapModel> maps = map.getAllPoints();
+                List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
 		model.addObject("markers", maps);
                 model.addObject("lan", lan);

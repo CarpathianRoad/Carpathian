@@ -131,23 +131,29 @@ public class MapModel {
     }
     
     private static List<MapModel> mapList;
-    public List<MapModel> getAllPoints() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<MapModel> getAllPoints(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type = 2 and publish = 1;");
         mapList = new LinkedList<>();
         while (result.next()) { 
             MapModel temp = new MapModel();
-            String str  = result.getString("textEN").replaceAll("'\\<.*?>","");
-            String str2 = str.replaceAll("[\\x00-\\x1F]", "");
-            String str3 = str2.replaceAll("'", "\\\\'");
-            if(str3.length() > 400){
-                str3 = str3.substring(0,400);
+            String text  = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
+            if("".equals(text) || text == null){
+                text = Helpers.html2text(result.getString("textEN"));
+            }
+            String str = text.replaceAll("[\\x00-\\x1F]", "").replaceAll("'\\<.*?>","").replaceAll("'", "\\\\'");
+            if(str.length() > 400){
+                str = str.substring(0,400);
             }
             
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(result.getString("titleEN"));
-            temp.setTextEN(str3);
+            temp.setTitle(f_title);
+            temp.setTextEN(str);
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setPublic_country(result.getString("public_country"));
             temp.setCountry(result.getString("country")); 
@@ -182,7 +188,7 @@ public class MapModel {
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
-                text = result.getString("textEN");
+                text = Helpers.html2text(result.getString("textEN"));
             }
             if(text.length() > 175){
                 text = text.substring(0,175) + "...";
