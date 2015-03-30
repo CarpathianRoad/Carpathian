@@ -10,6 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
     <script>var files = [];</script>
+            <div class="s-new widthClass">
         <div class="s-new markerPageTable">
         <div class="breadcrumbsMarker">
                 <ul class="breadcrumbsUlMarker">
@@ -26,26 +27,25 @@
                     <a href="#">Ukraine</a>
                 </div>
             </div>
-            <div class="markerLeftDescr routesLinks">
+        </div>
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
-                    <div class="routesListCell">
-                        <div class="markerPageTitle">
-                            <a href="${Constants.URL}routes/${route.id}">
-                                ${route.title}
-                            </a>
+                    <div class="s-cell">
+                        <div class="s-block newsHeight">
+                            <div class="newsImage">
+                                <a href="${Constants.URL}routes/${route.id}">
+                                    <div class="routesListMap" id="map${loop.index}"></div>
+                                </a>
+                            </div>
+                            <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
+                            <div class="news_text_box">
+                                <div class="news_title"><a href="${Constants.URL}article/full/${route.id}">${route.title}</a></div>
+                                <a href="${Constants.URL}article/full/${route.id}">
+                                    <div class="news_text">${route.textUA}</div>
+                                </a>
+                            </div>
                         </div>
-                        <div class="routeListText routesListText">
-                            <a href="${Constants.URL}routes/${route.id}">
-                                ${route.textUA}...
-                            </a>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-            <div class="markerRightDescr">
-                <c:forEach items="${routesList}" var="route" varStatus="loop">
+                    </div>   
                     <script>files.push("${route.file}");</script>
-                    <a href="${Constants.URL}routes/${route.id}"><div class="routesListMap" id="map${loop.index}"></div></a>
                 </c:forEach>
             </div>
                         
@@ -55,7 +55,6 @@
 					<a href="#" class="inactive">2</a>
 					<a href="#" class="inactive">3</a>
 				</div>
-        </div>
         <script>
             
             var countRoute = 0;

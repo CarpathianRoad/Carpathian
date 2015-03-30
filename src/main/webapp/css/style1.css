@@ -1769,10 +1769,9 @@ label{
     height: 120px;
 }
 .routesListMap{
-    height: 110px;
+    height: 195px;
     background: rgb(86,105,143);
     width: 300px;
-    margin-top: 10px;
 }
 .routeListText{
     font: 11pt 'Open Sans';
