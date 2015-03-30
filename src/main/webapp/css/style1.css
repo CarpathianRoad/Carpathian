@@ -1778,6 +1778,27 @@ label{
     float: none;
     text-align: justify;
 }
+.typeDiffChooser{
+    width: 100%;
+    text-align: right;
+    color: rgb(86,105,143);
+    font: 9pt 'Open Sans';
+    font-weight: 800;
+}
+.typeDiffChooser select{
+    padding: 2px;
+    border: 2px solid rgb(86,105,143);
+}
+.breadcrumbsRoutesList{
+    margin-top: 5px;
+}
+.routeType{
+    text-align: right;
+    float: right;
+    width: 100%;
+    padding-right: 30px;
+    color: white;
+}
 
 
 @media (min-width: 760px) and (max-width: 950px){

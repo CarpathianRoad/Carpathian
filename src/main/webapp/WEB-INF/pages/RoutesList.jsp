@@ -9,22 +9,44 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
-    <script>var files = [];</script>
+    <script>
+        var files = [];
+        var types = [];
+        var categories = [];
+    </script>
     <div class="s-new widthClass">
         <div class="s-new markerPageTable">
         <div class="breadcrumbsMarker">
-                <ul class="breadcrumbsUlMarker">
+                <ul class="breadcrumbsUlMarker breadcrumbsRoutesList">
                     <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
                     <li><a href="${Constants.URL}article/category/6">Routes</a><div class="right_arrow"> </div></li>
                     <li><a>Trails</a></li>
                 </ul>
-                <div class="countriesFilterMarker">
-                    <a class="selected_country" href="#">All countries</a>
-                    <a href="#">Poland</a>
-                    <a href="#">Hungary</a>
-                    <a href="#">Romania</a>
-                    <a href="#">Slovakia</a>
-                    <a href="#">Ukraine</a>
+                <div class="typeDiffChooser">
+                    <select>
+                        <option>Country</option>
+                        <option>Poland</option>
+                        <option>Hungary</option>
+                        <option>Romania</option>
+                        <option>Slovakia</option>
+                        <option>Ukraine</option>
+                    </select>
+                    <select>
+                        <option>Categories of tourist roads</option>
+                        <option>International tourist road (E or R)</option>
+                        <option>National tourist road</option>
+                        <option>Regional tourist road</option>
+                        <option>District tourist road</option>
+                        <option>Local (excursion) tourist road</option>
+                    </select>
+                    <select>
+                        <option>Method of trip</option>
+                        <option>Walking</option>
+                        <option>Bicycle</option>
+                        <option>Ski</option>
+                        <option>Horses</option>
+                        <option>Water</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -34,6 +56,14 @@
                             <div class="newsImage">
                                 <a href="${Constants.URL}routes/${route.id}">
                                     <div class="imageHover">
+                                        <div class="imageHoverDate">
+                                            ${route.date}
+                                        </div>
+                                        <div class="imageHoverCountry">
+                                            <div class="newsCountryText">${route.public_country}</div><img src="${Constants.URL}img/newsImageHover.png">
+                                        </div>
+                                        <div class="routeType" id="type${loop.index}"></div>
+                                        <div class="routeType" id="category${loop.index}"></div>
                                     </div>
                                     <div class="routesListMap" id="map${loop.index}"></div>
                                 </a>
@@ -48,6 +78,8 @@
                         </div>
                     </div>   
                     <script>files.push("${route.file}");</script>
+                    <script>types.push("${route.type}");</script>
+                    <script>categories.push("${route.category}");</script>
                 </c:forEach>
     </div>
                         
@@ -76,6 +108,42 @@
             {"featureType":"road","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"lightness":24}]},
             {"featureType":"road","elementType":"geometry","stylers":[{"lightness":57}]}];
         
+            for(var n = 0; n < types.length; n++){
+                switch(types[n]){
+                    case "0":
+                        $('#type'+n).html('Walking route');
+                        break;
+                    case "1":
+                        $('#type'+n).html('Bicycle route');
+                        break;
+                    case "2":
+                        $('#type'+n).html('Ski route');
+                        break;
+                    case "3":
+                        $('#type'+n).html('Horses route');
+                        break;
+                    case "4":
+                        $('#type'+n).html('Water route');
+                        break;
+                }
+                switch(categories[n]){
+                    case "4":
+                        $('#category'+n).html('International tourist road (E or R)');
+                        break;
+                    case "1":
+                        $('#category'+n).html('National tourist road');
+                        break;
+                    case "2":
+                        $('#category'+n).html('Regional tourist road');
+                        break;
+                    case "3":
+                        $('#category'+n).html('District tourist roade');
+                        break;
+                    case "0":
+                        $('#category'+n).html('Local (excursion) tourist road');
+                        break;
+                }
+            }
             
             for(var count = 0; count < '${fn:length(routesList)}'; count++){
                     if (window.XMLHttpRequest){
