@@ -252,7 +252,7 @@
         });
     }
     function addLangToLink(lang){
-    $( "a:not(.lang-sw)" ).each(function( index ) {
+    $( "a:not(.lang-sw, .shareLinks)" ).each(function( index ) {
             
             if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
             if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){
