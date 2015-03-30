@@ -9,44 +9,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
     <style type="text/css">
             v\:* {
                 behavior:url(#default#VML);
             }
-            #holder {
-                margin-top: -80px;
-            }
-            #routeDesc{
-                text-align: justify;
-                font-size:15px;
-                color: grey;
-                font-family: 'Open Sans', Arial, sans-serif;
-            }
-            #routeName{
-                font-size: 28px;
-                font-weight: 700;
-                color: #353535;
-                line-height:120%;
-                width: 100%;
-                margin-top: 0px;
-                float: left;
-                font-family: 'Open Sans', Arial, sans-serif;
-            }
             #map {
-                width: 100%; 
-                margin-top: 0px; 
-                margin-right: 0px; 
-                margin-left: 0px; 
-                margin-bottom: 0px;
-                margin-top: 60px;
-            }
-            #desc{
-                background: white;
-                padding: 10px 10px 0 10px;
-                color: #754719;
-                font-size:15px;
-                float: right;
+                margin-top: 30px;
             }
         </style>
         <script type="text/javascript"
@@ -107,7 +77,7 @@
                 });
                 var latlng = new google.maps.LatLng(48.71, 22.41);
                 var mapOptions = {
-                  zoom: 13,
+                  zoom: 11,
                   center: getCenter(),
                   //center: latlng,
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
@@ -376,13 +346,62 @@
             
     
         </script>
-    <div id="desc" style="width:50%;height:90%; float: right;margin-top: 45px;">
-            <div id="routeName">${route.title}</div>
-            <div id="routeDesc">${route.textUA}</div>
-            <div id="holder" style="width: 100%;height:25%;margin-top:0px;"></div>
-    </div>
-    <div id="map" style="width: 50%; height: 90%;"></div>
 
+        <div class="s-new markerPageTable">
+        <div class="breadcrumbsMarker">
+                <ul class="breadcrumbsUlMarker">
+                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
+                    <li><a href="${Constants.URL}article/category/6">Routes</a><div class="right_arrow"> </div></li>
+                    <li><a href="${Constants.URL}routesList">Trails</a><div class="right_arrow"> </div></li>
+                    <li><a>${route.title}</a></li>
+                </ul>
+                <div class="countriesFilterMarker">
+                    <a class="selected_country" href="#">All countries</a>
+                    <a href="#">Poland</a>
+                    <a href="#">Hungary</a>
+                    <a href="#">Romania</a>
+                    <a href="#">Slovakia</a>
+                    <a href="#">Ukraine</a>
+                </div>
+            </div>
+            <div class="markerLeftDescr routesLinks">
+                <div class="markerPageTitle">${route.title}</div>
+                <div class="markerPageText">
+                    ${route.textUA}
+                </div>
+                <div id="map" style="width: 100%; height: 200px;"></div>
+                <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
+                <c:if test="${(imagesRoute[0])!=''}">
+    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
+                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                            <c:forEach items="${imagesRoute}" var="image" varStatus="loop">
+                                                <div onclick="set_main_picture('${Constants.URL}${image.img}','${loop.index}')">
+                                                    <div class="sliderHover">
+                                                        <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image.img}" style="height: 150px"/>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
+                                        </span>
+                                        <span u="arrowright" class="markerPageArrowRight jssora03r" style="width: 50px; height: 95px; top: 28px; right: 20px">
+                                        </span>
+                                    </div>
+                                    <div class="article_main_image">
+                                        <img id="main_image" src="${Constants.URL}<c:out value="${imagesRoute[0].img}" />" />
+                                        <div class="mainImageSliderLine">
+                                            <div id="imageCount">1</div>/${fn:length(imagesRoute)}
+                                            &nbsp;&nbsp;
+                                                ${route.title} Gallery
+                                        </div>
+                                    </div>
+                </c:if>
+            </div>
+            <div class="markerRightDescr">
+                <div class="otherNewsHeading">OTHER ROUTES</div>
+            </div>
+        </div>
     
     
 </t:indexpage>

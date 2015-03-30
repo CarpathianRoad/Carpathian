@@ -45,7 +45,7 @@
             <div class="markerRightDescr">
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
                     <script>files.push("${route.file}");</script>
-                    <div class="routesListMap" id="map${loop.index}"></div>
+                    <a href="${Constants.URL}routes/${route.id}"><div class="routesListMap" id="map${loop.index}"></div></a>
                 </c:forEach>
             </div>
                         
@@ -132,7 +132,7 @@
                     geodesic: true,
                     strokeColor: '#FF9900',
                     strokeOpacity: 1.0,
-                    strokeWeight: 5
+                    strokeWeight: 2
 		});
 		route.setMap(map[countRoute]);
                 countRoute ++;
