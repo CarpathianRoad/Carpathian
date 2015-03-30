@@ -82,6 +82,9 @@ public class MenuModel {
             temp.setId(result.getInt("id"));
             temp.setParentID(result.getInt("parentId"));
             temp.setTitleEN(result.getString("title"+lan.toUpperCase()));
+            if("".equals(temp.getTitleEN()) || temp.getTitleEN() == null ){
+               temp.setTitleEN(result.getString("titleEN")); 
+            }
             temp.setCaret(result.getString("caret"));
             temp.setUrl(result.getString("url"));
             temp.setLevel(result.getInt("level"));

@@ -490,6 +490,7 @@ var path = $(".img-content-show-all").attr("current");
 function getFiles(temp_fold, parent, isFolder) {
         isFolder = isFolder || false;
         $(".img-content-show-all").html("");
+        console.log('name='+temp_fold+'&parent='+parent);
         jQuery.ajax({
             url: '${Constants.URL}showImages',
             cache: false,
