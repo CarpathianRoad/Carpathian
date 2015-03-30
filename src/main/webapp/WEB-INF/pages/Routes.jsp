@@ -399,7 +399,7 @@
                 </c:if>
             </div>
             <div class="markerRightDescr">
-                <div class="otherNewsHeading">OTHER NEWS</div>
+                <div class="otherNewsHeading">OTHER ROUTES</div>
             </div>
         </div>
     
