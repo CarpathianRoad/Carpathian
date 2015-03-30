@@ -33,7 +33,6 @@
             color: rgb(174, 214, 43);
         }
 	label.css-label {
-            background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_cf6353ab7cdbfbd4f8cf2b5189d35a11.png);
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -63,6 +62,12 @@
         }
         #status {
             background-image:url(${Constants.URL}img/status.gif); /* path to your loading animation */
+        }
+        input[type=checkbox].css-checkbox:checked + label.css-label {
+            background-image:url(${Constants.URL}img/checked.png);
+        }
+        input[type=checkbox].css-checkbox + label.css-label {
+            background-image:url(${Constants.URL}img/notChecked.png);
         }
     </style>
     
