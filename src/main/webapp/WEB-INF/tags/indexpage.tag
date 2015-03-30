@@ -103,14 +103,14 @@
                             </ul>
 			</div>
 			<div class="s-two">
-                            <a class="socialHeaderDiv intendSocial"
+                            <a class="socialHeaderDiv intendSocial" class="not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
-                            <a class="socialHeaderDiv"
+                            <a class="socialHeaderDiv" class="not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://twitter.com/CarpathianRoad" target="_blank">
@@ -158,15 +158,15 @@
                 <div class="footerNew">
                     <div class="footerLeftMain">
                             <div class="footerPartnership">
-                                <a href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
+                                <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                             </div>
                             <div class="footerCoFin">
-                                <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
+                                <a class="not-add-lan" href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
                                     <div class="rightTopText">The Programme is con-financed by the European Union</div>
                                 </a>
                             </div>
                             <div class="huskrouaFooter">
-                                <a href="http://huskroua-cbc.net/" target="_blank">
+                                <a href="http://huskroua-cbc.net/" class="not-add-lan" target="_blank">
                                     <img src="${Constants.URL}img/star_logo.png">
                                     <div class="countriesStar">Hungary-Slovakia-Romani-Ukraine</div>
                                     <div class="countriesStarSmall">ENPI Cross-border Cooperation Programme</div>
@@ -174,7 +174,7 @@
                             </div>
                     </div>
                     <div class="footerRightMain">
-                        <a class="fundedLink" href="http://www.surdp.eu" target="_blank">
+                        <a class="fundedLink" class="not-add-lan" href="http://www.surdp.eu" target="_blank">
                             <img src="${Constants.URL}img/euFlag.png">
                             <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
@@ -219,7 +219,7 @@
                         </div>
                 </div>
                                         <div class="developpedText">
-                                            <a href="http://www.aits.ua" target="_blank">
+                                            <a class="not-add-lan" href="http://www.aits.ua" target="_blank">
                                                 Developed by AITS
                                             </a>
                                         </div>
@@ -234,7 +234,7 @@
         console.log(lang);
         $.ajax({
             type: "get",
-            url: "${Constants.URL}/build/menu",
+            url: "${Constants.URL}build/menu",
             cache: false,    
             data:'lang='+lang+'',
             mimeType:"text/html; charset=UTF-8",
@@ -251,7 +251,7 @@
         });
     }
     function addLangToLink(lang){
-    $( "a:not(.lang-sw, .shareLinks)" ).each(function( index ) {
+    $( "a:not(.lang-sw, .shareLinks, .not-add-lan)" ).each(function( index ) {
             
             if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
             if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){
