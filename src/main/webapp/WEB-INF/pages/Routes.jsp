@@ -40,6 +40,13 @@
             var count = 0;
             var route;
             var center;
+            var mapStyles = [{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},
+                {"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},
+                {"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},
+                {"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]},
+                {"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"stylers":[{"hue":"#00aaff"},{"saturation":-100},{"gamma":2.15},{"lightness":12}]},
+                {"featureType":"road","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"lightness":24}]},
+                {"featureType":"road","elementType":"geometry","stylers":[{"lightness":57}]}];
             
             $(document).ready(function() {
                 if (window.XMLHttpRequest){
@@ -75,16 +82,23 @@
                 $(xml).find("trkpt").each(function(){
                     yCoord.push($(this).attr("lon"));
                 });
+                    var styledMap = new google.maps.StyledMapType(mapStyles,
+                        {name: "Styled Map"});
                 var latlng = new google.maps.LatLng(48.71, 22.41);
                 var mapOptions = {
                   zoom: 11,
                   center: getCenter(),
                   //center: latlng,
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true
+                  disableDefaultUI: true,
+                  mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                  }
                 };
                 map = new google.maps.Map(document.getElementById("map"),
                     mapOptions);
+                    map.mapTypes.set('map_style', styledMap);
+                    map.setMapTypeId('map_style');
                 <c:forEach items="${imagesRoute}" var="imgs">
                     if(("${imgs.x}".indexOf(',')!=-1)&&("${imgs.y}".indexOf('.')!=-1)){
                         var temp = "${imgs.x}".split(",");
