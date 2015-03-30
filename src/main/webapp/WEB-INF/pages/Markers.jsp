@@ -41,7 +41,7 @@
                     ${marker.textEN}
                 </div>
                 <c:if test="${fn:length(images[0])!=''}">
-    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
+                    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                     <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
                                         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
                                             <c:forEach items="${images}" var="image" varStatus="loop">
