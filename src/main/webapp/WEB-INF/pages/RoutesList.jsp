@@ -10,7 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
     <script>var files = [];</script>
-            <div class="s-new widthClass">
+    <div class="s-new widthClass">
         <div class="s-new markerPageTable">
         <div class="breadcrumbsMarker">
                 <ul class="breadcrumbsUlMarker">
@@ -33,13 +33,15 @@
                         <div class="s-block newsHeight">
                             <div class="newsImage">
                                 <a href="${Constants.URL}routes/${route.id}">
+                                    <div class="imageHover">
+                                    </div>
                                     <div class="routesListMap" id="map${loop.index}"></div>
                                 </a>
                             </div>
                             <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
                             <div class="news_text_box">
-                                <div class="news_title"><a href="${Constants.URL}article/full/${route.id}">${route.title}</a></div>
-                                <a href="${Constants.URL}article/full/${route.id}">
+                                <div class="news_title"><a href="${Constants.URL}routes/${route.id}">${route.title}</a></div>
+                                <a href="${Constants.URL}routes/${route.id}">
                                     <div class="news_text">${route.textUA}</div>
                                 </a>
                             </div>
@@ -47,7 +49,7 @@
                     </div>   
                     <script>files.push("${route.file}");</script>
                 </c:forEach>
-            </div>
+    </div>
                         
 				<div style="display:none;" id="pagination">
 					<span class="all">Page 1 of 3</span>
@@ -66,6 +68,14 @@
             var points = [];
             var route;
             var center;
+            var mapStyles = [{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},
+            {"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},
+            {"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},
+            {"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]},
+            {"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"stylers":[{"hue":"#00aaff"},{"saturation":-100},{"gamma":2.15},{"lightness":12}]},
+            {"featureType":"road","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"lightness":24}]},
+            {"featureType":"road","elementType":"geometry","stylers":[{"lightness":57}]}];
+        
             
             for(var count = 0; count < '${fn:length(routesList)}'; count++){
                     if (window.XMLHttpRequest){
@@ -102,15 +112,22 @@
                     $(xml).find("trkpt").each(function(){
                         yCoord.push($(this).attr("lon"));
                     });
+                    var styledMap = new google.maps.StyledMapType(mapStyles,
+                        {name: "Styled Map"});
                     var mapOptions = {
                       zoom: 10,
                       center: getCenter(),
                       //center: latlng,
                       mapTypeId: google.maps.MapTypeId.SATELLITE,
-                      disableDefaultUI: true
+                      disableDefaultUI: true,
+                      mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                      }
                     };
                     map[countRoute] = new google.maps.Map(document.getElementById("map"+countRoute),
                         mapOptions);
+                    map[countRoute].mapTypes.set('map_style', styledMap);
+                    map[countRoute].setMapTypeId('map_style');
                 for (var i = 0; i < (height.length); i++) { 
                     if(i==0){
                         var p1 = new google.maps.LatLng(xCoord[i],yCoord[i]);
