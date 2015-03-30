@@ -270,6 +270,7 @@ a:hover{
 .newsImage:hover .imageHover{
     transition: 0.5s;
     height: 300px;
+    z-index: 9999999;
 }
 .imageHoverCountry img{
     width: 8px;
@@ -1322,8 +1323,9 @@ p{
                     overflow: visible;
                     width:350px;
                     height: 510px;
-                    left: 50 !important;
-                    top: 150;
+                    left: 55 !important;
+                    top: 115;
+                    bottom: 0 !important;
 		}
                 .newsImageIndex:hover img{
                     transform: scale(1.5); 
@@ -1387,20 +1389,16 @@ input[type=checkbox].css-checkbox {
 }
 input[type=checkbox].css-checkbox + label.css-label {
     padding-left:17px;
-    height:12px; 
+    height:14px; 
     display:inline-block;
     line-height:12px;
     background-repeat:no-repeat;
-    background-position: 0 0;
     vertical-align:middle;
     cursor:pointer;
     margin: 5px 0;
     width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-input[type=checkbox].css-checkbox:checked + label.css-label {
-    background-position: 0 -12px;
 }
 .filterMap .bottom-caret{
     margin-top: 5.5px;

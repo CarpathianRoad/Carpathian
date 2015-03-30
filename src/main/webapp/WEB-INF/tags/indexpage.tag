@@ -63,6 +63,12 @@
         #status {
             background-image:url(${Constants.URL}img/status.gif); /* path to your loading animation */
         }
+        input[type=checkbox].css-checkbox:checked + label.css-label {
+            background-image:url(${Constants.URL}img/checked.png);
+        }
+        input[type=checkbox].css-checkbox + label.css-label {
+            background-image:url(${Constants.URL}img/notChecked.png);
+        }
     </style>
     
 </head>
@@ -94,7 +100,7 @@
                             <ul>
 				<li class="paddingLang"><a id="lang-switch-ua" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
 				<li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
-				<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
+				<!--<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li> -->
 				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
 				<!--
                                 <li class="paddingLang"><a href="#">PL</a></li>
