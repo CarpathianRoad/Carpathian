@@ -10,6 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:indexpage>
+    <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
             <div class="breadcrumbsMarker">

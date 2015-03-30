@@ -335,7 +335,7 @@ public class ArticleModel {
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
-                text = result.getString("textEN");
+                text = Helpers.html2text(result.getString("textEN"));
             }
             if(text.length() > 400){
                 text = text.substring(0,400) + "...";
@@ -371,7 +371,7 @@ public class ArticleModel {
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
-                text = result.getString("textEN");
+                text = Helpers.html2text(result.getString("textEN"));
             }
             if(text.length() > 175){
                 text = text.substring(0,175) + "...";
