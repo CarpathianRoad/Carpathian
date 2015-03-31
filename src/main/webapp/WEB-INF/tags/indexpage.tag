@@ -210,20 +210,12 @@
                 <div class="s-clear"></div>
                 <div class="projectFunded">
                     The project is funded by the European Union. This website has been developed with the assistance of the European Union. The content of this website can in no way be taken to reflect the views of the European Union.
-                </div>       
-                <div class="footerRights">
-                            <!--<div class="enter-icon"><img src="${Constants.URL}img/enter-icon.png"></div>-->
-                            <div id="copyright">&#169; Carpathian tourist road 2015 All right reserved</div>
-                        <div class="enter-block">
-                                <form action="${Constants.URL}system/login.do" method="POST" id="loginForm" name="auth">
-                                        <input id="loginInput" type="text" id="login" name="username" placeholder="* Enter login" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
-                                        <input id="loginInputPass" type="password" id="passwd" name="password" placeholder="* Enter password" data-rule="email" data-msg="Please enter a valid email" />
-                                        <button id="logInButton" class="btn btn-mini logInButton" onclick="madeAjaxCall();">Log In</button>
-                                        <button id="cancelButton" class="btn btn-mini cancelButton" type="button">Cancel</button>
-                                    <div class="validation"></div>
-                                </form>
-                        </div>
-                </div>
+                </div>    
+                                        <div class="footerContactsText developpedText">
+                                            <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
+                                                &#169; Communal enterprise ”Agency of Regional Development and Cross-Border Co-operation “Transcarpathia” of Zakarpattya Oblast Council”
+                                            </a>
+                                        </div>
                                         <div class="developpedText">
                                             <a class="not-add-lan" href="http://www.aits.ua" target="_blank">
                                                 Developed by AITS
@@ -246,9 +238,9 @@
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
              $("#cssmenu").html(response).css("width","");
-             if(lang === "UA" || lang === "ua") {
+             /*if(lang === "UA" || lang === "ua") {
                  $("#cssmenu").css("width","106%");
-             }
+             }*/
              addLangToLink(lang.toLowerCase());
             },
             error: function(response){      

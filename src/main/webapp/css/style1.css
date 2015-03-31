@@ -5,6 +5,9 @@ html{
 body{
     min-height: 100%;
 }
+a, a:hover, a:active, a:visited {
+    text-decoration:none;
+}
 .s-new  .s-logoIndex img{
     width: 100%;
 }
@@ -370,8 +373,8 @@ a:hover{
 }
 .s-new  .s-logoIndex{
 	float: left;
-	margin: 15px 0px;
-	width: 236px;
+	margin: 18px 0px;
+	width: 231px;
     transition: 1s;
 }
 .s-new  .s-logoIndex img{
@@ -407,6 +410,7 @@ a:hover{
     width: 100%;
     height: 33px;
     text-align: right;
+    margin-top: 16px;
 }
 .s-new  .s-rightNavBar .s-top .s-one{
 	float: right;
@@ -428,7 +432,7 @@ a:hover{
 	float: right;
 	font: 14pt 'Open Sans';
         font-weight: 600;
-        margin-top: 3px;
+        margin-top: -4px;
 }
 .s-new  .s-newsImageDiv1{
 	float: left;
@@ -512,7 +516,7 @@ article .intendNews .post-image .post-heading{
     transition: 1s;
 }
 .topMenu{
-    height: 110px;
+    height: 115px;
 }
 .topMenuSmall{
     height: 70px;
@@ -616,8 +620,9 @@ article .intendNews .post-image .post-heading{
 }
 .dropDownMenu {
 	width: 100%;
-	float: left;
+	float: right;
 	height: 40px;
+        text-transform: uppercase;
 }
 .dropDownMenu a {
 	font: 11pt 'Open Sans';
@@ -812,6 +817,14 @@ body {
     font-weight: 200;
     float: left;
     margin-top: 15px;
+    margin-left: 15px;
+}
+.footerContactsText{
+    margin-left: 0;
+}
+footer a:visited{
+    color: white;
+    text-decoration: none;
 }
 
 .menuLine{
@@ -977,7 +990,7 @@ body {
 }
 #cssmenu > ul > li {
   float: left;
-	margin: 10px 0px 10px 25px;
+	margin: 10px 0px 10px 12px;
 }
 #cssmenu > ul > li:after {
   display: block;
@@ -1005,7 +1018,7 @@ body {
 }
 .contentIntend{
     width: 100%;
-    height: 25px;
+    height: 35px;
 }
 .contentIntendMap{
     width: 100%;
@@ -1455,22 +1468,23 @@ label{
 }
 .footerPartnership{
 	height: 100%;
-	width: 33.333333%;
+	width: 180px;
 	float: left;
 	font: 9.5pt calibri;
 	font-weight: 200;
 	color: white;
 	text-align: center;
-        padding-top: 27px;
+        padding-top: 31px;
 }
 .footerCoFin{
 	height: 100%;
-	width: 33.333333%;
+	width: 190px;
 	float: left;
 	text-align: center;
 	font: 7pt calibri;
 	font-weight: 200;
-        padding-top: 27px;
+        padding-top: 23px;
+        margin-left: 5px;
 }
 .rightTopText{
     float: right;
@@ -1489,12 +1503,13 @@ label{
     height: 23px;
 }
 .huskrouaFooter{
-    padding-top: 7px;
+    padding-top: 4px;
     height: 100%;
-    width: 33.333333%;
+    width: 210px;
     float: left;
     font: 7pt calibri;
     font-weight: 600;
+    margin-left: 20px;
 }
 .countriesStar{
     margin-left: 27px;
@@ -1514,16 +1529,16 @@ label{
 	float: left;
 	height: 69px;
 	border: 2px solid rgb(122,144,180);
-        padding-top: 32px;
+        padding-top: 28px;
         text-align: center;
         padding-left: 24px;
 }
 .fundedLink{
-    margin: 0 auto;
     text-align: left;
     color: white;
     font: 7pt calibri;
     font-weight: 200;
+    margin-left: 14px;
 }
 .fundedLink a{
     text-align: left;
@@ -1536,7 +1551,7 @@ label{
 }
 .fundedLink{
     float: left;
-    width: 310px;
+    width: 300px;
 }
 .fundedText{
     margin-top: 0px;
@@ -1578,7 +1593,7 @@ label{
     margin-right: -7px;
 }
 .markerPageUnderHeading{
-    margin-top: 5px;
+    margin-top: 8px;
 }
 .markerPageTable{
     display: table;
@@ -1693,7 +1708,7 @@ label{
 }
 .breadcrumbsMarker{
     width: 100%;
-    height: 30px;
+    height: 45px;
 }
 .breadcrumbsMarker li a{
     color: rgb(84, 182, 157) !important;
@@ -1744,7 +1759,7 @@ label{
     font-weight: 600;
     color: white;
     float: right;
-    margin-bottom: 25px;
+    margin-bottom: 45px;
 }
 #imageCount{
     float:left;
@@ -1752,7 +1767,7 @@ label{
 .galleryTitle{
 }
 #article_slider1_container{
-    margin-top: 30px;
+    margin-top: 25px;
 }
 .routesListText{
     padding-top: 0;
@@ -1777,6 +1792,43 @@ label{
     color: rgb(86,105,143);
     float: none;
     text-align: justify;
+}
+.typeDiffChooser{
+    width: 100%;
+    text-align: right;
+    color: rgb(86,105,143);
+    font: 9pt 'Open Sans';
+    font-weight: 800;
+}
+.typeDiffChooser select{
+    padding: 2px;
+    border: 2px solid rgb(86,105,143);
+}
+.routeType{
+    text-align: right;
+    float: right;
+    width: 100%;
+    padding-right: 30px;
+    color: white;
+}
+.article_main_image{
+    margin-top: -5px;
+}
+.tripMethod{
+    width: 50%;
+    text-align: right;
+    margin-top: -16px;
+    float: right;
+}
+.tripFilterText{
+    float: right;
+    margin-left: 15px;
+}
+.tripFilterText a{
+    color: rgb(86,105,143);
+    text-transform: uppercase;
+    font-size: 9pt;
+    font-weight: 600;
 }
 
 
@@ -2116,6 +2168,14 @@ label{
         padding: 4px 4px 4px 4px !important;
         color: rgb(86,105,143);
         text-decoration: none;
+    }
+    .countriesFilterRoute{
+        left: 0;
+        text-align: left;
+        width: 50%;
+    }
+    .countriesFilterRoute a{
+        margin-left: 0;
     }
     
 .selected_country
