@@ -11,7 +11,7 @@
 
                                 <!-- !!!SLIDER!!! -->
                 
-    <div style="min-height: 50px;margin-top: -25px">
+    <div style="min-height: 50px;margin-top: -30px">
         <div id="slider1_container" style="display: none; position: relative; margin: 0 auto;
             top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             <div u="loading" style="position: absolute; top: 0px; left: 0px;">

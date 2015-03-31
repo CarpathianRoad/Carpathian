@@ -17,37 +17,23 @@
     <div class="s-new widthClass">
         <div class="s-new markerPageTable">
         <div class="breadcrumbsMarker">
-                <ul class="breadcrumbsUlMarker breadcrumbsRoutesList">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    <li><a href="${Constants.URL}article/category/6">Routes</a><div class="right_arrow"> </div></li>
-                    <li><a>Trails</a></li>
-                </ul>
-                <div class="typeDiffChooser">
-                    <select>
-                        <option>Country</option>
-                        <option>Poland</option>
-                        <option>Hungary</option>
-                        <option>Romania</option>
-                        <option>Slovakia</option>
-                        <option>Ukraine</option>
-                    </select>
-                    <select>
-                        <option>Categories of tourist roads</option>
-                        <option>International tourist road (E or R)</option>
-                        <option>National tourist road</option>
-                        <option>Regional tourist road</option>
-                        <option>District tourist road</option>
-                        <option>Local (excursion) tourist road</option>
-                    </select>
-                    <select>
-                        <option>Method of trip</option>
-                        <option>Walking</option>
-                        <option>Bicycle</option>
-                        <option>Ski</option>
-                        <option>Horses</option>
-                        <option>Water</option>
-                    </select>
+                <div class="countriesFilter countriesFilterRoute">
+                    <a class="selected_country" href="#">All countries</a>
+                    <a href="#">Poland</a>
+                    <a href="#">Hungary</a>
+                    <a href="#">Romania</a>
+                    <a href="#">Slovakia</a>
+                    <a href="#">Ukraine</a>
                 </div>
+                <div class="tripMethod">
+                    <div class="tripFilterText"><a>Water</a></div>
+                    <div class="tripFilterText"><a>Horses</a></div>
+                    <div class="tripFilterText"><a>Ski</a></div>
+                    <div class="tripFilterText"><a>Bicycle</a></div>
+                    <div class="tripFilterText"><a>Walking</a></div>
+                    <div class="tripFilterText"><a>All methods</a></div>
+                </div>
+                
             </div>
         </div>
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
