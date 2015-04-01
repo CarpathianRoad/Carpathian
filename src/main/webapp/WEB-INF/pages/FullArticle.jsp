@@ -10,7 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:indexpage>
-    <script src="${Constants.URL}js/social_networks.js"></script>
+    <!--<script src="${Constants.URL}js/social_networks.js"></script>-->
     <section>
         <div class="s-new markerPageTable">
             <div class="breadcrumbsMarker">
@@ -69,24 +69,11 @@
                                     </div>
                 </c:if>
                                     <div class="markerPageBottomLine"></div>
-                                    <div class="markerPageSocial">
-                                        <a target="_blank" class="shareLinks" id="share" href="http://www.facebook.com/sharer.php?u=http://bit.ly/FBshareArticle">
-                                        <div class="fbMarker markerPageSocialHover">
-                                            <div class="markerPageSocialIcon">
-                                                <img src="${Constants.URL}img/fb_icon_marker.png"/>
-                                            </div>
-                                            <div class="markerPageSocialNumber">25</div>
-                                        </div>
-                                        </a>
-                                        <a target="_blank" class="shareLinks" href="https://twitter.com/share">
-                                        <div class="twMarker markerPageSocialHover">
-                                            <div class="markerPageSocialIcon">
-                                                <img src="${Constants.URL}img/tw_icon_marker.png">
-                                            </div>
-                                            <div class="markerPageSocialNumber">117</div>
-                                        </div>
-                                        </a>
-                                    </div>
+                                   <!-- <div class="markerPageSocial"> -->
+                                        <a width="100px" name="fb_share"></a> 
+<script src="https://www.facebook.com/connect.php/js/FB.Share" type="text/javascript"></script>
+                                        
+                                    <!--</div>-->
             </div>
             <div class="markerRightDescr">
                 <div class="otherNewsHeading">OTHER NEWS</div>

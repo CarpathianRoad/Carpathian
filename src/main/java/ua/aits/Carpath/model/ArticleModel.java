@@ -325,7 +325,7 @@ public class ArticleModel {
     
     
     public List<ArticleModel> getAllNews(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc;");
+        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT 0, 9;");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
@@ -616,4 +616,74 @@ public class ArticleModel {
             return true;
     }
     
+    
+    public List<ArticleModel> get_news_by_limit(String last_item, String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT "+last_item+", 9;");
+        System.out.println("query = "+result.toString());
+        List<ArticleModel> newsList = new LinkedList<>();
+        while (result.next()) { 
+            ArticleModel temp = new ArticleModel();
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = Helpers.html2text(result.getString("textEN"));
+            }
+            if(text.length() > 400){
+                text = text.substring(0,400) + "...";
+            }
+            
+            temp.setTextEN(text);
+            temp.setId(result.getInt("id"));
+            temp.setTitle(f_title);
+            temp.setDate(result.getString("date"));
+            temp.setImage(result.getString("image"));
+            if("".equals(temp.getImage())){
+                temp.setImage("img/no-photo.png");
+            }
+            temp.setActDate(result.getString("actual"));
+            temp.setCountry(result.getString("country")); 
+            temp.setAuthor(result.getString("author"));
+            newsList.add(temp);
+        } 
+        DB.closeCon();
+    return newsList;
+    }
+    
+    public List<ArticleModel> get_category_by_limit(String last_item, String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT "+last_item+", 9;");
+        System.out.println("query = "+result.toString());
+        List<ArticleModel> newsList = new LinkedList<>();
+        while (result.next()) { 
+            ArticleModel temp = new ArticleModel();
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = Helpers.html2text(result.getString("textEN"));
+            }
+            if(text.length() > 400){
+                text = text.substring(0,400) + "...";
+            }
+            
+            temp.setTextEN(text);
+            temp.setId(result.getInt("id"));
+            temp.setTitle(f_title);
+            temp.setDate(result.getString("date"));
+            temp.setImage(result.getString("image"));
+            if("".equals(temp.getImage())){
+                temp.setImage("img/no-photo.png");
+            }
+            temp.setActDate(result.getString("actual"));
+            temp.setCountry(result.getString("country")); 
+            temp.setAuthor(result.getString("author"));
+            newsList.add(temp);
+        } 
+        DB.closeCon();
+    return newsList;
+    }
 }
