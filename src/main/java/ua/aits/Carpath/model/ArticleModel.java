@@ -344,7 +344,7 @@ public class ArticleModel {
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
-            temp.setDate(result.getString("date"));
+            temp.setDate(result.getString("date").replace("/", "."));
             temp.setImage(result.getString("image"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
@@ -380,7 +380,7 @@ public class ArticleModel {
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
             temp.setCountry(result.getString("country")); 
-            temp.setDate(result.getString("date"));
+            temp.setDate(result.getString("date").replace("/", "."));
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){
                 arr[0] = "img/zak.png";
@@ -448,7 +448,7 @@ public class ArticleModel {
             if("".equals(temp.getTextEN()) || temp.getTextEN() == null){
                 temp.setTextEN(result.getString("textEN"));
             }
-            temp.setDate(result.getString("date"));
+            temp.setDate(result.getString("date").replace("/", "."));
             temp.setActDate(result.getString("actual"));
             temp.setImage(result.getString("image"));
             temp.setAuthor(result.getString("author"));
@@ -489,7 +489,7 @@ public class ArticleModel {
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
-            temp.setDate(result.getString("date"));
+            temp.setDate(result.getString("date").replace("/", "."));
             temp.setImage(result.getString("image"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
@@ -527,7 +527,7 @@ public class ArticleModel {
             temp.setType(result.getInt("type"));
             temp.setTitle(result.getString("titleEN"));
             temp.setPublic_country(result.getString("public_country"));
-            temp.setDate(result.getString("date"));
+            temp.setDate(result.getString("date").replace("/", "."));
             temp.setActDate(result.getString("actual"));
             temp.setAuthor(result.getString("author"));
             temp.setCountry(result.getString("country"));

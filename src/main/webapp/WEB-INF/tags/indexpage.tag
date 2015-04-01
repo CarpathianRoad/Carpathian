@@ -180,7 +180,7 @@
                             </div>
                     </div>
                     <div class="footerRightMain">
-                        <a class="fundedLink" class="not-add-lan" href="http://www.surdp.eu" target="_blank">
+                        <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
                             <img src="${Constants.URL}img/euFlag.png">
                             <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
@@ -242,6 +242,7 @@
                  $("#cssmenu").css("width","106%");
              }*/
              addLangToLink(lang.toLowerCase());
+             addCssToMenu();
             },
             error: function(response){      
              console.log(response);
@@ -274,15 +275,18 @@
         
         
         $('#searchButtonActive').hide(); 
-        countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
+        
+    });
+    function addCssToMenu(){
+     countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(countryChooser){
             case "index":
                 $('#homeMenu').addClass('menuLine');
                 break;
-            case "6":
+            case "2":
                 $('#infoMenu').addClass('menuLine');
                 break;
-            case "4":
+            case "3":
                 $('#leisureMenu').addClass('menuLine');
                 break;
             case "news":
@@ -344,8 +348,7 @@
                 $('#contactsMenu').addClass('menuLine');
                 break;
         }
-    });
-    
+ }
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');
                 $('#mapMenu').addClass('menuLine');
