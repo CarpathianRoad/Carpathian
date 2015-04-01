@@ -9,7 +9,6 @@
 <style>
     .partners-list {
         list-style-type: none;
-        width: 70%;
     }
     .partners-list li {
 padding: 5px 15px;
@@ -19,11 +18,11 @@ border-radius: 5px;
 border-left: 10px solid #68A4C4;
 font-size: 14px;
 letter-spacing: 2px;
+margin-left: -40px;
     }
 </style>
 <t:indexpage>
-    <section id="content">
-        <div class="container">
+        <div class="s-new">
             <ul class="partners-list">
                 <li><a target="_blank" href="http://www.arr.sk/">Agentúra na podporu regionálneho rozvoja Košice n. o.</a></li>
                 <li><a target="_blank" href="http://www.kiut.hu/">KIÚT Térségfejlesztési Egyesület</a></li>
@@ -39,5 +38,4 @@ letter-spacing: 2px;
                 
             </ul>
         </div>
-    </section>
 </t:indexpage>

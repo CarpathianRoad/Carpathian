@@ -15,7 +15,7 @@
         <input type="hidden" id="contstants" value="${Constants.URL}" />
         <input type="hidden" id="lan" value="${lan}" />
         <div class="">
-            <div class="countriesFilter">
+            <div class="countriesFilter countriesFilterRoute">
                 <a class="selected_country" href="#">All countries</a>
                 <a href="#">Poland</a>
                 <a href="#">Hungary</a>
