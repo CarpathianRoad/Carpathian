@@ -43,6 +43,8 @@ public class RouteModel {
     public String textType;
     public Integer dificult;
     public String images; 
+    public String public_country;
+    public String date;  
     public Integer publish;
     
     public Integer getId() {
@@ -231,6 +233,20 @@ public class RouteModel {
         this.images = images;
     }
     
+    public String getPublic_country() {
+        return public_country;
+    }
+    public void setPublic_country(String public_country) {
+        this.public_country = public_country;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
     public String getFile() {
         return file;
     }
@@ -255,6 +271,10 @@ public class RouteModel {
             temp.setTextUA(str3);
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
+            temp.setPublic_country(result.getString("public_country")); 
+            temp.setDate(result.getString("date")); 
+            temp.setCategory(result.getString("category"));
+            temp.setType(result.getInt("type"));
             routeList.add(temp);
         } 
     return routeList;

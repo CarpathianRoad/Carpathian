@@ -63,6 +63,12 @@
         #status {
             background-image:url(${Constants.URL}img/status.gif); /* path to your loading animation */
         }
+        input[type=checkbox].css-checkbox:checked + label.css-label {
+            background-image:url(${Constants.URL}img/checked.png);
+        }
+        input[type=checkbox].css-checkbox + label.css-label {
+            background-image:url(${Constants.URL}img/notChecked.png);
+        }
     </style>
     
 </head>
@@ -103,14 +109,14 @@
                             </ul>
 			</div>
 			<div class="s-two">
-                            <a class="socialHeaderDiv intendSocial"
+                            <a class="socialHeaderDiv intendSocial not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
-                            <a class="socialHeaderDiv"
+                            <a class="socialHeaderDiv not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://twitter.com/CarpathianRoad" target="_blank">
@@ -158,15 +164,15 @@
                 <div class="footerNew">
                     <div class="footerLeftMain">
                             <div class="footerPartnership">
-                                <a href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
+                                <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                             </div>
                             <div class="footerCoFin">
-                                <a href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
+                                <a class="not-add-lan" href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
                                     <div class="rightTopText">The Programme is con-financed by the European Union</div>
                                 </a>
                             </div>
                             <div class="huskrouaFooter">
-                                <a href="http://huskroua-cbc.net/" target="_blank">
+                                <a href="http://huskroua-cbc.net/" class="not-add-lan" target="_blank">
                                     <img src="${Constants.URL}img/star_logo.png">
                                     <div class="countriesStar">Hungary-Slovakia-Romani-Ukraine</div>
                                     <div class="countriesStarSmall">ENPI Cross-border Cooperation Programme</div>
@@ -174,7 +180,7 @@
                             </div>
                     </div>
                     <div class="footerRightMain">
-                        <a class="fundedLink" href="http://www.surdp.eu" target="_blank">
+                        <a class="fundedLink" class="not-add-lan" href="http://www.surdp.eu" target="_blank">
                             <img src="${Constants.URL}img/euFlag.png">
                             <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
@@ -204,22 +210,14 @@
                 <div class="s-clear"></div>
                 <div class="projectFunded">
                     The project is funded by the European Union. This website has been developed with the assistance of the European Union. The content of this website can in no way be taken to reflect the views of the European Union.
-                </div>       
-                <div class="footerRights">
-                            <!--<div class="enter-icon"><img src="${Constants.URL}img/enter-icon.png"></div>-->
-                            <div id="copyright">&#169; Carpathian tourist road 2015 All right reserved</div>
-                        <div class="enter-block">
-                                <form action="${Constants.URL}system/login.do" method="POST" id="loginForm" name="auth">
-                                        <input id="loginInput" type="text" id="login" name="username" placeholder="* Enter login" data-rule="maxlen:4" data-msg="Please enter at least 4 chars" />
-                                        <input id="loginInputPass" type="password" id="passwd" name="password" placeholder="* Enter password" data-rule="email" data-msg="Please enter a valid email" />
-                                        <button id="logInButton" class="btn btn-mini logInButton" onclick="madeAjaxCall();">Log In</button>
-                                        <button id="cancelButton" class="btn btn-mini cancelButton" type="button">Cancel</button>
-                                    <div class="validation"></div>
-                                </form>
-                        </div>
-                </div>
+                </div>    
+                                        <div class="footerContactsText developpedText">
+                                            <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
+                                                &#169; Communal enterprise ”Agency of Regional Development and Cross-Border Co-operation “Transcarpathia” of Zakarpattya Oblast Council”
+                                            </a>
+                                        </div>
                                         <div class="developpedText">
-                                            <a href="http://www.aits.ua" target="_blank">
+                                            <a class="not-add-lan" href="http://www.aits.ua" target="_blank">
                                                 Developed by AITS
                                             </a>
                                         </div>
@@ -234,15 +232,15 @@
         console.log(lang);
         $.ajax({
             type: "get",
-            url: "${Constants.URL}/build/menu",
+            url: "${Constants.URL}build/menu",
             cache: false,    
             data:'lang='+lang+'',
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
              $("#cssmenu").html(response).css("width","");
-             if(lang === "UA" || lang === "ua") {
+             /*if(lang === "UA" || lang === "ua") {
                  $("#cssmenu").css("width","106%");
-             }
+             }*/
              addLangToLink(lang.toLowerCase());
             },
             error: function(response){      
@@ -251,7 +249,7 @@
         });
     }
     function addLangToLink(lang){
-    $( "a:not(.lang-sw, .shareLinks)" ).each(function( index ) {
+    $( "a:not(.lang-sw, .shareLinks, .not-add-lan)" ).each(function( index ) {
             
             if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
             if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){

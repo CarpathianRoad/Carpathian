@@ -136,24 +136,25 @@ public class MapModel {
         mapList = new LinkedList<>();
         while (result.next()) { 
             MapModel temp = new MapModel();
-            String text  = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            String text  = result.getString("text"+lan.toUpperCase());
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
                 f_title = result.getString("titleEN");
             }
             if("".equals(text) || text == null){
-                text = Helpers.html2text(result.getString("textEN"));
+                text = result.getString("textEN");
             }
-            String str = text.replaceAll("[\\x00-\\x1F]", "").replaceAll("'\\<.*?>","").replaceAll("'", "\\\\'");
-            if(str.length() > 400){
-                str = str.substring(0,400);
+            text = Helpers.replaceChars(text);
+            f_title = Helpers.replaceChars(f_title);
+            if(text.length() > 400){
+                text = text.substring(0,400);
             }
             
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
             temp.setTitle(f_title);
-            temp.setTextEN(str);
+            temp.setTextEN(text);
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setPublic_country(result.getString("public_country"));
             temp.setCountry(result.getString("country")); 
