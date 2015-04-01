@@ -19,19 +19,19 @@
         <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <a class="selected_country" href="#">All countries</a>
-                    <a href="#">Poland</a>
+                    <a href="#">Ukraine</a>
+                    <a href="#">Slovakia</a>
                     <a href="#">Hungary</a>
                     <a href="#">Romania</a>
-                    <a href="#">Slovakia</a>
-                    <a href="#">Ukraine</a>
+                    <a href="#">Poland</a>
                 </div>
                 <div class="tripMethod">
-                    <div class="tripFilterText"><a>Water</a></div>
-                    <div class="tripFilterText"><a>Horses</a></div>
-                    <div class="tripFilterText"><a>Ski</a></div>
-                    <div class="tripFilterText"><a>Bicycle</a></div>
-                    <div class="tripFilterText"><a>Walking</a></div>
-                    <div class="tripFilterText"><a>All methods</a></div>
+                    <div class="tripFilterText"><a href="${Constants.URL}routesList">Water</a></div>
+                    <div class="tripFilterText"><a href="${Constants.URL}routesList">Horses</a></div>
+                    <div class="tripFilterText"><a href="${Constants.URL}routesList">Ski</a></div>
+                    <div class="tripFilterText"><a href="${Constants.URL}routesList">Bicycle</a></div>
+                    <div class="tripFilterText"><a href="${Constants.URL}routesList">Walking</a></div>
+                    <div class="tripFilterText selectedCountryTrip"><a href="${Constants.URL}routesList">All methods</a></div>
                 </div>
                 
             </div>
@@ -169,7 +169,7 @@
                     var styledMap = new google.maps.StyledMapType(mapStyles,
                         {name: "Styled Map"});
                     var mapOptions = {
-                      zoom: 10,
+                      zoom: 11,
                       center: getCenter(),
                       //center: latlng,
                       mapTypeId: google.maps.MapTypeId.SATELLITE,
