@@ -100,7 +100,7 @@
                             <ul>
 				<li class="paddingLang"><a id="lang-switch-ua" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
 				<li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
-				<!--<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li> -->
+				<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
 				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
 				<!--
                                 <li class="paddingLang"><a href="#">PL</a></li>
@@ -109,14 +109,14 @@
                             </ul>
 			</div>
 			<div class="s-two">
-                            <a class="socialHeaderDiv intendSocial" class="not-add-lan"
+                            <a class="socialHeaderDiv intendSocial not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
-                            <a class="socialHeaderDiv" class="not-add-lan"
+                            <a class="socialHeaderDiv not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://twitter.com/CarpathianRoad" target="_blank">

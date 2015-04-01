@@ -64,5 +64,11 @@ public class Helpers {
                 html = html + "</ul>";
         return html;
     }
-    
+    public static String replaceChars(String text) {
+        text = text.replaceAll("[\\x00-\\x1F]", "");
+            text = text.replaceAll("'\\<.*?>","");
+            text = text.replaceAll("'", "\\\\'");
+            text = text.replaceAll("\\\"", "");
+            return text;
+    }
 }
