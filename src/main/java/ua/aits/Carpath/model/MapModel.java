@@ -144,9 +144,8 @@ public class MapModel {
             if("".equals(text) || text == null){
                 text = result.getString("textEN");
             }
-            text = text.replaceAll("[\\x00-\\x1F]", "");
-            text = text.replaceAll("'\\<.*?>","");
-            text = text.replaceAll("'", "\\\\'");
+            text = Helpers.replaceChars(text);
+            f_title = Helpers.replaceChars(f_title);
             if(text.length() > 400){
                 text = text.substring(0,400);
             }
@@ -154,7 +153,7 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(Helpers.html2text(f_title));
+            temp.setTitle(f_title);
             temp.setTextEN(text);
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setPublic_country(result.getString("public_country"));
