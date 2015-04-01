@@ -8,15 +8,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:indexpage>
+    <script src="${Constants.URL}js/load_by_scroll.js"></script>
     <div class="s-new widthClass">
+        <input type="hidden" id="page_type" value="news" />
+        <input type="hidden" id="last_item" value="9" />
+        <input type="hidden" id="contstants" value="${Constants.URL}" />
+        <input type="hidden" id="lan" value="${lan}" />
         <div class="">
-            <div class="breadcrumbs">
-                <ul class="breadcrumbs_ul">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    
-                    <li><a href="#">News</a></li>
-                </ul>
-            </div>
             <div class="countriesFilter">
                 <a class="selected_country" href="#">All countries</a>
                 <a href="#">Poland</a>
@@ -25,6 +23,7 @@
                 <a href="#">Slovakia</a>
                 <a href="#">Ukraine</a>
             </div>
+            <div class="all_news">
             <c:forEach items="${newsList}" var="news">	
                     <div class="s-cell">
                         <div class="s-block newsHeight">
@@ -51,14 +50,18 @@
                         </div>
                     </div>        
             </c:forEach>
+            </div>        
         <div class="s-clear"></div>
         </div>
+         <div class="loading_block">
+            <img src="${Constants.URL}img/status.gif" />
+        </div>
     </div>
-				<div style="display:none;" id="pagination">
-					<span class="all">Page 1 of 3</span>
-					<span class="current">1</span>
-					<a href="#" class="inactive">2</a>
-					<a href="#" class="inactive">3</a>
-				</div>
+    <div style="display:none;" id="pagination">
+	<span class="all">Page 1 of 3</span>
+	<span class="current">1</span>
+	<a href="#" class="inactive">2</a>
+	<a href="#" class="inactive">3</a>
+    </div>
 </t:indexpage>
  

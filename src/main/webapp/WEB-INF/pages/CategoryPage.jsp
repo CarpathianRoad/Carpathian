@@ -18,20 +18,8 @@
     </style>
     <div class="s-new widthClass">
         <div class="">
-            <div class="breadcrumbs">
-                <ul class="breadcrumbs_ul">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    
-                    <li><a href="#">Category</a></li>
-                </ul>
-            </div>
             <div class="countriesFilter">
-                <a class="selected_country" href="#">All countries</a>
-                <a href="#">Poland</a>
-                <a href="#">Hungary</a>
-                <a href="#">Romania</a>
-                <a href="#">Slovakia</a>
-                <a href="#">Ukraine</a>
+                
             </div>
             <c:forEach items="${contentList}" var="item">	
                     <div class="s-cell">

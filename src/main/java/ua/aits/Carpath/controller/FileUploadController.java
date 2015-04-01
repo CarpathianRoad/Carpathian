@@ -43,7 +43,7 @@ public class FileUploadController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandler(@RequestParam("upload") MultipartFile file, @RequestParam("path") String path,  HttpServletRequest request) {
- 
+        System.out.println("begin yeah");
                 String name = file.getOriginalFilename();
         if (!file.isEmpty()) {
             try {
@@ -63,7 +63,7 @@ public class FileUploadController {
                 String link_path = serverFile.getAbsolutePath().replace(Constants.home,"");
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
- 
+                System.out.println("yeaaaaah");
                 return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+path + name + "'>"
                         + "<img src=\""+Constants.URL+link_path+"\" realpath='"+link_path+"'  alt='" + link_path+file.getName() + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
             } catch (Exception e) {
@@ -160,5 +160,25 @@ public class FileUploadController {
             System.out.println(temp.getAbsolutePath());
         return result.toString();
     }
+
+@RequestMapping(value = "/showImagesCK", method = RequestMethod.GET)
+    public @ResponseBody
+    String showGaleryCK(HttpServletRequest request) {
+        String ckeditor = request.getParameter("CKEditor");
+        String num = request.getParameter("CKEditorFuncNum");
+        String curll = Constants.FILE_URL;
+        final File directory = new File(curll);
+        File[] fList = directory.listFiles();
+        String htmlImg = "";
+        String htmlFolder = "";
+        String link_path = curll.replace(Constants.home,"");
+        for (File file : fList) {
+            if (file.isFile()) {
+                htmlImg = htmlImg + "<img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/>";
+            } 
+        }
+        htmlFolder = "<html><body><script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+ckeditor+", \"/Carpath/img/dog.png\",\"ahaha\");</script></body></html>";
+        return htmlFolder;
+    }    
     
 }

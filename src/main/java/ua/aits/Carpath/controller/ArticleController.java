@@ -35,6 +35,7 @@ public class ArticleController {
                 temp.setImage(img[0]);
             }
             modelAndView.addObject("newsList", articles);
+            modelAndView.addObject("lan", lan);
             return modelAndView;
 	}
     
