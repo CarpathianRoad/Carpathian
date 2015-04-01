@@ -10,13 +10,6 @@
 <t:indexpage>
     <div class="s-new widthClass">
         <div class="">
-            <div class="breadcrumbs">
-                <ul class="breadcrumbs_ul">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    
-                    <li><a href="#">Articles</a></li>
-                </ul>
-            </div>
             <div class="countriesFilter">
                 <a class="selected_country" href="#">All countries</a>
                 <a href="#">Poland</a>
