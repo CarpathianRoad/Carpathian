@@ -15,15 +15,19 @@
         <input type="hidden" id="last_item" value="9" />
         <input type="hidden" id="contstants" value="${Constants.URL}" />
         <input type="hidden" id="lan" value="${lan}" />
-        <div class="">
-            <div class="countriesFilter">
-                <a class="selected_country" href="#">All countries</a>
-                <a href="#">Poland</a>
-                <a href="#">Hungary</a>
-                <a href="#">Romania</a>
-                <a href="#">Slovakia</a>
-                <a href="#">Ukraine</a>
+        <input type="hidden" id="count" value="${count}" />
+        <div class="s-new">
+            <div class="countriesFilter countriesFilterRoute">
+                <input type="hidden" id="selected_country" value="all"/>
+                <a id="all" onclick="change_country('all');" class="selected_country" >All countries</a>
+                <a id="ukraine" onclick="change_country('ukraine');" >Ukraine</a>
+                <a id="poland" onclick="change_country('poland');" >Poland</a>
+                <a id="hungary" onclick="change_country('hungary');" >Hungary</a>
+                <a id="romania" onclick="change_country('romania');" >Romania</a>
+                <a id="slovakia" onclick="change_country('slovakia');" >Slovakia</a>
             </div>
+        </div>
+        <div class="all_news">
             <c:forEach items="${contentList}" var="artilcle">	
                     <div class="s-cell">
                         <div class="s-block newsHeight">
@@ -50,10 +54,10 @@
                         </div>
                     </div>        
             </c:forEach>
+        </div>
         <div class="s-clear"></div>
         <div class="loading_block">
             <img src="${Constants.URL}img/status.gif" />
-        </div>
         </div>
     </div>
 </t:indexpage>
