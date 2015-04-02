@@ -652,8 +652,9 @@ public class ArticleModel {
     return newsList;
     }
     
-    public List<ArticleModel> get_category_by_limit(String last_item, String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT "+last_item+", 9;");
+    public List<ArticleModel> get_category_by_limit(String last_item, String lan, String menu_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        //select * from content where menuCat = "+catID+" and publish = 1 order by date desc;
+        ResultSet result = DB.getResultSet("select * from content where  menuCat = "+menu_id+" and publish = 1 order by id desc LIMIT "+last_item+", 9;");
         System.out.println("query = "+result.toString());
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 

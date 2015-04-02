@@ -214,8 +214,10 @@ public class AjaxController {
         String page_type = request.getParameter("page_type");
         String last_item = request.getParameter("last_item");
         String lan = request.getParameter("lan");
+        String menu_id = request.getParameter("menu_id");
         System.out.println("page_type = " + page_type);
         System.out.println("last_item = " + last_item);
+        System.out.println("menu_id = " + menu_id);
         System.out.println("lan = " + lan);
         List<ArticleModel> tempC = null;
         if(page_type.equals("news"))
@@ -224,7 +226,7 @@ public class AjaxController {
             }
         else if(page_type.equals("category"))
             {
-                tempC = content.get_category_by_limit(last_item, lan);
+                tempC = content.get_category_by_limit(last_item, lan, menu_id);
             }
         
         String returnHTML = "";
