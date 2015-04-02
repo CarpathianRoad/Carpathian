@@ -213,6 +213,7 @@ public class AjaxController {
         request.setCharacterEncoding("UTF-8");
         String page_type = request.getParameter("page_type");
         String last_item = request.getParameter("last_item");
+        String selected_country = request.getParameter("selected_country");
         String lan = request.getParameter("lan");
         String menu_id = request.getParameter("menu_id");
         System.out.println("page_type = " + page_type);
@@ -222,11 +223,65 @@ public class AjaxController {
         List<ArticleModel> tempC = null;
         if(page_type.equals("news"))
             {
-                 tempC = content.get_news_by_limit(last_item, lan);
+                 tempC = content.get_news_by_limit(last_item, lan, selected_country);
             }
         else if(page_type.equals("category"))
             {
-                tempC = content.get_category_by_limit(last_item, lan, menu_id);
+                tempC = content.get_category_by_limit(last_item, lan, menu_id, selected_country);
+            }
+        String returnHTML = "";
+        for (ArticleModel temp : tempC) 
+            {
+                String[] tempImg = temp.image.split(",");
+                returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
+"                        <div class=\"s-block newsHeight\">\n" +
+"                            <div class=\"newsImage\">\n" +
+"                                <a href=\""+Constants.URL+"article/full/"+temp.id+"\">\n" +
+"                                    <div class=\"imageHover\">\n" +
+"                                        <div class=\"imageHoverDate\">\n" +
+"                                            "+temp.date+"\n" +
+"                                        </div>\n" +
+"                                        <div class=\"imageHoverCountry\">\n" +
+"                                            <div class=\"newsCountryText\">"+temp.country+"</div><img src=\""+Constants.URL+"img/newsImageHover.png\">\n" +
+"                                        </div>\n" +
+"                                    </div>\n" +
+"                                    <img src=\""+Constants.URL+tempImg[0]+"\" />\n" +
+"                                </a>\n" +
+"                            </div>\n" +
+"\n" +
+"                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
+"                            <div class=\"news_text_box\">\n" +
+"                                <div class=\"news_title\"><a href=\""+Constants.URL+"article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
+"                                <a href=\""+Constants.URL+"article/full/"+temp.id+"\">\n" +
+"                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
+"                            </div>\n" +
+"                        </div>\n" +
+"                    </div> ";
+            }
+        HttpHeaders responseHeaders = new HttpHeaders(); 
+        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+        return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
+        //return returnHTML;
+    }
+    
+    @RequestMapping(value = {"/filter_by_country"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<String> filter_content(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String lan = request.getParameter("lan");
+        String country = request.getParameter("country");
+        String page_type = request.getParameter("page_type");
+        String menu_id = request.getParameter("menu_id");
+        System.out.println("lan = " + lan);
+        System.out.println("country = " + country);
+        List<ArticleModel> tempC = null;
+        if(page_type.equals("news"))
+            {
+                 tempC = content.get_news_by_country_filter(country, lan);
+            }
+        else if(page_type.equals("category"))
+            {
+                tempC = content.get_category_by_country_filter(country, lan, menu_id);
             }
         
         String returnHTML = "";
