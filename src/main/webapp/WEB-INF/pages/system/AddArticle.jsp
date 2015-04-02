@@ -31,16 +31,16 @@
                                               </div>
                                         </div>
 						<div class="col-lg-6 margintop10 field">
-                                                <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt">
-                                                <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt">
-                                                <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt">
-                                                <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt">
-                                                <input type="text" name="titlePL" class="form-control input-title-lang" lang="titlePL" id="tlt">
-                                                <input type="text" name="titleRO" class="form-control input-title-lang" lang="titleRO" id="tlt">
-                                                <input type="text" name="titleGE" class="form-control input-title-lang" lang="titleGE" id="tlt">
-                                                <input type="text" name="titleCZ" class="form-control input-title-lang" lang="titleCZ" id="tlt">
-                                                <input type="text" name="titleSRB" class="form-control input-title-lang" lang="titleSRB" id="tlt">
-                                                <div class="validation"></div>
+                                                <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt"  maxlength="55">
+                                                <input type="text" name="titlePL" class="form-control input-title-lang" lang="titlePL" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleRO" class="form-control input-title-lang" lang="titleRO" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleGE" class="form-control input-title-lang" lang="titleGE" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleCZ" class="form-control input-title-lang" lang="titleCZ" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleSRB" class="form-control input-title-lang" lang="titleSRB" id="tlt"  maxlength="55">
+                                                <div class="validation" id="textValidation"></div>
                                               </div>
                                         </div>
                 <hr>
@@ -361,6 +361,7 @@
                 
                 
     $(document).ready(function () { 
+        $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
         var currentLangT = $(".lang-switch-title button.active").attr("id");
@@ -371,7 +372,7 @@
         var currentDate = myDate.getDate();
         if (currentMonth < 10) { currentMonth = '0' + currentMonth; }
         if (currentDate < 10) { currentDate = '0' + currentDate; }
-var prettyDate = currentMonth + '/' + currentDate + '/' +
+var prettyDate = currentMonth + '.' + currentDate + '.' +
         myDate.getFullYear();
         $("#datepicker").val(prettyDate);
        $( "#datepicker" ).datepicker();
@@ -581,13 +582,23 @@ $("#sudmitData").click(function(){
     });
     $("#filter-type-all").attr("value", check_str_filters.slice(0,-1));
     
-    if($("#tlt").val() === "") {
-        $("#tlt").next("div.validation").html('<span style="color:red">Enter the title of the article</span>');
+    if($(".input-title-lang[lang='titleEN']").val() === "") {
+        $("#textValidation").html('<span style="color:red">Enter the title of the article</span>');
         isValidate = false;
     }
     else {
-        $("#tlt").next("div.validation").html("");
+        $("#textValidation").html("");
     }
+    $(".input-title-lang").each(function(){
+        if($(this).val() !== ""){
+            if($(this).val().length > 55) {
+                $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
+                isValidate = false;
+            }else {
+        $("#textValidation").html("");
+    }
+        }
+    });
     
     if($("#sel1").val() === null) {
         $("#sel1").next("div.validation").html('<span style="color:red">Choose the item</span>');

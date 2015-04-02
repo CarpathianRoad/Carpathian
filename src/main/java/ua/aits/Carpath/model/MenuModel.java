@@ -23,6 +23,7 @@ public class MenuModel {
     public String caret;
     public String url;
     public Integer level;
+    public String htmlID;
     
     
     public Integer getId() {
@@ -74,6 +75,13 @@ public class MenuModel {
         this.level = level;
     }
     
+    public String getHtmlID() {
+        return htmlID;
+    }
+    public void setHtmlID(String htmlID) {
+        this.htmlID = htmlID;
+    }
+    
     public List<MenuModel> getMenuRow(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ;");
         List<MenuModel> menuList = new LinkedList<>();
@@ -88,6 +96,7 @@ public class MenuModel {
             temp.setCaret(result.getString("caret"));
             temp.setUrl(result.getString("url"));
             temp.setLevel(result.getInt("level"));
+            temp.setHtmlID(result.getString("htmlId"));
             menuList.add(temp);
         } 
         DB.closeCon();

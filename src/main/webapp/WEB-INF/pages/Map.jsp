@@ -456,7 +456,7 @@
         <area href="${Constants.URL}map/Poland" shape="poly"  onmouseover="showMapHover('#poland')"
               coords="580,0,321,0,310,12,332,14,353,21,364,39,371,53,388,38,405,41,413,60,453,54,481,50,508,56,526,70,551,86,543,70,538,56,542,40"/>
     </map>
-<div style="width:100%;height:768px; margin-top: -50px; margin-bottom:-45px;">
+<div style="width:100%;height:768px; margin-top: -30px; margin-bottom:-45px;">
     <div id="sliderDiv" class="sliderDiv">
         <label id="sliderLabel" onclick="changeStyle()">
             <input type="checkbox" />
@@ -473,9 +473,13 @@
                         <a href="${Constants.URL}map/allMap"><div class='mapButton' id='allMap'
                                                                   onmouseover="showMapHover('#all')">ALL COUNTRIES</div></a>
                     </li>
-                    <li id="polandMenu" class="mapMenuLeftMArgin">
-                        <a href="${Constants.URL}map/Poland"><div class='mapButton' id='polandMap'
-                                                                  onmouseover="showMapHover('#poland')">POLAND</div></a>
+                    <li id="ukraineMenu" class="mapMenuLeftMArgin">
+                        <a href="${Constants.URL}map/Ukraine"><div class='mapButton' id='ukraineMap'
+                                                                   onmouseover="showMapHover('#ukraine')">UKRAINE</div></a>
+                    </li>
+                    <li id="slovakiaMenu" class="mapMenuLeftMArgin">
+                        <a href="${Constants.URL}map/Slovakia"><div class='mapButton' id='slovakiaMap'
+                                                                    onmouseover="showMapHover('#slovakia')">SLOVAKIA</div></a>
                     </li>
                     <li id="hungaryMenu" class="mapMenuLeftMArgin">
                         <a href="${Constants.URL}map/Hungary"><div class='mapButton' id='hungaryMap'
@@ -485,13 +489,9 @@
                         <a href="${Constants.URL}map/Romania"><div class='mapButton' id='romaniaMap'
                                                                    onmouseover="showMapHover('#romania')">ROMANIA</div></a>
                     </li>
-                    <li id="slovakiaMenu" class="mapMenuLeftMArgin">
-                        <a href="${Constants.URL}map/Slovakia"><div class='mapButton' id='slovakiaMap'
-                                                                    onmouseover="showMapHover('#slovakia')">SLOVAKIA</div></a>
-                    </li>
-                    <li id="ukraineMenu" class="mapMenuLeftMArgin">
-                        <a href="${Constants.URL}map/Ukraine"><div class='mapButton' id='ukraineMap'
-                                                                   onmouseover="showMapHover('#ukraine')">UKRAINE</div></a>
+                    <li id="polandMenu" class="mapMenuLeftMArgin">
+                        <a href="${Constants.URL}map/Poland"><div class='mapButton' id='polandMap'
+                                                                  onmouseover="showMapHover('#poland')">POLAND</div></a>
                     </li>
                 </ul>
             </div>
@@ -749,7 +749,19 @@
                 <li class="filterMap"><input type="checkbox" id="rescue" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="rescue" class="css-label">Rescue team</label></li>
                 <li class="filterMap"><input type="checkbox" id="car" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="car" class="css-label">Car rental</label></li>
                 <li class="filterMap"><input type="checkbox" id="transportConn" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="transportConn" class="css-label">Transport connection</label></li>
-                <li class="filterMap"><input type="checkbox" id="info" class="css-checkbox" onclick="Markers(['info'])" checked="checked" /><label for="info" class="css-label">Tourist information centers</label><br>
+                <li class="filterMap"><input type="checkbox" id="info" class="css-checkbox" onclick="Markers(['info'])" checked="checked" /><label for="info" class="css-label">Tourist information centers</label><br></li>
+                <div class="filtersGreenIntend"></div>
+                <li class="filterMap"><input type="checkbox" id="main8" class="css-checkbox" checked="checked" />
+                    <label onclick="Markers(['main8','welcomeCenters','tourStops'])" for="main8" class="css-label">Tourism infrastructure units</label><a><div class="filterClickIntend" onclick="rotateCaret('8')"><div id="filtersCaret8" class="bottom-caret"></div></div></a>
+                    <ul id="infrasturctureFilter">  
+                        <li class="subFilterMap">
+                            <input type="checkbox" id="welcomeCenters" class="css-checkbox" onclick="Markers('welcomeCenters')" checked="checked" /><label for="welcomeCenters" class="css-label">Tourist welcome centers</label>
+                        </li>
+                        <li class="subFilterMap">
+                            <input type="checkbox" id="tourStops" class="css-checkbox" onclick="Markers('tourStops')" checked="checked" /><label for="tourStops" class="css-label">Tourist stops</label>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             </div>
     </div>

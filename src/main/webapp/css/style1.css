@@ -102,7 +102,7 @@ body {
     text-decoration: none;
     border: none;
     position: absolute;
-    top: 11px;
+    top: 27px;
     height: 30px;
     margin-left: 374px;
     outline: none;
@@ -276,10 +276,10 @@ a:hover{
     z-index: 9999999;
 }
 .imageHoverCountry img{
-    width: 8px;
-    height: 11px;
+    width: 9px;
+    height: 13px;
     float: right;
-    margin-top: 5px;
+    margin-top: 4px;
     margin-right: 5px;
 }
 .newsCountryText{
@@ -699,11 +699,11 @@ li a:visited{
 	z-index: 999;
   border-left:  3px solid rgb(84,182,157);
 }
-.dropDownMenu li ul li:hover ul {
+/*.dropDownMenu li ul li:hover ul {
     border-left-style: solid;
 	display: block !important;
 	margin: 30px 0 0 0px;
-}
+}*/
 
 .dropDownMenu li ul li ul li {
 	float: left;
@@ -983,6 +983,7 @@ footer a:visited{
 }
 #cssmenu ul li ul li:hover > ul {
   left: 100%;
+  display: none;
 }
 #cssmenu ul li ul li:hover > ul > li {
   max-height: 72px;
@@ -1232,12 +1233,12 @@ p{
 }
 .pushRightConrainerFilters{
     width: 365px !important;
-    height: 403px !important;
+    height: 468px !important;
     transition: 0.5s;
     background-color: rgb(84,182,157) !important;
 }
 #filtersContainer{
-    height: 403px;
+    height: 468px;
     width: 320px;
     background: rgb(86,105,143);
     padding: 20px;
@@ -1409,7 +1410,7 @@ input[type=checkbox].css-checkbox + label.css-label {
     vertical-align:middle;
     cursor:pointer;
     margin: 5px 0;
-    width: 200px;
+    width: 225px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -1470,8 +1471,8 @@ label{
 	height: 100%;
 	width: 180px;
 	float: left;
-	font: 9.5pt calibri;
-	font-weight: 200;
+	font: 10pt 'PT sans';
+	font-weight: 400;
 	color: white;
 	text-align: center;
         padding-top: 31px;
@@ -1491,7 +1492,6 @@ label{
     text-align: left;
     width: 140px;
     margin-top: 5px;
-    margin-left: -10px;
 }
 .rightTopText a{
     margin-top: 8.5px;
@@ -1817,7 +1817,7 @@ label{
 .tripMethod{
     width: 50%;
     text-align: right;
-    margin-top: -16px;
+    margin-top: -17px;
     float: right;
 }
 .tripFilterText{
@@ -1827,8 +1827,25 @@ label{
 .tripFilterText a{
     color: rgb(86,105,143);
     text-transform: uppercase;
-    font-size: 9pt;
+    font: 9pt 'Open Sans';
     font-weight: 600;
+    transition: 0.5s;
+}
+.tripFilterText:hover a{
+    color: rgb(174, 214, 43);
+}
+a .disable-menu-link{
+    pointer-events: none;
+    cursor: default;
+}
+.filtersGreenIntend{
+    width: 100%;
+    background: rgb(84,182,157);
+    height: 4px;
+    margin-top: 5px;
+}
+.partners-list a{
+    color: rgb(86,105,143) !important;
 }
 
 
@@ -2183,6 +2200,15 @@ label{
         border: 0.2em solid rgb(84, 182, 157);
         color: rgb(84, 182, 157) !important;
     }
+    .selectedCountryTrip{
+        border: 0.2em solid rgb(84, 182, 157);
+        color: rgb(84, 182, 157) !important;
+        margin-top: -6px;
+        padding: 4px;
+    }
+    .selectedCountryTrip a{
+        color: rgb(84, 182, 157) !important;
+    }
 .news_title
     {
         text-overflow: ellipsis;
@@ -2298,10 +2324,5 @@ label{
 .article_side_news  
     {
         overflow: hidden;
-    }
-.loading_block
-    {
-        position: relative;
-        left: 50%;
     }
 /*=========END_ERIK========*/

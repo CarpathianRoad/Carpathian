@@ -53,11 +53,19 @@ public class Helpers {
         }
         String html = "<ul class=\""+clas2+"\">\n<div class=\""+clas+"\"></div>" ;
                 for(MenuModel temp : tempMenu) {
+                    String idhtml = "";
+                    String disableClass = "";
                     String tempUrl = "article/category/"+temp.id;
                     if(!"".equals(temp.url) && temp.url != null){
                         tempUrl = temp.url;
                     }
-                    html = html + "<li><a href=\""+Constants.URL+tempUrl+"\">"+temp.titleEN+"<div class=\""+temp.caret+"\"></div><div id=\"leisureMenu\"></div></a>";
+                    if("disable".equals(temp.url)) {
+                        disableClass = "disable-menu-link";
+                    }
+                    if("0".equals(id)){
+                        idhtml = "<div id=\""+temp.htmlID+"\"></div>";
+                    }
+                    html = html + "<li><a href=\""+Constants.URL+tempUrl+"\" class=\"" + disableClass + "\"><div class=\""+temp.caret+ " " + disableClass + "\"></div>"+temp.titleEN+idhtml+"</a>";
                     html = html + this.getRowHtml(lang, temp.id.toString());
                     html = html + "</li>";
                 }

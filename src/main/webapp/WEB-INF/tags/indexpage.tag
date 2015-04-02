@@ -27,6 +27,7 @@
     <script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
     <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <style>
         .lang-sw.active {
             color: rgb(174, 214, 43);
@@ -180,7 +181,7 @@
                             </div>
                     </div>
                     <div class="footerRightMain">
-                        <a class="fundedLink" class="not-add-lan" href="http://www.surdp.eu" target="_blank">
+                        <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
                             <img src="${Constants.URL}img/euFlag.png">
                             <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
@@ -242,6 +243,7 @@
                  $("#cssmenu").css("width","106%");
              }*/
              addLangToLink(lang.toLowerCase());
+             addCssToMenu();
             },
             error: function(response){      
              console.log(response);
@@ -274,15 +276,18 @@
         
         
         $('#searchButtonActive').hide(); 
-        countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
+        
+    });
+    function addCssToMenu(){
+     countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(countryChooser){
             case "index":
                 $('#homeMenu').addClass('menuLine');
                 break;
-            case "6":
+            case "2":
                 $('#infoMenu').addClass('menuLine');
                 break;
-            case "4":
+            case "3":
                 $('#leisureMenu').addClass('menuLine');
                 break;
             case "news":
@@ -344,8 +349,7 @@
                 $('#contactsMenu').addClass('menuLine');
                 break;
         }
-    });
-    
+ }
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');
                 $('#mapMenu').addClass('menuLine');
