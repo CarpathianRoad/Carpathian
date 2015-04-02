@@ -34,8 +34,10 @@ public class ArticleController {
                 String[] img  = temp.image.split(",");
                 temp.setImage(img[0]);
             }
+            Integer count = news.get_news_items_count(lan);
             modelAndView.addObject("newsList", articles);
             modelAndView.addObject("lan", lan);
+            modelAndView.addObject("count", count);
             return modelAndView;
 	}
     
@@ -66,9 +68,12 @@ public class ArticleController {
                 page = "CategoryPage";
                 content = menu.getSubCategories(lan, id);
             }
+            Integer count = news.get_category_items_count(lan, id);
             ModelAndView modelAndView = new ModelAndView(page);
             modelAndView.addObject("contentList", content);
             modelAndView.addObject("menu_id", id);
+            modelAndView.addObject("lan", lan);
+            modelAndView.addObject("count", count);
             return modelAndView;
 	}
         
