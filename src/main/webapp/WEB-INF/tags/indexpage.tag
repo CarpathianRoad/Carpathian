@@ -230,6 +230,7 @@
 </html>
 
 <script>
+    addCssToMenu();
     function buildMenu(lang){
         console.log(lang);
         $.ajax({
@@ -244,7 +245,6 @@
                  $("#cssmenu").css("width","106%");
              }*/
              addLangToLink(lang.toLowerCase());
-             addCssToMenu();
             },
             error: function(response){      
              console.log(response);
