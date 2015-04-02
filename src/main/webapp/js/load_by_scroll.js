@@ -12,12 +12,14 @@ jQuery(window).scroll(function() {
     var last_item = jQuery("#last_item").val();
     var next_item = parseInt(last_item) + 9;
     var lan = jQuery("#lan").val();
+    var menu_id = jQuery("#menu_id").val();
     //console.log("piece = " + piece);
     //console.log("window scroll top = "+jQuery(window).scrollTop());
     //console.log("window height = "+jQuery(window).height());
     //console.log("document height = "+jQuery(document).height());
     //console.log("document height - piece = " + (jQuery(document).height() - piece));
-    if(parseInt(jQuery(window).scrollTop()) >= parseInt(jQuery(document).height() - piece)) 
+    if ($(document).height() - $(window).height() <= $(window).scrollTop() + 250) 
+    //if(parseInt(jQuery(window).scrollTop()) >= parseInt(jQuery(document).height() - piece)) 
         {
             //alert("yeah!!");
             console.log("yeah!");
@@ -30,7 +32,7 @@ jQuery(window).scroll(function() {
             data.append('lan', lan);
             jQuery.ajax({
                 url: contstants+'load_more_content',
-                data: "page_type="+page_type+"&last_item="+last_item+"&lan="+lan,
+                data: "page_type="+page_type+"&last_item="+last_item+"&lan="+lan+"&menu_id="+menu_id,
                 cache: false,
                 mimeType: "text/html; charset=UTF-8",
                 type: 'GET',
