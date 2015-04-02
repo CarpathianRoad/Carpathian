@@ -13,21 +13,6 @@
     <!--<script src="${Constants.URL}js/social_networks.js"></script>-->
     <section>
         <div class="s-new markerPageTable">
-            <div class="breadcrumbsMarker">
-                <ul class="breadcrumbsUlMarker">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    <li><a href="${Constants.URL}article/news">News</a><div class="right_arrow"> </div></li>
-                    <li><a>${article.title}</a></li>
-                </ul>
-                <div class="countriesFilterMarker">
-                    <a class="selected_country" href="#">All countries</a>
-                    <a href="#">Poland</a>
-                    <a href="#">Hungary</a>
-                    <a href="#">Romania</a>
-                    <a href="#">Slovakia</a>
-                    <a href="#">Ukraine</a>
-                </div>
-            </div>
             <div class="markerLeftDescr">
                 <div class="markerPageTitle">${article.title}</div>
                 <div class="markerPageUnderHeading">
