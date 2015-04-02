@@ -45,6 +45,7 @@
 	var count = 1;
         var mapProp;
         var zoomMap;
+        var waypts = [];
         var routeMarkers = [];
         var mapStyles = [{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},
             {"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},
@@ -372,17 +373,16 @@
         }
         
         function hideRoute(){
-        console.log('1');
             if(filtersContainerCounter){hideFilters()}
             if(rightMapContainerCounter){hideMap()}
             if(mapRouteContainerCounter){
                 mapRouteContainerCounter = false;
-                $('#pushRightConrainer').removeClass('pushRightConrainerRoute');
+                $('#mapRouteButton').removeClass('pushRightConrainerRoute');
                 $('.routeMapContainer').fadeOut(100);
             }
             else{
                 mapRouteContainerCounter = true;
-                $('#pushRightConrainer').addClass('pushRightConrainerRoute');
+                $('#mapRouteButton').addClass('pushRightConrainerRoute');
                 $('.routeMapContainer').fadeIn(100);
             }
         }
@@ -498,7 +498,28 @@
             $('.routeMapContainer').html(markersList);
         }
         function buildRouteMap(){
-            
+            if(routeMarkers.length>2){
+                for(var n = 1; n < routeMarkers.length-1; n++){
+                    waypts.push({location:routeMarkers[n].coords, stopover: true});
+                    console.log(waypts[n-1]);
+                }
+            }
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var directionsService = new google.maps.DirectionsService();
+            directionsDisplay.setMap(map);
+            var request = {
+                origin: routeMarkers[0].coords,
+                destination: routeMarkers[routeMarkers.length-1].coords,
+                waypoints: waypts,
+                optimizeWaypoints: true,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+              }
+            });
         }
 </script>
     <map name="mainMap">
@@ -520,7 +541,9 @@
             <span id="slider"></span>
         </label>
     </div>
-    <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute"></div>
+    <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
+        <div class="routeMapContainer"></div>
+    </div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
              onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(100);}"
@@ -568,7 +591,6 @@
                 <img id="ukraineBorder" src="${Constants.URL}img/map_ukraine.png">
                 <img src="${Constants.URL}img/mapHoverImage.png" usemap="#mainMap">
             </div>
-            <div class="routeMapContainer"></div>
             <div id='filtersContainer'>
                 <div class="filtersName">
                     <input type="checkbox" id="markAll" name="markAll"
