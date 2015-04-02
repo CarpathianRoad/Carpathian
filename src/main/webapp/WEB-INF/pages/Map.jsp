@@ -66,7 +66,7 @@
                 zoom: zoomMap,
                 mapTypeControl: false,
                 panControl: false,
-                zoomControl: true,
+                zoomControl: false,
                 zoomControlOptions: {
                     style: google.maps.ZoomControlStyle.SMALL
                 },
@@ -379,11 +379,13 @@
                 mapRouteContainerCounter = false;
                 $('#mapRouteButton').removeClass('pushRightConrainerRoute');
                 $('.routeMapContainer').fadeOut(100);
+                $('#mapRouteImage').attr("src","${Constants.URL}img/route_icon.png");
             }
             else{
                 mapRouteContainerCounter = true;
                 $('#mapRouteButton').addClass('pushRightConrainerRoute');
                 $('.routeMapContainer').fadeIn(100);
+                $('#mapRouteImage').attr("src","${Constants.URL}img/icon_route_active.png");
             }
         }
         
@@ -496,6 +498,7 @@
             markersList = markersList + '<div class="addToRouteButton" onclick="buildRouteMap()">'+
                     '<a class="btn btn-theme detailsButton">BUILD ROUTE</a></div>';
             $('.routeMapContainer').html(markersList);
+            $('#routePointsNumber').html(routeMarkers.length);
         }
         function buildRouteMap(){
             if(routeMarkers.length>2){
@@ -542,7 +545,11 @@
         </label>
     </div>
     <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
-        <div class="routeMapContainer"></div>
+        <div id="routePointsNumber">0</div>
+        <img id="mapRouteImage" src="${Constants.URL}img/route_icon.png"
+             onmouseover="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/icon_route_hover.png';$(this).fadeIn(100);}"
+             onmouseout="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/route_icon.png';$(this).fadeIn(100);}">
+        <div class="routeMapContainer">No points in your route</div>
     </div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
