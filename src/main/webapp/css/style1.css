@@ -2325,4 +2325,9 @@ a .disable-menu-link{
     {
         overflow: hidden;
     }
+.loading_block  
+    {
+        position: relative;
+        left: 50%;
+    }
 /*=========END_ERIK========*/

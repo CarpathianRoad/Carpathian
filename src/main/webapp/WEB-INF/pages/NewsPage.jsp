@@ -14,7 +14,7 @@
         <input type="hidden" id="last_item" value="9" />
         <input type="hidden" id="contstants" value="${Constants.URL}" />
         <input type="hidden" id="lan" value="${lan}" />
-        <div class="">
+        <div class="s-new">
             <div class="countriesFilter countriesFilterRoute">
                 <a class="selected_country" href="#">All countries</a>
                 <a href="#">Poland</a>
@@ -23,6 +23,7 @@
                 <a href="#">Slovakia</a>
                 <a href="#">Ukraine</a>
             </div>
+         </div>
             <div class="all_news">
             <c:forEach items="${newsList}" var="news">	
                     <div class="s-cell">
@@ -52,7 +53,6 @@
             </c:forEach>
             </div>        
         <div class="s-clear"></div>
-        </div>
          <div class="loading_block">
             <img src="${Constants.URL}img/status.gif" />
         </div>

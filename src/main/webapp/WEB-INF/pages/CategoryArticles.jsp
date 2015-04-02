@@ -8,7 +8,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:indexpage>
+    <script src="${Constants.URL}js/load_by_scroll.js"></script>
     <div class="s-new widthClass">
+        <input type="hidden" id="page_type" value="category" />
+        <input type="hidden" id="menu_id" value="${menu_id}" />
+        <input type="hidden" id="last_item" value="9" />
+        <input type="hidden" id="contstants" value="${Constants.URL}" />
+        <input type="hidden" id="lan" value="${lan}" />
         <div class="">
             <div class="countriesFilter">
                 <a class="selected_country" href="#">All countries</a>
@@ -45,6 +51,9 @@
                     </div>        
             </c:forEach>
         <div class="s-clear"></div>
+        <div class="loading_block">
+            <img src="${Constants.URL}img/status.gif" />
+        </div>
         </div>
     </div>
 </t:indexpage>

@@ -68,6 +68,7 @@ public class ArticleController {
             }
             ModelAndView modelAndView = new ModelAndView(page);
             modelAndView.addObject("contentList", content);
+            modelAndView.addObject("menu_id", id);
             return modelAndView;
 	}
         
