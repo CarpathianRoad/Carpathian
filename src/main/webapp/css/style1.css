@@ -468,6 +468,7 @@ article .intendNews .post-image .post-heading{
     color:rgb(86,105,143);
     padding-left: 10px;
     transition: color 0.5s;
+    cursor: pointer
 }
 #newsMainPhoto{
     overflow: hidden;
@@ -645,10 +646,9 @@ li a:visited{
     border-radius: 0px;
     font: 11pt 'Open Sans';
     font-weight: 600;
-    width: 100px;
+    width: 145px;
 }
 .detailsButtonContainer{
-    width: 310px;
     margin: 0 auto;
     text-align: right;
     margin-top: 25px;
@@ -1164,6 +1164,14 @@ p{
 }
 .mapControls{
     right: 50px !important;
+    top: 145px !important;
+    width: 45px;
+    height: 45px;
+    background: rgb(86,105,143);
+    transition: 0.5s;
+}
+.mapRoute{
+    right: 50px !important;
     top: 95px !important;
     width: 45px;
     height: 45px;
@@ -1209,7 +1217,7 @@ p{
 }
 .pushRightConrainer{
     right: 50px !important;
-    top: 145px !important;
+    top: 195px !important;
     width: 45px;
     height: 45px;
     background: rgb(86,105,143);
@@ -1237,6 +1245,11 @@ p{
     transition: 0.5s;
     background-color: rgb(84,182,157) !important;
 }
+.pushRightConrainerRoute{
+    width: 365px !important;
+    height: 410px !important;
+    transition: 0.5s;
+}
 #filtersContainer{
     height: 468px;
     width: 320px;
@@ -1244,6 +1257,19 @@ p{
     padding: 20px;
     overflow-y: auto;
     position: absolute;
+}
+.routeMapContainer{
+    height: 415px;
+    width: 320px;
+    background: rgb(86,105,143);
+    padding: 20px;
+    overflow-y: auto;
+    position: absolute;
+    color: white;
+    font: 12pt "Open Sans";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 #filtersContainer ul li{
     display: block;
@@ -2324,5 +2350,10 @@ a .disable-menu-link{
 .article_side_news  
     {
         overflow: hidden;
+    }
+.loading_block  
+    {
+        position: relative;
+        left: 50%;
     }
 /*=========END_ERIK========*/

@@ -23,6 +23,16 @@
                     left: 50px !important;
                     top: 45px !important;
                 }
+                .addToRouteButton{
+                    width: 350px;
+                    margin: 0 auto;
+                    text-align: left;
+                    margin-top: 25px;
+                    position: absolute;
+                    bottom: 25px;
+                    left: 20px;
+                    cursor: pointer;
+                }
 	</style>
     <script>
         var center;
@@ -35,6 +45,7 @@
 	var count = 1;
         var mapProp;
         var zoomMap;
+        var routeMarkers = [];
         var mapStyles = [{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},
             {"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},
             {"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},
@@ -92,13 +103,6 @@
                 };
                 var x = "${marker.x}".substring(0, 7);
                 var y = "${marker.y}".substring(0, 7);
-                var info = '<div id="descriptionHideButton"><img src="${Constants.URL}img/hideDescrButton.png" onclick="hideDescr()"></div>' +
-                    images +
-                    '<div class="descrImageUnderline"></div>' +
-                    '<div class="markerName">${marker.title}</div>' +
-                    '<div class="infoBlock"><div class="markerDescr">'+'${marker.textEN}'.substr(0,300)+'...</div>'+
-                    '<div class="detailsButtonContainer"><a class="btn btn-theme detailsButton" href="${Constants.URL}${lan}/map/markers/${marker.id}">DETAILS</a></div></div>';
-			
 		var myLatlng = new google.maps.LatLng(${marker.x}, ${marker.y});
 		var marker = new google.maps.Marker({
                     position: myLatlng,
@@ -108,6 +112,13 @@
                     country: "${marker.public_country}",
                     title: "${marker.title}"
 		});
+                var info = '<div id="descriptionHideButton"><img src="${Constants.URL}img/hideDescrButton.png" onclick="hideDescr()"></div>' +
+                    images +
+                    '<div class="descrImageUnderline"></div>' +
+                    '<div class="markerName">${marker.title}</div>' +
+                    '<div class="infoBlock"><div class="markerDescr">'+'${marker.textEN}'.substr(0,300)+'...</div>'+
+                    '<div onclick="addMarkerToRoute(\'${marker.title}\',\'${marker.x}\',\'${marker.y}\')" class="addToRouteButton"><a class="btn btn-theme detailsButton">ADD TO ROUTE</a></div>'+
+                    '<div class="detailsButtonContainer"><a class="btn btn-theme detailsButton" href="${Constants.URL}${lan}/map/markers/${marker.id}">DETAILS</a></div></div>';	
 		markers.push(marker);
                 filterNames.push(markerIcons[0]);
                 bindDescription(marker,map, info);
@@ -150,6 +161,8 @@
                 document.getElementById('sliderDiv'));
             map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
                 document.getElementById('mapControls'));
+            map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
+                document.getElementById('mapRouteButton'));
             map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
                 document.getElementById('pushRightConrainer'));
             
@@ -329,9 +342,11 @@
         });
         var rightMapContainerCounter = false;
         var filtersContainerCounter = false;
+        var mapRouteContainerCounter = false;
         
         function hideMap(){
             if(filtersContainerCounter){hideFilters()}
+            if(mapRouteContainerCounter){hideRoute()}
             if(rightMapContainerCounter){
                 rightMapContainerCounter = false;
                 $('#pushRightConrainer').removeClass('pushRightConrainerBig');
@@ -355,6 +370,23 @@
                 $('#pushRightConrainer').removeClass('pushRightConrainerScroll');
             }
         }
+        
+        function hideRoute(){
+        console.log('1');
+            if(filtersContainerCounter){hideFilters()}
+            if(rightMapContainerCounter){hideMap()}
+            if(mapRouteContainerCounter){
+                mapRouteContainerCounter = false;
+                $('#pushRightConrainer').removeClass('pushRightConrainerRoute');
+                $('.routeMapContainer').fadeOut(100);
+            }
+            else{
+                mapRouteContainerCounter = true;
+                $('#pushRightConrainer').addClass('pushRightConrainerRoute');
+                $('.routeMapContainer').fadeIn(100);
+            }
+        }
+        
 	$( document ).ready(function() {
             $("#markerDescription").animate({width: 'hide'});
             var descriptionDiv = document.getElementById('descriptionHideButton');
@@ -362,11 +394,13 @@
                 $("#markerDescription").animate({width: 'hide'});
             });*/
             $('.indexMapContainer').fadeOut(1);
+            $('.routeMapContainer').fadeOut(1);
             $('.indexMapMenu').fadeOut(1);
             $('#filtersContainer').fadeOut(1);
         });
         function hideFilters(){
             if(rightMapContainerCounter){hideMap()}
+            if(mapRouteContainerCounter){hideRoute()}
             if(filtersContainerCounter){
                 filtersContainerCounter = false;
                 $('#pushRightConrainer').removeClass('pushRightConrainerFilters');
@@ -443,6 +477,29 @@
                 $('#filtersCaret'+number).addClass('rotatedCaret');
             }
         }
+        function addMarkerToRoute(name, x, y){
+            var latlng = new google.maps.LatLng(x, y);
+            var markersList = '';
+            var add = true;
+            var routeMarker = {title: name, coords: latlng};
+            for(var n = 0; n < routeMarkers.length; n++){
+                if(routeMarker.title==routeMarkers[n].title){
+                    add = false;
+                }
+            }
+            if(add){
+                routeMarkers.push(routeMarker);
+            }
+            for(var n = 0; n < routeMarkers.length; n++){
+                markersList = markersList + ' ' + routeMarkers[n].title + '<br>';
+            }
+            markersList = markersList + '<div class="addToRouteButton" onclick="buildRouteMap()">'+
+                    '<a class="btn btn-theme detailsButton">BUILD ROUTE</a></div>';
+            $('.routeMapContainer').html(markersList);
+        }
+        function buildRouteMap(){
+            
+        }
 </script>
     <map name="mainMap">
         <area href="${Constants.URL}map/Hungary" shape="poly" onmouseover="showMapHover('#hungary')"
@@ -463,6 +520,7 @@
             <span id="slider"></span>
         </label>
     </div>
+    <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute"></div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
              onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(100);}"
@@ -510,6 +568,7 @@
                 <img id="ukraineBorder" src="${Constants.URL}img/map_ukraine.png">
                 <img src="${Constants.URL}img/mapHoverImage.png" usemap="#mainMap">
             </div>
+            <div class="routeMapContainer"></div>
             <div id='filtersContainer'>
                 <div class="filtersName">
                     <input type="checkbox" id="markAll" name="markAll"
