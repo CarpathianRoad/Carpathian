@@ -468,6 +468,7 @@ article .intendNews .post-image .post-heading{
     color:rgb(86,105,143);
     padding-left: 10px;
     transition: color 0.5s;
+    cursor: pointer
 }
 #newsMainPhoto{
     overflow: hidden;

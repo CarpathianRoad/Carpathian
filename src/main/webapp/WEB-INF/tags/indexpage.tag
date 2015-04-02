@@ -22,6 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${Constants.URL}js/jssor.slider.mini.js"></script>
     <script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
+    <script src="${Constants.URL}js/filter_by_country.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
     <script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
