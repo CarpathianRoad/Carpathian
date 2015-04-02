@@ -1251,6 +1251,17 @@ p{
     height: 410px !important;
     transition: 0.5s;
 }
+#routePointsNumber{
+    position: absolute;
+    margin-top: 11px;
+    font: 7pt 'Open Sans';
+    width: 35px;
+    height: 10px;
+    text-align: center;
+    color: rgb(86,105,143);
+    font-weight: 600;
+    right: 10px;
+}
 #filtersContainer{
     height: 468px;
     width: 320px;
@@ -1365,7 +1376,7 @@ p{
                     width:350px;
                     height: 510px;
                     left: 55 !important;
-                    top: 115;
+                    top: 45;
                     bottom: 0 !important;
 		}
                 .newsImageIndex:hover img{
@@ -1632,6 +1643,20 @@ label{
     float: none;
     margin-top: 15px;
     text-align: justify;
+}
+.routeDescription{
+    float: right;
+    width: 700px;
+    background: white;
+}
+.routeWidth{
+    //width: 100%;
+    top: 50px !important;
+}
+#mapRouteImage{
+    margin-right: 7px;
+    margin-top: 7px;
+    float: right;
 }
 .markerPageText p{
     font: 11pt 'Open Sans';
@@ -2356,5 +2381,7 @@ a .disable-menu-link{
     {
         position: relative;
         left: 50%;
+        display: none;
     }
+    
 /*=========END_ERIK========*/
