@@ -27,6 +27,7 @@
     <script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
     <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <style>
         .lang-sw.active {
             color: rgb(174, 214, 43);
