@@ -1177,6 +1177,7 @@ p{
     height: 45px;
     background: rgb(86,105,143);
     transition: 0.5s;
+    z-index: 5 !important;
 }
 .mapControlsScroll{
     right: 50px !important;
@@ -1259,7 +1260,7 @@ p{
     position: absolute;
 }
 .routeMapContainer{
-    height: 415px;
+    height: 410px;
     width: 320px;
     background: rgb(86,105,143);
     padding: 20px;
