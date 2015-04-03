@@ -81,7 +81,7 @@ public class ArticleController {
 	public ModelAndView full(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             ModelAndView modelAndView = new ModelAndView("FullArticle");
-            modelAndView.addObject("articles", news.getArticleByCount(lan,"3"));
+            modelAndView.addObject("articles", news.getArticleByCount(lan,id,"3"));
             ArticleModel tempArt  = news.getOneArticle(lan, id);
             String[] tempImg = tempArt.getImage().split(",");
             modelAndView.addObject("main_image", tempImg[0]);
