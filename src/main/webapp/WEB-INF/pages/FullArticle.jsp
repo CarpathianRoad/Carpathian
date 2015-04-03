@@ -19,10 +19,14 @@
                 display: none;
             }
             .markerPageDate {
-                width: 100%
+                width: 100%;
+                margin-bottom: 15px;
             }
             .markerRightDescr {
                 display: none;
+            }
+            .twitter {
+                left:8%;
             }
         </style>
     </c:if>
