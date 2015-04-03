@@ -2420,5 +2420,15 @@ a.disable-menu-link{
         left: 50%;
         display: none;
     }
-    
+.social_networks
+    {
+        position: relative;
+        top: 1em;
+    }
+.twitter
+    {
+        position: relative;
+        left: 12%;
+        margin-top: -1.4em;
+    }
 /*=========END_ERIK========*/
