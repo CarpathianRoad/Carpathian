@@ -395,3 +395,17 @@ cke_contents{
 .cke_contents {
     height: 590px !important;
 }
+#myIframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.ui-dialog .ui-dialog-content {
+    padding: 0;
+}
+.img-upl {
+    padding: 20px;
+height: 100%;
+position: fixed;
+width: 100%;
+}
