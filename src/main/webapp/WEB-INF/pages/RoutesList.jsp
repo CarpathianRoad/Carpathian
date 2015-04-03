@@ -32,13 +32,13 @@
                     <a id="slovakia" onclick="change_routes_country('slovakia');" >Slovakia</a>
                 </div>
                 <div class="tripMethod">
-                    <input type="hidden" id="selected_type" value="all"/>
-                    <div id="water" class="tripFilterText"><a onclick="change_routes_type('water');">Water</a></div>
-                    <div id="horses" class="tripFilterText"><a onclick="change_routes_type('horses');">Horses</a></div>
-                    <div id="ski" class="tripFilterText"><a onclick="change_routes_type('ski');">Ski</a></div>
-                    <div id="bicycle" class="tripFilterText"><a onclick="change_routes_type('bicycle');">Bicycle</a></div>
-                    <div id="walking" class="tripFilterText"><a onclick="change_routes_type('walking');">Walking</a></div>
-                    <div id="all" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all');">All methods</a></div>
+                    <input type="hidden" id="selected_type" value="all_type"/>
+                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">Water</a></div>
+                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">Horses</a></div>
+                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">Ski</a></div>
+                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">Bicycle</a></div>
+                    <div id="0" class="tripFilterText"><a onclick="change_routes_type('0');">Walking</a></div>
+                    <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">All methods</a></div>
                 </div>
                 
             </div>
@@ -145,6 +145,7 @@
             build_route(files);
             function build_route(files_array)
                 {
+                    countRoute = 0;           
                     for(var count = 0; count < '${fn:length(routesList)}'; count++){
                             if (window.XMLHttpRequest){
                                 xmlhttp=new XMLHttpRequest();
@@ -193,6 +194,7 @@
                         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
                       }
                     };
+                    console.log("count route = " + countRoute);
                     map[countRoute] = new google.maps.Map(document.getElementById("map"+countRoute),
                         mapOptions);
                     map[countRoute].mapTypes.set('map_style', styledMap);

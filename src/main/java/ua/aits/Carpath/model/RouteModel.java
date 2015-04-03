@@ -394,16 +394,21 @@ public class RouteModel {
     }
     
     
-     public List<RouteModel> get_routes_by_country_filter(String lan, String country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = null;
-        if(country.equals("all"))
+     public List<RouteModel> get_routes_by_country_filter(String lan, String country, String type) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String query = " select * from routes where publish = 1 ";
+        if(!country.equals("all"))
             {
-                result = DB.getResultSet("select * from routes where publish = 1 order by id desc;");
+                query = query + " AND `public_country` = \""+country+"\" ";
             }
-        else
+       
+        if(!country.equals("all_type"))
             {
-            result = DB.getResultSet("select * from routes where publish = 1 AND `public_country` = \""+country+"\" order by id desc;;");    
+                query = query + " AND `type` = \""+type+"\" ";
             }
+        
+        query = query + " order by id desc; ";
+        ResultSet result = DB.getResultSet(query);
+        System.out.println("query = "+result.toString());
         routeList = new LinkedList<>();
         while (result.next()) { 
             String str  = result.getString("textUA").replaceAll("'\\<.*?>","");
@@ -428,16 +433,21 @@ public class RouteModel {
     }
      
      
-    public Integer get_count_routes_by_country_filter(String lan, String country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = null;
-        if(country.equals("all"))
+    public Integer get_count_routes_by_country_filter(String lan, String country, String type) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String query = " select COUNT(id) as count from routes where publish = 1 ";
+        if(!country.equals("all"))
             {
-                result = DB.getResultSet("select COUNT(id) as count from routes where publish = 1 order by id desc;");
+                query = query + " AND `public_country` = \""+country+"\" ";
             }
-        else
+       
+        if(!country.equals("all_type"))
             {
-            result = DB.getResultSet("select COUNT(id) as count from routes where publish = 1 AND `public_country` = \""+country+"\" order by id desc;;");    
+                query = query + " AND `type` = \""+type+"\" ";
             }
+        
+        query = query + " order by id desc; ";
+        ResultSet result = DB.getResultSet(query);
+        System.out.println("query = "+result.toString());
         int count = 0;
     while(result.next()){
         count = result.getInt("count");
