@@ -8,6 +8,7 @@ package ua.aits.Carpath.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -157,6 +158,18 @@ public class SinglePageController {
 		model.addObject("menu", "s");
 		return model;
 	}
+    @RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)
+        public ModelAndView fileManager (HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                String ckeditor = request.getParameter("CKEditor");
+                String num = request.getParameter("CKEditorFuncNum");
+		ModelAndView model = new ModelAndView("/tools/FileManager");
+                model.addObject("ckeditor", ckeditor);
+                model.addObject("num", num);
+		return model;
+    }
+        
+    
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
     public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
