@@ -128,7 +128,7 @@
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
-                            <a class="socialHeaderDiv not-add-lan"
+                            <a class="socialHeaderDiv twitterDivHeader not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
                                     href="https://twitter.com/CarpathianRoad" target="_blank">
@@ -150,7 +150,7 @@
 				</button>
                                 <input type="text" id="s-textbox">
 				</input>
-                                <button id="searchButtonActive">
+                                <button type="button" id="searchButtonActive">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png">
                                     </div>
 				</button>
@@ -552,7 +552,7 @@
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 110;
         if (distanceY > shrinkOn) {
-            $('.s-top').slideUp(300);
+            $('.s-top').hide();
             $('.topMenu').addClass('topMenuSmall');
             $('.s-logoIndex').addClass('s-logoIndexSmall');
             $('.s-logoIndexSmall').removeClass('s-logoIndex');
