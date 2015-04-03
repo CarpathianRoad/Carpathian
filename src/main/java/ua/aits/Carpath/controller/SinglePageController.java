@@ -34,24 +34,13 @@ public class SinglePageController {
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
-	@RequestMapping(value = "/403", method = RequestMethod.GET)
-	public ModelAndView accesssDenied() {
- 
-	  ModelAndView model = new ModelAndView();
- 
-	  //check if user is login
-	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	  if (!(auth instanceof AnonymousAuthenticationToken)) {
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();	
-		model.addObject("username", userDetail.getUsername());
-	  }
- 
-	  model.setViewName("403");
-	  return model;
- 
+    
+    @RequestMapping(value = {"/404", "/Carpath/404"})
+    public ModelAndView error404(HttpServletRequest request,
+			HttpServletResponse response)  {
+		ModelAndView model = new ModelAndView("/error/404");
+		return model;
 	}
-    
-    
     @RequestMapping(value = {"/{lan}/index", "/{lan}/main", "/{lan}/home"}, method = RequestMethod.GET)
     protected ModelAndView handleRequestInternal(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -172,6 +161,11 @@ public class SinglePageController {
     
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
     public ModelAndView login(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return new ModelAndView("redirect:" + "/en/login");
+	}
+    @RequestMapping(value = {"/en/login","/en/login/","/Carpath/en/login","/Carpath/en/login/"})
+    public ModelAndView loginEN(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("LogIn");
 		return model;
