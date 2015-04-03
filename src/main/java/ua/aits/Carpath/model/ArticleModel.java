@@ -357,8 +357,8 @@ public class ArticleModel {
         DB.closeCon();
     return newsList;
     }
-    public List<ArticleModel> getArticleByCount(String lan,String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and id !="+id+" and publish = 1 order by id desc limit "+count+";");
+    public List<ArticleModel> getArticleByCount(String lan,String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and publish = 1 order by id desc limit "+count+";");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
@@ -622,8 +622,7 @@ public class ArticleModel {
             }
             return temp.toString();
     } 
-    public String updateArticle(String id,String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, 
-            String type, String author, String img, String x, String y, 
+    public String updateArticle(String id,String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, String type, String author, String img, String x, String y, 
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
@@ -636,9 +635,7 @@ public class ArticleModel {
                 +"', titleGE = '" + StringEscapeUtils.escapeSql(titleGE)
                 +"', titleCZ = '" + StringEscapeUtils.escapeSql(titleCZ)
                 +"', titleSRB = '" + StringEscapeUtils.escapeSql(titleSRB)
-                +"', date = '"+  date +"', author = '"+  author 
-                 +"', type = "+  type 
-                +", image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
+                +"', date = '"+  date +"', author = '"+  author +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
                 "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +
                 "', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +
                 "', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +
