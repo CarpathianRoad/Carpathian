@@ -357,8 +357,8 @@ public class ArticleModel {
         DB.closeCon();
     return newsList;
     }
-    public List<ArticleModel> getArticleByCount(String lan,String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and publish = 1 order by id desc limit "+count+";");
+    public List<ArticleModel> getArticleByCount(String lan,String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and id != "+id+" and publish = 1 order by id desc limit "+count+";");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
@@ -635,7 +635,9 @@ public class ArticleModel {
                 +"', titleGE = '" + StringEscapeUtils.escapeSql(titleGE)
                 +"', titleCZ = '" + StringEscapeUtils.escapeSql(titleCZ)
                 +"', titleSRB = '" + StringEscapeUtils.escapeSql(titleSRB)
-                +"', date = '"+  date +"', author = '"+  author +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
+                +"', date = '"+  date +"', author = '"+  author 
+                +"', type = "+  type
+                +", image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
                 "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +
                 "', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +
                 "', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +
