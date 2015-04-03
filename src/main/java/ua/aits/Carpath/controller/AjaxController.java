@@ -236,7 +236,7 @@ public class AjaxController {
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
 "                            <div class=\"newsImage\">\n" +
-"                                <a href=\""+Constants.URL+"article/full/"+temp.id+"\">\n" +
+"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
 "                                    <div class=\"imageHover\">\n" +
 "                                        <div class=\"imageHoverDate\">\n" +
 "                                            "+temp.date+"\n" +
@@ -251,8 +251,8 @@ public class AjaxController {
 "\n" +
 "                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
 "                            <div class=\"news_text_box\">\n" +
-"                                <div class=\"news_title\"><a href=\""+Constants.URL+"article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
-"                                <a href=\""+Constants.URL+"article/full/"+temp.id+"\">\n" +
+"                                <div class=\"news_title\"><a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
+"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
 "                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
 "                            </div>\n" +
 "                        </div>\n" +
@@ -291,7 +291,7 @@ public class AjaxController {
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
 "                            <div class=\"newsImage\">\n" +
-"                                <a href=\""+Constants.URL+"article/full/"+temp.id+"\">\n" +
+"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
 "                                    <div class=\"imageHover\">\n" +
 "                                        <div class=\"imageHoverDate\">\n" +
 "                                            "+temp.date+"\n" +
@@ -306,8 +306,8 @@ public class AjaxController {
 "\n" +
 "                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
 "                            <div class=\"news_text_box\">\n" +
-"                                <div class=\"news_title\"><a href=\""+Constants.URL+"article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
-"                                <a href=\""+Constants.URL+"article/full/"+temp.id+"\">\n" +
+"                                <div class=\"news_title\"><a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
+"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
 "                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
 "                            </div>\n" +
 "                        </div>\n" +
@@ -342,7 +342,7 @@ public class AjaxController {
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
         "                        <div class=\"s-block newsHeight\">\n" +
         "                            <div class=\"newsImage\">\n" +
-        "                                <a href=\""+Constants.URL+"routes/"+route.id+"\">\n" +
+        "                                <a href=\""+Constants.URL+lan+"/routes/"+route.id+"\">\n" +
         "                                    <div class=\"imageHover\">\n" +
         "                                        <div class=\"imageHoverDate\">\n" +
         "                                            "+route.date+"\n" +
@@ -358,8 +358,8 @@ public class AjaxController {
         "                            </div>\n" +
         "                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
         "                            <div class=\"news_text_box\">\n" +
-        "                                <div class=\"news_title\"><a href=\""+Constants.URL+"routes/"+route.id+"\">"+route.title+"</a></div>\n" +
-        "                                <a href=\""+Constants.URL+"routes/"+route.id+"\">\n" +
+        "                                <div class=\"news_title\"><a href=\""+Constants.URL+lan+"/routes/"+route.id+"\">"+route.title+"</a></div>\n" +
+        "                                <a href=\""+Constants.URL+lan+"/routes/"+route.id+"\">\n" +
         "                                    <div class=\"news_text\">"+route.textUA+"</div>\n" +
         "                                </a>\n" +
         "                            </div>\n" +

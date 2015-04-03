@@ -24,17 +24,17 @@ margin-left: -40px;
 <t:indexpage>
         <div class="s-new">
             <ul class="partners-list">
-                <li><a target="_blank" href="http://www.arr.sk/">Agentúra na podporu regionálneho rozvoja Košice n. o.</a></li>
-                <li><a target="_blank" href="http://www.kiut.hu/">KIÚT Térségfejlesztési Egyesület</a></li>
-                <li><a target="_blank" href="http://zamnap.org.ua/">Закарпатський музей народної архітектури та побуту</a></li>
-                <li><a target="_blank" href="http://bokshaymuseum.com/">Закарпатський обласний художній музей імені Йосипа Бокшая</a></li>
-                <li><a target="_blank" href="http://derzhava.in.ua/Lists/2/Attachments/1852/6shevchyk2012t.pdf">КП «Агенція місцевого розвитку Виноградівщини»</a></li>
-                <li><a target="_blank" href="http://www.eco-bukovina.com.ua/">Департамент екології та туризму Чернівецької обласної державної адміністрації</a></li>
-                <li><a target="_blank" href="http://agencyrdtd.nethouse.ua/">КП "Агенція регіонального розвитку Тячівського району" </a></li>
-                <li><a target="_blank" href="http://www.feman.sk/">Združenie FEMAN</a></li>
-                <li><a target="_blank" href="http://kst.sk/">Klub slovenských turistov</a></li>
-                <li><a target="_blank" href="http://www.mara-tour.ro/">Mara International Tour</a></li>
-                <li><a target="_blank" href="http://rradz.sk/">Regionálna rozvojová agentúra Dolný Zemplín je členom IS RRA</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://www.arr.sk/">Agentúra na podporu regionálneho rozvoja Košice n. o.</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://www.kiut.hu/">KIÚT Térségfejlesztési Egyesület</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://zamnap.org.ua/">Закарпатський музей народної архітектури та побуту</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://bokshaymuseum.com/">Закарпатський обласний художній музей імені Йосипа Бокшая</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://derzhava.in.ua/Lists/2/Attachments/1852/6shevchyk2012t.pdf">КП «Агенція місцевого розвитку Виноградівщини»</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://www.eco-bukovina.com.ua/">Департамент екології та туризму Чернівецької обласної державної адміністрації</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://agencyrdtd.nethouse.ua/">КП "Агенція регіонального розвитку Тячівського району" </a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://www.feman.sk/">Združenie FEMAN</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://kst.sk/">Klub slovenských turistov</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://www.mara-tour.ro/">Mara International Tour</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://rradz.sk/">Regionálna rozvojová agentúra Dolný Zemplín je členom IS RRA</a></li>
                 
             </ul>
         </div>
