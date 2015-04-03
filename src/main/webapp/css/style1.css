@@ -1286,7 +1286,7 @@ p{
     height: 410px;
     width: 320px;
     background: rgb(86,105,143);
-    padding: 20px;
+    padding: 15px 20px;
     overflow-y: auto;
     position: absolute;
     color: white;
@@ -1294,6 +1294,7 @@ p{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: 600;
 }
 #filtersContainer ul li{
     display: block;
