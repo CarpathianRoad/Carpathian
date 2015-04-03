@@ -606,10 +606,7 @@ article .intendNews .post-image .post-heading{
 .s-new{
 }
 .s-new .s-rightNavBar .s-top .s-two{
-	margin-top: 12px;
-}
-.twitterDivHeader{
-    position: absolute;
+	margin-top: 10px;
 }
 .s-new .s-rightNavBar .s-top .s-three{
 	margin-top: 12px;
@@ -729,18 +726,6 @@ li a:visited{
 .dropDownMenu li ul li a:hover {
 	background-color: rgb(177,216,66);
         transition: 0.5s;
-}
-.dropDownMenu a:visited:hover{
-    color: white !important;
-}
-.dropDownMenu a:hover{
-    color: white !important;
-}
-.s-three a:visited:hover{
-    color: white !important;
-}
-.s-three a:hover{
-    color: white !important;
 }
 .scrollSmallerText{
     font-size: 9pt !important;
@@ -1419,7 +1404,7 @@ p{
                     opacity: 0.9;
                     overflow: visible;
                     width:350px;
-                    height: 480px;
+                    height: 510px;
                     left: 55 !important;
                     top: 45;
                     bottom: 0 !important;
@@ -1498,7 +1483,9 @@ input[type=checkbox].css-checkbox + label.css-label {
     text-overflow: ellipsis;
 }
 .filterMap .bottom-caret{
-    margin-top: 5px;
+    margin-top: 5.5px;
+    width: 5px;
+    height: 10px;
     padding: 0px;
     transition: 0.5s;
 }
@@ -1698,6 +1685,7 @@ label{
 .routeWidth{
     //width: 100%;
     top: 50px !important;
+    margin-bottom: -55px;
 }
 #mapRouteImage{
     margin-right: 7px;
@@ -1920,6 +1908,7 @@ label{
 }
 .routeWidth{
     width: 100%;
+    
 }
 .tripFilterText{
     float: right;
@@ -2014,10 +2003,10 @@ a.disable-menu-link{
 }
 @media (max-width: 1248px){
 	.dropDownMenu li ul li ul {
-		width: 200px;
+		//width: 200px;
 	}
 	.dropDownMenu li ul li {
-		width: 200px;
+		//width: 200px;
 	}
 	.dropDownMenu li ul li ul{
 		left: 200px;
@@ -2036,7 +2025,7 @@ a.disable-menu-link{
         }
 }
 
-@media (max-width: 1248px) and (min-width: 556px){
+@media (max-width: 1024px) and (min-width: 556px){
 	.s-new .s-logoIndex{
 		margin: 15px auto;
 		width: 300px;
@@ -2215,6 +2204,27 @@ a.disable-menu-link{
         height: 75px;
     }
 }
+@media (max-width: 480px)
+    {
+        .s-three
+            {
+                position: relative;
+                top: 67%;
+                right: 46%;
+            }
+        .s-two
+            {
+                position: relative;
+                top: 8%;
+            }
+        #s-textbox 
+            {
+                visibility: visible;
+                width: 60%;
+                margin-right: 22%;
+            }
+    }
+
 /* ==========ERIK========= */
 .breadcrumbs a
     {
