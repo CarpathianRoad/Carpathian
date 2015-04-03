@@ -450,11 +450,8 @@
             styleCounter++;
             if(styleCounter==2){
                 if(styleTrigger){
-                    var styledMap = new google.maps.StyledMapType(standartStyle,
-                        {name: "Styled Map"});
-                    map.mapTypes.set('map_style', styledMap);
-                    map.setMapTypeId('map_style');
                     styleTrigger = false;
+                    map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
                 }
                 else{
                     var styledMap = new google.maps.StyledMapType(mapStyles,

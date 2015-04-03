@@ -16,7 +16,7 @@
                 behavior:url(#default#VML);
             }
             #map {
-                margin-top: 30px;
+                margin-top: -30px;
             }
         </style>
         <script type="text/javascript"
@@ -30,7 +30,6 @@
         <script type="text/javascript">
             
             elevationService = new google.maps.ElevationService();
-            
             var map;
             var height = [];  
             var length = [];
@@ -47,8 +46,11 @@
                 {"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"stylers":[{"hue":"#00aaff"},{"saturation":-100},{"gamma":2.15},{"lightness":12}]},
                 {"featureType":"road","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"lightness":24}]},
                 {"featureType":"road","elementType":"geometry","stylers":[{"lightness":57}]}];
+            var standartStyle = [];
+            var styleTrigger = false;
             
             $(document).ready(function() {
+            $('#map').css('height',$('.routeDescription').height()+40);
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
                 }
@@ -89,16 +91,11 @@
                   zoom: 11,
                   center: getCenter(),
                   //center: latlng,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                  mapTypeControlOptions: {
-                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-                  }
+                  mapTypeId: google.maps.MapTypeId.TERRAIN,
+                  disableDefaultUI: true
                 };
                 map = new google.maps.Map(document.getElementById("map"),
                     mapOptions);
-                    map.mapTypes.set('map_style', styledMap);
-                    map.setMapTypeId('map_style');
                 <c:forEach items="${imagesRoute}" var="imgs">
                     if(("${imgs.x}".indexOf(',')!=-1)&&("${imgs.y}".indexOf('.')!=-1)){
                         var temp = "${imgs.x}".split(",");
@@ -134,6 +131,8 @@
                     
                 </c:forEach>
                 
+            map.controls[google.maps.ControlPosition.LEFT_TOP].push(
+                document.getElementById('sliderDiv'));
                 /*var routeDescription = document.getElementById('desc');
                 var div = document.createElement('div');
                 routeDescription.appendChild(div);
@@ -148,6 +147,7 @@
                 //document.getElementById("routeDesc").innerHTML = "<br>" + $(xml).find("desc").text();
                 getMarkers();
                 makeLegend();
+                buildChart();
             }
             
             function GetDegreeValue(v)
@@ -238,7 +238,6 @@
                         points.push(p1);
                     }
                 }
-                buildChart();
                 buildRoute();
             }
             
@@ -358,33 +357,47 @@
                 return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2));
             }
             
+        var styleCounter = 0;
+        function changeStyle(){
+            styleCounter++;
+            if(styleCounter==2){
+                if(styleTrigger){
+                    styleTrigger = false;
+                    map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+                }
+                else{
+                    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+                    styleTrigger = true;
+                }
+                styleCounter=0;
+            }
+        }
+            
     
         </script>
-
-        <div class="s-new markerPageTable">
-        <div class="breadcrumbsMarker">
-                <ul class="breadcrumbsUlMarker">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    <li><a href="${Constants.URL}article/category/6">Routes</a><div class="right_arrow"> </div></li>
-                    <li><a href="${Constants.URL}routesList">Trails</a><div class="right_arrow"> </div></li>
-                    <li><a>${route.title}</a></li>
-                </ul>
-                <div class="countriesFilterMarker">
-                    <a class="selected_country" href="#">All countries</a>
-                    <a href="#">Poland</a>
-                    <a href="#">Hungary</a>
-                    <a href="#">Romania</a>
-                    <a href="#">Slovakia</a>
-                    <a href="#">Ukraine</a>
-                </div>
-            </div>
-            <div class="markerLeftDescr routesLinks">
+    <div id="sliderDiv" class="sliderDivRoute">
+        <label id="sliderLabel" onclick="changeStyle()">
+            <input type="checkbox" />
+            <span id="slider"></span>
+        </label>
+    </div>
+        <div class="markerPageTable routeWidth">
+        <div id="map" style="width: 40%;float: left;"></div>
+            <div class="routesLinks routeDescription">
                 <div class="markerPageTitle">${route.title}</div>
+                <div class="markerPageUnderHeading">
+                    <div class="markerPageDate">
+                        ${route.date}
+                    </div>
+                    <div class="markerPageCountry">
+                        <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
+                        ${route.public_country}
+                    </div>
+                </div>
+                <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
                 <div class="markerPageText">
                     ${route.textUA}
                 </div>
-                <div id="map" style="width: 100%; height: 200px;"></div>
-                <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
                 <c:if test="${(imagesRoute[0])!=''}">
     <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                     <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
@@ -411,9 +424,6 @@
                                         </div>
                                     </div>
                 </c:if>
-            </div>
-            <div class="markerRightDescr">
-                <div class="otherNewsHeading">OTHER ROUTES</div>
             </div>
         </div>
     
