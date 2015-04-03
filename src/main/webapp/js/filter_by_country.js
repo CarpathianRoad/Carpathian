@@ -59,6 +59,7 @@ function change_routes_country(country)
                 console.log("file array = "+files);
                 files = files.split(",");
                 console.log("file array after split = "+files);
+                map = [];
                 build_route(files);
             },
             error: function(data)
@@ -73,17 +74,18 @@ function change_routes_type(type)
         var selected_type = jQuery("#selected_type").val();
         console.log("selected_type = " + selected_type);
         jQuery( "#"+selected_type).removeClass("selectedCountryTrip");
-        jQuery( "#"+type ).addClass( "selectedCountryTrip" );
-        jQuery("#selected_type ").val(type);
+        jQuery( "#"+type).addClass( "selectedCountryTrip" );
+        jQuery("#selected_type ").val(type); 
         jQuery("#last_item").val("9");
         var contstants = jQuery("#contstants").val();
         var lan = jQuery("#lan").val();
         var page_type = jQuery("#page_type").val();
         var menu_id = jQuery("#menu_id").val();
         var lan = jQuery("#lan").val();
+        var country = jQuery("#selected_country").val();
         jQuery.ajax({
-            url: contstants+'filter_by_country_routes',
-            data: "page_type="+page_type+"&country="+country+"&lan="+lan+"&menu_id="+menu_id+"&lan="+lan,
+            url: contstants+'filter_by_type_routes',
+            data: "page_type="+page_type+"&country="+country+"&lan="+lan+"&menu_id="+menu_id+"&lan="+lan+"&type="+type,
             cache: false,
             mimeType: "text/html; charset=UTF-8",
             type: 'GET',
