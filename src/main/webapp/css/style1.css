@@ -650,13 +650,21 @@ li a:visited{
     font-weight: 600;
     width: 145px;
 }
+.printRoute{
+    background-color: #8291B0;
+    border-radius: 0px;
+    font: 11pt 'Open Sans';
+    font-weight: 600;
+    width: 120px;
+    margin: 0 10px;
+}
 .detailsButtonContainer{
     margin: 0 auto;
-    text-align: right;
+    text-align: left;
     margin-top: 25px;
     position: absolute;
     bottom: 25px;
-    right: 20px;
+    left: 20px;
 }
 .dropDownMenu a:visited {
 	color: white;
@@ -774,7 +782,7 @@ li a:visited{
 }
 
 a:hover{
-    color: rgb(177,216,66);
+    color: rgb(177,216,66) !important;
     text-decoration: none;
     transition: color 0.5s;
 }
@@ -1290,11 +1298,20 @@ p{
     overflow-y: auto;
     position: absolute;
     color: white;
-    font: 12pt "Open Sans";
+    font: 10pt "Open Sans";
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: 400;
+}
+.deleteFromRouteImage{
+    width: 16px;
+    float: left;
+    margin-top: 4px;
+}
+.deleteFromRouteImage img{
+    width: 11px;
+    cursor: pointer;
 }
 #filtersContainer ul li{
     display: block;
@@ -1343,7 +1360,7 @@ p{
                     cursor: pointer;
                 }
 		.markerDescr{
-                    font: 11pt 'Open Sans';
+                    font: 10pt 'Open Sans';
                     font-weight: 200;
                     color: white;
                     margin: 0 auto;
@@ -1352,7 +1369,7 @@ p{
                     text-align: justify;
 		}
 		.markerDescr p{
-                    font: 11pt 'Open Sans';
+                    font: 10pt 'Open Sans';
                     font-weight: 200;
                     color: white;
                     margin: 0 auto;
@@ -1389,7 +1406,7 @@ p{
                     width:350px;
                     height: 510px;
                     left: 55 !important;
-                    top: 115;
+                    top: 45;
                     bottom: 0 !important;
 		}
                 .newsImageIndex:hover img{
@@ -1901,6 +1918,7 @@ label{
     font: 9pt 'Open Sans';
     font-weight: 600;
     transition: 0.5s;
+    cursor: pointer;
 }
 .tripFilterText:hover a{
     color: rgb(174, 214, 43);
