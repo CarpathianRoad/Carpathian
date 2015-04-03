@@ -24,13 +24,12 @@
                     top: 45px !important;
                 }
                 .addToRouteButton{
-                    width: 350px;
                     margin: 0 auto;
-                    text-align: left;
+                    text-align: right;
                     margin-top: 25px;
                     position: absolute;
                     bottom: 25px;
-                    left: 20px;
+                    right: 20px;
                     cursor: pointer;
                 }
 	</style>
@@ -56,6 +55,7 @@
             {"featureType":"road","elementType":"geometry","stylers":[{"lightness":57}]}];
         var standartStyle = [];
         var styleTrigger = true;
+        var summary = '';
         
 	function initialize() {
             var styledMap = new google.maps.StyledMapType(mapStyles,
@@ -463,6 +463,7 @@
                 styleCounter=0;
             }
         }
+        
         function rotateCaret(number){
             for(var i = 1; i<8; i++){
                 if(i!=number){
@@ -476,7 +477,9 @@
                 $('#filtersCaret'+number).addClass('rotatedCaret');
             }
         }
+        
         function addMarkerToRoute(name, x, y){
+            mapRouteContainerCounter = false;
             var latlng = new google.maps.LatLng(x, y);
             var markersList = '';
             var add = true;
@@ -490,18 +493,23 @@
                 routeMarkers.push(routeMarker);
             }
             for(var n = 0; n < routeMarkers.length; n++){
-                markersList = markersList + ' ' + routeMarkers[n].title + '<br>';
+                markersList = markersList + ' ' + 
+                '<div class="deleteFromRouteImage" onclick="removeFromRoute(\''+routeMarkers[n].title+'\')">'+
+                '<img src="${Constants.URL}img/hideDescrButtonRed.png"></div>'+  
+                routeMarkers[n].title + '<br>';
             }
-            markersList = markersList + '<div class="addToRouteButton" onclick="buildRouteMap()">'+
-                    '<a class="btn btn-theme detailsButton">BUILD ROUTE</a></div>';
+            markersList = markersList + '<div class="addToRouteButton">'+  
+                '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
+                '<a class="btn btn-theme printRoute">PRINT</a></div>';
             $('.routeMapContainer').html(markersList);
             $('#routePointsNumber').html(routeMarkers.length);
         }
+        
         function buildRouteMap(){
+            mapRouteContainerCounter = false;
             if(routeMarkers.length>2){
                 for(var n = 1; n < routeMarkers.length-1; n++){
                     waypts.push({location:routeMarkers[n].coords, stopover: true});
-                    console.log(waypts[n-1]);
                 }
             }
             var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -514,13 +522,53 @@
                 optimizeWaypoints: true,
                 travelMode: google.maps.TravelMode.DRIVING
             };
+            summary = '';
             directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
                 var route = response.routes[0];
+                // For each route, display summary information.
+                for (var i = 0; i < route.legs.length; i++) {
+                  var routeSegment = i + 1;
+                  summary += '<b>Route Segment: ' + routeSegment + '</b><br>';
+                  summary += route.legs[i].start_address + ' to ';
+                  summary += route.legs[i].end_address + '<br>';
+                  summary += route.legs[i].distance.text + '<br><br>';
+                }
               }
             });
         }
+        
+        function removeFromRoute(marker){
+            mapRouteContainerCounter = false;
+            for(var n = 0; n < routeMarkers.length; n++){
+                if(routeMarkers[n].title==marker){
+                    routeMarkers.splice(n, 1);
+                }
+            }
+            buildRouteFromArray();
+        }
+        
+        function buildRouteFromArray(){
+            mapRouteContainerCounter = false;
+            var markersList = '';
+            for(var n = 0; n < routeMarkers.length; n++){
+                markersList = markersList + ' ' + 
+                '<div class="deleteFromRouteImage" onclick="removeFromRoute(\''+routeMarkers[n].title+'\')"><img src="${Constants.URL}img/hideDescrButtonRed.png"></div>'+  
+                routeMarkers[n].title + '<br>';
+            }
+            if(routeMarkers.length!=0){
+                markersList = markersList + '<div class="addToRouteButton" onclick="buildRouteMap()">'+ 
+                '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
+                '<a class="btn btn-theme printRoute">PRINT</a></div>';
+                $('.routeMapContainer').html(markersList);
+                }
+            else{
+                $('.routeMapContainer').html("No points in your route");
+            }
+            $('#routePointsNumber').html(routeMarkers.length);
+        }
+        
 </script>
     <map name="mainMap">
         <area href="${Constants.URL}map/Hungary" shape="poly" onmouseover="showMapHover('#hungary')"
