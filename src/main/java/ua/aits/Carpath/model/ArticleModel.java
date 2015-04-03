@@ -463,7 +463,50 @@ public class ArticleModel {
         DB.closeCon();
         return temp;
     }
-    
+    public ArticleModel getOneArticleForEdit(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
+        ArticleModel temp = new ArticleModel();
+        while (result.next()) { 
+            temp.setId(result.getInt("id"));
+            temp.setX(result.getDouble("x"));
+            temp.setY(result.getDouble("y"));
+            temp.setType(result.getInt("type"));
+            temp.setPublic_country(result.getString("public_country"));
+            temp.setTitleEN(result.getString("titleEN"));
+            temp.setTitleUA(result.getString("titleUA"));
+            temp.setTitleHU(result.getString("titleHU"));
+            temp.setTitleSK(result.getString("titleSK"));
+            temp.setTitleRO(result.getString("titleRO"));
+            temp.setTitlePL(result.getString("titlePL"));
+            temp.setTitleGE(result.getString("titleGE"));
+            temp.setTitleCZ(result.getString("titleCZ"));
+            temp.setTitleSRB(result.getString("titleSRB"));
+            
+            temp.setTextEN(result.getString("textEN"));
+            temp.setTextUA(result.getString("textUA"));
+            temp.setTextHU(result.getString("textHU"));
+            temp.setTextSK(result.getString("textSK"));
+            temp.setTextRO(result.getString("textRO"));
+            temp.setTextPL(result.getString("textPL"));
+            temp.setTextGE(result.getString("textGE"));
+            temp.setTextCZ(result.getString("textCZ"));
+            temp.setTextSRB(result.getString("textSRB"));
+            
+            temp.setDate(result.getString("date").replace("/", "."));
+            temp.setActDate(result.getString("actual"));
+            temp.setImage(result.getString("image"));
+            temp.setAuthor(result.getString("author"));
+            temp.setMarkerIcon(result.getString("markerIcon")); 
+            temp.setFilters(result.getString("filters"));
+            temp.setCountry(result.getString("country")); 
+            temp.setRegion(result.getString("region")); 
+            temp.setDistrict(result.getString("district")); 
+            temp.setTown(result.getString("town")); 
+            temp.setMenuCat(result.getString("menuCat")); 
+        }
+        DB.closeCon();
+        return temp;
+    }
     public Boolean isHaveArticle(String id) throws SQLException{
         ResultSet result = DB.getResultSet("SELECT * FROM menu WHERE parentId="+id+";");
         return result.isBeforeFirst();

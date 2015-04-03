@@ -96,7 +96,7 @@ public class AjaxController {
         if(temp.publish == 0){ check = ""; is_publish = "";}
         returnHTML = returnHTML + "<tr><td class=\"admin-table-count\">"+count.toString()+"</td>" +
 "      <td class=\"admin-table-cell date-cell\">"+temp.date+"</td>" +
-"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"article/full/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
+"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"en/article/full/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
 "      <td class=\"admin-table-cell\">"+temp.public_country+"</td>" +
 "      <td class=\"article-type admin-table-cell\">"+temp.textType+"</td>" +
 "      <td class=\"catID admin-table-cell\">"+temp.menuText+"</td>" +
