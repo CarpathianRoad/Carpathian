@@ -105,38 +105,16 @@
                                     </div>
                 <hr>
             <div class="row add-row">
-                <div class="col-lg-10 field img-upl">
+                <div class="col-lg-10 field">
                                                     <div class="form-group">
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-          <div class="image-upload-modal">
-              <span class="arrow-left-img" aria-hidden="true"><img src="${Constants.URL}img/arrow-left-icon.png" /></span>
-            <label class="btn" for="file-input">
-                <button class="btn btn-primary" disabled="disabled" style="opacity: 100">Upload from computer</button>
-            </label>
-                <input class="" id="file-input" type="file"  accept="image/*"/>
-        <button class="btn btn-primary" id="createfolder" type="button" style="margin-right: 10px;">Create folder</button>       
-        <button type="button" id="close-modal" class="btn btn-danger" data-dismiss="modal">Close</button>
-       </div>
-            <div class="image-upload-folder">
-                <hr>
-                <input type="text" class="form-control" id="foldernametext" value="New Folder" name="name" />
-                <button class="btn btn-primary" id="create-folder" type="button">Create folder</button>  
-                <button class="btn btn-danger" id="close-add-folder" type="button">Cancel</button>  
-            </div>
-          <hr>
-          <span class="info-folder">Maximum download size - 3 MB</span>
-          <div class="img-content-show-all"></div>
-      </div>
-    </div>
-  </div>
-</div>   
+
                                                         <label for="img">Images</label>
                                                         <div class="img-content">
                                                             <div class="image-upload">
-                                                                <button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">
+                                                                <div id="dialog">
+    <iframe id="myIframe" src=""></iframe>
+</div>
+                                                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
                     Upload image
                 </button>
                                                             </div>                                     
@@ -353,7 +331,8 @@
         var action = $("#editForm").attr("action");
         var arr = window.location.href.split(";");
         $("#editForm").attr("action",action+";"+arr[1]);
-        initGalerry();
+        initDialog();
+        $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
         var currentLangT = $(".lang-switch-title button.active").attr("id");
@@ -393,139 +372,30 @@
             $("#cke_71_textInput").val("s2as1");
         });
 });
-$("#createfolder").click(function(){
-    $(".image-upload-folder").toggle("slow");
-});
 
-$("#close-add-folder").click(function(){
-    $(".image-upload-folder").toggle("slow");
-});
-$('.img-upl').on('change', '#file-input', function() {
-    
-    var data = new FormData();
-    data.append('upload', jQuery('#file-input')[0].files[0]);
-    data.append("path", $(".img-content-show-all").attr("realpath"));
-jQuery.ajax({
-            url: '${Constants.URL}uploadFile',
-            data: data,
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            success: function(data){
-                $(".img-content").append(data);
-                var path = $(data).find("img").attr("realpath");
-                var real = $("#real-img-path").val();
-                $("#real-img-path").val(real + "," + path);
-                $(".img-input-box").remove();
-                $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
-                initRemove();
-                initGalerry();
-                $("#close-modal").trigger("click");
+function returnImgCK(){
+    console.log(ret);
+    console.log(num);
 }
-        });
-});
-function initGalerry(){
-$(".btn-lg").click(function(){
-    getFiles("","");
-});
-}
-
-function insertImage(){
-
-$(".img-content-show-all img:not(.remove-icon)").click(function() {
-    var name = $(this).attr("name");
-    var path = $(this).attr("realpath");
-    if($(this).attr("type") === "img"){
-    $(".img-content").append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
-                        + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
-    var real = $("#real-img-path").val();
-    $("#real-img-path").val(real + "," + path +name);
-    $(".img-input-box").remove();
-    $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+function imageInserted(){
+    $( "#dialog" ).dialog( "close" );
     initRemove();
-    initGalerry();
-    $(".img-content-show-all").removeAttr("current");
-    $(".img-content-show-all").removeAttr("realpath");
-    $("#close-modal").trigger("click");
-    }
-    else {
-        getFiles($(this).attr("name"), $(this).attr("parent"));
-    }
-});
-
-
-
+    initDialog();
 }
-$(".arrow-left-img").click(function(){
-    var path = $(".img-content-show-all").attr("current");
-    var real = $(".img-content-show-all").attr("realpath");
-    var spl =  path.split("/");
-    var back = "";
-    var spl2 =  real.split("/");
-    var back2 = "";
-    $.each(spl.slice(0, -2), function( index, value ) {
-        back = back + value + "/";
-      });
-    $.each(spl2.slice(0, -2), function( index, value ) {
-        back2 = back2 + value + "/";
-      });
-   $(".img-content-show-all").attr("current",back);
-   $(".img-content-show-all").attr("realpath",back2);
-   getFiles("", back, true);
-});
-$("#create-folder").click(function(){
-var name = $("#foldernametext").val();
-var path = $(".img-content-show-all").attr("current");
-        jQuery.ajax({
-            url: '${Constants.URL}addFolder',
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'GET',
-            data: 'name='+name+'&path='+path,
-            success: function(data){
-                getFiles("", path, true);
-                console.log("create");
-                $(".image-upload-folder").hide();
-                $(".image-upload-folder input").val("New Folder");
-                }
+function initDialog(){
+    $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager');
+                  }
         });
-});
-function getFiles(temp_fold, parent, isFolder) {
-        isFolder = isFolder || false;
-        $(".img-content-show-all").html("");
-        jQuery.ajax({
-            url: '${Constants.URL}showImages',
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'GET',
-            data: 'name='+temp_fold+'&parent='+parent,
-            success: function(data){
-               $(".img-content-show-all").append(data);
-               insertImage();
-               var attr = $(".img-content-show-all").attr("current");
-                if (typeof attr === typeof undefined || attr === false) {
-                    $(".img-content-show-all").attr("current",$(".galery-item img:not(.remove-icon)").attr("parent"));
-                    $(".img-content-show-all").attr("realpath",$(".galery-item img:not(.remove-icon)").attr("realpath"));
-                }
-                else {
-                    
-               if(!isFolder){
-                   console.log("not folder");
-                    $(".img-content-show-all").attr("current",$(".img-content-show-all").attr("current")+temp_fold+"/");
-                    $(".img-content-show-all").attr("realpath",$(".img-content-show-all").attr("realpath")+temp_fold+"/");
-                }
-                }
-                $(".arrow-left-img").show();
-               if($(".img-content-show-all").attr("realpath") === "img/content/"){
-                   $(".arrow-left-img").hide();
-               }
-               $(".img-breadcrumps").remove();
-               $("<span class='img-breadcrumps'>"+$(".img-content-show-all").attr("realpath").replace(/\//g," > ")+"</span>").insertBefore(".img-content-show-all");
-                initRemoveFile(); 
-            }
+        
+        $('#dialogBtn').click(function(){
+            $('#dialog').dialog('open');
         });
 }
 function initRemove(){
@@ -537,24 +407,6 @@ $(".remove-icon").click(function(){
         newurl = newurl +"," + $(this).children("img").attr("alt");
     });
     $("#real-img-path").val(newurl);
-});
-}
-function initRemoveFile(){
-$(".img-content-show-all img.remove-icon").click(function(){
-    var name = $(this).next("img").attr("name");
-    var path = $(".img-content-show-all").attr("current");
-        jQuery.ajax({
-            url: '${Constants.URL}removeFileOrDir',
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'GET',
-            data: 'name='+name+'&path='+path,
-            success: function(data){
-                console.log(data);
-                getFiles("", path, true);
-                }
-        });
 });
 }
 $(".lang-switch-text button").click(function(){
@@ -584,13 +436,24 @@ $("#sudmitData").click(function(){
     });
     $("#filter-type-all").attr("value", check_str_filters.slice(0,-1));
     
-    if($("#tlt").val() === "") {
-        $("#tlt").next("div.validation").html('<span style="color:red">Enter the title of the article</span>');
+    
+    if($(".input-title-lang[lang='titleEN']").val() === "") {
+        $("#textValidation").html('<span style="color:red">Enter the title of the article</span>');
         isValidate = false;
     }
     else {
-        $("#tlt").next("div.validation").html("");
+        $("#textValidation").html("");
     }
+    $(".input-title-lang").each(function(){
+        if($(this).val() !== ""){
+            if($(this).val().length > 55) {
+                $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
+                isValidate = false;
+            }else {
+        $("#textValidation").html("");
+    }
+        }
+    });
     if($("#sel1").val() === null) {
         $("#sel1").next("div.validation").html('<span style="color:red">Choose the item</span>');
         isValidate = false;
