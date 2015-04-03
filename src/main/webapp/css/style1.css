@@ -17,6 +17,7 @@ a, a:hover, a:active, a:visited {
     position: fixed;
     width: 100%;
     z-index: 5;
+    transition: 0.5s;
 }
 .indexNavBarFooter{
     background-color: rgb(86,105,143);
@@ -102,7 +103,7 @@ body {
     text-decoration: none;
     border: none;
     position: absolute;
-    top: 27px;
+    top: 17px;
     height: 30px;
     margin-left: 374px;
     outline: none;
@@ -111,7 +112,7 @@ body {
     visibility: hidden;
 }
 .intendSocial{
-    margin-right: 10px;
+    margin-right: 6px;
 }
 
 .indexNavbar ul{
@@ -172,13 +173,13 @@ a:hover{
     padding-top: 5px;
 }
 .mapButton{
+    font: 10pt "Open Sans";
     background-color: rgba(86,105,143,0);
     border: none;
     float: left;
     height: 39px;
     margin: 3px 18px;
     padding-top: 11px;
-    font-size: 11pt;
     font-weight: 600; 
     letter-spacing: 1px;
     color: #7891C1;
@@ -286,7 +287,7 @@ a:hover{
     float: right;
 }
 .newsName{
-	padding-top: 10px;
+	padding-top: 12px;
 	font: 18pt 'Open Sans';
         font-weight: 600;
 	color: rgb(87,105,143);
@@ -303,8 +304,8 @@ a:hover{
     transition: 0.5s;
 }
 .newsText{
-    font: 11pt 'Open Sans';
-    margin-bottom: 25px;
+    font: 10pt 'Open Sans';
+    margin-bottom: 35px;
     color: rgb(87,105,143);
     width: 100%;
     transition: 0.5s;
@@ -314,6 +315,7 @@ a:hover{
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    margin-top: 5px;
 }
 .newsText:after{
     content: "...";
@@ -373,7 +375,7 @@ a:hover{
 }
 .s-new  .s-logoIndex{
 	float: left;
-	margin: 18px 0px;
+	margin: 16px 0px;
 	width: 231px;
     transition: 1s;
 }
@@ -410,7 +412,7 @@ a:hover{
     width: 100%;
     height: 33px;
     text-align: right;
-    margin-top: 16px;
+    margin-top: 6px;
 }
 .s-new  .s-rightNavBar .s-top .s-one{
 	float: right;
@@ -419,7 +421,7 @@ a:hover{
 }
 .s-new  .s-rightNavBar .s-top .s-two{
 	float: right;
-	margin: 0px 30px;
+	margin: 0px 29px;
         width: 50px;
         height: 18px;
 }
@@ -496,12 +498,12 @@ article .intendNews .post-image .post-heading{
 }
 .s-new  .s-logoIndexSmall{
 	float: left;
-	margin: 6px 0px;
-	width: 150px;
+	margin: 5px 0px;
+	width: 106px;
     transition: 1s;
 }
 .s-new  .s-logoIndexSmall img{
-	width: 155px;
+	width: 106px;
         float: left;
         transition: 1s;
 }
@@ -513,14 +515,14 @@ article .intendNews .post-image .post-heading{
 }
 .s-new  .s-rightNavBarSmall{
     float: right;
-    margin: 12px 0px 0px 0px;
+    margin: -4px 0px 0px 0px;
     transition: 1s;
 }
 .topMenu{
-    height: 115px;
+    height: 110px;
 }
 .topMenuSmall{
-    height: 70px;
+    height: 50px;
     transition: 1s;
     
 }
@@ -617,7 +619,7 @@ article .intendNews .post-image .post-heading{
     height: 18px;
 }
 .paddingLang{
-    padding-left: 12px;
+    padding-left: 7px;
 }
 .dropDownMenu {
 	width: 100%;
@@ -782,6 +784,8 @@ a:hover{
     transition: color 0.5s;
 }
 .s-newsText a{
+    font: 10pt "Open Sans";
+    font-weight: 600;
     color: rgb(84,182,157);
     transition: color 0.5s;
 }
@@ -991,7 +995,7 @@ footer a:visited{
 }
 #cssmenu > ul > li {
   float: left;
-	margin: 10px 0px 10px 12px;
+	margin: 17px 0px 10px 20px;
 }
 #cssmenu > ul > li:after {
   display: block;
@@ -1019,7 +1023,7 @@ footer a:visited{
 }
 .contentIntend{
     width: 100%;
-    height: 35px;
+    height: 30px;
 }
 .contentIntendMap{
     width: 100%;
@@ -1645,7 +1649,7 @@ label{
     display: table;
 }
 .markerPageText{
-    font: 11pt 'Open Sans';
+    font: 10pt 'Open Sans';
     font-weight: 100;
     color: rgb(86,105,143);
     float: none;
@@ -1670,7 +1674,7 @@ label{
     float: right;
 }
 .markerPageText p{
-    font: 11pt 'Open Sans';
+    font: 10pt 'Open Sans';
     font-weight: 100;
     color: rgb(86,105,143);
     text-align: justify;
@@ -1689,7 +1693,7 @@ label{
 .markerPageBottomLine{
     width: 100%;
     height: 5px;
-    margin-top: 30px;
+    margin-top: 32px;
     background: rgb(84, 182, 157);
 }
 .imageHoverMarkerPage{
@@ -1813,12 +1817,12 @@ label{
 }
 .otherNewsHeading{
     width: 300px;
-    height: 24px;  
+    height: 21px;  
     background-color: rgb(84, 182, 157);
-    margin-top: 2px;
+    margin-top: 7px;
     padding-left: 10px;
     padding-top: 1px;
-    font: 12pt 'Open Sans';
+    font: 10pt 'Open Sans';
     font-weight: 600;
     color: white;
     float: right;

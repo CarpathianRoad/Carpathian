@@ -13,21 +13,6 @@
     <!--<script src="${Constants.URL}js/social_networks.js"></script>-->
     <section>
         <div class="s-new markerPageTable">
-            <div class="breadcrumbsMarker">
-                <ul class="breadcrumbsUlMarker">
-                    <li><a href="${Constants.URL}index">Main</a><div class="right_arrow"> </div></li>
-                    <li><a href="${Constants.URL}article/news">News</a><div class="right_arrow"> </div></li>
-                    <li><a>${article.title}</a></li>
-                </ul>
-                <div class="countriesFilterMarker">
-                    <a class="selected_country" href="#">All countries</a>
-                    <a href="#">Poland</a>
-                    <a href="#">Hungary</a>
-                    <a href="#">Romania</a>
-                    <a href="#">Slovakia</a>
-                    <a href="#">Ukraine</a>
-                </div>
-            </div>
             <div class="markerLeftDescr">
                 <div class="markerPageTitle">${article.title}</div>
                 <div class="markerPageUnderHeading">
@@ -42,7 +27,7 @@
                 <div class="markerPageText">
                     ${article.textEN}
                 </div>
-                <c:if test="${fn:length(images[0])!=''}">
+                <c:if test="${images[0]!=''}">
     <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                     <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
                                         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
