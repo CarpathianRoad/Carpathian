@@ -54,7 +54,7 @@ public class MarkerModel {
         return temp;
     }
     public void addMarker(String title) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        DB.runQuery("INSERT INTO `markers`(`title`) VALUES ('"+title+"');");
+        DB.runQuery("INSERT INTO `markers`(`title`,`descr`) VALUES ('"+title+"','');");
     }
     public void updateMarker(String id, String title) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DB.runQuery("UPDATE `markers` SET title='"+title+"' WHERE id="+id+";");

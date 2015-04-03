@@ -72,15 +72,23 @@
                     processData: false,
                     type: 'POST',
                     success: function(data){
-                        $(".img-content").append(data);
                         var path = $(data).find("img").attr("realpath");
-                        var real = $("#real-img-path").val();
-                        $("#real-img-path").val(real + "," + path);
-                        $(".img-input-box").remove();
-                        $('.image-upload').append('<button type="button" class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
-                        initRemove();
-                        initGalerry();
-                        $("#close-modal").trigger("click");
+                        var name = $(data).find("img").attr("alt");
+                    if("${ckeditor}" === "" && "${num}" === "") {
+                       $(".img-content", window.parent.document).append(data);
+            $(".img-input-box", window.parent.document).remove();
+            $('.image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+            var real = $("#real-img-path", window.parent.document).val();        
+            $("#real-img-path", window.parent.document).val(real + "," + path);
+            initGalerry();
+            $(".img-content-show-all").removeAttr("current");
+            $(".img-content-show-all").removeAttr("realpath");
+            window.parent.imageInserted(); 
+                    }    else {
+                    window.opener.CKEDITOR.tools.callFunction("${num}", ""+"${Constants.URL}"+ path +"","");
+                    window.close();
+                    }
+                        
         }
                 });
         });
@@ -98,11 +106,11 @@
                 if("${ckeditor}" === "" && "${num}" === "") {
                     $(".img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
-            var real = $("#real-img-path").val();
-            $("#real-img-path").val(real + "," + path +name);
+            
             $(".img-input-box", window.parent.document).remove();
             $('.image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
-            
+            var real = $("#real-img-path", window.parent.document).val();        
+            $("#real-img-path", window.parent.document).val(real + "," + path + name);
             initGalerry();
             $(".img-content-show-all").removeAttr("current");
             $(".img-content-show-all").removeAttr("realpath");

@@ -133,7 +133,8 @@ margin-bottom: 20px;
     margin-top: 60px;
 }
 .img-content-show-all img {
-    width: 100%;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .galery-item {
@@ -405,7 +406,8 @@ cke_contents{
 }
 .img-upl {
     padding: 20px;
-height: 100%;
-position: fixed;
-width: 100%;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll
 }
