@@ -10,7 +10,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:indexpage>
-    <!--<script src="${Constants.URL}js/social_networks.js"></script>-->
+    <c:if test="${article.type == 3}">
+        <style>
+            .markerLeftDescr {
+                width: 980px;
+            }
+            .markerPageCountry {
+                display: none;
+            }
+            .markerPageDate {
+                width: 100%
+            }
+            .markerRightDescr {
+                display: none;
+            }
+        </style>
+    </c:if>
+    <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
             <div class="markerLeftDescr">
@@ -53,12 +69,16 @@
                                         </div>
                                     </div>
                 </c:if>
-                                    <div class="markerPageBottomLine"></div>
-                                   <!-- <div class="markerPageSocial"> -->
-                                        <a width="100px" name="fb_share"></a> 
-<script src="https://www.facebook.com/connect.php/js/FB.Share" type="text/javascript"></script>
-                                        
-                                    <!--</div>-->
+                                    
+                                   <div class="social_networks">
+                                        <div class="face">
+                                            <a name="fb_share" type="button"></a> 
+                                            <script src="https://www.facebook.com/connect.php/js/FB.Share" type="text/javascript"></script>
+                                        </div>
+                                        <div class="twitter">
+                                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                                        </div>
+                                    </div>
             </div>
             <div class="markerRightDescr">
                 <div class="otherNewsHeading">OTHER NEWS</div>

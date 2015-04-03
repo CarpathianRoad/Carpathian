@@ -436,13 +436,24 @@ $("#sudmitData").click(function(){
     });
     $("#filter-type-all").attr("value", check_str_filters.slice(0,-1));
     
-    if($("#tlt").val() === "") {
-        $("#tlt").next("div.validation").html('<span style="color:red">Enter the title of the article</span>');
+    
+    if($(".input-title-lang[lang='titleEN']").val() === "") {
+        $("#textValidation").html('<span style="color:red">Enter the title of the article</span>');
         isValidate = false;
     }
     else {
-        $("#tlt").next("div.validation").html("");
+        $("#textValidation").html("");
     }
+    $(".input-title-lang").each(function(){
+        if($(this).val() !== ""){
+            if($(this).val().length > 55) {
+                $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
+                isValidate = false;
+            }else {
+        $("#textValidation").html("");
+    }
+        }
+    });
     if($("#sel1").val() === null) {
         $("#sel1").next("div.validation").html('<span style="color:red">Choose the item</span>');
         isValidate = false;
