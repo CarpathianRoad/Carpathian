@@ -542,7 +542,7 @@
     window.addEventListener('scroll', function(e){
         var urlMap = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-            shrinkOn = 1;
+            shrinkOn = 110;
         if (distanceY > shrinkOn) {
             $('.s-top').slideUp(300);
             $('.topMenu').addClass('topMenuSmall');

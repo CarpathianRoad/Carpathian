@@ -311,7 +311,9 @@ public class RouteModel {
             temp.setTitle(result.getString("titleEN"));
             temp.setTextUA(result.getString("textUA"));
             temp.setFile(result.getString("file"));
-            temp.setImages(result.getString("images")); 
+            temp.setPublic_country(result.getString("public_country")); 
+            temp.setDate(result.getString("date")); 
+            temp.setImages(result.getString("images"));  
         }
         return temp;
     }
