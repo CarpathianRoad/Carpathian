@@ -606,7 +606,10 @@ article .intendNews .post-image .post-heading{
 .s-new{
 }
 .s-new .s-rightNavBar .s-top .s-two{
-	margin-top: 10px;
+	margin-top: 12px;
+}
+.twitterDivHeader{
+    position: absolute;
 }
 .s-new .s-rightNavBar .s-top .s-three{
 	margin-top: 12px;
@@ -726,6 +729,18 @@ li a:visited{
 .dropDownMenu li ul li a:hover {
 	background-color: rgb(177,216,66);
         transition: 0.5s;
+}
+.dropDownMenu a:visited:hover{
+    color: white !important;
+}
+.dropDownMenu a:hover{
+    color: white !important;
+}
+.s-three a:visited:hover{
+    color: white !important;
+}
+.s-three a:hover{
+    color: white !important;
 }
 .scrollSmallerText{
     font-size: 9pt !important;
@@ -1404,7 +1419,7 @@ p{
                     opacity: 0.9;
                     overflow: visible;
                     width:350px;
-                    height: 510px;
+                    height: 480px;
                     left: 55 !important;
                     top: 45;
                     bottom: 0 !important;
@@ -1483,9 +1498,7 @@ input[type=checkbox].css-checkbox + label.css-label {
     text-overflow: ellipsis;
 }
 .filterMap .bottom-caret{
-    margin-top: 5.5px;
-    width: 5px;
-    height: 10px;
+    margin-top: 5px;
     padding: 0px;
     transition: 0.5s;
 }
