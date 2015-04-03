@@ -34,24 +34,13 @@ public class SinglePageController {
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
-	@RequestMapping(value = "/403", method = RequestMethod.GET)
-	public ModelAndView accesssDenied() {
- 
-	  ModelAndView model = new ModelAndView();
- 
-	  //check if user is login
-	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	  if (!(auth instanceof AnonymousAuthenticationToken)) {
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();	
-		model.addObject("username", userDetail.getUsername());
-	  }
- 
-	  model.setViewName("403");
-	  return model;
- 
+    
+    @RequestMapping(value = {"/404", "/Carpath/404"})
+    public ModelAndView error404(HttpServletRequest request,
+			HttpServletResponse response)  {
+		ModelAndView model = new ModelAndView("/error/404");
+		return model;
 	}
-    
-    
     @RequestMapping(value = {"/{lan}/index", "/{lan}/main", "/{lan}/home"}, method = RequestMethod.GET)
     protected ModelAndView handleRequestInternal(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
