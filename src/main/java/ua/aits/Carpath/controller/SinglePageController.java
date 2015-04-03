@@ -58,8 +58,8 @@ public class SinglePageController {
 		 ArticleModel content = new ArticleModel();
                  ModelAndView modelAndView = new ModelAndView("Index");
                  modelAndView.addObject("lan", lan);
-                 modelAndView.addObject("content", content.getArticleByCount(lan,"9"));
-                 modelAndView.addObject("points", map.getPointsByCount(lan,"9"));
+                 modelAndView.addObject("content", content.getArticleByCount(lan, "0","9"));
+                 modelAndView.addObject("points", map.getPointsByCount(lan,"0","9"));
                  modelAndView.addObject("images", map.getImages());
                  return modelAndView;
 	}
@@ -146,7 +146,7 @@ public class SinglePageController {
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
         modelAndView.addObject("marker", ret);
-        modelAndView.addObject("articles", map.getPointsByCount(lan,"3"));
+        modelAndView.addObject("articles", map.getPointsByCount(lan,id,"3"));
         modelAndView.addObject("images", arrayMessage);
         return modelAndView;
     }

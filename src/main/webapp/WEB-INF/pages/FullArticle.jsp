@@ -10,6 +10,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:indexpage>
+    <c:if test="${article.type == 3}">
+                <style>
+                    .markerRightDescr {
+                        display: none;
+                    }
+                    .markerLeftDescr {
+                        width: 100%;
+                    }
+                </style>
+    </c:if>
     <!--<script src="${Constants.URL}js/social_networks.js"></script>-->
     <section>
         <div class="s-new markerPageTable">
@@ -60,6 +70,7 @@
                                         
                                     <!--</div>-->
             </div>
+            
             <div class="markerRightDescr">
                 <div class="otherNewsHeading">OTHER NEWS</div>
                 <c:forEach items="${articles}" var="item">
