@@ -162,6 +162,11 @@ public class SinglePageController {
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
     public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		return new ModelAndView("redirect:" + "/en/login");
+	}
+    @RequestMapping(value = {"/en/login","/en/login/","/Carpath/en/login","/Carpath/en/login/"})
+    public ModelAndView loginEN(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("LogIn");
 		return model;
 	}
