@@ -1210,6 +1210,14 @@ p{
     padding: 14.5px 10px;
     transition: 0.5s;
 }
+.sliderDivRoute{
+    background: rgb(86,105,143);
+    left: 45px !important;
+    top: 45px !important;
+    padding: 14.5px 10px;
+    transition: 0.5s;
+    width: 45px;
+}
 .sliderDivScroll {
     background: rgb(86,105,143);
     right: 50px !important;
@@ -1376,7 +1384,7 @@ p{
                     width:350px;
                     height: 510px;
                     left: 55 !important;
-                    top: 45;
+                    top: 115;
                     bottom: 0 !important;
 		}
                 .newsImageIndex:hover img{
@@ -1646,8 +1654,11 @@ label{
 }
 .routeDescription{
     float: right;
-    width: 700px;
+    width: 60%;
     background: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: justify;
 }
 .routeWidth{
     //width: 100%;
@@ -1872,6 +1883,9 @@ label{
     margin-top: -17px;
     float: right;
 }
+.routeWidth{
+    width: 100%;
+}
 .tripFilterText{
     float: right;
     margin-left: 15px;
@@ -1886,7 +1900,7 @@ label{
 .tripFilterText:hover a{
     color: rgb(174, 214, 43);
 }
-a .disable-menu-link{
+a.disable-menu-link{
     pointer-events: none;
     cursor: default;
 }
