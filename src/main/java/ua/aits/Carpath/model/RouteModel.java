@@ -392,4 +392,56 @@ public class RouteModel {
         this.img = img;
     }
     }
+    
+    
+     public List<RouteModel> get_routes_by_country_filter(String lan, String country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = null;
+        if(country.equals("all"))
+            {
+                result = DB.getResultSet("select * from routes where publish = 1 order by id desc;");
+            }
+        else
+            {
+            result = DB.getResultSet("select * from routes where publish = 1 AND `public_country` = \""+country+"\" order by id desc;;");    
+            }
+        routeList = new LinkedList<>();
+        while (result.next()) { 
+            String str  = result.getString("textUA").replaceAll("'\\<.*?>","");
+            String str2 = str.replaceAll("[\\x00-\\x1F]", "");
+            String str3 = str2.replaceAll("'", "\\\\'");
+            if(str3.length() > 250){
+                str3 = str3.substring(0,250);
+            }
+            RouteModel temp = new RouteModel();
+            temp.setId(result.getInt("id"));
+            temp.setTitle(result.getString("titleEN"));
+            temp.setTextUA(str3);
+            temp.setFile(result.getString("file"));
+            temp.setImages(result.getString("images")); 
+            temp.setPublic_country(result.getString("public_country")); 
+            temp.setDate(result.getString("date")); 
+            temp.setCategory(result.getString("category"));
+            temp.setType(result.getInt("type"));
+            routeList.add(temp);
+        } 
+    return routeList;
+    }
+     
+     
+    public Integer get_count_routes_by_country_filter(String lan, String country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = null;
+        if(country.equals("all"))
+            {
+                result = DB.getResultSet("select COUNT(id) as count from routes where publish = 1 order by id desc;");
+            }
+        else
+            {
+            result = DB.getResultSet("select COUNT(id) as count from routes where publish = 1 AND `public_country` = \""+country+"\" order by id desc;;");    
+            }
+        int count = 0;
+    while(result.next()){
+        count = result.getInt("count");
+        }
+    return count;
+    }
 }

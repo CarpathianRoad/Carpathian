@@ -801,11 +801,11 @@ public class ArticleModel {
     
     public Integer get_news_items_count(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
     
-    ResultSet result = DB.getResultSet("select COUNT(id) as count from content where type in (0,1) and publish = 1 order by id desc LIMIT 0, 9;");
+    ResultSet result = DB.getResultSet("select COUNT(id) as count from content where type in (0,1) and publish = 1 order by id desc;");
     int count = 0;
     while(result.next()){
         count = result.getInt("count");
-    }
+        }
     return count;
     }
 }

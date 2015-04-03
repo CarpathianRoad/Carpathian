@@ -15,27 +15,35 @@
         var categories = [];
     </script>
     <div class="s-new widthClass">
+        <input type="hidden" id="page_type" value="routes" />
+        <input type="hidden" id="last_item" value="9" />
+        <input type="hidden" id="contstants" value="${Constants.URL}" />
+        <input type="hidden" id="lan" value="${lan}" />
+        <input type="hidden" id="count" value="${count}" />
         <div class="s-new markerPageTable">
         <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
-                    <a class="selected_country" href="#">All countries</a>
-                    <a href="#">Ukraine</a>
-                    <a href="#">Slovakia</a>
-                    <a href="#">Hungary</a>
-                    <a href="#">Romania</a>
-                    <a href="#">Poland</a>
+                    <input type="hidden" id="selected_country" value="all"/>
+                    <a id="all" onclick="change_routes_country('all');" class="selected_country" >All countries</a>
+                    <a id="ukraine" onclick="change_routes_country('ukraine');" >Ukraine</a>
+                    <a id="poland" onclick="change_routes_country('poland');" >Poland</a>
+                    <a id="hungary" onclick="change_routes_country('hungary');" >Hungary</a>
+                    <a id="romania" onclick="change_routes_country('romania');" >Romania</a>
+                    <a id="slovakia" onclick="change_routes_country('slovakia');" >Slovakia</a>
                 </div>
                 <div class="tripMethod">
-                    <div class="tripFilterText"><a>Water</a></div>
-                    <div class="tripFilterText"><a>Horses</a></div>
-                    <div class="tripFilterText"><a>Ski</a></div>
-                    <div class="tripFilterText"><a>Bicycle</a></div>
-                    <div class="tripFilterText"><a>Walking</a></div>
-                    <div class="tripFilterText selectedCountryTrip"><a>All methods</a></div>
+                    <input type="hidden" id="selected_type" value="all"/>
+                    <div id="water" class="tripFilterText"><a onclick="change_routes_type('water');">Water</a></div>
+                    <div id="horses" class="tripFilterText"><a onclick="change_routes_type('horses');">Horses</a></div>
+                    <div id="ski" class="tripFilterText"><a onclick="change_routes_type('ski');">Ski</a></div>
+                    <div id="bicycle" class="tripFilterText"><a onclick="change_routes_type('bicycle');">Bicycle</a></div>
+                    <div id="walking" class="tripFilterText"><a onclick="change_routes_type('walking');">Walking</a></div>
+                    <div id="all" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all');">All methods</a></div>
                 </div>
                 
             </div>
         </div>
+            <div class="all_news">        
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
                     <div class="s-cell">
                         <div class="s-block newsHeight">
@@ -67,6 +75,10 @@
                     <script>types.push("${route.type}");</script>
                     <script>categories.push("${route.category}");</script>
                 </c:forEach>
+            </div>
+                 <div class="loading_block">
+                    <img src="${Constants.URL}img/status.gif" />
+                </div>
     </div>
                         
 				<div style="display:none;" id="pagination">
@@ -130,25 +142,28 @@
                         break;
                 }
             }
-            
-            for(var count = 0; count < '${fn:length(routesList)}'; count++){
-                    if (window.XMLHttpRequest){
-                        xmlhttp=new XMLHttpRequest();
-                    }
-                    else{
-                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.open("GET","${Constants.URL}routes/"+files[count],false);
-                    xmlhttp.send();
-                    xmlDoc=xmlhttp.responseXML;
-                    $.ajax({
-                        type: "GET",
-                        url: "${Constants.URL}routes/"+files[count],
-                        dataType: "xml",
-                        success: parseXml
-                    });
-            }   
-            
+            build_route(files);
+            function build_route(files_array)
+                {
+                    for(var count = 0; count < '${fn:length(routesList)}'; count++){
+                            if (window.XMLHttpRequest){
+                                xmlhttp=new XMLHttpRequest();
+                            }
+                            else{
+                                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp.open("GET","${Constants.URL}routes/"+files_array[count],false);
+                            xmlhttp.send();
+                            xmlDoc=xmlhttp.responseXML;
+                            console.log("item = "+files_array[count]);
+                            $.ajax({
+                                type: "GET",
+                                url: "${Constants.URL}routes/"+files_array[count],
+                                dataType: "xml",
+                                success: parseXml
+                            });
+                    }   
+                }
                 function parseXml(xml){
                         height = [];  
                         length = [];
@@ -207,7 +222,7 @@
 		route.setMap(map[countRoute]);
                 countRoute ++;
                 }
-            
+            files = [];
             function getCenter(){
                 var minLat = 0;
                 var maxLat = 0;
