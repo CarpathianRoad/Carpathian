@@ -273,9 +273,17 @@
             }
             }
         });
+        
+            var currentlan  = $(".lang-sw.active").text();
+            
+            $("#lang-switch-ua").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ua"));
+            $("#lang-switch-en").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/en"));
+            $("#lang-switch-sk").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/sk"));
+            $("#lang-switch-hu").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
     }
     var countryChooser;
     $( document ).ready(function() {
+            
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
             $("#lang-switch-"+str_url[4]).addClass("active");
