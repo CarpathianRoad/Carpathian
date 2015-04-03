@@ -328,10 +328,77 @@ public class AjaxController {
         String country = request.getParameter("country");
         String page_type = request.getParameter("page_type");
         String menu_id = request.getParameter("menu_id");
+        String type = request.getParameter("type");
         System.out.println("lan = " + lan);
         System.out.println("country = " + country);
-        List<RouteModel> tempR = routes.get_routes_by_country_filter(lan, country);
-        Integer items_count = routes.get_count_routes_by_country_filter(lan, country);
+        List<RouteModel> tempR = routes.get_routes_by_country_filter(lan, country, type);
+        Integer items_count = routes.get_count_routes_by_country_filter(lan, country, type);
+        String returnHTML = "";
+        Integer loop = 0;
+        String files_array= "";
+        //files_array = "[";
+        System.out.println("items_count = "+ items_count);
+        for (RouteModel route : tempR) 
+            {
+                returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
+        "                        <div class=\"s-block newsHeight\">\n" +
+        "                            <div class=\"newsImage\">\n" +
+        "                                <a href=\""+Constants.URL+"routes/"+route.id+"\">\n" +
+        "                                    <div class=\"imageHover\">\n" +
+        "                                        <div class=\"imageHoverDate\">\n" +
+        "                                            "+route.date+"\n" +
+        "                                        </div>\n" +
+        "                                        <div class=\"imageHoverCountry\">\n" +
+        "                                            <div class=\"newsCountryText\">"+route.public_country+"</div><img src=\""+Constants.URL+"img/newsImageHover.png\">\n" +
+        "                                        </div>\n" +
+        "                                        <div class=\"routeType\" id=\"type"+loop+"\"></div>\n" +
+        "                                        <div class=\"routeType\" id=\"category"+loop+"\"></div>\n" +
+        "                                    </div>\n" +
+        "                                    <div class=\"routesListMap\" id=\"map"+loop+"\"></div>\n" +
+        "                                </a>\n" +
+        "                            </div>\n" +
+        "                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
+        "                            <div class=\"news_text_box\">\n" +
+        "                                <div class=\"news_title\"><a href=\""+Constants.URL+"routes/"+route.id+"\">"+route.title+"</a></div>\n" +
+        "                                <a href=\""+Constants.URL+"routes/"+route.id+"\">\n" +
+        "                                    <div class=\"news_text\">"+route.textUA+"</div>\n" +
+        "                                </a>\n" +
+        "                            </div>\n" +
+        "                        </div>\n" +
+        "                    </div> ";
+                            files_array = files_array +route.file;
+                            if(items_count-1 > loop)
+                                {
+                                    files_array = files_array + ",";
+                                }
+                            System.out.println("loop = "+ loop );
+                            loop++;
+                            
+                    } 
+        //files_array = files_array + "]";
+        System.out.println(files_array);
+        returnHTML = returnHTML + "<input type=\"hidden\" id=\"file_array\" value=\""+files_array+"\"/> ";
+        //System.out.println("========================================"+returnHTML+"========================================");
+        HttpHeaders responseHeaders = new HttpHeaders(); 
+        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+        return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
+        //return returnHTML;
+    }
+    
+    
+    @RequestMapping(value = {"/filter_by_type_routes"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<String> routes_type_filter(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String lan = request.getParameter("lan");
+        String country = request.getParameter("country");
+        String page_type = request.getParameter("page_type");
+        String menu_id = request.getParameter("menu_id");
+        String type = request.getParameter("type");
+        System.out.println("lan = " + lan);
+        System.out.println("country = " + country);
+        List<RouteModel> tempR = routes.get_routes_by_country_filter(lan, country, type);
+        Integer items_count = routes.get_count_routes_by_country_filter(lan, country, type);
         String returnHTML = "";
         Integer loop = 0;
         String files_array= "";
