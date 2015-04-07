@@ -277,66 +277,66 @@
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorUA', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorHU', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorSK', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorPL', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorRO', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorGE', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorCZ', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorSRB', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
