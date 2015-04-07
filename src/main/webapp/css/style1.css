@@ -1695,7 +1695,7 @@ label{
     background: white;
     text-align: justify;
     position: absolute;
-    right: 0;
+    right: 0; 
     transition: 0.5s;
 }
 .routeDescriptionSmall{
