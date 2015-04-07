@@ -30,6 +30,7 @@
             }
         </style>
     </c:if>
+    <meta name="title" content="${article.title}">
     <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
