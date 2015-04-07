@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:indexpage>
-    
+    <script type="text/javascript" src="${Constants.URL}js/powerhour.printmaps.js"></script>
 	<style>
                 #googleMap .gm-style .gmnoprint .gmnoprint div img {
                     content:url("${Constants.URL}img/biggerSmallerMap.png") !important;
@@ -360,8 +360,8 @@
                 rightMapContainerCounter = true;
                 $('#pushRightConrainer').addClass('pushRightConrainerBig');
                 $('#mapControls').addClass('mapControlsBig');
-                $('.indexMapContainer').fadeIn(100);
-                $('.indexMapMenu').fadeIn(100);
+                $('.indexMapContainer').fadeIn(300);
+                $('.indexMapMenu').fadeIn(300);
                 $('#mapControlsImage').attr("src","${Constants.URL}img/marker_active_map.png");
                 $('#sliderDiv').addClass('sliderDiv');
                 $('#sliderDiv').removeClass('sliderDivScroll');
@@ -481,9 +481,9 @@
         function addMarkerToRoute(name, x, y){
             mapRouteContainerCounter = false;
             var latlng = new google.maps.LatLng(x, y);
-            var markersList = '';
+            var markersList = '<div class="mapRouteText">';
             var add = true;
-            var routeMarker = {title: name, coords: latlng};
+            var routeMarker = {title: name, coords: latlng,x:x,y:y};
             for(var n = 0; n < routeMarkers.length; n++){
                 if(routeMarker.title==routeMarkers[n].title){
                     add = false;
@@ -498,9 +498,9 @@
                 '<img src="${Constants.URL}img/hideDescrButtonRed.png"></div>'+  
                 routeMarkers[n].title + '<br>';
             }
-            markersList = markersList + '<div class="addToRouteButton">'+  
+            markersList = markersList + '</div><div class="buildRouteButton">'+  
                 '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
-                '<a class="btn btn-theme printRoute">PRINT</a></div>';
+                '<a target="_blank" id="printRoute" href="#" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
             $('.routeMapContainer').html(markersList);
             $('#routePointsNumber').html(routeMarkers.length);
         }
@@ -536,6 +536,7 @@
                   summary += route.legs[i].distance.text + '<br><br>';
                 }
               }
+            console.log(summary);
             });
         }
         
@@ -551,22 +552,30 @@
         
         function buildRouteFromArray(){
             mapRouteContainerCounter = false;
-            var markersList = '';
+            var markersList = '<div class="mapRouteText">';
             for(var n = 0; n < routeMarkers.length; n++){
                 markersList = markersList + ' ' + 
                 '<div class="deleteFromRouteImage" onclick="removeFromRoute(\''+routeMarkers[n].title+'\')"><img src="${Constants.URL}img/hideDescrButtonRed.png"></div>'+  
                 routeMarkers[n].title + '<br>';
             }
             if(routeMarkers.length!=0){
-                markersList = markersList + '<div class="addToRouteButton" onclick="buildRouteMap()">'+ 
+                markersList = markersList + '</div><div class="buildRouteButton" onclick="buildRouteMap()">'+ 
                 '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
-                '<a class="btn btn-theme printRoute">PRINT</a></div>';
+                '<a target="_blank" href="#" id="printRoute" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
                 $('.routeMapContainer').html(markersList);
                 }
             else{
                 $('.routeMapContainer').html("No points in your route");
             }
             $('#routePointsNumber').html(routeMarkers.length);
+        }
+        function printRoute(){
+            var printCoords = [];
+            for(var n = 0; n < routeMarkers.length; n++){
+                printCoords.push(routeMarkers[n].x+','+routeMarkers[n].y);
+            }
+            console.log(printCoords);
+            $('#printRoute').attr('href', PowerHour.getPrintUrl(printCoords));
         }
         
 </script>
@@ -592,14 +601,14 @@
     <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
         <div id="routePointsNumber">0</div>
         <img id="mapRouteImage" src="${Constants.URL}img/route_icon.png"
-             onmouseover="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/icon_route_hover.png';$(this).fadeIn(100);}"
-             onmouseout="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/route_icon.png';$(this).fadeIn(100);}">
-        <div class="routeMapContainer">No points in your route</div>
+             onmouseover="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/icon_route_hover.png';$(this).fadeIn(300);}"
+             onmouseout="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/route_icon.png';$(this).fadeIn(300);}">
+        <div class="routeMapContainer" id="printable">No points in your route</div>
     </div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
-             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(100);}"
-             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker'+countryChooser+'.png';$(this).fadeIn(100);}">
+             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(300);}"
+             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker'+countryChooser+'.png';$(this).fadeIn(300);}">
             <div class="indexMapMenu">
                 <ul id="nav">
                     <li id="allMenu">
@@ -631,8 +640,8 @@
     </div>
     <div id="pushRightConrainer" class="pushRightConrainer">
         <img onclick="hideFilters()" id="mainImageRightContaineMap" src="${Constants.URL}img/mapRightContainer.png"
-             onmouseover="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(100);}"
-             onmouseout="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(100);}">
+             onmouseover="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
+             onmouseout="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
             <div class="indexMapContainer">
                 <img src="${Constants.URL}img/main_map.png">
                 <img id="allBorder" src="${Constants.URL}img/map_all.png">
@@ -884,14 +893,14 @@
                 <li class="filterMap"><input type="checkbox" id="transportConn" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="transportConn" class="css-label">Transport connection</label></li>
                 <li class="filterMap"><input type="checkbox" id="info" class="css-checkbox" onclick="Markers(['info'])" checked="checked" /><label for="info" class="css-label">Tourist information centers</label><br></li>
                 <div class="filtersGreenIntend"></div>
-                <li class="filterMap"><input type="checkbox" id="main8" class="css-checkbox" checked="checked" />
+                <li class="filterMap"><input type="checkbox" id="main8" class="css-checkbox" />
                     <label onclick="Markers(['main8','welcomeCenters','tourStops'])" for="main8" class="css-label">Tourism infrastructure units</label><a><div class="filterClickIntend" onclick="rotateCaret('8')"><div id="filtersCaret8" class="bottom-caret"></div></div></a>
                     <ul id="infrasturctureFilter">  
                         <li class="subFilterMap">
-                            <input type="checkbox" id="welcomeCenters" class="css-checkbox" onclick="Markers('welcomeCenters')" checked="checked" /><label for="welcomeCenters" class="css-label">Tourist welcome centers</label>
+                            <input type="checkbox" id="welcomeCenters" class="css-checkbox" onclick="Markers('welcomeCenters')" /><label for="welcomeCenters" class="css-label">Tourist welcome centers</label>
                         </li>
                         <li class="subFilterMap">
-                            <input type="checkbox" id="tourStops" class="css-checkbox" onclick="Markers('tourStops')" checked="checked" /><label for="tourStops" class="css-label">Tourist stops</label>
+                            <input type="checkbox" id="tourStops" class="css-checkbox" onclick="Markers('tourStops')" /><label for="tourStops" class="css-label">Tourist stops</label>
                         </li>
                     </ul>
                 </li>
