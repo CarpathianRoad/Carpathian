@@ -481,7 +481,7 @@
         function addMarkerToRoute(name, x, y){
             mapRouteContainerCounter = false;
             var latlng = new google.maps.LatLng(x, y);
-            var markersList = '';
+            var markersList = '<div class="mapRouteText">';
             var add = true;
             var routeMarker = {title: name, coords: latlng,x:x,y:y};
             for(var n = 0; n < routeMarkers.length; n++){
@@ -498,7 +498,7 @@
                 '<img src="${Constants.URL}img/hideDescrButtonRed.png"></div>'+  
                 routeMarkers[n].title + '<br>';
             }
-            markersList = markersList + '<div class="addToRouteButton">'+  
+            markersList = markersList + '</div><div class="buildRouteButton">'+  
                 '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
                 '<a id="printRoute" href="#" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
             $('.routeMapContainer').html(markersList);
@@ -552,14 +552,14 @@
         
         function buildRouteFromArray(){
             mapRouteContainerCounter = false;
-            var markersList = '';
+            var markersList = '<div class="mapRouteText">';
             for(var n = 0; n < routeMarkers.length; n++){
                 markersList = markersList + ' ' + 
                 '<div class="deleteFromRouteImage" onclick="removeFromRoute(\''+routeMarkers[n].title+'\')"><img src="${Constants.URL}img/hideDescrButtonRed.png"></div>'+  
                 routeMarkers[n].title + '<br>';
             }
             if(routeMarkers.length!=0){
-                markersList = markersList + '<div class="addToRouteButton" onclick="buildRouteMap()">'+ 
+                markersList = markersList + '</div><div class="buildRouteButton" onclick="buildRouteMap()">'+ 
                 '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
                 '<a href="#" id="printRoute" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
                 $('.routeMapContainer').html(markersList);
@@ -893,14 +893,14 @@
                 <li class="filterMap"><input type="checkbox" id="transportConn" class="css-checkbox" onclick="Markers('')" checked="checked" /><label for="transportConn" class="css-label">Transport connection</label></li>
                 <li class="filterMap"><input type="checkbox" id="info" class="css-checkbox" onclick="Markers(['info'])" checked="checked" /><label for="info" class="css-label">Tourist information centers</label><br></li>
                 <div class="filtersGreenIntend"></div>
-                <li class="filterMap"><input type="checkbox" id="main8" class="css-checkbox" checked="checked" />
+                <li class="filterMap"><input type="checkbox" id="main8" class="css-checkbox" />
                     <label onclick="Markers(['main8','welcomeCenters','tourStops'])" for="main8" class="css-label">Tourism infrastructure units</label><a><div class="filterClickIntend" onclick="rotateCaret('8')"><div id="filtersCaret8" class="bottom-caret"></div></div></a>
                     <ul id="infrasturctureFilter">  
                         <li class="subFilterMap">
-                            <input type="checkbox" id="welcomeCenters" class="css-checkbox" onclick="Markers('welcomeCenters')" checked="checked" /><label for="welcomeCenters" class="css-label">Tourist welcome centers</label>
+                            <input type="checkbox" id="welcomeCenters" class="css-checkbox" onclick="Markers('welcomeCenters')" /><label for="welcomeCenters" class="css-label">Tourist welcome centers</label>
                         </li>
                         <li class="subFilterMap">
-                            <input type="checkbox" id="tourStops" class="css-checkbox" onclick="Markers('tourStops')" checked="checked" /><label for="tourStops" class="css-label">Tourist stops</label>
+                            <input type="checkbox" id="tourStops" class="css-checkbox" onclick="Markers('tourStops')" /><label for="tourStops" class="css-label">Tourist stops</label>
                         </li>
                     </ul>
                 </li>

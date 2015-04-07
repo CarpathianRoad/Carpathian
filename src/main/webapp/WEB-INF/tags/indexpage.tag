@@ -27,7 +27,6 @@
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
     <script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
     <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -40,6 +39,12 @@
 
     </script>
     <style>
+        @font-face {
+            font-family: "Open Sans";
+            src: url("${Constants.URL}files/OpenSans-Regular-webfont.eot");
+            src: url("${Constants.URL}files/OpenSans-Regular-webfont.woff");
+            src: url("${Constants.URL}files/OpenSans-Regular.ttf");
+        }
         .lang-sw.active {
             color: rgb(174, 214, 43);
         }
@@ -98,7 +103,7 @@
 <div id="preloader">
     <div id="status">&nbsp;</div>
 </div>
-    <div class="">
+    <div class="minHeight">
 	<div class="row indexNavbar topMenu">
             <div class='s-new' id="mainMenuWidth">
 		<div class="s-logoIndex">
@@ -169,6 +174,7 @@
         <div class="contentIntend"></div>
         <jsp:doBody/> 
         <div class="contentIntendBottom"></div>
+    </div>
         <footer class="indexNavBarFooter footerHeight">
             <div class="footerSmallIntend"></div>
             <div class="s-new s-footer">
@@ -235,7 +241,6 @@
                                         </div>
             </div>
         </footer>
-    </div>
 </body>
 </html>
 
