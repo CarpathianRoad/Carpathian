@@ -643,7 +643,7 @@ article .intendNews .post-image .post-heading{
 }
 .dropDownMenu a:hover {
 	text-decoration: none;
-	color: white;
+	color: white !important;
 }
 li a:visited{
     text-decoration: none;
@@ -673,7 +673,7 @@ li a:visited{
     left: 20px;
 }
 .dropDownMenu a:visited {
-	color: white;
+	color: white !important;
 }
 .dropDownMenu li {
 	float: left;
