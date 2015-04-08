@@ -87,7 +87,9 @@
             background-image:url(${Constants.URL}img/notChecked.png);
         }
     </style>
-    
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="${Constants.URL}js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="${Constants.URL}js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 </head>
 <script type="text/javascript">
 	//<![CDATA[
