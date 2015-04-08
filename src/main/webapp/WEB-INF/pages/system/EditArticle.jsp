@@ -385,6 +385,20 @@ function imageInserted(){
     initDialog();
 }
 function initDialog(){
+    var current = "";
+    if($('.returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('.returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+                //var curr = path.value;
+        var home = "${Constants.FILE_URL}".replace(/\//g,",");
+        path = jQuery.grep(path, function(value) {
+            return value !== "content";
+        });
+        path = jQuery.grep(path, function(value) {
+            return value !== "img";
+        });
+        current = home+path.toString()+",";
+    }
+    console.log(current);
     $("#dialog").dialog({
             autoOpen: false,
             modal: true,
@@ -392,7 +406,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager');
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
                   }
         });
         
