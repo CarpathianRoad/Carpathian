@@ -17,6 +17,7 @@
             }
             #map {
                 margin-top: -30px;
+                margin-bottom: -45px;
             }
         </style>
         <script type="text/javascript"
@@ -50,7 +51,7 @@
             var styleTrigger = false;
             
             $(document).ready(function() {
-            $('#map').css('height',$('.routeDescription').height()+40);
+            $('#map').css('height',$('.routeDescription').height()+80);
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
                 }
@@ -372,6 +373,22 @@
                 styleCounter=0;
             }
         }
+        
+        var descrHidden = false;
+        function hideDescrRoute(){
+            if(!descrHidden){
+                $('.routeDescription').addClass('routeDescriptionSmall');
+                $('.routeDescrOverflow').fadeOut('fast');
+                $('#hideRouteImage').attr('src','${Constants.URL}img/arrow_left_hover.png');
+                descrHidden = true;
+            }
+            else{
+                $('.routeDescription').removeClass('routeDescriptionSmall');
+                $('.routeDescrOverflow').fadeIn('slow');
+                $('#hideRouteImage').attr('src','${Constants.URL}img/arrow_right_hover.png');
+                descrHidden = false;
+            }
+        }
             
     
         </script>
@@ -382,48 +399,51 @@
         </label>
     </div>
         <div class="markerPageTable routeWidth">
-        <div id="map" style="width: 40%;float: left;"></div>
+        <div id="map" style="width: 100%;float: left;"></div>
             <div class="routesLinks routeDescription">
-                <div class="markerPageTitle">${route.title}</div>
-                <div class="markerPageUnderHeading">
-                    <div class="markerPageDate">
-                        ${route.date}
+                <div class="arrowRouteHide" onclick="hideDescrRoute()"><img id="hideRouteImage" src="${Constants.URL}img/arrow_right_hover.png"></div>
+                <div class="routeDescrOverflow">
+                    <div class="markerPageTitle">${route.title}</div>
+                    <div class="markerPageUnderHeading">
+                        <div class="markerPageDate">
+                            ${route.date}
+                        </div>
+                        <div class="markerPageCountry">
+                            <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
+                            ${route.public_country}
+                        </div>
                     </div>
-                    <div class="markerPageCountry">
-                        <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
-                        ${route.public_country}
+                    <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
+                    <div class="markerPageText">
+                        ${route.textUA}
                     </div>
-                </div>
-                <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
-                <div class="markerPageText">
-                    ${route.textUA}
-                </div>
-                <c:if test="${(imagesRoute[0])!=''}">
-    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
-                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                            <c:forEach items="${imagesRoute}" var="image" varStatus="loop">
-                                                <div onclick="set_main_picture('${Constants.URL}${image.img}','${loop.index}')">
-                                                    <div class="sliderHover">
-                                                        <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image.img}" style="height: 150px"/>
+                    <c:if test="${(imagesRoute[0])!=''}">
+        <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
+                                        <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                                <c:forEach items="${imagesRoute}" var="image" varStatus="loop">
+                                                    <div onclick="set_main_picture('${Constants.URL}${image.img}','${loop.index}')">
+                                                        <div class="sliderHover">
+                                                            <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image.img}" style="height: 150px"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </c:forEach>
+                                                </c:forEach>
+                                            </div>
+                                            <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
+                                            </span>
+                                            <span u="arrowright" class="markerPageArrowRight jssora03r" style="width: 50px; height: 95px; top: 28px; right: 20px">
+                                            </span>
                                         </div>
-                                        <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
-                                        </span>
-                                        <span u="arrowright" class="markerPageArrowRight jssora03r" style="width: 50px; height: 95px; top: 28px; right: 20px">
-                                        </span>
-                                    </div>
-                                    <div class="article_main_image">
-                                        <img id="main_image" src="${Constants.URL}<c:out value="${imagesRoute[0].img}" />" />
-                                        <div class="mainImageSliderLine">
-                                            <div id="imageCount">1</div>/${fn:length(imagesRoute)}
-                                            &nbsp;&nbsp;
-                                                ${route.title} Gallery
+                                        <div class="article_main_image">
+                                            <img id="main_image" src="${Constants.URL}<c:out value="${imagesRoute[0].img}" />" />
+                                            <div class="mainImageSliderLine">
+                                                <div id="imageCount">1</div>/${fn:length(imagesRoute)}
+                                                &nbsp;&nbsp;
+                                                    ${route.title} Gallery
+                                            </div>
                                         </div>
-                                    </div>
-                </c:if>
+                    </c:if>
+                </div>
             </div>
         </div>
     
