@@ -51,7 +51,16 @@
             var styleTrigger = false;
             
             $(document).ready(function() {
-            $('#map').css('height',$('.routeDescription').height()+80);
+            $('.projectFunded').addClass('footerDisplayNone');
+            $('.footerRightMain').addClass('footerDisplayNone');
+            $('.footerLeftMain').addClass('footerDisplayNone');
+            $('.developpedText').addClass('developpedSmall');
+            $('.footerHeight').addClass('footerHeightMap');
+            $('.minHeight').removeClass('minHeight');
+            $('.routeDescription').height(document.body.clientHeight-212);
+            $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-212)/2)-24);
+            $('#map').height(document.body.clientHeight-152); 
+            
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
                 }
