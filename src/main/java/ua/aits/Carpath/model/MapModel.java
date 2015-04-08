@@ -209,15 +209,21 @@ public class MapModel {
         DB.closeCon();
     return newsList;
     }
-    public MapModel getMarker(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public MapModel getMarker(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
         MapModel temp = new MapModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(result.getString("titleEN"));
-            temp.setTextEN(result.getString("textEN"));
+            temp.setTitle(result.getString("title"+lan));
+            temp.setTextEN(result.getString("text"+lan));
+            if("".equals(temp.getTitle()) || temp.getTitle() == null){
+                temp.setTitle(result.getString("titleEN"));
+            }
+            if("".equals(temp.getTextEN()) || temp.getTextEN() == null){
+                temp.setTextEN(result.getString("textEN"));
+            }
             temp.setDate(result.getString("date"));
             temp.setPublic_country(result.getString("public_country"));
             temp.setMarkerIcon(result.getString("markerIcon")); 

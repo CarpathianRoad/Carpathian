@@ -7,6 +7,10 @@ package ua.aits.Carpath.functions;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.jsoup.Jsoup;
@@ -78,5 +82,12 @@ public class Helpers {
             text = text.replaceAll("'", "\\\\'");
             text = text.replaceAll("\\\"", "");
             return text;
+    }
+    public static Boolean checkOldArticle(String actual_date) throws ParseException{
+                String date_str = actual_date.replace("/", ".");
+                DateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
+                Date actual = dateFormat.parse(date_str);
+                Date today = new Date();
+                return actual.before(today);
     }
 }
