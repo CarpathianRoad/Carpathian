@@ -411,3 +411,9 @@ cke_contents{
     width: 100%;
     overflow-y: scroll
 }
+.double-point-filter input {
+    display: none;
+}
+.double-point-filter {
+    font-weight: 900 !important;
+}

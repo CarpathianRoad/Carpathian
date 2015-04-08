@@ -21,9 +21,11 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'forms' },
 		{ name: 'tools' },
 		{ name: 'document',	   groups: [ 'document', 'doctools' ] },
-		{ name: 'others' }
+		{ name: 'others'}
 	];
-
+        config.extraPlugins = 'justify';
+        config.extraPlugins = 'youtube';
+        //config.extraPlugins = 'youtube';
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';
