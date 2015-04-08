@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
@@ -218,7 +219,9 @@
                         <c:forEach items="${filters}" var="item">
                         <li>
                             <div class="checkbox">  
-                                <label><input type="checkbox" value="${item.shortTitle}">${item.fullTitle}</label>
+                                <label class="<c:if test="${fn:contains(item.fullTitle, ':')}">double-point-filter</c:if>" >
+                                    <input type="checkbox" value="${item.shortTitle}">${item.fullTitle}
+                                </label>
                             </div>
                         </li> 
                         </c:forEach>
