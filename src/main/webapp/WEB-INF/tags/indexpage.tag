@@ -87,7 +87,9 @@
             background-image:url(${Constants.URL}img/notChecked.png);
         }
     </style>
-    
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="${Constants.URL}js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="${Constants.URL}js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 </head>
 <script type="text/javascript">
 	//<![CDATA[
@@ -181,13 +183,13 @@
                 <div class="footerIntentInside"></div>
                 <div class="footerNew">
                     <div class="footerLeftMain">
-                            <div class="footerPartnership">
-                                <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
-                            </div>
                             <div class="footerCoFin">
-                                <a class="not-add-lan" href="http://ec.europa.eu/index_en.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
+                                <a class="not-add-lan" href="http://eeas.europa.eu/delegations/ukraine/index_uk.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
                                     <div class="rightTopText">The Programme is con-financed by the European Union</div>
                                 </a>
+                            </div>
+                            <div class="footerPartnership">
+                                <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                             </div>
                             <div class="huskrouaFooter">
                                 <a href="http://huskroua-cbc.net/" class="not-add-lan" target="_blank">
@@ -199,7 +201,6 @@
                     </div>
                     <div class="footerRightMain">
                         <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
-                            <img src="${Constants.URL}img/euFlag.png">
                             <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
                     </div>
@@ -239,6 +240,11 @@
                                                 Developed by AITS
                                             </a>
                                         </div>
+                    <div class="siteMap">
+                        <a href="#">
+                            Site Map
+                        </a>
+                    </div>
             </div>
         </footer>
 </body>
@@ -377,6 +383,14 @@
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');
                 $('#mapMenu').addClass('menuLine');
+                $('.projectFunded').addClass('footerDisplayNone');
+                $('.footerRightMain').addClass('footerDisplayNone');
+                $('.footerLeftMain').addClass('footerDisplayNone');
+                $('.developpedText').addClass('developpedSmall');
+                $('.footerHeight').addClass('footerHeightMap');
+                $('.minHeight').removeClass('minHeight');
+                $('#googleMap').height(document.body.clientHeight-152);
+                $('.siteMap').addClass('siteMapSmall');
                 /*$('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
                 $('.topMenu').addClass('mapMenuSmall');

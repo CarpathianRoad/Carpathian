@@ -31,6 +31,14 @@
         </style>
     </c:if>
     <meta name="title" content="${article.title}">
+    <script>
+        $(document).ready(function() {
+            $(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+            });
+        });
+    </script>    
     <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
@@ -55,7 +63,8 @@
                                             <c:forEach items="${images}" var="image" varStatus="loop">
                                                 <div onclick="set_main_picture('${Constants.URL}${image}','${loop.index}')">
                                                     <div class="sliderHover">
-                                                        <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image}" style="height: 150px"/>
+                                                        <div class="imageHoverMarkerPage"></div>
+                                                        <img rel="gallery1" u="image" src="${Constants.URL}${image}" style="height: 150px"/>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -66,7 +75,9 @@
                                         </span>
                                     </div>
                                     <div class="article_main_image">
-                                        <img id="main_image" src="${Constants.URL}<c:out value="${images[0]}" />" />
+                                        <a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}<c:out value="${images[0]}" />">
+                                            <img id="main_image" src="${Constants.URL}<c:out value="${images[0]}" />" />
+                                        </a>
                                         <div class="mainImageSliderLine">
                                             <div id="imageCount">1</div>/${fn:length(images)}
                                             &nbsp;&nbsp;
