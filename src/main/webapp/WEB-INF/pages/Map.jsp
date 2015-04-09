@@ -413,6 +413,9 @@
                 filtersContainerCounter = true;
                 $('#filtersContainer').fadeIn(100);
                 $('#pushRightConrainer').addClass('pushRightConrainerFilters');
+                if(document.body.clientHeight<830){
+                    $('.pushRightConrainerFilters').css('height', document.body.clientHeight-372);
+                }
                 $('#mainImageRightContaineMap').attr("src","${Constants.URL}img/filtersImageActive.png");
                 $('#sliderDiv').addClass('sliderDiv');
                 $('#sliderDiv').removeClass('sliderDivScroll');
@@ -591,7 +594,7 @@
         <area href="${Constants.URL}map/Poland" shape="poly"  onmouseover="showMapHover('#poland')"
               coords="580,0,321,0,310,12,332,14,353,21,364,39,371,53,388,38,405,41,413,60,453,54,481,50,508,56,526,70,551,86,543,70,538,56,542,40"/>
     </map>
-<div style="width:100%;height:768px; margin-top: -30px; margin-bottom:-45px;">
+<div style="width:100%;margin-top: -30px; margin-bottom:-45px;">
     <div id="sliderDiv" class="sliderDiv">
         <label id="sliderLabel" onclick="changeStyle()">
             <input type="checkbox" />
@@ -907,7 +910,7 @@
             </ul>
             </div>
     </div>
-    <div id="googleMap" style="overflow: visible;width: 100%;height:768px;min-height:720px;padding-top: 75px;"></div>
+    <div id="googleMap" style="overflow: visible;width: 100%;"></div>
     <div style="overflow: visible;" id="markerDescription"></div>
 </div>    
  </t:indexpage>

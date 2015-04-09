@@ -379,6 +379,13 @@
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');
                 $('#mapMenu').addClass('menuLine');
+                $('.projectFunded').addClass('footerDisplayNone');
+                $('.footerRightMain').addClass('footerDisplayNone');
+                $('.footerLeftMain').addClass('footerDisplayNone');
+                $('.developpedText').addClass('developpedSmall');
+                $('.footerHeight').addClass('footerHeightMap');
+                $('.minHeight').removeClass('minHeight');
+                $('#googleMap').height(document.body.clientHeight-152); 
                 /*$('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
                 $('.topMenu').addClass('mapMenuSmall');
