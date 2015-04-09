@@ -408,7 +408,7 @@
                 $('#pushRightConrainer').removeClass('pushRightConrainerFilters');
                 $('#filtersContainer').fadeOut(100);
                 $('#mainImageRightContaineMap').attr("src","${Constants.URL}img/mapRightContainer.png");
-            }
+            } 
             else{
                 filtersContainerCounter = true;
                 $('#filtersContainer').fadeIn(100);

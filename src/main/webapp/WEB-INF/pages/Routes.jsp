@@ -17,7 +17,7 @@
             }
             #map {
                 margin-top: -30px;
-                margin-bottom: -45px;
+                margin-bottom: 10px;
             }
         </style>
         <script type="text/javascript"
@@ -51,15 +51,16 @@
             var styleTrigger = false;
             
             $(document).ready(function() {
-            $('.projectFunded').addClass('footerDisplayNone');
-            $('.footerRightMain').addClass('footerDisplayNone');
-            $('.footerLeftMain').addClass('footerDisplayNone');
-            $('.developpedText').addClass('developpedSmall');
-            $('.footerHeight').addClass('footerHeightMap');
-            $('.minHeight').removeClass('minHeight');
-            $('.routeDescription').height(document.body.clientHeight-212);
-            $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-212)/2)-24);
-            $('#map').height(document.body.clientHeight-152); 
+                $('.projectFunded').addClass('footerDisplayNone');
+                $('.footerRightMain').addClass('footerDisplayNone');
+                $('.footerLeftMain').addClass('footerDisplayNone');
+                $('.developpedText').addClass('developpedSmall');
+                $('.footerHeight').addClass('footerHeightMap');
+                $('.minHeight').removeClass('minHeight');
+                $('.routeDescription').height(document.body.clientHeight-152);
+                $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
+                $('#map').height(document.body.clientHeight-152); 
+                $('.siteMap').addClass('siteMapSmall');
             
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
