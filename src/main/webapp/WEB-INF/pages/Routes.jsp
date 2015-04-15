@@ -62,7 +62,7 @@
                 $('#map').height(document.body.clientHeight-92); 
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                
+                 
                 $('.hideMenu').css('visibility','visible');
                 $('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
