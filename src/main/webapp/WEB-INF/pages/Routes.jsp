@@ -57,10 +57,23 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('.routeDescription').height(document.body.clientHeight-152);
+                $('.routeDescription').height(document.body.clientHeight-92);
                 $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
-                $('#map').height(document.body.clientHeight-152); 
+                $('#map').height(document.body.clientHeight-92); 
                 $('.siteMap').addClass('siteMapSmall');
+                $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                
+                $('.hideMenu').css('visibility','visible');
+                $('.s-top').hide();
+                $('.topMenu').addClass('topMenuSmall');
+                $('.s-logoIndex').addClass('s-logoIndexSmall');
+                $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                $('.dropDownMenu a').addClass('scrollSmallerText');
+                $('.menuLineSmall').addClass('menuLineExtraSmall');
+                $('.carpathName').addClass('carpathNameSmall');
+                $('.carpathNameSmall').removeClass('carpathName');
             
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
