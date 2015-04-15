@@ -23,8 +23,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'document',	   groups: [ 'document', 'doctools' ] },
 		{ name: 'others'}
 	];
-        config.extraPlugins = 'justify';
-        config.extraPlugins = 'youtube';
+        config.extraPlugins = 'justify,youtube';
         //config.extraPlugins = 'youtube';
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.

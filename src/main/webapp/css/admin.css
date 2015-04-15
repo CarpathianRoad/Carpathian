@@ -263,11 +263,15 @@ float: left;
     width: 100%;
 }
 .list-block ul {
-    margin-left: 30px;
+    -moz-column-count: 4;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 5;
+    -webkit-column-gap: 20px;
+    column-count: 5;
+    column-gap: 20px;
 }
 .list-block li {
     display: block;
-    float: left;
     width: 20%;
     height: 40px;
 }
