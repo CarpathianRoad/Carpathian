@@ -162,7 +162,9 @@ public class SinglePageController {
 		ModelAndView model = new ModelAndView("/tools/FileManager");
                 model.addObject("ckeditor", ckeditor);
                 model.addObject("num", num);
-                model.addObject("path",path.replace(",", "/"));
+                if("".equals(path)) {
+                    model.addObject("path",path.replace(",", "/"));
+                }
 		return model;
     }
         

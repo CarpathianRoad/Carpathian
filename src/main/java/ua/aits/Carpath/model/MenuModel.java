@@ -83,12 +83,12 @@ public class MenuModel {
     }
     
     public List<MenuModel> getMenuRow(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ;");
+        ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ORDER BY `menu`.`sort` ASC;");
         List<MenuModel> menuList = new LinkedList<>();
         while (result.next()) { 
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
-            temp.setParentID(result.getInt("parentId"));
+            temp.setParentID(result.getInt("parentID"));
             temp.setTitleEN(result.getString("title"+lan.toUpperCase()));
             if("".equals(temp.getTitleEN()) || temp.getTitleEN() == null ){
                temp.setTitleEN(result.getString("titleEN")); 
@@ -104,7 +104,7 @@ public class MenuModel {
     }
     
     public List<MenuModel> getAllCat() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from menu;");
+        ResultSet result = DB.getResultSet("select * from menu ORDER BY `menu`.`sort` ASC;");
         List<MenuModel> menuList = new LinkedList<>();
         while (result.next()) { 
             MenuModel temp = new MenuModel();
@@ -125,7 +125,7 @@ public class MenuModel {
         return temp;
     } 
     public List<MenuModel> getSubCategories(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from menu where parentId="+id+";");
+        ResultSet result = DB.getResultSet("select * from menu where parentId="+id+" ORDER BY `menu`.`sort` ASC;");
         List<MenuModel> contentList = new LinkedList<>();
         while (result.next()) { 
             MenuModel temp = new MenuModel();

@@ -121,6 +121,7 @@
 				<li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
 				<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
 				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
+				<li class="paddingLang"><a id="lang-switch-ro" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
 				<!--
                                 <li class="paddingLang"><a href="#">PL</a></li>
 				<li class="paddingLang"><a href="#">RO</a></li>
@@ -295,6 +296,7 @@
             $("#lang-switch-en").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/en"));
             $("#lang-switch-sk").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/sk"));
             $("#lang-switch-hu").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
+            $("#lang-switch-ro").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ro"));
     }
     var countryChooser;
     $( document ).ready(function() {
