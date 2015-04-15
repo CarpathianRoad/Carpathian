@@ -7,6 +7,7 @@ package ua.aits.Carpath.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -324,11 +325,16 @@ public class ArticleModel {
     }
     
     
-    public List<ArticleModel> getAllNews(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> getAllNews(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT 0, 9;");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
                 f_title = result.getString("titleEN");
@@ -357,11 +363,16 @@ public class ArticleModel {
         DB.closeCon();
     return newsList;
     }
-    public List<ArticleModel> getArticleByCount(String lan,String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> getArticleByCount(String lan,String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and id != "+id+" and publish = 1 order by id desc limit "+count+";");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
                 f_title = result.getString("titleEN");
@@ -512,11 +523,16 @@ public class ArticleModel {
         return result.isBeforeFirst();
     }
     
-    public List<ArticleModel> getByCategory(String lan, String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> getByCategory(String lan, String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = DB.getResultSet("select * from content where menuCat = "+catID+" and publish = 1 order by date desc;");
         List<ArticleModel> contentList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
                 f_title = result.getString("titleEN");
@@ -662,7 +678,7 @@ public class ArticleModel {
     }
     
     
-    public List<ArticleModel> get_news_by_limit(String last_item, String lan, String selected_country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> get_news_by_limit(String last_item, String lan, String selected_country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         String query = "select * from content where type in (0,1) and publish = 1 ";
         if(!selected_country.equals("all"))
             {
@@ -673,6 +689,11 @@ public class ArticleModel {
         ResultSet result = DB.getResultSet(query);
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             ArticleModel temp = new ArticleModel();
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
@@ -703,7 +724,7 @@ public class ArticleModel {
     return newsList;
     }
     
-    public List<ArticleModel> get_category_by_limit(String last_item, String lan, String menu_id, String selected_country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> get_category_by_limit(String last_item, String lan, String menu_id, String selected_country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         String query = "select * from content where  menuCat = "+menu_id+" and publish = 1 ";
         if(!selected_country.equals("all"))
             {
@@ -714,6 +735,11 @@ public class ArticleModel {
         ResultSet result = DB.getResultSet(query);
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             ArticleModel temp = new ArticleModel();
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
@@ -744,7 +770,7 @@ public class ArticleModel {
     return newsList;
     }
     
-    public List<ArticleModel> get_news_by_country_filter(String country, String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> get_news_by_country_filter(String country, String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = null;
         if(country.equals("all"))
             {
@@ -758,6 +784,11 @@ public class ArticleModel {
         System.out.println("query = "+result.toString());
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             ArticleModel temp = new ArticleModel();
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){
@@ -789,7 +820,7 @@ public class ArticleModel {
     }
     
     
-    public List<ArticleModel> get_category_by_country_filter(String country, String lan, String menu_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ArticleModel> get_category_by_country_filter(String country, String lan, String menu_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = null;
         if(country.equals("all"))
             {
@@ -803,6 +834,11 @@ public class ArticleModel {
         System.out.println("query = "+result.toString());
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
             ArticleModel temp = new ArticleModel();
             String f_title = result.getString("title"+lan.toUpperCase());
             if("".equals(f_title) || f_title == null){

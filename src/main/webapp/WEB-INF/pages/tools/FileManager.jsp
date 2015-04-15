@@ -56,7 +56,9 @@
         $("#createfolder").click(function(){
             $(".image-upload-folder").toggle("slow");
         });
-
+        $("#close-modal").click(function(){
+            window.parent.imageInserted(); 
+        });
         $("#close-add-folder").click(function(){
             $(".image-upload-folder").toggle("slow");
         });
@@ -93,7 +95,8 @@
                 });
         });
         function initGalerry(){
-            getFiles("","");
+        
+           getFiles("","${path}"); 
         }
 
         function insertImage(){

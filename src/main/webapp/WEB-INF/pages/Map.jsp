@@ -503,7 +503,7 @@
             }
             markersList = markersList + '</div><div class="buildRouteButton">'+  
                 '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
-                '<a id="printRoute" href="#" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
+                '<a target="_blank" id="printRoute" href="#" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
             $('.routeMapContainer').html(markersList);
             $('#routePointsNumber').html(routeMarkers.length);
         }
@@ -564,7 +564,7 @@
             if(routeMarkers.length!=0){
                 markersList = markersList + '</div><div class="buildRouteButton" onclick="buildRouteMap()">'+ 
                 '<a onclick="buildRouteMap()" class="btn btn-theme printRoute">BUILD ROUTE</a>'+
-                '<a href="#" id="printRoute" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
+                '<a target="_blank" href="#" id="printRoute" onclick="printRoute()" class="btn btn-theme printRoute">PRINT</a></div>';
                 $('.routeMapContainer').html(markersList);
                 }
             else{

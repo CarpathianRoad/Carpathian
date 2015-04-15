@@ -41,6 +41,12 @@ public class SinglePageController {
 		ModelAndView model = new ModelAndView("/error/404");
 		return model;
 	}
+    @RequestMapping(value = {"/500", "/Carpath/500"})
+    public ModelAndView error500(HttpServletRequest request,
+			HttpServletResponse response)  {
+		ModelAndView model = new ModelAndView("/error/500");
+		return model;
+	}
     @RequestMapping(value = {"/{lan}/index", "/{lan}/main", "/{lan}/home"}, method = RequestMethod.GET)
     protected ModelAndView handleRequestInternal(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -122,7 +128,7 @@ public class SinglePageController {
     @RequestMapping(value = {"/{lan}/map/markers/{id}","/{lan}/map/markers/{id}/"})
     public ModelAndView marker(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-        MapModel ret  = map.getMarker(id);
+        MapModel ret  = map.getMarker(lan, id);
         if(ret.getMarkerIcon() == null || "".equals(ret.getMarkerIcon())) {
                             ret.setMarkerIcon("gardens");
                         }
@@ -150,11 +156,15 @@ public class SinglePageController {
     @RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)
         public ModelAndView fileManager (HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
+                String path = request.getParameter("path");
                 String ckeditor = request.getParameter("CKEditor");
                 String num = request.getParameter("CKEditorFuncNum");
 		ModelAndView model = new ModelAndView("/tools/FileManager");
                 model.addObject("ckeditor", ckeditor);
                 model.addObject("num", num);
+                if("".equals(path)) {
+                    model.addObject("path",path.replace(",", "/"));
+                }
 		return model;
     }
         
