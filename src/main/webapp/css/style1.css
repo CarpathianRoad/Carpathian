@@ -28,6 +28,9 @@ a, a:hover, a:active, a:visited {
     height:110px;
     background-color: rgb(86,105,143);
 }
+.mainMenuIntendSmall{
+    height:50px !important;
+}
 .mainMenuIntendMap{
     width: 100%;
     height:95px;
@@ -1730,7 +1733,27 @@ label{
     position: absolute;
     right: 0; 
     transition: 0.5s;
-    top: 110px;
+    top: 50px;
+}
+.hideMenu{
+    margin: 0 auto;
+    width: 9px;
+    height: 17px;
+    margin-top: -5px;
+    visibility: hidden;
+    transition: 0.5s;
+}
+.hideMenu img{
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    transition: 0.5s;
+}
+.rotateHideArrow{
+    -ms-transform: rotate(90deg) !important; /* IE 9 */
+    -webkit-transform: rotate(90deg) !important; /* Chrome, Safari, Opera */
+    transform: rotate(90deg) !important;
+    
 }
 .routeDescriptionSmall{
     width: 0px !important;

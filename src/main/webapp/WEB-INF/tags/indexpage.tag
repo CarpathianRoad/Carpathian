@@ -167,6 +167,10 @@
                         
                     </div>
 		</div>
+                <div class="s-clear"></div>
+                <div class="hideMenu" onclick="showHideMenu()">
+                    <img id="hideMenuArrow" src="${Constants.URL}img/arrow-menu-hide.png">
+                </div>
             </div>
 	<div class="s-clear"></div>
         </div>
@@ -306,6 +310,40 @@
         $('#searchButtonActive').hide(); 
         
     });
+    
+    var hidden = true;
+    function showHideMenu(){
+        if(hidden){
+            hidden = false;
+            $('.s-top').fadeIn("slow");
+            $('.topMenu').removeClass('topMenuSmall');
+            $('.s-logoIndexSmall').addClass('s-logoIndex');
+            $('.s-logoIndex').removeClass('s-logoIndexSmall');
+            $('.s-rightNavBarSmall').addClass('s-rightNavBar');
+            $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
+            $('.dropDownMenu a').removeClass('scrollSmallerText');
+            $('.menuLineSmall').removeClass('menuLineExtraSmall');
+            $('.carpathNameSmall').addClass('carpathName');
+            $('.carpathName').removeClass('carpathNameSmall');
+            $('#hideMenuArrow').addClass('rotateHideArrow');
+        }
+        else{
+            hidden = true;
+            $('.s-top').hide();
+            $('.topMenu').addClass('topMenuSmall');
+            $('.s-logoIndex').addClass('s-logoIndexSmall');
+            $('.s-logoIndexSmall').removeClass('s-logoIndex');
+            $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+            $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+            $('.dropDownMenu a').addClass('scrollSmallerText');
+            $('.menuLineSmall').addClass('menuLineExtraSmall');
+            $('.carpathName').addClass('carpathNameSmall');
+            $('.carpathNameSmall').removeClass('carpathName');
+            $('#hideMenuArrow').removeClass('rotateHideArrow');
+        }
+        console.log(hidden);
+    }
+    
     function addCssToMenu(){
      countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(countryChooser){
@@ -387,8 +425,21 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('#googleMap').height(document.body.clientHeight-152);
+                $('#googleMap').height(document.body.clientHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
+                $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                
+                $('.hideMenu').css('visibility','visible');
+                $('.s-top').hide();
+                $('.topMenu').addClass('topMenuSmall');
+                $('.s-logoIndex').addClass('s-logoIndexSmall');
+                $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                $('.dropDownMenu a').addClass('scrollSmallerText');
+                $('.menuLineSmall').addClass('menuLineExtraSmall');
+                $('.carpathName').addClass('carpathNameSmall');
+                $('.carpathNameSmall').removeClass('carpathName');
                 /*$('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
                 $('.topMenu').addClass('mapMenuSmall');

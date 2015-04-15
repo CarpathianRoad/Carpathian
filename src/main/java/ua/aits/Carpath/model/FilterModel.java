@@ -44,7 +44,7 @@ public class FilterModel {
     
     
     public List<FilterModel> getAllFilters() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from filters order by id desc;");
+        ResultSet result = DB.getResultSet("select * from filters order by id asc;");
         List<FilterModel> resultList = new LinkedList<>();
         while (result.next()) {
             FilterModel temp = new FilterModel();
