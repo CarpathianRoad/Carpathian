@@ -7,6 +7,7 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
@@ -210,7 +211,9 @@
                         <c:forEach items="${filters}" var="item">
                         <li>
                             <div class="checkbox">  
-                                <label><input type="checkbox" value="${item.shortTitle}">${item.fullTitle}</label>
+                                <label class="<c:if test="${fn:contains(item.fullTitle, ':')}">double-point-filter</c:if>" >
+                                    <input type="checkbox" value="${item.shortTitle}">${item.fullTitle}
+                                </label>
                             </div>
                         </li> 
                         </c:forEach>
@@ -252,7 +255,6 @@
 								<button class="btn btn-primary btn-mini margintop10 marginbottom30" id="sudmitData" type="submit">Save</button>
 							</p>
             <script> 
-                CKEDITOR.config.extraPlugins = 'justify';
                 CKEDITOR.replace('editorEN', {
                     filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
                     filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
@@ -383,6 +385,20 @@ function imageInserted(){
     initDialog();
 }
 function initDialog(){
+    var current = "";
+    if($('.returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('.returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+                //var curr = path.value;
+        var home = "${Constants.FILE_URL}".replace(/\//g,",");
+        path = jQuery.grep(path, function(value) {
+            return value !== "content";
+        });
+        path = jQuery.grep(path, function(value) {
+            return value !== "img";
+        });
+        current = home+path.toString()+",";
+    }
+    console.log(current);
     $("#dialog").dialog({
             autoOpen: false,
             modal: true,
@@ -390,7 +406,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager');
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
                   }
         });
         

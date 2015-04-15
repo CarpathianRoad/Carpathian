@@ -576,6 +576,9 @@ article .intendNews .post-image .post-heading{
 .footerHeight{
     height: 148px;
 }
+.footerHeightMap{
+    height: 42px;
+}
 .footerRights a:visited{
     color: white;
 }
@@ -833,6 +836,9 @@ body {
     float: left;
     margin-top: 15px;
     margin-left: 15px;
+}
+.developpedSmall{
+    margin-top: 0 !important;
 }
 .footerContactsText{
     margin-left: 0;
@@ -1264,8 +1270,8 @@ p{
     transition: 0.5s;
 }
 .pushRightConrainerFilters{
+    height: 468px; 
     width: 365px !important;
-    height: 468px !important;
     transition: 0.5s;
     background-color: rgb(84,182,157) !important;
 }
@@ -1301,7 +1307,7 @@ p{
     right: 10px;
 }
 #filtersContainer{
-    height: 468px;
+    height: inherit;
     width: 320px;
     background: rgb(86,105,143);
     padding: 20px;
@@ -1502,6 +1508,8 @@ input[type=checkbox].css-checkbox + label.css-label {
     height: 10px;
     padding: 0px;
     transition: 0.5s;
+    width: auto;
+    height: auto;
 }
 .rotatedCaret{
     transition: 0.5s;
@@ -1539,12 +1547,14 @@ label{
 }
 .footerLeftMain{
 	width: 610px;
-	float: left;
+	float: right;
 	height: 69px;
 	border: 2px solid rgb(122,144,180);
 }
+.footerDisplayNone{
+    display: none;
+}
 .footerPartnership{
-	background: rgb(122,144,180);
 	height: 100%;
 	width: 33.333333%;
 	float: left;
@@ -1558,13 +1568,14 @@ label{
 	color: white;
 	text-align: center;
         padding-top: 31px;
+        padding-left: 19px;
 }
 .footerCoFin{
 	height: 100%;
 	width: 190px;
 	float: left;
 	text-align: center;
-	font: 7pt calibri;
+	font: 7pt 'PT Sans';
 	font-weight: 200;
         padding-top: 23px;
         margin-left: 5px;
@@ -1606,21 +1617,30 @@ label{
     width: 33px;
 }
 .footerRightMain{
-	margin-left: 15px;
 	width: 355px;
 	float: left;
 	height: 69px;
 	border: 2px solid rgb(122,144,180);
         padding-top: 28px;
         text-align: center;
-        padding-left: 24px;
+        padding-left: 28px;
 }
 .fundedLink{
     text-align: left;
     color: white;
-    font: 7pt calibri;
+    font: 7pt 'PT Sans';
     font-weight: 200;
-    margin-left: 14px;
+    margin-left: 5px;
+}
+.siteMap{
+    float: right;
+    margin: 0 auto;
+    font: 7pt 'Open Sans';
+    font-weight: 200;
+    margin-top: 15px;
+}
+.siteMapSmall{
+    margin: 0 auto;
 }
 .fundedLink a{
     text-align: left;
@@ -1697,6 +1717,7 @@ label{
     position: absolute;
     right: 0; 
     transition: 0.5s;
+    top: 110px;
 }
 .routeDescriptionSmall{
     width: 0px !important;
@@ -1704,8 +1725,9 @@ label{
 .routeDescrOverflow{
     padding-top: 20px;
     padding-left: 40px;
+    padding-bottom: 20px;
     width: 700px;
-    height: 700px;;
+    height: inherit;
     overflow: hidden;
     overflow-y: scroll;
 }
