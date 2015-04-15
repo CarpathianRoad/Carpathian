@@ -1736,7 +1736,7 @@ label{
     transform: rotate(-90deg);
     transition: 0.5s;
 }
-.rotateHideArrow{
+.rotateHideArrow{ 
     -ms-transform: rotate(90deg) !important; /* IE 9 */
     -webkit-transform: rotate(90deg) !important; /* Chrome, Safari, Opera */
     transform: rotate(90deg) !important;

@@ -298,7 +298,7 @@
             $("#lang-switch-hu").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
             $("#lang-switch-ro").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ro"));
     }
-    var countryChooser;
+    var countryChooser; 
     $( document ).ready(function() {
             
             var str_url = window.location.href.split('/'); 
