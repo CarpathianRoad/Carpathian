@@ -62,7 +62,7 @@
                 $('#map').height(document.body.clientHeight-92); 
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                $('.contentIntend').css('height','30');
+                $('.contentIntend').css('height','30'); 
                  
                 if(window.innerWidth<1024){
                     $('#map').height(document.body.clientHeight-104);

@@ -457,7 +457,7 @@
                 }
                 if(window.innerWidth<736){
                     $('.s-bot').css('margin-top','11px');
-                }
+                } 
                 
                 $('.hideMenu').css('visibility','visible');
                 $('.s-top').hide();
