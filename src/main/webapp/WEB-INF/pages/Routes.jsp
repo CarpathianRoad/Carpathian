@@ -62,7 +62,19 @@
                 $('#map').height(document.body.clientHeight-92); 
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                $('.contentIntend').css('height','30');
                  
+                if(window.innerWidth<1024){
+                    $('#map').height(document.body.clientHeight-104);
+                    $('.routeDescription').height(document.body.clientHeight-104);
+                    $('#mainMenuWidth').css('padding','5px 15px');
+                }
+                if(window.innerWidth<800){
+                    hideDescrRoute();
+                }
+                if(window.innerWidth<736){
+                    $('.s-bot').css('margin-top','11px');
+                }
                 $('.hideMenu').css('visibility','visible');
                 $('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
