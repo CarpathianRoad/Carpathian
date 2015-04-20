@@ -562,6 +562,64 @@ public class ArticleModel {
     return contentList;
     }
     
+    public List<ArticleModel> getSearchResult(String lan, String str) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
+        ResultSet result = DB.getResultSet("select * from content where publish = 1 AND ("
+                + "titleEN LIKE '%"+str+"%' OR "
+                + "titleUA LIKE '%"+str+"%' OR "
+                + "titleHU LIKE '%"+str+"%' OR "
+                + "titleSK LIKE '%"+str+"%' OR "
+                + "titleRO LIKE '%"+str+"%' OR "
+                + "titlePL LIKE '%"+str+"%' OR "
+                + "titleGE LIKE '%"+str+"%' OR "
+                + "titleCZ LIKE '%"+str+"%' OR "
+                + "titleSRB LIKE '%"+str+"%' OR "
+                + "textEN LIKE '%"+str+"%' OR "
+                + "textUA LIKE '%"+str+"%' OR "
+                + "textHU LIKE '%"+str+"%' OR "
+                + "textSK LIKE '%"+str+"%' OR "
+                + "textRO LIKE '%"+str+"%' OR "
+                + "textPL LIKE '%"+str+"%' OR "
+                + "textGE LIKE '%"+str+"%' OR "
+                + "textCZ LIKE '%"+str+"%' OR "
+                + "textSRB LIKE '%"+str+"%' "
+                + ") order by id desc;");
+        List<ArticleModel> contentList = new LinkedList<>();
+        while (result.next()) { 
+            ArticleModel temp = new ArticleModel();
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = result.getString("textEN");
+            }
+            if(text.length() > 400){
+                text = text.substring(0,400) + "...";
+            }
+            
+            temp.setTextEN(text);
+            temp.setId(result.getInt("id"));
+            temp.setTitle(f_title);
+            temp.setDate(result.getString("date").replace("/", "."));
+            temp.setImage(result.getString("image"));
+            if("".equals(temp.getImage())){
+                temp.setImage("img/no-photo.png");
+            }
+            temp.setActDate(result.getString("actual"));
+            temp.setCountry(result.getString("country")); 
+            temp.setAuthor(result.getString("author"));
+            contentList.add(temp);
+        } 
+        DB.closeCon();
+    return contentList;
+    }
+    
     public List<ArticleModel> getAllContentByType(String username, String type, String value) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String where;
         String user;

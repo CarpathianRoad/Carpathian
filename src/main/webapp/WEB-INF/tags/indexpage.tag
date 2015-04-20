@@ -146,7 +146,7 @@
                             </a>
 			</div>
 			<div class="s-one">
-                            <form class="searchMenu">
+                            <form class="searchMenu" action="${Constants.URL}search" method="GET" id="searchForm">
 				<button type="button" id="searchButton" onclick="showButton()">
                                     <div class="socialHeaderDiv"
                                         onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
@@ -157,8 +157,8 @@
                                         >
                                     </div>
 				</button>
-                                <input type="text" id="s-textbox">
-				</input>
+                                           
+                                <input type="text" name="find" id="s-textbox">
                                 <button type="button" id="searchButtonActive">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png">
                                     </div>
@@ -252,7 +252,7 @@
                                             </a>
                                         </div>
                     <div class="siteMap">
-                        <a href="#">
+                        <a href="${Constants.URL}sitemap">
                             Site Map
                         </a>
                     </div>
@@ -325,11 +325,22 @@
             // style="color:rgb(174,214,43)"
             
             buildMenu($(".lang-sw.active").html());
-        
+           
+            if($("#searchForm").attr("action").toLowerCase().indexOf("/carpath/") !== -1){
+                $("#searchForm").attr("action", $("#searchForm").attr("action").replace("Carpath","Carpath/"+$(".lang-sw.active").html().toLowerCase()));
+            }
+            else {
+                $("#searchForm").attr("action", "/"+$(".lang-sw.active").html().toLowerCase()+$("#searchForm").attr("action"));
+            }
+            
         
         
         $('#searchButtonActive').hide(); 
         
+    });
+    
+    $("#searchButtonActive").click(function() {
+        $("#searchForm").submit();
     });
     
     var hidden = true;
