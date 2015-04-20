@@ -180,4 +180,29 @@ public class SinglePageController {
 		ModelAndView model = new ModelAndView("LogIn");
 		return model;
 	}
+    
+    @RequestMapping(value = {"/{lan}/search","/{lan}/search/","/Carpath/{lan}/search","/Carpath/{lan}/search/"}, method = RequestMethod.GET)
+        public ModelAndView searchResult (@PathVariable("lan") String lan, HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                String searchStr = request.getParameter("find");
+		ModelAndView model = new ModelAndView("Search");
+                System.out.println(lan);
+                System.out.println(searchStr);
+                List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
+                for(ArticleModel temp: articles) {
+                    String[] img  = temp.image.split(",");
+                    temp.setImage(img[0]);
+                }
+                model.addObject("resultList", articles);
+		return model;
+    }
+    
+    @RequestMapping(value = {"/{lan}/sitemap/","/{lan}/sitemap"})
+    public ModelAndView siteMap(@PathVariable("lan") String lan, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+                
+		ModelAndView model = new ModelAndView("SiteMap");
+		model.addObject("mapHTML", helpers.getRowHtml(lan, "0"));
+		return model;
+	}
 }

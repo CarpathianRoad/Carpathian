@@ -67,13 +67,6 @@ public class RouteModel {
         this.textType = textType;
     }
     
-    public Integer getdificult() {
-        return dificult;
-    }
-    public void setDificult(Integer dificult) {
-        this.dificult = dificult;
-    }
-    
     public Integer getPublish() {
         return publish;
     }
@@ -287,7 +280,6 @@ public class RouteModel {
             temp.setId(result.getInt("id"));
             temp.setTitle(result.getString("titleEN"));
             temp.setType(result.getInt("type"));
-            temp.setDificult(result.getInt("dificult"));
             temp.setCategory(result.getString("category"));
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
