@@ -98,6 +98,7 @@
 			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
 			$('body').delay(350).css({'overflow':'visible'});
 		})
+                var smallMenu = false;
 	//]]>
 </script>
 <body>
@@ -107,7 +108,7 @@
 </div>
     <div class="minHeight">
 	<div class="row indexNavbar topMenu">
-            <div class='s-new' id="mainMenuWidth">
+            <div class='s-new smallMenuWidth' id="mainMenuWidth">
 		<div class="s-logoIndex">
                     <a href="${Constants.URL}index">
                         <img src="${Constants.URL}img/logo_4.png">
@@ -170,6 +171,11 @@
                         
                     </div>
 		</div>
+                <div class="showSmallMenu" onclick="showSmallResMenu()">
+                    <img id="showSmallMenu" src="${Constants.URL}img/mapRightContainer.png"
+                        onmouseover="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
+                        onmouseout="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
+                </div>
                 <div class="s-clear"></div>
                 <div class="hideMenu" onclick="showHideMenu()">
                     <img id="hideMenuArrow" src="${Constants.URL}img/arrow-menu-hide.png">
@@ -237,7 +243,7 @@
                 </div>    
                                         <div class="footerContactsText developpedText">
                                             <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
-                                                &#169; Communal enterprise ”Agency of Regional Development and Cross-Border Co-operation “Transcarpathia” of Zakarpattya Oblast Council”
+                                                &#169; Communal enterprise âAgency of Regional Development and Cross-Border Co-operation âTranscarpathiaâ of Zakarpattya Oblast Councilâ
                                             </a>
                                         </div>
                                         <div class="developpedText">
@@ -257,6 +263,17 @@
 
 <script>
     addCssToMenu();
+    function showSmallResMenu(){
+        console.log('1');
+        if(!smallMenu){
+            $('.s-rightNavBar').css('display','block');
+            //$('.s-rightNavBar').css();
+            $('.showSmallMenu').css('display','none');
+        }
+        else{
+            
+        }
+    }
     function buildMenu(lang){
         console.log(lang);
         $.ajax({
@@ -298,9 +315,9 @@
             $("#lang-switch-hu").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
             $("#lang-switch-ro").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ro"));
     }
-    var countryChooser;
+    var countryChooser; 
     $( document ).ready(function() {
-            
+                
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
             $("#lang-switch-"+str_url[4]).addClass("active");
@@ -432,6 +449,15 @@
                 $('#googleMap').height(document.body.clientHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                $('.contentIntend').css('height','30');
+            
+                if(window.innerWidth<1024){
+                    $('#googleMap').height(document.body.clientHeight-104);
+                    $('#mainMenuWidth').css('padding','5px 15px');
+                }
+                if(window.innerWidth<736){
+                    $('.s-bot').css('margin-top','11px');
+                } 
                 
                 $('.hideMenu').css('visibility','visible');
                 $('.s-top').hide();
@@ -440,7 +466,6 @@
                 $('.s-logoIndexSmall').removeClass('s-logoIndex');
                 $('.s-rightNavBar').addClass('s-rightNavBarSmall');
                 $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
-                $('.dropDownMenu a').addClass('scrollSmallerText');
                 $('.menuLineSmall').addClass('menuLineExtraSmall');
                 $('.carpathName').addClass('carpathNameSmall');
                 $('.carpathNameSmall').removeClass('carpathName');
@@ -634,10 +659,13 @@
             $('.menuLineSmall').addClass('menuLineExtraSmall');
             $('.carpathName').addClass('carpathNameSmall');
             $('.carpathNameSmall').removeClass('carpathName');
+            $('#mainMenuWidth').addClass('paddingSmallMenu');
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                $('.s-top').fadeIn("slow");
+                if(window.innerWidth>735){
+                    $('.s-top').fadeIn("slow");
+                }
                 $('.topMenu').removeClass('topMenuSmall');
                 $('.s-logoIndexSmall').addClass('s-logoIndex');
                 $('.s-logoIndex').removeClass('s-logoIndexSmall');
@@ -647,6 +675,7 @@
                 $('.menuLineSmall').removeClass('menuLineExtraSmall');
                 $('.carpathNameSmall').addClass('carpathName');
                 $('.carpathName').removeClass('carpathNameSmall');
+            $('#mainMenuWidth').removeClass('paddingSmallMenu');
             //}
         }
     });
