@@ -320,8 +320,11 @@
                 
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
-            $("#lang-switch-"+str_url[4]).addClass("active");
-            $("#lang-switch-"+str_url[3]).addClass("active");
+            if("${Constants.URL}" === "/Carpath/") {
+                $("#lang-switch-"+str_url[4]).addClass("active");
+            } else {
+                $("#lang-switch-"+str_url[3]).addClass("active");
+            }
             // style="color:rgb(174,214,43)"
             
             buildMenu($(".lang-sw.active").html());
