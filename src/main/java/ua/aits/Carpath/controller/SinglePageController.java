@@ -5,22 +5,17 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
-import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
 
 /**
@@ -185,9 +180,9 @@ public class SinglePageController {
         public ModelAndView searchResult (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
                 String searchStr = request.getParameter("find");
+                byte[] bytes = searchStr.getBytes(StandardCharsets.ISO_8859_1);
+                searchStr = new String(bytes, StandardCharsets.UTF_8);
 		ModelAndView model = new ModelAndView("Search");
-                System.out.println(lan);
-                System.out.println(searchStr);
                 List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
                 for(ArticleModel temp: articles) {
                     String[] img  = temp.image.split(",");
