@@ -295,14 +295,17 @@
                 for(var i = 0; i<height.length; i++){
                     //data.addRow(['',height[i]]);
                     obj.push([length[i],parseFloat(height[i])]);
+                    if(height.length>1000) 
+                        i+=3
                 }
                 data.addRows(obj);
                 chart = new google.visualization.ColumnChart(document.getElementById('holder'));
                 chart.draw(data, {
                     legend: 'none',
                     titleY: 'Elevation (m)',
-                    focusBorderColor: '#00ff00',
-                    titleX: 'Length (km)'
+                    focusBorderColor: 'rgb(177,216,66)',
+                    borderColor: 'rgb(84, 182, 157)',
+                    hAxis: 'showTextEvery: 77777'
                   });
                 var mousemarker;
                 google.visualization.events.addListener(chart, 'onmouseover', function(e) {
