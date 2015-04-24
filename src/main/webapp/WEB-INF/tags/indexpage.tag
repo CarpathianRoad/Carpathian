@@ -320,7 +320,8 @@
                 
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
-            if("${Constants.URL}" === "/Carpath/") {
+            console.log(str_url[3]);
+            if("${Constants.URL}" === "/Carpath/" || str_url[3] === "Carpath") {
                 $("#lang-switch-"+str_url[4]).addClass("active");
             } else {
                 $("#lang-switch-"+str_url[3]).addClass("active");

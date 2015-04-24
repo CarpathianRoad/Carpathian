@@ -95,8 +95,8 @@
                 });
         });
         function initGalerry(){
-        
-           getFiles("","${path}"); 
+            console.log(getParameterByName('path').replace(/,/g,"/"));
+           getFiles("",getParameterByName('path').replace(/,/g,"/")); 
         }
 
         function insertImage(){
@@ -104,7 +104,6 @@
         $(".img-content-show-all img:not(.remove-icon)").click(function() {
             var name = $(this).attr("name");
             var path = $(this).attr("realpath");
-            console.log(path + name);
             if($(this).attr("type") === "img"){
                 if("${ckeditor}" === "" && "${num}" === "") {
                     $(".img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
@@ -162,7 +161,6 @@
                     data: 'name='+name+'&path='+path,
                     success: function(data){
                         getFiles("", path, true);
-                        console.log("create");
                         $(".image-upload-folder").hide();
                         $(".image-upload-folder input").val("New Folder");
                         }
@@ -222,6 +220,12 @@
                         }
                 });
         });
+        }
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
     </script>  
     

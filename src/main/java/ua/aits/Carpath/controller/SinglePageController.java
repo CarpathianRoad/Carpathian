@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
@@ -180,8 +181,10 @@ public class SinglePageController {
         public ModelAndView searchResult (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
                 String searchStr = request.getParameter("find");
-                byte[] bytes = searchStr.getBytes(StandardCharsets.ISO_8859_1);
-                searchStr = new String(bytes, StandardCharsets.UTF_8);
+                if(!"/Carpath/".equals(Constants.URL)){
+                    byte[] bytes = searchStr.getBytes(StandardCharsets.ISO_8859_1);
+                    searchStr = new String(bytes, StandardCharsets.UTF_8);
+                }
 		ModelAndView model = new ModelAndView("Search");
                 List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
                 for(ArticleModel temp: articles) {
