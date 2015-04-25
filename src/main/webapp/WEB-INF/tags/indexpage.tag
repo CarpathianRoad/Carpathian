@@ -96,7 +96,6 @@
 		$(window).load(function() { // makes sure the whole site is loaded
 			$('#status').fadeOut(); // will first fade out the loading animation
 			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-			$('body').delay(350).css({'overflow':'visible'});
 		})
                 var smallMenu = false;
 	//]]>
@@ -336,7 +335,9 @@
     function showHideMenu(){
         if(hidden){
             hidden = false;
-            $('.s-top').fadeIn("slow");
+            if(window.innerWidth>735){
+                $('.s-top').fadeIn("slow");
+            }
             $('.topMenu').removeClass('topMenuSmall');
             $('.s-logoIndexSmall').addClass('s-logoIndex');
             $('.s-logoIndex').removeClass('s-logoIndexSmall');
@@ -362,7 +363,6 @@
             $('.carpathNameSmall').removeClass('carpathName');
             $('#hideMenuArrow').removeClass('rotateHideArrow');
         }
-        console.log(hidden);
     }
     
     function addCssToMenu(){

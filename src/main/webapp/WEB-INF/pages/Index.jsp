@@ -98,7 +98,7 @@
                     <!-- !!!SLIDER ENDS!!! -->
                     <!-- !!!MAP BLOCK!!! -->
                     
-    <div class="s-new">
+    <div class="s-new indexMapAllContainer">
         <div class="indexMap" id="mainMap">
             <div class="indexMapMenu">
                 <ul id="nav">
