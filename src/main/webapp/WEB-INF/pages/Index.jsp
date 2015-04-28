@@ -173,7 +173,7 @@
                                         ${markers.date}
                                     </div>
                                     <div class="imageHoverCountry">
-                                        <div class="newsCountryText">${markers.country}</div><img src="${Constants.URL}img/newsImageHover.png">
+                                        <div class="newsCountryText">${markers.public_country}</div><img src="${Constants.URL}img/newsImageHover.png">
                                     </div>
                                 </div>
                                 <img src="${Constants.URL}${markers.image}" alt="image"/>
@@ -192,7 +192,7 @@
         <div class="s-newsText">
             <a href="${Constants.URL}article/news">NEWS</a>
         </div>
-        <div class="slider1">
+        <div class="slider2">
             <c:forEach items="${content}" var="item">
                 <div class="s-cell slide">
                     <div class="s-block">
@@ -203,7 +203,7 @@
                                         ${item.date}
                                     </div>
                                     <div class="imageHoverCountry">
-                                        <div class="newsCountryText">${item.country}</div><img src="${Constants.URL}img/newsImageHover.png">
+                                        <div class="newsCountryText">${item.public_country}</div><img src="${Constants.URL}img/newsImageHover.png">
                                     </div>
                                 </div>
                                 <img src="${Constants.URL}${item.image}" />
@@ -326,14 +326,40 @@
                     }
                 }, 5000);
                 */
-               
-            $('.slider1').bxSlider({
-                auto: false,
-                slideWidth: 300,
-                minSlides: 3,
-                maxSlides: 3,
-                slideMargin: 40
-            });
+            
+                if(window.outerWidth>980){
+                    $('.slider1').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 1,
+                        maxSlides: 3,
+                        slideMargin: 40
+                    });
+                    $('.slider2').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 1,
+                        maxSlides: 3,
+                        slideMargin: 40
+                    });
+                }else{
+                    $('.slider1').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 2,
+                        maxSlides: 2,
+                        slideMargin: 40
+                    });
+                    $('.slider2').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 2,
+                        maxSlides: 2,
+                        slideMargin: 40
+                    });
+                }
+            
+            
         });
     </script>
 </t:indexpage>

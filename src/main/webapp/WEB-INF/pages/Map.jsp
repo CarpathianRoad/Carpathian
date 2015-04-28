@@ -35,9 +35,11 @@
 	</style>
     <script>
         var center;
+        /*
         var icons = ['church','hotels','info','militaries',
             'museums','restaurants','ruins','swimming','tasting_hall',
             'yacht'];
+        */
         var markers = [];
         var map;
         var markerCluster;
@@ -86,9 +88,10 @@
             var filterNames = [];
             <c:forEach items="${markers}" var="marker">
                 var markerIcons = "${marker.markerIcon}".split(",");
-                if(icons.indexOf(markerIcons[0])==-1){
-                    markerIcons.splice(0,0,'info');
-                }
+                //KIT NE PASHE ROZKOMENTUTU
+                //if(icons.indexOf(markerIcons[0])==-1){
+                markerIcons.splice(0,0,'info');
+                //}
                 var pinIcon = new google.maps.MarkerImage(
                     "${Constants.URL}img/markers/"+markerIcons[0]+".png",
                     null, 
