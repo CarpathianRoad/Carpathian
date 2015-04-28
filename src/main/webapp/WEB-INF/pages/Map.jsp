@@ -90,7 +90,7 @@
                 var markerIcons = "${marker.markerIcon}".split(",");
                 //KIT NE PASHE ROZKOMENTUTU
                 //if(icons.indexOf(markerIcons[0])==-1){
-                markerIcons.splice(0,0,'info');
+                //markerIcons.splice(0,0,'info');
                 //}
                 var pinIcon = new google.maps.MarkerImage(
                     "${Constants.URL}img/markers/"+markerIcons[0]+".png",

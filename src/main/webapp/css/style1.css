@@ -2037,10 +2037,9 @@ a.disable-menu-link{
 
 .news_text_box
     {
-        max-height: 6.4em;
+        height: 5.4em;
         text-overflow: ellipsis;
         overflow: hidden;
-        text-transform: uppercase;
     }
     
 .breadcrumbs a:hover
