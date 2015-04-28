@@ -294,7 +294,7 @@
         });
     }
     function addLangToLink(lang){
-    $( "a:not(.lang-sw, .shareLinks, .not-add-lan)" ).each(function( index ) {
+    $( "a:not(.lang-sw, .shareLinks, .not-add-lan, .markerPageText a)" ).each(function( index ) {
             
             if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
             if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){
@@ -350,7 +350,7 @@
     function showHideMenu(){
         if(hidden){
             hidden = false;
-            if(window.innerWidth>735){
+            if(window.outerWidth>735){
                 $('.s-top').fadeIn("slow");
             }
             $('.topMenu').removeClass('topMenuSmall');
@@ -466,11 +466,11 @@
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
                 $('.contentIntend').css('height','30');
             
-                if(window.innerWidth<1024){
+                if(window.outerWidth<1024){
                     $('#googleMap').height(document.body.clientHeight-104);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }
-                if(window.innerWidth<736){
+                if(window.outerWidth<736){
                     $('.s-bot').css('margin-top','11px');
                 } 
                 
@@ -678,7 +678,7 @@
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                if(window.innerWidth>735){
+                if(window.outerWidth>735){
                     $('.s-top').fadeIn("slow");
                 }
                 $('.topMenu').removeClass('topMenuSmall');

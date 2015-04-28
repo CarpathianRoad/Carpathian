@@ -643,6 +643,7 @@ article .intendNews .post-image .post-heading{
 	float: left;
 	text-decoration: none;
         letter-spacing: 1px;
+        color: white !important;
 }
 .dropDownMenu a:hover {
 	text-decoration: none;
@@ -1703,6 +1704,9 @@ label{
 .markerPageTable{
     display: table;
 }
+.markerPageTable a{
+    color: rgb(86,105,143);
+}
 .markerPageText{
     font: 10pt 'Open Sans';
     font-weight: 100;
@@ -1746,9 +1750,7 @@ label{
     width: 0px !important;
 }
 .routeDescrOverflow{
-    padding-top: 20px;
-    padding-left: 40px;
-    padding-bottom: 20px;
+    padding: 20px 40px;
     width: 700px;
     height: inherit;
     overflow: hidden;
@@ -2035,10 +2037,10 @@ a.disable-menu-link{
 
 .news_text_box
     {
-        height: 6.4em;
         max-height: 6.4em;
         text-overflow: ellipsis;
         overflow: hidden;
+        text-transform: uppercase;
     }
     
 .breadcrumbs a:hover
@@ -2307,21 +2309,26 @@ a.disable-menu-link{
 }
 @media (max-width: 760px){
     .indexMapAllContainer{
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
     .indexMap{
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
     .indexMapMenu{
         width: 100%;
     }
     .indexMap img{
-        width: 100%;
+        width: 90%;
+    }
+    #slider1_container{
+        display: none !important;
     }
 }
 @media (max-width: 680px){
     .mapButton{
-        font-size: 7pt;
+        font-size: 6pt;
         margin-top: 5px;
     }
     .buttonBorderClass{
@@ -2685,16 +2692,21 @@ a.disable-menu-link{
 
 @media (max-device-width: 760px){
     .indexMapAllContainer{
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
     .indexMap{
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
     .indexMapMenu{
         width: 100%;
     }
     .indexMap img{
-        width: 100%;
+        width: 90%;
+    }
+    #slider1_container{
+        display: none !important;
     }
 }
 @media (max-device-width: 680px){
