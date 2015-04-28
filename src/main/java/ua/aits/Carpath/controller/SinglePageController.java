@@ -146,7 +146,6 @@ public class SinglePageController {
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("TestPage");
-		model.addObject("menu", "s");
 		return model;
 	}
     @RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)

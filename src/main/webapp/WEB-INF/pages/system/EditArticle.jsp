@@ -362,8 +362,12 @@
         $(".filters :checkbox[value='"+value+"']").attr("checked","true");
     });
 
-       $( "#datepicker" ).datepicker();
-       $( "#datepicker-act" ).datepicker();
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker("option", "dateFormat", "dd.mm.yy");
+        $("#datepicker").val("${article.date}");
+        $( "#datepicker-act" ).datepicker();
+        $( "#datepicker-act" ).datepicker("option", "dateFormat", "dd.mm.yy");
+        $("#datepicker-act").val("${article.actDate}");
        $('.selectpicker').selectpicker({
             size: 4
         });
