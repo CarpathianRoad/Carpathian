@@ -28,6 +28,7 @@
     <script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
     <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -123,9 +124,9 @@
 				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
 				<li class="paddingLang"><a id="lang-switch-ro" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
 				<!--
-                                <li class="paddingLang"><a href="#">PL</a></li>
-				<li class="paddingLang"><a href="#">RO</a></li>
-    -->
+                                    <li class="paddingLang"><a href="#">PL</a></li>
+                                    <li class="paddingLang"><a href="#">RO</a></li>
+                                -->
                             </ul>
 			</div>
 			<div class="s-two">
@@ -171,9 +172,21 @@
                     </div>
 		</div>
                 <div class="showSmallMenu" onclick="showSmallResMenu()">
-                    <img id="showSmallMenu" src="${Constants.URL}img/mapRightContainer.png"
-                        onmouseover="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
-                        onmouseout="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
+                    <div class="smallScreenMenu">
+                        <img src="${Constants.URL}img/mapRightContainer.png"
+                            onmouseover="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
+                            onmouseout="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
+                    </div>
+                    <div id="smallSearch" 
+                         onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
+                         $('#searchButton').css('top','4px')"
+                         onmouseout="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');$(this).find('img').fadeIn(100);
+                         $('#searchButton').css('top','3px')">
+                         <img src="${Constants.URL}img/search_icon.png">
+                    </div>
+                    <div id="languageSelectorSmall">
+                        En
+                    </div>
                 </div>
                 <div class="s-clear"></div>
                 <div class="hideMenu" onclick="showHideMenu()">
@@ -195,7 +208,7 @@
                     <div class="footerLeftMain">
                             <div class="footerCoFin">
                                 <a class="not-add-lan" href="http://eeas.europa.eu/delegations/ukraine/index_uk.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
-                                    <div class="rightTopText">The Programme is con-financed by the European Union</div>
+                                    <div class="rightTopText">The Programme is co-financed by the European Union</div>
                                 </a>
                             </div>
                             <div class="footerPartnership">
@@ -211,7 +224,7 @@
                     </div>
                     <div class="footerRightMain">
                         <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
-                            <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
+                            <div class="fundedText">The project is funded by European Union<br>Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
                     </div>
                 </div>
