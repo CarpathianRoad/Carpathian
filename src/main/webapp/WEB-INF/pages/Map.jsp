@@ -705,6 +705,9 @@
                         <li class="subFilterMap">
                             <input type="checkbox" id="warMon" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="warMon" class="css-label">War Monuments</label>
                         </li>
+                        <li class="subFilterMap" style="display:none">
+                            <input type="checkbox" id="wooden_church" class="css-checkbox" checked="checked" /><label for="wooden_church" class="css-label">Churches and monasteries</label>
+                        </li>
                         <li class="subFilterMap">
                             <input type="checkbox" id="church" onclick="Markers(['church','wooden_church'])" class="css-checkbox" checked="checked" /><label for="church" class="css-label">Churches and monasteries</label>
                         </li>
