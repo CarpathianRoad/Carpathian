@@ -28,6 +28,7 @@
     <script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
     <link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -96,8 +97,8 @@
 		$(window).load(function() { // makes sure the whole site is loaded
 			$('#status').fadeOut(); // will first fade out the loading animation
 			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-			$('body').delay(350).css({'overflow':'visible'});
 		})
+                var smallMenu = false;
 	//]]>
 </script>
 <body>
@@ -107,7 +108,7 @@
 </div>
     <div class="minHeight">
 	<div class="row indexNavbar topMenu">
-            <div class='s-new' id="mainMenuWidth">
+            <div class='s-new smallMenuWidth' id="mainMenuWidth">
 		<div class="s-logoIndex">
                     <a href="${Constants.URL}index">
                         <img src="${Constants.URL}img/logo_4.png">
@@ -121,10 +122,11 @@
 				<li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
 				<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
 				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
+				<li class="paddingLang"><a id="lang-switch-ro" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
 				<!--
-                                <li class="paddingLang"><a href="#">PL</a></li>
-				<li class="paddingLang"><a href="#">RO</a></li>
-    -->
+                                    <li class="paddingLang"><a href="#">PL</a></li>
+                                    <li class="paddingLang"><a href="#">RO</a></li>
+                                -->
                             </ul>
 			</div>
 			<div class="s-two">
@@ -144,7 +146,7 @@
                             </a>
 			</div>
 			<div class="s-one">
-                            <form class="searchMenu">
+                            <form class="searchMenu" action="${Constants.URL}search" method="GET" id="searchForm">
 				<button type="button" id="searchButton" onclick="showButton()">
                                     <div class="socialHeaderDiv"
                                         onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
@@ -155,8 +157,8 @@
                                         >
                                     </div>
 				</button>
-                                <input type="text" id="s-textbox">
-				</input>
+                                           
+                                <input type="text" name="find" id="s-textbox">
                                 <button type="button" id="searchButtonActive">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png">
                                     </div>
@@ -169,6 +171,27 @@
                         
                     </div>
 		</div>
+                <div class="showSmallMenu" onclick="showSmallResMenu()">
+                    <div class="smallScreenMenu">
+                        <img src="${Constants.URL}img/mapRightContainer.png"
+                            onmouseover="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
+                            onmouseout="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
+                    </div>
+                    <div id="smallSearch" 
+                         onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
+                         $('#searchButton').css('top','4px')"
+                         onmouseout="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');$(this).find('img').fadeIn(100);
+                         $('#searchButton').css('top','3px')">
+                         <img src="${Constants.URL}img/search_icon.png">
+                    </div>
+                    <div id="languageSelectorSmall">
+                        En
+                    </div>
+                </div>
+                <div class="s-clear"></div>
+                <div class="hideMenu" onclick="showHideMenu()">
+                    <img id="hideMenuArrow" src="${Constants.URL}img/arrow-menu-hide.png">
+                </div>
             </div>
 	<div class="s-clear"></div>
         </div>
@@ -185,7 +208,7 @@
                     <div class="footerLeftMain">
                             <div class="footerCoFin">
                                 <a class="not-add-lan" href="http://eeas.europa.eu/delegations/ukraine/index_uk.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
-                                    <div class="rightTopText">The Programme is con-financed by the European Union</div>
+                                    <div class="rightTopText">The Programme is co-financed by the European Union</div>
                                 </a>
                             </div>
                             <div class="footerPartnership">
@@ -201,7 +224,7 @@
                     </div>
                     <div class="footerRightMain">
                         <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
-                            <div class="fundedText">The project is funded by European Union Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
+                            <div class="fundedText">The project is funded by European Union<br>Support to Ukraine's Regional Development Policy Programme www.surdp.eu</div>    
                         </a>
                     </div>
                 </div>
@@ -232,7 +255,7 @@
                 </div>    
                                         <div class="footerContactsText developpedText">
                                             <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
-                                                &#169; Communal enterprise ”Agency of Regional Development and Cross-Border Co-operation “Transcarpathia” of Zakarpattya Oblast Council”
+                                                &#169; Communal enterprise âAgency of Regional Development and Cross-Border Co-operation âTranscarpathiaâ of Zakarpattya Oblast Councilâ
                                             </a>
                                         </div>
                                         <div class="developpedText">
@@ -241,7 +264,7 @@
                                             </a>
                                         </div>
                     <div class="siteMap">
-                        <a href="#">
+                        <a href="${Constants.URL}sitemap">
                             Site Map
                         </a>
                     </div>
@@ -252,6 +275,17 @@
 
 <script>
     addCssToMenu();
+    function showSmallResMenu(){
+        console.log('1');
+        if(!smallMenu){
+            $('.s-rightNavBar').css('display','block');
+            //$('.s-rightNavBar').css();
+            $('.showSmallMenu').css('display','none');
+        }
+        else{
+            
+        }
+    }
     function buildMenu(lang){
         console.log(lang);
         $.ajax({
@@ -273,7 +307,7 @@
         });
     }
     function addLangToLink(lang){
-    $( "a:not(.lang-sw, .shareLinks, .not-add-lan)" ).each(function( index ) {
+    $( "a:not(.lang-sw, .shareLinks, .not-add-lan, .markerPageText a)" ).each(function( index ) {
             
             if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){ 
             if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){
@@ -291,23 +325,74 @@
             $("#lang-switch-en").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/en"));
             $("#lang-switch-sk").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/sk"));
             $("#lang-switch-hu").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
+            $("#lang-switch-ro").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ro"));
     }
-    var countryChooser;
+    var countryChooser; 
     $( document ).ready(function() {
-            
+                
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
-            $("#lang-switch-"+str_url[4]).addClass("active");
-            $("#lang-switch-"+str_url[3]).addClass("active");
+            console.log(str_url[3]);
+            if("${Constants.URL}" === "/Carpath/" || str_url[3] === "Carpath") {
+                $("#lang-switch-"+str_url[4]).addClass("active");
+            } else {
+                $("#lang-switch-"+str_url[3]).addClass("active");
+            }
             // style="color:rgb(174,214,43)"
             
             buildMenu($(".lang-sw.active").html());
-        
+           
+            if($("#searchForm").attr("action").toLowerCase().indexOf("/carpath/") !== -1){
+                $("#searchForm").attr("action", $("#searchForm").attr("action").replace("Carpath","Carpath/"+$(".lang-sw.active").html().toLowerCase()));
+            }
+            else {
+                $("#searchForm").attr("action", "/"+$(".lang-sw.active").html().toLowerCase()+$("#searchForm").attr("action"));
+            }
+            
         
         
         $('#searchButtonActive').hide(); 
         
     });
+    
+    $("#searchButtonActive").click(function() {
+        $("#searchForm").submit();
+    });
+    
+    var hidden = true;
+    function showHideMenu(){
+        if(hidden){
+            hidden = false;
+            if(window.outerWidth>735){
+                $('.s-top').fadeIn("slow");
+            }
+            $('.topMenu').removeClass('topMenuSmall');
+            $('.s-logoIndexSmall').addClass('s-logoIndex');
+            $('.s-logoIndex').removeClass('s-logoIndexSmall');
+            $('.s-rightNavBarSmall').addClass('s-rightNavBar');
+            $('.s-rightNavBar').removeClass('s-rightNavBarSmall');
+            $('.dropDownMenu a').removeClass('scrollSmallerText');
+            $('.menuLineSmall').removeClass('menuLineExtraSmall');
+            $('.carpathNameSmall').addClass('carpathName');
+            $('.carpathName').removeClass('carpathNameSmall');
+            $('#hideMenuArrow').addClass('rotateHideArrow');
+        }
+        else{
+            hidden = true;
+            $('.s-top').hide();
+            $('.topMenu').addClass('topMenuSmall');
+            $('.s-logoIndex').addClass('s-logoIndexSmall');
+            $('.s-logoIndexSmall').removeClass('s-logoIndex');
+            $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+            $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+            $('.dropDownMenu a').addClass('scrollSmallerText');
+            $('.menuLineSmall').addClass('menuLineExtraSmall');
+            $('.carpathName').addClass('carpathNameSmall');
+            $('.carpathNameSmall').removeClass('carpathName');
+            $('#hideMenuArrow').removeClass('rotateHideArrow');
+        }
+    }
+    
     function addCssToMenu(){
      countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(countryChooser){
@@ -389,8 +474,29 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('#googleMap').height(document.body.clientHeight-152);
+                $('#googleMap').height(document.body.clientHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
+                $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                $('.contentIntend').css('height','30');
+            
+                if(window.outerWidth<1024){
+                    $('#googleMap').height(document.body.clientHeight-104);
+                    $('#mainMenuWidth').css('padding','5px 15px');
+                }
+                if(window.outerWidth<736){
+                    $('.s-bot').css('margin-top','11px');
+                } 
+                
+                $('.hideMenu').css('visibility','visible');
+                $('.s-top').hide();
+                $('.topMenu').addClass('topMenuSmall');
+                $('.s-logoIndex').addClass('s-logoIndexSmall');
+                $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                $('.menuLineSmall').addClass('menuLineExtraSmall');
+                $('.carpathName').addClass('carpathNameSmall');
+                $('.carpathNameSmall').removeClass('carpathName');
                 /*$('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
                 $('.topMenu').addClass('mapMenuSmall');
@@ -581,10 +687,13 @@
             $('.menuLineSmall').addClass('menuLineExtraSmall');
             $('.carpathName').addClass('carpathNameSmall');
             $('.carpathNameSmall').removeClass('carpathName');
+            $('#mainMenuWidth').addClass('paddingSmallMenu');
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                $('.s-top').fadeIn("slow");
+                if(window.outerWidth>735){
+                    $('.s-top').fadeIn("slow");
+                }
                 $('.topMenu').removeClass('topMenuSmall');
                 $('.s-logoIndexSmall').addClass('s-logoIndex');
                 $('.s-logoIndex').removeClass('s-logoIndexSmall');
@@ -594,6 +703,7 @@
                 $('.menuLineSmall').removeClass('menuLineExtraSmall');
                 $('.carpathNameSmall').addClass('carpathName');
                 $('.carpathName').removeClass('carpathNameSmall');
+            $('#mainMenuWidth').removeClass('paddingSmallMenu');
             //}
         }
     });

@@ -85,7 +85,7 @@ public class Helpers {
     }
     public static Boolean checkOldArticle(String actual_date) throws ParseException{
                 String date_str = actual_date.replace("/", ".");
-                DateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
+                DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
                 Date actual = dateFormat.parse(date_str);
                 Date today = new Date();
                 return actual.before(today);

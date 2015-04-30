@@ -35,9 +35,11 @@
 	</style>
     <script>
         var center;
+        /*
         var icons = ['church','hotels','info','militaries',
             'museums','restaurants','ruins','swimming','tasting_hall',
             'yacht'];
+        */
         var markers = [];
         var map;
         var markerCluster;
@@ -86,9 +88,10 @@
             var filterNames = [];
             <c:forEach items="${markers}" var="marker">
                 var markerIcons = "${marker.markerIcon}".split(",");
-                if(icons.indexOf(markerIcons[0])==-1){
-                    markerIcons.splice(0,0,'info');
-                }
+                //KIT NE PASHE ROZKOMENTUTU
+                //if(icons.indexOf(markerIcons[0])==-1){
+                //markerIcons.splice(0,0,'info');
+                //}
                 var pinIcon = new google.maps.MarkerImage(
                     "${Constants.URL}img/markers/"+markerIcons[0]+".png",
                     null, 
@@ -408,7 +411,7 @@
                 $('#pushRightConrainer').removeClass('pushRightConrainerFilters');
                 $('#filtersContainer').fadeOut(100);
                 $('#mainImageRightContaineMap').attr("src","${Constants.URL}img/mapRightContainer.png");
-            } 
+            }  
             else{
                 filtersContainerCounter = true;
                 $('#filtersContainer').fadeIn(100);
@@ -659,13 +662,13 @@
                 <div class="filtersName">
                     <input type="checkbox" id="markAll" name="markAll"
                         onclick="Markers(['markAll',
-                            'main1','ruins','museums','castle','palace','residense','village_tourism','skansens','techMon','warMon','church','unesco','arch',
-                            'main2','zoo','mountains','geoparks','caves','ornithology','lakes','waterfall','forest_food','gardens','visual',
+                            'main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','unesco','arch',
+                            'main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','forest_food','gardens','visual',
                             'main3','theaters','music','visualArt','movies','tradition','car','transportConn',
                             'main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral','rescue',
                             'main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding',
                             'main6','restaurant','specialRestaurant','cafe','bar','nightBar','winery','vine_bunker','tasting_hall',
-                            'main7','hotels','apartments','campings','quest','motels','cottages','info','equipment'
+                            'main7','hotels','apartments','campings','quest','motels','cottages','info','equipment','wooden_church'
                         ])" 
                         class="css-checkbox" checked="checked" />
                     <label for="markAll" class="css-label">Filters</label>
@@ -673,7 +676,7 @@
                     <ul class='filtersMainContainer'>
                         <li class="filterMap"><input type="checkbox" id="main1" class="css-checkbox" checked="checked" />
                         <label for="main1" class="css-label"
-                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansens','techMon','warMon','church','unesco','arch'])">Monuments and architecture</label><a><div class="filterClickIntend" onclick="rotateCaret('1')"><div id="filtersCaret1" class="bottom-caret"></div></div></a>
+                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','wooden_church','unesco','arch'])">Monuments and architecture</label><a><div class="filterClickIntend" onclick="rotateCaret('1')"><div id="filtersCaret1" class="bottom-caret"></div></div></a>
                     <ul id="MonAndArchFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="museums" name="museums" onclick="Markers(['museums'])" class="css-checkbox" checked="checked" /><label for="museums" class="css-label">Museums</label>
@@ -691,7 +694,7 @@
                             <input type="checkbox" id="ruins" name="ruins" onclick="Markers(['ruins'])" class="css-checkbox" checked="checked" /><label for="ruins" class="css-label">Ruins</label>
                         </li>
                         <li class="subFilterMap">
-                            <input type="checkbox" id="skansens"  onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="skansens" class="css-label">Skansens</label>
+                            <input type="checkbox" id="skansen"  onclick="Markers('skansen')" class="css-checkbox" checked="checked" /><label for="skansen" class="css-label">Skansens</label>
                         </li>
                         <li class="subFilterMap">
                             <input type="checkbox" id="village_tourism" name="village_tourism" onclick="Markers(['village_tourism'])" class="css-checkbox" checked="checked" /><label for="village_tourism" class="css-label">Administrative builds</label>
@@ -702,8 +705,11 @@
                         <li class="subFilterMap">
                             <input type="checkbox" id="warMon" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="warMon" class="css-label">War Monuments</label>
                         </li>
+                        <li class="subFilterMap" style="display:none">
+                            <input type="checkbox" id="wooden_church" class="css-checkbox" checked="checked" /><label for="wooden_church" class="css-label">Churches and monasteries</label>
+                        </li>
                         <li class="subFilterMap">
-                            <input type="checkbox" id="church" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="church" class="css-label">Churches and monasteries</label>
+                            <input type="checkbox" id="church" onclick="Markers(['church','wooden_church'])" class="css-checkbox" checked="checked" /><label for="church" class="css-label">Churches and monasteries</label>
                         </li>
                         <li class="subFilterMap">
                             <input type="checkbox" id="unesco" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="unesco" class="css-label">UNESCO monuments</label>
@@ -714,13 +720,13 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main2" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes','waterfall','forest_food','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
+                    <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','forest_food','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
                    <ul id="natureFilter">
                         <li class="subFilterMap">
-                            <input type="checkbox" id="forest_food" name="forest_food" onclick="Markers(['forest_food'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
+                            <input type="checkbox" id="forest_food" name="forest_food" onclick="Markers(['national_park'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
                         </li>
                         <li class="subFilterMap">
-                            <input type="checkbox" id="lakes" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="lakes" class="css-label">Lakes and Water Areas</label>
+                            <input type="checkbox" id="lakes_and_waters" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="lakes_and_waters" class="css-label">Lakes and Water Areas</label>
                         </li>
                         <li class="subFilterMap">
                             <input type="checkbox" id="waterfall" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="waterfall" class="css-label">Waterfalls</label>

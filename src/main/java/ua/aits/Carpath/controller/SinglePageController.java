@@ -5,22 +5,18 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
-import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
 
 /**
@@ -150,7 +146,6 @@ public class SinglePageController {
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("TestPage");
-		model.addObject("menu", "s");
 		return model;
 	}
     @RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)
@@ -162,7 +157,9 @@ public class SinglePageController {
 		ModelAndView model = new ModelAndView("/tools/FileManager");
                 model.addObject("ckeditor", ckeditor);
                 model.addObject("num", num);
-                model.addObject("path",path.replace(",", "/"));
+                if("".equals(path)) {
+                    model.addObject("path",path.replace(",", "/"));
+                }
 		return model;
     }
         
@@ -176,6 +173,33 @@ public class SinglePageController {
     public ModelAndView loginEN(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("LogIn");
+		return model;
+	}
+    
+    @RequestMapping(value = {"/{lan}/search","/{lan}/search/","/Carpath/{lan}/search","/Carpath/{lan}/search/"}, method = RequestMethod.GET)
+        public ModelAndView searchResult (@PathVariable("lan") String lan, HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                String searchStr = request.getParameter("find");
+                if(!"/Carpath/".equals(Constants.URL)){
+                    byte[] bytes = searchStr.getBytes(StandardCharsets.ISO_8859_1);
+                    searchStr = new String(bytes, StandardCharsets.UTF_8);
+                }
+		ModelAndView model = new ModelAndView("Search");
+                List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
+                for(ArticleModel temp: articles) {
+                    String[] img  = temp.image.split(",");
+                    temp.setImage(img[0]);
+                }
+                model.addObject("resultList", articles);
+		return model;
+    }
+    
+    @RequestMapping(value = {"/{lan}/sitemap/","/{lan}/sitemap"})
+    public ModelAndView siteMap(@PathVariable("lan") String lan, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+                
+		ModelAndView model = new ModelAndView("SiteMap");
+		model.addObject("mapHTML", helpers.getRowHtml(lan, "0"));
 		return model;
 	}
 }

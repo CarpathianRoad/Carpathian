@@ -357,12 +357,13 @@
         var currentDate = myDate.getDate();
         if (currentMonth < 10) { currentMonth = '0' + currentMonth; }
         if (currentDate < 10) { currentDate = '0' + currentDate; }
-var prettyDate = currentMonth + '.' + currentDate + '.' +
-        myDate.getFullYear();
+        var prettyDate = currentDate + '.' +currentMonth + '.' +  myDate.getFullYear();
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker("option", "dateFormat", "dd.mm.yy");
         $("#datepicker").val(prettyDate);
-       $( "#datepicker" ).datepicker();
-       $( "#datepicker-act" ).datepicker();
-       $('.selectpicker').selectpicker({
+        $( "#datepicker-act" ).datepicker();
+        $( "#datepicker-act" ).datepicker("option", "dateFormat", "dd.mm.yy");
+        $('.selectpicker').selectpicker({
             size: 4
         });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");
@@ -703,6 +704,11 @@ $("#sudmitData").click(function(){
                             console.log(marker[num]);
                             myLatlng = new google.maps.LatLng(jQuery("#latitude"+num).val(),jQuery("#longitude"+num).val());
                             marker[num].setPosition(myLatlng);
+                            var x = jQuery("#latitude"+num).val();
+                            var y = jQuery("#longitude"+num).val();
+                            if((x.slice(-1)!='.')&&(y.slice(-1)!='.')){
+                                geocodePosition(myLatlng);
+                            }
                     }
             function deleteMarker(number)
                     {

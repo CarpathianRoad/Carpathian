@@ -185,14 +185,14 @@ public class MapModel {
                 f_title = result.getString("titleEN");
             }
             if(f_title.length() > 30){
-                f_title = f_title.substring(0,30) + "...";
+                f_title = f_title.substring(0,30);
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
                 text = Helpers.html2text(result.getString("textEN"));
             }
             if(text.length() > 175){
-                text = text.substring(0,175) + "...";
+                text = text.substring(0,175);
             }
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
@@ -262,11 +262,11 @@ public class MapModel {
             MapModel temp = new MapModel();
             String f_title = result.getString("titleEN");
             if(f_title.length() > 30){
-                f_title = f_title.substring(0,30) + "...";
+                f_title = f_title.substring(0,30);
             }
             String text = Helpers.html2text(result.getString("textEN"));
             if(text.length() > 175){
-                text = text.substring(0,175) + "...";
+                text = text.substring(0,175);
             }
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));

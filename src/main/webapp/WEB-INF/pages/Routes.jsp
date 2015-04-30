@@ -57,10 +57,35 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('.routeDescription').height(document.body.clientHeight-152);
+                $('.routeDescription').height(document.body.clientHeight-92);
                 $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
-                $('#map').height(document.body.clientHeight-152); 
+                $('#map').height(document.body.clientHeight-92); 
                 $('.siteMap').addClass('siteMapSmall');
+                $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                $('.contentIntend').css('height','30'); 
+                 
+                if(window.innerWidth<1024){
+                    $('#map').height(document.body.clientHeight-104);
+                    $('.routeDescription').height(document.body.clientHeight-104);
+                    $('#mainMenuWidth').css('padding','5px 15px');
+                }
+                if(window.innerWidth<800){
+                    hideDescrRoute();
+                }
+                if(window.innerWidth<736){
+                    $('.s-bot').css('margin-top','11px');
+                }
+                $('.hideMenu').css('visibility','visible');
+                $('.s-top').hide();
+                $('.topMenu').addClass('topMenuSmall');
+                $('.s-logoIndex').addClass('s-logoIndexSmall');
+                $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                $('.dropDownMenu a').addClass('scrollSmallerText');
+                $('.menuLineSmall').addClass('menuLineExtraSmall');
+                $('.carpathName').addClass('carpathNameSmall');
+                $('.carpathNameSmall').removeClass('carpathName');
             
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
@@ -123,7 +148,7 @@
                         content: ""
                     });
                     var pinIcon = new google.maps.MarkerImage(
-                       "${Constants.URL}img/markers/trailsign.png",
+                       "${Constants.URL}img/markers/visual.png",
                         null, 
                         null, 
                         null, 
@@ -270,14 +295,17 @@
                 for(var i = 0; i<height.length; i++){
                     //data.addRow(['',height[i]]);
                     obj.push([length[i],parseFloat(height[i])]);
+                    if(height.length>1000) 
+                        i+=3
                 }
                 data.addRows(obj);
                 chart = new google.visualization.ColumnChart(document.getElementById('holder'));
                 chart.draw(data, {
                     legend: 'none',
                     titleY: 'Elevation (m)',
-                    focusBorderColor: '#00ff00',
-                    titleX: 'Length (km)'
+                    focusBorderColor: 'rgb(177,216,66)',
+                    borderColor: 'rgb(84, 182, 157)',
+                    hAxis: 'showTextEvery: 77777'
                   });
                 var mousemarker;
                 google.visualization.events.addListener(chart, 'onmouseover', function(e) {
@@ -428,6 +456,7 @@
                         ${route.textUA}
                     </div>
                     <c:if test="${(imagesRoute[0])!=''}">
+                        <c:if test="${fn:length(imagesRoute)>0}">
         <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                         <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
                                             <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
@@ -452,6 +481,7 @@
                                                     ${route.title} Gallery
                                             </div>
                                         </div>
+                        </c:if>
                     </c:if>
                 </div>
             </div>
