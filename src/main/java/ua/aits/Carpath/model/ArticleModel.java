@@ -633,9 +633,16 @@ public class ArticleModel {
             where = "c.isDelete = 0";
         } 
         else {
-            where = "c.isDelete = 0 AND c."+type+"='"+value+"'";
+            String[] filters = type.split(",");
+            String[] values = value.split(",");
+            String filt = "";
+            for(int i = 1; i <= filters.length-1; i++){
+                filt = filt + " AND c."+filters[i]+"='"+values[i]+"'";
+            }
+            System.out.println(filt);
+            where = "c.isDelete = 0" + filt;
         }
-        
+        System.out.println(where);
         ResultSet result = DB.getResultSet("SELECT t.titleEN as 'menuText', c. * FROM content c LEFT JOIN menu t ON c.menuCat = t.id WHERE "+ where + user +" order by id desc;");
         List<ArticleModel> contentList = new LinkedList<>();
         while (result.next()) { 

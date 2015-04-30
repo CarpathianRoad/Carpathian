@@ -114,29 +114,44 @@ $(document).ready(function () {
     
     $(".filter-select" ).change(function() {
         var val = $(this).val();
-        $( ".filter-select" ).each(function( index ) {
-                $(this).removeClass("active-filter");
-            });
-        $(".filter-select").val($(".filter-select option:first").val());
         $(this).val(val);
-        $(this).addClass("active-filter");
-        loadContent("${sessionScope.user.username}", $(this).attr("id"), $(this).val(), $("#page_number").val(), 1);
+        if(val === "all") {
+            $(this).removeClass("active-filter");
+        }
+        else {
+            $(this).addClass("active-filter");
+        }
+        var filters = "";
+        var values = "";
+        $( ".active-filter" ).each(function( index ) {
+                filters = filters+","+$(this).attr("id");
+                values = values+","+$(this).val();
+        });
+        
+        loadContent("${sessionScope.user.username}", filters, values, $("#page_number").val(), 1);
       });
     $("#page_number" ).change(function() {
         if($(".active-filter").length){
-                var filterType = $(".active-filter").attr("id");
-                var filterValue = $(".active-filter").val();
+                var filters = "";
+                var values = "";
+                $( ".active-filter" ).each(function( index ) {
+                        filters = filters+","+$(this).attr("id");
+                        values = values+","+$(this).val();
+                });
             }
             else {
-                var filterType = "default";
-                var filterValue = "default";
+                var filters = "default";
+                var values = "default";
             }
-        loadContent("${sessionScope.user.username}",  filterType, filterValue, $("#page_number").val(), 1);
+            console.log(filters + "/" + values);
+        loadContent("${sessionScope.user.username}",  filters, values, $("#page_number").val(), 1);
     });
     function loadContent(username, filterType, filterValue, count, page) {
         $(".loader-block").show();
         filterType = typeof filterType !== 'undefined' ? filterType : "default";
         filterValue = typeof filterValue !== 'undefined' ? filterValue : 'default';
+        filterType = filterType !== "" ? filterType : "default";
+        filterValue = filterValue !== "" ? filterValue : 'default';
         $.ajax({
             type: "get",
             url: "${Constants.URL}system/contentByType",
@@ -173,14 +188,18 @@ $(document).ready(function () {
         $(".pagination a").click(function() {
             var currPage = $(this).html();
             if($(".active-filter").length){
-                var filterType = $(".active-filter").attr("id");
-                var filterValue = $(".active-filter").val();
+                var filters = "";
+                var values = "";
+                $( ".active-filter" ).each(function( index ) {
+                        filters = filters+","+$(this).attr("id");
+                        values = values+","+$(this).val();
+                });
             }
             else {
-                var filterType = "default";
-                var filterValue = "default";
+                var filters = "default";
+                var values = "default";
             }
-            loadContent("${sessionScope.user.username}",  filterType, filterValue, $("#page_number").val(), currPage);
+            loadContent("${sessionScope.user.username}",  filters, values, $("#page_number").val(), currPage);
         });  
       }
         function cutDate(){
