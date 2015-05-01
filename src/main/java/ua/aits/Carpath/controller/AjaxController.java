@@ -232,6 +232,9 @@ public class AjaxController {
         String returnHTML = "";
         for (ArticleModel temp : tempC) 
             {
+                if(!"".equals(temp.avatar)){
+                        temp.setImage(temp.avatar);
+                }
                 String[] tempImg = temp.image.split(",");
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
@@ -287,6 +290,9 @@ public class AjaxController {
         String returnHTML = "";
         for (ArticleModel temp : tempC) 
             {
+                if(!"".equals(temp.avatar)){
+                        temp.setImage(temp.avatar);
+                }
                 String[] tempImg = temp.image.split(",");
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
