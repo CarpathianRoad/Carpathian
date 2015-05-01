@@ -148,7 +148,7 @@
                         content: ""
                     });
                     var pinIcon = new google.maps.MarkerImage(
-                       "${Constants.URL}img/markers/trailsign.png",
+                       "${Constants.URL}img/markers/visual.png",
                         null, 
                         null, 
                         null, 
@@ -456,6 +456,7 @@
                         ${route.textUA}
                     </div>
                     <c:if test="${(imagesRoute[0])!=''}">
+                        <c:if test="${fn:length(imagesRoute)>0}">
         <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                         <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
                                             <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
@@ -480,6 +481,7 @@
                                                     ${route.title} Gallery
                                             </div>
                                         </div>
+                        </c:if>
                     </c:if>
                 </div>
             </div>

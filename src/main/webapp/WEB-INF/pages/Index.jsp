@@ -98,7 +98,7 @@
                     <!-- !!!SLIDER ENDS!!! -->
                     <!-- !!!MAP BLOCK!!! -->
                     
-    <div class="s-new">
+    <div class="s-new indexMapAllContainer">
         <div class="indexMap" id="mainMap">
             <div class="indexMapMenu">
                 <ul id="nav">
@@ -192,7 +192,7 @@
         <div class="s-newsText">
             <a href="${Constants.URL}article/news">NEWS</a>
         </div>
-        <div class="slider1">
+        <div class="slider2">
             <c:forEach items="${content}" var="item">
                 <div class="s-cell slide">
                     <div class="s-block">
@@ -326,14 +326,55 @@
                     }
                 }, 5000);
                 */
-               
-            $('.slider1').bxSlider({
-                auto: false,
-                slideWidth: 300,
-                minSlides: 3,
-                maxSlides: 3,
-                slideMargin: 40
-            });
+            
+                if(window.outerWidth>1040){
+                    $('.slider1').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 1,
+                        maxSlides: 3,
+                        slideMargin: 40
+                    });
+                    $('.slider2').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 1,
+                        maxSlides: 3,
+                        slideMargin: 40
+                    });
+                }else if((window.outerWidth<=1040)&&(window.outerWidth>680)){
+                    $('.slider1').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 2,
+                        maxSlides: 2,
+                        slideMargin: 40
+                    });
+                    $('.slider2').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 2,
+                        maxSlides: 2,
+                        slideMargin: 40
+                    });
+                }else{
+                    $('.slider1').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 1,
+                        maxSlides: 1,
+                        slideMargin: 40
+                    });
+                    $('.slider2').bxSlider({
+                        auto: false,
+                        slideWidth: 300,
+                        minSlides: 1,
+                        maxSlides: 1,
+                        slideMargin: 40
+                    });
+                }
+            
+            
         });
     </script>
 </t:indexpage>

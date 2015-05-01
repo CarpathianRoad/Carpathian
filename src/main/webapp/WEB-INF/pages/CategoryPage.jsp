@@ -12,12 +12,6 @@
     .news_title a:after{
         content:"";
     }
-    .news_text_box {
-        height: 2.5em;
-    }
-    .news_title a {
-        text-transform: uppercase;
-    }
     </style>
     <div class="s-new widthClass">
         <div class="">

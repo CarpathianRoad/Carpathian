@@ -704,6 +704,11 @@ $("#sudmitData").click(function(){
                             console.log(marker[num]);
                             myLatlng = new google.maps.LatLng(jQuery("#latitude"+num).val(),jQuery("#longitude"+num).val());
                             marker[num].setPosition(myLatlng);
+                            var x = jQuery("#latitude"+num).val();
+                            var y = jQuery("#longitude"+num).val();
+                            if((x.slice(-1)!='.')&&(y.slice(-1)!='.')){
+                                geocodePosition(myLatlng);
+                            }
                     }
             function deleteMarker(number)
                     {
