@@ -74,14 +74,22 @@
                     processData: false,
                     type: 'POST',
                     success: function(data){
-                        var path = $(data).find("img").attr("realpath");
-                        var name = $(data).find("img").attr("alt");
-                    if("${ckeditor}" === "" && "${num}" === "") {
-                       $(".img-content", window.parent.document).append(data);
-            $(".img-input-box", window.parent.document).remove();
-            $('.image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
-            var real = $("#real-img-path", window.parent.document).val();        
-            $("#real-img-path", window.parent.document).val(real + "," + path);
+            var path = $(data).find("img").attr("realpath");
+            if("${ckeditor}" === "" && "${num}" === "") {
+                if("${type}" === "avatar") {
+                    $("#avatarUpload .img-content", window.parent.document).append(data);
+                    $("#avatarUpload .img-input-box", window.parent.document).remove();
+                    $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Upload avatar</button>');
+                    $("#avatar-path", window.parent.document).val(path);  
+                }
+                else {
+                    $("#imageUpload .img-content", window.parent.document).append(data);
+                    $("#imageUpload .img-input-box", window.parent.document).remove();
+                    $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+                    var real = $("#real-img-path", window.parent.document).val();        
+                    $("#real-img-path", window.parent.document).val(real + "," + path);
+                }
+            
             initGalerry();
             $(".img-content-show-all").removeAttr("current");
             $(".img-content-show-all").removeAttr("realpath");
@@ -95,7 +103,6 @@
                 });
         });
         function initGalerry(){
-            console.log(getParameterByName('path').replace(/,/g,"/"));
            getFiles("",getParameterByName('path').replace(/,/g,"/")); 
         }
 
@@ -105,22 +112,32 @@
             var name = $(this).attr("name");
             var path = $(this).attr("realpath");
             if($(this).attr("type") === "img"){
-                if("${ckeditor}" === "" && "${num}" === "") {
-                    $(".img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
+                if("${ckeditor}" === "" && "${num}" === "" && "${type}" === "") {
+                    $("#imageUpload .img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
             
-            $(".img-input-box", window.parent.document).remove();
-            $('.image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+            $("#imageUpload .img-input-box", window.parent.document).remove();
+            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
             var real = $("#real-img-path", window.parent.document).val();        
             $("#real-img-path", window.parent.document).val(real + "," + path + name);
             initGalerry();
-            $(".img-content-show-all").removeAttr("current");
-            $(".img-content-show-all").removeAttr("realpath");
+            $("#imageUpload .img-content-show-all").removeAttr("current");
+            $("#imageUpload .img-content-show-all").removeAttr("realpath");
             window.parent.imageInserted();
             }
-                
-                else {
-                    console.log("ckedit");
+            else if("${type}" === "avatar")   {
+               $("#avatarUpload .img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
+                                + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
+            
+            $("#avatarUpload .img-input-box", window.parent.document).remove();
+            $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Upload avatar</button>');
+            $("#avatar-path", window.parent.document).val(path + name);
+            initGalerry();
+            $("#avatarUpload .img-content-show-all").removeAttr("current");
+            $("#avatarUpload .img-content-show-all").removeAttr("realpath");
+            window.parent.imageInserted();
+            }
+            else {
                     var ret = "window.parent.CKEDITOR.tools.callFunction('"+"${ckeditor}"+"', \""+"${Constants.URL}"+ path + name +"\",\"\");";
                     window.opener.CKEDITOR.tools.callFunction("${num}", ""+"${Constants.URL}"+ path + name +"","");
                     window.close();
@@ -169,7 +186,6 @@
         function getFiles(temp_fold, parent, isFolder) {
                 isFolder = isFolder || false;
                 $(".img-content-show-all").html("");
-                console.log('name='+temp_fold+'&parent='+parent);
                 jQuery.ajax({
                     url: '${Constants.URL}showImages',
                     cache: false,

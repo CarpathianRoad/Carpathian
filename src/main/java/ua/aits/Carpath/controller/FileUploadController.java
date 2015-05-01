@@ -43,7 +43,7 @@ public class FileUploadController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandler(@RequestParam("upload") MultipartFile file, @RequestParam("path") String path,  HttpServletRequest request) {
-        System.out.println("begin yeah");
+        
                 String name = file.getOriginalFilename();
         if (!file.isEmpty()) {
             try {
@@ -61,9 +61,6 @@ public class FileUploadController {
                     stream.write(bytes);
                 }
                 String link_path = serverFile.getAbsolutePath().replace(Constants.home,"");
-                logger.info("Server File Location="
-                        + serverFile.getAbsolutePath());
-                System.out.println("yeaaaaah");
                 return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+path + name + "'>"
                         + "<img src=\""+Constants.URL+link_path+"\" realpath='"+link_path+"'  alt='" + link_path+file.getName() + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
             } catch (Exception e) {

@@ -117,6 +117,11 @@ public class SinglePageController {
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
+                for(MapModel temp: maps) {
+                    if(!"".equals(temp.avatar)){
+                        temp.setImage(temp.avatar);
+                    }
+                }
 		model.addObject("markers", maps);
                 model.addObject("lan", lan);
 		return model;
@@ -152,11 +157,13 @@ public class SinglePageController {
         public ModelAndView fileManager (HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
                 String path = request.getParameter("path");
+                String type = request.getParameter("type");
                 String ckeditor = request.getParameter("CKEditor");
                 String num = request.getParameter("CKEditorFuncNum");
 		ModelAndView model = new ModelAndView("/tools/FileManager");
                 model.addObject("ckeditor", ckeditor);
                 model.addObject("num", num);
+                model.addObject("type", type);
                 if("".equals(path)) {
                     model.addObject("path",path.replace(",", "/"));
                 }
