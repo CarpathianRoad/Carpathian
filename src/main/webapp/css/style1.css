@@ -1037,10 +1037,87 @@ footer a:visited{
 #cssmenu > ul > li:hover > ul {
   left: -10px;
   min-width: 100%;
+  height: auto;
 }
 #cssmenu > ul > li:hover > ul > li {
   max-height: 72px;
   position: relative;
+}
+.smallMenuBlock{
+    display: none;
+}
+.smallMenuBlock ul li {
+  display: block;
+  position: relative;
+}
+.smallMenuBlock ul li ul {
+  background-color: rgb(122,144,180);
+  height: 0;
+  overflow: hidden;
+}
+.smallMenuBlock ul li ul li {
+  max-height: 0;
+  position: absolute;
+  -webkit-transition: max-height 1s ease-out;
+  -moz-transition: max-height 1s ease-out;
+  -ms-transition: max-height 1s ease-out;
+  -o-transition: max-height 1s ease-out;
+  transition: max-height 1s ease-out;
+}
+.smallMenuBlock ul li ul li:hover > ul {
+  left: 100%;
+  display: none;
+}
+.smallMenuBlock ul li ul li:hover > ul > li {
+  max-height: 72px;
+  position: relative;
+}
+.smallMenuBlock > ul > li {
+  float: left;
+}
+.smallMenuBlock > ul > li:after {
+  display: block;
+  position: absolute;
+  height: 0;
+  top: 0;
+  z-index: 0;
+  -webkit-transition: height .2s;
+  -moz-transition: height .2s;
+  -ms-transition: height .2s;
+  -o-transition: height .2s;
+  transition: height .2s;
+}
+.smallMenuBlock > ul > li > a {
+  z-index: 2;
+  position: relative;
+}
+.smallMenuBlock > ul > li:hover > ul {
+  left: -10px;
+  min-width: 100%;
+  height: auto;
+}
+.smallMenuBlock > ul > li:hover > ul > li {
+  max-height: 72px;
+  position: relative;
+}
+.smallMenuBlock ul li ul li ul{
+    display: none !important;
+}
+.smallMenuBlock li{
+    list-style: none !important;
+    width: 100%;
+}
+.smallMenuBlock li a{
+    width: 100%;
+}
+.smallMenuBlock li ul{
+    position: relative;
+}
+.smallMenuBlock{
+    width: 100%;
+}
+.smallMenuBlock .bottom-caret{
+    margin-right: 3px;
 }
 .contentIntend{
     width: 100%;
@@ -2259,9 +2336,13 @@ a.disable-menu-link{
 }
 #languageSelectorSmall{
     float: right;
-    color: rgb(174, 214, 43);
+    color: #7891C1;
     font-size: 14pt;
     margin-top: 8px;
+    font-weight: 600;
+}
+#languageSelectorSmall:hover{
+    color: rgb(174, 214, 43)
 }
 #smallSearch{
     float: right;
@@ -2271,6 +2352,36 @@ a.disable-menu-link{
 }
 #smallSearch img{
     width: 25px;
+}
+#langSmallMenu{
+    display: none;
+    float: right;
+    margin-right: 12px;
+    margin-top: 5px;
+}
+#searchBoxSmall{
+    width: 100%;
+    height: 30px;
+    color: rgb(174,214,43);
+    font-weight: 200;
+    margin-right: 0px;
+    overflow: hidden;
+    border:none;
+    transition: 0.5s;
+    margin-top: 5px;
+}
+#searchButtonActiveSmall{
+    background-color: rgb(84,182,157);
+    text-decoration: none;
+    border: none;
+    position: absolute;
+    top: 65px;
+    height: 30px;
+    outline: none;
+    right: 15px;
+}
+.searchMenuSmall{
+    display: none;
 }
 
 
@@ -2629,7 +2740,7 @@ a.disable-menu-link{
     }
     .s-new .s-logoIndex{
         float: left;
-        height: 79px;
+        height: 37px;
         margin: 0 auto;
     }
     .s-new .s-rightNavBar{
@@ -2716,7 +2827,8 @@ a.disable-menu-link{
 }
 @media (max-width: 597px){
     .indexMapMenu{
-        height: 90px;
+        display: table;
+        height: auto;
     }
     .indexMap{
         height: 350px;
@@ -2736,9 +2848,10 @@ a.disable-menu-link{
     }
     .showSmallMenu{
         display: block;
+        margin-right: -10px;
     }
     .topMenu{
-        height: 60px;
+        height: 70px;
     }
 }
 
@@ -2752,7 +2865,8 @@ a.disable-menu-link{
 
 @media (max-device-width: 597px){
     .indexMapMenu{
-        height: 90px;
+        display: table;
+        height: auto;
     }
     .indexMap{
         height: 350px;
@@ -3124,7 +3238,7 @@ a.disable-menu-link{
     }
     .s-new .s-logoIndex{
         float: left;
-        height: 79px;
+        height: 37px;
         margin: 0 auto;
     }
     .s-new .s-rightNavBar{
@@ -3215,11 +3329,13 @@ a.disable-menu-link{
     }
     .showSmallMenu{
         display: block;
+        margin-right: -10px;
     }
     .topMenu{
-        height: 60px;
+        height: 70px;
     }
     .s-rightNavBarSmall{
         display: none;
+        
     }
 }

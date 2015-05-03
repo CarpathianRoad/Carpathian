@@ -663,7 +663,7 @@
                     <input type="checkbox" id="markAll" name="markAll"
                         onclick="Markers(['markAll',
                             'main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','unesco','arch',
-                            'main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','forest_food','gardens','visual',
+                            'main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','national_park','gardens','visual',
                             'main3','theaters','music','visualArt','movies','tradition','car','transportConn',
                             'main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral','rescue',
                             'main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding',
@@ -723,7 +723,7 @@
                     <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','forest_food','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
                    <ul id="natureFilter">
                         <li class="subFilterMap">
-                            <input type="checkbox" id="forest_food" name="forest_food" onclick="Markers(['national_park'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
+                            <input type="checkbox" id="national_park" name="national_park" onclick="Markers(['national_park'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
                         </li>
                         <li class="subFilterMap">
                             <input type="checkbox" id="lakes_and_waters" onclick="Markers('')" class="css-checkbox" checked="checked" /><label for="lakes_and_waters" class="css-label">Lakes and Water Areas</label>
