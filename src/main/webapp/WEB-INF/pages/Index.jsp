@@ -327,7 +327,7 @@
                 }, 5000);
                 */
             
-                if(window.outerWidth>1040){
+                if((window.outerWidth>1040)&(window.innerWidth>1040)){
                     $('.slider1').bxSlider({
                         auto: false,
                         slideWidth: 300,
@@ -342,7 +342,7 @@
                         maxSlides: 3,
                         slideMargin: 40
                     });
-                }else if((window.outerWidth<=1040)&&(window.outerWidth>680)){
+                }else if((window.outerWidth<=1040)&&(window.outerWidth>680)&(window.innerWidth>680)&(window.innerWidth<1040)){
                     $('.slider1').bxSlider({
                         auto: false,
                         slideWidth: 300,
