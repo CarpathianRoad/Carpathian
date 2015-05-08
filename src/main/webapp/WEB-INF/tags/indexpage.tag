@@ -171,24 +171,45 @@
                         
                     </div>
 		</div>
-                <div class="showSmallMenu" onclick="showSmallResMenu()">
-                    <div class="smallScreenMenu">
+                <div class="showSmallMenu">
+                    <div class="smallScreenMenu" onclick="showSmallMenu()">
                         <img src="${Constants.URL}img/mapRightContainer.png"
                             onmouseover="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
                             onmouseout="if(!smallMenu){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
                     </div>
-                    <div id="smallSearch" 
+                    <div id="smallSearch" onclick='searchSmallMenu()'
                          onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
                          $('#searchButton').css('top','4px')"
                          onmouseout="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');$(this).find('img').fadeIn(100);
                          $('#searchButton').css('top','3px')">
                          <img src="${Constants.URL}img/search_icon.png">
                     </div>
-                    <div id="languageSelectorSmall">
-                        En
+                    <div id="languageSelectorSmall" onclick='langSelectMenu()'>
                     </div>
                 </div>
                 <div class="s-clear"></div>
+                    <div id="langSmallMenu">
+                        <ul class="smallMenuLangSelector">
+				<li class="paddingLang"><a id="lang-switch-ua" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
+				<li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
+				<li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
+				<li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
+				<li class="paddingLang"><a id="lang-switch-ro" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
+				<!--
+                                    <li class="paddingLang"><a href="#">PL</a></li>
+                                    <li class="paddingLang"><a href="#">RO</a></li>
+                                -->
+                            </ul>
+                    </div>
+                            <form class="searchMenuSmall" action="${Constants.URL}search" method="GET" id="searchForm">
+                                <input type="text" name="find" id="searchBoxSmall">
+                                <button type="button" id="searchButtonActiveSmall">
+                                    <div class=""><img src="${Constants.URL}img/search_icon_active.png"></div>
+				</button>
+                            </form>
+                    <div class="smallMenuBlock">
+                                    
+                    </div>
                 <div class="hideMenu" onclick="showHideMenu()">
                     <img id="hideMenuArrow" src="${Constants.URL}img/arrow-menu-hide.png">
                 </div>
@@ -274,18 +295,56 @@
 </html>
 
 <script>
+    
+    var showLang = false;
+    var showMenu = false;
+    var showSearch = false;
+    
     addCssToMenu();
-    function showSmallResMenu(){
-        console.log('1');
-        if(!smallMenu){
-            $('.s-rightNavBar').css('display','block');
-            //$('.s-rightNavBar').css();
-            $('.showSmallMenu').css('display','none');
-        }
-        else{
-            
+    
+    function langSelectMenu(){
+        if(!(showLang)){
+            if(showSearch)searchSmallMenu();
+            if(showMenu)showSmallMenu();
+            $('.topMenu').css('height','100');
+            $('#langSmallMenu').css('display','table');
+            $('.topMenu').removeClass('topMenuSmall');
+            showLang = true;
+        }else{
+            $('.topMenu').css('height','60');
+            $('#langSmallMenu').css('display','none');
+            showLang = false;
         }
     }
+    
+    function searchSmallMenu(){
+        if(!(showSearch)){
+            if(showLang)langSelectMenu();
+            if(showMenu)showSmallMenu();
+            $('.topMenu').css('height','110');
+            $('.searchMenuSmall').css('display','block');
+            showSearch = true;
+        }else{
+            $('.topMenu').css('height','60');
+            $('.searchMenuSmall').css('display','none');
+            showSearch = false;
+        }
+    }
+    
+    function showSmallMenu(){
+        if(!(showMenu)){
+            if(showLang)langSelectMenu();
+            if(showSearch)searchSmallMenu();
+            $('.topMenu').css('height','auto');
+            $('.smallMenuBlock').css('display', 'block');
+            showMenu = true;
+        }else{
+            $('.topMenu').css('height','60');
+            $('.smallMenuBlock').css('display', 'none');
+            showMenu = false;
+        }
+    }
+    
     function buildMenu(lang){
         console.log(lang);
         $.ajax({
@@ -296,6 +355,7 @@
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
              $("#cssmenu").html(response).css("width","");
+             $(".smallMenuBlock").html($("#cssmenu").html());
              /*if(lang === "UA" || lang === "ua") {
                  $("#cssmenu").css("width","106%");
              }*/
@@ -305,7 +365,9 @@
              console.log(response);
             }
         });
+        $('#languageSelectorSmall').html(lang);
     }
+    
     function addLangToLink(lang){
     $( "a:not(.lang-sw, .shareLinks, .not-add-lan, .markerPageText a)" ).each(function( index ) {
             
@@ -358,12 +420,15 @@
     $("#searchButtonActive").click(function() {
         $("#searchForm").submit();
     });
+    $("#searchButtonActiveSmall").click(function() {
+        $("#searchForm").submit();
+    });
     
     var hidden = true;
     function showHideMenu(){
-        if(hidden){
+        if((hidden)&&(window.outerWidth>760)&(window.innerWidth>760)){
             hidden = false;
-            if(window.outerWidth>735){
+            if((window.outerWidth>735)&(window.innerWidth>735)){
                 $('.s-top').fadeIn("slow");
             }
             $('.topMenu').removeClass('topMenuSmall');
@@ -479,11 +544,11 @@
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
                 $('.contentIntend').css('height','30');
             
-                if(window.outerWidth<1024){
+                if((window.outerWidth<1024)&(window.innerWidth>1024)){
                     $('#googleMap').height(document.body.clientHeight-104);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }
-                if(window.outerWidth<736){
+                if((window.outerWidth<736)&(window.innerWidth>736)){
                     $('.s-bot').css('margin-top','11px');
                 } 
                 
@@ -676,7 +741,7 @@
         var urlMap = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 110;
-        if (distanceY > shrinkOn) {
+        if ((distanceY > shrinkOn)&&(window.outerWidth>760)&&(window.innerWidth>760)) {
             $('.s-top').hide();
             $('.topMenu').addClass('topMenuSmall');
             $('.s-logoIndex').addClass('s-logoIndexSmall');
@@ -691,7 +756,7 @@
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                if(window.outerWidth>735){
+                if((window.outerWidth>735)&(window.innerWidth>735)){
                     $('.s-top').fadeIn("slow");
                 }
                 $('.topMenu').removeClass('topMenuSmall');
