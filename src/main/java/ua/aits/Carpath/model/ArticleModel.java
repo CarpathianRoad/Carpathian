@@ -621,6 +621,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setImage(result.getString("image"));
+            temp.setAvatar(result.getString("avatar"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
             }
