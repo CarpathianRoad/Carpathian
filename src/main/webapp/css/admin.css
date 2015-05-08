@@ -426,3 +426,17 @@ cke_contents{
 .double-point-filter {
     font-weight: 900 !important;
 }
+.upload-success {
+    margin-left: -5px;
+    color: #59C10D;
+    font-weight: 700;
+}
+.upload-success img {
+    height: 40px;
+}
+.is-exist-file {
+    margin-left: 15px;
+}
+.is-exist-file a {
+    margin-left: 10px;
+}

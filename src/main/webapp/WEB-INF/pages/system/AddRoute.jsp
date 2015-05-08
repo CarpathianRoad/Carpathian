@@ -43,13 +43,16 @@
                                               </div>
                                         </div>
                               <hr>
-                                    <div class="row add-row">
+                                    <div class="row add-row route-file">
                                         
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
-                                                <label for="sel1">Route file<span class="red-star">*</span></label>
-                                                <input type="file" name="file" id="route-file" />
+                                                <label class="btn" id="route-file-block" for="file-input">
+                                                    <button class="btn btn-primary" disabled="disabled" style="opacity: 100">Upload route file</button>
+                                                </label>
+                                                    <input style="display: none" class="" id="file-input" type="file" multiple/>
                                                     </div>
+                                                    <input type="hidden" id="fullname" name="filename"/>
                                                 </div>
                                     </div>
                 <hr>
@@ -88,7 +91,16 @@
                                                 </div>
                                     </div>
                 <hr>
-            <div class="row add-row list-block route-filter">
+            <div class="row add-row">
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="datepicker">Date<span class="red-star">*</span></label>
+                                                <input type="text" class="form-control" name="date" id="datepicker">
+                                                    </div>
+                                                </div>
+                                    </div>
+                <hr>
+            <div class="row add-row list-block route-filters">
                 <div class="col-lg-10 field">
                     <div> <label>Filter type:</label></div>
                     <ul>  
@@ -159,74 +171,74 @@
 							</p>
             <script> 
                 CKEDITOR.replace('editorEN', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorUA', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorHU', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorSK', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorPL', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorRO', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorGE', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorCZ', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
                 CKEDITOR.replace('editorSRB', {
-                    filebrowserBrowseUrl : '/browser/browse/type/all',
-                    filebrowserUploadUrl : '/browser/upload/type/all',
-                    filebrowserImageBrowseUrl : '${Constants.URL}uploadFile',
-                    filebrowserImageUploadUrl : '${Constants.URL}uploadFile',
+                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
                     filebrowserWindowWidth  : 800,
                     filebrowserWindowHeight : 500
                 });
@@ -237,9 +249,37 @@
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
         var currentLangT = $(".lang-switch-title button.active").attr("id");
         $(".input-title-lang[lang='"+currentLangT+"']").show();
-        
+        var myDate = new Date();
+        var currentMonth = (myDate.getMonth()+1);
+        var currentDate = myDate.getDate();
+        if (currentMonth < 10) { currentMonth = '0' + currentMonth; }
+        if (currentDate < 10) { currentDate = '0' + currentDate; }
+        var prettyDate = currentDate + '.' +currentMonth + '.' +  myDate.getFullYear();
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker("option", "dateFormat", "dd.mm.yy");
+        $("#datepicker").val(prettyDate);
+        $('.selectpicker').selectpicker({
+            size: 4
+        });
 });
-
+$('.route-file').on('change', '#file-input', function() {
+        var data = new FormData();
+        data.append('upload', jQuery('#file-input')[0].files[0]);
+        jQuery.ajax({
+                    url: '${Constants.URL}uploadRoute',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data){
+                        console.log(data);
+                        $("#fullname").val(data);
+                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded!</span>").appendTo("#route-file-block");
+                        $("#route-file-block button").hide();
+                    }
+                    });
+});
 $(".lang-switch-text button").click(function(){
     $(".lang-switch-text button").removeClass("active");
     $(this).addClass("active");
@@ -255,10 +295,13 @@ $(".lang-switch-title button").click(function(){
     $(".input-title-lang[lang='"+currentLangT+"']").show();
 });
 $("#sudmitData").click(function(){
+    var check_str_filters = "";
+    $(".route-filters input:checkbox:checked:checked").each(function() {
+        check_str_filters = check_str_filters + this.value + ",";
+    });
+    $("#filter-type-all").attr("value", check_str_filters.slice(0,-1));
     $("div.validation").html('');
     var isValidate = true;
-    var check_str_markers = "";
-    var check_str_filters = "";
     
     if($("#tlt").val() === "") {
         $("#tlt").next("div.validation").html('<span style="color:red">Enter the title of the article</span>');

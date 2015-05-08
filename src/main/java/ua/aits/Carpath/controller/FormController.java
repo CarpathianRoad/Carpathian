@@ -27,6 +27,7 @@ import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MarkerModel;
+import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.UserModel;
 
 /**
@@ -41,7 +42,7 @@ public class FormController {
     UserModel users = new UserModel();
     MarkerModel markers = new MarkerModel();
     FilterModel filters = new FilterModel();
-    
+    RouteModel route = new RouteModel();
     private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
     
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
@@ -155,6 +156,71 @@ public class FormController {
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/panel");
        
+    }
+     @RequestMapping(value = "/system/routes/insertdata.do", method = RequestMethod.POST)
+    public ModelAndView doInsertRoute(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        String titleEN = request.getParameter("titleEN");
+        String titleUA = request.getParameter("titleUA");
+        String titleHU = request.getParameter("titleHU");
+        String titleSK = request.getParameter("titleSK");
+        String titlePL = request.getParameter("titlePL");
+        String titleRO = request.getParameter("titleRO");
+        String titleGE = request.getParameter("titleGE");
+        String titleCZ = request.getParameter("titleCZ");
+        String titleSRB = request.getParameter("titleSRB");
+        String type = request.getParameter("type");
+        String public_country = request.getParameter("public_country");
+        String filename = request.getParameter("filename");
+        String filter = request.getParameter("filter-type-all");
+        String date = request.getParameter("date");
+        String textEN = request.getParameter("textEN");
+        String textUA = request.getParameter("textUA");
+        String textHU = request.getParameter("textHU");
+        String textSK = request.getParameter("textSK");
+        String textPL = request.getParameter("textPL");
+        String textRO = request.getParameter("textRO");
+        String textGE = request.getParameter("textGE");
+        String textCZ = request.getParameter("textCZ");
+        String textSRB = request.getParameter("textSRB");
+        String result = route.insertRoute(
+                titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, 
+                filename, date, type, public_country, filter,
+                textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
+        return new ModelAndView("redirect:" + "/system/routes");
+    }
+     @RequestMapping(value = "/system/routes/updatedata.do", method = RequestMethod.POST)
+    public ModelAndView doUpdateRoute(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("id");
+        String titleEN = request.getParameter("titleEN");
+        String titleUA = request.getParameter("titleUA");
+        String titleHU = request.getParameter("titleHU");
+        String titleSK = request.getParameter("titleSK");
+        String titlePL = request.getParameter("titlePL");
+        String titleRO = request.getParameter("titleRO");
+        String titleGE = request.getParameter("titleGE");
+        String titleCZ = request.getParameter("titleCZ");
+        String titleSRB = request.getParameter("titleSRB");
+        String type = request.getParameter("type");
+        String public_country = request.getParameter("public_country");
+        String filename = request.getParameter("filename");
+        String filter = request.getParameter("filter-type-all");
+        String date = request.getParameter("date");
+        String textEN = request.getParameter("textEN");
+        String textUA = request.getParameter("textUA");
+        String textHU = request.getParameter("textHU");
+        String textSK = request.getParameter("textSK");
+        String textPL = request.getParameter("textPL");
+        String textRO = request.getParameter("textRO");
+        String textGE = request.getParameter("textGE");
+        String textCZ = request.getParameter("textCZ");
+        String textSRB = request.getParameter("textSRB");
+        String result = route.updateRoute(id, 
+                titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, 
+                filename, date, type, public_country, filter,
+                textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
+        return new ModelAndView("redirect:" + "/system/routes");
     }
     @RequestMapping(value = "/system/adduser.do", method = RequestMethod.POST)
     public ModelAndView doAddUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {

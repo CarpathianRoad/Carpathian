@@ -99,6 +99,40 @@ public class FileUploadController {
                     + " because the file was empty.";
         }
     }
+    @RequestMapping(value = "/uploadRoute", method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadFileHandlerRoute(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
+ 
+                String name = file.getOriginalFilename();
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                // Creating the directory to store file
+                File dir = new File(Constants.FILE_URL_ROUTES);
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + name);
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                return name;
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name
+                    + " because the file was empty.";
+        }
+    }
+    @RequestMapping(value = "/system/deleteRouteFile", method = RequestMethod.GET)
+    public @ResponseBody
+    String removeRouteFile(HttpServletRequest request) {
+        String name = request.getParameter("name");
+            File temp = new File(Constants.FILE_URL_ROUTES+name);
+            Boolean result = temp.delete();
+        return result.toString();
+    }
     @RequestMapping(value = "/showImages", method = RequestMethod.GET)
     public @ResponseBody
     String showGalery(HttpServletRequest request) {

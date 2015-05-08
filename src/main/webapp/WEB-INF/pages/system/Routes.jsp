@@ -12,7 +12,7 @@
 		<div class="row">
                             <div>
                                 <div class="add-button-panel"><button class="btn btn-primary btn-mini" type="submit"><a href="<c:url value="/system/routes/add"/>">Add route</a></button></div>
-                        <div class="admin-panel-filters">
+                        <div class="admin-panel-filters" style="display: none">
                         <div class="field">
                                                     <div class="form-group">
                                                 <label for="sel1">Country</label>

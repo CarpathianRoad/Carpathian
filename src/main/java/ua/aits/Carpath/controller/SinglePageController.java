@@ -118,7 +118,7 @@ public class SinglePageController {
                 List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
                 for(MapModel temp: maps) {
-                    if(!"".equals(temp.avatar)){
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
                         temp.setImage(temp.avatar);
                     }
                 }
@@ -194,6 +194,9 @@ public class SinglePageController {
 		ModelAndView model = new ModelAndView("Search");
                 List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
                 for(ArticleModel temp: articles) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                    }
                     String[] img  = temp.image.split(",");
                     temp.setImage(img[0]);
                 }

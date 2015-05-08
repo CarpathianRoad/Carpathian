@@ -157,8 +157,8 @@ public class AjaxController {
         System.out.println(temp.id);
         if(temp.publish == 0){ check = ""; is_publish = "";}
         returnHTML = returnHTML + "<tr><td class=\"admin-table-count\">"+count.toString()+"</td>" +
-"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"routes/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
-"      <td class=\"admin-table-cell\">"+temp.country+"</td>" +
+"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"en/routes/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
+"      <td class=\"admin-table-cell\">"+temp.public_country+"</td>" +
 "      <td class=\"article-type admin-table-cell\">"+temp.textType+"</td>" +
 "      <td class=\"article-publish "+is_publish+"\"><input type=\"checkbox\" data-size=\"mini\" class=\"publish-checkbox\" data-id=\""+temp.id+"\" name=\"my-checkbox\" "+check+"></td>"
                 + "<td class=\""+is_publish+"\">" +
@@ -232,7 +232,7 @@ public class AjaxController {
         String returnHTML = "";
         for (ArticleModel temp : tempC) 
             {
-                if(!"".equals(temp.avatar)){
+                if(!"".equals(temp.avatar) && temp.avatar != null){
                         temp.setImage(temp.avatar);
                 }
                 String[] tempImg = temp.image.split(",");
@@ -290,7 +290,7 @@ public class AjaxController {
         String returnHTML = "";
         for (ArticleModel temp : tempC) 
             {
-                if(!"".equals(temp.avatar)){
+                if(!"".equals(temp.avatar) && temp.avatar != null){
                         temp.setImage(temp.avatar);
                 }
                 String[] tempImg = temp.image.split(",");
