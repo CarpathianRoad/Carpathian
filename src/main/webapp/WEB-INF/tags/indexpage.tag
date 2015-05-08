@@ -227,14 +227,19 @@
                 <div class="footerIntentInside"></div>
                 <div class="footerNew">
                     <div class="footerLeftMain">
+                        <div class="coFinBlock">
                             <div class="footerCoFin">
                                 <a class="not-add-lan" href="http://eeas.europa.eu/delegations/ukraine/index_uk.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
                                     <div class="rightTopText">The Programme is co-financed by the European Union</div>
                                 </a>
                             </div>
+                        </div>
+                        <div class="partnershipBlock">
                             <div class="footerPartnership">
                                 <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                             </div>
+                        </div>
+                        <div class="huskrouaBlock">
                             <div class="huskrouaFooter">
                                 <a href="http://huskroua-cbc.net/" class="not-add-lan" target="_blank">
                                     <img src="${Constants.URL}img/star_logo.png">
@@ -242,6 +247,7 @@
                                     <div class="countriesStarSmall">ENPI Cross-border Cooperation Programme</div>
                                 </a>
                             </div>
+                        </div>
                     </div>
                     <div class="footerRightMain">
                         <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">

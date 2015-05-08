@@ -1630,7 +1630,6 @@ label{
 	width: 610px;
 	float: right;
 	height: 69px;
-	border: 2px solid rgb(122,144,180);
 }
 .footerDisplayNone{
     display: none;
@@ -2384,6 +2383,27 @@ a.disable-menu-link{
     display: none;
 }
 
+.coFinBlock{
+    border: 2px solid rgb(122,144,180);
+    border-right: none;
+    height: 70px;
+    float: left;
+    
+}
+.partnershipBlock{
+    border: 2px solid rgb(122,144,180);
+    border-left: none;
+    border-right: none;
+    height: 70px;
+    float: left;
+}
+.huskrouaBlock{
+    border: 2px solid rgb(122,144,180);
+    border-left: none;
+    height: 70px;
+    float: left;
+}
+
 
 
 
@@ -2501,6 +2521,47 @@ a.disable-menu-link{
     .buttonBorderClass{
         padding: 14px 12px 25px 15px;
         margin-top: 0px;
+    }
+    .footerLeftMain{
+        width: auto;
+        height: auto;
+    }
+    .coFinBlock{
+        width: 210px;
+        float: none;
+        border-right: 2px solid rgb(122,144,180);
+        margin: 0 auto;
+    }
+    .partnershipBlock{
+        border-left: 2px solid rgb(122,144,180);
+        border-right: 2px solid rgb(122,144,180);
+        float: none;
+        width: 210px;
+        margin: 20px auto;
+    }
+    .huskrouaBlock{
+        border-left: 2px solid rgb(122,144,180);
+        float: none;
+        width: 250px;
+        margin: 0 auto;
+    }
+    .projectFunded{
+        width: 75% !important;
+        margin-top: 30px;
+    }
+    .developpedText{
+        float: none;
+        text-align: center;
+        margin-left: 0;
+        width: 75%;
+        margin: 20 auto !important;
+    }
+    .footerNew{
+        height: 250px;
+        width: 100%;
+    }
+    .footerHeight{
+        height: 530px !important;
     }
 }
 @media (max-width: 885px){
@@ -2949,6 +3010,67 @@ a.disable-menu-link{
     .buttonBorderClass{
         padding: 14px 12px 25px 15px;
         margin-top: 0px;
+    }
+    .footerLeftMain{
+        width: auto;
+        height: auto;
+        float: none;
+    }
+    .coFinBlock{
+        width: 210px;
+        float: none;
+        border-right: 2px solid rgb(122,144,180);
+        margin: 0 auto;
+    }
+    .partnershipBlock{
+        border-left: 2px solid rgb(122,144,180);
+        border-right: 2px solid rgb(122,144,180);
+        float: none;
+        width: 210px;
+        margin: 20px auto;
+    }
+    .huskrouaBlock{
+        border-left: 2px solid rgb(122,144,180);
+        float: none;
+        width: 250px;
+        margin: 0 auto;
+    }
+    .projectFunded{
+        width: 75% !important;
+        margin-top: 30px;
+    }
+    .developpedText{
+        float: none;
+        text-align: center;
+        margin-left: 0;
+        width: 75%;
+        margin: 20px auto !important;
+        margin-top: 20px;
+    }
+    .footerNew{
+        height: 250px;
+        width: 100%;
+    }
+    .footerHeight{
+        height: 500px !important;
+    }
+    .footerRightMain{
+        width: 280px;
+        height: 69px;
+        border: 2px solid rgb(122,144,180);
+        padding-top: 16px;
+        padding-left: 8px;
+        margin: 0 auto;
+        float: none;
+        margin-top: 20px;
+    }
+    .siteMap{
+        width: 39px;
+        float: none;
+        margin: 0 auto;
+    }
+    .footerHeight{
+        height: 560px !important;
     }
 }
 @media screen and (min-device-width: 760px) and (max-device-width: 950px){
