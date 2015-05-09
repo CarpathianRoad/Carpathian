@@ -43,7 +43,7 @@
                 
             </div>
         </div>
-            <div class="all_news">        
+            <div class="all_news" id="routesList">        
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
                     <div class="s-cell">
                         <div class="s-block newsHeight">

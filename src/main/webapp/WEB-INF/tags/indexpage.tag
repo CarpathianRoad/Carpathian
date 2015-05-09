@@ -221,20 +221,25 @@
         <jsp:doBody/> 
         <div class="contentIntendBottom"></div>
     </div>
-        <footer class="indexNavBarFooter footerHeight">
+        <footer class="indexNavBarFooter footerHeight" id="footer">
             <div class="footerSmallIntend"></div>
             <div class="s-new s-footer">
                 <div class="footerIntentInside"></div>
                 <div class="footerNew">
                     <div class="footerLeftMain">
+                        <div class="coFinBlock">
                             <div class="footerCoFin">
                                 <a class="not-add-lan" href="http://eeas.europa.eu/delegations/ukraine/index_uk.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
                                     <div class="rightTopText">The Programme is co-financed by the European Union</div>
                                 </a>
                             </div>
+                        </div>
+                        <div class="partnershipBlock">
                             <div class="footerPartnership">
                                 <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                             </div>
+                        </div>
+                        <div class="huskrouaBlock">
                             <div class="huskrouaFooter">
                                 <a href="http://huskroua-cbc.net/" class="not-add-lan" target="_blank">
                                     <img src="${Constants.URL}img/star_logo.png">
@@ -242,6 +247,7 @@
                                     <div class="countriesStarSmall">ENPI Cross-border Cooperation Programme</div>
                                 </a>
                             </div>
+                        </div>
                     </div>
                     <div class="footerRightMain">
                         <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
@@ -279,7 +285,7 @@
                                                 &#169; Communal enterprise âAgency of Regional Development and Cross-Border Co-operation âTranscarpathiaâ of Zakarpattya Oblast Councilâ
                                             </a>
                                         </div>
-                                        <div class="developpedText">
+                                        <div class="developpedText aitsText">
                                             <a class="not-add-lan" href="http://www.aits.ua" target="_blank">
                                                 Developed by AITS
                                             </a>
@@ -426,9 +432,9 @@
     
     var hidden = true;
     function showHideMenu(){
-        if((hidden)&&(window.outerWidth>760)&(window.innerWidth>760)){
+        if((hidden)&&(window.outerWidth>760)&&(window.innerWidth>760)){
             hidden = false;
-            if((window.outerWidth>735)&(window.innerWidth>735)){
+            if((window.outerWidth>735)&&(window.innerWidth>735)){
                 $('.s-top').fadeIn("slow");
             }
             $('.topMenu').removeClass('topMenuSmall');
@@ -532,6 +538,7 @@
  }
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');
+                
                 $('#mapMenu').addClass('menuLine');
                 $('.projectFunded').addClass('footerDisplayNone');
                 $('.footerRightMain').addClass('footerDisplayNone');
@@ -543,25 +550,50 @@
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
                 $('.contentIntend').css('height','30');
-            
-                if((window.outerWidth<1024)&(window.innerWidth>1024)){
+                
+                console.log(window.innerWidth);
+                console.log(window.outerWidth);
+                
+                if((window.innerWidth<1024)&&(window.innerWidth>780)){
                     $('#googleMap').height(document.body.clientHeight-104);
                     $('#mainMenuWidth').css('padding','5px 15px');
+                }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
+                    $('#googleMap').height(document.body.clientHeight-104);
+                }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
+                    $('#googleMap').height(document.body.clientHeight-142);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                }else{
+                    $('#googleMap').height(document.body.clientHeight-165);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('padding-top','10');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
                 }
-                if((window.outerWidth<736)&(window.innerWidth>736)){
+                if(window.innerWidth<736){
                     $('.s-bot').css('margin-top','11px');
                 } 
-                
-                $('.hideMenu').css('visibility','visible');
-                $('.s-top').hide();
-                $('.topMenu').addClass('topMenuSmall');
-                $('.s-logoIndex').addClass('s-logoIndexSmall');
-                $('.s-logoIndexSmall').removeClass('s-logoIndex');
-                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
-                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
-                $('.menuLineSmall').addClass('menuLineExtraSmall');
-                $('.carpathName').addClass('carpathNameSmall');
-                $('.carpathNameSmall').removeClass('carpathName');
+                if(window.innerWidth>780){
+                    $('.hideMenu').css('visibility','visible');
+                    $('.s-top').hide();
+                    $('.topMenu').addClass('topMenuSmall');
+                    $('.s-logoIndex').addClass('s-logoIndexSmall');
+                    $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                    $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                    $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                    $('.menuLineSmall').addClass('menuLineExtraSmall');
+                    $('.carpathName').addClass('carpathNameSmall');
+                    $('.carpathNameSmall').removeClass('carpathName');
+                }else{
+                    $('.hideMenu').css('display','none');
+                }
                 /*$('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
                 $('.topMenu').addClass('mapMenuSmall');
@@ -756,7 +788,7 @@
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                if((window.outerWidth>735)&(window.innerWidth>735)){
+                if((window.outerWidth>735)&&(window.innerWidth>735)){
                     $('.s-top').fadeIn("slow");
                 }
                 $('.topMenu').removeClass('topMenuSmall');
