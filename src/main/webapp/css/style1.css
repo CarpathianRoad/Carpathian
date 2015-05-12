@@ -22,6 +22,7 @@ a, a:hover, a:active, a:visited {
 .indexNavBarFooter{
     background-color: rgb(86,105,143);
     width: 100%;
+    display: table;
 }
 .mainMenuIntend{
     width: 100%;
@@ -839,10 +840,6 @@ body {
     font-weight: 200;
     float: left;
     margin-top: 15px;
-    margin-left: 15px;
-}
-.developpedSmall{
-    margin-top: 0 !important;
 }
 .footerContactsText{
     margin-left: 0;
@@ -1718,9 +1715,7 @@ label{
     font: 7pt 'Open Sans';
     font-weight: 200;
     margin-top: 15px;
-}
-.siteMapSmall{
-    margin: 0 auto;
+    margin-bottom: 10px;
 }
 .fundedLink a{
     text-align: left;
@@ -1806,7 +1801,7 @@ label{
     margin: 0 auto;
     width: 9px;
     height: 17px;
-    margin-top: 2px;
+    margin-top: -3px;
     visibility: hidden;
     transition: 0.5s;
 }
@@ -2681,9 +2676,6 @@ a.disable-menu-link{
         margin: 0 auto;
         float: none;
     }
-    .markerPageTable{
-        display: flex;
-    }
     .s-cellFullArticle .s-block{
         width: 100% !important;
     }
@@ -2936,9 +2928,6 @@ a.disable-menu-link{
     }
 }
 @media (max-width: 480px){
-    #routesList{
-        margin-top: 60px;
-    }
 }
 
 
@@ -3270,9 +3259,6 @@ a.disable-menu-link{
         width: 100%;
         height: 10px;
     }
-    .markerPageTable{
-        display: flex;
-    }
     
     
     .otherNewsHeading{
@@ -3493,7 +3479,4 @@ a.disable-menu-link{
     }
 }
 @media (max-device-width: 480px){
-    #routesList{
-        margin-top: 60px;
-    }
 }
