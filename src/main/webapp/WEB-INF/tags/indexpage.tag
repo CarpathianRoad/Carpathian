@@ -566,7 +566,7 @@
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
                     $('#googleMap').height(document.body.clientHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#googleMap').height(document.body.clientHeight-142);
+                    $('#googleMap').height(document.body.clientHeight-132);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
