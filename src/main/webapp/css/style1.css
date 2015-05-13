@@ -22,6 +22,7 @@ a, a:hover, a:active, a:visited {
 .indexNavBarFooter{
     background-color: rgb(86,105,143);
     width: 100%;
+    display: table;
 }
 .mainMenuIntend{
     width: 100%;
@@ -839,10 +840,6 @@ body {
     font-weight: 200;
     float: left;
     margin-top: 15px;
-    margin-left: 15px;
-}
-.developpedSmall{
-    margin-top: 0 !important;
 }
 .footerContactsText{
     margin-left: 0;
@@ -1718,9 +1715,7 @@ label{
     font: 7pt 'Open Sans';
     font-weight: 200;
     margin-top: 15px;
-}
-.siteMapSmall{
-    margin: 0 auto;
+    margin-bottom: 10px;
 }
 .fundedLink a{
     text-align: left;
@@ -1806,7 +1801,7 @@ label{
     margin: 0 auto;
     width: 9px;
     height: 17px;
-    margin-top: 2px;
+    margin-top: -3px;
     visibility: hidden;
     transition: 0.5s;
 }
@@ -2521,6 +2516,15 @@ a.disable-menu-link{
     }
 }
 @media (max-width: 680px){
+    .footerLeftMain{
+        display: none;
+    }
+    .footerRightMain{
+        display: none;
+    }
+    .footerNew{
+        height: 0;
+    }
     .mapButton{
         font-size: 6pt;
         margin-top: 5px;
@@ -2568,17 +2572,25 @@ a.disable-menu-link{
         width: 75%;
         margin: 20 auto;
     }
-    .footerNew{
-        height: 250px;
-        width: 100%;
-    }
     .footerHeight{
-        height: 570px !important;
+        height: auto !important;
     }
     .siteMap{
         width: 39px;
         margin: 0 auto;
         float: none;
+    }
+    .footerIntentInside{
+        height: 0;
+    }
+    .developpedText{
+        margin-left: auto !important;
+    }
+    .indexNavBarFooter{
+        display: block;
+    }
+    .projectFunded{
+        display: none;
     }
 }
 @media (max-width: 885px){
@@ -2680,9 +2692,6 @@ a.disable-menu-link{
         width: 90%;
         margin: 0 auto;
         float: none;
-    }
-    .markerPageTable{
-        display: flex;
     }
     .s-cellFullArticle .s-block{
         width: 100% !important;
@@ -2936,9 +2945,6 @@ a.disable-menu-link{
     }
 }
 @media (max-width: 480px){
-    #routesList{
-        margin-top: 60px;
-    }
 }
 
 
@@ -3031,6 +3037,15 @@ a.disable-menu-link{
         }
 }
 @media (max-device-width: 680px){
+    .footerLeftMain{
+        display: none;
+    }
+    .footerRightMain{
+        display: none;
+    }
+    .footerNew{
+        height: 0;
+    }
     .mapButton{
         font-size: 7pt;
         margin-top: 5px;
@@ -3075,12 +3090,11 @@ a.disable-menu-link{
         margin: 20px auto;
         margin-top: 20px;
     }
-    .footerNew{
-        height: 250px;
-        width: 100%;
-    }
     .footerHeight{
-        height: 500px !important;
+        height: auto !important;
+    }
+    .indexNavBarFooter{
+        display: block;
     }
     .footerRightMain{
         width: 280px;
@@ -3097,8 +3111,14 @@ a.disable-menu-link{
         float: none;
         margin: 0 auto;
     }
-    .footerHeight{
-        height: 570px !important;
+    .footerIntentInside{
+        height: 0;
+    }
+    .developpedText{
+        margin-left: auto !important;
+    }
+    .projectFunded{
+        display: none;
     }
 }
 @media screen and (min-device-width: 760px) and (max-device-width: 950px){
@@ -3269,9 +3289,6 @@ a.disable-menu-link{
     .s-cellFullArticle .newsImageUnderline{
         width: 100%;
         height: 10px;
-    }
-    .markerPageTable{
-        display: flex;
     }
     
     
@@ -3493,7 +3510,4 @@ a.disable-menu-link{
     }
 }
 @media (max-device-width: 480px){
-    #routesList{
-        margin-top: 60px;
-    }
 }

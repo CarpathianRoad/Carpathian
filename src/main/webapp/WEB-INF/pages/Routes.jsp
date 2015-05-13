@@ -54,7 +54,6 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('.routeDescription').height(document.body.clientHeight-92);
                 $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
                 $('#map').height(document.body.clientHeight-92); 
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
@@ -79,12 +78,20 @@
                 console.log(window.outerWidth);
                 
                 if((window.innerWidth<1024)&&(window.innerWidth>780)){
-                    $('#map').height(document.body.clientHeight-104);
+                    $('#map').height(document.body.clientHeight-159);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
-                    $('#map').height(document.body.clientHeight-104);
+                    $('#googleMap').height(document.body.clientHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#map').height(document.body.clientHeight-142);
+                    $('#map').height(document.body.clientHeight-132);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                }else if(window.innerWidth<=340){
+                    $('#map').height(document.body.clientHeight-145);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -92,7 +99,7 @@
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
                 }else{
-                    $('#map').height(document.body.clientHeight-155);
+                    $('#map').height(document.body.clientHeight-116);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -100,6 +107,7 @@
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
                 }
+                $('.routeDescription').height($('#map').height());
                 if(window.innerWidth<736){
                     $('.s-bot').css('margin-top','11px');
                 } 

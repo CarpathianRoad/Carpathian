@@ -201,7 +201,7 @@
                                 -->
                             </ul>
                     </div>
-                            <form class="searchMenuSmall" action="${Constants.URL}search" method="GET" id="searchForm">
+                            <form class="searchMenuSmall" action="${Constants.URL}search" method="GET" id="searchFormSmall">
                                 <input type="text" name="find" id="searchBoxSmall">
                                 <button type="button" id="searchButtonActiveSmall">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png"></div>
@@ -416,6 +416,12 @@
             else {
                 $("#searchForm").attr("action", "/"+$(".lang-sw.active").html().toLowerCase()+$("#searchForm").attr("action"));
             }
+            if($("#searchFormSmall").attr("action").toLowerCase().indexOf("/carpath/") !== -1){
+                $("#searchFormSmall").attr("action", $("#searchFormSmall").attr("action").replace("Carpath","Carpath/"+$(".lang-sw.active").html().toLowerCase()));
+            }
+            else {
+                $("#searchFormSmall").attr("action", "/"+$(".lang-sw.active").html().toLowerCase()+$("#searchFormSmall").attr("action"));
+            }
             
         
         
@@ -427,7 +433,7 @@
         $("#searchForm").submit();
     });
     $("#searchButtonActiveSmall").click(function() {
-        $("#searchForm").submit();
+        $("#searchFormSmall").submit();
     });
     
     var hidden = true;
@@ -567,11 +573,18 @@
                     $('#footer').removeClass('footerHeight');
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
-                }else{
-                    $('#googleMap').height(document.body.clientHeight-165);
+                }else if(window.innerWidth<=340){
+                    $('#googleMap').height(document.body.clientHeight-145);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
-                    $('.developpedText').css('padding-top','10');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                }else{
+                    $('#googleMap').height(document.body.clientHeight-114);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
                     $('#footer').removeClass('footerHeight');
                     $('#footer').removeClass('footerHeightMap');
