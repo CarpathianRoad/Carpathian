@@ -342,6 +342,7 @@ public class RouteModel {
             
             temp.setDate(result.getString("date").replace("/", "."));  
             temp.setType(result.getInt("type"));
+            temp.setImages(result.getString("images")); 
             temp.setCategory(result.getString("category"));
             temp.setFile(result.getString("file"));
         }
@@ -376,7 +377,7 @@ public class RouteModel {
                 + StringEscapeUtils.escapeSql(titleGE) +"','"
                 + StringEscapeUtils.escapeSql(titleCZ) +"','"
                 + StringEscapeUtils.escapeSql(titleSRB) +"','"
-                + filename +"','"+ img +"',"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ 
+                + filename +"','"+ img +"','"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ 
                 "0, '"+  
                 StringEscapeUtils.escapeSql(textEN) +"', '"
                 +  StringEscapeUtils.escapeSql(textUA) +"', '"
@@ -410,7 +411,7 @@ public class RouteModel {
                 +"', date = '"+  date
                 +"', type = "+  type
                  +", file = '"+  filename
-                 +", images = '"+  img
+                 +"', images = '"+  img
                 +"', category = '"+  filter +"', public_country = '"+ public_country +"', publish  = 0"+ 
                 ", textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
                 "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +

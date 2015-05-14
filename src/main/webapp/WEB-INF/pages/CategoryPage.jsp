@@ -21,7 +21,7 @@
             <c:forEach items="${contentList}" var="item">	
                     <div class="s-cell">
                         <div class="s-block newsHeight">
-                            <div class="newsImage">
+                            <div class="newsImage" style="display:none">
                                 <a href="${Constants.URL}article/category/${item.id}">
                                     <div class="imageHover">
                                         <div class="imageHoverDate">
