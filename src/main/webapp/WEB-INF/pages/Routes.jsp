@@ -57,7 +57,7 @@
                 $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
                 $('#map').height(document.body.clientHeight-92); 
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                $('.contentIntend').css('height','30'); 
+                $('.contentIntend').css('height','10'); 
                 
                 if(window.innerWidth<800){
                     hideDescrRoute();
@@ -72,7 +72,6 @@
                 $('#map').height(document.body.clientHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                $('.contentIntend').css('height','30');
                 
                 console.log(window.innerWidth);
                 console.log(window.outerWidth);
@@ -510,7 +509,7 @@
                                             </span>
                                         </div>
                                         <div class="article_main_image">
-                                            <img id="main_image"/>
+                                            <div id="mainImageBlock"></div>
                                             <div class="mainImageSliderLine">
                                                 <div id="imageCount">1</div><div id="maxImages"></div>
                                                 &nbsp;&nbsp;
@@ -524,7 +523,8 @@
             var images = '${route.images}'.split(",");
             var imagesBlock = '';
             $('#maxImages').html("/"+images.length);
-            $('#main_image').attr('src',images[0]);
+            $('#mainImageBlock').html('<img id="main_image" src="${Constants.URL}'+images[0]+'"/>');
+            
             for(var i = 0; i < images.length; i++){
                 
                 imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\')">'+
