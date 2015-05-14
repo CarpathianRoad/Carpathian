@@ -526,8 +526,6 @@
             $('#maxImages').html("/"+images.length);
             $('#main_image').attr('src',images[0]);
             for(var i = 0; i < images.length; i++){
-                console.log(images[i]);
-                console.log(images.length);
                 
                 imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\')">'+
                         '<div class="sliderHover">'+
