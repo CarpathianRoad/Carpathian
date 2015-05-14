@@ -345,7 +345,7 @@
                 
                 
     $(document).ready(function () { 
-        
+        alert = function() {};
         initDialog();
         $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
         var currentLang = $(".lang-switch-text button.active").attr("id");
@@ -539,7 +539,7 @@ $("#sudmitData").click(function(){
 
             }
             
-            function addMarker(location) {
+            /*function addMarker(location) {
                 if(markerOnMap==null){
                     markerOnMap = new google.maps.Marker({
                         position: location,
@@ -555,6 +555,7 @@ $("#sudmitData").click(function(){
                     geocodePosition(markerOnMap.getPosition());
                 });
             }
+            */  
             function geocodePosition(location) {
                 var infowindow = new google.maps.InfoWindow();
                 geocoder.geocode({'latLng': location}, function(results, status) {
@@ -703,11 +704,11 @@ $("#sudmitData").click(function(){
                             var num = numS[1];
                             console.log(marker[num]);
                             myLatlng = new google.maps.LatLng(jQuery("#latitude"+num).val(),jQuery("#longitude"+num).val());
-                            marker[num].setPosition(myLatlng);
                             var x = jQuery("#latitude"+num).val();
                             var y = jQuery("#longitude"+num).val();
                             if((x.slice(-1)!='.')&&(y.slice(-1)!='.')){
                                 geocodePosition(myLatlng);
+                                marker[num].setPosition(myLatlng);
                             }
                     }
             function deleteMarker(number)
