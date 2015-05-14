@@ -470,7 +470,7 @@
                 descrHidden = false;
             }
         }
-            
+        console.log('${route.images}');
     
         </script>
     <div id="sliderDiv" class="sliderDivRoute">
@@ -479,6 +479,7 @@
             <span id="slider"></span>
         </label>
     </div>
+        ${route.images}
         <div class="markerPageTable routeWidth">
         <div id="map" style="width: 100%;float: left;"></div>
             <div class="routesLinks routeDescription">
@@ -498,18 +499,10 @@
                     <div class="markerPageText">
                         ${route.textUA}
                     </div>
-                    <c:if test="${(imagesRoute[0])!=''}">
-                        <c:if test="${fn:length(imagesRoute)>0}">
-        <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
+                            <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                         <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                                <c:forEach items="${imagesRoute}" var="image" varStatus="loop">
-                                                    <div onclick="set_main_picture('${Constants.URL}${image.img}','${loop.index}')">
-                                                        <div class="sliderHover">
-                                                            <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image.img}" style="height: 150px"/>
-                                                        </div>
-                                                    </div>
-                                                </c:forEach>
+                                            <div id="imageHolder" u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                                
                                             </div>
                                             <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
                                             </span>
@@ -517,18 +510,32 @@
                                             </span>
                                         </div>
                                         <div class="article_main_image">
-                                            <img id="main_image" src="${Constants.URL}<c:out value="${imagesRoute[0].img}" />" />
+                                            <img id="main_image"/>
                                             <div class="mainImageSliderLine">
-                                                <div id="imageCount">1</div>/${fn:length(imagesRoute)}
+                                                <div id="imageCount">1</div><div id="maxImages"></div>
                                                 &nbsp;&nbsp;
                                                     ${route.title} Gallery
                                             </div>
                                         </div>
-                        </c:if>
-                    </c:if>
                 </div>
             </div>
         </div>
-    
+        <script>
+            var images = '${route.images}'.split(",");
+            var imagesBlock = '';
+            $('#maxImages').html("/"+images.length);
+            $('#main_image').attr('src',images[0]);
+            for(var i = 0; i < images.length; i++){
+                console.log(images[i]);
+                console.log(images.length);
+                
+                imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\')">'+
+                        '<div class="sliderHover">'+
+                        '<div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}'+images[i]+'" style="height: 150px"/>'+
+                        '</div>'+
+                        '</div>';
+            }
+            $('#imageHolder').html(imagesBlock);
+        </script>
     
 </t:indexpage>
