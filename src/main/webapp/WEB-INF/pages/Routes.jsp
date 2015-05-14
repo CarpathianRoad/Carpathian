@@ -81,23 +81,26 @@
                     $('#map').height(document.body.clientHeight-159);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
+                    $('.siteMap').css('display','none');
                     $('#googleMap').height(document.body.clientHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#map').height(document.body.clientHeight-132);
+                    $('#map').height(document.body.clientHeight-84);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
                     $('#footer').removeClass('footerHeight');
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
+                    $('.siteMap').css('display','none');
                 }else if(window.innerWidth<=340){
-                    $('#map').height(document.body.clientHeight-145);
+                    $('#map').height(document.body.clientHeight-97);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
                     $('#footer').removeClass('footerHeight');
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
+                    $('.siteMap').css('display','none');
                 }else{
                     $('#map').height(document.body.clientHeight-116);
                     $('.footerNew').css('height','0');
@@ -106,6 +109,7 @@
                     $('#footer').removeClass('footerHeight');
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
+                    $('.siteMap').css('display','none');
                 }
                 $('.routeDescription').height($('#map').height());
                 if(window.innerWidth<736){
