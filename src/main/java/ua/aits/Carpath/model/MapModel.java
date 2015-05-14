@@ -174,9 +174,6 @@ public class MapModel {
             if(temp.getMarkerIcon() == null || "".equals(temp.getMarkerIcon())) {
                 temp.setMarkerIcon("gardens");
             }
-            if(temp.getImage() == null || "".equals(temp.getImage())) {
-                temp.setImage("img/logo2.png");
-            }
             if(temp.getTextEN() == null || "".equals(temp.getTextEN())) {
                 temp.setTextEN("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
             }            

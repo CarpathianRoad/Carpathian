@@ -361,11 +361,11 @@ public class RouteModel {
             return true;
     }
     public String insertRoute(String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, 
-            String filename, String date, String type, String public_country, String filter,
+            String filename, String img, String date, String type, String public_country, String filter,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         DB.runQuery("INSERT INTO routes (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, "
-                + "file, date, type, public_country, category, publish, "
+                + "file, images, date, type, public_country, category, publish, "
                 + "textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, isDelete)"
                     + "values ('"+ StringEscapeUtils.escapeSql(titleEN) +"','"
                 + StringEscapeUtils.escapeSql(titleUA) +"','"
@@ -376,7 +376,7 @@ public class RouteModel {
                 + StringEscapeUtils.escapeSql(titleGE) +"','"
                 + StringEscapeUtils.escapeSql(titleCZ) +"','"
                 + StringEscapeUtils.escapeSql(titleSRB) +"','"
-                + filename +"','"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ 
+                + filename +"','"+ img +"',"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ 
                 "0, '"+  
                 StringEscapeUtils.escapeSql(textEN) +"', '"
                 +  StringEscapeUtils.escapeSql(textUA) +"', '"
@@ -395,7 +395,7 @@ public class RouteModel {
             return temp.toString();
     } 
     public String updateRoute(String id, String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, 
-            String filename, String date, String type, String public_country, String filter,
+            String filename, String img, String date, String type, String public_country, String filter,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         DB.runQuery("UPDATE routes SET titleEN = '"+ StringEscapeUtils.escapeSql(titleEN) 
@@ -410,6 +410,7 @@ public class RouteModel {
                 +"', date = '"+  date
                 +"', type = "+  type
                  +", file = '"+  filename
+                 +", images = '"+  img
                 +"', category = '"+  filter +"', public_country = '"+ public_country +"', publish  = 0"+ 
                 ", textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
                 "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +

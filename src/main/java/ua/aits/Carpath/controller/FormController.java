@@ -174,6 +174,7 @@ public class FormController {
         String filename = request.getParameter("filename");
         String filter = request.getParameter("filter-type-all");
         String date = request.getParameter("date");
+        String img = request.getParameter("real-img-path");
         String textEN = request.getParameter("textEN");
         String textUA = request.getParameter("textUA");
         String textHU = request.getParameter("textHU");
@@ -185,7 +186,7 @@ public class FormController {
         String textSRB = request.getParameter("textSRB");
         String result = route.insertRoute(
                 titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, 
-                filename, date, type, public_country, filter,
+                filename, img, date, type, public_country, filter,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/routes");
     }
@@ -202,6 +203,7 @@ public class FormController {
         String titleGE = request.getParameter("titleGE");
         String titleCZ = request.getParameter("titleCZ");
         String titleSRB = request.getParameter("titleSRB");
+        String img = request.getParameter("real-img-path");
         String type = request.getParameter("type");
         String public_country = request.getParameter("public_country");
         String filename = request.getParameter("filename");
@@ -218,7 +220,7 @@ public class FormController {
         String textSRB = request.getParameter("textSRB");
         String result = route.updateRoute(id, 
                 titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, 
-                filename, date, type, public_country, filter,
+                filename, img, date, type, public_country, filter,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/routes");
     }

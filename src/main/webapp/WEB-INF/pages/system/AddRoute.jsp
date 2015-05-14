@@ -56,6 +56,25 @@
                                                 </div>
                                     </div>
                 <hr>
+                <div class="row add-row">
+                <div class="col-lg-10 field">
+                    <div id="imageUpload" class="form-group">
+                        <label for="img">Images</label>
+                        <div class="img-content">
+                            <div class="image-upload">
+                                <div id="dialog">
+                                    <iframe id="myIframe" src=""></iframe>
+                                </div>
+                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
+                                Upload image
+                                </button>
+                            </div>    
+                        </div>
+                        <input type="hidden" name="real-img-path" id="real-img-path" />                           
+                    </div>
+                </div>
+            </div>
+                <hr>
                                     <div class="row add-row">
                                         
 						<div class="col-lg-3 field">
@@ -245,6 +264,7 @@
                 
                 
     $(document).ready(function () { 
+        initDialog();
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
         var currentLangT = $(".lang-switch-title button.active").attr("id");
@@ -280,6 +300,49 @@ $('.route-file').on('change', '#file-input', function() {
                     }
                     });
 });
+function imageInserted(){
+    $( "#dialog" ).dialog( "close" );
+    initRemove();
+    initDialog();
+}
+function initDialog(){
+    var current = "";
+    var home = "${Constants.FILE_URL}".replace(/\//g,",");
+    if($('#imageUpload .returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('#imageUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        
+        path = jQuery.grep(path, function(value) {
+            return value !== "content";
+        });
+        path = jQuery.grep(path, function(value) {
+            return value !== "img";
+        });
+        current = home+path.toString()+",";
+    }
+    $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
+                  }
+        });
+        $('#dialogBtn').click(function(){
+            $('#dialog').dialog('open');
+        });
+}
+function initRemove(){
+$("#imageUpload .returnImage img.remove-icon").click(function(){
+    $(this).parent("a").remove();
+    var newurl = "";
+    $( "#imageUpload .returnImage" ).each(function( index ) {
+        newurl = newurl + "," + $(this).find("img").first().attr("alt");
+    });
+    $("#real-img-path").val(newurl);
+});
+}
 $(".lang-switch-text button").click(function(){
     $(".lang-switch-text button").removeClass("active");
     $(this).addClass("active");
@@ -311,6 +374,8 @@ $("#sudmitData").click(function(){
         $("#tlt").next("div.validation").html("");
     }
     if(isValidate) {
+        var real = $("#real-img-path").val();
+        $("#real-img-path").val(real.substring(1, real.lenght));
         $("#addForm").submit();
     }
     });
