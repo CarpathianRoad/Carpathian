@@ -72,9 +72,6 @@ public class SinglePageController {
                 List<RouteModel> routes = route.getAllRoutes();
                 
 		for (RouteModel temp : routes) {
-                        if(temp.getImages() == null || "".equals(temp.getImages())) {
-                            temp.setImages("img/logo2.png");
-                        }
                         if(temp.getTextUA() == null || "".equals(temp.getTextUA())) {
                             temp.setTextUA("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
                         }
@@ -117,6 +114,11 @@ public class SinglePageController {
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
+                for(MapModel temp: maps) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                    }
+                }
 		model.addObject("markers", maps);
                 model.addObject("lan", lan);
 		return model;
@@ -127,9 +129,6 @@ public class SinglePageController {
         MapModel ret  = map.getMarker(lan, id);
         if(ret.getMarkerIcon() == null || "".equals(ret.getMarkerIcon())) {
                             ret.setMarkerIcon("gardens");
-                        }
-                        if(ret.getImage() == null || "".equals(ret.getImage())) {
-                            ret.setImage("img/logo2.png");
                         }
                         if(ret.getTextEN() == null || "".equals(ret.getTextEN())) {
                             ret.setTextEN("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
@@ -152,11 +151,13 @@ public class SinglePageController {
         public ModelAndView fileManager (HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
                 String path = request.getParameter("path");
+                String type = request.getParameter("type");
                 String ckeditor = request.getParameter("CKEditor");
                 String num = request.getParameter("CKEditorFuncNum");
 		ModelAndView model = new ModelAndView("/tools/FileManager");
                 model.addObject("ckeditor", ckeditor);
                 model.addObject("num", num);
+                model.addObject("type", type);
                 if("".equals(path)) {
                     model.addObject("path",path.replace(",", "/"));
                 }
@@ -187,6 +188,9 @@ public class SinglePageController {
 		ModelAndView model = new ModelAndView("Search");
                 List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
                 for(ArticleModel temp: articles) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                    }
                     String[] img  = temp.image.split(",");
                     temp.setImage(img[0]);
                 }

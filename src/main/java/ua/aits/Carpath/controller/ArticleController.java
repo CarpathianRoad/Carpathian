@@ -31,6 +31,9 @@ public class ArticleController {
             ModelAndView modelAndView = new ModelAndView("NewsPage");
             List<ArticleModel> articles = news.getAllNews(lan);
             for(ArticleModel temp: articles) {
+                if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                }
                 String[] img  = temp.image.split(",");
                 temp.setImage(img[0]);
             }
@@ -59,6 +62,9 @@ public class ArticleController {
                 page = "CategoryArticles";
                 List<ArticleModel> articles = news.getByCategory(lan, id);
                 for(ArticleModel temp: articles) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                    }
                     String[] img  = temp.image.split(",");
                     temp.setImage(img[0]);
                 }

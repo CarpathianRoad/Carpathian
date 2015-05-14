@@ -106,26 +106,41 @@
                                     </div>
                 <hr>
             <div class="row add-row">
+                    <div class="col-lg-10 field">
+                        <div id="avatarUpload" class="form-group">
+                            <label for="img">Avatar Image</label>
+                            <div class="img-content">
+                                <div class="image-upload">
+                                    <div id="avatarDialog">
+                                        <iframe id="avatarFrame" src=""></iframe>
+                                    </div>
+                                    <button type="button" id="avatarBtn" class="btn btn-primary btn-lg img-input-box">
+                                    Upload avatar
+                                    </button>
+                                </div>    
+                            </div>
+                            <input type="hidden" name="avatar-path" id="avatar-path" />                           
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            <div class="row add-row">
                 <div class="col-lg-10 field">
-                                                    <div class="form-group">
-
-                                                        <label for="img">Images</label>
-                                                        <div class="img-content">
-                                                            <div class="image-upload">
-                                                                <div id="dialog">
-    <iframe id="myIframe" src=""></iframe>
-</div>
-                                                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
-                    Upload image
-                </button>
-                                                            </div>                                     
-                
-                                                           
-                                                        </div>
-                                                        <input type="hidden" name="real-img-path" id="real-img-path" />
-                                                        
-                                              </div>
-                                                </div>
+                    <div id="imageUpload" class="form-group">
+                        <label for="img">Images</label>
+                        <div class="img-content">
+                            <div class="image-upload">
+                                <div id="dialog">
+                                    <iframe id="myIframe" src=""></iframe>
+                                </div>
+                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
+                                Upload image
+                                </button>
+                            </div>    
+                        </div>
+                        <input type="hidden" name="real-img-path" id="real-img-path" />                           
+                    </div>
+                </div>
             </div>
                 <hr>
                                    <div class="row add-row">
@@ -346,13 +361,17 @@
         if("${article.image}" !== "" && "${article.image}" !== undefined) {
             var images = "${article.image}".split(",");
        $.each(images, function( index, value ) {
-            $(".img-content").append('<a class="returnImage" data-url="${Constants.URL}'+value+'"><img src="${Constants.URL}'+value+'" alt="'+value+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
+            $("#imageUpload .img-content").append('<a class="returnImage" data-url="${Constants.URL}'+value+'"><img src="${Constants.URL}'+value+'" alt="'+value+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
 
     var real = $("#real-img-path").val();        
     $("#real-img-path").val(real + "," + value);       
 });
         }
-       initRemove();
+        if("${article.avatar}" !== "" && "${article.avatar}" !== undefined) { 
+        $("#avatarUpload .img-content").append('<a class="returnImage" data-url="${Constants.URL}'+"${article.avatar}"+'"><img src="${Constants.URL}'+"${article.avatar}"+'" alt="'+"${article.avatar}"+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
+        $("#avatar-path").val("${article.avatar}"); 
+        }
+        initRemove();
     var markers  = "${article.markerIcon}".split(",");
     $.each(markers, function( index, value ) {
         $(".markers :checkbox[value='"+value+"']").attr("checked","true");
@@ -385,15 +404,17 @@ function returnImgCK(){
 }
 function imageInserted(){
     $( "#dialog" ).dialog( "close" );
+    $( "#avatarDialog" ).dialog( "close" );
     initRemove();
     initDialog();
 }
 function initDialog(){
     var current = "";
-    if($('.returnImage img:not(.remove-icon)').last().length > 0) {
-        var path = $('.returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
-                //var curr = path.value;
-        var home = "${Constants.FILE_URL}".replace(/\//g,",");
+    var currentAva = "";
+    var home = "${Constants.FILE_URL}".replace(/\//g,",");
+    if($('#imageUpload .returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('#imageUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        
         path = jQuery.grep(path, function(value) {
             return value !== "content";
         });
@@ -402,7 +423,17 @@ function initDialog(){
         });
         current = home+path.toString()+",";
     }
-    console.log(current);
+    if($('#avatarUpload .returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('#avatarUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        
+        path = jQuery.grep(path, function(value) {
+            return value !== "content";
+        });
+        path = jQuery.grep(path, function(value) {
+            return value !== "img";
+        });
+        currentAva = home+path.toString()+",";
+    }
     $("#dialog").dialog({
             autoOpen: false,
             modal: true,
@@ -413,20 +444,39 @@ function initDialog(){
                      $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
                   }
         });
-        
+       $("#avatarDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path='+currentAva+'&type=avatar');
+                  }
+        }); 
         $('#dialogBtn').click(function(){
             $('#dialog').dialog('open');
         });
+        $('#avatarBtn').click(function(){
+            $('#avatarDialog').dialog('open');
+        });
 }
 function initRemove(){
-
-$(".remove-icon").click(function(){
+$("#imageUpload .returnImage img.remove-icon").click(function(){
     $(this).parent("a").remove();
     var newurl = "";
-    $( ".returnImage" ).each(function( index ) {
-        newurl = newurl +"," + $(this).children("img").attr("alt");
+    $( "#imageUpload .returnImage" ).each(function( index ) {
+        newurl = newurl + "," + $(this).find("img").first().attr("alt");
     });
     $("#real-img-path").val(newurl);
+});
+$("#avatarUpload .returnImage img.remove-icon").click(function(){
+    $(this).parent("a").remove();
+    var newurl = "";
+    $( "#avatarUpload .returnImage" ).each(function( index ) {
+        newurl = $(this).find("img").first().attr("alt");
+    });
+    $("#avatar-path").val(newurl);
 });
 }
 $(".lang-switch-text button").click(function(){

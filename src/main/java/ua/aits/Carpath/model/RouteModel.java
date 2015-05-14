@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.lang.StringEscapeUtils;
 import ua.aits.Carpath.functions.DB;
 
 /**
@@ -249,7 +250,7 @@ public class RouteModel {
     
      private static List<RouteModel> routeList;
      public List<RouteModel> getAllRoutes() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from routes where publish = 1 order by id desc;;");
+        ResultSet result = DB.getResultSet("select * from routes where publish = 1 and isDelete = 0 order by id desc;;");
         routeList = new LinkedList<>();
         while (result.next()) { 
             String str  = result.getString("textUA").replaceAll("'\\<.*?>","");
@@ -273,17 +274,20 @@ public class RouteModel {
     return routeList;
     }
      public List<RouteModel> getAllRoutesSystem(String type, String value) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from routes order by id desc;");
+        ResultSet result = DB.getResultSet("select * from routes where isDelete = 0 order by id desc;");
         routeList = new LinkedList<>();
         while (result.next()) { 
             RouteModel temp = new RouteModel();
             temp.setId(result.getInt("id"));
             temp.setTitle(result.getString("titleEN"));
             temp.setType(result.getInt("type"));
+            temp.setPublic_country(result.getString("public_country")); 
+            temp.setCountry(result.getString("country"));
             temp.setCategory(result.getString("category"));
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
             switch(temp.getType()) {
+                case 0: temp.setTextType("Test"); break;
                 case 1: temp.setTextType("Foot"); break;
                 case 2: temp.setTextType("Bike"); break;
                 case 3: temp.setTextType("Ski"); break;
@@ -309,6 +313,41 @@ public class RouteModel {
         }
         return temp;
     }
+    public RouteModel getOneRouteForEdit(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        ResultSet result = DB.getResultSet("select * from routes where id = "+ id +";");
+        RouteModel temp = new RouteModel();
+        while (result.next()) { 
+            temp.setId(result.getInt("id"));
+            temp.setPublic_country(result.getString("public_country"));
+            
+            temp.setTitleEN(result.getString("titleEN"));
+            temp.setTitleUA(result.getString("titleUA"));
+            temp.setTitleHU(result.getString("titleHU"));
+            temp.setTitleSK(result.getString("titleSK"));
+            temp.setTitleRO(result.getString("titleRO"));
+            temp.setTitlePL(result.getString("titlePL"));
+            temp.setTitleGE(result.getString("titleGE"));
+            temp.setTitleCZ(result.getString("titleCZ"));
+            temp.setTitleSRB(result.getString("titleSRB"));
+            
+            temp.setTextEN(result.getString("textEN"));
+            temp.setTextUA(result.getString("textUA"));
+            temp.setTextHU(result.getString("textHU"));
+            temp.setTextSK(result.getString("textSK"));
+            temp.setTextRO(result.getString("textRO"));
+            temp.setTextPL(result.getString("textPL"));
+            temp.setTextGE(result.getString("textGE"));
+            temp.setTextCZ(result.getString("textCZ"));
+            temp.setTextSRB(result.getString("textSRB"));
+            
+            temp.setDate(result.getString("date").replace("/", "."));  
+            temp.setType(result.getInt("type"));
+            temp.setImages(result.getString("images")); 
+            temp.setCategory(result.getString("category"));
+            temp.setFile(result.getString("file"));
+        }
+        return temp;
+    }
      
     public Boolean deleteRoute(String id) throws SQLException{
         DB.runQuery("UPDATE routes SET isDelete = 1, publish = 0 where id = "+ id +";");
@@ -322,6 +361,69 @@ public class RouteModel {
         DB.runQuery("UPDATE routes SET publish = "+stat+" where id = "+ id +";");
             return true;
     }
+    public String insertRoute(String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, 
+            String filename, String img, String date, String type, String public_country, String filter,
+            String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+        DB.runQuery("INSERT INTO routes (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, "
+                + "file, images, date, type, public_country, category, publish, "
+                + "textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, isDelete)"
+                    + "values ('"+ StringEscapeUtils.escapeSql(titleEN) +"','"
+                + StringEscapeUtils.escapeSql(titleUA) +"','"
+                + StringEscapeUtils.escapeSql(titleHU) +"','"
+                + StringEscapeUtils.escapeSql(titleSK) +"','"
+                + StringEscapeUtils.escapeSql(titlePL) +"','"
+                + StringEscapeUtils.escapeSql(titleRO) +"','"
+                + StringEscapeUtils.escapeSql(titleGE) +"','"
+                + StringEscapeUtils.escapeSql(titleCZ) +"','"
+                + StringEscapeUtils.escapeSql(titleSRB) +"','"
+                + filename +"','"+ img +"','"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ 
+                "0, '"+  
+                StringEscapeUtils.escapeSql(textEN) +"', '"
+                +  StringEscapeUtils.escapeSql(textUA) +"', '"
+                +  StringEscapeUtils.escapeSql(textHU) +"', '"
+                +  StringEscapeUtils.escapeSql(textSK) +"', '"
+                +  StringEscapeUtils.escapeSql(textRO) +"', '"
+                +  StringEscapeUtils.escapeSql(textPL) +"', '"
+                +  StringEscapeUtils.escapeSql(textGE) +"', '"
+                +  StringEscapeUtils.escapeSql(textCZ) +"', '"
+                +  StringEscapeUtils.escapeSql(textSRB) +"', 0);");
+            ResultSet result = DB.getResultSet("SELECT * FROM routes WHERE type="+  type +" AND date='"+  date +"' AND file='"+  filename +"' ORDER BY id DESC LIMIT 1;");
+            Integer temp = 1;
+            while (result.next()) {
+                temp = result.getInt("id");
+            }
+            return temp.toString();
+    } 
+    public String updateRoute(String id, String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, 
+            String filename, String img, String date, String type, String public_country, String filter,
+            String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+        DB.runQuery("UPDATE routes SET titleEN = '"+ StringEscapeUtils.escapeSql(titleEN) 
+                +"', titleUA = '" + StringEscapeUtils.escapeSql(titleUA)
+                +"', titleHU = '" + StringEscapeUtils.escapeSql(titleHU)
+                +"', titleSK = '" + StringEscapeUtils.escapeSql(titleSK)
+                +"', titlePL = '" + StringEscapeUtils.escapeSql(titlePL)
+                +"', titleRO = '" + StringEscapeUtils.escapeSql(titleRO)
+                +"', titleGE = '" + StringEscapeUtils.escapeSql(titleGE)
+                +"', titleCZ = '" + StringEscapeUtils.escapeSql(titleCZ)
+                +"', titleSRB = '" + StringEscapeUtils.escapeSql(titleSRB)
+                +"', date = '"+  date
+                +"', type = "+  type
+                 +", file = '"+  filename
+                 +"', images = '"+  img
+                +"', category = '"+  filter +"', public_country = '"+ public_country +"', publish  = 0"+ 
+                ", textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
+                "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +
+                "', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +
+                "', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +
+                "', textPL = '"+ StringEscapeUtils.escapeSql(textPL) +
+                "', textGE = '"+ StringEscapeUtils.escapeSql(textGE) +
+                "', textCZ = '"+ StringEscapeUtils.escapeSql(textCZ) +
+                "', textSRB = '"+ StringEscapeUtils.escapeSql(textSRB) +
+                "' where id = '"+id+"'");
+            return id;
+    } 
      public List<RouteImage> getRouteImages(String id)throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException { 
         ResultSet result = DB.getResultSet("select * from routeimages where route = "+id+";");
         LinkedList<RouteImage> imageRoute = new LinkedList<>();
