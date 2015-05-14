@@ -47,6 +47,7 @@ public class ArticleModel {
     public String date;
     public String public_country;
     public String author; 
+    public String avatar;
     public String image; 
     public String actDate;
     public String markerIcon;
@@ -274,6 +275,13 @@ public class ArticleModel {
         this.author = author;
     }
     
+    public String getAvatar() {
+        return avatar;
+    }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    
     public String getImage() {
         return image;
     }
@@ -352,6 +360,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setImage(result.getString("image"));
+            temp.setAvatar(result.getString("avatar"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
             }
@@ -392,6 +401,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setCountry(result.getString("country")); 
             temp.setDate(result.getString("date").replace("/", "."));
+            temp.setAvatar(result.getString("avatar"));
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){
                 arr[0] = "img/zak.png";
@@ -461,6 +471,7 @@ public class ArticleModel {
             }
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setActDate(result.getString("actual"));
+            temp.setAvatar(result.getString("avatar"));
             temp.setImage(result.getString("image"));
             temp.setAuthor(result.getString("author"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
@@ -505,6 +516,7 @@ public class ArticleModel {
             
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setActDate(result.getString("actual"));
+            temp.setAvatar(result.getString("avatar"));
             temp.setImage(result.getString("image"));
             temp.setAuthor(result.getString("author"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
@@ -549,6 +561,7 @@ public class ArticleModel {
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
             temp.setDate(result.getString("date").replace("/", "."));
+            temp.setAvatar(result.getString("avatar"));
             temp.setImage(result.getString("image"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
@@ -608,6 +621,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setImage(result.getString("image"));
+            temp.setAvatar(result.getString("avatar"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
             }
@@ -633,9 +647,16 @@ public class ArticleModel {
             where = "c.isDelete = 0";
         } 
         else {
-            where = "c.isDelete = 0 AND c."+type+"='"+value+"'";
+            String[] filters = type.split(",");
+            String[] values = value.split(",");
+            String filt = "";
+            for(int i = 1; i <= filters.length-1; i++){
+                filt = filt + " AND c."+filters[i]+"='"+values[i]+"'";
+            }
+            System.out.println(filt);
+            where = "c.isDelete = 0" + filt;
         }
-        
+        System.out.println(where);
         ResultSet result = DB.getResultSet("SELECT t.titleEN as 'menuText', c. * FROM content c LEFT JOIN menu t ON c.menuCat = t.id WHERE "+ where + user +" order by id desc;");
         List<ArticleModel> contentList = new LinkedList<>();
         while (result.next()) { 
@@ -649,6 +670,7 @@ public class ArticleModel {
             temp.setAuthor(result.getString("author"));
             temp.setCountry(result.getString("country"));
             temp.setPublish(result.getInt("publish"));
+            temp.setAvatar(result.getString("avatar"));
             temp.setMenuCat(result.getString("menuCat")); 
             switch(temp.getType()) {
                 case 0: temp.setTextType("News"); break;
@@ -663,11 +685,12 @@ public class ArticleModel {
     return contentList;
     }
     
-    public String insertArticle(String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, String type, String author, String img, String x, String y, 
+    public String insertArticle(String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, String type, String author,
+            String avatar, String img, String x, String y, 
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
-        DB.runQuery("INSERT INTO content (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, type, author, image, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete)"
+        DB.runQuery("INSERT INTO content (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, type, author, avatar, image, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete)"
                     + "values ('"+ StringEscapeUtils.escapeSql(titleEN) +"','"
                 + StringEscapeUtils.escapeSql(titleUA) +"','"
                 + StringEscapeUtils.escapeSql(titleHU) +"','"
@@ -677,7 +700,7 @@ public class ArticleModel {
                 + StringEscapeUtils.escapeSql(titleGE) +"','"
                 + StringEscapeUtils.escapeSql(titleCZ) +"','"
                 + StringEscapeUtils.escapeSql(titleSRB) +"','"
-                +  date +"',"+  type +",'"+  author +"','"+  img +"',"+  x +","+  y +","+ 
+                +  date +"',"+  type +",'"+  author +"','"+  avatar +"','"+  img +"',"+  x +","+  y +","+ 
 "                '"+ public_country +"','"+ StringEscapeUtils.escapeSql(country) +"','"+  StringEscapeUtils.escapeSql(region) +"','"+ StringEscapeUtils.escapeSql(district) +"','"+  StringEscapeUtils.escapeSql(town) +"','"+  markerType +"','"+  filters +"', 0, '"+  
                 StringEscapeUtils.escapeSql(textEN) +"', '"
                 +  StringEscapeUtils.escapeSql(textUA) +"', '"
@@ -696,7 +719,8 @@ public class ArticleModel {
             }
             return temp.toString();
     } 
-    public String updateArticle(String id,String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, String type, String author, String img, String x, String y, 
+    public String updateArticle(String id,String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, String type, String author,
+            String avatar, String img, String x, String y, 
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
@@ -711,7 +735,8 @@ public class ArticleModel {
                 +"', titleSRB = '" + StringEscapeUtils.escapeSql(titleSRB)
                 +"', date = '"+  date +"', author = '"+  author 
                 +"', type = "+  type
-                +", image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
+                 +", avatar = '"+  avatar
+                +"', image = '"+  img +"', x = "+  x +", y = "+  y +", public_country = '"+ public_country +"',country = '"+ StringEscapeUtils.escapeSql(country) +"', region = '"+  StringEscapeUtils.escapeSql(region) +"', district = '"+ StringEscapeUtils.escapeSql(district) +"', town = '"+  StringEscapeUtils.escapeSql(town) +"', markerIcon = '"+  markerType +"', filters = '"+  filters +"', publish  = 0, textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
                 "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +
                 "', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +
                 "', textRO = '"+ StringEscapeUtils.escapeSql(textRO) +
@@ -770,6 +795,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setDate(result.getString("date"));
             temp.setImage(result.getString("image"));
+            temp.setAvatar(result.getString("avatar"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
             }
@@ -816,6 +842,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setDate(result.getString("date"));
             temp.setImage(result.getString("image"));
+            temp.setAvatar(result.getString("avatar"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
             }
@@ -865,6 +892,7 @@ public class ArticleModel {
             temp.setTitle(f_title);
             temp.setDate(result.getString("date"));
             temp.setImage(result.getString("image"));
+            temp.setAvatar(result.getString("avatar"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");
             }
@@ -914,6 +942,7 @@ public class ArticleModel {
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
             temp.setDate(result.getString("date"));
+            temp.setAvatar(result.getString("avatar"));
             temp.setImage(result.getString("image"));
             if("".equals(temp.getImage())){
                 temp.setImage("img/no-photo.png");

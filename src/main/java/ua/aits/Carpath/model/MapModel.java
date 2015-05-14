@@ -20,20 +20,21 @@ import ua.aits.Carpath.functions.Helpers;
  * @author kiwi
  */
 public class MapModel {
-    Integer id;
-    String x; 
-    String y;
-    String title;
-    String textEN;
-    String markerIcon;
-    String country;
-    String region;
-    String district;
-    String town;
+    public Integer id;
+    public String x; 
+    public String y;
+    public String title;
+    public String textEN;
+    public String markerIcon;
+    public String country;
+    public String region;
+    public String district;
+    public String town;
     public String public_country;
-    String image; 
-    String date;
-    Integer publish;
+    public String image; 
+    public String avatar;
+    public String date;
+    public Integer publish;
     
     public Integer getId() {
         return id;
@@ -130,6 +131,13 @@ public class MapModel {
         this.image = image;
     }
     
+    public String getAvatar() {
+        return avatar;
+    }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    
     private static List<MapModel> mapList;
     public List<MapModel> getAllPoints(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type = 2 and publish = 1;");
@@ -162,11 +170,9 @@ public class MapModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
             temp.setImage(result.getString("image")); 
+            temp.setAvatar(result.getString("avatar")); 
             if(temp.getMarkerIcon() == null || "".equals(temp.getMarkerIcon())) {
                 temp.setMarkerIcon("gardens");
-            }
-            if(temp.getImage() == null || "".equals(temp.getImage())) {
-                temp.setImage("img/logo2.png");
             }
             if(temp.getTextEN() == null || "".equals(temp.getTextEN())) {
                 temp.setTextEN("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
@@ -199,6 +205,7 @@ public class MapModel {
             temp.setTitle(f_title);
             temp.setCountry(result.getString("country")); 
             temp.setDate(result.getString("date"));
+            temp.setAvatar(result.getString("avatar")); 
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){
                 arr[0] = "img/zak.png";

@@ -111,28 +111,42 @@
                                                 </div>
                                     </div>
                 <hr>
+                <div class="row add-row">
+                    <div class="col-lg-10 field">
+                        <div id="avatarUpload" class="form-group">
+                            <label for="img">Avatar Image</label>
+                            <div class="img-content">
+                                <div class="image-upload">
+                                    <div id="avatarDialog">
+                                        <iframe id="avatarFrame" src=""></iframe>
+                                    </div>
+                                    <button type="button" id="avatarBtn" class="btn btn-primary btn-lg img-input-box">
+                                    Upload avatar
+                                    </button>
+                                </div>    
+                            </div>
+                            <input type="hidden" name="avatar-path" id="avatar-path" />                           
+                        </div>
+                    </div>
+                </div>
+                <hr>
             <div class="row add-row">
-
                 <div class="col-lg-10 field">
-                                                    <div class="form-group">
-
-                                                        <label for="img">Images</label>
-                                                        <div class="img-content">
-                                                            <div class="image-upload">
-                                                                <div id="dialog">
-    <iframe id="myIframe" src=""></iframe>
-</div>
-                                                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
-                    Upload image
-                </button>
-                                                            </div>                                     
-                
-                                                           
-                                                        </div>
-                                                        <input type="hidden" name="real-img-path" id="real-img-path" />
-                                                        
-                                              </div>
-                                                </div>
+                    <div id="imageUpload" class="form-group">
+                        <label for="img">Images</label>
+                        <div class="img-content">
+                            <div class="image-upload">
+                                <div id="dialog">
+                                    <iframe id="myIframe" src=""></iframe>
+                                </div>
+                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
+                                Upload image
+                                </button>
+                            </div>    
+                        </div>
+                        <input type="hidden" name="real-img-path" id="real-img-path" />                           
+                    </div>
+                </div>
             </div>
                 <hr>
                                     <div class="row add-row">
@@ -368,23 +382,23 @@
         });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");
          obj.click("click", function (e) {
-            var urlImage = $(this).attr("data-url");
-            //This takes the data value and id of the editor and sends the data(i.e.,image url) back to the caller page
             $("#cke_71_textInput").val("s2as1");
         });
 });
 
 function imageInserted(){
     $( "#dialog" ).dialog( "close" );
+    $( "#avatarDialog" ).dialog( "close" );
     initRemove();
     initDialog();
 }
 function initDialog(){
     var current = "";
-    if($('.returnImage img:not(.remove-icon)').last().length > 0) {
-        var path = $('.returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
-                //var curr = path.value;
-        var home = "${Constants.FILE_URL}".replace(/\//g,",");
+    var currentAva = "";
+    var home = "${Constants.FILE_URL}".replace(/\//g,",");
+    if($('#imageUpload .returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('#imageUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        
         path = jQuery.grep(path, function(value) {
             return value !== "content";
         });
@@ -393,7 +407,17 @@ function initDialog(){
         });
         current = home+path.toString()+",";
     }
-    console.log(current);
+    if($('#avatarUpload .returnImage img:not(.remove-icon)').last().length > 0) {
+        var path = $('#avatarUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        
+        path = jQuery.grep(path, function(value) {
+            return value !== "content";
+        });
+        path = jQuery.grep(path, function(value) {
+            return value !== "img";
+        });
+        currentAva = home+path.toString()+",";
+    }
     $("#dialog").dialog({
             autoOpen: false,
             modal: true,
@@ -404,19 +428,39 @@ function initDialog(){
                      $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
                   }
         });
-        
+       $("#avatarDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path='+currentAva+'&type=avatar');
+                  }
+        }); 
         $('#dialogBtn').click(function(){
             $('#dialog').dialog('open');
         });
+        $('#avatarBtn').click(function(){
+            $('#avatarDialog').dialog('open');
+        });
 }
 function initRemove(){
-$(".returnImage img.remove-icon").click(function(){
+$("#imageUpload .returnImage img.remove-icon").click(function(){
     $(this).parent("a").remove();
-    var newurl = ",";
-    $( ".returnImage" ).each(function( index ) {
-        newurl = newurl + $(this+" img").attr("alt");
-        console.log(newurl);
+    var newurl = "";
+    $( "#imageUpload .returnImage" ).each(function( index ) {
+        newurl = newurl + "," + $(this).find("img").first().attr("alt");
     });
+    $("#real-img-path").val(newurl);
+});
+$("#avatarUpload .returnImage img.remove-icon").click(function(){
+    $(this).parent("a").remove();
+    var newurl = "";
+    $( "#avatarUpload .returnImage" ).each(function( index ) {
+        newurl = $(this).find("img").first().attr("alt");
+    });
+    $("#avatar-path").val(newurl);
 });
 }
 

@@ -136,7 +136,7 @@ public class SystemController {
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/EditRoute");
-            modelAndView.addObject("route",routes.getOneRoute(id));
+            modelAndView.addObject("route",routes.getOneRouteForEdit(id));
             return modelAndView;
 	}
     @RequestMapping(value = {"/system/markers", "/system/markers/", "/Carpath/system/markers", "/Carpath/system/markers/"})
