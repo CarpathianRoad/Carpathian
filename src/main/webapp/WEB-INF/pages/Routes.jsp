@@ -525,7 +525,8 @@
             $('#mainImageBlock').html('<img id="main_image" src="${Constants.URL}'+images[0]+'"/>');
             if(images[0]==""){
                 $('#article_slider1_container').css('display','none');
-                $('#article_main_image').css('display','none');
+                $('#mainImageBlock').css('display','none');
+                $('.mainImageSliderLine').css('display','none');
             }
             
             for(var i = 0; i < images.length; i++){
