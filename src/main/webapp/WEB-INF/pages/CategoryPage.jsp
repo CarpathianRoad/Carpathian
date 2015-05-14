@@ -12,6 +12,23 @@
     .news_title a:after{
         content:"";
     }
+    .news_title {
+              background-color: #56698F;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+    }
+    .news_title a {
+          color: #fff;
+        height: 3.6em;
+        margin-top: -20px;
+        padding-top: 20px;
+        width: 110%;
+        margin-left: -15px;
+    }
+    .news_text_box {
+          height: 3.0em;
+    }
     </style>
     <div class="s-new widthClass">
         <div class="">
