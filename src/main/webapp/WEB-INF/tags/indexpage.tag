@@ -282,7 +282,7 @@
                 </div>    
                                         <div class="footerContactsText developpedText">
                                             <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
-                                                &#169; Communal enterprise âAgency of Regional Development and Cross-Border Co-operation âTranscarpathiaâ of Zakarpattya Oblast Councilâ
+                                                &#169; Communal enterprise "Agency of Regional Development and Cross-Border Co-operation "Transcarpathia" of Zakarpattya Oblast Council"
                                             </a>
                                         </div>
                                         <div class="developpedText aitsText">
@@ -571,7 +571,7 @@
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
                     $('#googleMap').height(document.body.clientHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#googleMap').height(document.body.clientHeight-132);
+                    $('#googleMap').height(document.body.clientHeight-84);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -579,7 +579,7 @@
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
                 }else if(window.innerWidth<=340){
-                    $('#googleMap').height(document.body.clientHeight-145);
+                    $('#googleMap').height(document.body.clientHeight-97);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
