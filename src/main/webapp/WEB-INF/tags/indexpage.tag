@@ -338,6 +338,8 @@
     }
     
     function showSmallMenu(){
+        $('#mapMenu').parent().parent().css('display','none');
+        $('#homeMenu').parent().css('pointer-events','none');
         if(!(showMenu)){
             if(showLang)langSelectMenu();
             if(showSearch)searchSmallMenu();
@@ -360,8 +362,11 @@
             data:'lang='+lang+'',
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
-             $("#cssmenu").html(response).css("width","");
-             $(".smallMenuBlock").html($("#cssmenu").html());
+             if(window.innerWidth>780){
+                $("#cssmenu").html(response).css("width","");
+             }else{
+                $(".smallMenuBlock").html(response).css("width","");
+             }
              /*if(lang === "UA" || lang === "ua") {
                  $("#cssmenu").css("width","106%");
              }*/
@@ -398,6 +403,7 @@
     var countryChooser; 
     $( document ).ready(function() {
                 
+                
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
             console.log(str_url[3]);
@@ -426,7 +432,6 @@
         
         
         $('#searchButtonActive').hide(); 
-        
     });
     
     $("#searchButtonActive").click(function() {
@@ -566,7 +571,7 @@
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
                     $('#googleMap').height(document.body.clientHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#googleMap').height(document.body.clientHeight-142);
+                    $('#googleMap').height(document.body.clientHeight-132);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');

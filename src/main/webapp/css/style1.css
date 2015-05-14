@@ -19,6 +19,9 @@ a, a:hover, a:active, a:visited {
     z-index: 5;
     transition: 0.5s;
 }
+#mapMenu{
+    visibility: hidden;
+}
 .indexNavBarFooter{
     background-color: rgb(86,105,143);
     width: 100%;
@@ -1715,7 +1718,7 @@ label{
     font: 7pt 'Open Sans';
     font-weight: 200;
     margin-top: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 .fundedLink a{
     text-align: left;
@@ -2459,6 +2462,7 @@ a.disable-menu-link{
     .indexMapAllContainer{
         width: 90%;
         margin: 0 auto;
+        display: none;
     }
     .indexMap{
         width: 90%;
@@ -2519,6 +2523,9 @@ a.disable-menu-link{
     .footerLeftMain{
         display: none;
     }
+    .siteMap{
+        display: none;
+    }
     .footerRightMain{
         display: none;
     }
@@ -2570,7 +2577,13 @@ a.disable-menu-link{
         text-align: center;
         margin-left: 0;
         width: 75%;
-        margin: 20 auto;
+        margin: 0px auto;
+    }
+    .footerContactsText{
+        margin-top: 5px;
+    }
+    .aitsText{
+        padding-bottom: 5px;
     }
     .footerHeight{
         height: auto !important;
@@ -2581,7 +2594,7 @@ a.disable-menu-link{
         float: none;
     }
     .footerIntentInside{
-        height: 0;
+        height: 1;
     }
     .developpedText{
         margin-left: auto !important;
@@ -2943,6 +2956,15 @@ a.disable-menu-link{
     .s-logoIndex img{
         width: 100% !important;
     }
+    .routeDescription{
+        width:90%;
+    }
+    #holder{
+        display: none;
+    }
+    .routeDescrOverflow{
+        width: 100%;
+    }
 }
 @media (max-width: 480px){
 }
@@ -2973,6 +2995,7 @@ a.disable-menu-link{
     .indexMapAllContainer{
         width: 90%;
         margin: 0 auto;
+        display: none;
     }
     .indexMap{
         width: 90%;
@@ -3040,6 +3063,9 @@ a.disable-menu-link{
     .footerLeftMain{
         display: none;
     }
+    .siteMap{
+        display: none;
+    }
     .footerRightMain{
         display: none;
     }
@@ -3087,8 +3113,13 @@ a.disable-menu-link{
         text-align: center;
         margin-left: 0;
         width: 75%;
-        margin: 20px auto;
-        margin-top: 20px;
+        margin: 0px auto;
+    }
+    .footerContactsText{
+        margin-top: 5px;
+    }
+    .aitsText{
+        padding-bottom: 5px;
     }
     .footerHeight{
         height: auto !important;
@@ -3112,7 +3143,7 @@ a.disable-menu-link{
         margin: 0 auto;
     }
     .footerIntentInside{
-        height: 0;
+        height: 1;
     }
     .developpedText{
         margin-left: auto !important;
@@ -3507,6 +3538,15 @@ a.disable-menu-link{
     }
     .s-logoIndex img{
         width: 100% !important;
+    }
+    .routeDescription{
+        width:90%;
+    }
+    #holder{
+        display: none;
+    }
+    .routeDescrOverflow{
+        width: 100%;
     }
 }
 @media (max-device-width: 480px){
