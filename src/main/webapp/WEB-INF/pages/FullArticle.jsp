@@ -28,6 +28,22 @@
             .twitter {
                 left:8%;
             }
+            @media (max-width: 1020px){
+                .markerLeftDescr {
+                    width: 90%;
+                }
+                .markerPageTable{
+                    display: block;
+                }
+            }
+            @media (max-device-width: 1020px){
+                .markerLeftDescr {
+                    width: 90%;
+                }
+                .markerPageTable{
+                    display: block;
+                }
+            }
         </style>
     </c:if>
     <meta name="title" content="${article.title}">

@@ -46,7 +46,7 @@ a, a:hover, a:active, a:visited {
     height: 30px;
     margin-top: 3px;
     padding-left: 5px;
-    color: rgb(174,214,43);
+    color: rgb(86,105,143);
     font-weight: 200;
     margin-right: 0px;
     overflow: hidden;
@@ -55,6 +55,7 @@ a, a:hover, a:active, a:visited {
     float: right;
     transition: 0.5s;
     margin-right: 30px;
+    padding-left: 5px;
 }
 .textBoxWidth{
     transition: 1s;
@@ -2363,13 +2364,14 @@ a.disable-menu-link{
 #searchBoxSmall{
     width: 100%;
     height: 30px;
-    color: rgb(174,214,43);
+    color: rgb(86,105,143);
     font-weight: 200;
     margin-right: 0px;
     overflow: hidden;
     border:none;
     transition: 0.5s;
     margin-top: 5px;
+    padding-left: 5px;
 }
 #searchButtonActiveSmall{
     background-color: rgb(84,182,157);
@@ -2966,7 +2968,10 @@ a.disable-menu-link{
         width: 100%;
     }
 }
-@media (max-width: 480px){
+@media (max-width: 360px){
+    .smallMenuBlock > ul > li:hover > ul > li{
+        white-space: normal;
+    }
 }
 
 
@@ -3549,5 +3554,8 @@ a.disable-menu-link{
         width: 100%;
     }
 }
-@media (max-device-width: 480px){
+@media (max-device-width: 360px){
+    .smallMenuBlock > ul > li:hover > ul > li{
+        white-space: normal;
+    }
 }
