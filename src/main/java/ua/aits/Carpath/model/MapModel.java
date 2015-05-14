@@ -190,8 +190,8 @@ public class MapModel {
             if("".equals(f_title) || f_title == null){
                 f_title = result.getString("titleEN");
             }
-            if(f_title.length() > 30){
-                f_title = f_title.substring(0,30);
+            if(f_title.length() > 55){
+                f_title = f_title.substring(0,55);
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
@@ -268,8 +268,8 @@ public class MapModel {
         while (result.next()) { 
             MapModel temp = new MapModel();
             String f_title = result.getString("titleEN");
-            if(f_title.length() > 30){
-                f_title = f_title.substring(0,30);
+            if(f_title.length() > 55){
+                f_title = f_title.substring(0,55);
             }
             String text = Helpers.html2text(result.getString("textEN"));
             if(text.length() > 175){
