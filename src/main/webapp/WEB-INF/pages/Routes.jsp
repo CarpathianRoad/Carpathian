@@ -527,6 +527,8 @@
                 $('#article_slider1_container').css('display','none');
                 $('#mainImageBlock').css('display','none');
                 $('.mainImageSliderLine').css('display','none');
+            }else{
+                $('.contentIntend').css('height','10');
             }
             
             for(var i = 0; i < images.length; i++){

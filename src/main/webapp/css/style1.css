@@ -2824,6 +2824,7 @@ a.disable-menu-link{
     .tripFilterText{
         float: left;
         margin-left: 19px;
+        margin-top: 10px;
     }
     .all_news{
         margin-top: 25px;
@@ -3423,6 +3424,7 @@ a.disable-menu-link{
     .tripFilterText{
         float: left;
         margin-left: 19px;
+        margin-top: 10px;
     }
     .all_news{
         margin-top: 25px;
