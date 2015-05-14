@@ -57,7 +57,7 @@
                 $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
                 $('#map').height(document.body.clientHeight-92); 
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                $('.contentIntend').css('height','10'); 
+                $('.contentIntend').css('height','30'); 
                 
                 if(window.innerWidth<800){
                     hideDescrRoute();
@@ -77,7 +77,7 @@
                 console.log(window.outerWidth);
                 
                 if((window.innerWidth<1024)&&(window.innerWidth>780)){
-                    $('#map').height(document.body.clientHeight-159);
+                    $('#map').height(document.body.clientHeight-157);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
                     $('.siteMap').css('display','none');
@@ -101,14 +101,13 @@
                     $('#footer').css('height','90px !important');
                     $('.siteMap').css('display','none');
                 }else{
-                    $('#map').height(document.body.clientHeight-116);
+                    $('#map').height(document.body.clientHeight-114);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
                     $('#footer').removeClass('footerHeight');
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
-                    $('.siteMap').css('display','none');
                 }
                 $('.routeDescription').height($('#map').height());
                 if(window.innerWidth<736){
@@ -199,7 +198,7 @@
                     var myLatlng = new google.maps.LatLng(x, y);
                     var markerPhoto = new google.maps.Marker({
                         position: myLatlng,
-                        map: map,
+                        //map: map,
                         icon: pinIcon,
                         title: "${imgs.name}"
                     });
@@ -524,6 +523,10 @@
             var imagesBlock = '';
             $('#maxImages').html("/"+images.length);
             $('#mainImageBlock').html('<img id="main_image" src="${Constants.URL}'+images[0]+'"/>');
+            if(images[0]==""){
+                $('#article_slider1_container').css('display','none');
+                $('#article_main_image').css('display','none');
+            }
             
             for(var i = 0; i < images.length; i++){
                 
