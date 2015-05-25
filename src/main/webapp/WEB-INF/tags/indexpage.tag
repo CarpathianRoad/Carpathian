@@ -41,10 +41,16 @@
     </script>
     <style>
         @font-face {
-            font-family: "Open Sans";
-            src: url("${Constants.URL}files/OpenSans-Regular-webfont.eot");
-            src: url("${Constants.URL}files/OpenSans-Regular-webfont.woff");
-            src: url("${Constants.URL}files/OpenSans-Regular.ttf");
+            font-family: 'Open Sans';
+            src: url('${Constants.URL}files/OpenSans.eot');
+            src: url('${Constants.URL}files/OpenSans.eot?#iefix') format('embedded-opentype'),
+                 url('${Constants.URL}files/OpenSans.woff2') format('woff2'),
+                 url('${Constants.URL}files/OpenSans.woff') format('woff'),
+                 url('${Constants.URL}files/OpenSans.ttf') format('truetype'),
+                 url('${Constants.URL}files/OpenSans.svg#open_sansregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
         }
         .lang-sw.active {
             color: rgb(174, 214, 43);
@@ -218,6 +224,7 @@
         </div>
         <div class="mainMenuIntend"></div>
         <div class="contentIntend"></div>
+        <div class="scrollToTop" onclick="scrollToTop()"><img src="${Constants.URL}img/scrollToTop.png"></div>
         <jsp:doBody/> 
         <div class="contentIntendBottom"></div>
     </div>
@@ -321,6 +328,10 @@
             $('#langSmallMenu').css('display','none');
             showLang = false;
         }
+    }
+    
+    function scrollToTop(){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
     }
     
     function searchSmallMenu(){
@@ -430,7 +441,7 @@
             }
             
         
-        
+        $('.scrollToTop').fadeOut(1);
         $('#searchButtonActive').hide(); 
     });
     
@@ -557,7 +568,7 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('#googleMap').height(document.body.clientHeight-92);
+                $('#googleMap').height(window.innerHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
                 $('.contentIntend').css('height','30');
@@ -566,12 +577,12 @@
                 console.log(window.outerWidth);
                 
                 if((window.innerWidth<1024)&&(window.innerWidth>780)){
-                    $('#googleMap').height(document.body.clientHeight-104);
+                    $('#googleMap').height(window.innerHeight-104);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
-                    $('#googleMap').height(document.body.clientHeight-104);
+                    $('#googleMap').height(window.innerHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#googleMap').height(document.body.clientHeight-84);
+                    $('#googleMap').height(window.innerHeight-84);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -579,7 +590,7 @@
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
                 }else if(window.innerWidth<=340){
-                    $('#googleMap').height(document.body.clientHeight-97);
+                    $('#googleMap').height(window.innerHeight-97);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -587,7 +598,7 @@
                     $('#footer').removeClass('footerHeightMap');
                     $('#footer').css('height','90px !important');
                 }else{
-                    $('#googleMap').height(document.body.clientHeight-114);
+                    $('#googleMap').height(window.innerHeight-114);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -790,7 +801,7 @@
     window.addEventListener('scroll', function(e){
         var urlMap = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-            shrinkOn = 110;
+            shrinkOn = 200;
         if ((distanceY > shrinkOn)&&(window.outerWidth>760)&&(window.innerWidth>760)) {
             $('.s-top').hide();
             $('.topMenu').addClass('topMenuSmall');
@@ -803,6 +814,7 @@
             $('.carpathName').addClass('carpathNameSmall');
             $('.carpathNameSmall').removeClass('carpathName');
             $('#mainMenuWidth').addClass('paddingSmallMenu');
+            $('.scrollToTop').fadeIn(500);
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
@@ -819,6 +831,7 @@
                 $('.carpathNameSmall').addClass('carpathName');
                 $('.carpathName').removeClass('carpathNameSmall');
             $('#mainMenuWidth').removeClass('paddingSmallMenu');
+            $('.scrollToTop').fadeOut(500);
             //}
         }
     });
