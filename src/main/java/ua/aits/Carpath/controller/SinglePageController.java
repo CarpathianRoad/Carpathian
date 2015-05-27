@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +50,24 @@ public class SinglePageController {
 		 ArticleModel content = new ArticleModel();
                  ModelAndView modelAndView = new ModelAndView("Index");
                  modelAndView.addObject("lan", lan);
-                 modelAndView.addObject("content", content.getArticleByCount(lan,"0","9"));
-                 modelAndView.addObject("points", map.getPointsByCount(lan,"0","9"));
+                 List<ArticleModel> articles = content.getArticleByCount(lan,"0","9");
+                 List<MapModel> points = map.getPointsByCount(lan,"0","9");
+                 for(ArticleModel temp: articles) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                            temp.setImage(temp.avatar);
+                    }
+                    String[] img  = temp.image.split(",");
+                    temp.setImage(img[0]);
+                }
+                 for(MapModel temp: points) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                            temp.setImage(temp.avatar);
+                    }
+                    String[] img  = temp.image.split(",");
+                    temp.setImage(img[0]);
+                }
+                 modelAndView.addObject("content", articles);
+                 modelAndView.addObject("points", points);
                  modelAndView.addObject("images", map.getImages());
                  return modelAndView;
 	}
@@ -100,12 +117,17 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/{lan}/map/{country}","/{lan}/map/{country}/"})
-    public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("country") String country, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/{pointer}","/{lan}/map/{pointer}/"})
+    public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("pointer") String pointer, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
-                model.addObject("country",country);
+                if (StringUtils.isNumeric(pointer)) {
+                    model.addObject("id", pointer);
+                }
+                else {
+                    model.addObject("country",pointer);
+                }
 		model.addObject("markers", maps);
 		return model;
 	}
@@ -136,7 +158,15 @@ public class SinglePageController {
         String[] arrayMessage = ret.getImage().split(",");
         ModelAndView modelAndView = new ModelAndView("Markers");
         modelAndView.addObject("marker", ret);
-        modelAndView.addObject("articles", map.getPointsByCount(lan,id,"3"));
+        List<MapModel> points = map.getPointsByCount(lan,id,"3");
+                 for(MapModel temp: points) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                            temp.setImage(temp.avatar);
+                    }
+                    String[] img  = temp.image.split(",");
+                    temp.setImage(img[0]);
+                }
+        modelAndView.addObject("articles", points);
         modelAndView.addObject("images", arrayMessage);
         return modelAndView;
     }

@@ -289,8 +289,8 @@
         $.each(filters, function( index, value ) {
             $(".route-filters :checkbox[value='"+value+"']").attr("checked","true");
         });
-        if("${article.image}" !== "" && "${article.image}" !== undefined) {
-            var images = "${article.image}".split(",");
+        if("${route.images}" !== "" && "${route.images}" !== undefined) {
+            var images = "${aroute.images}".split(",");
        $.each(images, function( index, value ) {
             $("#imageUpload .img-content").append('<a class="returnImage" data-url="${Constants.URL}'+value+'"><img src="${Constants.URL}'+value+'" alt="'+value+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
 
