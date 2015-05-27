@@ -54,10 +54,9 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
-                $('#map').height(document.body.clientHeight-92); 
+                $('.arrowRouteHide').css('margin-top',((window.innerHeight-152)/2)-24);
+                $('#map').height(window.innerHeight-92); 
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                $('.contentIntend').css('height','30'); 
                 
                 if(window.innerWidth<800){
                     hideDescrRoute();
@@ -69,7 +68,7 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('#map').height(document.body.clientHeight-92);
+                $('#map').height(window.innerHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
                 
@@ -77,13 +76,13 @@
                 console.log(window.outerWidth);
                 
                 if((window.innerWidth<1024)&&(window.innerWidth>780)){
-                    $('#map').height(document.body.clientHeight-157);
+                    $('#map').height(window.innerHeight-157);
                     $('#mainMenuWidth').css('padding','5px 15px');
                 }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
                     $('.siteMap').css('display','none');
-                    $('#googleMap').height(document.body.clientHeight-104);
+                    $('#googleMap').height(window.innerHeight-104);
                 }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
-                    $('#map').height(document.body.clientHeight-84);
+                    $('#map').height(window.innerHeight-84);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -92,7 +91,7 @@
                     $('#footer').css('height','90px !important');
                     $('.siteMap').css('display','none');
                 }else if(window.innerWidth<=340){
-                    $('#map').height(document.body.clientHeight-97);
+                    $('#map').height(window.innerHeight-97);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -101,7 +100,7 @@
                     $('#footer').css('height','90px !important');
                     $('.siteMap').css('display','none');
                 }else{
-                    $('#map').height(document.body.clientHeight-114);
+                    $('#map').height(window.innerHeight-114);
                     $('.footerNew').css('height','0');
                     $('.footerIntentInside').css('height','0');
                     $('.developpedText').css('width','90%');
@@ -359,12 +358,12 @@
                             new google.maps.Size(30, 40)
                         ); 
                         mousemarker = new google.maps.Marker({
-                            position: new google.maps.LatLng(xCoord[e.row],yCoord[e.row]),
+                            position: new google.maps.LatLng(xCoord[e.row*4],yCoord[e.row*4]),
                             map: map, 
                             icon: pinIcon        
                         });
                     } else {
-                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row],yCoord[e.row]));
+                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row*4],yCoord[e.row*4]));
                     }
                 });
             }
@@ -492,6 +491,9 @@
                             <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
                             ${route.public_country}
                         </div>
+                        <div class="markerPageCountry downloadRouteFile">
+                            <a href="${Constants.URL}routes/${route.file}" download>Download track file</a>
+                        </div>
                     </div>
                     <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
                     <div class="markerPageText">
@@ -527,6 +529,7 @@
                 $('#article_slider1_container').css('display','none');
                 $('#mainImageBlock').css('display','none');
                 $('.mainImageSliderLine').css('display','none');
+                $('.contentIntend').css('height','30'); 
             }else{
                 $('.contentIntend').css('height','10');
             }

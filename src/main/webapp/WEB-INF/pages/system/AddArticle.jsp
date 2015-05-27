@@ -566,16 +566,13 @@ $("#sudmitData").click(function(){
     var markerOnMap = null;
     function initialize()
             {
-                    //??????????? ?????
-                    var latlng = new google.maps.LatLng(50.4501,30.523400000000038);
                     var options = {
                             zoom: 5,
-                            center: latlng,
+                            center: new google.maps.LatLng(50.4501,30.523400000000038),
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                     map = new google.maps.Map(document.getElementById("map_canvas"), options);
+                    map = new google.maps.Map(document.getElementById("map_canvas"), options);
 
-                    //??????????? ?????????
                     geocoder = new google.maps.Geocoder();
                     google.maps.event.addListener(map, 'click', function(event) {
                         addMarker(event.latLng);
@@ -590,17 +587,19 @@ $("#sudmitData").click(function(){
                         draggable: true,
                         map: map
                     });
+                    geocodePosition(location);
                 }else{
                     marker[0].setPosition(location);
+                    geocodePosition(location);
                 }
-                //geocodePosition(location)
-                google.maps.event.addListener(markerOnMap, 'dragend', function() 
-                {
-                    geocodePosition(markerOnMap.getPosition());
+                google.maps.event.addListener(marker[0],'dragend',function(event) {
+                    geocodePosition(marker[0].getPosition());
                 });
             }
              
             function geocodePosition(location) {
+                $('#latitude0').val(location.lat());
+                $('#longitude0').val(location.lng());
                 var infowindow = new google.maps.InfoWindow();
                 geocoder.geocode({'latLng': location}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -609,15 +608,19 @@ $("#sudmitData").click(function(){
                         for (var p = address.length-1; p >= 0; p--) {
                             if (address[p].types.indexOf("country") != -1) {
                                 $('#cnt').attr("value",address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("locality") != -1) {
                                 $('#twn').attr("value",address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("administrative_area_level_2") != -1) {
                                 $('#dstr').attr("value",address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("administrative_area_level_1") != -1) {
                                 $('#rgn').attr("value",address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                         }
                         if (results[1]) {
@@ -629,78 +632,21 @@ $("#sudmitData").click(function(){
                     }
                 });
                 map.setCenter(location);
-                $('#latitude0').val(location.lat());
-                $('#longitude0').val(location.lng());
             }
-        
             
-            function dam(num)
-                    {
-                            var text = 'marker '+num;
-                            marker[num] = new google.maps.Marker({
-                            map: map,
-                            draggable: true,
-                            title: text
-                      });
-
-                    $(function() {
-                    $("#address"+num).autocomplete({
-                      //?????????? ???????? ??? ?????? ??? ??????????????
-                      source: function(request, response) {
-                            geocoder.geocode( {'address': request.term}, function(results, status) {
-                              response($.map(results, function(item) {
-                                    return {
-                                      label:  item.formatted_address,
-                                      value: item.formatted_address,
-                                      latitude: item.geometry.location.lat(),
-                                      longitude: item.geometry.location.lng()
-                                    }
-                              }));
-                            })
-                      },
-                      //??????????? ??? ?????? ??????????? ??????
-                      select: function(event, ui) {
-                            $("#latitude"+num).val(ui.item.latitude);
-                            $("#longitude"+num).val(ui.item.longitude);
-                            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-                            marker[num].setPosition(location);
-                            map.setCenter(location);
-                      }
-                    });
-              });
-
-              //????????? ????????? ??????? ????????? ?????????????? ??? ??????? ??? ??? ???????????  
-              google.maps.event.addListener(marker[num], 'drag', function() {
-                    geocoder.geocode({'latLng': marker[num].getPosition()}, function(results, status) {
-                      if (status == google.maps.GeocoderStatus.OK) {
-                            if (results[0]) {
-                              $('#address'+num).val(results[0].formatted_address);
-                              $('#latitude'+num).val(marker[num].getPosition().lat());
-                              $('#longitude'+num).val(marker[num].getPosition().lng());
-                                    jQuery(".marker-view").show();
-                                    jQuery(".div-addres").hide();
-                                    jQuery(".div-addres-"+num).show();
-                            }
-                      }
-                    });
-              });
-                    }
             $(document).ready(function(){ 
               initialize();
-              dam(0);
               jQuery(".coordinate").keyup(function(){
                     setMarkerPosition(this);
               });
             });
+            
             function setMarkerPosition(input)
                     {
                         var x = $("#latitude0").val();
                         var y = $("#longitude0").val();
-                        console.log(x);
-                        console.log(y);
                         var xArr = x.split('.');
                         var yArr = y.split('.');
-                        console.log(xArr.length+'lenth');
                         if((!(xArr.length>2))&&(!(yArr.length>2))){
                             if((x.indexOf(',')!=-1)||(y.indexOf(','))!=-1){
                                 x = x.replace(',','.');
@@ -710,7 +656,6 @@ $("#sudmitData").click(function(){
                             var id= jQuery(input).attr('id');
                             var numS = id.split('tude');
                             var num = numS[1];
-                            console.log(marker[num]);
                             
                             myLatlng = new google.maps.LatLng(x,y);
                             if((x.slice(-1)!='.')&&(y.slice(-1)!='.')){
