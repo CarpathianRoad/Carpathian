@@ -109,6 +109,7 @@
                 var y = "${marker.y}".substring(0, 7);
 		var myLatlng = new google.maps.LatLng(${marker.x}, ${marker.y});
 		var marker = new google.maps.Marker({
+                    id: "${marker.id}",
                     position: myLatlng,
                     map: map,
                     icon: pinIcon,
@@ -169,6 +170,16 @@
                 document.getElementById('mapRouteButton'));
             map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
                 document.getElementById('pushRightConrainer'));
+            
+            if('${id}'!=''){
+                console.log(markers.length);
+                for (var i=0;i<markers.length;i++){
+                    if('${id}'==markers[i].id){
+                        map.setCenter(markers[i].getPosition());
+                        map.setZoom(12);
+                    }
+                }
+            }
             
                 var hideButton = document.getElementById('filterHide');
                 /*google.maps.event.addDomListener(hideButton, 'click', function() {
@@ -402,6 +413,52 @@
             $('.routeMapContainer').fadeOut(1);
             $('.indexMapMenu').fadeOut(1);
             $('#filtersContainer').fadeOut(1);
+            
+            switch('${country}'){
+                case "allMap":
+                    mapPageMenu();
+                    zoomMap = 7;
+                    center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
+                    break;
+                case "Romania":
+                    mapPageMenu();
+                    zoomMap = 8;
+                    center = new google.maps.LatLng(46.07323062540838,24.708251953125);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerRomania.png');
+                    break;
+                case "Poland":
+                    mapPageMenu();
+                    zoomMap = 8;
+                    center = new google.maps.LatLng(50.00067775723633,21.4068603515625);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerPoland.png');
+                    break;
+                case "Ukraine":
+                    mapPageMenu();
+                    zoomMap = 9;
+                    center = new google.maps.LatLng(48.705462895790596,23.895263671875);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerUkraine.png');
+                    break;
+                case "Slovakia":
+                    mapPageMenu();
+                    zoomMap = 8;
+                    center = new google.maps.LatLng(48.828565527993234,19.9346923828125);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerSlovakia.png');
+                    break;
+                case "Hungary":
+                    mapPageMenu();
+                    zoomMap = 8;
+                    center = new google.maps.LatLng(47.21210577562242,19.5611572265625);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerHungary.png');
+                    break;
+                case "":
+                    mapPageMenu();
+                    center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                    $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
+                    countryChooser = "allMap";
+                    zoomMap = 7;
+                    break;
+            }
         });
         function hideFilters(){
             if(rightMapContainerCounter){hideMap()}

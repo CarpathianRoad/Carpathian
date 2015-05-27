@@ -65,6 +65,7 @@
                         <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
                         ${article.country}
                     </div>
+                    <div class="downloadRouteFile">&nbsp;</div>
                 </div>
                 <div class="markerPageText">
                     ${article.textEN}
