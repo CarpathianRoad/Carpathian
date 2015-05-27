@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -116,12 +117,17 @@ public class SinglePageController {
 		
 		return model;
 	}
-    @RequestMapping(value = {"/{lan}/map/{country}","/{lan}/map/{country}/"})
-    public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("country") String country, HttpServletRequest request,
+    @RequestMapping(value = {"/{lan}/map/{pointer}","/{lan}/map/{pointer}/"})
+    public ModelAndView mapCountry(@PathVariable("lan") String lan, @PathVariable("pointer") String pointer, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
                 List<MapModel> maps = map.getAllPoints(lan);
 		ModelAndView model = new ModelAndView("Map");
-                model.addObject("country",country);
+                if (StringUtils.isNumeric(pointer)) {
+                    model.addObject("id", pointer);
+                }
+                else {
+                    model.addObject("country",pointer);
+                }
 		model.addObject("markers", maps);
 		return model;
 	}
