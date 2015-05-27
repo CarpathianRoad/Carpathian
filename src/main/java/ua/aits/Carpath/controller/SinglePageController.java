@@ -19,6 +19,7 @@ import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
 import ua.aits.Carpath.model.RouteModel;
+import ua.aits.Carpath.model.PanoramaModel;
 
 /**
  *
@@ -31,6 +32,7 @@ public class SinglePageController {
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
+    PanoramaModel panoramas = new PanoramaModel();
     
     @RequestMapping(value = {"/404", "/Carpath/404"})
     public ModelAndView error404(HttpServletRequest request,
@@ -175,6 +177,14 @@ public class SinglePageController {
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("TestPage");
+		return model;
+	}
+    
+    @RequestMapping(value = {"/{lan}/panorama/{id}"})
+    public ModelAndView panorama(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView model = new ModelAndView("Panorama");
+                model.addObject("url", panoramas.getUrlByID(id));
 		return model;
 	}
     @RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)
