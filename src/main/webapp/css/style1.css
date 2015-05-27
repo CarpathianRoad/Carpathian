@@ -19,9 +19,13 @@ a, a:hover, a:active, a:visited {
     z-index: 5;
     transition: 0.5s;
 }
+#mapMenu{
+    visibility: hidden;
+}
 .indexNavBarFooter{
     background-color: rgb(86,105,143);
     width: 100%;
+    display: table;
 }
 .mainMenuIntend{
     width: 100%;
@@ -42,7 +46,7 @@ a, a:hover, a:active, a:visited {
     height: 30px;
     margin-top: 3px;
     padding-left: 5px;
-    color: rgb(174,214,43);
+    color: rgb(86,105,143);
     font-weight: 200;
     margin-right: 0px;
     overflow: hidden;
@@ -51,6 +55,7 @@ a, a:hover, a:active, a:visited {
     float: right;
     transition: 0.5s;
     margin-right: 30px;
+    padding-left: 5px;
 }
 .textBoxWidth{
     transition: 1s;
@@ -839,10 +844,6 @@ body {
     font-weight: 200;
     float: left;
     margin-top: 15px;
-    margin-left: 15px;
-}
-.developpedSmall{
-    margin-top: 0 !important;
 }
 .footerContactsText{
     margin-left: 0;
@@ -1630,7 +1631,6 @@ label{
 	width: 610px;
 	float: right;
 	height: 69px;
-	border: 2px solid rgb(122,144,180);
 }
 .footerDisplayNone{
     display: none;
@@ -1719,9 +1719,7 @@ label{
     font: 7pt 'Open Sans';
     font-weight: 200;
     margin-top: 15px;
-}
-.siteMapSmall{
-    margin: 0 auto;
+    margin-bottom: 8px;
 }
 .fundedLink a{
     text-align: left;
@@ -1767,7 +1765,8 @@ label{
     font: 12pt 'Open Sans';
     font-weight: 200;
     color: rgb(84, 182, 157);
-    margin-left: 100px;
+    margin-left: 10px;
+    float: left;
 }
 .markerPageCountry img{
     width: 21px;
@@ -1807,7 +1806,7 @@ label{
     margin: 0 auto;
     width: 9px;
     height: 17px;
-    margin-top: -5px;
+    margin-top: -3px;
     visibility: hidden;
     transition: 0.5s;
 }
@@ -2114,7 +2113,7 @@ a.disable-menu-link{
 
 .news_text_box
     {
-        height: 5.4em;
+        height: 120px;
         text-overflow: ellipsis;
         overflow: hidden;
     }
@@ -2208,8 +2207,7 @@ a.disable-menu-link{
         font: 18pt 'Open Sans';
         font-weight: 600;
         color: rgb(87,105,143);
-        max-height: 2.5em;
-        min-height: 30px;
+        height: 2.5em;
     }
 .news_title a
     {
@@ -2327,12 +2325,14 @@ a.disable-menu-link{
 .twitter
     {
         position: relative;
-        left: 12%;
+        left: 70px;
         margin-top: -1.4em;
     }
 /*=========END_ERIK========*/
 .smallScreenMenu{
     float: right;
+    width: 45px;
+    height: 42px;
 }
 #languageSelectorSmall{
     float: right;
@@ -2349,6 +2349,8 @@ a.disable-menu-link{
     margin-top: 8px;
     margin-left: 20px;
     margin-right: 15px;
+    width: 25px;
+    height: 25px;
 }
 #smallSearch img{
     width: 25px;
@@ -2362,13 +2364,14 @@ a.disable-menu-link{
 #searchBoxSmall{
     width: 100%;
     height: 30px;
-    color: rgb(174,214,43);
+    color: rgb(86,105,143);
     font-weight: 200;
     margin-right: 0px;
     overflow: hidden;
     border:none;
     transition: 0.5s;
     margin-top: 5px;
+    padding-left: 5px;
 }
 #searchButtonActiveSmall{
     background-color: rgb(84,182,157);
@@ -2382,6 +2385,48 @@ a.disable-menu-link{
 }
 .searchMenuSmall{
     display: none;
+}
+
+.coFinBlock{
+    border: 2px solid rgb(122,144,180);
+    border-right: none;
+    height: 70px;
+    float: left;
+    
+}
+.partnershipBlock{
+    border: 2px solid rgb(122,144,180);
+    border-left: none;
+    border-right: none;
+    height: 70px;
+    float: left;
+}
+.huskrouaBlock{
+    border: 2px solid rgb(122,144,180);
+    border-left: none;
+    height: 70px;
+    float: left;
+}
+#maxImages{
+    float: left;
+}
+.downloadRouteFile{
+    margin-left: 17px;
+}
+.downloadRouteFile a{
+    color: rgb(84, 182, 157);
+}
+.scrollToTop{
+    position: fixed;
+    z-index: 999999;
+    right: 20;
+    bottom: 20;
+    width: 45px;
+    height: 45px;
+}
+.scrollToTop img{
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -2434,9 +2479,13 @@ a.disable-menu-link{
         }
 }
 @media (max-width: 760px){
+        .widthClass{
+            display: block;
+        }
     .indexMapAllContainer{
         width: 90%;
         margin: 0 auto;
+        display: none;
     }
     .indexMap{
         width: 90%;
@@ -2494,6 +2543,18 @@ a.disable-menu-link{
     }
 }
 @media (max-width: 680px){
+    .footerLeftMain{
+        display: none;
+    }
+    .siteMap{
+        display: none;
+    }
+    .footerRightMain{
+        display: none;
+    }
+    .footerNew{
+        height: 0;
+    }
     .mapButton{
         font-size: 6pt;
         margin-top: 5px;
@@ -2501,6 +2562,71 @@ a.disable-menu-link{
     .buttonBorderClass{
         padding: 14px 12px 25px 15px;
         margin-top: 0px;
+    }
+    .footerLeftMain{
+        width: auto;
+        height: auto;
+        float: none;
+    }
+    .footerRightMain{
+        float: none;
+        margin: 20 auto;
+    }
+    .coFinBlock{
+        width: 210px;
+        float: none;
+        border-right: 2px solid rgb(122,144,180);
+        margin: 0 auto;
+    }
+    .partnershipBlock{
+        border-left: 2px solid rgb(122,144,180);
+        border-right: 2px solid rgb(122,144,180);
+        float: none;
+        width: 210px;
+        margin: 20px auto;
+    }
+    .huskrouaBlock{
+        border-left: 2px solid rgb(122,144,180);
+        float: none;
+        width: 250px;
+        margin: 0 auto;
+    }
+    .projectFunded{
+        width: 75% !important;
+        margin-top: 30px;
+    }
+    .developpedText{
+        float: none;
+        text-align: center;
+        margin-left: 0;
+        width: 75%;
+        margin: 0px auto;
+    }
+    .footerContactsText{
+        margin-top: 5px;
+    }
+    .aitsText{
+        padding-bottom: 5px;
+    }
+    .footerHeight{
+        height: auto !important;
+    }
+    .siteMap{
+        width: 39px;
+        margin: 0 auto;
+        float: none;
+    }
+    .footerIntentInside{
+        height: 1;
+    }
+    .developpedText{
+        margin-left: auto !important;
+    }
+    .indexNavBarFooter{
+        display: block;
+    }
+    .projectFunded{
+        display: none;
     }
 }
 @media (max-width: 885px){
@@ -2709,13 +2835,14 @@ a.disable-menu-link{
         text-align: center;
     }
     .tripMethod{
-        margin: 27px auto 0 auto;
-        float: none;
-        width: 425px;
+        width: 100%;
+        text-align: center;
+        margin: 20 auto;
     }
     .tripFilterText{
         float: left;
         margin-left: 19px;
+        margin-top: 10px;
     }
     .all_news{
         margin-top: 25px;
@@ -2771,7 +2898,7 @@ a.disable-menu-link{
     }
     .s-new .s-rightNavBar .s-bot{
         float: right;
-        margin-top: -55px;
+        margin-top: -15px;
     }
     .showSmallMenu{
         width: 135px;
@@ -2812,12 +2939,6 @@ a.disable-menu-link{
     .paddingSmallMenu #cssmenu > ul > li{
         margin: 17px 10px;
     } 
-    .s-logoIndex{
-        width: 100px !important;
-    }
-    .s-logoIndex img{
-        width: 100% !important;
-    }
     .mainMenuIntend{
         height: 70px;
     }
@@ -2853,6 +2974,26 @@ a.disable-menu-link{
     .topMenu{
         height: 70px;
     }
+    .s-logoIndex{
+        width: 100px !important;
+    }
+    .s-logoIndex img{
+        width: 100% !important;
+    }
+    .routeDescription{
+        width:90%;
+    }
+    #holder{
+        display: none;
+    }
+    .routeDescrOverflow{
+        width: 100%;
+    }
+}
+@media (max-width: 360px){
+    .smallMenuBlock > ul > li:hover > ul > li{
+        white-space: normal;
+    }
 }
 
 
@@ -2881,6 +3022,7 @@ a.disable-menu-link{
     .indexMapAllContainer{
         width: 90%;
         margin: 0 auto;
+        display: none;
     }
     .indexMap{
         width: 90%;
@@ -2940,8 +3082,23 @@ a.disable-menu-link{
             min-height: none;
             max-height: none;
         }
+        .widthClass{
+            display: block;
+        }
 }
 @media (max-device-width: 680px){
+    .footerLeftMain{
+        display: none;
+    }
+    .siteMap{
+        display: none;
+    }
+    .footerRightMain{
+        display: none;
+    }
+    .footerNew{
+        height: 0;
+    }
     .mapButton{
         font-size: 7pt;
         margin-top: 5px;
@@ -2949,6 +3106,77 @@ a.disable-menu-link{
     .buttonBorderClass{
         padding: 14px 12px 25px 15px;
         margin-top: 0px;
+    }
+    .footerLeftMain{
+        width: auto;
+        height: auto;
+        float: none;
+    }
+    .coFinBlock{
+        width: 210px;
+        float: none;
+        border-right: 2px solid rgb(122,144,180);
+        margin: 0 auto;
+    }
+    .partnershipBlock{
+        border-left: 2px solid rgb(122,144,180);
+        border-right: 2px solid rgb(122,144,180);
+        float: none;
+        width: 210px;
+        margin: 20px auto;
+    }
+    .huskrouaBlock{
+        border-left: 2px solid rgb(122,144,180);
+        float: none;
+        width: 250px;
+        margin: 0 auto;
+    }
+    .projectFunded{
+        width: 75% !important;
+        margin-top: 30px;
+    }
+    .developpedText{
+        float: none;
+        text-align: center;
+        margin-left: 0;
+        width: 75%;
+        margin: 0px auto;
+    }
+    .footerContactsText{
+        margin-top: 5px;
+    }
+    .aitsText{
+        padding-bottom: 5px;
+    }
+    .footerHeight{
+        height: auto !important;
+    }
+    .indexNavBarFooter{
+        display: block;
+    }
+    .footerRightMain{
+        width: 280px;
+        height: 69px;
+        border: 2px solid rgb(122,144,180);
+        padding-top: 16px;
+        padding-left: 8px;
+        margin: 0 auto;
+        float: none;
+        margin-top: 20px;
+    }
+    .siteMap{
+        width: 39px;
+        float: none;
+        margin: 0 auto;
+    }
+    .footerIntentInside{
+        height: 1;
+    }
+    .developpedText{
+        margin-left: auto !important;
+    }
+    .projectFunded{
+        display: none;
     }
 }
 @media screen and (min-device-width: 760px) and (max-device-width: 950px){
@@ -3207,13 +3435,14 @@ a.disable-menu-link{
         text-align: center;
     }
     .tripMethod{
-        margin: 27px auto 0 auto;
-        float: none;
-        width: 425px;
+        width: 100%;
+        text-align: center;
+        margin: 20 auto;
     }
     .tripFilterText{
         float: left;
         margin-left: 19px;
+        margin-top: 10px;
     }
     .all_news{
         margin-top: 25px;
@@ -3269,7 +3498,7 @@ a.disable-menu-link{
     }
     .s-new .s-rightNavBar .s-bot{
         float: right;
-        margin-top: -55px;
+        margin-top: -15px;
     }
     .showSmallMenu{
         width: 135px;
@@ -3310,12 +3539,6 @@ a.disable-menu-link{
     .paddingSmallMenu #cssmenu > ul > li{
         margin: 17px 10px;
     } 
-    .s-logoIndex{
-        width: 100px !important;
-    }
-    .s-logoIndex img{
-        width: 100% !important;
-    }
     .mainMenuIntend{
         height: 70px;
     }
@@ -3323,7 +3546,7 @@ a.disable-menu-link{
         height: 20px !important;
     }
 }
-@media (max-width: 780px){
+@media (max-device-width: 780px){
     .s-rightNavBar{
         display: none;
     }
@@ -3337,5 +3560,25 @@ a.disable-menu-link{
     .s-rightNavBarSmall{
         display: none;
         
+    }
+    .s-logoIndex{
+        width: 100px !important;
+    }
+    .s-logoIndex img{
+        width: 100% !important;
+    }
+    .routeDescription{
+        width:90%;
+    }
+    #holder{
+        display: none;
+    }
+    .routeDescrOverflow{
+        width: 100%;
+    }
+}
+@media (max-device-width: 360px){
+    .smallMenuBlock > ul > li:hover > ul > li{
+        white-space: normal;
     }
 }

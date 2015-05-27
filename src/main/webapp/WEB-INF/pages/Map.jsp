@@ -416,8 +416,8 @@
                 filtersContainerCounter = true;
                 $('#filtersContainer').fadeIn(100);
                 $('#pushRightConrainer').addClass('pushRightConrainerFilters');
-                if(document.body.clientHeight<830){
-                    $('.pushRightConrainerFilters').css('height', document.body.clientHeight-372);
+                if(window.innerHeight<830){
+                    $('.pushRightConrainerFilters').css('height', window.innerHeight-372);
                 }
                 $('#mainImageRightContaineMap').attr("src","${Constants.URL}img/filtersImageActive.png");
                 $('#sliderDiv').addClass('sliderDiv');
@@ -448,6 +448,8 @@
                 return false;	
               }		
             });
+            
+            console.log(typeof InstallTrigger !== 'undefined');   // Firefox 1.0+);
             });
         } )( jQuery );
         

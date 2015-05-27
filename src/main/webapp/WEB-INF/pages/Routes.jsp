@@ -51,41 +51,81 @@
             var styleTrigger = false;
             
             $(document).ready(function() {
+                $('.developpedText').addClass('developpedSmall');
+                $('.footerHeight').addClass('footerHeightMap');
+                $('.minHeight').removeClass('minHeight');
+                $('.arrowRouteHide').css('margin-top',((window.innerHeight-152)/2)-24);
+                $('#map').height(window.innerHeight-92); 
+                $('.mainMenuIntend').addClass('mainMenuIntendSmall');
+                
+                if(window.innerWidth<800){
+                    hideDescrRoute();
+                }
+                
                 $('.projectFunded').addClass('footerDisplayNone');
                 $('.footerRightMain').addClass('footerDisplayNone');
                 $('.footerLeftMain').addClass('footerDisplayNone');
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('.routeDescription').height(document.body.clientHeight-92);
-                $('.arrowRouteHide').css('margin-top',((document.body.clientHeight-152)/2)-24);
-                $('#map').height(document.body.clientHeight-92); 
+                $('#map').height(window.innerHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
-                $('.contentIntend').css('height','30'); 
-                 
-                if(window.innerWidth<1024){
-                    $('#map').height(document.body.clientHeight-104);
-                    $('.routeDescription').height(document.body.clientHeight-104);
+                
+                console.log(window.innerWidth);
+                console.log(window.outerWidth);
+                
+                if((window.innerWidth<1024)&&(window.innerWidth>780)){
+                    $('#map').height(window.innerHeight-157);
                     $('#mainMenuWidth').css('padding','5px 15px');
+                }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
+                    $('.siteMap').css('display','none');
+                    $('#googleMap').height(window.innerHeight-104);
+                }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
+                    $('#map').height(window.innerHeight-84);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                    $('.siteMap').css('display','none');
+                }else if(window.innerWidth<=340){
+                    $('#map').height(window.innerHeight-97);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                    $('.siteMap').css('display','none');
+                }else{
+                    $('#map').height(window.innerHeight-114);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
                 }
-                if(window.innerWidth<800){
-                    hideDescrRoute();
-                }
+                $('.routeDescription').height($('#map').height());
                 if(window.innerWidth<736){
                     $('.s-bot').css('margin-top','11px');
+                } 
+                if(window.innerWidth>780){
+                    $('.hideMenu').css('visibility','visible');
+                    $('.s-top').hide();
+                    $('.topMenu').addClass('topMenuSmall');
+                    $('.s-logoIndex').addClass('s-logoIndexSmall');
+                    $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                    $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                    $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                    $('.menuLineSmall').addClass('menuLineExtraSmall');
+                    $('.carpathName').addClass('carpathNameSmall');
+                    $('.carpathNameSmall').removeClass('carpathName');
+                }else{
+                    $('.hideMenu').css('display','none');
                 }
-                $('.hideMenu').css('visibility','visible');
-                $('.s-top').hide();
-                $('.topMenu').addClass('topMenuSmall');
-                $('.s-logoIndex').addClass('s-logoIndexSmall');
-                $('.s-logoIndexSmall').removeClass('s-logoIndex');
-                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
-                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
-                $('.dropDownMenu a').addClass('scrollSmallerText');
-                $('.menuLineSmall').addClass('menuLineExtraSmall');
-                $('.carpathName').addClass('carpathNameSmall');
-                $('.carpathNameSmall').removeClass('carpathName');
             
                 if (window.XMLHttpRequest){
                     xmlhttp=new XMLHttpRequest();
@@ -157,7 +197,7 @@
                     var myLatlng = new google.maps.LatLng(x, y);
                     var markerPhoto = new google.maps.Marker({
                         position: myLatlng,
-                        map: map,
+                        //map: map,
                         icon: pinIcon,
                         title: "${imgs.name}"
                     });
@@ -318,12 +358,12 @@
                             new google.maps.Size(30, 40)
                         ); 
                         mousemarker = new google.maps.Marker({
-                            position: new google.maps.LatLng(xCoord[e.row],yCoord[e.row]),
+                            position: new google.maps.LatLng(xCoord[e.row*4],yCoord[e.row*4]),
                             map: map, 
                             icon: pinIcon        
                         });
                     } else {
-                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row],yCoord[e.row]));
+                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row*4],yCoord[e.row*4]));
                     }
                 });
             }
@@ -427,7 +467,7 @@
                 descrHidden = false;
             }
         }
-            
+        console.log('${route.images}');
     
         </script>
     <div id="sliderDiv" class="sliderDivRoute">
@@ -436,6 +476,7 @@
             <span id="slider"></span>
         </label>
     </div>
+        ${route.images}
         <div class="markerPageTable routeWidth">
         <div id="map" style="width: 100%;float: left;"></div>
             <div class="routesLinks routeDescription">
@@ -450,23 +491,18 @@
                             <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
                             ${route.public_country}
                         </div>
+                        <div class="markerPageCountry downloadRouteFile">
+                            <a href="${Constants.URL}routes/${route.file}" download>Download track file</a>
+                        </div>
                     </div>
                     <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
                     <div class="markerPageText">
                         ${route.textUA}
                     </div>
-                    <c:if test="${(imagesRoute[0])!=''}">
-                        <c:if test="${fn:length(imagesRoute)>0}">
-        <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
+                            <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                         <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                                <c:forEach items="${imagesRoute}" var="image" varStatus="loop">
-                                                    <div onclick="set_main_picture('${Constants.URL}${image.img}','${loop.index}')">
-                                                        <div class="sliderHover">
-                                                            <div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}${image.img}" style="height: 150px"/>
-                                                        </div>
-                                                    </div>
-                                                </c:forEach>
+                                            <div id="imageHolder" u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
+                                                
                                             </div>
                                             <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
                                             </span>
@@ -474,18 +510,39 @@
                                             </span>
                                         </div>
                                         <div class="article_main_image">
-                                            <img id="main_image" src="${Constants.URL}<c:out value="${imagesRoute[0].img}" />" />
+                                            <div id="mainImageBlock"></div>
                                             <div class="mainImageSliderLine">
-                                                <div id="imageCount">1</div>/${fn:length(imagesRoute)}
+                                                <div id="imageCount">1</div><div id="maxImages"></div>
                                                 &nbsp;&nbsp;
                                                     ${route.title} Gallery
                                             </div>
                                         </div>
-                        </c:if>
-                    </c:if>
                 </div>
             </div>
         </div>
-    
+        <script>
+            var images = '${route.images}'.split(",");
+            var imagesBlock = '';
+            $('#maxImages').html("/"+images.length);
+            $('#mainImageBlock').html('<img id="main_image" src="${Constants.URL}'+images[0]+'"/>');
+            if(images[0]==""){
+                $('#article_slider1_container').css('display','none');
+                $('#mainImageBlock').css('display','none');
+                $('.mainImageSliderLine').css('display','none');
+                $('.contentIntend').css('height','30'); 
+            }else{
+                $('.contentIntend').css('height','10');
+            }
+            
+            for(var i = 0; i < images.length; i++){
+                
+                imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\')">'+
+                        '<div class="sliderHover">'+
+                        '<div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}'+images[i]+'" style="height: 150px"/>'+
+                        '</div>'+
+                        '</div>';
+            }
+            $('#imageHolder').html(imagesBlock);
+        </script>
     
 </t:indexpage>

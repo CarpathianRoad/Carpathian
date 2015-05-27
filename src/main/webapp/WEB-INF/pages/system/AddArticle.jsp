@@ -359,7 +359,7 @@
                 
                 
     $(document).ready(function () { 
-        
+        alert = function() {};
         initDialog();
         $("#textValidation").html('<span style="color:red">Max length for title - 55 chars</span>');
         var currentLang = $(".lang-switch-text button.active").attr("id");
@@ -566,16 +566,13 @@ $("#sudmitData").click(function(){
     var markerOnMap = null;
     function initialize()
             {
-                    //??????????? ?????
-                    var latlng = new google.maps.LatLng(50.4501,30.523400000000038);
                     var options = {
                             zoom: 5,
-                            center: latlng,
+                            center: new google.maps.LatLng(50.4501,30.523400000000038),
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                     map = new google.maps.Map(document.getElementById("map_canvas"), options);
+                    map = new google.maps.Map(document.getElementById("map_canvas"), options);
 
-                    //??????????? ?????????
                     geocoder = new google.maps.Geocoder();
                     google.maps.event.addListener(map, 'click', function(event) {
                         addMarker(event.latLng);
@@ -584,54 +581,46 @@ $("#sudmitData").click(function(){
             }
             
             function addMarker(location) {
-                if(markerOnMap==null){
-                    markerOnMap = new google.maps.Marker({
+                if(marker[0]==null){
+                    marker[0] = new google.maps.Marker({
                         position: location,
                         draggable: true,
                         map: map
                     });
+                    geocodePosition(location);
                 }else{
-                    markerOnMap.setPosition(location);
+                    marker[0].setPosition(location);
+                    geocodePosition(location);
                 }
-                geocodePosition(location)
-                google.maps.event.addListener(markerOnMap, 'dragend', function() 
-                {
-                    geocodePosition(markerOnMap.getPosition());
+                google.maps.event.addListener(marker[0],'dragend',function(event) {
+                    geocodePosition(marker[0].getPosition());
                 });
             }
+             
             function geocodePosition(location) {
+                $('#latitude0').val(location.lat());
+                $('#longitude0').val(location.lng());
                 var infowindow = new google.maps.InfoWindow();
                 geocoder.geocode({'latLng': location}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var address = results[0].address_components;
                         $('#address0').val(results[1].formatted_address);
-                        //console.log("GPS = " + location);
-                        //console.log("Formatted adrees = " + results[1].formatted_address);
                         for (var p = address.length-1; p >= 0; p--) {
                             if (address[p].types.indexOf("country") != -1) {
-                                //console.log("country = " + address[p].long_name);
                                 $('#cnt').attr("value",address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("locality") != -1) {
-                                //console.log("town = " + address[p].long_name);
                                 $('#twn').attr("value",address[p].long_name);
-                            }
-                            if (address[p].types.indexOf("route") != -1) {
-                                //console.log("route = " + address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("administrative_area_level_2") != -1) {
-                                //console.log("district = " + address[p].long_name);
                                 $('#dstr').attr("value",address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("administrative_area_level_1") != -1) {
-                                //console.log("region = " + address[p].long_name);
                                 $('#rgn').attr("value",address[p].long_name);
-                            }
-                            if (address[p].types.indexOf("street_number") != -1) {
-                                //console.log("street number = " + address[p].long_name);
-                            }
-                            if (address[p].types.indexOf("postal_code") != -1) {
-                                //console.log("postal code = " + address[p].long_name);
+                                //console.log(address[p].long_name+'ok');
                             }
                         }
                         if (results[1]) {
@@ -643,126 +632,38 @@ $("#sudmitData").click(function(){
                     }
                 });
                 map.setCenter(location);
-                //dam(location);
-                $('#latitude0').val(location.lat());
-                $('#longitude0').val(location.lng());
             }
-        
             
-            function dam(num)
-                    {
-                            var text = 'marker '+num;
-                            marker[num] = new google.maps.Marker({
-                            map: map,
-                            draggable: true,
-                            title: text
-                      });
-
-                    $(function() {
-                    $("#address"+num).autocomplete({
-                      //?????????? ???????? ??? ?????? ??? ??????????????
-                      source: function(request, response) {
-                            geocoder.geocode( {'address': request.term}, function(results, status) {
-                              response($.map(results, function(item) {
-                                    return {
-                                      label:  item.formatted_address,
-                                      value: item.formatted_address,
-                                      latitude: item.geometry.location.lat(),
-                                      longitude: item.geometry.location.lng()
-                                    }
-                              }));
-                            })
-                      },
-                      //??????????? ??? ?????? ??????????? ??????
-                      select: function(event, ui) {
-                            $("#latitude"+num).val(ui.item.latitude);
-                            $("#longitude"+num).val(ui.item.longitude);
-                            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-                            marker[num].setPosition(location);
-                            map.setCenter(location);
-                      }
-                    });
-              });
-
-              //????????? ????????? ??????? ????????? ?????????????? ??? ??????? ??? ??? ???????????  
-              google.maps.event.addListener(marker[num], 'drag', function() {
-                    geocoder.geocode({'latLng': marker[num].getPosition()}, function(results, status) {
-                      if (status == google.maps.GeocoderStatus.OK) {
-                            if (results[0]) {
-                              $('#address'+num).val(results[0].formatted_address);
-                              $('#latitude'+num).val(marker[num].getPosition().lat());
-                              $('#longitude'+num).val(marker[num].getPosition().lng());
-                                    jQuery(".marker-view").show();
-                                    jQuery(".div-addres").hide();
-                                    jQuery(".div-addres-"+num).show();
-                            }
-                      }
-                    });
-              });
-                    }
             $(document).ready(function(){ 
               initialize();
-              dam(0);
               jQuery(".coordinate").keyup(function(){
                     setMarkerPosition(this);
               });
             });
-            function addAdress()
-                    {
-                            var number = jQuery("#address-number").val();
-                            /*number++;
-                            jQuery(".main-address").append(
-                                            '<div class="div-addres div-addres-'+number+'">'+number+'<label>????? ??? ??????: </label>'+
-                                            '<input name="googleaddress_'+number+'" id="address'+number+'" style="width:600px;" type="text"/>'+
-                                            '<input type="button" value="???????" onclick="deleteMarker('+number+');" ><br/>'+
-                                            '<span>?????? (latitude): </span><input name="coordinate_x_'+number+'" class="coordinate" id="latitude'+number+'" type="text"/>'+
-                                            '<span>??????? (longitude): </span><input name="coordinate_y_'+number+'" class="coordinate" id="longitude'+number+'" type="text"/></div>'
-                                    );
-                            jQuery(".main-button").append(
-                                            '<input type="button" onclick="viewMarker('+number+');" value="?????? '+number+'" '+
-                                            ' class="marker-view marker-view-'+number+'">');*/
-                            //initialize(number);
-                            dam(number);
-                            jQuery(".coordinate").keyup(function(){
-                                    setMarkerPosition(this);
-                              });
-                            //jQuery(".marker-view").show();
-                            //jQuery(".div-addres").hide();
-                            //jQuery(".div-addres-"+number).show();
-                            //jQuery("#address-number").val(number);
-                            var massCount = jQuery("#mass-count-marker").val();
-                            massCount += "~"+ number + "~,";
-                            jQuery("#mass-count-marker").val(massCount);
-                    }
-            function viewMarker(number)
-                    {
-                            jQuery(".marker-view").show();
-                            jQuery(".div-addres").hide();
-                            jQuery(".div-addres-"+number).show();
-                    }
+            
             function setMarkerPosition(input)
                     {
+                        var x = $("#latitude0").val();
+                        var y = $("#longitude0").val();
+                        var xArr = x.split('.');
+                        var yArr = y.split('.');
+                        if((!(xArr.length>2))&&(!(yArr.length>2))){
+                            if((x.indexOf(',')!=-1)||(y.indexOf(','))!=-1){
+                                x = x.replace(',','.');
+                                y = y.replace(',','.');
+                            }
+                            
                             var id= jQuery(input).attr('id');
                             var numS = id.split('tude');
                             var num = numS[1];
-                            console.log(marker[num]);
-                            myLatlng = new google.maps.LatLng(jQuery("#latitude"+num).val(),jQuery("#longitude"+num).val());
-                            marker[num].setPosition(myLatlng);
-                            var x = jQuery("#latitude"+num).val();
-                            var y = jQuery("#longitude"+num).val();
+                            
+                            myLatlng = new google.maps.LatLng(x,y);
                             if((x.slice(-1)!='.')&&(y.slice(-1)!='.')){
                                 geocodePosition(myLatlng);
+                                marker[num].setPosition(myLatlng);
                             }
+                        }
                     }
-            function deleteMarker(number)
-                    {
-                            marker[number].setMap(null);
-                            jQuery(".div-addres-"+number).remove();
-                            jQuery(".marker-view-"+number).remove();
-                            var massCount = jQuery("#mass-count-marker").val();
-                            var massCountEnd = massCount.replace("~"+number+"~,","");
-                            jQuery("#mass-count-marker").val(massCountEnd);
-                    } 
              </script>
         </div>
 </t:adminpage>

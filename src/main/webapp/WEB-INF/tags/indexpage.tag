@@ -41,10 +41,16 @@
     </script>
     <style>
         @font-face {
-            font-family: "Open Sans";
-            src: url("${Constants.URL}files/OpenSans-Regular-webfont.eot");
-            src: url("${Constants.URL}files/OpenSans-Regular-webfont.woff");
-            src: url("${Constants.URL}files/OpenSans-Regular.ttf");
+            font-family: 'Open Sans';
+            src: url('${Constants.URL}files/OpenSans.eot');
+            src: url('${Constants.URL}files/OpenSans.eot?#iefix') format('embedded-opentype'),
+                 url('${Constants.URL}files/OpenSans.woff2') format('woff2'),
+                 url('${Constants.URL}files/OpenSans.woff') format('woff'),
+                 url('${Constants.URL}files/OpenSans.ttf') format('truetype'),
+                 url('${Constants.URL}files/OpenSans.svg#open_sansregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
         }
         .lang-sw.active {
             color: rgb(174, 214, 43);
@@ -201,7 +207,7 @@
                                 -->
                             </ul>
                     </div>
-                            <form class="searchMenuSmall" action="${Constants.URL}search" method="GET" id="searchForm">
+                            <form class="searchMenuSmall" action="${Constants.URL}search" method="GET" id="searchFormSmall">
                                 <input type="text" name="find" id="searchBoxSmall">
                                 <button type="button" id="searchButtonActiveSmall">
                                     <div class=""><img src="${Constants.URL}img/search_icon_active.png"></div>
@@ -218,23 +224,29 @@
         </div>
         <div class="mainMenuIntend"></div>
         <div class="contentIntend"></div>
+        <div class="scrollToTop" onclick="scrollToTop()"><img src="${Constants.URL}img/scrollToTop.png"></div>
         <jsp:doBody/> 
         <div class="contentIntendBottom"></div>
     </div>
-        <footer class="indexNavBarFooter footerHeight">
+        <footer class="indexNavBarFooter footerHeight" id="footer">
             <div class="footerSmallIntend"></div>
             <div class="s-new s-footer">
                 <div class="footerIntentInside"></div>
                 <div class="footerNew">
                     <div class="footerLeftMain">
+                        <div class="coFinBlock">
                             <div class="footerCoFin">
                                 <a class="not-add-lan" href="http://eeas.europa.eu/delegations/ukraine/index_uk.htm" target="_blank"><img class="footerEU" src="${Constants.URL}img/euFlag.png">
                                     <div class="rightTopText">The Programme is co-financed by the European Union</div>
                                 </a>
                             </div>
+                        </div>
+                        <div class="partnershipBlock">
                             <div class="footerPartnership">
                                 <a class="not-add-lan" href="http://huskroua-cbc.net/" target="_blank">Partnership without borders</a>
                             </div>
+                        </div>
+                        <div class="huskrouaBlock">
                             <div class="huskrouaFooter">
                                 <a href="http://huskroua-cbc.net/" class="not-add-lan" target="_blank">
                                     <img src="${Constants.URL}img/star_logo.png">
@@ -242,6 +254,7 @@
                                     <div class="countriesStarSmall">ENPI Cross-border Cooperation Programme</div>
                                 </a>
                             </div>
+                        </div>
                     </div>
                     <div class="footerRightMain">
                         <a class="fundedLink not-add-lan"  href="http://www.surdp.eu" target="_blank">
@@ -276,10 +289,10 @@
                 </div>    
                                         <div class="footerContactsText developpedText">
                                             <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
-                                                &#169; Communal enterprise âAgency of Regional Development and Cross-Border Co-operation âTranscarpathiaâ of Zakarpattya Oblast Councilâ
+                                                &#169; Communal enterprise "Agency of Regional Development and Cross-Border Co-operation "Transcarpathia" of Zakarpattya Oblast Council"
                                             </a>
                                         </div>
-                                        <div class="developpedText">
+                                        <div class="developpedText aitsText">
                                             <a class="not-add-lan" href="http://www.aits.ua" target="_blank">
                                                 Developed by AITS
                                             </a>
@@ -317,6 +330,10 @@
         }
     }
     
+    function scrollToTop(){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+    
     function searchSmallMenu(){
         if(!(showSearch)){
             if(showLang)langSelectMenu();
@@ -332,6 +349,8 @@
     }
     
     function showSmallMenu(){
+        $('#mapMenu').parent().parent().css('display','none');
+        $('#homeMenu').parent().css('pointer-events','none');
         if(!(showMenu)){
             if(showLang)langSelectMenu();
             if(showSearch)searchSmallMenu();
@@ -354,8 +373,11 @@
             data:'lang='+lang+'',
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
-             $("#cssmenu").html(response).css("width","");
-             $(".smallMenuBlock").html($("#cssmenu").html());
+             if(window.innerWidth>780){
+                $("#cssmenu").html(response).css("width","");
+             }else{
+                $(".smallMenuBlock").html(response).css("width","");
+             }
              /*if(lang === "UA" || lang === "ua") {
                  $("#cssmenu").css("width","106%");
              }*/
@@ -392,6 +414,7 @@
     var countryChooser; 
     $( document ).ready(function() {
                 
+                
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");
             console.log(str_url[3]);
@@ -410,25 +433,30 @@
             else {
                 $("#searchForm").attr("action", "/"+$(".lang-sw.active").html().toLowerCase()+$("#searchForm").attr("action"));
             }
+            if($("#searchFormSmall").attr("action").toLowerCase().indexOf("/carpath/") !== -1){
+                $("#searchFormSmall").attr("action", $("#searchFormSmall").attr("action").replace("Carpath","Carpath/"+$(".lang-sw.active").html().toLowerCase()));
+            }
+            else {
+                $("#searchFormSmall").attr("action", "/"+$(".lang-sw.active").html().toLowerCase()+$("#searchFormSmall").attr("action"));
+            }
             
         
-        
+        $('.scrollToTop').fadeOut(1);
         $('#searchButtonActive').hide(); 
-        
     });
     
     $("#searchButtonActive").click(function() {
         $("#searchForm").submit();
     });
     $("#searchButtonActiveSmall").click(function() {
-        $("#searchForm").submit();
+        $("#searchFormSmall").submit();
     });
     
     var hidden = true;
     function showHideMenu(){
-        if((hidden)&&(window.outerWidth>760)&(window.innerWidth>760)){
+        if((hidden)&&(window.outerWidth>760)&&(window.innerWidth>760)){
             hidden = false;
-            if((window.outerWidth>735)&(window.innerWidth>735)){
+            if((window.outerWidth>735)&&(window.innerWidth>735)){
                 $('.s-top').fadeIn("slow");
             }
             $('.topMenu').removeClass('topMenuSmall');
@@ -532,6 +560,7 @@
  }
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');
+                
                 $('#mapMenu').addClass('menuLine');
                 $('.projectFunded').addClass('footerDisplayNone');
                 $('.footerRightMain').addClass('footerDisplayNone');
@@ -539,29 +568,61 @@
                 $('.developpedText').addClass('developpedSmall');
                 $('.footerHeight').addClass('footerHeightMap');
                 $('.minHeight').removeClass('minHeight');
-                $('#googleMap').height(document.body.clientHeight-92);
+                $('#googleMap').height(window.innerHeight-92);
                 $('.siteMap').addClass('siteMapSmall');
                 $('.mainMenuIntend').addClass('mainMenuIntendSmall');
                 $('.contentIntend').css('height','30');
-            
-                if((window.outerWidth<1024)&(window.innerWidth>1024)){
-                    $('#googleMap').height(document.body.clientHeight-104);
+                
+                console.log(window.innerWidth);
+                console.log(window.outerWidth);
+                
+                if((window.innerWidth<1024)&&(window.innerWidth>780)){
+                    $('#googleMap').height(window.innerHeight-104);
                     $('#mainMenuWidth').css('padding','5px 15px');
+                }else if((window.innerWidth<=780)&&(window.innerWidth>680)){
+                    $('#googleMap').height(window.innerHeight-104);
+                }else if((window.innerWidth>340)&&(window.innerWidth<=680)){
+                    $('#googleMap').height(window.innerHeight-84);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                }else if(window.innerWidth<=340){
+                    $('#googleMap').height(window.innerHeight-97);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
+                }else{
+                    $('#googleMap').height(window.innerHeight-114);
+                    $('.footerNew').css('height','0');
+                    $('.footerIntentInside').css('height','0');
+                    $('.developpedText').css('width','90%');
+                    $('#footer').removeClass('footerHeight');
+                    $('#footer').removeClass('footerHeightMap');
+                    $('#footer').css('height','90px !important');
                 }
-                if((window.outerWidth<736)&(window.innerWidth>736)){
+                if(window.innerWidth<736){
                     $('.s-bot').css('margin-top','11px');
                 } 
-                
-                $('.hideMenu').css('visibility','visible');
-                $('.s-top').hide();
-                $('.topMenu').addClass('topMenuSmall');
-                $('.s-logoIndex').addClass('s-logoIndexSmall');
-                $('.s-logoIndexSmall').removeClass('s-logoIndex');
-                $('.s-rightNavBar').addClass('s-rightNavBarSmall');
-                $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
-                $('.menuLineSmall').addClass('menuLineExtraSmall');
-                $('.carpathName').addClass('carpathNameSmall');
-                $('.carpathNameSmall').removeClass('carpathName');
+                if(window.innerWidth>780){
+                    $('.hideMenu').css('visibility','visible');
+                    $('.s-top').hide();
+                    $('.topMenu').addClass('topMenuSmall');
+                    $('.s-logoIndex').addClass('s-logoIndexSmall');
+                    $('.s-logoIndexSmall').removeClass('s-logoIndex');
+                    $('.s-rightNavBar').addClass('s-rightNavBarSmall');
+                    $('.s-rightNavBarSmall').removeClass('s-rightNavBar');
+                    $('.menuLineSmall').addClass('menuLineExtraSmall');
+                    $('.carpathName').addClass('carpathNameSmall');
+                    $('.carpathNameSmall').removeClass('carpathName');
+                }else{
+                    $('.hideMenu').css('display','none');
+                }
                 /*$('.s-top').hide();
                 $('.topMenu').addClass('topMenuSmall');
                 $('.topMenu').addClass('mapMenuSmall');
@@ -740,7 +801,7 @@
     window.addEventListener('scroll', function(e){
         var urlMap = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-            shrinkOn = 110;
+            shrinkOn = 200;
         if ((distanceY > shrinkOn)&&(window.outerWidth>760)&&(window.innerWidth>760)) {
             $('.s-top').hide();
             $('.topMenu').addClass('topMenuSmall');
@@ -753,10 +814,11 @@
             $('.carpathName').addClass('carpathNameSmall');
             $('.carpathNameSmall').removeClass('carpathName');
             $('#mainMenuWidth').addClass('paddingSmallMenu');
+            $('.scrollToTop').fadeIn(500);
         } 
         else {
             //if(document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length)!='map'){
-                if((window.outerWidth>735)&(window.innerWidth>735)){
+                if((window.outerWidth>735)&&(window.innerWidth>735)){
                     $('.s-top').fadeIn("slow");
                 }
                 $('.topMenu').removeClass('topMenuSmall');
@@ -769,6 +831,7 @@
                 $('.carpathNameSmall').addClass('carpathName');
                 $('.carpathName').removeClass('carpathNameSmall');
             $('#mainMenuWidth').removeClass('paddingSmallMenu');
+            $('.scrollToTop').fadeOut(500);
             //}
         }
     });
