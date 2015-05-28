@@ -17,13 +17,21 @@
                     <div class="markerPageDate">
                         ${marker.date}
                     </div>
-                    <div class="markerPageCountry">
-                        <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
-                        ${marker.country}
-                    </div>
+                    <a href="${Constants.URL}map/${marker.id}">
+                        <div class="markerPageCountry">
+                            <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
+                            ${marker.country}
+                        </div>
+                    </a>
+                    <div class="downloadRouteFile">&nbsp;</div>
                 </div>
                 <div class="markerPageText">
                     ${marker.textEN}
+                </div>
+                <div class="panorama">
+                    <a href="${Constants.URL}panorama/${panorama}">
+                        Panorama
+                    </a>
                 </div>
                 <c:if test="${images[0]!=''}">
                     <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
