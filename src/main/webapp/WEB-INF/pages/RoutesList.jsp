@@ -33,11 +33,11 @@
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" value="all_type"/>
-                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">${titles.routeWAT}</a></div>
-                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">${titles.routeHOR}</a></div>
-                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">${titles.routeSKI}</a></div>
-                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeBIC}</a></div>
-                    <div id="0" class="tripFilterText"><a onclick="change_routes_type('0');">${titles.routeWAL}</a></div>
+                    <div id="5" class="tripFilterText"><a onclick="change_routes_type('5');">${titles.routeWAT}</a></div>
+                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">${titles.routeHOR}</a></div>
+                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">${titles.routeSKI}</a></div>
+                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">${titles.routeBIC}</a></div>
+                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeWAL}</a></div>
                     <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">${titles.routeALL}</a></div>
                 </div>
                 
@@ -108,36 +108,36 @@
         
             for(var n = 0; n < types.length; n++){
                 switch(types[n]){
-                    case "0":
+                    case "1":
                         $('#type'+n).html('Walking route');
                         break;
-                    case "1":
+                    case "2":
                         $('#type'+n).html('Bicycle route');
                         break;
-                    case "2":
+                    case "3":
                         $('#type'+n).html('Ski route');
                         break;
-                    case "3":
+                    case "4":
                         $('#type'+n).html('Horses route');
                         break;
-                    case "4":
+                    case "5":
                         $('#type'+n).html('Water route');
                         break;
                 }
                 switch(categories[n]){
-                    case "4":
+                    case "1":
                         $('#category'+n).html('International tourist road (E or R)');
                         break;
-                    case "1":
+                    case "2":
                         $('#category'+n).html('National tourist road');
                         break;
-                    case "2":
+                    case "3":
                         $('#category'+n).html('Regional tourist road');
                         break;
-                    case "3":
+                    case "4":
                         $('#category'+n).html('District tourist roade');
                         break;
-                    case "0":
+                    case "5":
                         $('#category'+n).html('Local (excursion) tourist road');
                         break;
                 }

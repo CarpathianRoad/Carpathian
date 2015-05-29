@@ -354,6 +354,7 @@
             $('#slovakiaBorder').hide();
             $('#ukraineBorder').hide();
             $("#allMap").addClass( "buttonBorderClass" );
+            $(".mapType").hide();
         });
         var rightMapContainerCounter = false;
         var filtersContainerCounter = false;
@@ -362,6 +363,7 @@
         function hideMap(){
             if(filtersContainerCounter){hideFilters()}
             if(mapRouteContainerCounter){hideRoute()}
+            if(showTypes){chooseMapType()}
             if(rightMapContainerCounter){
                 rightMapContainerCounter = false;
                 $('#pushRightConrainer').removeClass('pushRightConrainerBig');
@@ -389,6 +391,7 @@
         function hideRoute(){
             if(filtersContainerCounter){hideFilters()}
             if(rightMapContainerCounter){hideMap()}
+            if(showTypes){chooseMapType()}
             if(mapRouteContainerCounter){
                 mapRouteContainerCounter = false;
                 $('#mapRouteButton').removeClass('pushRightConrainerRoute');
@@ -463,6 +466,7 @@
         function hideFilters(){
             if(rightMapContainerCounter){hideMap()}
             if(mapRouteContainerCounter){hideRoute()}
+            if(showTypes){chooseMapType()}
             if(filtersContainerCounter){
                 filtersContainerCounter = false;
                 $('#pushRightConrainer').removeClass('pushRightConrainerFilters');
@@ -643,6 +647,43 @@
             $('#printRoute').attr('href', PowerHour.getPrintUrl(printCoords));
         }
         
+        var showTypes = false;
+        function chooseMapType(){
+            if(filtersContainerCounter){hideFilters()}
+            if(mapRouteContainerCounter){hideRoute()}
+            if(rightMapContainerCounter){hideMap()}
+            if(!showTypes){
+                $('.sliderDiv').addClass('sliderDivBig');
+                $('.mapType').fadeIn('slow');
+                showTypes = true;
+            }else{
+                $('.sliderDiv').removeClass('sliderDivBig');
+                $('.mapType').fadeOut('slow');
+                showTypes = false;
+            }
+        }
+        
+        function changeMapType(lett){
+            $('#chosenType').html(lett);
+            switch(lett) {
+                case 'S':
+                    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+                    break;
+                case 'D':
+                    var styledMap = new google.maps.StyledMapType(mapStyles,
+                        {name: "Styled Map"});
+                    map.mapTypes.set('map_style', styledMap);
+                    map.setMapTypeId('map_style');
+                    break;
+                case 'R':
+                    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+                    break;
+                case 'T':
+                    map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+                    break;
+            }
+        }
+        
 </script>
     <map name="mainMap">
         <area href="${Constants.URL}map/Hungary" shape="poly" onmouseover="showMapHover('#hungary')"
@@ -657,11 +698,28 @@
               coords="580,0,321,0,310,12,332,14,353,21,364,39,371,53,388,38,405,41,413,60,453,54,481,50,508,56,526,70,551,86,543,70,538,56,542,40"/>
     </map>
 <div style="width:100%;margin-top: -30px; margin-bottom:-45px;">
-    <div id="sliderDiv" class="sliderDiv">
-        <label id="sliderLabel" onclick="changeStyle()">
-            <input type="checkbox" />
-            <span id="slider"></span>
-        </label>
+    <div id="sliderDiv" class="sliderDiv" onclick="chooseMapType()">
+        <div id="chosenType">D</div>
+        <div class="mapType">
+            <ul id="nav">
+                <li id="defaultMap">
+                    <div class='mapButton' id='allMap' onmouseover="showMapHover('#all')"
+                                                                onclick="changeMapType('D')">DEFAULT</div>
+                </li>
+                <li id="satelliteMap" class="mapMenuLeftMArgin">
+                    <div class='mapButton' id='ukraineMap' onmouseover="showMapHover('#ukraine')"
+                                                                   onclick="changeMapType('S')">SATELLITE</div>
+                </li>
+                <li id="roadMap" class="mapMenuLeftMArgin">
+                    <div class='mapButton' id='slovakiaMap' onmouseover="showMapHover('#slovakia')"
+                                                                   onclick="changeMapType('R')">ROADMAP</div>
+                </li>
+                <li id="roadMap" class="mapMenuLeftMArgin">
+                    <div class='mapButton' id='hungaryMap' onmouseover="showMapHover('#hungary')"
+                                                                   onclick="changeMapType('T')">TERRAIN</div>
+                </li>
+            </ul>
+        </div>
     </div>
     <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
         <div id="routePointsNumber">0</div>

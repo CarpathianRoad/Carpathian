@@ -358,12 +358,12 @@
                             new google.maps.Size(30, 40)
                         ); 
                         mousemarker = new google.maps.Marker({
-                            position: new google.maps.LatLng(xCoord[e.row*4],yCoord[e.row*4]),
+                            position: new google.maps.LatLng(xCoord[e.row*3],yCoord[e.row*3]),
                             map: map, 
                             icon: pinIcon        
                         });
                     } else {
-                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row*4],yCoord[e.row*4]));
+                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row*3],yCoord[e.row*3]));
                     }
                 });
             }
