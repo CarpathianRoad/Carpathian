@@ -577,21 +577,16 @@ $("#sudmitData").click(function(){
                     google.maps.event.addListener(map, 'click', function(event) {
                         addMarker(event.latLng);
                     });
+                    marker[0] = new google.maps.Marker({
+                        draggable: true,
+                        map: map
+                    });
 
             }
             
             function addMarker(location) {
-                if(marker[0]==null){
-                    marker[0] = new google.maps.Marker({
-                        position: location,
-                        draggable: true,
-                        map: map
-                    });
-                    geocodePosition(location);
-                }else{
-                    marker[0].setPosition(location);
-                    geocodePosition(location);
-                }
+                marker[0].setPosition(location);
+                geocodePosition(location);
                 google.maps.event.addListener(marker[0],'dragend',function(event) {
                     geocodePosition(marker[0].getPosition());
                 });
