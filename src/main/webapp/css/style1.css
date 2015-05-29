@@ -294,6 +294,7 @@ a:hover{
 }
 .newsCountryText{
     float: right;
+    text-transform: capitalize;
 }
 .newsName{
 	padding-top: 12px;
@@ -1312,8 +1313,37 @@ p{
     background: rgb(86,105,143);
     right: 50px !important;
     top: 45px !important;
-    padding: 14.5px 10px;
     transition: 0.5s;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.sliderDivBig{
+    width: 480px !important;
+}
+#defaultMap{
+    margin-left: -40px;
+}
+.mapButton{
+    cursor: pointer;
+}
+#chosenType{
+    float: right;
+    width: 45px;
+    height: 45px;
+    color: white;
+    font-size: 20pt;
+    font-weight: 600;
+    padding: 4px 13px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#chosenType:hover{
+    color:rgb(174,214,43);
+}
+.mapType{
+    float: left;
 }
 .sliderDivRoute{
     background: rgb(86,105,143);
