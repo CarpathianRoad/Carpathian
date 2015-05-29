@@ -24,12 +24,12 @@
             <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
-                    <a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a>
-                    <a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a>
-                    <a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a>
-                    <a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a>
-                    <a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a>
-                    <a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a>
+                    <div class="filterRoutesFin"><a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a></div>
+                    <div class="filterRoutesFin"><a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a></div>
+                    <div class="filterRoutesFin"><a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a></div>
+                    <div class="filterRoutesFin"><a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a></div>
+                    <div class="filterRoutesFin"><a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a></div>
+                    <div class="filterRoutesFin"><a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a></div>
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" value="all_type"/>
