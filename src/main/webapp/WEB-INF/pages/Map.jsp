@@ -701,7 +701,7 @@
     <div id="sliderDiv" class="sliderDiv" onclick="chooseMapType()">
         <div id="chosenType">D</div>
         <div class="mapType">
-            <ul id="nav">
+            <ul id="nav" class="mapTypeLi">
                 <li id="defaultMap">
                     <div class='mapButton' id='allMap' onmouseover="showMapHover('#all')"
                                                                 onclick="changeMapType('D')">DEFAULT</div>
