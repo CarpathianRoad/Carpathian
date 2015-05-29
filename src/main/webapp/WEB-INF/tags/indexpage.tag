@@ -289,7 +289,7 @@
                 </div>    
                                         <div class="footerContactsText developpedText">
                                             <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
-                                                &#169; Communal enterprise "Agency of Regional Development and Cross-Border Co-operation "Transcarpathia" of Zakarpattya Oblast Council"
+                                                &#169; Communal enterprise "Agency of Regional Development and Cross-Border Co-operation "Transcarpathia" of Zakarpattya Oblast Council"ÂÂ
                                             </a>
                                         </div>
                                         <div class="developpedText aitsText">
@@ -443,7 +443,17 @@
         
         $('.scrollToTop').fadeOut(1);
         $('#searchButtonActive').hide(); 
+        
+        $(".markerPageText").find('img').addClass('fancybox');
     });
+    
+    function showImg(){
+            $.each($('.fancybox'), function() {
+                setTimeout(function(){ 
+                    $('.fancybox').css('display', 'inline-block');
+                }, 1);
+            });
+    }
     
     $("#searchButtonActive").click(function() {
         $("#searchForm").submit();
@@ -487,7 +497,7 @@
     }
     
     function addCssToMenu(){
-     countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
+     /*countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
         switch(countryChooser){
             case "index":
                 $('#homeMenu').addClass('menuLine');
@@ -556,7 +566,7 @@
             case "contact":
                 $('#contactsMenu').addClass('menuLine');
                 break;
-        }
+        }*/
  }
     function mapPageMenu(){
                 //$('#contactsMenu').addClass('menuLine');

@@ -131,6 +131,7 @@ public class SinglePageController {
                     model.addObject("country",pointer);
                 }
 		model.addObject("markers", maps);
+                model.addObject("lan", lan);
 		return model;
 	}
     @RequestMapping(value = {"/{lan}/map/","/{lan}/map"})
@@ -170,6 +171,7 @@ public class SinglePageController {
                 }
         modelAndView.addObject("articles", points);
         modelAndView.addObject("images", arrayMessage);
+        modelAndView.addObject("panorama",panoramas.getRandomPanorama().id);
         return modelAndView;
     }
     
