@@ -202,4 +202,27 @@ public class PageFiltersTranslate {
         }
         return titles;
     }
+    public String translateCountryByLan(String lan, String country) {
+        String translate;
+        PageFiltersTranslate titles = this.getTranslateFilters(lan);
+        if("Ukraine".equals(country) || "Украина".equals(country) || "Україна".equals(country)) {
+            translate = titles.getCountryUA();
+        }
+        else if("Румыния".equals(country) || "Romania".equals(country) || "Румунія".equals(country)){
+            translate = titles.getCountryRO();
+        }
+        else if("Словаччина".equals(country) || "Словакия".equals(country) || "Slovakia".equals(country)){
+            translate = titles.getCountrySK();
+        }
+        else if("Венгрия".equals(country) || "Hungary".equals(country) || "Угорщина".equals(country)){
+            translate = titles.getCountryHU();
+        }
+        else if("Польша".equals(country) || "Poland".equals(country) || "Польща".equals(country)){
+            translate = titles.getCountryPL();
+        }
+        else {
+            translate = titles.getCountryUA();
+        }
+        return translate;
+    }
 }

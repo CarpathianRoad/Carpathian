@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:indexpage>
+
     <div class="s-new markerPageTable">
                         <object width="100%" height="500px">
                             <param name="movie" value="${Constants.URL}${url}">
@@ -14,4 +14,4 @@
                             </embed>
                         </object>
     </div>
-   </t:indexpage>
+

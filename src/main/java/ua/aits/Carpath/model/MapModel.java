@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import ua.aits.Carpath.functions.DB;
 import ua.aits.Carpath.functions.Helpers;
+import ua.aits.Carpath.functions.PageFiltersTranslate;
 
 /**
  *
@@ -138,6 +139,8 @@ public class MapModel {
         this.avatar = avatar;
     }
     
+    PageFiltersTranslate translate = new PageFiltersTranslate();
+    
     private static List<MapModel> mapList;
     public List<MapModel> getAllPoints(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type = 2 and publish = 1;");
@@ -165,7 +168,7 @@ public class MapModel {
             temp.setTextEN(text);
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setPublic_country(result.getString("public_country"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setRegion(result.getString("region")); 
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
@@ -203,7 +206,7 @@ public class MapModel {
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setDate(result.getString("date"));
             temp.setAvatar(result.getString("avatar")); 
             String [] arr = result.getString("image").split(",");
@@ -234,7 +237,7 @@ public class MapModel {
             temp.setDate(result.getString("date"));
             temp.setPublic_country(result.getString("public_country"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setRegion(result.getString("region")); 
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town"));
