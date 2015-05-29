@@ -349,6 +349,11 @@
                   });
                 var mousemarker;
                 google.visualization.events.addListener(chart, 'onmouseover', function(e) {
+                    var pointCounter;
+                    if(height.length>1000) 
+                        pointCounter = 4;
+                    else
+                        pointCounter = 1;
                     if (mousemarker == null) {
                         var pinIcon = new google.maps.MarkerImage(
                             "${Constants.URL}img/markers/walking.png",
@@ -358,12 +363,12 @@
                             new google.maps.Size(30, 40)
                         ); 
                         mousemarker = new google.maps.Marker({
-                            position: new google.maps.LatLng(xCoord[e.row*3],yCoord[e.row*3]),
+                            position: new google.maps.LatLng(xCoord[e.row*pointCounter],yCoord[e.row*pointCounter]),
                             map: map, 
                             icon: pinIcon        
                         });
                     } else {
-                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row*3],yCoord[e.row*3]));
+                        mousemarker.setPosition(new google.maps.LatLng(xCoord[e.row*pointCounter],yCoord[e.row*pointCounter]));
                     }
                 });
             }

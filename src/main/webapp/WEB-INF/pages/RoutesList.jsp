@@ -21,7 +21,7 @@
         <input type="hidden" id="lan" value="${lan}" />
         <input type="hidden" id="count" value="${count}" />
         <div class="s-new markerPageTable">
-        <div class="breadcrumbsMarker">
+            <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
                     <a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a>
@@ -40,7 +40,6 @@
                     <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeWAL}</a></div>
                     <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">${titles.routeALL}</a></div>
                 </div>
-                
             </div>
         </div>
             <div class="all_news" id="routesList">        
@@ -125,19 +124,19 @@
                         break;
                 }
                 switch(categories[n]){
-                    case "1":
+                    case "4":
                         $('#category'+n).html('International tourist road (E or R)');
                         break;
-                    case "2":
+                    case "1":
                         $('#category'+n).html('National tourist road');
                         break;
-                    case "3":
+                    case "2":
                         $('#category'+n).html('Regional tourist road');
                         break;
-                    case "4":
+                    case "3":
                         $('#category'+n).html('District tourist roade');
                         break;
-                    case "5":
+                    case "0":
                         $('#category'+n).html('Local (excursion) tourist road');
                         break;
                 }
@@ -252,7 +251,6 @@
                         }
                     }
                 }
-                
                 return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2));
             }
         </script>
