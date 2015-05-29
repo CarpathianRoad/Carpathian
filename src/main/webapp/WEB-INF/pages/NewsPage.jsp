@@ -18,12 +18,12 @@
         <div class="s-new">
             <div class="countriesFilter countriesFilterRoute">
                 <input type="hidden" id="selected_country" value="all"/>
-                <a id="all" onclick="change_country('all');" class="selected_country" >All countries</a>
-                <a id="ukraine" onclick="change_country('ukraine');" >Ukraine</a>
-                <a id="poland" onclick="change_country('poland');" >Poland</a>
-                <a id="hungary" onclick="change_country('hungary');" >Hungary</a>
-                <a id="romania" onclick="change_country('romania');" >Romania</a>
-                <a id="slovakia" onclick="change_country('slovakia');" >Slovakia</a>
+                <a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a>
+                <a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a>
+                <a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a>
+                <a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a>
+                <a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a>
+                <a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a>
             </div>
          </div>
             <div class="all_news">
