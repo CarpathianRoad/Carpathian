@@ -20,14 +20,10 @@
     }
     .news_title a {
           color: #fff;
-        height: 3.6em;
-        margin-top: -20px;
-        padding-top: 20px;
-        width: 110%;
-        margin-left: -15px;
+        height: auto;
     }
     .news_text_box {
-          height: 3.0em;
+          height: auto;
     }
     </style>
     <div class="s-new widthClass">

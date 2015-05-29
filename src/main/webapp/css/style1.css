@@ -2423,6 +2423,7 @@ a.disable-menu-link{
     bottom: 20;
     width: 45px;
     height: 45px;
+    cursor: pointer;
 }
 .scrollToTop img{
     width: 100%;

@@ -443,7 +443,17 @@
         
         $('.scrollToTop').fadeOut(1);
         $('#searchButtonActive').hide(); 
+        
+        $(".markerPageText").find('img').addClass('fancybox');
     });
+    
+    function showImg(){
+            $.each($('.fancybox'), function() {
+                setTimeout(function(){ 
+                    $('.fancybox').css('display', 'inline-block');
+                }, 1);
+            });
+    }
     
     $("#searchButtonActive").click(function() {
         $("#searchForm").submit();
