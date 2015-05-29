@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.PageFiltersTranslate;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MenuModel;
 
@@ -24,6 +25,7 @@ public class ArticleController {
         
         ArticleModel news = new ArticleModel();
         MenuModel menu = new MenuModel();
+        PageFiltersTranslate translate = new PageFiltersTranslate();
         
         @RequestMapping(value = {"/{lan}/article/news", "/{lan}/article/news/"})
         public ModelAndView showNews (@PathVariable("lan") String lan, HttpServletRequest request,
@@ -41,6 +43,7 @@ public class ArticleController {
             modelAndView.addObject("newsList", articles);
             modelAndView.addObject("lan", lan);
             modelAndView.addObject("count", count);
+            modelAndView.addObject("titles", translate.getTranslateFilters(lan));
             return modelAndView;
 	}
     
@@ -80,6 +83,7 @@ public class ArticleController {
             modelAndView.addObject("menu_id", id);
             modelAndView.addObject("lan", lan);
             modelAndView.addObject("count", count);
+            modelAndView.addObject("titles", translate.getTranslateFilters(lan));
             return modelAndView;
 	}
         

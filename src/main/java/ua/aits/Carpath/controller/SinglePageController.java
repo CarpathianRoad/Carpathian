@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
+import ua.aits.Carpath.functions.PageFiltersTranslate;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
 import ua.aits.Carpath.model.RouteModel;
@@ -33,6 +34,7 @@ public class SinglePageController {
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
     PanoramaModel panoramas = new PanoramaModel();
+    PageFiltersTranslate translate = new PageFiltersTranslate();
     
     @RequestMapping(value = {"/404", "/Carpath/404"})
     public ModelAndView error404(HttpServletRequest request,
@@ -71,6 +73,7 @@ public class SinglePageController {
                  modelAndView.addObject("content", articles);
                  modelAndView.addObject("points", points);
                  modelAndView.addObject("images", map.getImages());
+                 modelAndView.addObject("titles", translate.getTranslateFilters(lan));
                  return modelAndView;
 	}
     @RequestMapping(value = {"/{lan}/routes/{id}", "/{lan}/routes/{id}/"})
@@ -98,7 +101,7 @@ public class SinglePageController {
                 
 		ModelAndView model = new ModelAndView("RoutesList");
 		model.addObject("routesList", routes);
-		
+                model.addObject("titles", translate.getTranslateFilters(lan));
 		return model;
 	}
     @RequestMapping(value = {"/{lan}/contact","/{lan}/contact/"})
