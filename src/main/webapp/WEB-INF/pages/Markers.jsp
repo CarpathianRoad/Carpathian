@@ -28,9 +28,10 @@
                 <div class="markerPageText">
                     ${marker.textEN}
                 </div>
+                <div class="markerPageBottomLine"></div>
                 <div class="panorama">
-                    <a href="${Constants.URL}panorama/${panorama}">
-                        Panorama
+                    <a target="_blank" href="${Constants.URL}panorama/${panorama}">
+                        <strong>Panorama <img class="new-tab-icon" src="${Constants.URL}img/newTabIcon.png"/></strong>
                     </a>
                 </div>
                 <c:if test="${images[0]!=''}">

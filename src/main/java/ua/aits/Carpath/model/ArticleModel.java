@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
 import ua.aits.Carpath.functions.DB;
 import ua.aits.Carpath.functions.Helpers;
+import ua.aits.Carpath.functions.PageFiltersTranslate;
 
 /**
  *
@@ -332,6 +333,7 @@ public class ArticleModel {
         this.menuText = menuText;
     }
     
+    PageFiltersTranslate translate = new PageFiltersTranslate();
     
     public List<ArticleModel> getAllNews(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT 0, 9;");
@@ -365,7 +367,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             newsList.add(temp);
         } 
@@ -399,7 +401,7 @@ public class ArticleModel {
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setAvatar(result.getString("avatar"));
             String [] arr = result.getString("image").split(",");
@@ -476,7 +478,7 @@ public class ArticleModel {
             temp.setAuthor(result.getString("author"));
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setFilters(result.getString("filters"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setRegion(result.getString("region")); 
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
@@ -567,7 +569,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             contentList.add(temp);
         } 
@@ -626,7 +628,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             contentList.add(temp);
         } 
@@ -800,7 +802,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             newsList.add(temp);
         } 
@@ -847,7 +849,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             newsList.add(temp);
         } 
@@ -897,7 +899,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             newsList.add(temp);
         } 
@@ -948,7 +950,7 @@ public class ArticleModel {
                 temp.setImage("img/no-photo.png");
             }
             temp.setActDate(result.getString("actual"));
-            temp.setCountry(result.getString("country")); 
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
             newsList.add(temp);
         } 
