@@ -192,6 +192,7 @@ a:hover{
     letter-spacing: 1px;
     color: #7891C1;
     z-index: 2;
+    text-transform: uppercase;
 }
 .mapButton a{
     z-index: 2;
@@ -481,7 +482,8 @@ article .intendNews .post-image .post-heading{
     color:rgb(86,105,143);
     padding-left: 10px;
     transition: color 0.5s;
-    cursor: pointer
+    cursor: pointer;
+    text-transform: uppercase;
 }
 #newsMainPhoto{
     overflow: hidden;
@@ -1804,22 +1806,23 @@ label{
 }
 .hideMenu{
     margin: 0 auto;
-    width: 9px;
+    width: 24px;
     height: 17px;
-    margin-top: -3px;
+    margin-top: -2px;
     visibility: hidden;
     transition: 0.5s;
 }
 .hideMenu img{
-    -ms-transform: rotate(-90deg); /* IE 9 */
-    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
-    transform: rotate(-90deg);
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
     transition: 0.5s;
+    width: 100%;
 }
 .rotateHideArrow{ 
-    -ms-transform: rotate(90deg) !important; /* IE 9 */
-    -webkit-transform: rotate(90deg) !important; /* Chrome, Safari, Opera */
-    transform: rotate(90deg) !important;
+    -ms-transform: rotate(0deg) !important; /* IE 9 */
+    -webkit-transform: rotate(0deg) !important; /* Chrome, Safari, Opera */
+    transform: rotate(0deg) !important;
     
 }
 .routeDescriptionSmall{

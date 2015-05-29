@@ -457,13 +457,13 @@
             if(!descrHidden){
                 $('.routeDescription').addClass('routeDescriptionSmall');
                 $('.routeDescrOverflow').fadeOut('fast');
-                $('#hideRouteImage').attr('src','${Constants.URL}img/arrow_left_hover.png');
+                $('#hideRouteImage').attr('src','${Constants.URL}img/arrowRoutesHide.png');
                 descrHidden = true;
             }
             else{
                 $('.routeDescription').removeClass('routeDescriptionSmall');
                 $('.routeDescrOverflow').fadeIn('slow');
-                $('#hideRouteImage').attr('src','${Constants.URL}img/arrow_right_hover.png');
+                $('#hideRouteImage').attr('src','${Constants.URL}img/arrowRoutesShow.png');
                 descrHidden = false;
             }
         }
@@ -480,7 +480,7 @@
         <div class="markerPageTable routeWidth">
         <div id="map" style="width: 100%;float: left;"></div>
             <div class="routesLinks routeDescription">
-                <div class="arrowRouteHide" onclick="hideDescrRoute()"><img id="hideRouteImage" src="${Constants.URL}img/arrow_right_hover.png"></div>
+                <div class="arrowRouteHide" onclick="hideDescrRoute()"><img id="hideRouteImage" src="${Constants.URL}img/arrowRoutesShow.png"></div>
                 <div class="routeDescrOverflow">
                     <div class="markerPageTitle">${route.title}</div>
                     <div class="markerPageUnderHeading">
@@ -520,11 +520,21 @@
                 </div>
             </div>
         </div>
+    <link rel="stylesheet" href="${Constants.URL}js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="${Constants.URL}js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
         <script>
+            
+            $(document).ready(function() {
+                $(".fancybox").fancybox({
+                    openEffect	: 'none',
+                    closeEffect	: 'none'
+                });
+            });
+            
             var images = '${route.images}'.split(",");
             var imagesBlock = '';
             $('#maxImages').html("/"+images.length);
-            $('#mainImageBlock').html('<img id="main_image" src="${Constants.URL}'+images[0]+'"/>');
+            $('#mainImageBlock').html('<a class="fancybox not-add-lan" href="${Constants.URL}'+images[0]+'"><img id="main_image" src="${Constants.URL}'+images[0]+'"/></a>');
             if(images[0]==""){
                 $('#article_slider1_container').css('display','none');
                 $('#mainImageBlock').css('display','none');
@@ -536,13 +546,18 @@
             
             for(var i = 0; i < images.length; i++){
                 
-                imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\')">'+
+                imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\');tellFancyBox(\'${Constants.URL}'+images[i]+'\');">'+
                         '<div class="sliderHover">'+
                         '<div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}'+images[i]+'" style="height: 150px"/>'+
                         '</div>'+
                         '</div>';
             }
             $('#imageHolder').html(imagesBlock);
+            
+            function tellFancyBox(image){
+                console.log('1');
+                $('#main_image').parent().attr('href',image);
+            }
         </script>
     
 </t:indexpage>
