@@ -104,27 +104,27 @@
                 <ul id="nav">
                     <li id="allMenu">
                         <a href="${Constants.URL}map/allMap"><div class='mapButton' id='allMap'
-                                                                  onmouseover="showMapHover('#all')">ALL COUNTRIES</div></a>
+                                                                  onmouseover="showMapHover('#all')">${titles.countryALL}</div></a>
                     </li>
                     <li id="ukraineMenu" class="mapMenuLeftMArgin">
                         <a href="${Constants.URL}map/Ukraine"><div class='mapButton' id='ukraineMap'
-                                                                   onmouseover="showMapHover('#ukraine')">UKRAINE</div></a>
+                                                                   onmouseover="showMapHover('#ukraine')">${titles.countryUA}</div></a>
                     </li>
                     <li id="slovakiaMenu" class="mapMenuLeftMArgin">
                         <a href="${Constants.URL}map/Slovakia"><div class='mapButton' id='slovakiaMap'
-                                                                    onmouseover="showMapHover('#slovakia')">SLOVAKIA</div></a>
+                                                                    onmouseover="showMapHover('#slovakia')">${titles.countrySK}</div></a>
                     </li>
                     <li id="hungaryMenu" class="mapMenuLeftMArgin">
                         <a href="${Constants.URL}map/Hungary"><div class='mapButton' id='hungaryMap'
-                                                                   onmouseover="showMapHover('#hungary')">HUNGARY</div></a>
+                                                                   onmouseover="showMapHover('#hungary')">${titles.countryHU}</div></a>
                     </li>
                     <li id="romaniaMenu" class="mapMenuLeftMArgin">
                         <a href="${Constants.URL}map/Romania"><div class='mapButton' id='romaniaMap'
-                                                                   onmouseover="showMapHover('#romania')">ROMANIA</div></a>
+                                                                   onmouseover="showMapHover('#romania')">${titles.countryRO}</div></a>
                     </li>
                     <li id="polandMenu" class="mapMenuLeftMArgin">
                         <a href="${Constants.URL}map/Poland"><div class='mapButton' id='polandMap'
-                                                                  onmouseover="showMapHover('#poland')">POLAND</div></a>
+                                                                  onmouseover="showMapHover('#poland')">${titles.countryPL}</div></a>
                     </li>
                 </ul>
             </div>

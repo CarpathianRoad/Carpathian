@@ -24,21 +24,21 @@
         <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
-                    <a id="all" onclick="change_routes_country('all');" class="selected_country" >All countries</a>
-                    <a id="ukraine" onclick="change_routes_country('ukraine');" >Ukraine</a>
-                    <a id="poland" onclick="change_routes_country('poland');" >Poland</a>
-                    <a id="hungary" onclick="change_routes_country('hungary');" >Hungary</a>
-                    <a id="romania" onclick="change_routes_country('romania');" >Romania</a>
-                    <a id="slovakia" onclick="change_routes_country('slovakia');" >Slovakia</a>
+                    <a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a>
+                    <a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a>
+                    <a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a>
+                    <a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a>
+                    <a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a>
+                    <a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a>
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" value="all_type"/>
-                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">Water</a></div>
-                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">Horses</a></div>
-                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">Ski</a></div>
-                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">Bicycle</a></div>
-                    <div id="0" class="tripFilterText"><a onclick="change_routes_type('0');">Walking</a></div>
-                    <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">All methods</a></div>
+                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">${titles.routeWAT}</a></div>
+                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">${titles.routeHOR}</a></div>
+                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">${titles.routeSKI}</a></div>
+                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeBIC}</a></div>
+                    <div id="0" class="tripFilterText"><a onclick="change_routes_type('0');">${titles.routeWAL}</a></div>
+                    <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">${titles.routeALL}</a></div>
                 </div>
                 
             </div>
