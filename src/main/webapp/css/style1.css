@@ -2464,9 +2464,14 @@ a.disable-menu-link{
 }
 .panorama{
     margin: 15px 0 20px 0;
+    text-align: center;
 }
 .panorama a{
-    color: rgb(84, 182, 157);
+    color: rgb(175, 212, 66);
+}
+.panorama img{
+    width: 15px;
+    margin-top: -5px;
 }
 
 
@@ -3307,6 +3312,9 @@ a.disable-menu-link{
             visibility: visible;
             display: block !important;
         }*/
+        .panorama{
+            display: none;
+        }
 }
 
 @media (max-device-width: 1024px) and (min-device-width: 556px){
