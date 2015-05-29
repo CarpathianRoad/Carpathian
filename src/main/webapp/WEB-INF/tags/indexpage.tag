@@ -217,7 +217,7 @@
                                     
                     </div>
                 <div class="hideMenu" onclick="showHideMenu()">
-                    <img id="hideMenuArrow" src="${Constants.URL}img/arrow-menu-hide.png">
+                    <img id="hideMenuArrow" src="${Constants.URL}img/menuArrowHide.png">
                 </div>
             </div>
 	<div class="s-clear"></div>
@@ -451,7 +451,7 @@
             $.each($('.fancybox'), function() {
                 setTimeout(function(){ 
                     $('.fancybox').css('display', 'inline-block');
-                }, 1);
+                }, 100);
             });
     }
     
