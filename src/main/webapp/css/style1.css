@@ -2923,6 +2923,9 @@ a.disable-menu-link{
     #mainMenuWidth{
         padding: 15px;
     }
+    .scrollToTop{
+        display: none;
+    }
 }
 @media (max-width: 735px){
     .s-top{
@@ -3522,6 +3525,9 @@ a.disable-menu-link{
     }
     #mainMenuWidth{
         padding: 15px;
+    }
+    .scrollToTop{
+        display: none;
     }
 }
 @media (max-device-width: 735px){
