@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
 import ua.aits.Carpath.functions.DB;
+import ua.aits.Carpath.functions.Helpers;
 
 /**
  *
@@ -262,7 +263,7 @@ public class RouteModel {
             RouteModel temp = new RouteModel();
             temp.setId(result.getInt("id"));
             temp.setTitle(result.getString("titleEN"));
-            temp.setTextUA(str3);
+            temp.setTextUA(Helpers.html2text(str3));
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
             temp.setPublic_country(result.getString("public_country")); 
@@ -305,7 +306,7 @@ public class RouteModel {
         while (result.next()) { 
             temp.setId(result.getInt("id"));
             temp.setTitle(result.getString("titleEN"));
-            temp.setTextUA(result.getString("textUA"));
+            temp.setTextUA(Helpers.html2text(result.getString("textUA")));
             temp.setFile(result.getString("file"));
             temp.setPublic_country(result.getString("public_country")); 
             temp.setDate(result.getString("date")); 
