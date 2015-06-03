@@ -2892,13 +2892,19 @@ a.disable-menu-link{
         text-align: center;
         margin: 20 auto;
         float: left;
+        padding-right: 30px;
     }
     .filterRoutesFin{
-        margin-left: 20xp;
+        margin-left: 20xp !important;
+    }
+    .countriesFilterRoute{
+        margin-left: 30xp !important;
+        letf: 30px;
+        padding-right: 30px;
     }
     .tripFilterText{
         float: left;
-        margin-left: 19px;
+        margin-left: 30px;
         margin-top: 10px;
     }
     .all_news{
@@ -3502,13 +3508,19 @@ a.disable-menu-link{
         text-align: center;
         margin: 20 auto;
         float: left;
+        padding-right: 30px;
     }
     .filterRoutesFin{
-        margin-left: 20xp;
+        margin-left: 20xp !important;
+    }
+    .countriesFilterRoute{
+        margin-left: 30xp !important;
+        left: 30px;
+        padding-right: 30px;
     }
     .tripFilterText{
         float: left;
-        margin-left: 19px;
+        margin-left: 30px;
         margin-top: 10px;
     }
     .all_news{

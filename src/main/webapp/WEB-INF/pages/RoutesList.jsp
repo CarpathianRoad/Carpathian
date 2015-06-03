@@ -13,6 +13,7 @@
         var files = [];
         var types = [];
         var categories = [];
+        var countries = [];
     </script>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
@@ -24,12 +25,12 @@
             <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
-                    <div class="filterRoutesFin"><a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a></div>
-                    <div class="filterRoutesFin"><a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a></div>
-                    <div class="filterRoutesFin"><a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a></div>
-                    <div class="filterRoutesFin"><a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a></div>
-                    <div class="filterRoutesFin"><a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a></div>
-                    <div class="filterRoutesFin"><a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a></div>
+                    <div class="filterRoutesFin"><a id="all" onclick="countryFilter('all');" class="selected_country" >${titles.countryALL}</a></div>
+                    <div class="filterRoutesFin"><a id="Ukraine" onclick="countryFilter('Ukraine');" >${titles.countryUA}</a></div>
+                    <div class="filterRoutesFin"><a id="Poland" onclick="countryFilter('Poland');" >${titles.countryPL}</a></div>
+                    <div class="filterRoutesFin"><a id="Hungary" onclick="countryFilter('Hungary');" >${titles.countryHU}</a></div>
+                    <div class="filterRoutesFin"><a id="Romania" onclick="countryFilter('Romania');" >${titles.countryRO}</a></div>
+                    <div class="filterRoutesFin"><a id="Slovakia" onclick="countryFilter('Slovakia');" >${titles.countrySK}</a></div>
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" value="all_type"/>
@@ -44,7 +45,7 @@
         </div>
             <div class="all_news" id="routesList">        
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
-                    <div class="s-cell">
+                    <div class="s-cell" id="routeBlock${loop.index}">
                         <div class="s-block newsHeight">
                             <div class="newsImage">
                                 <a href="${Constants.URL}routes/${route.id}">
@@ -73,6 +74,7 @@
                     <script>files.push("${route.file}");</script>
                     <script>types.push("${route.type}");</script>
                     <script>categories.push("${route.category}");</script>
+                    <script>countries.push("${route.public_country}");</script>
                 </c:forEach>
             </div>
                  <div class="loading_block">
@@ -252,6 +254,23 @@
                     }
                 }
                 return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2));
+            }
+            
+            function countryFilter(country){
+                for(var n = 0; n < types.length; n++){
+                    var selected_country = jQuery("#selected_country").val();
+                    jQuery( "#"+selected_country).removeClass( "selected_country" );
+                    jQuery( "#"+country ).addClass( "selected_country" );
+                    jQuery("#selected_country").val(country);
+                    jQuery("#last_item").val("9");
+                    if(countries[n]!=country){
+                        $('#routeBlock'+n).css('display','none');
+                    }else{
+                        $('#routeBlock'+n).css('display','block');
+                    }
+                    if(country=='all')
+                        $('#routeBlock'+n).css('display','block');
+                }
             }
         </script>
 </t:indexpage>
