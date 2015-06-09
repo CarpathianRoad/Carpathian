@@ -2481,6 +2481,9 @@ a.disable-menu-link{
     width: 15px;
     margin-top: -5px;
 }
+.fancybox{
+    cursor: pointer;
+}
 
 
 
