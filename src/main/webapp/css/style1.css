@@ -192,6 +192,7 @@ a:hover{
     letter-spacing: 1px;
     color: #7891C1;
     z-index: 2;
+    text-transform: uppercase;
 }
 .mapButton a{
     z-index: 2;
@@ -233,6 +234,9 @@ a:hover{
     float: left;
     z-index: 2;
     position: relative;
+}
+.mapTypeLi li{
+    list-style: none;
 }
 
 .buttonBorderMapClass{
@@ -293,6 +297,7 @@ a:hover{
 }
 .newsCountryText{
     float: right;
+    text-transform: capitalize;
 }
 .newsName{
 	padding-top: 12px;
@@ -481,7 +486,8 @@ article .intendNews .post-image .post-heading{
     color:rgb(86,105,143);
     padding-left: 10px;
     transition: color 0.5s;
-    cursor: pointer
+    cursor: pointer;
+    text-transform: uppercase;
 }
 #newsMainPhoto{
     overflow: hidden;
@@ -1310,8 +1316,37 @@ p{
     background: rgb(86,105,143);
     right: 50px !important;
     top: 45px !important;
-    padding: 14.5px 10px;
     transition: 0.5s;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.sliderDivBig{
+    width: 500px !important;
+}
+#defaultMap{
+    margin-left: -40px;
+}
+.mapButton{
+    cursor: pointer;
+}
+#chosenType{
+    float: right;
+    width: 45px;
+    height: 45px;
+    color: white;
+    font-size: 20pt;
+    font-weight: 600;
+    padding: 4px 13px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#chosenType:hover{
+    color:rgb(174,214,43);
+}
+.mapType{
+    float: left;
 }
 .sliderDivRoute{
     background: rgb(86,105,143);
@@ -1804,22 +1839,28 @@ label{
 }
 .hideMenu{
     margin: 0 auto;
-    width: 9px;
+    width: 24px;
     height: 17px;
-    margin-top: -3px;
+    margin-top: -2px;
     visibility: hidden;
     transition: 0.5s;
+    cursor: pointer;
+}
+.filterRoutesFin{
+    float: left;
+    height: 40px;
 }
 .hideMenu img{
-    -ms-transform: rotate(-90deg); /* IE 9 */
-    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
-    transform: rotate(-90deg);
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
     transition: 0.5s;
+    width: 100%;
 }
 .rotateHideArrow{ 
-    -ms-transform: rotate(90deg) !important; /* IE 9 */
-    -webkit-transform: rotate(90deg) !important; /* Chrome, Safari, Opera */
-    transform: rotate(90deg) !important;
+    -ms-transform: rotate(0deg) !important; /* IE 9 */
+    -webkit-transform: rotate(0deg) !important; /* Chrome, Safari, Opera */
+    transform: rotate(0deg) !important;
     
 }
 .routeDescriptionSmall{
@@ -1839,6 +1880,7 @@ label{
     height: 48px;
     float: left;
     background: white;
+    cursor: pointer;
 }
 .arrowRouteHide img{
     width: 24px;
@@ -2066,7 +2108,6 @@ label{
 .tripMethod{
     width: 50%;
     text-align: right;
-    margin-top: -17px;
     float: right;
 }
 .routeWidth{
@@ -2431,9 +2472,14 @@ a.disable-menu-link{
 }
 .panorama{
     margin: 15px 0 20px 0;
+    text-align: center;
 }
 .panorama a{
-    color: rgb(84, 182, 157);
+    color: rgb(175, 212, 66);
+}
+.panorama img{
+    width: 15px;
+    margin-top: -5px;
 }
 
 
@@ -2845,10 +2891,20 @@ a.disable-menu-link{
         width: 100%;
         text-align: center;
         margin: 20 auto;
+        float: left;
+        padding-right: 30px;
+    }
+    .filterRoutesFin{
+        margin-left: 20xp !important;
+    }
+    .countriesFilterRoute{
+        margin-left: 30xp !important;
+        letf: 30px;
+        padding-right: 30px;
     }
     .tripFilterText{
         float: left;
-        margin-left: 19px;
+        margin-left: 30px;
         margin-top: 10px;
     }
     .all_news{
@@ -2922,6 +2978,9 @@ a.disable-menu-link{
     }
     #mainMenuWidth{
         padding: 15px;
+    }
+    .scrollToTop{
+        display: none;
     }
 }
 @media (max-width: 735px){
@@ -3271,6 +3330,9 @@ a.disable-menu-link{
             visibility: visible;
             display: block !important;
         }*/
+        .panorama{
+            display: none;
+        }
 }
 
 @media (max-device-width: 1024px) and (min-device-width: 556px){
@@ -3445,10 +3507,20 @@ a.disable-menu-link{
         width: 100%;
         text-align: center;
         margin: 20 auto;
+        float: left;
+        padding-right: 30px;
+    }
+    .filterRoutesFin{
+        margin-left: 20xp !important;
+    }
+    .countriesFilterRoute{
+        margin-left: 30xp !important;
+        left: 30px;
+        padding-right: 30px;
     }
     .tripFilterText{
         float: left;
-        margin-left: 19px;
+        margin-left: 30px;
         margin-top: 10px;
     }
     .all_news{
@@ -3522,6 +3594,9 @@ a.disable-menu-link{
     }
     #mainMenuWidth{
         padding: 15px;
+    }
+    .scrollToTop{
+        display: none;
     }
 }
 @media (max-device-width: 735px){

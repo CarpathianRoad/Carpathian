@@ -13,6 +13,7 @@
         var files = [];
         var types = [];
         var categories = [];
+        var countries = [];
     </script>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
@@ -21,31 +22,30 @@
         <input type="hidden" id="lan" value="${lan}" />
         <input type="hidden" id="count" value="${count}" />
         <div class="s-new markerPageTable">
-        <div class="breadcrumbsMarker">
+            <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
-                    <a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a>
-                    <a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a>
-                    <a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a>
-                    <a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a>
-                    <a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a>
-                    <a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a>
+                    <div class="filterRoutesFin"><a id="all" onclick="countryFilter('all');" class="selected_country" >${titles.countryALL}</a></div>
+                    <div class="filterRoutesFin"><a id="Ukraine" onclick="countryFilter('Ukraine');" >${titles.countryUA}</a></div>
+                    <div class="filterRoutesFin"><a id="Poland" onclick="countryFilter('Poland');" >${titles.countryPL}</a></div>
+                    <div class="filterRoutesFin"><a id="Hungary" onclick="countryFilter('Hungary');" >${titles.countryHU}</a></div>
+                    <div class="filterRoutesFin"><a id="Romania" onclick="countryFilter('Romania');" >${titles.countryRO}</a></div>
+                    <div class="filterRoutesFin"><a id="Slovakia" onclick="countryFilter('Slovakia');" >${titles.countrySK}</a></div>
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" value="all_type"/>
-                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">${titles.routeWAT}</a></div>
-                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">${titles.routeHOR}</a></div>
-                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">${titles.routeSKI}</a></div>
-                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeBIC}</a></div>
-                    <div id="0" class="tripFilterText"><a onclick="change_routes_type('0');">${titles.routeWAL}</a></div>
+                    <div id="5" class="tripFilterText"><a onclick="change_routes_type('5');">${titles.routeWAT}</a></div>
+                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">${titles.routeHOR}</a></div>
+                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">${titles.routeSKI}</a></div>
+                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">${titles.routeBIC}</a></div>
+                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeWAL}</a></div>
                     <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">${titles.routeALL}</a></div>
                 </div>
-                
             </div>
         </div>
             <div class="all_news" id="routesList">        
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
-                    <div class="s-cell">
+                    <div class="s-cell" id="routeBlock${loop.index}">
                         <div class="s-block newsHeight">
                             <div class="newsImage">
                                 <a href="${Constants.URL}routes/${route.id}">
@@ -74,6 +74,7 @@
                     <script>files.push("${route.file}");</script>
                     <script>types.push("${route.type}");</script>
                     <script>categories.push("${route.category}");</script>
+                    <script>countries.push("${route.public_country}");</script>
                 </c:forEach>
             </div>
                  <div class="loading_block">
@@ -108,19 +109,19 @@
         
             for(var n = 0; n < types.length; n++){
                 switch(types[n]){
-                    case "0":
+                    case "1":
                         $('#type'+n).html('Walking route');
                         break;
-                    case "1":
+                    case "2":
                         $('#type'+n).html('Bicycle route');
                         break;
-                    case "2":
+                    case "3":
                         $('#type'+n).html('Ski route');
                         break;
-                    case "3":
+                    case "4":
                         $('#type'+n).html('Horses route');
                         break;
-                    case "4":
+                    case "5":
                         $('#type'+n).html('Water route');
                         break;
                 }
@@ -252,8 +253,24 @@
                         }
                     }
                 }
-                
                 return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2));
+            }
+            
+            function countryFilter(country){
+                for(var n = 0; n < types.length; n++){
+                    var selected_country = jQuery("#selected_country").val();
+                    jQuery( "#"+selected_country).removeClass( "selected_country" );
+                    jQuery( "#"+country ).addClass( "selected_country" );
+                    jQuery("#selected_country").val(country);
+                    jQuery("#last_item").val("9");
+                    if(countries[n]!=country){
+                        $('#routeBlock'+n).css('display','none');
+                    }else{
+                        $('#routeBlock'+n).css('display','block');
+                    }
+                    if(country=='all')
+                        $('#routeBlock'+n).css('display','block');
+                }
             }
         </script>
 </t:indexpage>

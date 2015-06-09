@@ -51,7 +51,40 @@
 		closeEffect	: 'none'
             });
         });
-    </script>    
+    </script>  
+    <script>
+        if("${article.avatar}"!=""){
+            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${article.avatar}");
+        }else if("${images[0]}"!=""){
+            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${images[0]}");
+        }else{
+            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg");
+        }
+        console.log($("meta[property='og\\:image']").attr("content"));
+        $('#fbShare').attr('data-href',document.URL);
+    
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '904133936315428',
+      xfbml      : true,
+      cookie: true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   FB.ui({
+  method: 'feed',
+  link: 'https://developers.facebook.com/docs/',
+  caption: 'An example caption',
+}, function(response){});
+</script>
     <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
@@ -111,8 +144,7 @@
                                     
                                    <div class="social_networks">
                                         <div class="face">
-                                            <a name="fb_share" type="button"></a> 
-                                            <script src="https://www.facebook.com/connect.php/js/FB.Share" type="text/javascript"></script>
+                                            <div id="fb-post" class="fb-share-button" data-href="" data-layout="button" data-width="500"></div>
                                         </div>
                                         <div class="twitter">
                                             <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>

@@ -17,10 +17,16 @@
   padding: 15px;
   text-align: center;
   text-transform: uppercase;
+    -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
     }
     .news_title a {
           color: #fff;
         height: auto;
+          position: relative;
+  top: 50%;
+  transform: translateY(-50%);
     }
     .news_text_box {
           height: auto;

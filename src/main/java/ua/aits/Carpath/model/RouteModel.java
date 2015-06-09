@@ -496,7 +496,7 @@ public class RouteModel {
                 query = query + " AND `public_country` = \""+country+"\" ";
             }
        
-        if(!country.equals("all_type"))
+        if(!type.equals("all_type"))
             {
                 query = query + " AND `type` = \""+type+"\" ";
             }
@@ -535,7 +535,7 @@ public class RouteModel {
                 query = query + " AND `public_country` = \""+country+"\" ";
             }
        
-        if(!country.equals("all_type"))
+        if(!type.equals("all_type"))
             {
                 query = query + " AND `type` = \""+type+"\" ";
             }

@@ -12,6 +12,7 @@
 
 <html>
 <head>
+    <meta property="og:image" content="http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg"/>
     <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
     <title>Carpathian Tourist Road</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"
@@ -105,6 +106,7 @@
 			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
 		})
                 var smallMenu = false;
+                $('#fbShare').attr('data-href',document.URL);
 	//]]>
 </script>
 <body>
@@ -217,7 +219,7 @@
                                     
                     </div>
                 <div class="hideMenu" onclick="showHideMenu()">
-                    <img id="hideMenuArrow" src="${Constants.URL}img/arrow-menu-hide.png">
+                    <img id="hideMenuArrow" src="${Constants.URL}img/menuArrowHide.png">
                 </div>
             </div>
 	<div class="s-clear"></div>
@@ -289,12 +291,12 @@
                 </div>    
                                         <div class="footerContactsText developpedText">
                                             <a class="not-add-lan" href="http://www.arr.com.ua" target="_blank">
-                                                &#169; Communal enterprise "Agency of Regional Development and Cross-Border Co-operation "Transcarpathia" of Zakarpattya Oblast Council"ÂÂ
+                                                &#169; Communal enterprise "Agency of Regional Development and Cross-Border Co-operation "Transcarpathia" of Zakarpattya Oblast Council" 
                                             </a>
                                         </div>
                                         <div class="developpedText aitsText">
-                                            <a class="not-add-lan" href="http://www.aits.ua" target="_blank">
-                                                Developed by AITS
+                                            <a style="margin-left:5px" class="not-add-lan" href="http://www.aits.ua" target="_blank">
+                                                 Developed by AITS
                                             </a>
                                         </div>
                     <div class="siteMap">
@@ -451,7 +453,7 @@
             $.each($('.fancybox'), function() {
                 setTimeout(function(){ 
                     $('.fancybox').css('display', 'inline-block');
-                }, 1);
+                }, 100);
             });
     }
     
