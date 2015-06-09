@@ -110,19 +110,19 @@ public class PageFiltersTranslate {
         PageFiltersTranslate titles = new PageFiltersTranslate();
         switch(lang.toUpperCase()) {
             case "UA" :
-                titles.setCountryALL("ÂÑ² ÊĞÀ¯ÍÈ");
-                titles.setCountryUA("ÓÊĞÀ¯ÍÀ");
-                titles.setCountryHU("ÓÃÎĞÙÈÍÀ");
-                titles.setCountryPL("ÏÎËÜÙÀ");
-                titles.setCountrySK("ÑËÎÂÀ××ÈÍÀ");
-                titles.setCountryRO("ĞÓÌÓÍ²ß");
+                titles.setCountryALL("Ğ’Ğ¡Ğ† ĞšĞ ĞĞ‡ĞĞ˜");
+                titles.setCountryUA("Ğ£ĞšĞ ĞĞ‡ĞĞ");
+                titles.setCountryHU("Ğ£Ğ“ĞĞ Ğ©Ğ˜ĞĞ");
+                titles.setCountryPL("ĞŸĞĞ›Ğ¬Ğ©Ğ");
+                titles.setCountrySK("Ğ¡Ğ›ĞĞ’ĞĞ§Ğ§Ğ˜ĞĞ");
+                titles.setCountryRO("Ğ Ğ£ĞœĞ£ĞĞ†Ğ¯");
                 
-                titles.setRouteALL("ÂÑ² ÂÈÄÈ");
-                titles.setRouteBIC("ÂÅËÎÑÈÏÅÄÍ²");
-                titles.setRouteHOR("Ê²ÍÍ²");
-                titles.setRouteSKI("ËÈÆÍ²");
-                titles.setRouteWAL("Ï²Ø²");
-                titles.setRouteWAT("ÂÎÄÍ²");
+                titles.setRouteALL("Ğ’Ğ¡Ğ† Ğ’Ğ˜Ğ”Ğ˜");
+                titles.setRouteBIC("Ğ’Ğ•Ğ›ĞĞ¡Ğ˜ĞŸĞ•Ğ”ĞĞ†");
+                titles.setRouteHOR("ĞšĞ†ĞĞĞ†");
+                titles.setRouteSKI("Ğ›Ğ˜Ğ–ĞĞ†");
+                titles.setRouteWAL("ĞŸĞ†Ğ¨Ğ†");
+                titles.setRouteWAT("Ğ’ĞĞ”ĞĞ†");
                 break;
             case "EN": 
                 titles.setCountryALL("ALL COUNTRIES");
@@ -205,19 +205,19 @@ public class PageFiltersTranslate {
     public String translateCountryByLan(String lan, String country) {
         String translate;
         PageFiltersTranslate titles = this.getTranslateFilters(lan);
-        if("Ukraine".equals(country) || "Óêğàèíà".equals(country) || "Óêğà¿íà".equals(country)) {
+        if("Ukraine".equals(country) || "Ğ£ĞºÑ€Ğ°Ğ¸Ğ½Ğ°".equals(country) || "Ğ£ĞºÑ€Ğ°Ñ—Ğ½Ğ°".equals(country)) {
             translate = titles.getCountryUA();
         }
-        else if("Ğóìûíèÿ".equals(country) || "Romania".equals(country) || "Ğóìóí³ÿ".equals(country)){
+        else if("Ğ ÑƒĞ¼Ñ‹Ğ½Ğ¸Ñ".equals(country) || "Romania".equals(country) || "Ğ ÑƒĞ¼ÑƒĞ½Ñ–Ñ".equals(country)){
             translate = titles.getCountryRO();
         }
-        else if("Ñëîâà÷÷èíà".equals(country) || "Ñëîâàêèÿ".equals(country) || "Slovakia".equals(country)){
+        else if("Ğ¡Ğ»Ğ¾Ğ²Ğ°Ñ‡Ñ‡Ğ¸Ğ½Ğ°".equals(country) || "Ğ¡Ğ»Ğ¾Ğ²Ğ°ĞºĞ¸Ñ".equals(country) || "Slovakia".equals(country)){
             translate = titles.getCountrySK();
         }
-        else if("Âåíãğèÿ".equals(country) || "Hungary".equals(country) || "Óãîğùèíà".equals(country)){
+        else if("Ğ’ĞµĞ½Ğ³Ñ€Ğ¸Ñ".equals(country) || "Hungary".equals(country) || "Ğ£Ğ³Ğ¾Ñ€Ñ‰Ğ¸Ğ½Ğ°".equals(country)){
             translate = titles.getCountryHU();
         }
-        else if("Ïîëüøà".equals(country) || "Poland".equals(country) || "Ïîëüùà".equals(country)){
+        else if("ĞŸĞ¾Ğ»ÑŒÑˆĞ°".equals(country) || "Poland".equals(country) || "ĞŸĞ¾Ğ»ÑŒÑ‰Ğ°".equals(country)){
             translate = titles.getCountryPL();
         }
         else {

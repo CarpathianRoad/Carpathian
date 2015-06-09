@@ -102,8 +102,16 @@ public class ArticleController {
             modelAndView.addObject("articles", articles);
             ArticleModel tempArt  = news.getOneArticle(lan, id);
             String[] tempImg = tempArt.getImage().split(",");
+            if("".equals(tempArt.avatar) || tempArt.avatar == null) {
+                if("".equals(tempImg[0]) || tempImg[0] == null) {
+                    tempArt.avatar = "img/dog.png";
+                }
+                else {
+                    tempArt.avatar = tempImg[0];
+                }
+            }
             modelAndView.addObject("main_image", tempImg[0]);
-            modelAndView.addObject("article", news.getOneArticle(lan,id));
+            modelAndView.addObject("article", tempArt);
             modelAndView.addObject("images", tempImg);
             return modelAndView;
  
