@@ -10,6 +10,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
     <script>
+        $(document).ready(function() {
+            $(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+            });
+        });
+    </script> 
+    <script>
         if("${article.avatar}"!=""){
             $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${marker.avatar}");
         }else if("${images[0]}"!=""){
