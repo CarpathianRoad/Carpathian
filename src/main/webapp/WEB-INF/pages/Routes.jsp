@@ -437,8 +437,10 @@
                         }
                     }
                 }
-                
-                return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2));
+                //if(window.innerWidth>1400)
+                    return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2+0.25));
+                //else
+                //    return (new google.maps.LatLng((parseFloat(minLat)+parseFloat(maxLat))/2, (parseFloat(minLon)+parseFloat(maxLon))/2));
             }
             
         var styleCounter = 0;

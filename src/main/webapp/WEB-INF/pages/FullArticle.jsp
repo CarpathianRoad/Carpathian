@@ -179,4 +179,15 @@
             </div>
         </div>
     </section>
+    <script>
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) { 
+                $.each($('.fancybox'), function() {
+                    setTimeout(function(){ 
+                        $('.fancybox').css('display', 'inline-block');
+                    }, 100);
+                });
+            }
+        });
+    </script>
 </t:indexpage>
