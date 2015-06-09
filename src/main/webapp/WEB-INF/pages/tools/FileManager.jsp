@@ -47,6 +47,7 @@
     </div>
   </div>
 </div>
+    <span id="returnedhtml" style="display: none"></span>
     </body>
     <script>
         $(document).ready(function () {
@@ -62,9 +63,15 @@
         $("#close-add-folder").click(function(){
             $(".image-upload-folder").toggle("slow");
         });
+        
         $('.img-upl').on('change', '#file-input', function() {
-        var data = new FormData();
-        data.append('upload', jQuery('#file-input')[0].files[0]);
+            
+        var result = [];
+        var len = $(this).get(0).files.length;
+        var count = 1;
+        for (var i = 0; i < $(this).get(0).files.length; ++i) {
+            var data = new FormData();
+        data.append('upload', $(this).get(0).files[i]);
         data.append("path", $(".img-content-show-all").attr("realpath"));
         jQuery.ajax({
                     url: '${Constants.URL}uploadFile',
@@ -74,20 +81,36 @@
                     processData: false,
                     type: 'POST',
                     success: function(data){
-            var path = $(data).find("img").attr("realpath");
+                        $("#returnedhtml").append(data);
+                        if(count === len) {
+                            console.log("lll");
+                            completeAjaxCall();
+                        }
+                        count++;
+                            
+                    }
+                });
+        }   
+        });
+        
+        function completeAjaxCall(){
+        var path = "";
+            $("#returnedhtml a").each(function( index ) {
+                path += $(this).find("img").attr("realpath") + ",";
+            });
             if("${ckeditor}" === "" && "${num}" === "") {
                 if("${type}" === "avatar") {
-                    $("#avatarUpload .img-content", window.parent.document).append(data);
+                    $("#avatarUpload .img-content", window.parent.document).append($("#returnedhtml").html());
                     $("#avatarUpload .img-input-box", window.parent.document).remove();
                     $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Upload avatar</button>');
-                    $("#avatar-path", window.parent.document).val(path);  
+                    $("#avatar-path", window.parent.document).val(path.slice(0,-1));  
                 }
                 else {
-                    $("#imageUpload .img-content", window.parent.document).append(data);
+                    $("#imageUpload .img-content", window.parent.document).append($("#returnedhtml").html());
                     $("#imageUpload .img-input-box", window.parent.document).remove();
                     $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
                     var real = $("#real-img-path", window.parent.document).val();        
-                    $("#real-img-path", window.parent.document).val(real + "," + path);
+                    $("#real-img-path", window.parent.document).val(real + "," + path.slice(0,-1));
                 }
             
             initGalerry();
@@ -98,10 +121,8 @@
                     window.opener.CKEDITOR.tools.callFunction("${num}", ""+"${Constants.URL}"+ path +"","");
                     window.close();
                     }
-                        
         }
-                });
-        });
+        
         function initGalerry(){
            getFiles("",getParameterByName('path').replace(/,/g,"/")); 
         }
