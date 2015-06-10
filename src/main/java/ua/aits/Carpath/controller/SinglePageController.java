@@ -185,6 +185,8 @@ public class SinglePageController {
         modelAndView.addObject("images", arrayMessage);
         modelAndView.addObject("panorama",panoramas.getRandomPanorama().id);
         modelAndView.addObject("avatarvar", ret.avatar);
+        modelAndView.addObject("titlevar", ret.title);
+        modelAndView.addObject("descrvar", Helpers.html2text(ret.textEN));
         return modelAndView;
     }
     
