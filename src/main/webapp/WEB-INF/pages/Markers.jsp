@@ -18,14 +18,14 @@
         });
     </script> 
     <script>
-        if("${article.avatar}"!=""){
-            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${marker.avatar}");
-        }else if("${images[0]}"!=""){
-            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${images[0]}");
-        }else{
-            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg");
-        }
-        console.log($("meta[property='og\\:image']").attr("content"));
+        //if("${article.avatar}"!=""){
+          //  $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${marker.avatar}");
+        //}else if("${images[0]}"!=""){
+        //   $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${images[0]}");
+        //}else{
+         //   $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg");
+       // }
+       // console.log($("meta[property='og\\:image']").attr("content"));
         $('#fbShare').attr('data-href',document.URL);
     
   window.fbAsyncInit = function() {

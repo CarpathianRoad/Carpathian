@@ -89,7 +89,7 @@ public class SinglePageController {
     @RequestMapping(value = {"/{lan}/routesList","/{lan}/routesList/"})
     public ModelAndView routesList(@PathVariable("lan") String lan, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
+        
 		RouteModel route = new RouteModel();
                 List<RouteModel> routes = route.getAllRoutes();
                 
@@ -172,9 +172,19 @@ public class SinglePageController {
                     String[] img  = temp.image.split(",");
                     temp.setImage(img[0]);
                 }
+        String[] tempImg = ret.getImage().split(",");
+            if("".equals(ret.avatar) || ret.avatar == null) {
+                if("".equals(tempImg[0]) || tempImg[0] == null) {
+                    ret.avatar = "img/slides/slider.png";
+                }
+                else {
+                    ret.avatar = tempImg[0];
+                }
+            }
         modelAndView.addObject("articles", points);
         modelAndView.addObject("images", arrayMessage);
         modelAndView.addObject("panorama",panoramas.getRandomPanorama().id);
+        modelAndView.addObject("avatarvar", ret.avatar);
         return modelAndView;
     }
     

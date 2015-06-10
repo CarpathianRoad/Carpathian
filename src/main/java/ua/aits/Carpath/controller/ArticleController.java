@@ -104,7 +104,7 @@ public class ArticleController {
             String[] tempImg = tempArt.getImage().split(",");
             if("".equals(tempArt.avatar) || tempArt.avatar == null) {
                 if("".equals(tempImg[0]) || tempImg[0] == null) {
-                    tempArt.avatar = "img/dog.png";
+                    tempArt.avatar = "img/slides/slider.png";
                 }
                 else {
                     tempArt.avatar = tempImg[0];
@@ -113,6 +113,7 @@ public class ArticleController {
             modelAndView.addObject("main_image", tempImg[0]);
             modelAndView.addObject("article", tempArt);
             modelAndView.addObject("images", tempImg);
+            modelAndView.addObject("avatarvar", tempArt.avatar);
             return modelAndView;
  
 	}
