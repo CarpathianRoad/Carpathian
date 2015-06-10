@@ -14,6 +14,8 @@
 <head>
     <c:if test="${avatarvar != null}">
         <meta property="og:image" content="http://www.carpathianroad.com/${avatarvar}"/>
+        <meta property="og:title" content="${titlevar}"/>
+        <meta property="og:description" content="${descrvar}"/>
     </c:if>
     <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
     <title>Carpathian Tourist Road</title>
