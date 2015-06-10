@@ -9,6 +9,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
+    <script>
+        $(document).ready(function() {
+            $(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+            });
+        });
+    </script> 
+    <script>
+        if("${article.avatar}"!=""){
+            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${marker.avatar}");
+        }else if("${images[0]}"!=""){
+            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${images[0]}");
+        }else{
+            $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg");
+        }
+        console.log($("meta[property='og\\:image']").attr("content"));
+        $('#fbShare').attr('data-href',document.URL);
+    
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '904133936315428',
+      xfbml      : true,
+      cookie: true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   FB.ui({
+  method: 'feed',
+  link: 'https://developers.facebook.com/docs/',
+  caption: 'An example caption',
+}, function(response){});
+</script>
+    <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
             <div class="markerLeftDescr">
@@ -56,23 +98,18 @@
                                         <div class="mainImageSliderLine">
                                             <div id="imageCount">1</div>/${fn:length(images)}
                                             &nbsp;&nbsp;
-                                                ${article.title} Gallery
+                                                ${marker.title} Gallery
                                         </div>
                                     </div>
                 </c:if>
                                     <div class="markerPageBottomLine"></div>
-                                    <div class="markerPageSocial">
-                                        <div class="fbMarker markerPageSocialHover">
-                                            <div class="markerPageSocialIcon">
-                                                <img src="${Constants.URL}img/fb_icon_marker.png">
-                                            </div>
-                                            <div class="markerPageSocialNumber">25</div>
+                                    
+                                   <div class="social_networks">
+                                        <div class="face">
+                                            <div id="fb-post" class="fb-share-button" data-href="" data-layout="button" data-width="500"></div>
                                         </div>
-                                        <div class="twMarker markerPageSocialHover">
-                                            <div class="markerPageSocialIcon">
-                                                <img src="${Constants.URL}img/tw_icon_marker.png">
-                                            </div>
-                                            <div class="markerPageSocialNumber">117</div>
+                                        <div class="twitter">
+                                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
                                         </div>
                                     </div>
             </div>
@@ -104,4 +141,15 @@
             </div>
         </div>
     </section>
+    <script>
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) { 
+                $.each($('.fancybox'), function() {
+                    setTimeout(function(){ 
+                        $('.fancybox').css('display', 'inline-block');
+                    }, 100);
+                });
+            }
+        });
+    </script>
 </t:indexpage>
