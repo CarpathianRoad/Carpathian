@@ -426,7 +426,7 @@ public class ArticleModel {
         if(!"0".equals(menuCat)) {
             menuFilter = " AND menuCat = "+menuCat; 
         }
-        ResultSet result = DB.getResultSet("select * from content where type = "+type+" and publish = 1 "+countryFilter+menuFilter+" order by id desc;");
+        ResultSet result = DB.getResultSet("select * from content where type IN("+type+") and publish = 1 "+countryFilter+menuFilter+" order by id desc;");
         List<ArticleModel> newsList = new LinkedList<>();
         if(!result.isBeforeFirst()){
             return null;
