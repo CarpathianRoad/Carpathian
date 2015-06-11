@@ -76,6 +76,41 @@ public class Helpers {
                 html = html + "</ul>";
         return html;
     }
+    public String getRowHtmlSelect(String lang, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<MenuModel> tempMenu = menu.getMenuRowSelect(lang, id);
+        String html = null;
+        if("0".equals(id)) {
+            html = "<label id=\"sel3-label\" for=\"sel3\">Category (menu)<span class=\"red-star\">*</span></label><select class=\"form-control\" name=\"menuCat\" id=\"sel3\"><option value=\"option\" disabled selected>Select option</option>";
+            for(MenuModel temp : tempMenu) {
+                    html = html + "<optgroup label=\""+temp.titleEN+"\">";
+                    html = html + this.getRowHtmlSelect(lang, temp.id.toString());
+                    html = html + "</optgroup>";
+                }
+            html += "</select>";
+        }
+        else if(id == "2" || id == "3") {
+            for(MenuModel temp : tempMenu) {
+                    html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN+"\">";
+                    html = html + this.getRowHtmlSelect(lang, temp.id.toString());
+                    html = html + "</optgroup>";
+                }
+        }
+        else {
+             for(MenuModel temp : tempMenu) {
+                 if(temp.parentID == 2 || temp.parentID == 3) {
+                    html = html + "<optgroup label=\"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN+"\">";
+                    html = html + this.getRowHtmlSelect(lang, temp.id.toString());
+                    html = html + "</optgroup>";
+                 }
+                 else {
+                    html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN;
+                    html = html + "</option>";
+                 }
+                }
+            
+        }
+        return html;
+    }
     public static String replaceChars(String text) {
         text = text.replaceAll("[\\x00-\\x1F]", "");
             text = text.replaceAll("'\\<.*?>","");
