@@ -13,7 +13,7 @@
                 
     <div style="min-height: 50px;margin-top: -30px">
         <div id="slider1_container" style="display: none; position: relative; margin: 0 auto;
-            top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
+            top: 0px; left: 0px; width: 1300px; height: 250px; overflow: hidden;">
             <div u="loading" style="position: absolute; top: 0px; left: 0px;">
                 <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;
                     top: 0px; left: 0px; width: 100%; height: 100%;">
@@ -22,18 +22,21 @@
                     top: 0px; left: 0px; width: 100%; height: 100%;">
                 </div>
             </div>
-            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1300px; height: 500px; overflow: hidden;">
+            <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1300px; height: 250px; overflow: hidden;">
                 <div>
-                    <img u="image" src2="${Constants.URL}img/slides/slider.png" />
+                    <img u="image" src2="${Constants.URL}img/slides/borzhava.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="${Constants.URL}img/slides/slider1.png" />
+                    <img u="image" src2="${Constants.URL}img/slides/europe_center.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="${Constants.URL}img/slides/slider2.png" />
+                    <img u="image" src2="${Constants.URL}img/slides/narcis.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="${Constants.URL}img/slides/slider3.png" />
+                    <img u="image" src2="${Constants.URL}img/slides/pylypets.jpg" />
+                </div>
+                <div>
+                    <img u="image" src2="${Constants.URL}img/slides/sheeps.jpg" />
                 </div>
             </div>
             <div u="navigator" class="jssorb21" style="position: absolute; bottom: 26px; left: 6px;">
