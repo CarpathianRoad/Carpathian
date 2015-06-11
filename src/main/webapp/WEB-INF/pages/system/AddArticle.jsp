@@ -384,11 +384,13 @@
         $( "#sel1" ).change(function() {
             if($(this).val() == 0 || $(this).val() == 1) {
                 $("#sel3").hide();
+                $("#sel3-label").hide();
                 $('#sel3').append($("<option selected></option>").attr("value",4).text("news")); 
             }
             else {
                 $("#sel3 option[value='4']").remove();
                 $("#sel3").show();
+                $("#sel3-label").show();
                 $("#sel3").prop('selectedIndex',0);
             }
           });
