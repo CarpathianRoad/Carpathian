@@ -98,9 +98,15 @@ public class Helpers {
         else {
              for(MenuModel temp : tempMenu) {
                  if(temp.parentID == 2 || temp.parentID == 3) {
+                     if(temp.id == 92 || temp.id == 17 || temp.id == 95) {
+                         html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN;
+                            html = html + "</option>"; 
+                     }
+                     else {
                     html = html + "<optgroup label=\"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN+"\">";
                     html = html + this.getRowHtmlSelect(lang, temp.id.toString());
                     html = html + "</optgroup>";
+                     }
                  }
                  else {
                     html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN;
