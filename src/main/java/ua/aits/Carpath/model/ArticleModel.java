@@ -414,7 +414,60 @@ public class ArticleModel {
         DB.closeCon();
     return newsList;
     }
-    
+    public List<ArticleModel> getArticleByFilters(String lan, String country, String type, String menuCat) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
+        String countryFilter;
+        String menuFilter = "";
+        if("all".equals(country)) {
+            countryFilter = "";
+        } 
+        else {
+            countryFilter = " AND public_country='"+country+"'";
+        }
+        if(!"0".equals(menuCat)) {
+            menuFilter = " AND menuCat = "+menuCat; 
+        }
+        ResultSet result = DB.getResultSet("select * from content where type IN("+type+") and publish = 1 "+countryFilter+menuFilter+" order by id desc;");
+        List<ArticleModel> newsList = new LinkedList<>();
+        if(!result.isBeforeFirst()){
+            return null;
+        }
+        while (result.next()) { 
+            ArticleModel temp = new ArticleModel();
+            if(result.getString("actual") != null && !"".equals(result.getString("actual"))){
+                if(Helpers.checkOldArticle(result.getString("actual"))){
+                    continue;
+                }
+            }
+            String f_title = result.getString("title"+lan.toUpperCase());
+            if("".equals(f_title) || f_title == null){
+                f_title = result.getString("titleEN");
+            }
+            if(f_title.length() > 55){
+                f_title = f_title.substring(0,55);
+            }
+            String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
+            if("".equals(text) || text == null){
+                text = Helpers.html2text(result.getString("textEN"));
+            }
+            if(text.length() > 175){
+                text = text.substring(0,175);
+            }
+            temp.setTextEN(text);
+            temp.setId(result.getInt("id"));
+            temp.setTitle(f_title);
+            temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
+            temp.setDate(result.getString("date").replace("/", "."));
+            temp.setAvatar(result.getString("avatar"));
+            String [] arr = result.getString("image").split(",");
+            if("".equals(arr[0])){
+                arr[0] = "img/zak.png";
+            }
+            temp.setImage(arr[0]); 
+            newsList.add(temp);
+        } 
+        DB.closeCon();
+    return newsList;
+    }
     public List<ArticleModel> getAllAdv() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from content where type = 1 and publish = 1 order by date desc;");
         List<ArticleModel> advList = new LinkedList<>();

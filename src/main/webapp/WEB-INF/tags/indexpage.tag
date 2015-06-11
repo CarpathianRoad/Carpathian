@@ -12,7 +12,11 @@
 
 <html>
 <head>
-    <meta property="og:image" content="http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg"/>
+    <c:if test="${avatarvar != null}">
+        <meta property="og:image" content="http://www.carpathianroad.com/${avatarvar}"/>
+        <meta property="og:title" content="${titlevar}"/>
+        <meta property="og:description" content="${descrvar}"/>
+    </c:if>
     <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
     <title>Carpathian Tourist Road</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"
@@ -415,7 +419,7 @@
     }
     var countryChooser; 
     $( document ).ready(function() {
-                
+            console.log("${avatarvar}");    
                 
             var str_url = window.location.href.split('/'); 
             $("li.paddingLang a").removeClass("active");

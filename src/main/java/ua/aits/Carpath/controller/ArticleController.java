@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.functions.PageFiltersTranslate;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MenuModel;
@@ -104,7 +105,7 @@ public class ArticleController {
             String[] tempImg = tempArt.getImage().split(",");
             if("".equals(tempArt.avatar) || tempArt.avatar == null) {
                 if("".equals(tempImg[0]) || tempImg[0] == null) {
-                    tempArt.avatar = "img/dog.png";
+                    tempArt.avatar = "img/slides/slider.png";
                 }
                 else {
                     tempArt.avatar = tempImg[0];
@@ -113,6 +114,9 @@ public class ArticleController {
             modelAndView.addObject("main_image", tempImg[0]);
             modelAndView.addObject("article", tempArt);
             modelAndView.addObject("images", tempImg);
+            modelAndView.addObject("avatarvar", tempArt.avatar);
+            modelAndView.addObject("titlevar", tempArt.title);
+            modelAndView.addObject("descrvar", Helpers.html2text(tempArt.textEN));
             return modelAndView;
  
 	}
