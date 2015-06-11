@@ -515,7 +515,7 @@ public class RouteModel {
             RouteModel temp = new RouteModel();
             temp.setId(result.getInt("id"));
             temp.setTitle(result.getString("titleEN"));
-            temp.setTextUA(str3);
+            temp.setTextUA(Helpers.html2text(str3));
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
             temp.setPublic_country(result.getString("public_country")); 
