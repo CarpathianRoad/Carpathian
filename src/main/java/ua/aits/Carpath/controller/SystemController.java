@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MarkerModel;
@@ -34,15 +35,16 @@ public class SystemController {
     MarkerModel markers = new MarkerModel();
     FilterModel filters = new FilterModel();
     RouteModel routes = new RouteModel();
+    Helpers helpers = new Helpers();
     
     @RequestMapping(value = {"/system/add", "/system/add/","/Carpath/system/add", "/Carpath/system/add/"})
         public ModelAndView addArticle (HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/AddArticle");
-            modelAndView.addObject("menuList", menu.getAllCat());
             modelAndView.addObject("markers", markers.getAllMarkers());
             modelAndView.addObject("filters", filters.getAllFilters());
+            modelAndView.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
             return modelAndView;
 	}
     @RequestMapping(value = {"/system/edit/{id}", "/system/edit/{id}/","/Carpath/system/edit/{id}", "/Carpath/system/edit/{id}/"})
@@ -50,7 +52,7 @@ public class SystemController {
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/EditArticle");
-            modelAndView.addObject("menuList", menu.getAllCat());
+            modelAndView.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
             modelAndView.addObject("article",article.getOneArticleForEdit(id));
             modelAndView.addObject("markers", markers.getAllMarkers());
             modelAndView.addObject("filters", filters.getAllFilters());

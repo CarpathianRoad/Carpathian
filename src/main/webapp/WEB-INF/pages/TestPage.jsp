@@ -8,6 +8,6 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<body>
-		${menu}
+		${menuList}
 	</body>	
 </html>
