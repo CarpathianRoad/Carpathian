@@ -8,56 +8,69 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:indexpage>
-    <script src="${Constants.URL}js/load_by_scroll.js"></script>
     <div class="s-new widthClass">
-        <input type="hidden" id="page_type" value="category" />
-        <input type="hidden" id="menu_id" value="${menu_id}" />
-        <input type="hidden" id="last_item" value="9" />
-        <input type="hidden" id="contstants" value="${Constants.URL}" />
-        <input type="hidden" id="lan" value="${lan}" />
-        <input type="hidden" id="count" value="${count}" />
         <div class="s-new">
             <div class="countriesFilter countriesFilterRoute">
-                <input type="hidden" id="selected_country" value="all"/>
-                <a id="all" onclick="change_country('all');" class="selected_country" >${titles.countryALL}</a>
-                <a id="ukraine" onclick="change_country('ukraine');" >${titles.countryUA}</a>
-                <a id="poland" onclick="change_country('poland');" >${titles.countryPL}</a>
-                <a id="hungary" onclick="change_country('hungary');" >${titles.countryHU}</a>
-                <a id="romania" onclick="change_country('romania');" >${titles.countryRO}</a>
-                <a id="slovakia" onclick="change_country('slovakia');" >${titles.countrySK}</a>
+                <input type="hidden" id="type" value="2"/>
+                <input type="hidden" id="lan" value="${lan}"/>
+                <input type="hidden" id="menu" value="${menu_id}"/>
+                <a id="all" class="selected_country country-filter" >${titles.countryALL}</a>
+                <a id="Ukraine" class="country-filter" >${titles.countryUA}</a>
+                <a id="Poland" class="country-filter" >${titles.countryPL}</a>
+                <a id="Hungary" class="country-filter" >${titles.countryHU}</a>
+                <a id="Romania" class="country-filter" >${titles.countryRO}</a>
+                <a id="Slovakia" class="country-filter" >${titles.countrySK}</a>
             </div>
-        </div>
-        <div class="all_news">
-            <c:forEach items="${contentList}" var="artilcle">	
-                    <div class="s-cell">
-                        <div class="s-block newsHeight">
-                            <div class="newsImage">
-                                <a href="${Constants.URL}article/full/${artilcle.id}">
-                                    <div class="imageHover">
-                                        <div class="imageHoverDate">
-                                            ${artilcle.date}
-                                        </div>
-                                        <div class="imageHoverCountry">
-                                            <div class="newsCountryText">${artilcle.country}</div><img src="${Constants.URL}img/newsImageHover.png">
-                                        </div>
-                                    </div>
-                                    <img src="${Constants.URL}${artilcle.image}" />
-                                </a>
-                            </div>
-
-                            <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
-                            <div class="news_text_box">
-                                <div class="news_title"><a href="${Constants.URL}article/full/${artilcle.id}">${artilcle.title}</a></div>
-                                <a href="${Constants.URL}article/full/${artilcle.id}">
-                                <div class="news_text">${artilcle.textEN}</div></a>
-                            </div>
-                        </div>
-                    </div>        
-            </c:forEach>
-        </div>
+         </div>
+            <div class="all_news">
+            </div>        
         <div class="s-clear"></div>
-        <div class="loading_block">
+         <div class="loading_block">
             <img src="${Constants.URL}img/status.gif" />
         </div>
     </div>
 </t:indexpage>
+<script>
+$(document).ready(function () {
+   loadContent("all", "0");
+   $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+    options.async = true;
+});
+});
+
+    $(".country-filter").click(function(){
+        $(".all_news").html("");
+        $(".countriesFilter a").removeClass("selected_country");
+        loadContent($(this).attr("id"), "0");
+        $(this).addClass("selected_country");
+    });
+function loadButtonInit() {
+    $(".load-more-content .btn").click(function(){
+        loadContent($(".selected_country").attr("id"), $(this).attr("count"));
+    });
+}
+function loadContent(country, count){
+    var type = $("#type").val();
+    var lan = $("#lan").val();
+    var menuCat = $("#menu").val();
+    $(".loader-block").show();
+    $.ajax({
+            type: "get",
+            url: "${Constants.URL}articles/loadсontent",
+            cache: false,    
+            data:'lan='+lan+'&count='+count+'&country='+country+'&type='+type+'&menuCat='+menuCat,
+            mimeType:"text/html; charset=UTF-8",
+            success: function(response){
+             $(".load-more-content").remove();
+             $(response).hide().appendTo(".all_news").fadeIn(1000);
+             $(".doNotShow").hide();
+             $(".loader-block").hide();
+             loadButtonInit();
+            },
+            error: function(response){      
+             console.log(response);
+            }
+        });
+}
+</script>
+ 

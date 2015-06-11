@@ -207,28 +207,30 @@ public class AjaxController {
         return new ResponseEntity<>(helpers.getRowHtml(request.getParameter("lang"), "0"), responseHeaders, HttpStatus.CREATED);
     }
     
-    @RequestMapping(value = {"/load_more_content"}, method = RequestMethod.GET)
+    
+    
+    @RequestMapping(value = {"/articles/loadсontent"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> load_content(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
-        String page_type = request.getParameter("page_type");
-        String last_item = request.getParameter("last_item");
-        String selected_country = request.getParameter("selected_country");
+        HttpHeaders responseHeaders = new HttpHeaders(); 
+        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         String lan = request.getParameter("lan");
-        String menu_id = request.getParameter("menu_id");
-        System.out.println("page_type = " + page_type);
-        System.out.println("last_item = " + last_item);
-        System.out.println("menu_id = " + menu_id);
-        System.out.println("lan = " + lan);
-        List<ArticleModel> tempC = null;
-        if(page_type.equals("news"))
-            {
-                 tempC = content.get_news_by_limit(last_item, lan, selected_country);
-            }
-        else if(page_type.equals("category"))
-            {
-                tempC = content.get_category_by_limit(last_item, lan, menu_id, selected_country);
-            }
+        String country = request.getParameter("country");
+        String type = request.getParameter("type");
+        String menuCat = request.getParameter("menuCat");
+        int countPage = Integer.parseInt(request.getParameter("count"));
+        int countNeed = countPage + 9;
+        List<ArticleModel> tempw =  content.getArticleByFilters(lan, country, type, menuCat);
+        if(tempw == null) { 
+        return new ResponseEntity<>("", responseHeaders, HttpStatus.CREATED);
+        }
+        String styleForMore = "";
+        if(tempw.size() < countNeed) { 
+            countNeed = tempw.size();
+            styleForMore = "doNotShow";
+        }
+        List<ArticleModel> tempC = tempw.subList(countPage, countNeed);
         String returnHTML = "";
         for (ArticleModel temp : tempC) 
             {
@@ -261,8 +263,10 @@ public class AjaxController {
 "                        </div>\n" +
 "                    </div> ";
             }
-        HttpHeaders responseHeaders = new HttpHeaders(); 
-        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+        returnHTML += "<div class=\"load-more-content "+styleForMore+"\"><a count=\""+countNeed+"\" class=\"btn btn-theme detailsButton\"> "
+                + "<span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>"
+                + "<span class=\"load-text\">LOAD MORE</span>"
+                + "</a></div>";
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
     }
