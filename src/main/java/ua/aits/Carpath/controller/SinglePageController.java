@@ -19,6 +19,7 @@ import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.functions.PageFiltersTranslate;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MapModel;
+import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.PanoramaModel;
 
@@ -30,6 +31,7 @@ import ua.aits.Carpath.model.PanoramaModel;
 @Scope("session")
 public class SinglePageController {
     
+    MenuModel menu = new MenuModel();
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
@@ -194,6 +196,7 @@ public class SinglePageController {
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("TestPage");
+            model.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
 		return model;
 	}
     

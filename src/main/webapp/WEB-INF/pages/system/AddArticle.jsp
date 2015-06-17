@@ -80,13 +80,8 @@
                                         
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
-                                                <label for="sel3">Category (menu)<span class="red-star">*</span></label>
-                                                <select class="form-control" name="menuCat" id="sel3">
-                                                  <option value="option" disabled selected>Select option</option>
-                                                    <c:forEach items="${menuList}" var="item">
-                                                        <option value="${item.id}">${item.titleEN}</option>
-                                                    </c:forEach>
-                                               </select>
+                                                
+                                                ${menuList}
                                                 <div class="validation">
 							</div>
                                               </div>
@@ -384,6 +379,21 @@
          obj.click("click", function (e) {
             $("#cke_71_textInput").val("s2as1");
         });
+        
+        
+        $( "#sel1" ).change(function() {
+            if($(this).val() == 0 || $(this).val() == 1) {
+                $("#sel3").hide();
+                $("#sel3-label").hide();
+                $('#sel3').append($("<option selected></option>").attr("value",4).text("news")); 
+            }
+            else {
+                $("#sel3 option[value='4']").remove();
+                $("#sel3").show();
+                $("#sel3-label").show();
+                $("#sel3").prop('selectedIndex',0);
+            }
+          });
 });
 
 function imageInserted(){

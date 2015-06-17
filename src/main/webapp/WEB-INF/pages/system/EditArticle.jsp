@@ -63,7 +63,7 @@
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="sel3">Publication country<span class="red-star">*</span></label>
-                                                <select class="form-control" name="public_country" id="sel3">
+                                                <select class="form-control" name="public_country" id="sel2">
                                                   <option value="Ukraine">Ukraine</option>
                                                   <option value="Poland">Poland</option>
                                                   <option value="Hungary">Hungary</option>
@@ -76,12 +76,7 @@
                                                 </div>
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
-                                                <label for="sel1">Category (menu)<span class="red-star">*</span></label>
-                                                <select class="form-control" name="menuCat" id="sel2">
-                                                    <c:forEach items="${menuList}" var="item">
-                                                        <option value="${item.id}">${item.titleEN}</option>
-                                                    </c:forEach>
-                                               </select>
+                                                ${menuList}
 							<div class="validation">
 							</div>
                                               </div>
@@ -356,8 +351,12 @@
         $(".input-title-lang[lang='"+currentLangT+"']").show();
         
         $("#sel1").val('${article.type}');
-        $("#sel2").val('${article.menuCat}');
-        $("#sel3").val('${article.public_country}');
+        if('${article.type}' == 0 || '${article.type}' == 1) {
+            $("#sel3").hide();
+            $("#sel3-label").hide();
+        }
+        $("#sel3").val('${article.menuCat}');
+        $("#sel2").val('${article.public_country}');
         if("${article.image}" !== "" && "${article.image}" !== undefined) {
             var images = "${article.image}".split(",");
        $.each(images, function( index, value ) {
@@ -396,6 +395,20 @@
             //This takes the data value and id of the editor and sends the data(i.e.,image url) back to the caller page
             $("#cke_71_textInput").val("s2as1");
         });
+        
+         $( "#sel1" ).change(function() {
+            if($(this).val() == 0 || $(this).val() == 1) {
+                $("#sel3").hide();
+                $("#sel3-label").hide();
+                $('#sel3').append($("<option selected></option>").attr("value",4).text("news")); 
+            }
+            else {
+                $("#sel3 option[value='4']").remove();
+                $("#sel3").show();
+                $("#sel3-label").show();
+                $("#sel3").prop('selectedIndex',0);
+            }
+          });
 });
 
 function returnImgCK(){

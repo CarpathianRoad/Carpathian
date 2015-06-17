@@ -102,6 +102,29 @@ public class MenuModel {
         DB.closeCon();
     return menuList;
     }
+    public List<MenuModel> getMenuRowSelect(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ORDER BY `menu`.`sort` ASC;");
+        List<MenuModel> menuList = new LinkedList<>();
+        while (result.next()) { 
+            if(result.getInt("id") != 1 && result.getInt("id") != 4 && result.getInt("id") != 5 && result.getInt("id") != 6 ) {
+            
+            MenuModel temp = new MenuModel();
+            temp.setId(result.getInt("id"));
+            temp.setParentID(result.getInt("parentID"));
+            temp.setTitleEN(result.getString("title"+lan.toUpperCase()));
+            if("".equals(temp.getTitleEN()) || temp.getTitleEN() == null ){
+               temp.setTitleEN(result.getString("titleEN")); 
+            }
+            temp.setCaret(result.getString("caret"));
+            temp.setUrl(result.getString("url"));
+            temp.setLevel(result.getInt("level"));
+            temp.setHtmlID(result.getString("htmlId"));
+            menuList.add(temp);
+            }
+        } 
+        DB.closeCon();
+    return menuList;
+    }
     
     public List<MenuModel> getAllCat() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from menu ORDER BY `menu`.`sort` ASC;");
@@ -134,5 +157,11 @@ public class MenuModel {
             contentList.add(temp);
         } 
         return contentList;
+    }
+    public Boolean isHaveSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from menu where parentId="+id+" ORDER BY `menu`.`sort` ASC;");
+        Boolean ret = result.isBeforeFirst();
+        DB.closeCon();
+        return ret;
     }
 }
