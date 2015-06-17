@@ -32,7 +32,6 @@ import ua.aits.Carpath.model.UserModel;
  */
 @Controller
 public class FormController {
-    @Autowired
     ArticleModel article = new ArticleModel();
     UserModel users = new UserModel();
     MarkerModel markers = new MarkerModel();
