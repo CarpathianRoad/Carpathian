@@ -82,7 +82,7 @@ public class Helpers {
         if("0".equals(id)) {
             html = "<label id=\"sel3-label\" for=\"sel3\">Category (menu)<span class=\"red-star\">*</span></label><select class=\"form-control\" name=\"menuCat\" id=\"sel3\"><option value=\"option\" disabled selected>Select option</option>";
             for(MenuModel temp : tempMenu) {
-                    html = html + "<optgroup label=\""+temp.titleEN+"\">";
+                    html = html + "<optgroup label=\""+temp.titleEN.toUpperCase()+"\">";
                     html = html + this.getRowHtmlSelect(lang, temp.id.toString());
                     html = html + "</optgroup>";
                 }
@@ -90,7 +90,7 @@ public class Helpers {
         }
         else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
-                    html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN+"\">";
+                    html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
                     html = html + this.getRowHtmlSelect(lang, temp.id.toString());
                     html = html + "</optgroup>";
                 }
@@ -99,17 +99,17 @@ public class Helpers {
              for(MenuModel temp : tempMenu) {
                  if(temp.parentID == 2 || temp.parentID == 3) {
                      if(temp.id == 92 || temp.id == 17 || temp.id == 95) {
-                         html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN;
+                         html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase();
                             html = html + "</option>"; 
                      }
                      else {
-                    html = html + "<optgroup label=\"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN+"\">";
+                    html = html + "<optgroup label=\"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
                     html = html + this.getRowHtmlSelect(lang, temp.id.toString());
                     html = html + "</optgroup>";
                      }
                  }
                  else {
-                    html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN;
+                    html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase();
                     html = html + "</option>";
                  }
                 }
