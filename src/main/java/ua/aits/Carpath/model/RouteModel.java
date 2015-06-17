@@ -251,7 +251,7 @@ public class RouteModel {
     
      private static List<RouteModel> routeList;
      public List<RouteModel> getAllRoutes() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from routes where publish = 1 and isDelete = 0 order by id desc;;");
+        ResultSet result = DB.getResultSet("select * from routes where publish = 1 and isDelete = 0 order by id desc;");
         routeList = new LinkedList<>();
         while (result.next()) { 
             String str  = result.getString("textUA").replaceAll("'\\<.*?>","");
@@ -440,53 +440,8 @@ public class RouteModel {
         }
         return imageRoute;
      }
-    public class RouteImage {
-         public Integer id;
-         public Integer routeID; 
-         public String name;
-         public String x;
-         public String y;
-         public String img;
-         
+     
     
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public Integer getRouteID() {
-        return routeID;
-    }
-    public void setRouteID(Integer routeID) {
-        this.routeID = routeID;
-    }
-    public String getX() {
-        return x;
-    }
-    public void setX(String x) {
-        this.x = x;
-    }
-    
-    public String getY() {
-        return y;
-    }
-    public void setY(String y) {
-        this.y = y;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getImg() {
-        return img;
-    }
-    public void setImg(String img) {
-        this.img = img;
-    }
-    }
     
     
      public List<RouteModel> get_routes_by_country_filter(String lan, String country, String type) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -548,5 +503,52 @@ public class RouteModel {
         count = result.getInt("count");
         }
     return count;
+    } 
+    public class RouteImage {
+         public Integer id;
+         public Integer routeID; 
+         public String name;
+         public String x;
+         public String y;
+         public String img;
+         
+    
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Integer getRouteID() {
+        return routeID;
+    }
+    public void setRouteID(Integer routeID) {
+        this.routeID = routeID;
+    }
+    public String getX() {
+        return x;
+    }
+    public void setX(String x) {
+        this.x = x;
+    }
+    
+    public String getY() {
+        return y;
+    }
+    public void setY(String y) {
+        this.y = y;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
     }
 }

@@ -12,11 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,39 +33,12 @@ import ua.aits.Carpath.model.UserModel;
 @Controller
 public class FormController {
     @Autowired
-    private JavaMailSender mailSender;
     ArticleModel article = new ArticleModel();
     UserModel users = new UserModel();
     MarkerModel markers = new MarkerModel();
     FilterModel filters = new FilterModel();
     RouteModel route = new RouteModel();
-    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
     
-    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
-    public String doSendEmail(HttpServletRequest request) {
-        // takes input from e-mail form
-        String recipientAddress = request.getParameter("email");
-        String name = request.getParameter("name");
-        String subject = request.getParameter("subject");
-        String message = request.getParameter("message");
-         
-        // prints debug info
-        System.out.println("To: " + recipientAddress);
-        System.out.println("Subject: " + subject);
-        System.out.println("Message: " + message);
-         
-        // creates a simple e-mail object
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(message);
-         
-        // sends the e-mail
-        mailSender.send(email);
-         System.out.println("send");
-        // forwards to the view named "Result"
-        return "Result";
-    }
      @RequestMapping(value = "/system/insertdata.do", method = RequestMethod.POST)
     public ModelAndView doInsertData(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
@@ -259,10 +228,10 @@ public class FormController {
                 }
                 
             } catch (Exception e) {
-                logger.info( "You failed to upload " + name + " => " + e.getMessage());
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
             }
         } else {
-            logger.info("You failed to upload " + name + " because the file was empty.");
+            System.out.println("You failed to upload " + name + " because the file was empty.");
         }
         markers.addMarker(short_title);
         return new ModelAndView("redirect:" + "/system/markers");
@@ -290,10 +259,10 @@ public class FormController {
                 }
                 
             } catch (Exception e) {
-                logger.info( "You failed to upload " + name + " => " + e.getMessage());
+                System.out.println( "You failed to upload " + name + " => " + e.getMessage());
             }
         } else {
-            logger.info("You failed to upload " + name + " because the file was empty.");
+            System.out.println("You failed to upload " + name + " because the file was empty.");
         }
         markers.updateMarker(id, short_title);
         return new ModelAndView("redirect:" + "/system/markers");

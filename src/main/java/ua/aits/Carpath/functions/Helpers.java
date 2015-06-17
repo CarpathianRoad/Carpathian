@@ -88,7 +88,7 @@ public class Helpers {
                 }
             html += "</select>";
         }
-        else if(id == "2" || id == "3") {
+        else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
                     html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN+"\">";
                     html = html + this.getRowHtmlSelect(lang, temp.id.toString());

@@ -181,23 +181,6 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
     }
-    @RequestMapping(value = {"/upload/type/image/", "/upload/type/image"}, method = RequestMethod.POST)
-    public @ResponseBody String handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file){
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)))) {
-                    stream.write(bytes);
-                }
-                return "You successfully uploaded " + name + "!";
-            } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
-            }
-        } else {
-            return "You failed to upload " + name + " because the file was empty.";
-        }
-    }
     @RequestMapping(value = {"/build/menu/", "/build/menu"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> returnMenuHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -206,9 +189,6 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(helpers.getRowHtml(request.getParameter("lang"), "0"), responseHeaders, HttpStatus.CREATED);
     }
-    
-    
-    
     @RequestMapping(value = {"/articles/loadсontent"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> load_content(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -270,65 +250,6 @@ public class AjaxController {
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
     }
-    
-    @RequestMapping(value = {"/filter_by_country"}, method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<String> content_filter(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.setCharacterEncoding("UTF-8");
-        String lan = request.getParameter("lan");
-        String country = request.getParameter("country");
-        String page_type = request.getParameter("page_type");
-        String menu_id = request.getParameter("menu_id");
-        System.out.println("lan = " + lan);
-        System.out.println("country = " + country);
-        List<ArticleModel> tempC = null;
-        if(page_type.equals("news"))
-            {
-                 tempC = content.get_news_by_country_filter(country, lan);
-            }
-        else if(page_type.equals("category"))
-            {
-                tempC = content.get_category_by_country_filter(country, lan, menu_id);
-            }
-        
-        String returnHTML = "";
-        for (ArticleModel temp : tempC) 
-            {
-                if(!"".equals(temp.avatar) && temp.avatar != null){
-                        temp.setImage(temp.avatar);
-                }
-                String[] tempImg = temp.image.split(",");
-                returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
-"                        <div class=\"s-block newsHeight\">\n" +
-"                            <div class=\"newsImage\">\n" +
-"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
-"                                    <div class=\"imageHover\">\n" +
-"                                        <div class=\"imageHoverDate\">\n" +
-"                                            "+temp.date+"\n" +
-"                                        </div>\n" +
-"                                        <div class=\"imageHoverCountry\">\n" +
-"                                            <div class=\"newsCountryText\">"+temp.country+"</div><img src=\""+Constants.URL+"img/newsImageHover.png\">\n" +
-"                                        </div>\n" +
-"                                    </div>\n" +
-"                                    <img src=\""+Constants.URL+tempImg[0]+"\" />\n" +
-"                                </a>\n" +
-"                            </div>\n" +
-"\n" +
-"                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
-"                            <div class=\"news_text_box\">\n" +
-"                                <div class=\"news_title\"><a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
-"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
-"                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
-"                            </div>\n" +
-"                        </div>\n" +
-"                    </div> ";
-            }
-        HttpHeaders responseHeaders = new HttpHeaders(); 
-        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-        return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
-        //return returnHTML;
-    }
-    
     
     @RequestMapping(value = {"/filter_by_country_routes"}, method = RequestMethod.GET)
     public @ResponseBody

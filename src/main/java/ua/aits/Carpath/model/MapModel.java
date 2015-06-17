@@ -220,7 +220,7 @@ public class MapModel {
     return newsList;
     }
     public MapModel getMarker(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
+        ResultSet result = DB.getResultSet("select * from content where id = "+ id +" and publish = 1;");
         MapModel temp = new MapModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
@@ -244,55 +244,5 @@ public class MapModel {
             temp.setImage(result.getString("image")); 
         }
         return temp;
-    }
-    private static List<MapModel> imageList;
-    public List<MapModel> getImages() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select id, image from content;");
-        imageList = new LinkedList<>();
-        while (result.next()) {
-            String[] arrayMessage = result.getString("image").split(",");
-            for(String s: arrayMessage){
-            MapModel temp = new MapModel();
-                temp.setId(result.getInt("id"));
-                temp.setImage(s);
-                imageList.add(temp);
-            }
-        }
-        Collections.shuffle(imageList);
-        Set setItems = new LinkedHashSet(imageList);
-        imageList.clear();
-        imageList.addAll(setItems);
-        List<MapModel> tempList = imageList.subList(0,8);
-        return tempList;
-    }
-    public List<MapModel> getLastTenPoints() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type = 2 and publish = 1 ORDER BY id DESC LIMIT 9;");
-        mapList = new LinkedList<>();
-        while (result.next()) { 
-            MapModel temp = new MapModel();
-            String f_title = result.getString("titleEN");
-            if(f_title.length() > 55){
-                f_title = f_title.substring(0,55);
-            }
-            String text = Helpers.html2text(result.getString("textEN"));
-            if(text.length() > 175){
-                text = text.substring(0,175);
-            }
-            temp.setTextEN(text);
-            temp.setId(result.getInt("id"));
-            temp.setX(result.getString("x"));
-            temp.setY(result.getString("y"));
-            temp.setPublic_country(result.getString("public_country"));
-            temp.setDate(result.getString("date"));
-            temp.setCountry(result.getString("country")); 
-            temp.setTitle(f_title);
-            String [] arr = result.getString("image").split(",");
-            if("".equals(arr[0])){
-                arr[0] = "img/zak.png";
-            }
-            temp.setImage(arr[0]); 
-            mapList.add(temp);
-        } 
-    return mapList;
     }
 }
