@@ -32,7 +32,7 @@ public class ArticleController {
         public ModelAndView showNews (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             ModelAndView modelAndView = new ModelAndView("NewsPage");
-            List<ArticleModel> articles = news.getAllNews(lan);
+            List<ArticleModel> articles = news.getFirstNineNews(lan);
             for(ArticleModel temp: articles) {
                 if(!"".equals(temp.avatar) && temp.avatar != null){
                         temp.setImage(temp.avatar);
@@ -40,23 +40,12 @@ public class ArticleController {
                 String[] img  = temp.image.split(",");
                 temp.setImage(img[0]);
             }
-            Integer count = news.get_news_items_count(lan);
             modelAndView.addObject("newsList", articles);
             modelAndView.addObject("lan", lan);
-            modelAndView.addObject("count", count);
             modelAndView.addObject("titles", translate.getTranslateFilters(lan));
             return modelAndView;
 	}
     
-        
-        @RequestMapping(value = {"/{lan}/article/advs", "/{lan}/article/advs/"})
-        public ModelAndView showAdv (@PathVariable("lan") String lan, HttpServletRequest request,
-		HttpServletResponse response) throws Exception {
-            ModelAndView modelAndView = new ModelAndView("AdvsPage");
-            modelAndView.addObject("advsList", news.getAllAdv());
-            return modelAndView;
-	}
-        
         @RequestMapping(value = {"/{lan}/article/category/{id}", "/{lan}/article/category/{id}/"})
         public ModelAndView showCategory (@PathVariable("lan") String lan, @PathVariable("id") String id,HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
@@ -78,12 +67,10 @@ public class ArticleController {
                 page = "CategoryPage";
                 content = menu.getSubCategories(lan, id);
             }
-            Integer count = news.get_category_items_count(lan, id);
             ModelAndView modelAndView = new ModelAndView(page);
             modelAndView.addObject("contentList", content);
             modelAndView.addObject("menu_id", id);
             modelAndView.addObject("lan", lan);
-            modelAndView.addObject("count", count);
             modelAndView.addObject("titles", translate.getTranslateFilters(lan));
             return modelAndView;
 	}

@@ -74,7 +74,6 @@ public class SinglePageController {
                 }
                  modelAndView.addObject("content", articles);
                  modelAndView.addObject("points", points);
-                 modelAndView.addObject("images", map.getImages());
                  modelAndView.addObject("titles", translate.getTranslateFilters(lan));
                  return modelAndView;
 	}
