@@ -65,6 +65,11 @@
                             ${marker.country}
                         </div>
                     </a>
+                    <a href="${Constants.URL}map/${marker.id}">
+                        <div class="markerPageCountry">
+                            Show on map
+                        </div>
+                    </a>
                     <div class="downloadRouteFile">&nbsp;</div>
                 </div>
                 <div class="markerPageText">
