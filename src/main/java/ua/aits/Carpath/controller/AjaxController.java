@@ -201,6 +201,10 @@ public class AjaxController {
         String menuCat = request.getParameter("menuCat");
         int countPage = Integer.parseInt(request.getParameter("count"));
         int countNeed = countPage + 9;
+        String lanURL = Constants.URL + lan + "/";
+        if(countPage == 0) {
+            lanURL = Constants.URL;
+        }
         List<ArticleModel> tempw =  content.getArticleByFilters(lan, country, type, menuCat);
         if(tempw == null) { 
         return new ResponseEntity<>("", responseHeaders, HttpStatus.CREATED);
@@ -221,7 +225,7 @@ public class AjaxController {
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
 "                            <div class=\"newsImage\">\n" +
-"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
+"                                <a href=\""+lanURL+"article/full/"+temp.id+"\">\n" +
 "                                    <div class=\"imageHover\">\n" +
 "                                        <div class=\"imageHoverDate\">\n" +
 "                                            "+temp.date+"\n" +
@@ -236,8 +240,8 @@ public class AjaxController {
 "\n" +
 "                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
 "                            <div class=\"news_text_box\">\n" +
-"                                <div class=\"news_title\"><a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
-"                                <a href=\""+Constants.URL+lan+"/article/full/"+temp.id+"\">\n" +
+"                                <div class=\"news_title\"><a href=\""+lanURL+"article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
+"                                <a href=\""+lanURL+"article/full/"+temp.id+"\">\n" +
 "                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
 "                            </div>\n" +
 "                        </div>\n" +
