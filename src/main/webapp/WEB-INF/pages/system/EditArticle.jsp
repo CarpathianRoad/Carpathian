@@ -545,10 +545,6 @@ $("#sudmitData").click(function(){
         $("#sel2").next("div.validation").html('<span style="color:red">Choose the item</span>');
         isValidate = false;
     }
-    if($("#sel3").val() === null) {
-        $("#sel3").next("div.validation").html('<span style="color:red">Choose the item</span>');
-        isValidate = false;
-    }
     if($("#sel1").val() === "2") {
         if($("#latitude0").val() === "") {
             $("#latitude0").next("div.validation").html('<span style="color:red">Enter the x coord</span>');
