@@ -541,7 +541,7 @@
             var images = '${route.images}'.split(",");
             var imagesBlock = '';
             $('#maxImages').html("/"+images.length);
-            $('#mainImageBlock').html('<a class="fancybox not-add-lan" href="${Constants.URL}'+images[0]+'"><img id="main_image" src="${Constants.URL}'+images[0]+'"/></a>');
+            $('#mainImageBlock').html('<a class="fancybox not-add-lan" id="mainPictureFancybox" href="${Constants.URL}'+images[0]+'"><img id="main_image" src="${Constants.URL}'+images[0]+'"/></a>');
             if(images[0]==""){
                 $('#article_slider1_container').css('display','none');
                 $('#mainImageBlock').css('display','none');

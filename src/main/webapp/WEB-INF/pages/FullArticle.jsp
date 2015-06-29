@@ -122,7 +122,7 @@
                                         </span>
                                     </div>
                                     <div class="article_main_image">
-                                        <a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}<c:out value="${images[0]}" />">
+                                        <a class="fancybox not-add-lan" id="mainPictureFancybox" rel="gallery1" href="${Constants.URL}<c:out value="${images[0]}" />">
                                             <img id="main_image" src="${Constants.URL}<c:out value="${images[0]}" />" />
                                         </a>
                                         <div style="display:none" >
