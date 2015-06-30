@@ -239,6 +239,7 @@ public class MapModel {
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setRegion(result.getString("region")); 
+            temp.setAvatar(result.getString("avatar")); 
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town"));
             temp.setImage(result.getString("image")); 

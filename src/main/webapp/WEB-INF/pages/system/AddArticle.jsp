@@ -144,6 +144,22 @@
                 </div>
             </div>
                 <hr>
+                <div class="row add-row panorama-file">
+                                        
+						<div class="col-lg-10 field">
+                                                    <div class="form-group">
+                                                        <label for="img">Panorama</label>
+                                                <label class="btn" id="panorama-file-block" for="panorama-input">
+                                                    <button type="button" class="btn btn-primary btn-lg">
+                                Upload panorama
+                                </button>
+                                                </label>
+                                                    <input style="display: none" class="" id="panorama-input" type="file" multiple/>
+                                                    </div>
+                                                    <input type="hidden" id="fullname-panorama" name="filename-panorama"/>
+                                                </div>
+                                    </div>
+                <hr>
                                     <div class="row add-row">
                                         <div class="col-lg-3 field map-field">
                                                     <div class="form-group">
@@ -394,8 +410,28 @@
                 $("#sel3").prop('selectedIndex',0);
             }
           });
+          //$("#panorama-file-block button").click(function(){
+             // $("#panorama-input").click();
+          //});
 });
-
+$('.panorama-file').on('change', '#panorama-input', function() {
+        var data = new FormData();
+        data.append('upload', jQuery('#panorama-input')[0].files[0]);
+        jQuery.ajax({
+                    url: '${Constants.URL}uploadPanorama',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data){
+                        console.log(data);
+                        $("#fullname-panorama").val(data);
+                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded!</span>").appendTo("#panorama-file-block");
+                        $("#panorama-file-block button").hide();
+                    }
+                    });
+});
 function imageInserted(){
     $( "#dialog" ).dialog( "close" );
     $( "#avatarDialog" ).dialog( "close" );

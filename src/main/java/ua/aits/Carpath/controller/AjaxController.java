@@ -205,6 +205,12 @@ public class AjaxController {
         if(countPage == 0) {
             lanURL = Constants.URL;
         }
+        if("2".equals(type)) {
+            lanURL +="map/markers/";
+        }
+        else {
+            lanURL += "article/full/";
+        }
         List<ArticleModel> tempw =  content.getArticleByFilters(lan, country, type, menuCat);
         if(tempw == null) { 
         return new ResponseEntity<>("", responseHeaders, HttpStatus.CREATED);
@@ -225,7 +231,7 @@ public class AjaxController {
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
 "                            <div class=\"newsImage\">\n" +
-"                                <a href=\""+lanURL+"article/full/"+temp.id+"\">\n" +
+"                                <a href=\""+lanURL+temp.id+"\">\n" +
 "                                    <div class=\"imageHover\">\n" +
 "                                        <div class=\"imageHoverDate\">\n" +
 "                                            "+temp.date+"\n" +
@@ -240,8 +246,8 @@ public class AjaxController {
 "\n" +
 "                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
 "                            <div class=\"news_text_box\">\n" +
-"                                <div class=\"news_title\"><a href=\""+lanURL+"article/full/"+temp.id+"\">"+temp.title+"</a></div>\n" +
-"                                <a href=\""+lanURL+"article/full/"+temp.id+"\">\n" +
+"                                <div class=\"news_title\"><a href=\""+lanURL+temp.id+"\">"+temp.title+"</a></div>\n" +
+"                                <a href=\""+lanURL+temp.id+"\">\n" +
 "                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
 "                            </div>\n" +
 "                        </div>\n" +

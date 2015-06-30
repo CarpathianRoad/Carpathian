@@ -440,3 +440,14 @@ cke_contents{
 .is-exist-file a {
     margin-left: 10px;
 }
+.panorama-file {
+    margin-top:20px;
+    margin-left: -15px;
+}
+#panorama-file-block {
+    display: block;
+    width: 185px;
+}
+#panorama-file-block button {
+      margin-left: -16px;
+}
