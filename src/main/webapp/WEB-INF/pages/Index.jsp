@@ -34,10 +34,10 @@
 			</ul>
 		</div>
 		<div class="controls">
-			<a href="#" style="display:none" class="prev-page">Prev Page</a>
+			<a href="#" style="display:none" class="prev-page"></a>
                         <div class="prev-slide"></div>
-                        <div class="next-slide"></div>
-			<a href="#" style="display:none" class="next-page">Next Page</a>
+                        <div style="display:none" class="next-slide"></div>
+			<div class="next-page"></div>
 		</div>
 	</div>
                     <!-- !!!SLIDER ENDS!!! -->
@@ -175,7 +175,7 @@
             position: absolute;
             left: 50;
         }
-        .next-slide{
+        .next-slide,.next-page{
             background: url(${Constants.URL}img/arrow_right.png) center center no-repeat;
             width: 48px;
             height: 90px;
@@ -186,7 +186,7 @@
         .prev-slide:hover {
             background: url(${Constants.URL}img/arrow_left_hover.png) center center no-repeat;
         }
-        .next-slide:hover {
+        .next-slide:hover ,.next-page:hover{
             background: url(${Constants.URL}img/arrow_right_hover.png) center center no-repeat;
         }
         </style>
