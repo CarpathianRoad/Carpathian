@@ -20,6 +20,7 @@ import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MarkerModel;
 import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
+import ua.aits.Carpath.model.SliderModel;
 import ua.aits.Carpath.model.UserModel;
 
 /**
@@ -36,6 +37,7 @@ public class SystemController {
     FilterModel filters = new FilterModel();
     RouteModel routes = new RouteModel();
     Helpers helpers = new Helpers();
+    SliderModel slider = new SliderModel();
     
     @RequestMapping(value = {"/system/add", "/system/add/","/Carpath/system/add", "/Carpath/system/add/"})
         public ModelAndView addArticle (HttpServletRequest request,
@@ -173,5 +175,14 @@ public class SystemController {
 		HttpServletResponse response) throws Exception {
             filters.deleteFilter(id);
             return new ModelAndView("redirect:" + "/system/filters");
+    }
+    
+    @RequestMapping(value = {"/system/slider", "/system/slider/","/Carpath/system/slider", "/Carpath/system/slider/"})
+        public ModelAndView slider(HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            request.setCharacterEncoding("UTF-8");
+            ModelAndView modelAndView = new ModelAndView("/system/Slider");
+            modelAndView.addObject("slides", slider.getAllSlides());
+            return modelAndView;
     }
 }

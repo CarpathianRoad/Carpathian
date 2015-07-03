@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +23,7 @@ import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MarkerModel;
 import ua.aits.Carpath.model.RouteModel;
+import ua.aits.Carpath.model.SliderModel;
 import ua.aits.Carpath.model.UserModel;
 
 /**
@@ -37,6 +37,7 @@ public class FormController {
     MarkerModel markers = new MarkerModel();
     FilterModel filters = new FilterModel();
     RouteModel route = new RouteModel();
+    SliderModel slider = new SliderModel();
     
      @RequestMapping(value = "/system/insertdata.do", method = RequestMethod.POST)
     public ModelAndView doInsertData(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
@@ -265,5 +266,16 @@ public class FormController {
         }
         markers.updateMarker(id, short_title);
         return new ModelAndView("redirect:" + "/system/markers");
+    }
+    @RequestMapping(value = "/system/slideredit.do", method = RequestMethod.POST)
+    public ModelAndView doUpdateSlider(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        
+        String[] imgs = request.getParameter("real-img-path").split(",");
+        slider.clearTable();
+        for(String img: imgs) {
+            slider.insertSlide(img, request.getParameter(img+"-url"), request.getParameter(img+"-text"));
+        }
+        return new ModelAndView("redirect:" + "/system/slider");
     }
 }

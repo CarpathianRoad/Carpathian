@@ -22,6 +22,7 @@ import ua.aits.Carpath.model.MapModel;
 import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.PanoramaModel;
+import ua.aits.Carpath.model.SliderModel;
 
 /**
  *
@@ -36,6 +37,7 @@ public class SinglePageController {
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
     PanoramaModel panoramas = new PanoramaModel();
+    SliderModel slider = new SliderModel();
     PageFiltersTranslate translate = new PageFiltersTranslate();
     
     @RequestMapping(value = {"/404", "/Carpath/404"})
@@ -75,6 +77,7 @@ public class SinglePageController {
                  modelAndView.addObject("content", articles);
                  modelAndView.addObject("points", points);
                  modelAndView.addObject("titles", translate.getTranslateFilters(lan));
+                 modelAndView.addObject("slides", slider.getAllSlides());
                  return modelAndView;
 	}
     @RequestMapping(value = {"/{lan}/routes/{id}", "/{lan}/routes/{id}/"})

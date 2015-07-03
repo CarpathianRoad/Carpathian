@@ -158,6 +158,21 @@
             $("#avatarUpload .img-content-show-all").removeAttr("realpath");
             window.parent.imageInserted();
             }
+            else if("${type}" === "slider") {
+                        $("#imageUpload .img-content", window.parent.document).append("<div class='col-lg-2 slider-block'><a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
+                                + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a> \n\
+                    <input type='text' placeholder='URL' class=' slider slider-url form-control' name='"+path + name+"-url'/>\n\
+                    <input type='text' placeholder='Text on slide' name='"+path + name+"-text' class='slider slider-text form-control'/></div>");
+            
+            $("#imageUpload .img-input-box", window.parent.document).remove();
+            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image for slide</button>');
+            var real = $("#real-img-path", window.parent.document).val();        
+            $("#real-img-path", window.parent.document).val(real + "," + path + name);
+            initGalerry();
+            $("#imageUpload .img-content-show-all").removeAttr("current");
+            $("#imageUpload .img-content-show-all").removeAttr("realpath");
+            window.parent.imageInserted();
+            }
             else {
                     var ret = "window.parent.CKEDITOR.tools.callFunction('"+"${ckeditor}"+"', \""+"${Constants.URL}"+ path + name +"\",\"\");";
                     window.opener.CKEDITOR.tools.callFunction("${num}", ""+"${Constants.URL}"+ path + name +"","");
