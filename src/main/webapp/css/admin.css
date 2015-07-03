@@ -451,3 +451,17 @@ cke_contents{
 #panorama-file-block button {
       margin-left: -16px;
 }
+.slider-block {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.slider-block input {
+    margin-top: 10px;
+    display: inline;
+}
+
+.slide-upload-button {
+    width: 100%; 
+    margin-bottom: 20px;
+    margin-left: 17px;
+}

@@ -36,6 +36,7 @@
                     <a id="markers" href="<c:url value="/system/markers"/>">Markers</a>
                     <a id="filters" href="<c:url value="/system/filters"/>">Filters</a>
                     <a id="routes" href="<c:url value="/system/routes"/>">Routes</a>
+                    <a id="slider" href="<c:url value="/system/slider"/>">Slider</a>
                     </c:if>
                 </div>
                 

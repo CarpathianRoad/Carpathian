@@ -15,21 +15,14 @@
 	<div class="wrapSlider">
 		<div id="slider1" class="slider">
 			<ul style="height: 250px;">
-                               <li> <div class="sliderImage">
-                    <img u="image" src="${Constants.URL}img/slides/borzhava.jpg" />
-                </div></li>
-               <li> <div>
-                    <img u="image" src="${Constants.URL}img/slides/europe_center.jpg" />
-                </div></li>
-               <li> <div>
-                    <img u="image" src="${Constants.URL}img/slides/narcis.jpg" />
-                </div></li>
-               <li> <div>
-                    <img u="image" src="${Constants.URL}img/slides/pylypets.jpg" />
-                </div></li>
-                <li><div>
-                    <img u="image" src="${Constants.URL}img/slides/sheeps.jpg" />
-                </div></li>
+                            <c:forEach items="${slides}" var="slide">
+                                <li> <div class="sliderImage">
+                                            <img u="image" src="${Constants.URL}${slide.image}" />
+                                            <c:if test="${not empty slide.text}">
+                                                <a href="${Constants.URL}${slide.url}" class="slider-image-link"><span class="slider-image-text">${slide.text}</span></a>
+                                            </c:if>
+                                 </div></li> 
+                            </c:forEach>
                                 
 			</ul>
 		</div>
