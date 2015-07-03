@@ -65,7 +65,7 @@
                             ${marker.country}
                         </div>
                     </a>
-                    <a href="${Constants.URL}map/${marker.id}">
+                            <a style="float:right" href="${Constants.URL}map/${marker.id}">
                         <div class="markerPageCountry">
                             Show on map
                         </div>
