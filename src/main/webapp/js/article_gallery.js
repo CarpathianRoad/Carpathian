@@ -8,6 +8,7 @@ function set_main_picture(path,num)
     {
         jQuery("#main_image").attr('src', path);
         $('#imageCount').html(parseFloat(num)+1);
+        $('#mainPictureFancybox').attr('href',path);
     }
 jQuery(document).ready(function ($) {
     jQuery(".article_side_news").css("max-height", jQuery(".col-lg-8").height());
