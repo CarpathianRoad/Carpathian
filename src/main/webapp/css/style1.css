@@ -3734,3 +3734,12 @@ a.disable-menu-link{
     display: inline-block;
     position: relative;
 }
+.show-map-block {
+    float: right;
+}
+.show-map-block div {
+    margin-top: -45px;
+}
+.show-map-block div img {
+    width: 50px;
+}
