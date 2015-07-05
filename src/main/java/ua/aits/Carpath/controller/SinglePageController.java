@@ -137,6 +137,11 @@ public class SinglePageController {
                 else {
                     model.addObject("country",pointer);
                 }
+                 for(MapModel temp: maps) {
+                    if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                    }
+                }
 		model.addObject("markers", maps);
                 model.addObject("lan", lan);
 		return model;
