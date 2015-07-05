@@ -19,6 +19,7 @@ public class FilterModel {
     public Integer id;
     public String shortTitle;
     public String fullTitle;
+    public Integer groupID;
     
     public Integer getId() {
         return id;
@@ -41,23 +42,75 @@ public class FilterModel {
         this.fullTitle = fullTitle;
     }
     
+    public Integer getGroupID() {
+        return groupID;
+    }
+    public void setGroupID(Integer groupID) {
+        this.groupID = groupID;
+    }
+    
     
     
     public List<FilterModel> getAllFilters() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from filters order by id asc;");
+        ResultSet result = DB.getResultSet("select * from filters order by groupID;");
         List<FilterModel> resultList = new LinkedList<>();
         while (result.next()) {
             FilterModel temp = new FilterModel();
             temp.setId(result.getInt("id"));
             temp.setShortTitle(result.getString("title"));
             temp.setFullTitle(result.getString("descr"));
+            temp.setGroupID(result.getInt("groupID"));
             resultList.add(temp);
         } 
         return resultList;
     }
     
-    public void addFilter(String title, String descr) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        DB.runQuery("INSERT INTO `filters`(`title`, `descr`) VALUES ('"+title+"','"+descr+"');");
+    public String FiltersHTML(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        String resultHTML = "";
+        for(FilterModel temp : getOneRowFilters(id)){
+            if(temp.groupID > 0) {
+                resultHTML += "<li>\n" +
+"                            <div class=\"checkbox\">  \n" +
+"                                <label class=\"\" >\n" +
+"                                    <input type=\"checkbox\" value=\""+temp.shortTitle+"\">"+temp.fullTitle+"\n" +
+"                                </label>\n" +
+"                            </div>\n" +
+"                        </li> ";
+            }
+            else if(temp.groupID == -1) {
+                
+            }
+            else if(temp.groupID == 0) {
+                resultHTML += "<li>\n" +
+"                            <div class=\"checkbox\">  \n" +
+"                                <label class=\"double-point-filter\" >\n" +
+"                                    <input type=\"checkbox\" value=\""+temp.shortTitle+"\">"+temp.fullTitle+"\n" +
+"                                </label>\n" +
+"                            </div>\n" +
+"                        </li> ";
+                    resultHTML += FiltersHTML(temp.id.toString());
+            }
+        }
+        return resultHTML;
+    }
+    
+    public List<FilterModel> getOneRowFilters(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from filters where groupID = "+id+" order by id asc;");
+        List<FilterModel> resultList = new LinkedList<>();
+        while (result.next()) {
+            FilterModel temp = new FilterModel();
+            temp.setId(result.getInt("id"));
+            temp.setShortTitle(result.getString("title"));
+            temp.setFullTitle(result.getString("descr"));
+            temp.setGroupID(result.getInt("groupID"));
+            resultList.add(temp);
+        } 
+        return resultList;
+    }
+    
+    
+    public void addFilter(String title, String descr, String group_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("INSERT INTO `filters`(`title`, `descr`, `groupID`) VALUES ('"+title+"','"+descr+"',"+group_id+");");
     }
     
     public void deleteFilter(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

@@ -18,10 +18,10 @@ import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.functions.PageFiltersTranslate;
 import ua.aits.Carpath.model.ArticleModel;
+import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MapModel;
 import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
-import ua.aits.Carpath.model.PanoramaModel;
 import ua.aits.Carpath.model.SliderModel;
 
 /**
@@ -36,8 +36,8 @@ public class SinglePageController {
     MapModel map = new MapModel();
     ArticleModel news = new ArticleModel();
     Helpers helpers = new Helpers();
-    PanoramaModel panoramas = new PanoramaModel();
     SliderModel slider = new SliderModel();
+    FilterModel filters = new FilterModel();
     PageFiltersTranslate translate = new PageFiltersTranslate();
     
     @RequestMapping(value = {"/404", "/Carpath/404"})
@@ -187,26 +187,17 @@ public class SinglePageController {
             }
         modelAndView.addObject("articles", points);
         modelAndView.addObject("images", arrayMessage);
-        modelAndView.addObject("panorama",panoramas.getRandomPanorama().id);
         modelAndView.addObject("avatarvar", ret.avatar);
         modelAndView.addObject("titlevar", ret.title);
         modelAndView.addObject("descrvar", Helpers.html2text(ret.textEN));
         return modelAndView;
     }
     
-    @RequestMapping(value = {"/kiwi/test"})
-    public ModelAndView kiwi(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ModelAndView model = new ModelAndView("TestPage");
-            model.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
-		return model;
-	}
-    
-    @RequestMapping(value = {"/{lan}/panorama/{id}"})
-    public ModelAndView panorama(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
+    @RequestMapping(value = {"/panorama/{id}"})
+    public ModelAndView panorama(@PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("Panorama");
-                model.addObject("url", panoramas.getUrlByID(id));
+                model.addObject("name",map.getPanoramaName(id));
 		return model;
 	}
     @RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)
@@ -266,6 +257,14 @@ public class SinglePageController {
                 
 		ModelAndView model = new ModelAndView("SiteMap");
 		model.addObject("mapHTML", helpers.getRowHtml(lan, "0"));
+		return model;
+	}
+    
+    @RequestMapping(value = {"/kiwi/test"})
+    public ModelAndView kiwi(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView model = new ModelAndView("TestPage");
+            model.addObject("filters", filters.FiltersHTML("0"));
 		return model;
 	}
 }

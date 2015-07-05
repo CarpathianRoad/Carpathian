@@ -45,14 +45,18 @@
                               <hr>
                                     <div class="row add-row route-file">
                                         
-						<div class="col-lg-3 field">
+						<div class="col-lg-10 field">
                                                     <div class="form-group">
-                                                <label class="btn" id="route-file-block" for="file-input">
-                                                    <button class="btn btn-primary" disabled="disabled" style="opacity: 100">Upload route file</button>
-                                                </label>
-                                                    <input style="display: none" class="" id="file-input" type="file" multiple/>
+                                                        <label for="img">Route file</label>
+                                                    
+                                                        <div id="route-upload-block">
+                                                            <span class="btn btn-primary btn-file">
+                                                                Browse <input class="" id="route-input" type="file" multiple/>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <input type="hidden" id="fullname" name="filename"/>
+                                                    <input type="hidden" id="fullname-route" name="filename-route"/>
+                                                    <div class="load-route"><img src="${Constants.URL}img/loader.gif"/></div>
                                                 </div>
                                     </div>
                 <hr>
@@ -65,7 +69,7 @@
                                 <div id="dialog">
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
-                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
+                                <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
                                 Upload image
                                 </button>
                             </div>    
@@ -282,24 +286,51 @@
             size: 4
         });
 });
-$('.route-file').on('change', '#file-input', function() {
+
+$('.route-file').on('change', '#route-input', function() {
+        $(".load-route").show();
         var data = new FormData();
-        data.append('upload', jQuery('#file-input')[0].files[0]);
+        data.append('upload', jQuery('#route-input')[0].files[0]);
+        
         jQuery.ajax({
-                    url: '${Constants.URL}uploadRoute',
+                    url: '${Constants.URL}system/uploadRoute',
                     data: data,
                     cache: false,
                     contentType: false,
                     processData: false,
                     type: 'POST',
                     success: function(data){
-                        console.log(data);
-                        $("#fullname").val(data);
-                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded!</span>").appendTo("#route-file-block");
-                        $("#route-file-block button").hide();
+                        $(".load-route").hide();
+                        $("#fullname-route").val(data);
+                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='route-name'>("+data+")</span> </span> <span class='remove-route'>Remove</span>").appendTo("#route-upload-block");
+                        $("#route-upload-block .btn-file").hide();
+                        $(".remove-route").attr("route-name", data);
+                        removeRouteInit();
                     }
                     });
 });
+function removeRouteInit(){
+    $(".remove-route").click(function(){
+        $(".load-route").show();
+        var filename = $(this).attr("route-name");
+        $.ajax({
+            type: "get",
+            url: "${Constants.URL}system/deleteRouteFile",
+            cache: false,    
+            data:'name='+filename,
+            success: function(response){
+                        $(".load-route").hide();
+                        $("#fullname-route").val("");
+                        $(".remove-route").remove();
+                        $(".upload-success").remove();
+                        $("#route-upload-block .btn-file").show();
+            },
+            error: function(response){      
+                console.log(response);
+            }
+        });
+    });
+}
 function imageInserted(){
     $( "#dialog" ).dialog( "close" );
     initRemove();

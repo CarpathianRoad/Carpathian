@@ -33,6 +33,7 @@ public class MapModel {
     public String town;
     public String public_country;
     public String image; 
+    public String panorama; 
     public String avatar;
     public String date;
     public Integer publish;
@@ -139,6 +140,14 @@ public class MapModel {
         this.avatar = avatar;
     }
     
+    
+    public String getPanorama() {
+        return panorama;
+    }
+    public void setPanorama(String panorama) {
+        this.panorama = panorama;
+    }
+    
     PageFiltersTranslate translate = new PageFiltersTranslate();
     
     private static List<MapModel> mapList;
@@ -243,7 +252,13 @@ public class MapModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town"));
             temp.setImage(result.getString("image")); 
+            temp.setPanorama(result.getString("panorama")); 
         }
         return temp;
+    }
+    public String getPanoramaName(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        ResultSet result = DB.getResultSet("select panorama from content where id = "+ id +" and publish = 1;");
+        result.first();
+        return result.getString("panorama");
     }
 }

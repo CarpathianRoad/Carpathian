@@ -20,10 +20,18 @@
                                                 <input type="text" name="short_title" class="form-control" id="shortTitle">
                                                 <div class="validation"></div>
                                               </div>
-						</div><div class="col-lg-2 field">
+						</div>
+                                            <div class="col-lg-2 field">
                                                     <div class="form-group">
                                                 <label for="tlt">Full title:</label>
                                                 <input type="text" name="full_title" class="form-control" id="fullTitle">
+                                                <div class="validation"></div>
+                                              </div>
+						</div>
+                                            <div class="col-lg-2 field">
+                                                    <div class="form-group">
+                                                <label for="tlt">Group ID:</label>
+                                                <input type="text" name="group_id" class="form-control" id="groupID">
                                                 <div class="validation"></div>
                                               </div>
 						</div>
@@ -41,8 +49,10 @@
   <thead>
     <tr>
         <th>#</th>
+        <th>ID</th>
       <th>Short title</th>
       <th>Full title</th>
+      <th>Group ID</th>
       <th></th>
       <th></th>
     </tr>
@@ -53,8 +63,10 @@
     
     <tr>
         <td>${count}</td>
+        <td>${title.id}</td>
       <td>${title.shortTitle}</td>
       <td>${title.fullTitle}</td>
+      <td>${title.groupID}</td>
       <td><a href="<c:url value="#"/>"><img class="edit-delete" src="${Constants.URL}img/edit.png" /></a></td>
       <td><a href="<c:url value="/system/filters/delete/${title.id}"/>"><img class="edit-delete" src="${Constants.URL}img/delete.png" /></a></td>
     </tr>

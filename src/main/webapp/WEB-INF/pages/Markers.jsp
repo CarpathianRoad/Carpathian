@@ -9,6 +9,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <style>
+        #myIframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
     <script>
         $(document).ready(function() {
             $(".fancybox").fancybox({
@@ -76,11 +85,16 @@
                     ${marker.textEN}
                 </div>
                 <div class="markerPageBottomLine"></div>
+                <c:if test="${marker.panorama !=''}">
                 <div class="panorama">
-                    <a target="_blank" href="${Constants.URL}panorama/${panorama}">
+                    <a class="panorama-link">
                         <strong>Panorama <img class="new-tab-icon" src="${Constants.URL}img/newTabIcon.png"/></strong>
                     </a>
+                    <div id="dialog">
+                                    <iframe id="myIframe" src=""></iframe>
+                                </div>
                 </div>
+                </c:if>
                 <c:if test="${images[0]!=''}">
                     <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
                                     <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
@@ -156,5 +170,28 @@
                 });
             }
         });
+        $(document).ready(function () {
+            initDialog();
+        });
+        function initDialog(){
+            
+           $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#myIframe').attr('src','${Constants.URL}panorama/${marker.id}');
+                  },
+                          close: function( event, ui ) {
+                              $("#myIframe").contents().find("html body").remove();
+                          }
+        });  
+        
+           $(".panorama-link").click(function(){
+                    $('#dialog').dialog('open');
+           }); 
+        }
     </script>
 </t:indexpage>
