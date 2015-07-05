@@ -5,6 +5,7 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
@@ -45,7 +47,7 @@ public class SystemController {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/AddArticle");
             modelAndView.addObject("markers", markers.getAllMarkers());
-            modelAndView.addObject("filters", filters.getAllFilters());
+            modelAndView.addObject("filters", filters.FiltersHTML("0"));
             modelAndView.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
             return modelAndView;
 	}
@@ -57,13 +59,18 @@ public class SystemController {
             modelAndView.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
             modelAndView.addObject("article",article.getOneArticleForEdit(id));
             modelAndView.addObject("markers", markers.getAllMarkers());
-            modelAndView.addObject("filters", filters.getAllFilters());
+            modelAndView.addObject("filters", filters.FiltersHTML("0"));
             return modelAndView;
 	}
     
     @RequestMapping(value = {"/system/delete/{id}/","/system/delete/{id}","/Carpath/system/delete/{id}/","/Carpath/system/delete/{id}"})
     public ModelAndView deleteArticle(@PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+        ArticleModel art = article.getOneArticleForEdit(id);
+        if(!"".equals(art.panorama) && art.panorama != null) {
+            File temp = new File(Constants.home+"files/panoramas/"+art.panorama);
+            Boolean result = temp.delete();
+        }
         Boolean result = article.deleteArticle(id);
         
         return new ModelAndView("redirect:" + "/system/panel");
@@ -131,6 +138,11 @@ public class SystemController {
     @RequestMapping(value = {"/system/routes/delete/{id}/","/system/routes/delete/{id}","/Carpath/system/routes/delete/{id}/","/Carpath/system/routes/delete/{id}"})
     public ModelAndView deleteRoute(@PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+        RouteModel rout = routes.getOneRouteForEdit(id);
+        if(!"".equals(rout.file) && rout.file != null) {
+            File temp = new File(Constants.FILE_URL_ROUTES+rout.file);
+            Boolean result = temp.delete();
+        }
         Boolean result = routes.deleteRoute(id);
         
         return new ModelAndView("redirect:" + "/system/routes");

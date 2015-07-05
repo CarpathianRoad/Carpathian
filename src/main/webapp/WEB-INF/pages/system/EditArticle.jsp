@@ -136,7 +136,23 @@
                         <input type="hidden" name="real-img-path" id="real-img-path" />                           
                     </div>
                 </div>
-            </div>
+            </div><hr>
+                <div class="row add-row panorama-file">
+                                        
+						<div class="col-lg-10 field">
+                                                    <div class="form-group">
+                                                        <label for="img">Panorama</label>
+                                                    
+                                                        <div id="panorama-upload-block">
+                                                            <span class="btn btn-primary btn-file">
+                                                                Browse <input class="" id="panorama-input" type="file" multiple/>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="fullname-panorama" name="filename-panorama"/>
+                                                    <div class="load-panorama"><img src="${Constants.URL}img/loader.gif"/></div>
+                                                </div>
+                                    </div>
                 <hr>
                                    <div class="row add-row">
                                         <div class="col-lg-3 field map-field">
@@ -218,15 +234,7 @@
                 <div class="col-lg-10 field">
                     <div> <label>Filter type</label></div>
                     <ul>  
-                        <c:forEach items="${filters}" var="item">
-                        <li>
-                            <div class="checkbox">  
-                                <label class="<c:if test="${fn:contains(item.fullTitle, ':')}">double-point-filter</c:if>" >
-                                    <input type="checkbox" value="${item.shortTitle}">${item.fullTitle}
-                                </label>
-                            </div>
-                        </li> 
-                        </c:forEach>
+                        ${filters}
                     </ul>
                     <input type="hidden" name="filter-type-all" id="filter-type-all" />
                                                 <div class="validation"></div>
@@ -397,7 +405,7 @@
         });
         
          $( "#sel1" ).change(function() {
-            if($(this).val() == 0 || $(this).val() == 1) {
+            if($(this).val() === 0 || $(this).val() === 1) {
                 $("#sel3").hide();
                 $("#sel3-label").hide();
                 $('#sel3').append($("<option selected></option>").attr("value",4).text("news")); 
@@ -409,8 +417,61 @@
                 $("#sel3").prop('selectedIndex',0);
             }
           });
+        
+        if("${article.panorama}" !== "" && "${article.panorama}" !== null) {
+            $("#fullname-panorama").val("${article.panorama}");
+            $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+"${article.panorama}"+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block");
+            $("#panorama-upload-block .btn-file").hide();
+            $(".remove-panorama").attr("panorama-name", "${article.panorama}");
+            removePanoramaInit();
+        }
 });
 
+
+$('.panorama-file').on('change', '#panorama-input', function() {
+        $(".load-panorama").show();
+        var data = new FormData();
+        data.append('upload', jQuery('#panorama-input')[0].files[0]);
+        
+        jQuery.ajax({
+                    url: '${Constants.URL}system/uploadPanorama',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data){
+                        $(".load-panorama").hide();
+                        $("#fullname-panorama").val(data);
+                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+data+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block");
+                        $("#panorama-upload-block .btn-file").hide();
+                        $(".remove-panorama").attr("panorama-name", data);
+                        removePanoramaInit();
+                    }
+                    });
+});
+function removePanoramaInit(){
+    $(".remove-panorama").click(function(){
+        $(".load-panorama").show();
+        var filename = $(this).attr("panorama-name");
+        $.ajax({
+            type: "get",
+            url: "${Constants.URL}system/deletePanoramaFile",
+            cache: false,    
+            data:'name='+filename,
+            success: function(response){
+                        $(".load-panorama").hide();
+                        $("#fullname-panorama").val("");
+                        $(".remove-panorama").remove();
+                        $(".upload-success").remove();
+                        $("#panorama-upload-block .btn-file").show();
+            },
+            error: function(response){      
+                console.log(response);
+            }
+        });
+    });
+}
 function returnImgCK(){
     console.log(ret);
     console.log(num);

@@ -59,6 +59,7 @@ public class FormController {
         String author = request.getParameter("author");
         String avatar = request.getParameter("avatar-path");
         String img = request.getParameter("real-img-path");
+        String panorama = request.getParameter("filename-panorama");
         String x = request.getParameter("x");
         String y = request.getParameter("y");
         String country = request.getParameter("country");
@@ -77,7 +78,7 @@ public class FormController {
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
         String result = article.insertArticle(titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author,
-                avatar, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
+                avatar, img, panorama, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/panel");
        
@@ -103,6 +104,7 @@ public class FormController {
         String author = request.getParameter("author");
         String avatar = request.getParameter("avatar-path");
         String img = request.getParameter("real-img-path");
+        String panorama = request.getParameter("filename-panorama");
         String x = request.getParameter("x");
         String y = request.getParameter("y");
         String country = request.getParameter("country");
@@ -121,7 +123,7 @@ public class FormController {
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
         String result = article.updateArticle(id,titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author,
-                avatar, img, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
+                avatar, img, panorama, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/panel");
        
@@ -140,7 +142,7 @@ public class FormController {
         String titleSRB = request.getParameter("titleSRB");
         String type = request.getParameter("type");
         String public_country = request.getParameter("public_country");
-        String filename = request.getParameter("filename");
+        String filename = request.getParameter("filename-route");
         String filter = request.getParameter("filter-type-all");
         String date = request.getParameter("date");
         String img = request.getParameter("real-img-path");
@@ -175,7 +177,7 @@ public class FormController {
         String img = request.getParameter("real-img-path");
         String type = request.getParameter("type");
         String public_country = request.getParameter("public_country");
-        String filename = request.getParameter("filename");
+        String filename = request.getParameter("filename-route");
         String filter = request.getParameter("filter-type-all");
         String date = request.getParameter("date");
         String textEN = request.getParameter("textEN");
@@ -208,7 +210,11 @@ public class FormController {
     public ModelAndView doAddFilter(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String short_title = request.getParameter("short_title");
         String full_title = request.getParameter("full_title");
-        filters.addFilter(short_title, full_title);
+        String group_id = request.getParameter("group_id");
+        if(group_id == null || "".equals(group_id)) {
+            group_id = "0";
+        }
+        filters.addFilter(short_title, full_title, group_id);
         return new ModelAndView("redirect:" + "/system/filters");
     }
     @RequestMapping(value = "/system/addmarker.do", method = RequestMethod.POST)

@@ -44,24 +44,20 @@
                                               </div>
                                         </div>
                               <hr>
-                                    <div class="row add-row route-file">
+                              <div class="row add-row route-file">
                                         
-						<div class="col-lg-3 field">
+						<div class="col-lg-10 field">
                                                     <div class="form-group">
-                                                        <c:choose>
-                                                            <c:when test="${route.file == ''}">
-                                                              <label class="btn" id="route-file-block" for="file-input">
-                                                    <button class="btn btn-primary" disabled="disabled" style="opacity: 100">Upload route file</button>
-                                                </label>
-                                                    <input style="display: none" class="" id="file-input" type="file" multiple/>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                              <span class="is-exist-file">${route.file} <a class="remove-route-file" filename="${route.file}">Remove file</a></span>
-                                                            </c:otherwise>
-                                                          </c:choose>
-                                                        
+                                                        <label for="img">Route file</label>
+                                                    
+                                                        <div id="route-upload-block">
+                                                            <span class="btn btn-primary btn-file">
+                                                                Browse <input class="" id="route-input" type="file" multiple/>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <input type="hidden" id="fullname" name="filename" value="${route.file}"/>
+                                                    <input type="hidden" id="fullname-route" name="filename-route"/>
+                                                    <div class="load-route"><img src="${Constants.URL}img/loader.gif"/></div>
                                                 </div>
                                     </div>
                 <hr><div class="row add-row">
@@ -290,7 +286,7 @@
             $(".route-filters :checkbox[value='"+value+"']").attr("checked","true");
         });
         if("${route.images}" !== "" && "${route.images}" !== undefined) {
-            var images = "${aroute.images}".split(",");
+            var images = "${route.images}".split(",");
        $.each(images, function( index, value ) {
             $("#imageUpload .img-content").append('<a class="returnImage" data-url="${Constants.URL}'+value+'"><img src="${Constants.URL}'+value+'" alt="'+value+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
 
@@ -298,7 +294,58 @@
     $("#real-img-path").val(real + "," + value);       
 });
         }
+      if("${route.file}" !== "" && "${route.file}" !== null) {
+            $("#fullname-route").val("${route.file}");
+            $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='route-name'>("+"${route.file}"+")</span> </span> <span class='remove-route'>Remove</span>").appendTo("#route-upload-block");
+            $("#route-upload-block .btn-file").hide();
+            $(".remove-route").attr("route-name", "${route.file}");
+            removeRouteInit();
+        }  
 });
+$('.route-file').on('change', '#route-input', function() {
+        $(".load-route").show();
+        var data = new FormData();
+        data.append('upload', jQuery('#route-input')[0].files[0]);
+        
+        jQuery.ajax({
+                    url: '${Constants.URL}system/uploadRoute',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data){
+                        $(".load-route").hide();
+                        $("#fullname-route").val(data);
+                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='route-name'>("+data+")</span> </span> <span class='remove-route'>Remove</span>").appendTo("#route-upload-block");
+                        $("#route-upload-block .btn-file").hide();
+                        $(".remove-route").attr("route-name", data);
+                        removeRouteInit();
+                    }
+                    });
+});
+function removeRouteInit(){
+    $(".remove-route").click(function(){
+        $(".load-route").show();
+        var filename = $(this).attr("route-name");
+        $.ajax({
+            type: "get",
+            url: "${Constants.URL}system/deleteRouteFile",
+            cache: false,    
+            data:'name='+filename,
+            success: function(response){
+                        $(".load-route").hide();
+                        $("#fullname-route").val("");
+                        $(".remove-route").remove();
+                        $(".upload-success").remove();
+                        $("#route-upload-block .btn-file").show();
+            },
+            error: function(response){      
+                console.log(response);
+            }
+        });
+    });
+}
 function returnImgCK(){
     console.log(ret);
     console.log(num);

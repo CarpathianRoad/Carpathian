@@ -115,7 +115,7 @@
                                     <div id="avatarDialog">
                                         <iframe id="avatarFrame" src=""></iframe>
                                     </div>
-                                    <button type="button" id="avatarBtn" class="btn btn-primary btn-lg img-input-box">
+                                    <button type="button" id="avatarBtn" class="btn btn-primary img-input-box">
                                     Upload avatar
                                     </button>
                                 </div>    
@@ -134,7 +134,7 @@
                                 <div id="dialog">
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
-                                <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
+                                <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
                                 Upload image
                                 </button>
                             </div>    
@@ -149,14 +149,15 @@
 						<div class="col-lg-10 field">
                                                     <div class="form-group">
                                                         <label for="img">Panorama</label>
-                                                <label class="btn" id="panorama-file-block" for="panorama-input">
-                                                    <button type="button" class="btn btn-primary btn-lg">
-                                Upload panorama
-                                </button>
-                                                </label>
-                                                    <input style="display: none" class="" id="panorama-input" type="file" multiple/>
+                                                    
+                                                        <div id="panorama-upload-block">
+                                                            <span class="btn btn-primary btn-file">
+                                                                Browse <input class="" id="panorama-input" type="file" multiple/>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                     <input type="hidden" id="fullname-panorama" name="filename-panorama"/>
+                                                    <div class="load-panorama"><img src="${Constants.URL}img/loader.gif"/></div>
                                                 </div>
                                     </div>
                 <hr>
@@ -241,15 +242,7 @@
                 <div class="col-lg-10 field">
                     <div> <label>Filter type:</label></div>
                     <ul>  
-                        <c:forEach items="${filters}" var="item">
-                        <li>
-                            <div class="checkbox">  
-                                <label class="<c:if test="${fn:contains(item.fullTitle, ':')}">double-point-filter</c:if>" >
-                                    <input type="checkbox" value="${item.shortTitle}">${item.fullTitle}
-                                </label>
-                            </div>
-                        </li> 
-                        </c:forEach>
+                        ${filters}
                     </ul>
                     <input type="hidden" name="filter-type-all" id="filter-type-all" />
                                                 <div class="validation"></div>
@@ -415,20 +408,24 @@
           //});
 });
 $('.panorama-file').on('change', '#panorama-input', function() {
+        $(".load-panorama").show();
         var data = new FormData();
         data.append('upload', jQuery('#panorama-input')[0].files[0]);
+        
         jQuery.ajax({
-                    url: '${Constants.URL}uploadPanorama',
+                    url: '${Constants.URL}system/uploadPanorama',
                     data: data,
                     cache: false,
                     contentType: false,
                     processData: false,
                     type: 'POST',
                     success: function(data){
-                        console.log(data);
+                        $(".load-panorama").hide();
                         $("#fullname-panorama").val(data);
-                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded!</span>").appendTo("#panorama-file-block");
-                        $("#panorama-file-block button").hide();
+                        $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+data+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block");
+                        $("#panorama-upload-block .btn-file").hide();
+                        $(".remove-panorama").attr("panorama-name", data);
+                        removePanoramaInit();
                     }
                     });
 });
@@ -437,6 +434,28 @@ function imageInserted(){
     $( "#avatarDialog" ).dialog( "close" );
     initRemove();
     initDialog();
+}
+function removePanoramaInit(){
+    $(".remove-panorama").click(function(){
+        $(".load-panorama").show();
+        var filename = $(this).attr("panorama-name");
+        $.ajax({
+            type: "get",
+            url: "${Constants.URL}system/deletePanoramaFile",
+            cache: false,    
+            data:'name='+filename,
+            success: function(response){
+                        $(".load-panorama").hide();
+                        $("#fullname-panorama").val("");
+                        $(".remove-panorama").remove();
+                        $(".upload-success").remove();
+                        $("#panorama-upload-block .btn-file").show();
+            },
+            error: function(response){      
+                console.log(response);
+            }
+        });
+    });
 }
 function initDialog(){
     var current = "";

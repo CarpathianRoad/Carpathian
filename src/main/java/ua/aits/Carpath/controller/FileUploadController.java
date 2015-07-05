@@ -99,7 +99,7 @@ public class FileUploadController {
                     + " because the file was empty.";
         }
     }
-    @RequestMapping(value = "/uploadRoute", method = RequestMethod.POST)
+    @RequestMapping(value = "/system/uploadRoute", method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandlerRoute(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
  
@@ -134,10 +134,10 @@ public class FileUploadController {
         return result.toString();
     }
     
-    @RequestMapping(value = "/uploadPanorama", method = RequestMethod.POST)
+    @RequestMapping(value = "/system/uploadPanorama", method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandlerPanorama(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
- 
+        
                 String name = file.getOriginalFilename();
         if (!file.isEmpty()) {
             try {
