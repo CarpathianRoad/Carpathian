@@ -51,7 +51,7 @@
                                                     
                                                         <div id="route-upload-block">
                                                             <span class="btn btn-primary btn-file">
-                                                                Browse <input class="" id="route-input" type="file" multiple/>
+                                                                Browse rouse file<input class="" id="route-input" type="file" multiple/>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -70,7 +70,7 @@
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
                                 <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
-                                Upload image
+                                Browse image
                                 </button>
                             </div>    
                         </div>

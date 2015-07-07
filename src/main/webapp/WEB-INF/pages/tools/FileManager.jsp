@@ -102,13 +102,13 @@
                 if("${type}" === "avatar") {
                     $("#avatarUpload .img-content", window.parent.document).append($("#returnedhtml").html());
                     $("#avatarUpload .img-input-box", window.parent.document).remove();
-                    $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Upload avatar</button>');
+                    $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button>');
                     $("#avatar-path", window.parent.document).val(path.slice(0,-1));  
                 }
                 else {
                     $("#imageUpload .img-content", window.parent.document).append($("#returnedhtml").html());
                     $("#imageUpload .img-input-box", window.parent.document).remove();
-                    $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+                    $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Browse image</button>');
                     var real = $("#real-img-path", window.parent.document).val();        
                     $("#real-img-path", window.parent.document).val(real + "," + path.slice(0,-1));
                 }
@@ -138,7 +138,7 @@
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
             
             $("#imageUpload .img-input-box", window.parent.document).remove();
-            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image</button>');
+            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Browse image</button>');
             var real = $("#real-img-path", window.parent.document).val();        
             $("#real-img-path", window.parent.document).val(real + "," + path + name);
             initGalerry();
@@ -151,7 +151,7 @@
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
             
             $("#avatarUpload .img-input-box", window.parent.document).remove();
-            $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Upload avatar</button>');
+            $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button>');
             $("#avatar-path", window.parent.document).val(path + name);
             initGalerry();
             $("#avatarUpload .img-content-show-all").removeAttr("current");
@@ -165,7 +165,7 @@
                     <input type='text' placeholder='Text on slide' name='"+path + name+"-text' class='slider slider-text form-control'/></div>");
             
             $("#imageUpload .img-input-box", window.parent.document).remove();
-            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Upload image for slide</button>');
+            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary btn-lg img-input-box" data-toggle="modal" data-target="#myModal">Browse image for slide</button>');
             var real = $("#real-img-path", window.parent.document).val();        
             $("#real-img-path", window.parent.document).val(real + "," + path + name);
             initGalerry();

@@ -116,7 +116,7 @@
                                         <iframe id="avatarFrame" src=""></iframe>
                                     </div>
                                     <button type="button" id="avatarBtn" class="btn btn-primary img-input-box">
-                                    Upload avatar
+                                    Browse avatar
                                     </button>
                                 </div>    
                             </div>
@@ -135,7 +135,7 @@
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
                                 <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
-                                Upload image
+                                Browse image
                                 </button>
                             </div>    
                         </div>
@@ -152,7 +152,7 @@
                                                     
                                                         <div id="panorama-upload-block">
                                                             <span class="btn btn-primary btn-file">
-                                                                Browse <input class="" id="panorama-input" type="file" multiple/>
+                                                                Browse panorama<input class="" id="panorama-input" type="file" multiple/>
                                                             </span>
                                                         </div>
                                                     </div>
