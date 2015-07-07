@@ -20,8 +20,8 @@
                                     <div id="dialog">
                                         <iframe id="myIframe" src=""></iframe>
                                     </div>
-                                    <button type="button" id="dialogBtn" class="btn btn-primary btn-lg img-input-box">
-                                    Upload image for slide
+                                    <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
+                                    Browse image for slide
                                     </button>
                                 </div>    
                             </div>

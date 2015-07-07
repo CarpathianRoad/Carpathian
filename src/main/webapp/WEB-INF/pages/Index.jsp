@@ -19,7 +19,7 @@
                                 <li> <div class="sliderImage">
                                             <img u="image" src="${Constants.URL}${slide.image}" />
                                             <c:if test="${not empty slide.text}">
-                                                <a href="${Constants.URL}${slide.url}" class="slider-image-link"><span class="slider-image-text">${slide.text}</span></a>
+                                                <a href="${slide.url}" class="slider-image-link not-add-lan"><span class="slider-image-text">${slide.text}</span></a>
                                             </c:if>
                                  </div></li> 
                             </c:forEach>
