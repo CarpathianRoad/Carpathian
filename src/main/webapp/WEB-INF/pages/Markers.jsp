@@ -113,15 +113,15 @@
                                     </ul>
                             </div>
                             <div class="controls">
-                                    <a href="#" style="display:none" class="prev-page"></a>
+                                    <a href="#" class="prev-page"></a>
                                     <div class="prev-slide"></div>
-                                    <div class="next-slide"></div>
-                                    <div style="display:none" class="next-page"></div>
+                                    <div style="display:none" class="next-slide"></div>
+                                    <div class="next-page"></div>
                             </div>
                     </div>
                                     
                                     <div class="article_main_image">
-                                        <a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}${image}" />">
+                                        <a class="fancybox not-add-lan" id="mainPictureFancybox" rel="gallery1" href="${Constants.URL}${images[0]}" />
                                             <img id="main_image" src="${Constants.URL}<c:out value="${images[0]}" />" />
                                         </a>
                                         <div class="mainImageSliderLine">
@@ -183,7 +183,7 @@
         $(document).ready(function () {
             initDialog();
             window.onload = function(){
-                $( '#slider1' ).lemmonSlider();
+                $( '#slider1' ).lemmonSlider({center:false});
             }
         });
         function initDialog(){

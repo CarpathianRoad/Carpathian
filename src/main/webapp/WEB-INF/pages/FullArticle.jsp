@@ -121,10 +121,10 @@
                                     </ul>
                             </div>
                             <div class="controls">
-                                    <a href="#" style="display:none" class="prev-page"></a>
+                                    <a href="#" class="prev-page"></a>
                                     <div class="prev-slide"></div>
-                                    <div class="next-slide"></div>
-                                    <div style="display:none" class="next-page"></div>
+                                    <div style="display:none" class="next-slide"></div>
+                                    <div class="next-page"></div>
                             </div>
                     </div>
                                     <div class="article_main_image">
@@ -188,7 +188,7 @@
     <script>
         jQuery(document).ready(function ($) {
             window.onload = function(){
-                $( '#slider1' ).lemmonSlider();
+                $( '#slider1' ).lemmonSlider({center:false});
             }
         });
         $(document).keyup(function(e) {
