@@ -170,7 +170,7 @@
             </div>
         </div>
     </section>
-    <script>
+    <script> 
         $(document).keyup(function(e) {
             if (e.keyCode == 27) { 
                 $.each($('.fancybox'), function() {

@@ -188,7 +188,7 @@
     <script>
         jQuery(document).ready(function ($) {
             window.onload = function(){
-                $( '#slider1' ).lemmonSlider({center:false});
+                $( '#slider1' ).lemmonSlider({center:false}); 
             }
         });
         $(document).keyup(function(e) {
