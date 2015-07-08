@@ -10,6 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:indexpage>
+	<script src="${Constants.URL}js/lemmon-slider.js"></script> 
     <c:if test="${article.type == 3}">
         <style>
             .markerLeftDescr {
@@ -104,23 +105,28 @@
                     ${article.textEN}
                 </div>
                 <c:if test="${images[0]!=''}">
-    <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
-                                    <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                            <c:forEach items="${images}" var="image" varStatus="loop">
+                    <div class="wrapSlider">
+                            <div id="slider1" class="slider">
+                                    <ul style="height: 150px;">
+                                        <c:forEach items="${images}" var="image" varStatus="loop">
+                                            <li style="cursor:pointer">
                                                 <div onclick="set_main_picture('${Constants.URL}${image}','${loop.index}')">
                                                     <div class="sliderHover">
-                                                        <div class="imageHoverMarkerPage"></div>
+                                                    <!--<div class="imageHoverMarkerPage"></div>-->
                                                         <img rel="gallery1" u="image" src="${Constants.URL}${image}" style="height: 150px"/>
-                                                    </div>
+                                                    <!--</div>-->
                                                 </div>
-                                            </c:forEach>
-                                        </div>
-                                        <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
-                                        </span>
-                                        <span u="arrowright" class="markerPageArrowRight jssora03r" style="width: 50px; height: 95px; top: 28px; right: 20px">
-                                        </span>
-                                    </div>
+                                            </li>
+                                        </c:forEach>       
+                                    </ul>
+                            </div>
+                            <div class="controls">
+                                    <a href="#" style="display:none" class="prev-page"></a>
+                                    <div class="prev-slide"></div>
+                                    <div class="next-slide"></div>
+                                    <div style="display:none" class="next-page"></div>
+                            </div>
+                    </div>
                                     <div class="article_main_image">
                                         <a class="fancybox not-add-lan" id="mainPictureFancybox" rel="gallery1" href="${Constants.URL}<c:out value="${images[0]}" />">
                                             <img id="main_image" src="${Constants.URL}<c:out value="${images[0]}" />" />
@@ -180,6 +186,11 @@
         </div>
     </section>
     <script>
+        jQuery(document).ready(function ($) {
+            window.onload = function(){
+                $( '#slider1' ).lemmonSlider();
+            }
+        });
         $(document).keyup(function(e) {
             if (e.keyCode == 27) { 
                 $.each($('.fancybox'), function() {
@@ -189,5 +200,44 @@
                 });
             }
         });
+        
     </script>
+        
+        <style>
+            
+        .prev-slide{
+            background: url(${Constants.URL}img/arrow_left.png) center center no-repeat;
+            width: 48px;
+            height: 90px;
+            cursor: pointer;
+            position: absolute;
+            left: 50;
+        }
+        .next-slide,.next-page{
+            background: url(${Constants.URL}img/arrow_right.png) center center no-repeat;
+            width: 48px;
+            height: 90px;
+            cursor: pointer;
+            position: absolute;
+            right: 50;
+        }
+        .prev-slide:hover {
+            background: url(${Constants.URL}img/arrow_left_hover.png) center center no-repeat;
+        }
+        .next-slide:hover ,.next-page:hover{
+            background: url(${Constants.URL}img/arrow_right_hover.png) center center no-repeat;
+        }
+        .wrapSlider { width:100%; height: 150 !important; margin-top: 0px;}
+	body div.slider    { overflow:hidden; position:relative; width:100%; height:150px !important; }
+	body div.slider ul { margin:0; padding:0; height:150px; }
+	body div.slider li { float:left; list-style:none; margin:0; }
+	body div.slider li { text-align:center; line-height:160px; font-size:25px; }
+        .slider img{
+            height: 150px;
+        }
+        .controls{
+            position: relative;
+            margin-top: -120px;
+        }
+        </style>
 </t:indexpage>
