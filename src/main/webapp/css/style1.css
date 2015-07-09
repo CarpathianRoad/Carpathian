@@ -2474,6 +2474,7 @@ a.disable-menu-link{
 .panorama{
     margin: 15px 0 20px 0;
     text-align: center;
+    cursor: pointer;
 }
 .panorama a{
     color: rgb(175, 212, 66);

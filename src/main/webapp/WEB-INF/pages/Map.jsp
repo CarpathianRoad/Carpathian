@@ -171,16 +171,6 @@
             map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
                 document.getElementById('pushRightConrainer'));
             
-            if('${id}'!=''){
-                console.log(markers.length);
-                for (var i=0;i<markers.length;i++){
-                    if('${id}'==markers[i].id){
-                        map.setCenter(markers[i].getPosition());
-                        map.setZoom(12);
-                    }
-                }
-            }
-            
                 var hideButton = document.getElementById('filterHide');
                 /*google.maps.event.addDomListener(hideButton, 'click', function() {
                     $("#legend").animate({width: 'toggle'});
@@ -201,6 +191,19 @@
             if('${country}'!=''){
                 for (var i=0;i<markers.length;i++) {
                     if((markers[i].country!='${country}')&&('${country}'!='allMap')){
+                        markers[i].setMap(null);
+                        markerCluster.removeMarker(markers[i]);
+                    }
+                }
+            }
+            
+            if('${id}'!=''){
+                console.log(markers.length);
+                for (var i=0;i<markers.length;i++){
+                    if('${id}'==markers[i].id){
+                        map.setCenter(markers[i].getPosition());
+                        map.setZoom(12);
+                    }else{
                         markers[i].setMap(null);
                         markerCluster.removeMarker(markers[i]);
                     }
