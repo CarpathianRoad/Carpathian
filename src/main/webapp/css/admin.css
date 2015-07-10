@@ -115,10 +115,10 @@ margin-top: 3px;
     width: 100%;
 }
 .img-content a {
-    margin-left: 10px;
     display: block;
     float: left;
     padding-bottom: 5px;
+    width: 100%;
 }
 .image-upload {
     float: left;
@@ -457,7 +457,10 @@ cke_contents{
 }
 .slider-block input {
     margin-top: 10px;
-    display: inline;
+    /* display: inline; */
+}
+.slider-block button.active {
+    z-index: 0 !important;
 }
 
 .slide-upload-button {
