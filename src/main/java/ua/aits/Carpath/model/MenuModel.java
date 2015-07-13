@@ -24,6 +24,7 @@ public class MenuModel {
     public String url;
     public Integer level;
     public String htmlID;
+    public String img;
     
     
     public Integer getId() {
@@ -80,6 +81,13 @@ public class MenuModel {
     }
     public void setHtmlID(String htmlID) {
         this.htmlID = htmlID;
+    }
+    
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
     }
     
     public List<MenuModel> getMenuRow(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -154,6 +162,7 @@ public class MenuModel {
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
             temp.setTitleEN(result.getString("title"+lan.toUpperCase()));
+            temp.setImg(result.getString("img"));
             contentList.add(temp);
         } 
         return contentList;
