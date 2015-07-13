@@ -31,6 +31,12 @@
     .news_text_box {
           height: auto;
     }
+    .newsImage {
+        text-align: center;
+    }
+    .newsImage img {
+        width: 190px;
+    }
     </style>
     <div class="s-new widthClass">
         <div class="">
@@ -40,7 +46,8 @@
             <c:forEach items="${contentList}" var="item">	
                     <div class="s-cell">
                         <div class="s-block newsHeight">
-                            <div class="newsImage" style="display:none">
+                        <c:if test="${item.img != null}">
+                            <div class="newsImage">
                                 <a href="${Constants.URL}article/category/${item.id}">
                                     <div class="imageHover">
                                         <div class="imageHoverDate">
@@ -48,10 +55,10 @@
                                         <div class="imageHoverCountry">
                                         </div>
                                     </div>
-                                    <img src="${Constants.URL}img/dog.png" />
+                                    <img src="${Constants.URL}${item.img}" />
                                 </a>
                             </div>
-
+                        </c:if>
                             <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
                             <div class="news_text_box">
                                 <div class="news_title"><a href="${Constants.URL}article/category/${item.id}">${item.titleEN}</a></div>
