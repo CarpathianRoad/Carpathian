@@ -77,7 +77,7 @@ public class SinglePageController {
                  modelAndView.addObject("content", articles);
                  modelAndView.addObject("points", points);
                  modelAndView.addObject("titles", translate.getTranslateFilters(lan));
-                 modelAndView.addObject("slides", slider.getAllSlides());
+                 modelAndView.addObject("slides", slider.getAllSlides(lan));
                  return modelAndView;
 	}
     @RequestMapping(value = {"/{lan}/routes/{id}", "/{lan}/routes/{id}/"})

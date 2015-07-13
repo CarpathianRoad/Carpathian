@@ -3719,10 +3719,9 @@ a.disable-menu-link{
 .slider-image-text {
     color: white;
     text-shadow: -1px 0 rgb(86, 105, 143), 0 1px rgb(86, 105, 143), 1px 0 rgb(86, 105, 143), 0 -1px rgb(86, 105, 143);
-    padding: 5px;
-    background-color: rgba(86,105,143,0.7);
-    border-radius: 20px;
-    font-size: 16pt;
+    padding: 10px 15px;
+    background-color: rgba(0,0,0,0.7);
+    font-size: 10pt;
     font-weight: 600;
     transition: 0.5s;
 }

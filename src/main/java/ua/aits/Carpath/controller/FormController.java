@@ -280,7 +280,18 @@ public class FormController {
         String[] imgs = request.getParameter("real-img-path").split(",");
         slider.clearTable();
         for(String img: imgs) {
-            slider.insertSlide(img, request.getParameter(img+"-url"), request.getParameter(img+"-text"));
+            slider.insertSlide(img, 
+                    request.getParameter(img+"-urlEN"), 
+                    request.getParameter(img+"-urlUA"), 
+                    request.getParameter(img+"-urlHU"), 
+                    request.getParameter(img+"-urlSK"), 
+                    request.getParameter(img+"-urlRO"), 
+                    request.getParameter(img+"-textEN"), 
+                    request.getParameter(img+"-textUA"), 
+                    request.getParameter(img+"-textHU"), 
+                    request.getParameter(img+"-textSK"), 
+                    request.getParameter(img+"-textRO")
+            );
         }
         return new ModelAndView("redirect:" + "/system/slider");
     }
