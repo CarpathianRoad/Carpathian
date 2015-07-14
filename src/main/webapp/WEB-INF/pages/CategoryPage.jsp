@@ -22,7 +22,9 @@
                                         <h3>${item.titleEN}</h3>
                                         <p></p>
                                 </div>
-                        </div></a>
+                        </div>
+                        <h4>${item.titleEN}</h4>
+                    </a>
                 </li>
             </c:forEach>
 </ul>

@@ -3836,3 +3836,12 @@ a.disable-menu-link{
 .ch-item:hover .ch-info p {
 	opacity: 1;
 }
+.ch-grid h4 {
+      color: #56698F;
+  font-weight: 700;
+  text-transform: uppercase;  
+  font-size: 14px;
+}
+.ch-grid h4:hover {
+    color: #A2C936;
+}
