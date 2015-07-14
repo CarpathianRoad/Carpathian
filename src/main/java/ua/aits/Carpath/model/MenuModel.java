@@ -163,6 +163,9 @@ public class MenuModel {
             temp.setId(result.getInt("id"));
             temp.setTitleEN(result.getString("title"+lan.toUpperCase()));
             temp.setImg(result.getString("img"));
+            if(temp.img == null || "".equals(temp.img)) {
+                temp.img = "img/dog.png";
+            }
             contentList.add(temp);
         } 
         return contentList;
