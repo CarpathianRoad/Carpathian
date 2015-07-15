@@ -171,6 +171,7 @@ public class MenuModel {
             }
             contentList.add(temp);
         } 
+        DB.closeCon();
         return contentList;
     }
     public Boolean isHaveSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
