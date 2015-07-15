@@ -192,7 +192,7 @@ public class MapModel {
     return mapList;
     }
     public List<MapModel> getPointsByCount(String lan, String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type = 2 and id != "+id+" and publish = 1 order by id desc limit "+count+";");
+        ResultSet result = DB.getResultSet("select * from content where type = 2 and id != "+id+" and publish = 1 and isDelete = 0 order by id desc limit "+count+";");
         List<MapModel> newsList = new LinkedList<>();
         while (result.next()) { 
             MapModel temp = new MapModel();
