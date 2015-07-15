@@ -40,13 +40,7 @@
                                                 </div>
                             <div class="field">
                                                     <div class="form-group">
-                                                <label for="sel1">Menu</label>
-                                                <select class="filter-select" name="type" id="menuCat">
-                                                  <option value="all">All</option>
-                                                  <c:forEach items="${menuList}" var="item">
-                                                        <option value="${item.id}">${item.titleEN}</option>
-                                                    </c:forEach>
-                                                </select>
+                                                ${menuList}
                                               </div>
                                                 </div>
                             <div class="field">
