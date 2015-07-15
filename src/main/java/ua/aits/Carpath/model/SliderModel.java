@@ -133,6 +133,7 @@ public class SliderModel {
             }
             resultList.add(temp);
         } 
+        DB.closeCon();
         return resultList;
     }
     
@@ -155,6 +156,7 @@ public class SliderModel {
             temp.setTextRO(result.getString("textRO"));
             resultList.add(temp);
         } 
+        DB.closeCon();
         return resultList;
     }
     

@@ -558,7 +558,9 @@ public class ArticleModel {
     }
     public Boolean isHaveArticle(String id) throws SQLException{
         ResultSet result = DB.getResultSet("SELECT * FROM menu WHERE parentId="+id+";");
-        return result.isBeforeFirst();
+        Boolean res = result.isBeforeFirst();
+        DB.closeCon();
+        return res;
     }
     
     public List<ArticleModel> getByCategory(String lan, String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {

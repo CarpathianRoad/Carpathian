@@ -272,6 +272,7 @@ public class RouteModel {
             temp.setType(result.getInt("type"));
             routeList.add(temp);
         } 
+        DB.closeCon();
     return routeList;
     }
      public List<RouteModel> getAllRoutesSystem(String type, String value) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -298,6 +299,7 @@ public class RouteModel {
             temp.setPublish(result.getInt("publish"));
             routeList.add(temp);
         } 
+        DB.closeCon();
     return routeList;
     }
      public RouteModel getOneRoute(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
@@ -312,6 +314,7 @@ public class RouteModel {
             temp.setDate(result.getString("date")); 
             temp.setImages(result.getString("images"));  
         }
+        DB.closeCon();
         return temp;
     }
     public RouteModel getOneRouteForEdit(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
@@ -347,6 +350,7 @@ public class RouteModel {
             temp.setCategory(result.getString("category"));
             temp.setFile(result.getString("file"));
         }
+        DB.closeCon();
         return temp;
     }
      
@@ -438,6 +442,7 @@ public class RouteModel {
             temp.setImg(result.getString("img"));
             imageRoute.add(temp);
         }
+        DB.closeCon();
         return imageRoute;
      }
      
@@ -479,6 +484,7 @@ public class RouteModel {
             temp.setType(result.getInt("type"));
             routeList.add(temp);
         } 
+        DB.closeCon();
     return routeList;
     }
      
@@ -502,6 +508,7 @@ public class RouteModel {
     while(result.next()){
         count = result.getInt("count");
         }
+        DB.closeCon();
     return count;
     } 
     public class RouteImage {
