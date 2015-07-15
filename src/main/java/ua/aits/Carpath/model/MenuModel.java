@@ -24,6 +24,7 @@ public class MenuModel {
     public String url;
     public Integer level;
     public String htmlID;
+    public String img;
     
     
     public Integer getId() {
@@ -82,6 +83,13 @@ public class MenuModel {
         this.htmlID = htmlID;
     }
     
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
     public List<MenuModel> getMenuRow(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ORDER BY `menu`.`sort` ASC;");
         List<MenuModel> menuList = new LinkedList<>();
@@ -133,7 +141,7 @@ public class MenuModel {
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
             temp.setParentID(result.getInt("parentId"));
-            temp.setTitleEN(result.getString("titleen"));
+            temp.setTitleEN(result.getString("titleEN"));
             menuList.add(temp);
         } 
         DB.closeCon();
@@ -154,8 +162,16 @@ public class MenuModel {
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
             temp.setTitleEN(result.getString("title"+lan.toUpperCase()));
+            temp.setImg(result.getString("img"));
+            if(temp.img == null || "".equals(temp.img)) {
+                temp.img = "img/dog.png";
+            }
+            if("".equals(temp.getTitleEN()) || temp.getTitleEN() == null ){
+               temp.setTitleEN(result.getString("titleEN")); 
+            }
             contentList.add(temp);
         } 
+        DB.closeCon();
         return contentList;
     }
     public Boolean isHaveSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

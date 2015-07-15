@@ -7,11 +7,8 @@ package ua.aits.Carpath.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import ua.aits.Carpath.functions.DB;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.functions.PageFiltersTranslate;
@@ -191,10 +188,11 @@ public class MapModel {
             }            
             mapList.add(temp);
         } 
+        DB.closeCon();
     return mapList;
     }
     public List<MapModel> getPointsByCount(String lan, String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from content where type = 2 and id != "+id+" and publish = 1 order by id desc limit "+count+";");
+        ResultSet result = DB.getResultSet("select * from content where type = 2 and id != "+id+" and publish = 1 and isDelete = 0 order by id desc limit "+count+";");
         List<MapModel> newsList = new LinkedList<>();
         while (result.next()) { 
             MapModel temp = new MapModel();
@@ -254,6 +252,7 @@ public class MapModel {
             temp.setImage(result.getString("image")); 
             temp.setPanorama(result.getString("panorama")); 
         }
+        DB.closeCon();
         return temp;
     }
     public String getPanoramaName(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {

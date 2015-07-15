@@ -8,58 +8,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:indexpage>
-    <style>
-    .news_title a:after{
-        content:"";
-    }
-    .news_title {
-              background-color: #56698F;
-  padding: 15px;
-  text-align: center;
-  text-transform: uppercase;
-    -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-    }
-    .news_title a {
-          color: #fff;
-        height: auto;
-          position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-    }
-    .news_text_box {
-          height: auto;
-    }
-    </style>
     <div class="s-new widthClass">
         <div class="">
             <div class="countriesFilter">
                 
             </div>
-            <c:forEach items="${contentList}" var="item">	
-                    <div class="s-cell">
-                        <div class="s-block newsHeight">
-                            <div class="newsImage" style="display:none">
-                                <a href="${Constants.URL}article/category/${item.id}">
-                                    <div class="imageHover">
-                                        <div class="imageHoverDate">
-                                        </div>
-                                        <div class="imageHoverCountry">
-                                        </div>
-                                    </div>
-                                    <img src="${Constants.URL}img/dog.png" />
-                                </a>
-                            </div>
-
-                            <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
-                            <div class="news_text_box">
-                                <div class="news_title"><a href="${Constants.URL}article/category/${item.id}">${item.titleEN}</a></div>
-                                
-                            </div>
+            <ul class="ch-grid">
+                
+            <c:forEach items="${contentList}" var="item">
+                <li>
+                    <a href="${Constants.URL}article/category/${item.id}"><div class="ch-item ch-img-1" style="background-image: url('${Constants.URL}${item.img}')">
+                                <div class="ch-info">
+                                        <h3>${item.titleEN}</h3>
+                                        <p></p>
+                                </div>
                         </div>
-                    </div>        
+                        <h4>${item.titleEN}</h4>
+                    </a>
+                </li>
             </c:forEach>
+</ul>
         <div class="s-clear"></div>
         </div>
     </div>

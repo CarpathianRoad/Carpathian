@@ -115,13 +115,16 @@ margin-top: 3px;
     width: 100%;
 }
 .img-content a {
-    margin-left: 10px;
     display: block;
     float: left;
     padding-bottom: 5px;
 }
+#sliderEdit .img-content a {
+    width: 100%;
+}
 .image-upload {
     float: left;
+    margin-right: 20px;
 }
 .image-upload-modal {
     width: 100%;
@@ -457,7 +460,10 @@ cke_contents{
 }
 .slider-block input {
     margin-top: 10px;
-    display: inline;
+    /* display: inline; */
+}
+.slider-block button.active {
+    z-index: 0 !important;
 }
 
 .slide-upload-button {

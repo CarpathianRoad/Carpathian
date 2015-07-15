@@ -345,7 +345,7 @@ public class ArticleModel {
     PageFiltersTranslate translate = new PageFiltersTranslate();
     
     public List<ArticleModel> getFirstNineNews(String lan) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 order by id desc LIMIT 0, 9;");
+        ResultSet result = DB.getResultSet("select * from content where type in (0,1) and publish = 1 and isDelete = 0  order by id desc LIMIT 0, 9;");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
@@ -384,7 +384,7 @@ public class ArticleModel {
     return newsList;
     }
     public List<ArticleModel> getArticleByCount(String lan,String id, String count) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and id != "+id+" and publish = 1 order by id desc limit "+count+";");
+        ResultSet result = DB.getResultSet("select * from content where type NOT IN (2,3) and id != "+id+" and publish = 1 and isDelete = 0  order by id desc limit "+count+";");
         List<ArticleModel> newsList = new LinkedList<>();
         while (result.next()) { 
             ArticleModel temp = new ArticleModel();
@@ -435,7 +435,7 @@ public class ArticleModel {
         if(!"0".equals(menuCat)) {
             menuFilter = " AND menuCat = "+menuCat; 
         }
-        ResultSet result = DB.getResultSet("select * from content where type IN("+type+") and publish = 1 "+countryFilter+menuFilter+" order by id desc;");
+        ResultSet result = DB.getResultSet("select * from content where type IN("+type+") and publish = 1 and isDelete = 0 "+countryFilter+menuFilter+" order by id desc;");
         List<ArticleModel> newsList = new LinkedList<>();
         if(!result.isBeforeFirst()){
             return null;
@@ -558,7 +558,9 @@ public class ArticleModel {
     }
     public Boolean isHaveArticle(String id) throws SQLException{
         ResultSet result = DB.getResultSet("SELECT * FROM menu WHERE parentId="+id+";");
-        return result.isBeforeFirst();
+        Boolean res = result.isBeforeFirst();
+        DB.closeCon();
+        return res;
     }
     
     public List<ArticleModel> getByCategory(String lan, String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {

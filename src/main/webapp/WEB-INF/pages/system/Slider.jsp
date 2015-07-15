@@ -23,8 +23,7 @@
                                     <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
                                     Browse image for slide
                                     </button>
-                                </div>    
-                            </div>
+                                </div>  
                             <input type="hidden" name="real-img-path" id="real-img-path" />                           
                         </div>
                     </div>
@@ -47,21 +46,55 @@
         if("${slides}" !== "" && "${slides}" !== undefined) {
             <c:forEach items="${slides}" var="slide">
                 
-                 $("#imageUpload .img-content").append("<div class='col-lg-3 slider-block'><a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + "${slide.image}" + "'>"
-                                + "<img src='"+"${Constants.URL}"+ "${slide.image}" + "' alt='" + "${slide.image}" + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a> \n\
-                    <input type='text' value='${slide.url}' placeholder='URL' class=' slider slider-url form-control' name='"+"${slide.image}"+"-url'/>\n\
-                    <input type='text' value='${slide.text}' placeholder='Text on slide' name='"+"${slide.image}"+"-text' class='slider slider-text form-control'/></div>");
+                 $("#imageUpload .img-content").append("<div class='col-lg-4 slider-block'><a class='returnImage' data-url='"+"${Constants.URL}"+ "${slide.image}" + "'>"
+                                + "<img src='"+"${Constants.URL}"+ "${slide.image}" + "' alt='" + "${slide.image}" + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>"
+                    +"<div class='col-lg-12 margintop30 field'>"
+                                            +"<div class='btn-group lang-switch-title' role='group'>"
+                                                +"<button type='button' id='titleEN' class='btn btn-default active'>EN</button>"
+                                               +" <button type='button' id='titleUA' class='btn btn-default'>UA</button>"
+                                               +" <button type='button' id='titleHU' class='btn btn-default'>HU</button>"
+                                               +" <button type='button' id='titleSK' class='btn btn-default'>SK</button>"
+                                               +" <button type='button' id='titleRO' class='btn btn-default'>RO</button>"
+                                              +"</div></div>"
+						+"<div class='col-lg-12 margintop10 field'>"
+                                                +"<input type='text' value='"+"${slide.urlEN}"+"' name='"+"${slide.image}"+"-urlEN' placeholder='URL EN' class='form-control input-title-lang' lang='titleEN'>"
+                                                +"<input type='text' value='"+"${slide.urlUA}"+"' name='"+"${slide.image}"+"-urlUA' placeholder='URL UA' class='form-control input-title-lang' lang='titleUA'>"
+                                                +"<input type='text' value='"+"${slide.urlHU}"+"' name='"+"${slide.image}"+"-urlHU' placeholder='URL HU' class='form-control input-title-lang' lang='titleHU'>"
+                                                +"<input type='text' value='"+"${slide.urlSK}"+"' name='"+"${slide.image}"+"-urlSK' placeholder='URL SK' class='form-control input-title-lang' lang='titleSK'>"
+                                                +"<input type='text' value='"+"${slide.urlRO}"+"' name='"+"${slide.image}"+"-urlRO' placeholder='URL RO' class='form-control input-title-lang' lang='titleRO'>"
+                                                +"<br/>"
+                                                +"<input type='text' value='"+"${slide.textEN}"+"' name='"+"${slide.image}"+"-textEN' placeholder='Text on slide EN' class='form-control input-title-lang' lang='titleEN'>"
+                                                +"<input type='text' value='"+"${slide.textUA}"+"' name='"+"${slide.image}"+"-textUA' placeholder='Text on slide UA' class='form-control input-title-lang' lang='titleUA'>"
+                                                +"<input type='text' value='"+"${slide.textHU}"+"' name='"+"${slide.image}"+"-textHU' placeholder='Text on slide HU' class='form-control input-title-lang' lang='titleHU'>"
+                                                +"<input type='text' value='"+"${slide.textSK}"+"' name='"+"${slide.image}"+"-textSK' placeholder='Text on slide SK' class='form-control input-title-lang' lang='titleSK'>"
+                                                +"<input type='text' value='"+"${slide.textRO}"+"' name='"+"${slide.image}"+"-textRO' placeholder='Text on slide RO' class='form-control input-title-lang' lang='titleRO'>"
+                                                
+                                              +"</div></div>");
             
                 var real = $("#real-img-path").val();        
                 $("#real-img-path").val(real + "," + "${slide.image}");             
              </c:forEach>
              }
              initRemove();
+            initInputButtons();
         });
+function initInputButtons(){
+        var currentLangT = $(".lang-switch-title button.active").attr("id");
+        $(".input-title-lang[lang='"+currentLangT+"']").show();
+        $(".lang-switch-title button").click(function(){
+            var par = $(this).closest(".slider-block");
+            $(par).find(".lang-switch-title button").removeClass("active");
+            $(this).addClass("active");
+            var currentLangT = $(this).attr("id");
+            $(par).find(".input-title-lang").hide();
+            $(par).find(".input-title-lang[lang='"+currentLangT+"']").show();
+        });
+}
 function imageInserted(){
     $( "#dialog" ).dialog( "close" );
     initRemove();
     initDialog();
+    initInputButtons();
 }
 function initDialog(){
     var current = "";

@@ -5,6 +5,11 @@
  */
 package ua.aits.Carpath.functions;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Kiwi
@@ -106,103 +111,37 @@ public class PageFiltersTranslate {
         this.routeBIC = routeBIC;
     }
     
-    public PageFiltersTranslate getTranslateFilters(String lang) {
+    public PageFiltersTranslate getTranslateFilters(String lang) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        lang = lang.toUpperCase();
+        ResultSet result = DB.getResultSet("select name,"+lang+" from translate");
         PageFiltersTranslate titles = new PageFiltersTranslate();
-        switch(lang.toUpperCase()) {
-            case "UA" :
-                titles.setCountryALL("ВСІ КРАЇНИ");
-                titles.setCountryUA("УКРАЇНА");
-                titles.setCountryHU("УГОРЩИНА");
-                titles.setCountryPL("ПОЛЬЩА");
-                titles.setCountrySK("СЛОВАЧЧИНА");
-                titles.setCountryRO("РУМУНІЯ");
-                
-                titles.setRouteALL("ВСІ ВИДИ");
-                titles.setRouteBIC("ВЕЛОСИПЕДНІ");
-                titles.setRouteHOR("КІННІ");
-                titles.setRouteSKI("ЛИЖНІ");
-                titles.setRouteWAL("ПІШІ");
-                titles.setRouteWAT("ВОДНІ");
-                break;
-            case "EN": 
-                titles.setCountryALL("ALL COUNTRIES");
-                titles.setCountryUA("UKRAINE");
-                titles.setCountryHU("HUNGARY");
-                titles.setCountryPL("POLAND");
-                titles.setCountrySK("SLOVAKIA");
-                titles.setCountryRO("ROMANIA");
-                
-                titles.setRouteALL("ALL METHODS");
-                titles.setRouteBIC("BICYCLE");
-                titles.setRouteHOR("HORSES");
-                titles.setRouteSKI("SKI");
-                titles.setRouteWAL("WALK");
-                titles.setRouteWAT("WATER");
-                break;
-            case "SK": 
-                titles.setCountryALL("VSE DR?AVE");
-                titles.setCountryUA("UKRAJINA");
-                titles.setCountryHU("MAD?ARSKA");
-                titles.setCountryPL("POLJSKA");
-                titles.setCountrySK("SLOVA?KA");
-                titles.setCountryRO("ROMUNIJA");
-                
-                titles.setRouteALL("VSE METODE");
-                titles.setRouteBIC("KOLO");
-                titles.setRouteHOR("KONJI");
-                titles.setRouteSKI("SMU?I");
-                titles.setRouteWAL("HOJA");
-                titles.setRouteWAT("VODA");
-                break;
-            case "HU": 
-                titles.setCountryALL("?sszes orsz?g");
-                titles.setCountryUA("UKRAJNA");
-                titles.setCountryHU("MAGYARORSZ?G");
-                titles.setCountryPL("LENGYELORSZ?G");
-                titles.setCountrySK("SZLOV?KIA");
-                titles.setCountryRO("ROM?NIA");
-                
-                titles.setRouteALL("Minden m?dszer");
-                titles.setRouteBIC("KER?KP?R");
-                titles.setRouteHOR("L?");
-                titles.setRouteSKI("s?el");
-                titles.setRouteWAL("S?TA");
-                titles.setRouteWAT("V?Z");
-                break;
-            case "RO": 
-                titles.setCountryALL("TOATE TARILE");
-                titles.setCountryUA("UKRAINE");
-                titles.setCountryHU("UNGARIA");
-                titles.setCountryPL("POLONIA");
-                titles.setCountrySK("SLOVACIA");
-                titles.setCountryRO("ROM?NIA");
-                
-                titles.setRouteALL("Toate metodele");
-                titles.setRouteBIC("BICICLETA");
-                titles.setRouteHOR("CAI");
-                titles.setRouteSKI("SKI");
-                titles.setRouteWAL("plimbare");
-                titles.setRouteWAT("APA");
-                break;
-            default:
-                titles.setCountryALL("ALL COUNTRIES");
-                titles.setCountryUA("UKRAINE");
-                titles.setCountryHU("HUNGARY");
-                titles.setCountryPL("POLAND");
-                titles.setCountrySK("SLOVAKIA");
-                titles.setCountryRO("ROMANIA");
-                
-                titles.setRouteALL("ALL METHODS");
-                titles.setRouteBIC("BICYCLE");
-                titles.setRouteHOR("HORSES");
-                titles.setRouteSKI("SKI");
-                titles.setRouteWAL("WALK");
-                titles.setRouteWAT("WATER");
-                break;
+        Map<String, String> myMap = new HashMap<>();
+        int column1Pos = result.findColumn("name");
+        int column2Pos = result.findColumn(lang);
+        while (result.next()) {
+            String column1 = result.getString(column1Pos);
+            String column2 = result.getString(column2Pos);
+            myMap.put(column1, column2);
         }
+        
+        titles.setCountryALL(myMap.get("setCountryALL"));
+        titles.setCountryUA(myMap.get("setCountryUA"));
+        titles.setCountryHU(myMap.get("setCountryHU"));
+        titles.setCountryPL(myMap.get("setCountryPL"));
+        titles.setCountrySK(myMap.get("setCountrySK"));
+        titles.setCountryRO(myMap.get("setCountryRO"));
+
+        titles.setRouteALL(myMap.get("setRouteALL"));
+        titles.setRouteBIC(myMap.get("setRouteBIC"));
+        titles.setRouteHOR(myMap.get("setRouteHOR"));
+        titles.setRouteSKI(myMap.get("setRouteSKI"));
+        titles.setRouteWAL(myMap.get("setRouteWAL"));
+        titles.setRouteWAT(myMap.get("setRouteWAT"));
+        
+        DB.closeCon();
         return titles;
     }
-    public String translateCountryByLan(String lan, String country) {
+    public String translateCountryByLan(String lan, String country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String translate;
         PageFiltersTranslate titles = this.getTranslateFilters(lan);
         if("Ukraine".equals(country) || "Украина".equals(country) || "Україна".equals(country)) {

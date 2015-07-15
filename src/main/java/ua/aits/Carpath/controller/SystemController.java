@@ -194,7 +194,7 @@ public class SystemController {
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/Slider");
-            modelAndView.addObject("slides", slider.getAllSlides());
+            modelAndView.addObject("slides", slider.getAllSlidesForEdit());
             return modelAndView;
     }
 }

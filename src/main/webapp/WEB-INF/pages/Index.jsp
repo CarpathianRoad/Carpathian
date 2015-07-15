@@ -18,8 +18,8 @@
                             <c:forEach items="${slides}" var="slide">
                                 <li> <div class="sliderImage">
                                             <img u="image" src="${Constants.URL}${slide.image}" />
-                                            <c:if test="${not empty slide.text}">
-                                                <a href="${slide.url}" class="slider-image-link not-add-lan"><span class="slider-image-text">${slide.text}</span></a>
+                                            <c:if test="${not empty slide.textEN}">
+                                                <a href="${slide.urlEN}" class="slider-image-link not-add-lan"><span class="slider-image-text">${slide.textEN}</span></a>
                                             </c:if>
                                  </div></li> 
                             </c:forEach>

@@ -5,9 +5,6 @@
  */
 package ua.aits.Carpath.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArticleModel;
@@ -91,12 +86,16 @@ public class AjaxController {
         Integer count = tempC.size()-(first);
         List<ArticleModel> tempS = tempC.subList(first, second);
         for (ArticleModel temp : tempS) {
+            String ur = "article/full/";
+            if(temp.type == 2) {
+                ur = "map/markers/";
+            }
         String check = "checked";
         String is_publish = "publish";
         if(temp.publish == 0){ check = ""; is_publish = "";}
         returnHTML = returnHTML + "<tr><td class=\"admin-table-count\">"+count.toString()+"</td>" +
 "      <td class=\"admin-table-cell date-cell\">"+temp.date+"</td>" +
-"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"en/article/full/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
+"      <td class=\"admin-table-cell-title\"><a href=\"http://www.carpathianroad.com/en/"+ur+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
 "      <td class=\"admin-table-cell\">"+temp.public_country+"</td>" +
 "      <td class=\"article-type admin-table-cell\">"+temp.textType+"</td>" +
 "      <td class=\"catID admin-table-cell\">"+temp.menuText+"</td>" +
@@ -157,7 +156,7 @@ public class AjaxController {
         System.out.println(temp.id);
         if(temp.publish == 0){ check = ""; is_publish = "";}
         returnHTML = returnHTML + "<tr><td class=\"admin-table-count\">"+count.toString()+"</td>" +
-"      <td class=\"admin-table-cell-title\"><a href=\""+Constants.URL+"en/routes/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
+"      <td class=\"admin-table-cell-title\"><a href=\"http://www.carpathianroad.com/en/routes/"+temp.id+"\" target=\"_blank\">"+temp.title+"</a></td>" +
 "      <td class=\"admin-table-cell\">"+temp.public_country+"</td>" +
 "      <td class=\"article-type admin-table-cell\">"+temp.textType+"</td>" +
 "      <td class=\"article-publish "+is_publish+"\"><input type=\"checkbox\" data-size=\"mini\" class=\"publish-checkbox\" data-id=\""+temp.id+"\" name=\"my-checkbox\" "+check+"></td>"
