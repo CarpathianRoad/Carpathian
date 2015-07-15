@@ -141,7 +141,7 @@ public class MenuModel {
             MenuModel temp = new MenuModel();
             temp.setId(result.getInt("id"));
             temp.setParentID(result.getInt("parentId"));
-            temp.setTitleEN(result.getString("titleen"));
+            temp.setTitleEN(result.getString("titleEN"));
             menuList.add(temp);
         } 
         DB.closeCon();
@@ -165,6 +165,9 @@ public class MenuModel {
             temp.setImg(result.getString("img"));
             if(temp.img == null || "".equals(temp.img)) {
                 temp.img = "img/dog.png";
+            }
+            if("".equals(temp.getTitleEN()) || temp.getTitleEN() == null ){
+               temp.setTitleEN(result.getString("titleEN")); 
             }
             contentList.add(temp);
         } 
