@@ -226,12 +226,19 @@ public class SinglePageController {
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
     public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		return new ModelAndView("redirect:" + "/en/login");
+        String redir = "http://88.81.239.23:59180/";
+        if("/Carpath/".equals(Constants.URL)) {
+            redir = "/";
+        }
+		return new ModelAndView("redirect:" + redir+"en/login");
 	}
     @RequestMapping(value = {"/en/login","/en/login/","/Carpath/en/login","/Carpath/en/login/"})
     public ModelAndView loginEN(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+                        System.out.println(request.getHeader("referer"));
+                        
 		ModelAndView model = new ModelAndView("LogIn");
+                model.addObject("result", request.getHeader("referer"));
 		return model;
 	}
     
