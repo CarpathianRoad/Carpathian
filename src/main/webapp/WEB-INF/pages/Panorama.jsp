@@ -20,12 +20,20 @@
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     </head>
     <body>
-         <div class="img-upl">
+         <div class="img-upl" style="text-align: center">
              <object width="100%" height="100%">
                             <param name="movie" value="${Constants.URL}files/panoramas/${name}">
-                            <embed src="${Constants.URL}files/panoramas/${name}" width="700" height="450">
+                            <embed src="${Constants.URL}files/panoramas/${name}" width="800" height="535">
                             </embed>
                         </object>
+                            <button type="button" id="close-modal" class="btn btn-danger" data-dismiss="modal">Close</button>
          </div>
     </body>
 </html>
+<script>
+    $(document).ready(function () {
+            $("#close-modal").click(function(){
+                window.parent.closeDialog(); 
+            });
+        });
+</script>
