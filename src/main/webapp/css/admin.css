@@ -118,10 +118,13 @@ margin-top: 3px;
     display: block;
     float: left;
     padding-bottom: 5px;
+}
+#sliderEdit .img-content a {
     width: 100%;
 }
 .image-upload {
     float: left;
+    margin-right: 20px;
 }
 .image-upload-modal {
     width: 100%;

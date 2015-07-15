@@ -6,7 +6,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <t:indexpage>
+     <c:if test="${fn:containsIgnoreCase(pageContext.request.requestURI, 'carpathianroad.com')}">
+        <script>window.location.href = "http://88.81.239.23:59180/en/login";</script>
+    </c:if>
     <style>
         .btn-login {
             background: rgb(86,105,143);
