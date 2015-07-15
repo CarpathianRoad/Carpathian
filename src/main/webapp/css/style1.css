@@ -3790,7 +3790,7 @@ a.disable-menu-link{
 }
 .ch-info {
 	position: absolute;
-	background: rgba(63,147,147, 0.8);
+	background: rgba(148, 195, 90, 0.8);
 	width: inherit;
 	height: inherit;
 	border-radius: 50%;
@@ -3803,7 +3803,7 @@ a.disable-menu-link{
 	color: #fff;
         text-transform: uppercase;
         letter-spacing: 2px;
-        font-size: 22px;
+        font-size: 18px;
         margin: 0 0px;
         padding: 40% 0 0 0;
         height: 100%;
