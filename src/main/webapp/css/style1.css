@@ -2106,6 +2106,13 @@ label{
 .article_main_image{
     margin-top: -5px;
 }
+.article_main_image a{
+    display: block !important;
+}
+.headerSocial{
+    float: left;
+    margin-top: 2px;
+}
 .tripMethod{
     width: 45%;
     text-align: right;
@@ -2477,7 +2484,7 @@ a.disable-menu-link{
     cursor: pointer;
 }
 .panorama a{
-    color: rgb(0, 163, 106);
+    //color: rgb(0, 163, 106);
 }
 .panorama img{
     width: 15px;
@@ -3718,7 +3725,6 @@ a.disable-menu-link{
 }
 .slider-image-text {
     color: white;
-    text-shadow: -1px 0 rgb(86, 105, 143), 0 1px rgb(86, 105, 143), 1px 0 rgb(86, 105, 143), 0 -1px rgb(86, 105, 143);
     padding: 10px 15px;
     background-color: rgba(0,0,0,0.7);
     font-size: 10pt;
@@ -3734,7 +3740,6 @@ a.disable-menu-link{
     height: 128px;
     text-align: right;
     position: absolute;
-    padding-right: 15px;
     top: 140px;
     left: 0;
     right: 0;

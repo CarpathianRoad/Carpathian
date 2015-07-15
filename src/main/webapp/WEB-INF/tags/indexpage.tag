@@ -102,21 +102,7 @@
     <link rel="stylesheet" href="${Constants.URL}js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
     <script type="text/javascript" src="${Constants.URL}js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 </head>
-<script type="text/javascript">
-	//<![CDATA[
-		$(window).load(function() { // makes sure the whole site is loaded
-			$('#status').fadeOut(); // will first fade out the loading animation
-			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-		})
-                var smallMenu = false;
-                $('#fbShare').attr('data-href',document.URL);
-	//]]>
-</script>
 <body>
-    <!-- Preloader -->
-<div id="preloader">
-    <div id="status">&nbsp;</div>
-</div>
     <div class="minHeight">
 	<div class="row indexNavbar topMenu">
             <div class='s-new smallMenuWidth' id="mainMenuWidth">
@@ -141,6 +127,7 @@
                             </ul>
 			</div>
 			<div class="s-two">
+                            <div class="headerSocial intendSocial">
                             <a class="socialHeaderDiv intendSocial not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
@@ -148,6 +135,8 @@
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
+                            </div>
+                            <div class="headerSocial">
                             <a class="socialHeaderDiv twitterDivHeader not-add-lan"
                                     onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
                                     onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
@@ -155,6 +144,7 @@
                                 <img class="s-socialLogo" src="${Constants.URL}img/tw_icon.png"
                                     border="0">
                             </a>
+                            </div>
 			</div>
 			<div class="s-one">
                             <form class="searchMenu" action="${Constants.URL}search" method="GET" id="searchForm">
