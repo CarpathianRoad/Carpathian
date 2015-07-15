@@ -727,14 +727,14 @@
     <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
         <div id="routePointsNumber">0</div>
         <img id="mapRouteImage" src="${Constants.URL}img/route_icon.png"
-             onmouseover="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/icon_route_hover.png';$(this).fadeIn(300);}"
-             onmouseout="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/route_icon.png';$(this).fadeIn(300);}">
+             onmouseover="if(!mapRouteContainerCounter){this.src='${Constants.URL}img/icon_route_hover.png';}"
+             onmouseout="if(!mapRouteContainerCounter){this.src='${Constants.URL}img/route_icon.png';}">
         <div class="routeMapContainer" id="printable">No points in your route</div>
     </div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
-             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(300);}"
-             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker'+countryChooser+'.png';$(this).fadeIn(300);}">
+             onmouseover="if(!rightMapContainerCounter){this.src='${Constants.URL}img/marker_hover.png';}"
+             onmouseout="if(!rightMapContainerCounter){this.src='${Constants.URL}img/marker'+countryChooser+'.png';}">
             <div class="indexMapMenu">
                 <ul id="nav">
                     <li id="allMenu">
@@ -766,8 +766,8 @@
     </div>
     <div id="pushRightConrainer" class="pushRightConrainer">
         <img onclick="hideFilters()" id="mainImageRightContaineMap" src="${Constants.URL}img/mapRightContainer.png"
-             onmouseover="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
-             onmouseout="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
+             onmouseover="if(!filtersContainerCounter){this.src='${Constants.URL}img/mapRightContainerHover.png';}"
+             onmouseout="if(!filtersContainerCounter){this.src='${Constants.URL}img/mapRightContainer.png';}">
             <div class="indexMapContainer">
                 <img src="${Constants.URL}img/main_map.png">
                 <img id="allBorder" src="${Constants.URL}img/map_all.png">
@@ -786,7 +786,7 @@
                             'main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','national_park','gardens','visual',
                             'main3','theaters','music','visualArt','movies','tradition','car','transportConn',
                             'main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral','rescue',
-                            'main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding',
+                            'main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','atv','paragliding',
                             'main6','restaurant','specialRestaurant','cafes','bar','nightBar','winery','vine_bunker','tasting_hall',
                             'main7','hotels','apartments','campings','quest','motels','cottages','info','equipment','wooden_church'
                         ])" 
@@ -796,7 +796,7 @@
                     <ul class='filtersMainContainer'>
                         <li class="filterMap"><input type="checkbox" id="main1" class="css-checkbox" checked="checked" />
                         <label for="main1" class="css-label"
-                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','wooden_church','unesco','interest_architect'])">Monuments and architecture</label><a><div class="filterClickIntend" onclick="rotateCaret('1')"><div id="filtersCaret1" class="bottom-caret"></div></div></a>
+                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','unesco','interest_architect','wooden_church'])">Monuments and architecture</label><a><div class="filterClickIntend" onclick="rotateCaret('1')"><div id="filtersCaret1" class="bottom-caret"></div></div></a>
                     <ul id="MonAndArchFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="museums" name="museums" onclick="Markers(['museums'])" class="css-checkbox" checked="checked" /><label for="museums" class="css-label">Museums</label>
@@ -840,7 +840,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main2" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','forest_food','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
+                    <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','national_park','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
                    <ul id="natureFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="national_park" name="national_park" onclick="Markers(['national_park'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
@@ -921,7 +921,7 @@
                     </ul>
                 </li>
                 <li class="filterMap"><input type="checkbox" id="main5" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','bike','paragliding'])" for="main5" class="css-label">Active rest</label><a><div class="filterClickIntend" onclick="rotateCaret('5')"><div id="filtersCaret5" class="bottom-caret"></div></div></a>
+                    <label onclick="Markers(['main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','atv','paragliding'])" for="main5" class="css-label">Active rest</label><a><div class="filterClickIntend" onclick="rotateCaret('5')"><div id="filtersCaret5" class="bottom-caret"></div></div></a>
                     <ul id="actFilter">
                         <li class="subFilterMap">
                             <input type="checkbox" id="ski" class="css-checkbox" onclick="Markers('ski')" checked="checked" /><label for="ski" class="css-label">Ski and freeride</label>
@@ -939,7 +939,7 @@
                             <input type="checkbox" id="diving" class="css-checkbox" onclick="Markers('diving')" checked="checked" /><label for="diving" class="css-label">Diving</label>
                         </li>
                         <li class="subFilterMap">
-                            <input type="checkbox" id="bike" class="css-checkbox" onclick="Markers('bike')" checked="checked" /><label for="bike" class="css-label">Extreme bike tracks</label>
+                            <input type="checkbox" id="atv" class="css-checkbox" onclick="Markers('atv')" checked="checked" /><label for="atv" class="css-label">Extreme bike tracks</label>
                         </li>
                         <li class="subFilterMap">
                             <input type="checkbox" id="paragliding" class="css-checkbox" onclick="Markers('paragliding')" checked="checked" /><label for="paragliding" class="css-label">Paragliding</label>

@@ -7,6 +7,7 @@ body{
 }
 a, a:hover, a:active, a:visited {
     text-decoration:none;
+    outline: 0;
 }
 .s-new  .s-logoIndex img{
     width: 100%;
@@ -115,6 +116,7 @@ body {
     height: 30px;
     margin-left: 374px;
     outline: none;
+    visibility: hidden;
 }
 .activeSearch{
     visibility: hidden;
@@ -2508,6 +2510,18 @@ a.disable-menu-link{
         }
 
 
+@-moz-document url-prefix() { 
+    .s-new .s-rightNavBar .s-top .s-one{
+        margin-top: 5px;
+    }
+    #searchButtonActive{
+        top: 19px;
+    }
+    .s-new .s-rightNavBar .s-top .s-two{
+        margin-left: 5px;
+    }
+}
+        
 
 
 @media (min-width: 760px) and (max-width: 950px){

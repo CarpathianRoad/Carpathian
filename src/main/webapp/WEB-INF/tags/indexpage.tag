@@ -723,6 +723,7 @@
     */
    
     function showButton(){
+        $('#searchButtonActive').css('visibility','visible'); 
         $('#searchButtonActive').fadeIn(200); 
         $("#s-textbox").addClass("textBoxWidth");
         $('#searchButton').fadeOut(1); 
