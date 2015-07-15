@@ -389,7 +389,7 @@
              addLangToLink(lang.toLowerCase());
             },
             error: function(response){      
-             console.log(response);
+             buildMenu($(".lang-sw.active").html());
             }
         });
         $('#languageSelectorSmall').html(lang);

@@ -138,6 +138,7 @@ public class PageFiltersTranslate {
         titles.setRouteWAL(myMap.get("setRouteWAL"));
         titles.setRouteWAT(myMap.get("setRouteWAT"));
         
+        DB.closeCon();
         return titles;
     }
     public String translateCountryByLan(String lan, String country) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
