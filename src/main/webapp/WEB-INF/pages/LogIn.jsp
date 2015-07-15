@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <t:indexpage>
-     <c:if test="${fn:containsIgnoreCase(pageContext.request.requestURI, 'carpathianroad.com')}">
+     <c:if test="${fn:containsIgnoreCase(pageContext.request.requestURL, 'carpathianroad.com')}">
         <script>window.location.href = "http://88.81.239.23:59180/en/login";</script>
     </c:if>
     <style>

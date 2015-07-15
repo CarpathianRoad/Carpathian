@@ -273,81 +273,82 @@
 								<button class="btn btn-primary btn-mini margintop10 marginbottom30" id="sudmitData" type="submit">Save</button>
 							</p>
             <script> 
-                CKEDITOR.replace('editorEN', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorUA', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorHU', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorSK', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorPL', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorRO', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorGE', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorCZ', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                CKEDITOR.replace('editorSRB', {
-                    filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
-                    filebrowserWindowWidth  : 800,
-                    filebrowserWindowHeight : 500
-                });
-                
-                
+                function initCKE() {
+                    CKEDITOR.replace('editorEN', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorUA', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorHU', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorSK', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorPL', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorRO', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorGE', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorCZ', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                    CKEDITOR.replace('editorSRB', {
+                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserWindowWidth  : 800,
+                        filebrowserWindowHeight : 500
+                    });
+                }
     $(document).ready(function () { 
+        initCKE();
         var action = $("#editForm").attr("action");
         var arr = window.location.href.split(";");
         $("#editForm").attr("action",action+";"+arr[1]);
@@ -471,10 +472,7 @@ function removePanoramaInit(){
             }
         });
     });
-}
-function returnImgCK(){
-    console.log(ret);
-    console.log(num);
+    initCKE();
 }
 function imageInserted(){
     $( "#dialog" ).dialog( "close" );
