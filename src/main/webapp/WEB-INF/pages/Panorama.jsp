@@ -21,7 +21,7 @@
     </head>
     <body>
          <div class="img-upl" style="text-align: center">
-             <object width="100%" height="100%">
+             <object width="100%" height="94%">
                             <param name="movie" value="${Constants.URL}files/panoramas/${name}">
                             <embed src="${Constants.URL}files/panoramas/${name}" width="800" height="535">
                             </embed>

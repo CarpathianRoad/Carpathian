@@ -246,10 +246,6 @@ public class SinglePageController {
         public ModelAndView searchResult (@PathVariable("lan") String lan, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
                 String searchStr = request.getParameter("find");
-                if(!"/Carpath/".equals(Constants.URL)){
-                    byte[] bytes = searchStr.getBytes(StandardCharsets.ISO_8859_1);
-                    searchStr = new String(bytes, StandardCharsets.UTF_8);
-                }
 		ModelAndView model = new ModelAndView("Search");
                 List<ArticleModel> articles = news.getSearchResult(lan, searchStr);
                 for(ArticleModel temp: articles) {
@@ -259,7 +255,9 @@ public class SinglePageController {
                     String[] img  = temp.image.split(",");
                     temp.setImage(img[0]);
                 }
+                model.addObject("find", searchStr);
                 model.addObject("resultList", articles);
+                model.addObject("lan", lan);
 		return model;
     }
     
