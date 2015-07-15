@@ -129,8 +129,8 @@
 			<div class="s-two">
                             <div class="headerSocial intendSocial">
                             <a class="socialHeaderDiv intendSocial not-add-lan"
-                                    onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');$(this).find('img').fadeIn(300);" 
-                                    onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');$(this).find('img').fadeIn(1);" 
+                                    onmouseover="$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');" 
+                                    onmouseout="$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');" 
                                     href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
@@ -138,8 +138,8 @@
                             </div>
                             <div class="headerSocial">
                             <a class="socialHeaderDiv twitterDivHeader not-add-lan"
-                                    onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');$(this).find('img').fadeIn(300);" 
-                                    onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');$(this).find('img').fadeIn(1);" 
+                                    onmouseover="$(this).find('img').attr('src','${Constants.URL}img/tw_icon_hover.png');" 
+                                    onmouseout="$(this).find('img').attr('src','${Constants.URL}img/tw_icon.png');" 
                                     href="https://twitter.com/CarpathianRoad" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/tw_icon.png"
                                     border="0">
@@ -150,9 +150,9 @@
                             <form class="searchMenu" action="${Constants.URL}search" method="GET" id="searchForm">
 				<button type="button" id="searchButton" onclick="showButton()">
                                     <div class="socialHeaderDiv"
-                                        onmouseover="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');$(this).find('img').fadeIn(100);
+                                        onmouseover="$(this).find('img').attr('src','${Constants.URL}img/search_icon_hover.png');
                                             $('#searchButton').css('top','4px')"
-                                        onmouseout="$(this).find('img').hide();$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');$(this).find('img').fadeIn(100);
+                                        onmouseout="$(this).find('img').attr('src','${Constants.URL}img/search_icon.png');
                                             $('#searchButton').css('top','3px')">
                                         <img src="${Constants.URL}img/search_icon.png"
                                         >
