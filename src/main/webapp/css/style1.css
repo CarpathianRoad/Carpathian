@@ -2107,7 +2107,7 @@ label{
     margin-top: -5px;
 }
 .tripMethod{
-    width: 50%;
+    width: 45%;
     text-align: right;
     float: right;
 }
@@ -2221,7 +2221,7 @@ a.disable-menu-link{
     .countriesFilterRoute{
         left: 0;
         text-align: left;
-        width: 50%;
+        width: 55%;
     }
     .countriesFilterRoute a{
         margin-left: 0;
