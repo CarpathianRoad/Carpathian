@@ -88,8 +88,10 @@
                 <div class="markerPageBottomLine"></div>
                 <c:if test="${marker.panorama !=''}">
                 <div class="panorama">
-                    <a class="panorama-link">
-                        <strong>Panorama <img class="new-tab-icon" src="${Constants.URL}img/newTabIcon.png"/></strong>
+                    <a class="panorama-link"
+                       onmouseover="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/newTabIcon.png');$(this).find('img').fadeIn(200);" 
+                       onmouseout="$(this).find('img').fadeOut(1);$(this).find('img').attr('src','${Constants.URL}img/new_tab1.png');$(this).find('img').fadeIn(200);">
+                        <strong>Panorama <img class="new-tab-icon" src="${Constants.URL}img/new_tab1.png"/></strong>
                     </a>
                     <div id="dialog">
                                     <iframe id="myIframe" src=""></iframe>
