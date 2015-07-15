@@ -139,7 +139,7 @@ public class Helpers {
         else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
                 if(temp.id == 92 || temp.id == 17 || temp.id == 95) {
-                         html = html + "<option value=\""+temp.id+"\"><&nbsp;&nbsp"+temp.titleEN.toUpperCase();
+                         html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp"+temp.titleEN.toUpperCase();
                             html = html + "</option>"; 
                      }
                 else {
