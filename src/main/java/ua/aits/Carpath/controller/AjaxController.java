@@ -259,7 +259,76 @@ public class AjaxController {
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
     }
-    
+    @RequestMapping(value = {"/articles/loadсontentforsearch"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<String> load_content_for_search(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        HttpHeaders responseHeaders = new HttpHeaders(); 
+        responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+        String lan = request.getParameter("lan");
+        String find = request.getParameter("find");
+        int countPage = Integer.parseInt(request.getParameter("count"));
+        int countNeed = countPage + 9;
+        String lang = lan + "/";
+        if(countPage == 0) {
+            lang = "";
+        }
+        List<ArticleModel> tempw =  content.getSearchResult(lan, find);
+        if(tempw == null) { 
+        return new ResponseEntity<>("", responseHeaders, HttpStatus.CREATED);
+        }
+        String styleForMore = "";
+        if(tempw.size() < countNeed) { 
+            countNeed = tempw.size();
+            styleForMore = "doNotShow";
+        }
+        List<ArticleModel> tempC = tempw.subList(countPage, countNeed);
+        String returnHTML = "";
+        for (ArticleModel temp : tempC) 
+            {
+            String lanURL = Constants.URL + lang + "article/full/";   
+        if(temp.type == 2) {
+            lanURL = Constants.URL + lang + "map/markers/";
+        }
+        else {
+            
+        }
+                if(!"".equals(temp.avatar) && temp.avatar != null){
+                        temp.setImage(temp.avatar);
+                }
+                String[] tempImg = temp.image.split(",");
+                returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
+"                        <div class=\"s-block newsHeight\">\n" +
+"                            <div class=\"newsImage\">\n" +
+"                                <a href=\""+lanURL+temp.id+"\">\n" +
+"                                    <div class=\"imageHover\">\n" +
+"                                        <div class=\"imageHoverDate\">\n" +
+"                                            "+temp.date+"\n" +
+"                                        </div>\n" +
+"                                        <div class=\"imageHoverCountry\">\n" +
+"                                            <div class=\"newsCountryText\">"+temp.country+"</div><img src=\""+Constants.URL+"img/newsImageHover.png\">\n" +
+"                                        </div>\n" +
+"                                    </div>\n" +
+"                                    <img src=\""+Constants.URL+tempImg[0]+"\" />\n" +
+"                                </a>\n" +
+"                            </div>\n" +
+"\n" +
+"                            <img class=\"newsImageUnderline\" src=\""+Constants.URL+"img/newsLine.png\">\n" +
+"                            <div class=\"news_text_box\">\n" +
+"                                <div class=\"news_title\"><a href=\""+lanURL+temp.id+"\">"+temp.title+"</a></div>\n" +
+"                                <a href=\""+lanURL+temp.id+"\">\n" +
+"                                <div class=\"news_text\">"+temp.textEN+"</div></a>\n" +
+"                            </div>\n" +
+"                        </div>\n" +
+"                    </div> ";
+            }
+        returnHTML += "<div class=\"load-more-content "+styleForMore+"\"><a count=\""+countNeed+"\" class=\"btn btn-theme detailsButton\"> "
+                + "<span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>"
+                + "<span class=\"load-text\">LOAD MORE</span>"
+                + "</a></div>";
+        return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
+        //return returnHTML;
+    }
     @RequestMapping(value = {"/filter_by_country_routes"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> routes_content_filter(HttpServletRequest request, HttpServletResponse response) throws Exception {

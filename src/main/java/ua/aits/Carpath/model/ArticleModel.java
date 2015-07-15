@@ -636,26 +636,28 @@ public class ArticleModel {
             if("".equals(f_title) || f_title == null){
                 f_title = result.getString("titleEN");
             }
+            if(f_title.length() > 55){
+                f_title = f_title.substring(0,55);
+            }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
-                text = result.getString("textEN");
+                text = Helpers.html2text(result.getString("textEN"));
             }
-            if(text.length() > 400){
-                text = text.substring(0,400) + "...";
+            if(text.length() > 175){
+                text = text.substring(0,175);
             }
-            
             temp.setTextEN(text);
             temp.setId(result.getInt("id"));
             temp.setTitle(f_title);
-            temp.setDate(result.getString("date").replace("/", "."));
-            temp.setImage(result.getString("image"));
-            temp.setAvatar(result.getString("avatar"));
-            if("".equals(temp.getImage())){
-                temp.setImage("img/no-photo.png");
-            }
-            temp.setActDate(result.getString("actual"));
+            temp.setType(result.getInt("type"));
             temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
-            temp.setAuthor(result.getString("author"));
+            temp.setDate(result.getString("date").replace("/", "."));
+            temp.setAvatar(result.getString("avatar"));
+            String [] arr = result.getString("image").split(",");
+            if("".equals(arr[0])){
+                arr[0] = "img/zak.png";
+            }
+            temp.setImage(arr[0]); 
             contentList.add(temp);
         } 
         DB.closeCon();
