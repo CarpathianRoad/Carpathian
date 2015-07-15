@@ -122,6 +122,12 @@ public class SliderModel {
             temp.setImage(result.getString("image"));
             temp.setUrlEN(result.getString("url"+lan.toUpperCase()));
             temp.setTextEN(result.getString("text"+lan.toUpperCase()));
+            if("".equals(temp.getTextEN()) || temp.getTextEN() == null ){
+               temp.setTextEN(result.getString("textEN")); 
+            }
+            if("".equals(temp.getUrlEN()) || temp.getUrlEN() == null ){
+               temp.setUrlEN(result.getString("urlEN")); 
+            }
             resultList.add(temp);
         } 
         return resultList;
