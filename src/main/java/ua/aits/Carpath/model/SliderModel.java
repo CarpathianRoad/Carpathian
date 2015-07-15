@@ -128,6 +128,9 @@ public class SliderModel {
             if("".equals(temp.getUrlEN()) || temp.getUrlEN() == null ){
                temp.setUrlEN(result.getString("urlEN")); 
             }
+            if(temp.getTextEN() == "null"){
+                temp.setTextEN("");
+            }
             resultList.add(temp);
         } 
         return resultList;
