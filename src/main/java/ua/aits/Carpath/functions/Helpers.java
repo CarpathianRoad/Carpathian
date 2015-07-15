@@ -90,9 +90,15 @@ public class Helpers {
         }
         else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
-                    html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
-                    html = html + this.getRowHtmlSelect(lang, temp.id.toString());
-                    html = html + "</optgroup>";
+                    if(temp.id == 92 || temp.id == 17 || temp.id == 95) {
+                             html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp"+temp.titleEN.toUpperCase();
+                                html = html + "</option>"; 
+                         }
+                    else {
+                        html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
+                        html = html + this.getRowHtmlSelect(lang, temp.id.toString());
+                        html = html + "</optgroup>";
+                    }
                 }
         }
         else {
@@ -105,6 +111,54 @@ public class Helpers {
                      else {
                     html = html + "<optgroup label=\"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
                     html = html + this.getRowHtmlSelect(lang, temp.id.toString());
+                    html = html + "</optgroup>";
+                     }
+                 }
+                 else {
+                    html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase();
+                    html = html + "</option>";
+                 }
+                }
+            
+        }
+        return html;
+    }
+    
+    public String getRowHtmlSelectSmall(String lang, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<MenuModel> tempMenu = menu.getMenuRowSelect(lang, id);
+        String html = null;
+        if("0".equals(id)) {
+            html = "<label for=\"sel1\">Menu</label><select class=\"filter-select\" name=\"type\" id=\"menuCat\"><option value=\"all\">All</option>";
+            for(MenuModel temp : tempMenu) {
+                    html = html + "<optgroup label=\""+temp.titleEN.toUpperCase()+"\">";
+                    html = html + this.getRowHtmlSelectSmall(lang, temp.id.toString());
+                    html = html + "</optgroup>";
+                }
+            html += "</select>";
+        }
+        else if("2".equals(id) || "3".equals(id)) {
+            for(MenuModel temp : tempMenu) {
+                if(temp.id == 92 || temp.id == 17 || temp.id == 95) {
+                         html = html + "<option value=\""+temp.id+"\"><&nbsp;&nbsp"+temp.titleEN.toUpperCase();
+                            html = html + "</option>"; 
+                     }
+                else {
+                    html = html + "<optgroup label=\"&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
+                    html = html + this.getRowHtmlSelectSmall(lang, temp.id.toString());
+                    html = html + "</optgroup>";
+                }
+                }
+        }
+        else {
+             for(MenuModel temp : tempMenu) {
+                 if(temp.parentID == 2 || temp.parentID == 3) {
+                     if(temp.id == 92 || temp.id == 17 || temp.id == 95) {
+                         html = html + "<option value=\""+temp.id+"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase();
+                            html = html + "</option>"; 
+                     }
+                     else {
+                    html = html + "<optgroup label=\"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.titleEN.toUpperCase()+"\">";
+                    html = html + this.getRowHtmlSelectSmall(lang, temp.id.toString());
                     html = html + "</optgroup>";
                      }
                  }
