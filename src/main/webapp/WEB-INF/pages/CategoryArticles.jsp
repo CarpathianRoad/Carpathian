@@ -68,7 +68,7 @@ function loadContent(country, count){
              loadButtonInit();
             },
             error: function(response){      
-             console.log(response);
+             loadContent("all", "0");
             }
         });
 }
