@@ -438,14 +438,20 @@
         
         $('.scrollToTop').fadeOut(1);
         $('#searchButtonActive').hide(); 
+        $(".markerPageText").find('img').parent().append('<a class="fancybox not-add-lan" id="fancyboxCont"></a>');
+        //$(".markerPageText").find('img').addClass('fancybox');
         
-        $(".markerPageText").find('img').addClass('fancybox');
+        $(".markerPageText").find('img').each(function() {
+            var elem = $(this);
+            $(this).next().attr('href',$(elem).attr('src'));
+            $(this).appendTo($(this).next());
+        });
     });
     
     function showImg(){
             $.each($('.fancybox'), function() {
                 setTimeout(function(){ 
-                    $('.fancybox').css('display', 'inline-block');
+                    //$('.fancybox').css('display', 'inline-block');
                 }, 100);
             });
     }
