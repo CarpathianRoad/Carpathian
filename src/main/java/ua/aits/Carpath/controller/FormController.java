@@ -66,7 +66,7 @@ public class FormController {
         String region = request.getParameter("region");
         String district = request.getParameter("district");
         String town = request.getParameter("town");
-        String markerType = request.getParameter("marker-type-all");
+        String markerType = "";
         String filter = request.getParameter("filter-type-all");
         String textEN = request.getParameter("textEN");
         String textUA = request.getParameter("textUA");
@@ -111,7 +111,7 @@ public class FormController {
         String region = request.getParameter("region");
         String district = request.getParameter("district");
         String town = request.getParameter("town");
-        String markerType = request.getParameter("marker-type-all");
+        String markerType = "";
         String filter = request.getParameter("filter-type-all");
         String textEN = request.getParameter("textEN");
         String textUA = request.getParameter("textUA");

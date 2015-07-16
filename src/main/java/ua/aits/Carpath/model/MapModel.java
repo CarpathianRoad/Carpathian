@@ -24,6 +24,7 @@ public class MapModel {
     public String title;
     public String textEN;
     public String markerIcon;
+    public String filters;
     public String country;
     public String region;
     public String district;
@@ -74,6 +75,13 @@ public class MapModel {
     }
     public void setMarkerIcon(String markerIcon) {
         this.markerIcon = markerIcon;
+    }
+    
+    public String getFilters() {
+        return filters;
+    }
+    public void setFilters(String filters) {
+        this.filters = filters;
     }
     
     
@@ -173,6 +181,7 @@ public class MapModel {
             temp.setTitle(f_title);
             temp.setTextEN(text);
             temp.setMarkerIcon(result.getString("markerIcon")); 
+            temp.setFilters(result.getString("filters")); 
             temp.setPublic_country(result.getString("public_country"));
             temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setRegion(result.getString("region")); 
