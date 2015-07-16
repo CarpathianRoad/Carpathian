@@ -5,13 +5,28 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<t:archive_page>
+    <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Category list
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+                        <div class="list-group">
+                            ${menuList}
+                        </div>
+                    </div>
+                </div>
+</t:archive_page>
+<script>
+    $(document).ready(function() {
+        console.log("${sessionScope.user.user_name}");
+    });
+</script>

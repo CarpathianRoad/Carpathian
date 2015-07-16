@@ -180,4 +180,15 @@ public class MenuModel {
         DB.closeCon();
         return ret;
     }
+    public Integer countSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from menu where menu.parentID = "+id+";");
+        result.first();
+        return result.getInt("cnt");
+    }
+    
+    public Integer countArticles(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from content where menuCat = "+id+";");
+        result.first();
+        return 0;
+    }
 }
