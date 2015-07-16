@@ -186,7 +186,7 @@
             if (e.keyCode == 27) { 
                 $.each($('.fancybox'), function() {
                     setTimeout(function(){ 
-                        $('.fancybox').css('display', 'inline-block');
+                        //$('.fancybox').css('display', 'inline-block');
                     }, 100);
                 });
             }
