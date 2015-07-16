@@ -7,6 +7,11 @@
 <%@tag description="Archive page" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
+
+<c:if test="${sessionScope.user == null && pageContext.request.servletPath.substring(pageContext.request.servletPath.lastIndexOf('/')) != '/Login.jsp'}">
+    <script>window.location.href = "${Constants.URL}archive/login";</script>
+</c:if>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
     <title>Archive page</title>
 
     <!-- Bootstrap Core CSS -->
@@ -59,39 +64,51 @@
                     <img src="${Constants.URL}img/logo_4.png"></a>
             </div>
             <!-- Top Menu Items -->
+            <c:if test="${sessionScope.user != null}">
             <ul class="nav navbar-right top-nav">
                 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="user-avatar" src="${Constants.URL}${sessionScope.user.user_avatar}" /> ${sessionScope.user.user_firstname} ${sessionScope.user.user_lastname} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<c:url value="/archive/do/logout.do"/>"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
             </ul>
+            </c:if>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="${Constants.URL}archive/login"><i class="fa fa-fw fa-sign-in"></i> Login page</a>
-                    </li>
-                    <li>
-                        <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-list-alt"></i> Main page</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
+                    <c:choose>
+                        <c:when test="${sessionScope.user == null}">
+                            <li class="active">
+                                <a href="${Constants.URL}archive/login"><i class="fa fa-fw fa-sign-in"></i> Login page</a>
+                            </li>
+                        </c:when>    
+                        <c:otherwise>
+                            <li class="active">
+                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-list-alt"></i> Main page</a>
+                            </li>
+                            <c:if test="${sessionScope.user.user_role == 1}">
+                            <li class="">
+                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-users"></i> Users</a>
+                            </li>
+                            <li class="">
+                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-picture-o"></i> Slider</a>
+                            </li>
+                            <li class="">
+                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-road"></i> Routes</a>
+                            </li>
+                            <li class="">
+                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-filter"></i> Filters</a>
+                            </li>
+                            <li class="">
+                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-map-marker"></i> Markers</a>
+                            </li>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
