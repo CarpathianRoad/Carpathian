@@ -111,8 +111,10 @@ public class ArchiveUserModel {
     
     public String isExitsUser(String user_name, String user_password) throws SQLException{
         ResultSet result = DB.getResultSet("SELECT * FROM archive_users WHERE user_name = '" + user_name +"' AND user_password = '" + user_password + "' AND user_enabled = 1;");
-        if(result.next()) { return result.getString("user_id"); }
-        return null;
+        String res = null;
+        if(result.next()) { res = result.getString("user_id"); }
+        DB.closeCon();
+        return res;
     }
     
     public ArchiveUserModel getOneUserFull(String user_id, String user_name, String user_password)  throws SQLException{ 
@@ -133,6 +135,7 @@ public class ArchiveUserModel {
             temp.setUser_role(result.getInt("user_role"));
             temp.setUser_descr(result.getString("user_descr"));
         }
+        DB.closeCon();
         return temp;
     }
     
@@ -153,6 +156,7 @@ public class ArchiveUserModel {
             temp.setUser_descr(result.getString("user_descr"));
             userList.add(temp);
         }
+        DB.closeCon();
         return userList;
     }
 }
