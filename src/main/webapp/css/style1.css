@@ -1291,6 +1291,9 @@ p{
     transition: 0.5s;
     z-index: 5 !important;
 }
+#mapRouteButton{
+    cursor: pointer;
+}
 .mapControlsScroll{
     right: 50px !important;
     width: 45px;
@@ -2509,6 +2512,13 @@ a.disable-menu-link{
             margin-top: -160px;
         }
 
+        
+.markerPageText a:visited{
+    color: rgb(86,105,143) !important;
+}
+a:visited:hover {
+    color: rgb(174,214,43);
+}
 
 @-moz-document url-prefix() { 
     .s-new .s-rightNavBar .s-top .s-one{
