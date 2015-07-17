@@ -210,26 +210,6 @@
 						</div>
                                             </div> 
                 <hr>
-            <div class="row add-row list-block markers">
-                <div class="col-lg-10 field">
-                    <div> <label>Marker type</label></div>
-                    <ul>
-                        <c:forEach items="${markers}" var="item">
-                            <li>
-                                <div class="checkbox">  
-                                <label><img src="${Constants.URL}img/markers/${item.shortTitle}.png"/><input type="checkbox" value="${item.shortTitle}">${item.shortTitle}</label>
-                              
-                              </div>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                    <input type="hidden" name="marker-type-all" id="marker-type-all" />
-                                                <div class="validation"></div>
-                </div>
-              
-    
-            </div> 
-                <hr>
             <div class="row add-row list-block filters">
                 <div class="col-lg-10 field">
                     <div> <label>Filter type</label></div>
@@ -370,7 +350,6 @@
             var images = "${article.image}".split(",");
        $.each(images, function( index, value ) {
             $("#imageUpload .img-content").append('<a class="returnImage" data-url="${Constants.URL}'+value+'"><img src="${Constants.URL}'+value+'" alt="'+value+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
-
     var real = $("#real-img-path").val();        
     $("#real-img-path").val(real + "," + value);       
 });
@@ -380,15 +359,10 @@
         $("#avatar-path").val("${article.avatar}"); 
         }
         initRemove();
-    var markers  = "${article.markerIcon}".split(",");
-    $.each(markers, function( index, value ) {
-        $(".markers :checkbox[value='"+value+"']").attr("checked","true");
-    });
     var filters  = "${article.filters}".split(",");
     $.each(filters, function( index, value ) {
         $(".filters :checkbox[value='"+value+"']").attr("checked","true");
     });
-
         $( "#datepicker" ).datepicker();
         $( "#datepicker" ).datepicker("option", "dateFormat", "dd.mm.yy");
         $("#datepicker").val("${article.date}");
@@ -427,8 +401,6 @@
             removePanoramaInit();
         }
 });
-
-
 $('.panorama-file').on('change', '#panorama-input', function() {
         $(".load-panorama").show();
         var data = new FormData();
@@ -569,10 +541,6 @@ $("#sudmitData").click(function(){
     var isValidate = true;
     var check_str_markers = "";
     var check_str_filters = "";
-    $(".markers input:checkbox:checked:checked").each(function() {
-        check_str_markers = check_str_markers + this.value + ",";
-    });
-    $("#marker-type-all").attr("value", check_str_markers.slice(0,-1));
     $(".filters input:checkbox:checked:checked").each(function() {
         check_str_filters = check_str_filters + this.value + ",";
     });
@@ -619,14 +587,7 @@ $("#sudmitData").click(function(){
         else {
             $("#longitude0").next("div.validation").html('');
         }
-        if(check_str_markers === "") {
-            $("#marker-type-all").next("div.validation").html('<span style="color:red">Select at least one marker type.</span>');
-            isValidate = false;   
-        }
-        else {
-            $("#marker-type-all").next("div.validation").html('');
-        }
-        if(check_str_markers === "") {
+        if(check_str_filters === "") {
             $("#filter-type-all").next("div.validation").html('<span style="color:red">Select at least one filter type.</span>');
             isValidate = false;   
         }
@@ -665,11 +626,8 @@ $("#sudmitData").click(function(){
                     {
                         geocodePosition(marker.getPosition());
                     });
-
                     //Определение геокодера
                     geocoder = new google.maps.Geocoder();
-
-
             }
             
             function geocodePosition(location) {
@@ -729,7 +687,6 @@ $("#sudmitData").click(function(){
                             draggable: true,
                             title: text
                       });
-
                     $(function() {
                     $("#address"+num).autocomplete({
                       //Определяем значение для адреса при геокодировании
@@ -755,7 +712,6 @@ $("#sudmitData").click(function(){
                       }
                     });
               });
-
               //Добавляем слушателя события обратного геокодирования для маркера при его перемещении  
               google.maps.event.addListener(marker[num], 'drag', function() {
                     geocoder.geocode({'latLng': marker[num].getPosition()}, function(results, status) {
