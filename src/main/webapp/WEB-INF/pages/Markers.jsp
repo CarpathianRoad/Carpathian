@@ -18,6 +18,7 @@
             height: 100%;
             border: 0;
         }
+        .ui-dialog-titlebar {display:none}
     </style>
     <script>
         $(document).ready(function() {
@@ -216,6 +217,9 @@
            $(".panorama-link").click(function(){
                     $('#dialog').dialog('open');
            }); 
+        }
+        function closeDialog(){
+            $( "#dialog" ).dialog( "close" );
         }
     </script>
         <style>

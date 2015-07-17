@@ -87,7 +87,8 @@
             });
             var filterNames = [];
             <c:forEach items="${markers}" var="marker">
-                var markerIcons = "${marker.markerIcon}".split(",");
+                var markerIcons = "${marker.filters}".split(",");
+                console.log("${marker.filters}");
                 //KIT NE PASHE ROZKOMENTUTU
                 //if(icons.indexOf(markerIcons[0])==-1){
                 //markerIcons.splice(0,0,'info');
@@ -139,7 +140,6 @@
                     url: '${Constants.URL}img/group_marker.png' 
                 }
             ];
-
             var mcOptions = {
                 styles: clusterStyles
             };
@@ -249,13 +249,13 @@
                                 if(document.getElementById(markers[i].props[j]).checked==true){
                                     show = true;
                                     /*var pinIcon = new google.maps.MarkerImage(
-                                        "${Constants.URL}img/greenmarkers/"+markers[i].props[j]+".png",
+                                        "${Constants.URL}img/markers/"+markers[i].props[j]+".png",
                                         null, 
                                         null, 
                                         null, 
                                         new google.maps.Size(30, 40)
-                                    ); */
-                                    //markers[i].icon=pinIcon;
+                                    );
+                                    markers[i].icon=pinIcon;*/
                                     markerCluster.removeMarker(markers[i]);
                                     markerCluster.addMarker(markers[i]);
                                     markers[i].setMap(null);
@@ -277,7 +277,7 @@
                             markerCluster.removeMarker(markers[i]);
                             markerCluster.addMarker(markers[i]);
                             /*var pinIcon = new google.maps.MarkerImage(
-                                "${Constants.URL}img/greenmarkers/"+type[0]+".png",
+                                "${Constants.URL}img/markers/"+type[0]+".png",
                                 null, 
                                 null, 
                                 null, 
@@ -316,7 +316,6 @@
             }
             return false;
         };
-
         Array.prototype.unique = function() {
             var arr = [];
             for(var i = 0; i < this.length; i++) {
@@ -358,6 +357,7 @@
             $('#ukraineBorder').hide();
             $("#allMap").addClass( "buttonBorderClass" );
             $(".mapType").hide();
+            Markers(['tourism_infrastructure_units','tourist_welcome_centers','tourist_stops']);
         });
         var rightMapContainerCounter = false;
         var filtersContainerCounter = false;
@@ -727,14 +727,14 @@
     <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
         <div id="routePointsNumber">0</div>
         <img id="mapRouteImage" src="${Constants.URL}img/route_icon.png"
-             onmouseover="if(!mapRouteContainerCounter){this.src='${Constants.URL}img/icon_route_hover.png';}"
-             onmouseout="if(!mapRouteContainerCounter){this.src='${Constants.URL}img/route_icon.png';}">
+             onmouseover="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/icon_route_hover.png';$(this).fadeIn(300);}"
+             onmouseout="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/route_icon.png';$(this).fadeIn(300);}">
         <div class="routeMapContainer" id="printable">No points in your route</div>
     </div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
-             onmouseover="if(!rightMapContainerCounter){this.src='${Constants.URL}img/marker_hover.png';}"
-             onmouseout="if(!rightMapContainerCounter){this.src='${Constants.URL}img/marker'+countryChooser+'.png';}">
+             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(300);}"
+             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker'+countryChooser+'.png';$(this).fadeIn(300);}">
             <div class="indexMapMenu">
                 <ul id="nav">
                     <li id="allMenu">
@@ -766,8 +766,8 @@
     </div>
     <div id="pushRightConrainer" class="pushRightConrainer">
         <img onclick="hideFilters()" id="mainImageRightContaineMap" src="${Constants.URL}img/mapRightContainer.png"
-             onmouseover="if(!filtersContainerCounter){this.src='${Constants.URL}img/mapRightContainerHover.png';}"
-             onmouseout="if(!filtersContainerCounter){this.src='${Constants.URL}img/mapRightContainer.png';}">
+             onmouseover="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
+             onmouseout="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
             <div class="indexMapContainer">
                 <img src="${Constants.URL}img/main_map.png">
                 <img id="allBorder" src="${Constants.URL}img/map_all.png">
@@ -781,259 +781,11 @@
             <div id='filtersContainer'>
                 <div class="filtersName">
                     <input type="checkbox" id="markAll" name="markAll"
-                        onclick="Markers(['markAll',
-                            'main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','unesco','interest_architect',
-                            'main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','national_park','gardens','visual',
-                            'main3','theaters','music','visualArt','movies','tradition','car','transportConn',
-                            'main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral','rescue',
-                            'main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','atv','paragliding',
-                            'main6','restaurant','specialRestaurant','cafes','bar','nightBar','winery','vine_bunker','tasting_hall',
-                            'main7','hotels','apartments','campings','quest','motels','cottages','info','equipment','wooden_church'
-                        ])" 
+                        onclick="Markers(['markAll'${htmlOnClick}])" 
                         class="css-checkbox" checked="checked" />
                     <label for="markAll" class="css-label">Filters</label>
                 </div>
-                    <ul class='filtersMainContainer'>
-                        <li class="filterMap"><input type="checkbox" id="main1" class="css-checkbox" checked="checked" />
-                        <label for="main1" class="css-label"
-                               onclick="Markers(['main1','ruins','museums','castle','palace','residense','village_tourism','skansen','techMon','warMon','church','unesco','interest_architect','wooden_church'])">Monuments and architecture</label><a><div class="filterClickIntend" onclick="rotateCaret('1')"><div id="filtersCaret1" class="bottom-caret"></div></div></a>
-                    <ul id="MonAndArchFilter">
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="museums" name="museums" onclick="Markers(['museums'])" class="css-checkbox" checked="checked" /><label for="museums" class="css-label">Museums</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="castle" name="castle" onclick="Markers(['castle'])" class="css-checkbox" checked="checked" /><label for="castle" class="css-label">Castle</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="palace" name="palace" onclick="Markers(['palace'])" class="css-checkbox" checked="checked" /><label for="palace" class="css-label">Palace</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="residense" name="residense" onclick="Markers(['residense'])" class="css-checkbox" checked="checked" /><label for="residense" class="css-label">Residense</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="ruins" name="ruins" onclick="Markers(['ruins'])" class="css-checkbox" checked="checked" /><label for="ruins" class="css-label">Ruins</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="skansen"  onclick="Markers('skansen')" class="css-checkbox" checked="checked" /><label for="skansen" class="css-label">Skansens</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="village_tourism" name="village_tourism" onclick="Markers(['village_tourism'])" class="css-checkbox" checked="checked" /><label for="village_tourism" class="css-label">Administrative builds</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="techMon" onclick="Markers('techMon')" class="css-checkbox" checked="checked" /><label for="techMon" class="css-label">Technical Monuments</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="warMon" onclick="Markers('warMon')" class="css-checkbox" checked="checked" /><label for="warMon" class="css-label">War Monuments</label>
-                        </li>
-                        <li class="subFilterMap" style="display:none">
-                            <input type="checkbox" id="wooden_church" class="css-checkbox" checked="checked" /><label for="wooden_church" class="css-label">Churches and monasteries</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="church" onclick="Markers(['church','wooden_church'])" class="css-checkbox" checked="checked" /><label for="church" class="css-label">Churches and monasteries</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="unesco" onclick="Markers('unesco')" class="css-checkbox" checked="checked" /><label for="unesco" class="css-label">UNESCO monuments</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="interest_architect" onclick="Markers('interest_architect')" class="css-checkbox" checked="checked" /><label for="interest_architect" class="css-label">Architectural Interest</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="main2" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main2','zoo','mountains','geoparks','caves','ornithology','lakes_and_waters','waterfall','national_park','gardens','visual'])" for="main2" class="css-label">Nature</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret2" class="bottom-caret"></div></div></a>
-                   <ul id="natureFilter">
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="national_park" name="national_park" onclick="Markers(['national_park'])" class="css-checkbox" checked="checked" /><label for="forest_food" class="css-label">National Parks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="lakes_and_waters" onclick="Markers('lakes_and_waters')" class="css-checkbox" checked="checked" /><label for="lakes_and_waters" class="css-label">Lakes and Water Areas</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="waterfall" onclick="Markers('waterfall')" class="css-checkbox" checked="checked" /><label for="waterfall" class="css-label">Waterfalls</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="ornithology" onclick="Markers('ornithology')" class="css-checkbox" checked="checked" /><label for="ornithology" class="css-label">Ornithology</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="caves" onclick="Markers('caves')" class="css-checkbox" checked="checked" /><label for="caves" class="css-label">Caves</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="geoparks" onclick="Markers('geoparks')" class="css-checkbox" checked="checked" /><label for="geoparks" class="css-label">Geoparks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="mountains" onclick="Markers('mountains')" class="css-checkbox" checked="checked" /><label for="mountains" class="css-label">Mountains</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="gardens" name="gardens" onclick="Markers(['gardens'])" class="css-checkbox" checked="checked" /><label for="gardens" class="css-label">National parks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="zoo" onclick="Markers('zoo')" class="css-checkbox" checked="checked" /><label for="zoo" class="css-label">Zoo and animal parks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="visual" name="visual" onclick="Markers(['visual'])" class="css-checkbox" checked="checked" /><label for="visual" class="css-label">Specific natural wonders</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="main3" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main3','theaters','music','visualArt','movies','tradition'])" for="main3" class="css-label">Culture and traditions</label><a><div class="filterClickIntend" onclick="rotateCaret('2')"><div id="filtersCaret3" class="bottom-caret"></div></div></a>
-                    <ul id="cultureFilter">
-                        <li class="subFilterMap" class="subFilterMap">
-                            <input type="checkbox" id="theaters"  onclick="Markers('theaters')" class="css-checkbox" checked="checked" /><label for="theaters" class="css-label">Theaters</label>
-                        </li>
-                        <li class="subFilterMap" class="subFilterMap">
-                            <input type="checkbox" id="music"  onclick="Markers('music')" class="css-checkbox" checked="checked" /><label for="music" class="css-label">Music</label>
-                        </li>
-                        <li class="subFilterMap" class="subFilterMap">
-                            <input type="checkbox" id="visualArt"  onclick="Markers('visualArt')" class="css-checkbox" checked="checked" /><label for="visualArt" class="css-label">Visual arts</label>
-                        </li>
-                        <li class="subFilterMap" class="subFilterMap">
-                            <input type="checkbox" id="movies"  onclick="Markers('movies')" class="css-checkbox" checked="checked" /><label for="movies" class="css-label">Movies</label>
-                        </li>
-                        <li class="subFilterMap" class="subFilterMap">
-                            <input type="checkbox" id="tradition"  onclick="Markers('tradition')" class="css-checkbox" checked="checked" /><label for="tradition" class="css-label">Traditional Handicraft points</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="main4" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main4','sauna','spa','wellness','swimmingPool','thermal','beauty','mineral'])" for="main4" class="css-label">SPA</label><a><div class="filterClickIntend" onclick="rotateCaret('4')"><div id="filtersCaret4" class="bottom-caret"></div></div></a>
-                    <ul id="spaFilter">
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="sauna" class="css-checkbox" onclick="Markers('sauna')" checked="checked" /><label for="sauna" class="css-label">Sauna</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="spa" class="css-checkbox" onclick="Markers('spa')" checked="checked" /><label for="spa" class="css-label">SPA</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="wellness" class="css-checkbox" id="wellness" name="wellness" onclick="Markers(['wellness'])" checked="checked" /><label for="wellness" class="css-label">Sanatorium</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="swimmingPool" class="css-checkbox" onclick="Markers('swimmingPool')" checked="checked" /><label for="swimmingPool" class="css-label">Swimming-pools and  Aqua-parks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="thermal" class="css-checkbox" onclick="Markers('thermal')" checked="checked" /><label for="thermal" class="css-label">Thermal waters</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="beauty" class="css-checkbox" onclick="Markers('beauty')" checked="checked" /><label for="beauty" class="css-label">Beauty and barbers</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="mineral" class="css-checkbox" onclick="Markers('mineral')" checked="checked" /><label for="mineral" class="css-label">Mineral springs</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="main5" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main5','rafting','rally','rocks','ropeJump','ropePark','zip','ski','horses','bouldering','carting','diving','atv','paragliding'])" for="main5" class="css-label">Active rest</label><a><div class="filterClickIntend" onclick="rotateCaret('5')"><div id="filtersCaret5" class="bottom-caret"></div></div></a>
-                    <ul id="actFilter">
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="ski" class="css-checkbox" onclick="Markers('ski')" checked="checked" /><label for="ski" class="css-label">Ski and freeride</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="horses" class="css-checkbox" onclick="Markers('horses')" checked="checked" /><label for="horses" class="css-label">Horses ride</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="bouldering" class="css-checkbox" onclick="Markers('bouldering')" checked="checked" /><label for="bouldering" class="css-label">Bouldering stands</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="carting" class="css-checkbox" onclick="Markers('carting')" checked="checked" /><label for="carting" class="css-label">Carting</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="diving" class="css-checkbox" onclick="Markers('diving')" checked="checked" /><label for="diving" class="css-label">Diving</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="atv" class="css-checkbox" onclick="Markers('atv')" checked="checked" /><label for="atv" class="css-label">Extreme bike tracks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="paragliding" class="css-checkbox" onclick="Markers('paragliding')" checked="checked" /><label for="paragliding" class="css-label">Paragliding</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="rafting" class="css-checkbox" onclick="Markers('rafting')" checked="checked" /><label for="rafting" class="css-label">Rafting</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="rally" class="css-checkbox" onclick="Markers('rally')" checked="checked" /><label for="rally" class="css-label">Rally tracks (for rally cars, auto, etc.)</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="rocks" class="css-checkbox" onclick="Markers('rocks')" checked="checked" /><label for="rocks" class="css-label">Rock climbing</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="ropeJump" class="css-checkbox" onclick="Markers('ropeJump')" checked="checked" /><label for="ropeJump" class="css-label">Rope jumping</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="ropePark" class="css-checkbox" onclick="Markers('ropePark')" checked="checked" /><label for="ropePark" class="css-label">Rope parks</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="zip" class="css-checkbox" onclick="Markers('zip')" checked="checked" /><label for="zip" class="css-label">Zip-lines</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="main6" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main6','restaurant','specialRestaurant','cafes','bar','nightBar','winery','vine_bunker','tasting_hall'])" for="main6" class="css-label">Gastronomy</label><a><div class="filterClickIntend" onclick="rotateCaret('6')"><div id="filtersCaret6" class="bottom-caret"></div></div></a>
-                    <ul id="gastronomyFilter">
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="restaurant" class="css-checkbox" onclick="Markers('restaurant')" checked="checked" /><label for="restaurant" class="css-label">Restaurant</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="specialRestaurant" class="css-checkbox" onclick="Markers('specialRestaurant')" checked="checked" /><label for="specialRestaurant" class="css-label">Specialized Restaurant</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="cafes" class="css-checkbox" onclick="Markers('cafes')" checked="checked" /><label for="cafes" class="css-label">Cafe</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="bar" class="css-checkbox" onclick="Markers('bar')" checked="checked" /><label for="bar" class="css-label">Bar</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="nightBar" class="css-checkbox" onclick="Markers('nightBar')" checked="checked" /><label for="nightBar" class="css-label">Night Bar / Night Club</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="winery" class="css-checkbox" onclick="Markers('winery')" checked="checked" /><label for="winery" class="css-label">Winery</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="vine_bunker" class="css-checkbox" name="vine_bunker" onclick="Markers(['vine_bunker'])" checked="checked" /><label for="vine_bunker" class="css-label">Wine Cellar</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="tasting_hall" class="css-checkbox" name="tasting_hall" onclick="Markers(['tasting_hall'])" checked="checked" /><label for="tasting_hall" class="css-label">Tasting room</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="main7" class="css-checkbox" checked="checked" />
-                    <label onclick="Markers(['main7','hotels','apartments','campings','quest','motels','cottages'])" for="main7" class="css-label">Accomodations</label><a><div class="filterClickIntend" onclick="rotateCaret('7')"><div id="filtersCaret7" class="bottom-caret"></div></div></a>
-                    <ul id="accFilter">
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="hotels" class="css-checkbox" onclick="Markers('hotels')" checked="checked" /><label for="hotels" class="css-label">Hotels</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="apartments" class="css-checkbox" onclick="Markers('apartments')" checked="checked" /><label for="apartments" class="css-label">Apartments</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="campings" class="css-checkbox" onclick="Markers('campings')" checked="checked" /><label for="campings" class="css-label">Campings</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="quest" class="css-checkbox" onclick="Markers('quest')" checked="checked" /><label for="quest" class="css-label">Quest houses</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="motels" class="css-checkbox" onclick="Markers('motels')" checked="checked" /><label for="motels" class="css-label">Motels</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="cottages" class="css-checkbox" onclick="Markers('cottages')" checked="checked" /><label for="cottages" class="css-label">Cottages</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="filterMap"><input type="checkbox" id="equipment" class="css-checkbox" onclick="Markers('equipment')" checked="checked" /><label for="equipment" class="css-label">Tourist equipment rental</label></li>
-                <li class="filterMap"><input type="checkbox" id="rescue" class="css-checkbox" onclick="Markers('rescue')" checked="checked" /><label for="rescue" class="css-label">Rescue team</label></li>
-                <li class="filterMap"><input type="checkbox" id="car" class="css-checkbox" onclick="Markers('car')" checked="checked" /><label for="car" class="css-label">Car rental</label></li>
-                <li class="filterMap"><input type="checkbox" id="transportConn" class="css-checkbox" onclick="Markers('transportConn')" checked="checked" /><label for="transportConn" class="css-label">Transport connection</label></li>
-                <li class="filterMap"><input type="checkbox" id="info" class="css-checkbox" onclick="Markers(['info'])" checked="checked" /><label for="info" class="css-label">Tourist information centers</label><br></li>
-                <div class="filtersGreenIntend"></div>
-                <li class="filterMap"><input type="checkbox" id="main8" class="css-checkbox" />
-                    <label onclick="Markers(['main8','welcomeCenters','tourStops'])" for="main8" class="css-label">Tourism infrastructure units</label><a><div class="filterClickIntend" onclick="rotateCaret('8')"><div id="filtersCaret8" class="bottom-caret"></div></div></a>
-                    <ul id="infrasturctureFilter">  
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="welcomeCenters" class="css-checkbox" onclick="Markers('welcomeCenters')" /><label for="welcomeCenters" class="css-label">Tourist welcome centers</label>
-                        </li>
-                        <li class="subFilterMap">
-                            <input type="checkbox" id="tourStops" class="css-checkbox" onclick="Markers('tourStops')" /><label for="tourStops" class="css-label">Tourist stops</label>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                ${htmlFilters}
             </div>
     </div>
     <div id="googleMap" style="overflow: visible;width: 100%;"></div>

@@ -81,7 +81,7 @@ public class SystemController {
         request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/Panel");
             modelAndView.addObject("users", users.getAllUsers());
-            modelAndView.addObject("menuList", menu.getAllCat());
+            modelAndView.addObject("menuList", helpers.getRowHtmlSelectSmall("en", "0"));
             return modelAndView;
     }
     @RequestMapping(value = {"/system/login.do","/system/login.do/"}, method = RequestMethod.POST)

@@ -279,7 +279,7 @@ float: left;
     height: 40px;
 }
 .filters.list-block li {
-    height:17px;
+      height: 35px;
 }
 .checkbox {
 width: 210px;
@@ -417,11 +417,12 @@ cke_contents{
     padding: 0;
 }
 .img-upl {
-    padding: 20px;
+    padding: 0px;
     height: 100%;
     position: fixed;
     width: 100%;
-    overflow-y: scroll
+    overflow-y: scroll;
+    overflow: hidden;
 }
 .double-point-filter input {
     display: none;

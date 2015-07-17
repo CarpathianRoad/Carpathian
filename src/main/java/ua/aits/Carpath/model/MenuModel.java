@@ -153,6 +153,8 @@ public class MenuModel {
         while (result.next()) { 
             temp = result.getString("titleEN");
         }
+        
+        DB.closeCon();
         return temp;
     } 
     public List<MenuModel> getSubCategories(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -179,5 +181,19 @@ public class MenuModel {
         Boolean ret = result.isBeforeFirst();
         DB.closeCon();
         return ret;
+    }
+    public Integer countSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from menu where menu.parentID = "+id+";");
+        result.first();
+        Integer coun = result.getInt("cnt");
+        DB.closeCon();
+        return coun;
+    }
+    
+    public Integer countArticles(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from content where menuCat = "+id+";");
+        result.first();
+        DB.closeCon();
+        return 0;
     }
 }
