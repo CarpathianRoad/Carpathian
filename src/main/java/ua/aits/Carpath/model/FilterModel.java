@@ -63,6 +63,7 @@ public class FilterModel {
             temp.setGroupID(result.getInt("groupID"));
             resultList.add(temp);
         } 
+        DB.closeCon();
         return resultList;
     }
     
@@ -92,6 +93,7 @@ public class FilterModel {
                     resultHTML += FiltersHTML(temp.id.toString());
             }
         }
+        DB.closeCon();
         return resultHTML;
     }
     
@@ -106,6 +108,7 @@ public class FilterModel {
             temp.setGroupID(result.getInt("groupID"));
             resultList.add(temp);
         } 
+        DB.closeCon();
         return resultList;
     }
     
@@ -124,6 +127,7 @@ public class FilterModel {
         while (result.next()) {
             resultStr +=",'"+result.getString("title")+"'";
         }
+        DB.closeCon();
         return resultStr;
     }
     public String FiltersMain() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -133,6 +137,7 @@ public class FilterModel {
             resultStr +=",'"+result.getString("title")+"'";
             resultStr += this.FiltersOnClick(result.getString("id"));
         }
+        DB.closeCon();
         return resultStr;
     }
     public String FiltersHTMLMap(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -165,6 +170,7 @@ public class FilterModel {
             }
         }
         
+        DB.closeCon();
         return resultHTML;
     }
     
