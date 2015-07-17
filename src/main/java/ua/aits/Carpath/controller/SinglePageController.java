@@ -142,6 +142,8 @@ public class SinglePageController {
                         temp.setImage(temp.avatar);
                     }
                 }
+                model.addObject("htmlOnClick", filters.FiltersMain());
+                model.addObject("htmlFilters", filters.FiltersHTMLMap("0"));
 		model.addObject("markers", maps);
                 model.addObject("lan", lan);
 		return model;
@@ -156,6 +158,8 @@ public class SinglePageController {
                         temp.setImage(temp.avatar);
                     }
                 }
+                model.addObject("htmlOnClick", filters.FiltersMain());
+                model.addObject("htmlFilters", filters.FiltersHTMLMap("0"));
 		model.addObject("markers", maps);
                 model.addObject("lan", lan);
 		return model;
@@ -274,7 +278,7 @@ public class SinglePageController {
     public ModelAndView kiwi(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView("TestPage");
-            model.addObject("filters", filters.FiltersHTML("0"));
+            model.addObject("filters", filters.FiltersHTMLMap("0"));
 		return model;
 	}
 }
