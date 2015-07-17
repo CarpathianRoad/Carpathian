@@ -2517,7 +2517,7 @@ a.disable-menu-link{
     color: rgb(86,105,143) !important;
 }
 a:visited:hover {
-    color: rgb(174,214,43);
+    color: rgb(174,214,43) !important;
 }
 
 @-moz-document url-prefix() { 
