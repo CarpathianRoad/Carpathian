@@ -88,7 +88,6 @@
             var filterNames = [];
             <c:forEach items="${markers}" var="marker">
                 var markerIcons = "${marker.filters}".split(",");
-                console.log("${marker.filters}");
                 //KIT NE PASHE ROZKOMENTUTU
                 //if(icons.indexOf(markerIcons[0])==-1){
                 //markerIcons.splice(0,0,'info');
@@ -198,7 +197,6 @@
             }
             
             if('${id}'!=''){
-                console.log(markers.length);
                 for (var i=0;i<markers.length;i++){
                     if('${id}'==markers[i].id){
                         map.setCenter(markers[i].getPosition());
@@ -240,6 +238,7 @@
             $('#markerDescription').hide("slow");
         }
 	function Markers(type){
+            console.log(type);
             if(type.length == 1){
 		if (document.getElementById(type[0]).checked==false) {
                     for (var i=0;i<markers.length;i++) {
@@ -357,7 +356,11 @@
             $('#ukraineBorder').hide();
             $("#allMap").addClass( "buttonBorderClass" );
             $(".mapType").hide();
-            Markers(['tourism_infrastructure_units','tourist_welcome_centers','tourist_stops']);
+            if('${id}'!=''){
+                $('#markAll').click();
+            }else{
+                $('#tourism_infrastructure_units').click();
+            }
         });
         var rightMapContainerCounter = false;
         var filtersContainerCounter = false;
@@ -512,8 +515,6 @@
                 return false;	
               }		
             });
-            
-            console.log(typeof InstallTrigger !== 'undefined');   // Firefox 1.0+);
             });
         } )( jQuery );
         
@@ -608,7 +609,6 @@
                   summary += route.legs[i].distance.text + '<br><br>';
                 }
               }
-            console.log(summary);
             });
         }
         
@@ -646,7 +646,6 @@
             for(var n = 0; n < routeMarkers.length; n++){
                 printCoords.push(routeMarkers[n].x+','+routeMarkers[n].y);
             }
-            console.log(printCoords);
             $('#printRoute').attr('href', PowerHour.getPrintUrl(printCoords));
         }
         
