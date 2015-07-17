@@ -2519,6 +2519,9 @@ a.disable-menu-link{
 a:visited:hover {
     color: rgb(174,214,43) !important;
 }
+#mainMenuWidth a:visited:hover {
+    color: white !important;
+}
 
 @-moz-document url-prefix() { 
     .s-new .s-rightNavBar .s-top .s-one{

@@ -131,7 +131,7 @@
                             <a class="socialHeaderDiv intendSocial not-add-lan"
                                     onmouseover="$(this).find('img').attr('src','${Constants.URL}img/fb_icon_hover.png');" 
                                     onmouseout="$(this).find('img').attr('src','${Constants.URL}img/fb_icon.png');" 
-                                    href="https://uk-ua.facebook.com/people/Ard-Transcarpathia/100008981281491" target="_blank">
+                                    href="https://www.facebook.com/carpathianroad" target="_blank">
                                 <img class="s-socialLogo" src="${Constants.URL}img/fb_icon.png" 
                                     border="0">
                             </a>
