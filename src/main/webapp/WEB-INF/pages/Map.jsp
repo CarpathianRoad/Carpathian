@@ -248,14 +248,14 @@
                             for(var j = 0; j<markers[i].props.length; j++){
                                 if(document.getElementById(markers[i].props[j]).checked==true){
                                     show = true;
-                                    /*var pinIcon = new google.maps.MarkerImage(
+                                    var pinIcon = new google.maps.MarkerImage(
                                         "${Constants.URL}img/markers/"+markers[i].props[j]+".png",
                                         null, 
                                         null, 
                                         null, 
-                                        new google.maps.Size(30, 40)
+                                        new google.maps.Size(42,58)
                                     );
-                                    markers[i].icon=pinIcon;*/
+                                    markers[i].icon=pinIcon;
                                     markerCluster.removeMarker(markers[i]);
                                     markerCluster.addMarker(markers[i]);
                                     markers[i].setMap(null);
@@ -276,14 +276,14 @@
                             markers[i].setMap(map);
                             markerCluster.removeMarker(markers[i]);
                             markerCluster.addMarker(markers[i]);
-                            /*var pinIcon = new google.maps.MarkerImage(
+                            var pinIcon = new google.maps.MarkerImage(
                                 "${Constants.URL}img/markers/"+type[0]+".png",
                                 null, 
                                 null, 
                                 null, 
-                                new google.maps.Size(30, 40)
+                                new google.maps.Size(42,58)
                             ); 
-                            markers[i].icon=pinIcon;*/
+                            markers[i].icon=pinIcon;
                         }
                     }
 		}
@@ -727,14 +727,14 @@
     <div id="mapRouteButton" onclick="hideRoute()" class="mapRoute">
         <div id="routePointsNumber">0</div>
         <img id="mapRouteImage" src="${Constants.URL}img/route_icon.png"
-             onmouseover="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/icon_route_hover.png';$(this).fadeIn(300);}"
-             onmouseout="if(!mapRouteContainerCounter){$(this).hide();this.src='${Constants.URL}img/route_icon.png';$(this).fadeIn(300);}">
+             onmouseover="if(!mapRouteContainerCounter){this.src='${Constants.URL}img/icon_route_hover.png';}"
+             onmouseout="if(!mapRouteContainerCounter){this.src='${Constants.URL}img/route_icon.png';}">
         <div class="routeMapContainer" id="printable">No points in your route</div>
     </div>
     <div id="mapControls" class="mapControls">
         <img id="mapControlsImage" onclick="hideMap()" src="${Constants.URL}img/mapControlsImage.png"
-             onmouseover="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker_hover.png';$(this).fadeIn(300);}"
-             onmouseout="if(!rightMapContainerCounter){$(this).hide();this.src='${Constants.URL}img/marker'+countryChooser+'.png';$(this).fadeIn(300);}">
+             onmouseover="if(!rightMapContainerCounter){this.src='${Constants.URL}img/marker_hover.png';}"
+             onmouseout="if(!rightMapContainerCounter){this.src='${Constants.URL}img/marker'+countryChooser+'.png';}">
             <div class="indexMapMenu">
                 <ul id="nav">
                     <li id="allMenu">
@@ -766,8 +766,8 @@
     </div>
     <div id="pushRightConrainer" class="pushRightConrainer">
         <img onclick="hideFilters()" id="mainImageRightContaineMap" src="${Constants.URL}img/mapRightContainer.png"
-             onmouseover="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainerHover.png';$(this).fadeIn(300);}"
-             onmouseout="if(!filtersContainerCounter){$(this).hide();this.src='${Constants.URL}img/mapRightContainer.png';$(this).fadeIn(300);}">
+             onmouseover="if(!filtersContainerCounter){this.src='${Constants.URL}img/mapRightContainerHover.png';}"
+             onmouseout="if(!filtersContainerCounter){this.src='${Constants.URL}img/mapRightContainer.png';}">
             <div class="indexMapContainer">
                 <img src="${Constants.URL}img/main_map.png">
                 <img id="allBorder" src="${Constants.URL}img/map_all.png">
