@@ -418,11 +418,12 @@ cke_contents{
 }
 .img-upl {
     padding: 0px;
-    height: 100%;
-    position: fixed;
-    width: 100%;
-    overflow-y: scroll;
-    overflow: hidden;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  padding-right: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .double-point-filter input {
     display: none;

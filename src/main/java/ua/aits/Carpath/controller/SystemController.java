@@ -176,6 +176,13 @@ public class SystemController {
             modelAndView.addObject("filters", filters.getAllFilters());
             return modelAndView;
     }
+    @RequestMapping(value = {"/system/filters/edit/{id}", "/system/filters/edit/{id}", "/Carpath/system/filters/edit/{id}", "/Carpath/system/filters/edit/{id}"})
+    public ModelAndView editFilters(@PathVariable("id") String id,HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            ModelAndView modelAndView = new ModelAndView("/system/EditFilter");
+            modelAndView.addObject("filter", filters.getOneFilter(id));
+            return modelAndView;
+    }
     @RequestMapping(value = {"/system/markers/delete/{id}", "/system/markers/delete/{id}/","/Carpath/system/markers/delete/{id}", "/Carpath/system/markers/delete{id}/"})
     public ModelAndView deleteMarkers (@PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
@@ -185,7 +192,8 @@ public class SystemController {
     @RequestMapping(value = {"/system/filters/delete/{id}", "/system/filters/delete/{id}/","/Carpath/system/filters/delete/{id}", "/Carpath/system/filters/delete{id}/"})
     public ModelAndView deleteFilters (@PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
-            filters.deleteFilter(id);
+            String short_title = filters.deleteFilter(id);
+            File temp = new File(Constants.FILE_URL_ROUTES+short_title+".png");
             return new ModelAndView("redirect:" + "/system/filters");
     }
     
