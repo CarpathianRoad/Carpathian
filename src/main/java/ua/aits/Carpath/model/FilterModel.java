@@ -21,6 +21,7 @@ public class FilterModel {
     public String shortTitle;
     public String fullTitle;
     public Integer groupID;
+    public Integer sortNumber;
     
     public Integer getId() {
         return id;
@@ -50,6 +51,13 @@ public class FilterModel {
         this.groupID = groupID;
     }
     
+    public Integer getSortNumber() {
+        return sortNumber;
+    }
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
+    }
+    
     
     
     public List<FilterModel> getAllFilters() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -61,10 +69,23 @@ public class FilterModel {
             temp.setShortTitle(result.getString("title"));
             temp.setFullTitle(result.getString("descr"));
             temp.setGroupID(result.getInt("groupID"));
+            temp.setSortNumber(result.getInt("sortNumber"));
             resultList.add(temp);
         } 
         DB.closeCon();
         return resultList;
+    }
+    
+    public FilterModel getOneFilter(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from filters where id="+id+";");
+        result.first();
+            FilterModel temp = new FilterModel();
+            temp.setId(result.getInt("id"));
+            temp.setShortTitle(result.getString("title"));
+            temp.setFullTitle(result.getString("descr"));
+            temp.setGroupID(result.getInt("groupID"));
+            temp.setSortNumber(result.getInt("sortNumber"));
+        return temp;
     }
     
     public String FiltersHTML(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -113,12 +134,20 @@ public class FilterModel {
     }
     
     
-    public void addFilter(String title, String descr, String group_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        DB.runQuery("INSERT INTO `filters`(`title`, `descr`, `groupID`) VALUES ('"+title+"','"+descr+"',"+group_id+");");
+    public void addFilter(String title, String descr, String group_id, String sort_number) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("INSERT INTO `filters`(`title`, `descr`, `groupID`, `sortNumber`) VALUES ('"+title+"','"+descr+"',"+group_id+", "+sort_number+");");
     }
     
-    public void deleteFilter(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void updateFilter(String id, String title, String descr, String group_id, String sort_number) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `filters` SET title='"+title+"', descr='"+descr+"', groupID="+group_id+", sortNumber="+sort_number+" WHERE id="+id+";");
+    }
+    
+    public String deleteFilter(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select * from filters where groupID = "+id+";");
+        result.first();
+        String ret = result.getString("title");
         DB.runQuery("DELETE FROM `filters` WHERE id="+id);
+        return ret;
     }
     
     public String FiltersOnClick(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{

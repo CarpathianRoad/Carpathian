@@ -33,7 +33,6 @@
                     <a id="panel" href="<c:url value="/system/panel"/>">Content</a>
                     <c:if test="${sessionScope.user.username == 'admin'}">
                     <a id="users" href="<c:url value="/system/users"/>">Users</a>
-                    <a id="markers" href="<c:url value="/system/markers"/>">Markers</a>
                     <a id="filters" href="<c:url value="/system/filters"/>">Filters</a>
                     <a id="routes" href="<c:url value="/system/routes"/>">Routes</a>
                     <a id="slider" href="<c:url value="/system/slider"/>">Slider</a>
