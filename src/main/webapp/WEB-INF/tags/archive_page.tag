@@ -37,6 +37,8 @@
     <!-- Custom Fonts -->
     <link href="${Constants.URL}archive/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" href="${Constants.URL}archive/css/dropzone.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -103,9 +105,6 @@
                             <li class="">
                                 <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-filter"></i> Filters</a>
                             </li>
-                            <li class="">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-map-marker"></i> Markers</a>
-                            </li>
                             </c:if>
                         </c:otherwise>
                     </c:choose>
@@ -125,19 +124,12 @@
         <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
+            
     <script src="${Constants.URL}archive/js/jquery.js"></script>
-
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="${Constants.URL}archive/js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="${Constants.URL}archive/js/plugins/morris/raphael.min.js"></script>
-    <script src="${Constants.URL}archive/js/plugins/morris/morris.min.js"></script>
-    <script src="${Constants.URL}archive/js/plugins/morris/morris-data.js"></script>
-
 </body>
 
 </html>

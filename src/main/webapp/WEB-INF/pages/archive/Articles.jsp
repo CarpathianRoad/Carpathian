@@ -19,25 +19,42 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/add"/>">+ Add article</a></button></div>
-                            <table class="table table-bordered table-hover table-striped">
+                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/archive/add/"/>${category}">+ Add article</a></button></div>
+                            <table class="article-table table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Title</th>
-                                        <th>Images</th>
-                                        <th>Files</th>
-                                        <th>Edit date</th>
-                                        <th>Editor</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th class="text-center" style="width:3%">#</th>
+                                        <th style="width:60%">Title</th>
+                                        <th class="text-center" style="width:5%">Images</th>
+                                        <th class="text-center" style="width:5%">Files</th>
+                                        <th style="width:13%">Edit date</th>
+                                        <th class="text-center" style="width:5%">Editor</th>
+                                        <th colspan="3" style="width:3%;"></th>
+                                        <th style="width:3%; display: none;"></th>
+                                        <th style="width:5%; display: none;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td colspan="9">No articles in this category...</td>
-                                    </tr>
+                                    <c:if test="${empty articles}">
+                                        <tr>
+                                            <td colspan="9">No articles in this category...</td>
+                                        </tr>
+                                    </c:if>
+                                    <c:set var="count" value="1" scope="page" />
+                                    <c:forEach items="${articles}" var="item">
+                                        <tr>
+                                            <td class="text-center counter">${count}</td>
+                                            <td>${item.article_title_en}</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">${item.article_edit_date}</td>
+                                            <td class="text-center">${item.article_editor}</td>
+                                            <td class="text-center"><a href="<c:url value="/archive/edit/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/edit.png" /></a></td>
+                                            <td class="text-center"><a href="<c:url value="/archive/delete/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/delete.png" /></a></td>
+                                            <td class="text-center"><button class="btn btn-success btn-xs" id="publishData" type="submit"><a href="<c:url value="/archive/publish/${item.article_id}"/>">Publish</a></button></td>
+                                        </tr>
+                                        <c:set var="count" value="${count + 1}" scope="page"/>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
