@@ -277,11 +277,47 @@ ul.alert-dropdown {
     font-weight: 100;
 }
 .add-button-panel {
-    float: right;
     margin-bottom: 20px;
     color: #fff;
 }
 .add-button-panel a {
     color: #fff;
     font-weight: 700;
+}
+.input-title-lang {
+  display: none;
+}
+.textarea-msg {
+  display: none;
+}
+.margintop10 {
+    margin-top: 10px;
+}
+.margintop20 {
+    margin-top: 20px;
+}
+.margintop30 {
+    margin-top: 30px;
+}
+.margintop-button {
+    margin-top: 23px;
+}
+.marginbottom30 {
+    margin-bottom: 30px;
+}
+.red-star {
+    color: #EC1515;
+    margin-left: 5px;
+}
+.article-buttons {
+      width: 20px;
+}
+#publishData a {
+    color: #fff;
+}
+.article-table td {
+    color: #000;
+}
+.article-table .counter {
+      color: #9B9B9B;
 }
