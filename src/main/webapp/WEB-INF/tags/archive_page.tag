@@ -18,8 +18,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
@@ -29,6 +28,7 @@
     <link href="${Constants.URL}archive/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
+    <link href="${Constants.URL}css/admin.css" rel="stylesheet">
     <link href="${Constants.URL}archive/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
@@ -39,13 +39,10 @@
 
     <link rel="stylesheet" href="${Constants.URL}archive/css/dropzone.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="${Constants.URL}css/bootstrap-switch.css" rel="stylesheet" />
 
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 </head>
 
 <body>
@@ -128,8 +125,11 @@
     <script src="${Constants.URL}archive/js/jquery.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${Constants.URL}archive/js/bootstrap.min.js"></script>
+    <script src="${Constants.URL}js/bootstrap.min.js"></script>
+    <script src="${Constants.URL}js/bootstrap-select.js"></script>
+    <script src="${Constants.URL}js/bootstrap-switch.js"></script>
+    <script src="${Constants.URL}js/jquery.cookie.js"></script>
+
 </body>
 
 </html>

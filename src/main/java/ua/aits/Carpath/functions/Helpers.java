@@ -20,9 +20,7 @@ import ua.aits.Carpath.model.MenuModel;
  *
  * @author kiwi
  */
-public class Helpers {
-    
-    
+public class Helpers extends FileMethods {
     
     MenuModel menu = new MenuModel();
     public static String html2text(String html) {

@@ -13,6 +13,11 @@
                         <h1 class="page-header">
                             Articles in category
                         </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <a href="${Constants.URL}archive/index"> <i class="fa fa-fw fa-list-alt"></i> Back to categories</a>
+                            </li>
+                        </ol>
                     </div>
                 </div>
 
@@ -24,10 +29,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" style="width:3%">#</th>
-                                        <th style="width:60%">Title</th>
-                                        <th class="text-center" style="width:5%">Images</th>
-                                        <th class="text-center" style="width:5%">Files</th>
-                                        <th style="width:13%">Edit date</th>
+                                        <th style="width:55%">Title</th>
+                                        <th class="text-center" style="width:10%">Images</th>
+                                        <th class="text-center" style="width:10%">Files</th>
+                                        <th class="text-center" style="width:13%">Edit date</th>
                                         <th class="text-center" style="width:5%">Editor</th>
                                         <th colspan="3" style="width:3%;"></th>
                                         <th style="width:3%; display: none;"></th>
@@ -46,7 +51,7 @@
                                             <td class="text-center counter">${count}</td>
                                             <td>${item.article_title_en}</td>
                                             <td class="text-center">0</td>
-                                            <td class="text-center">0</td>
+                                            <td class="text-center">${item.article_file_size}</td>
                                             <td class="text-center">${item.article_edit_date}</td>
                                             <td class="text-center">${item.article_editor}</td>
                                             <td class="text-center"><a href="<c:url value="/archive/edit/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/edit.png" /></a></td>

@@ -5,13 +5,17 @@
  */
 package ua.aits.Carpath.model;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
+import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.DB;
+import ua.aits.Carpath.functions.Helpers;
 
 /**
  *
@@ -37,6 +41,8 @@ public class ArchiveArticleModel {
     public Integer article_is_edit;
     public Integer article_is_delete;
     public Integer article_is_publish;
+    public String article_dir;
+    public String article_file_size;
 
     public Integer getArticle_id() {
         return article_id;
@@ -189,6 +195,24 @@ public class ArchiveArticleModel {
     public void setArticle_is_publish(Integer article_is_publish) {
         this.article_is_publish = article_is_publish;
     }
+
+    public String getArticle_dir() {
+        return article_dir;
+    }
+
+    public void setArticle_dir(String article_dir) {
+        this.article_dir = article_dir;
+    }
+
+    public String getArticle_file_size() {
+        return article_file_size;
+    }
+
+    public void setArticle_file_size(String article_file_size) {
+        this.article_file_size = article_file_size;
+    }
+    
+    Helpers Helpers = new Helpers();
     
     public List<ArchiveArticleModel> getAllArticlesInCategory(String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         ResultSet result = DB.getResultSet("SELECT * FROM archive_articles WHERE archive_articles.article_category = " + catID + " AND archive_articles.article_is_delete = 0 ORDER BY archive_articles.article_id");
@@ -208,6 +232,8 @@ public class ArchiveArticleModel {
             temp.setArticle_is_edit(result.getInt("article_is_edit"));
             temp.setArticle_is_delete(result.getInt("article_is_delete"));
             temp.setArticle_is_publish(result.getInt("article_is_publish"));
+            temp.setArticle_dir(result.getString("article_dir"));
+            temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 2));
             articleList.add(temp);
         }
         DB.closeCon();
@@ -231,15 +257,16 @@ public class ArchiveArticleModel {
         temp.setArticle_is_edit(result.getInt("article_is_edit"));
         temp.setArticle_is_delete(result.getInt("article_is_delete"));
         temp.setArticle_is_publish(result.getInt("article_is_publish"));
+        temp.setArticle_dir(result.getString("article_dir"));
         DB.closeCon();
         return temp;
     }
     
-    public void insertArticle(String titleEN, String titleUA, String textEN, String textUA, String category, String author, String date) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void insertArticle(String titleEN, String titleUA, String textEN, String textUA, String category, String author, String date, String dir) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DB.runQuery("INSERT INTO `archive_articles`(`article_title_EN`, `article_title_UA`, `article_text_EN`, `article_text_UA`, "
-                + "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`) VALUES ("
+                + "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`, `article_dir`) VALUES ("
                 + "'"+StringEscapeUtils.escapeSql(titleEN)+"','"+StringEscapeUtils.escapeSql(titleUA)+"','"+StringEscapeUtils.escapeSql(textEN)+"','"+StringEscapeUtils.escapeSql(textUA)+
-                "','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0);");
+                "','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0,'"+dir+"');");
     } 
     
     public void updateArticle(String id, String titleEN, String titleUA, String textEN, String textUA, String author, String date) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -247,5 +274,15 @@ public class ArchiveArticleModel {
                 "`article_title_EN`='"+StringEscapeUtils.escapeSql(titleEN)+"',`article_title_UA`='"+StringEscapeUtils.escapeSql(titleUA)+"'," +
                 "`article_text_EN`='"+StringEscapeUtils.escapeSql(textEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(textUA)+"'," +
                 "`article_editor`='"+author+"',`article_edit_date`='"+date+"' WHERE article_id = "+id+";");
-    } 
+    }
+    
+    public String deleteArticle(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+        ResultSet result = DB.getResultSet("SELECT archive_articles.article_id, archive_articles.article_category, archive_articles.article_dir FROM archive_articles WHERE archive_articles.article_id = " + id + ";");
+        result.first();
+        Helpers.removeDir(Constants.home + "archive_content/" + result.getString("article_dir"));
+        DB.runQuery("UPDATE `archive_articles` SET `article_is_delete`= 1 WHERE article_id = "+id+";");
+        String category = result.getString("article_category");
+        DB.closeCon();
+        return category;
+    }
 }
