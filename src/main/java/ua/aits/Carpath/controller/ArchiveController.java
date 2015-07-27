@@ -5,6 +5,10 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -18,10 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArchiveArticleModel;
 import ua.aits.Carpath.model.ArchiveUserModel;
+import ua.aits.Carpath.model.FilterModel;
 
 /**
  *
@@ -34,7 +41,7 @@ public class ArchiveController {
     ArchiveUserModel Users = new ArchiveUserModel();
     Helpers Helpers = new Helpers();
     ArchiveArticleModel Articles = new ArchiveArticleModel();
-    
+    FilterModel Filters = new FilterModel();
     
     @RequestMapping(value = {"/archive/login", "/archive/login"})
     public ModelAndView archiveLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -57,6 +64,7 @@ public class ArchiveController {
     @RequestMapping(value = {"/archive/add/{id}", "/archive/add/{id}/"}, method = RequestMethod.GET)
     public ModelAndView archiveAdd(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/archive/Add");
+        modelAndView.addObject("folder", Helpers.createTempDir());
         modelAndView.addObject("category", id);
         return modelAndView;
     }
@@ -64,11 +72,22 @@ public class ArchiveController {
     public ModelAndView archiveEdit(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/archive/Edit");
         modelAndView.addObject("article", Articles.getOneArticleByID(id));
+        modelAndView.addObject("filesHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/files/"));
         return modelAndView;
     }
-    @RequestMapping(value = {"/archive/publish/{id}", "/archive/publish/{id}/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/archive/delete/{id}", "/archive/delete/{id}/"}, method = RequestMethod.GET)
+    public ModelAndView archiveDelete(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("/archive/Delete");
+        modelAndView.addObject("article", Articles.getOneArticleByID(id));
+        return modelAndView;
+    }
+    @RequestMapping(value = {"/archive/publish/{id}", "/archive/publish/{id}/"})
     public ModelAndView archivePublish(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         ModelAndView modelAndView = new ModelAndView("/archive/Publish");
+        modelAndView.addObject("article", Articles.getOneArticleByID(id));
+        modelAndView.addObject("filters", Filters.FiltersHTML("0"));
+        modelAndView.addObject("menuList", Helpers.getRowHtmlSelect("en", "0"));
         return modelAndView;
     }
     
@@ -98,7 +117,7 @@ public class ArchiveController {
         return new ModelAndView("redirect:" + "/archive/login"); 
     } 
     @RequestMapping(value = "/archive/do/insertdata.do", method = RequestMethod.POST)
-    public ModelAndView addArticle(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+    public ModelAndView addArticle(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException, IOException {
         request.setCharacterEncoding("UTF-8");
         String titleEN = request.getParameter("titleEN");
         String titleUA = request.getParameter("titleUA");
@@ -106,10 +125,13 @@ public class ArchiveController {
         String textUA = request.getParameter("textUA");
         String author = request.getParameter("author");
         String category = request.getParameter("category");
+        String directory = request.getParameter("dir");
         Date date_format = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String date = sdf.format(date_format);
-        Articles.insertArticle(titleEN, titleUA, textEN, textUA, category, author, date);
+        String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, titleEN, category);
+        Helpers.removeDir(Constants.home + directory);
+        Articles.insertArticle(titleEN, titleUA, textEN, textUA, category, author, date, dir);
         return new ModelAndView("redirect:" + "/archive/articles/"+category);
     }
     @RequestMapping(value = "/archive/do/updatedata.do", method = RequestMethod.POST)
@@ -128,5 +150,41 @@ public class ArchiveController {
         Articles.updateArticle(id, titleEN, titleUA, textEN, textUA, author, date);
         return new ModelAndView("redirect:" + "/archive/articles/"+category);
     }
+    @RequestMapping(value = {"/archive/do/deletearticle/{id}","/archive/do/deletearticle/{id}/"})
+    public ModelAndView deleteArticle(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        return new ModelAndView("redirect:" + "/archive/articles/" + Articles.deleteArticle(id)); 
+    }
     
+    /* File Upload Controllers */
+    
+    @RequestMapping(value = {"/archive/do/uploadfile", "/archive/do/uploadfile/"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadFileHandler(@RequestParam("file") MultipartFile file, @RequestParam("path") String path,  HttpServletRequest request) {
+        String name = file.getOriginalFilename();
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.home+path);
+                if (!dir.exists())
+                    dir.mkdirs();
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+                try (BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile))) { 
+                    stream.write(bytes); 
+                }
+                return "";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
+    }
+    @RequestMapping(value = "/archive/do/removefile", method = RequestMethod.GET)
+    public @ResponseBody String removeFileOrDir(HttpServletRequest request) {
+        String path = request.getParameter("path");
+        File temp = new File(Constants.home + path);
+        Boolean result = temp.delete();
+        return result.toString();
+    } 
 }

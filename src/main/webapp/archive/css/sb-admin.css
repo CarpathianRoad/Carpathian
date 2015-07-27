@@ -321,3 +321,20 @@ ul.alert-dropdown {
 .article-table .counter {
       color: #9B9B9B;
 }
+.delete-row {
+    font-size: 24px;
+    color: #56698F;
+}
+.delete-row strong {
+    color: #000;
+}
+.list-block li img {
+    width: 20px;
+  margin-right: 30px;
+}
+.filters.list-block li {
+    height: 30px;
+}
+.checkbox {
+  width: 185px; 
+}

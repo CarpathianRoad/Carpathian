@@ -12,10 +12,16 @@
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
         <h4>Add article</h4>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="${Constants.URL}archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+            </li>
+        </ol>
 	<form action="${Constants.URL}archive/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
             <input type="hidden" class="form-control" name="category" value="${article.article_category}">
             <input type="hidden" class="form-control" name="id" value="${article.article_id}">
+            <input type="hidden" name="dir" id="dir-name" value="archive_content/${article.article_dir}" />
             <div class="row add-row">
                 <div class="col-lg-12 margintop30 field">
                     <label for="tlt">Article title <span class="red-star">*</span></label>
@@ -66,11 +72,13 @@
                 <label for="tlt">Article files</label><br/>
             </div>
         </div>
-        <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+        <form action="${Constants.URL}archive/do/uploadfile" class="dropzone"  id="my-awesome-dropzone">
+            <input type="hidden" name="path" value="archive_content/${article.article_dir}/files" />
             <input type="file" name="file" style="display:none" />
         </form>
         <p>
-            <button class="btn btn-warning margintop30 marginbottom30" id="sudmitData" type="submit">+ Save changes</button>
+            <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save changes</button>
+            <a href="${Constants.URL}archive/articles/${category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
         </p>
     </div>
 </t:archive_page>
@@ -80,6 +88,14 @@
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
         var currentLangT = $(".lang-switch-title button.active").attr("id");
         $(".input-title-lang[lang='"+currentLangT+"']").show();
+        $("#my-awesome-dropzone").dropzone({ 
+            url: "${Constants.URL}archive/do/uploadfile",
+            addRemoveLinks: true
+        });
+        if('${filesHTML}' !== null && '${filesHTML}' !== ''){
+            $(".dz-message").hide();
+            $("#my-awesome-dropzone").append('${filesHTML}');
+        }    
         initCKE();
     });
     
@@ -106,6 +122,25 @@
             $("#addForm").submit();
         }
     });
+    
+    function deleteFile(temp){
+        var path = $("#dir-name").val() + "/files/" + $(temp).parent().find(".dz-details .dz-filename span").text();
+        console.log(path);
+        jQuery.ajax({
+            url: '${Constants.URL}archive/do/removefile',
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'GET',
+            data: 'path='+path,
+            success: function(data){
+                $(temp).parent().remove();
+                if (!$("#my-awesome-dropzone").find("div.dz-file-preview").length) { 
+                    $(".dz-message").show();
+                }
+            }
+        });
+    }
     
     function initCKE() {
         CKEDITOR.replace('editorEN', {
