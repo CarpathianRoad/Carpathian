@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <t:archive_page>
+    <t:adminpage>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
@@ -18,7 +18,7 @@
     <div class="row">
                     <div class="col-lg-4">
 
-                        <form role="form" name="login-form" id="login-form" action="${Constants.URL}archive/do/login.do" method="POST">
+                        <form role="form" name="login-form" id="login-form" action="${Constants.URL}system/archive/do/login.do" method="POST">
                             <input name="user_id" id="user_id" type="hidden"/>
                             <div class="form-group">
                                 <label>Your login:</label>
@@ -35,7 +35,7 @@
                             <div class="validation"></div>
                     </div>
                 </div>
-</t:archive_page>
+</t:adminpage>
 <script>
     $(document).ready(function() {});
     
@@ -50,7 +50,7 @@
         $(".validation").html("");
         $.ajax({
             type: "get",
-            url: "${Constants.URL}archive/ajax/checkUser",
+            url: "${Constants.URL}system/archive/ajax/checkUser",
             cache: false,    
             data:'user_name='+ $("#user_name").val() +'&user_password='+$("#user_password").val(),
             success: function(response){

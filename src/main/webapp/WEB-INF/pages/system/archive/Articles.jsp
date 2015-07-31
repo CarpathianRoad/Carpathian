@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<t:archive_page>
+<t:adminpage>
     <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
@@ -15,7 +15,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <a href="${Constants.URL}archive/index"> <i class="fa fa-fw fa-list-alt"></i> Back to categories</a>
+                                <a href="${Constants.URL}system/archive/index"> <i class="fa fa-fw fa-list-alt"></i> Back to categories</a>
                             </li>
                         </ol>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/archive/add/"/>${category}">+ Add article</a></button></div>
+                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/archive/add/"/>${category}">+ Add article</a></button></div>
                             <table class="article-table table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
@@ -54,9 +54,9 @@
                                             <td class="text-center">${item.article_file_size}</td>
                                             <td class="text-center">${item.article_edit_date}</td>
                                             <td class="text-center">${item.article_editor}</td>
-                                            <td class="text-center"><a href="<c:url value="/archive/edit/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/edit.png" /></a></td>
-                                            <td class="text-center"><a href="<c:url value="/archive/delete/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/delete.png" /></a></td>
-                                            <td class="text-center"><button class="btn btn-success btn-xs" id="publishData" type="submit"><a href="<c:url value="/archive/publish/${item.article_id}"/>">Publish</a></button></td>
+                                            <td class="text-center"><a href="<c:url value="/system/archive/edit/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/edit.png" /></a></td>
+                                            <td class="text-center"><a href="<c:url value="/system/archive/delete/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/delete.png" /></a></td>
+                                            <td class="text-center"><button class="btn btn-success btn-xs" id="publishData" type="submit"><a href="<c:url value="/system/archive/publish/${item.article_id}"/>">Publish</a></button></td>
                                         </tr>
                                         <c:set var="count" value="${count + 1}" scope="page"/>
                                     </c:forEach>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-</t:archive_page>
+</t:adminpage>
 <script>
     $(document).ready(function() {
         console.log("${sessionScope.user.user_name}");

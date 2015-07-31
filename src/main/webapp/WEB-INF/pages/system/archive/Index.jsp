@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<t:archive_page>
+<t:adminpage>
     <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-</t:archive_page>
+</t:adminpage>
 <script>
     $(document).ready(function() {
         console.log("${sessionScope.user.user_name}");

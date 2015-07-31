@@ -8,13 +8,13 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<t:archive_page>
+<t:adminpage>
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
         <h4>Add article</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
             </li>
         </ol>
                                 <form action="${Constants.URL}system/insertdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
@@ -91,13 +91,13 @@
                                     </div>
                 <hr>
                                     
-                                                <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
+                                                <input type="hidden" class="form-control" id="auth" name="author" value="${article.article_editor}">
                                     
                                     <div class="row add-row">
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="datepicker">Date<span class="red-star">*</span></label>
-                                                <input type="text" class="form-control" name="date" id="datepicker">
+                                                <input type="text" class="form-control" name="date" id="datepicker" value="${article.article_edit_date}">
                                                     </div>
                                                 </div>
 						<div class="col-lg-3 field">
@@ -267,11 +267,12 @@
 						</div>
 					</div>
         </form>
-							<p>
-								<button class="btn btn-primary btn-mini margintop30 marginbottom30" id="sudmitData" type="submit">Save</button>
-							</p>
+                                                        <p>
+            <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Publish article</button>
+            <a href="${Constants.URL}system/archive/articles/${category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
+        </p>
         </div>
-</t:archive_page>
+</t:adminpage>
 
             <script> 
                 function initCKE() {
@@ -350,7 +351,7 @@
                 }
                 
                 
-    $(document).ready(function () { 
+    $(document).ready(function () {
         initCKE();
         alert = function() {};
         initDialog();
@@ -364,10 +365,10 @@
         var currentDate = myDate.getDate();
         if (currentMonth < 10) { currentMonth = '0' + currentMonth; }
         if (currentDate < 10) { currentDate = '0' + currentDate; }
-        var prettyDate = currentDate + '.' +currentMonth + '.' +  myDate.getFullYear();
         $( "#datepicker" ).datepicker();
         $( "#datepicker" ).datepicker("option", "dateFormat", "dd.mm.yy");
-        $("#datepicker").val(prettyDate);
+        var dat = '${article.article_edit_date}'.split(" ");
+        $("#datepicker").val(dat[0]);
         $( "#datepicker-act" ).datepicker();
         $( "#datepicker-act" ).datepicker("option", "dateFormat", "dd.mm.yy");
         $('.selectpicker').selectpicker({

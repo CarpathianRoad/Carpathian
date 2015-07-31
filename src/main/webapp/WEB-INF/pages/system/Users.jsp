@@ -8,50 +8,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:adminpage>
-    
-	<div class="container admin-panel-container">
-            <div class="row">
-            <form name="userAdd" method="POST" action="${Constants.URL}system/adduser.do" id="addUser">
-                
-               
-						<div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Username:</label>
-                                                <input type="text" name="username" class="form-control" id="username">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                                                <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Password:</label>
-                                                <input type="password" name="password" class="form-control" id="password">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                                                <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Description:</label>
-                                                <input type="text" name="descr" class="form-control" id="descr">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                    <div class="col-lg-2">
-                        <input class="btn btn-primary btn-mini margintop-button" id="sudmitData" value="Add user" type="submit">
-                                        </div>
-            </form>
-            
-	</div>
-		<div class="row">
-			<div class="col-lg-4">
-                            
-                                    
-<table class="table table-bordered">
+    <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Users
+                        </h1>
+                    </div>
+                </div>
+	<div class="row">
+                    <div class="col-lg-10">
+                        <div class="table-responsive">
+                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/users/add/"/>${category}">+ Add user</a></button></div>
+                            <table class="article-table table table-bordered table-hover table-striped">
   <thead>
     <tr>
-        <th>#</th>
-      <th>Username</th>
-      <th>Password</th>
-      <th>Description</th>
+        <th class="text-center">#</th>
+      <th class="text-center">Avatar</th>
+      <th class="text-center">Username</th>
+      <th class="text-center">First name</th>
+      <th class="text-center">Last name</th>
+      <th class="text-center">Last contacts</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">Description</th>
+      <th class="text-center" colspan="2" style="width:3%;"></th>
+      <th class="text-center" style="width:3%; display: none;"></th>
     </tr>
   </thead>
   <tbody>
@@ -59,12 +39,25 @@
     <c:set var="count" value="${count + 1}" scope="page"/>
     
     <tr>
-        <td>${count}</td>
-      <td>${user.username}</td>
-      <td>${user.password}</td>
-      <td>${user.descr}</td>
-      <td><a href="<c:url value="#"/>"><img class="edit-delete" src="${Constants.URL}img/edit.png" /></a></td>
-      <td><a href="<c:url value="/system/users/delete/${user.username}"/>"><img class="edit-delete" src="${Constants.URL}img/delete.png" /></a></td>
+      <td class="text-center">${count}</td>
+      <td class="text-center"><img class="user-avatar" style="width: 20px;text-align: center;margin-left: 10px;" src="${Constants.URL}${user.user_avatar}"/></td>
+      <td class="text-center">${user.user_name}</td>
+      <td class="text-center">${user.user_firstname}</td>
+      <td class="text-center">${user.user_lastname}</td>
+      <td class="text-center">${user.user_contacts}</td>
+      <td class="text-center">
+            <c:choose>
+                <c:when test="${user.user_enabled == 0}">
+                    Disabled
+                </c:when>    
+                <c:otherwise>
+                    Enabled
+                </c:otherwise>
+            </c:choose>
+      </td>
+      <td class="text-center">${user.user_descr}</td>
+      <td class="text-center"><a href="<c:url value="/system/users/edit/${user.user_id}"/>"><img class="edit-delete" src="${Constants.URL}img/edit.png" /></a></td>
+      <td class="text-center"><a href="<c:url value="/system/users/delete/${user.user_id}"/>"><img class="edit-delete" src="${Constants.URL}img/delete.png" /></a></td>
     </tr>
     </c:forEach>
   </tbody>

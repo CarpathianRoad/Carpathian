@@ -143,7 +143,7 @@ public class FilterModel {
     }
     
     public String deleteFilter(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select * from filters where groupID = "+id+";");
+        ResultSet result = DB.getResultSet("select * from filters where id = "+id+";");
         result.first();
         String ret = result.getString("title");
         DB.runQuery("DELETE FROM `filters` WHERE id="+id);
