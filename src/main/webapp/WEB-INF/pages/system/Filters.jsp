@@ -4,60 +4,24 @@
     Author     : kiwi
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:adminpage>
-        <div class="container admin-panel-container">
-            <div class="row">
-            <form name="filterAdd" method="POST" action="${Constants.URL}system/addfilter.do" id="addFilter" enctype="multipart/form-data" type="multipart/form-data">
-                                                <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                        <label for="tlt">Filter icon:</label>
-                                                            <input type="file" name="filter_icon" class="form-control" id="filterIcon" />
-                                                            <div class="validation"></div>
-                                                    </div>
-                                                </div>
-						<div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Short title:</label>
-                                                <input type="text" name="short_title" class="form-control" id="shortTitle">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                                            <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Full title:</label>
-                                                <input type="text" name="full_title" class="form-control" id="fullTitle">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                                            <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Group ID:</label>
-                                                <input type="text" name="group_id" class="form-control" id="groupID">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                                            <div class="col-lg-2 field">
-                                                    <div class="form-group">
-                                                <label for="tlt">Sort Number:</label>
-                                                <input type="text" name="sort_number" class="form-control" id="sort_number">
-                                                <div class="validation"></div>
-                                              </div>
-						</div>
-                    <div class="col-lg-2">
-                        <input class="btn btn-primary btn-mini margintop-button" id="sudmitData" value="Add filter" type="submit">
+    <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Filters
+                        </h1>
                     </div>
-            </form>
-            
-	</div>
-		<div class="row">
-			<div class="col-lg-5">
-                            
-                                    
-<table class="table table-bordered">
+                </div>
+	<div class="row">
+                    <div class="col-lg-10">
+                        <div class="table-responsive">
+                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/filters/add/"/>${category}">+ Add filter</a></button></div>
+                            <table class="article-table filters-table table table-bordered table-hover table-striped">
   <thead>
     <tr>
         <th>#</th>
@@ -67,8 +31,8 @@
       <th>Full title</th>
       <th>Group ID</th>
       <th>Sort Number</th>
-      <th></th>
-      <th></th>
+      <th class="text-center" colspan="2" style="width:3%;"></th>
+      <th class="text-center" style="width:3%; display: none;"></th>
     </tr>
   </thead>
   <tbody>
@@ -76,9 +40,9 @@
     <c:set var="count" value="${count + 1}" scope="page"/>
     
     <tr>
-        <td>${count}</td>
-        <td>${title.id}</td>
-        <td>
+      <td class="text-center">${count}</td>
+        <td class="text-center">${title.id}</td>
+        <td  class="text-center">
             <c:choose>
                 <c:when test="${title.groupID == 0}">
                     <img src="${Constants.URL}img/group_marker.png" />

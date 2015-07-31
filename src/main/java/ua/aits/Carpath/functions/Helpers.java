@@ -175,8 +175,8 @@ public class Helpers extends FileMethods {
         if("0".equals(id)) {
             html = "<ul class=\"content-list\"><li>";
             for(MenuModel temp : tempMenu) {
-                    html = html + "<a href=\"javascript:;\"  class=\"list-group-item parent-item-main\" aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+" </a>\n" +
-"                                <ul id=\""+temp.titleEN.toUpperCase()+"\">";
+                    html = html + "<a href=\"javascript:;\"  class=\"list-group-item parent-item-main main-item-text\" aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+" </a>\n" +
+"                                <ul id=\""+temp.titleEN.toUpperCase()+"\" class=\"main-item\">";
                     html = html + this.getRowHtmlList(lang, temp.id.toString());
                     html = html + "</ul>";
                 }
@@ -185,15 +185,15 @@ public class Helpers extends FileMethods {
         else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
                 if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
-                         html = html + "<li class=\"collapsed list-group-item\"><a class=\"parent-children\" href=\""+Constants.URL+"archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
+                         html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
                                  +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles)</i>";
                             html = html + "</a></li>"; 
                      }
                 else {
-                    html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item\" "
+                    html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item-text\" "
                             + "aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+ 
                             "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories)</i><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
-"                                <ul id=\""+temp.id+"\" class=\"collapse \" aria-expanded=\"false\" style=\"height: 0px;\">";
+"                                <ul id=\""+temp.id+"\" class=\"collapse parent-item\" aria-expanded=\"false\" style=\"height: 0px;\">";
                     html = html + this.getRowHtmlList(lang, temp.id.toString());
                     html = html + "</ul>";
                 }
@@ -203,21 +203,21 @@ public class Helpers extends FileMethods {
              for(MenuModel temp : tempMenu) {
                  if(temp.parentID == 2 || temp.parentID == 3) {
                      if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
-                         html = html + "<li class=\"collapsed list-group-item\"><a class=\"parent-children\" href=\""+Constants.URL+"archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
+                         html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
                                  +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles)</i>";
                             html = html + "</a></li>"; 
                      }
                      else {
-                    html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item\" "
+                    html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item-text\" "
                             + "aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+
                             "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories)</i><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
-"                                <ul id=\""+temp.id+"\" class=\"collapse \" aria-expanded=\"false\" style=\"height: 0px;\">";
+"                                <ul id=\""+temp.id+"\" class=\"collapse parent-item\" aria-expanded=\"false\" style=\"height: 0px;\">";
                     html = html + this.getRowHtmlList(lang, temp.id.toString());
                     html = html + "</ul>";
                      }
                  }
                  else {
-                    html = html + "<li class=\"collapsed list-group-item\"><a class=\"parent-children\" href=\""+Constants.URL+"archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
+                    html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
                             +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles)</i>";
                     html = html + "</a></li>";
                  }

@@ -8,16 +8,16 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<t:archive_page>
+<t:adminpage>
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
         <h4>Add article</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
             </li>
         </ol>
-	<form action="${Constants.URL}archive/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+	<form action="${Constants.URL}system/archive/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
             <input type="hidden" class="form-control" name="category" value="${article.article_category}">
             <input type="hidden" class="form-control" name="id" value="${article.article_id}">
@@ -78,10 +78,10 @@
         </form>
         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save changes</button>
-            <a href="${Constants.URL}archive/articles/${category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
+            <a href="${Constants.URL}system/archive/articles/${category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
         </p>
     </div>
-</t:archive_page>
+</t:adminpage>
 <script> 
     $(document).ready(function () { 
         var currentLang = $(".lang-switch-text button.active").attr("id");
@@ -89,7 +89,7 @@
         var currentLangT = $(".lang-switch-title button.active").attr("id");
         $(".input-title-lang[lang='"+currentLangT+"']").show();
         $("#my-awesome-dropzone").dropzone({ 
-            url: "${Constants.URL}archive/do/uploadfile",
+            url: "${Constants.URL}system/archive/do/uploadfile",
             addRemoveLinks: true
         });
         if('${filesHTML}' !== null && '${filesHTML}' !== ''){
@@ -127,7 +127,7 @@
         var path = $("#dir-name").val() + "/files/" + $(temp).parent().find(".dz-details .dz-filename span").text();
         console.log(path);
         jQuery.ajax({
-            url: '${Constants.URL}archive/do/removefile',
+            url: '${Constants.URL}system/archive/do/removefile',
             cache: false,
             contentType: false,
             processData: false,

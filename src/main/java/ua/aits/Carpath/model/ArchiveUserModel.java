@@ -139,6 +139,28 @@ public class ArchiveUserModel {
         return temp;
     }
     
+    public ArchiveUserModel getOneUserFullById(String user_id)  throws SQLException{ 
+        ResultSet result = DB.getResultSet("SELECT * FROM archive_users WHERE user_id = "+user_id+";");
+        ArchiveUserModel temp = new ArchiveUserModel();
+        while (result.next()) { 
+            temp.setUser_id(result.getInt("user_id"));
+            temp.setUser_name(result.getString("user_name"));
+            temp.setUser_password(result.getString("user_password"));
+            temp.setUser_firstname(result.getString("user_firstname"));
+            temp.setUser_lastname(result.getString("user_lastname"));
+            temp.setUser_avatar(result.getString("user_avatar"));
+            if(temp.getUser_avatar() == null || "".equals(temp.getUser_avatar())){
+                temp.setUser_avatar("img/noavatar.png");
+            }
+            temp.setUser_contacts(result.getString("user_contacts"));
+            temp.setUser_enabled(result.getInt("user_enabled"));
+            temp.setUser_role(result.getInt("user_role"));
+            temp.setUser_descr(result.getString("user_descr"));
+        }
+        DB.closeCon();
+        return temp;
+    }
+    
     public List<ArchiveUserModel> getAllUsers() throws SQLException {
         ResultSet result = DB.getResultSet("SELECT * FROM archive_users;");
         List<ArchiveUserModel> userList = new LinkedList<>();
@@ -154,9 +176,35 @@ public class ArchiveUserModel {
             temp.setUser_enabled(result.getInt("user_enabled"));
             temp.setUser_role(result.getInt("user_role"));
             temp.setUser_descr(result.getString("user_descr"));
+            if(temp.getUser_avatar() == null || "".equals(temp.getUser_avatar())){
+                temp.setUser_avatar("img/noavatar.png");
+            }
             userList.add(temp);
         }
         DB.closeCon();
         return userList;
+    }
+    
+    public void deleteUser(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("DELETE FROM `archive_users` WHERE user_id='"+id+"'");
+    }
+    
+    public void addUser(String user_name, String user_password, String user_firstname, String user_lastname, String user_contacts, String user_role, String user_enabled, String user_descr) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("INSERT INTO `archive_users`(`user_name`, `user_password`, `user_firstname`, `user_lastname`, `user_avatar`, `user_contacts`, `user_role`, `user_enabled`, `user_descr`) VALUES "
+                + "('"+user_name+"','"+user_password+"','"+user_firstname+"','"+user_lastname+"','','"+user_contacts+"',"+user_role+","+user_enabled+",'"+user_descr+"');");
+    }
+    
+    public void editUser(String user_id, String user_name, String user_password, String user_firstname, String user_lastname, String user_contacts, String user_role, String user_enabled, String user_descr, String user_avatar) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `archive_users` SET "
+                + "`user_name`='"+user_name+"',"
+                + "`user_password`='"+user_password+"',"
+                + "`user_firstname`='"+user_firstname+"',"
+                + "`user_lastname`='"+user_lastname+"',"
+                + "`user_avatar`='"+user_avatar+"',"
+                + "`user_contacts`='"+user_contacts+"',"
+                + "`user_role`="+user_role+","
+                + "`user_enabled`="+user_enabled+","
+                + "`user_descr`='"+user_descr+"' "
+                + "WHERE user_id = "+user_id+";");
     }
 }
