@@ -28,6 +28,7 @@ import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.ArchiveArticleModel;
 import ua.aits.Carpath.model.ArchiveUserModel;
+import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
 
 /**
@@ -42,6 +43,7 @@ public class ArchiveController {
     Helpers Helpers = new Helpers();
     ArchiveArticleModel Articles = new ArchiveArticleModel();
     FilterModel Filters = new FilterModel();
+    ArticleModel MainArticles = new ArticleModel();
     
     @RequestMapping(value = {"/system/archive/login", "/system/archive/login"})
     public ModelAndView archiveLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -148,7 +150,52 @@ public class ArchiveController {
         request.setCharacterEncoding("UTF-8");
         return new ModelAndView("redirect:" + "/system/archive/articles/" + Articles.deleteArticle(id)); 
     }
-    
+    @RequestMapping(value = "/system/archive/do/publishdata.do", method = RequestMethod.POST)
+    public ModelAndView doPublishArticle(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("article_id");
+        String titleEN = request.getParameter("titleEN");
+        String titleUA = request.getParameter("titleUA");
+        String titleHU = request.getParameter("titleHU");
+        String titleSK = request.getParameter("titleSK");
+        String titlePL = request.getParameter("titlePL");
+        String titleRO = request.getParameter("titleRO");
+        String titleGE = request.getParameter("titleGE");
+        String titleCZ = request.getParameter("titleCZ");
+        String titleSRB = request.getParameter("titleSRB");
+        String type = request.getParameter("type");
+        String public_country = request.getParameter("public_country");
+        String menuCat = request.getParameter("menuCat");
+        String date = request.getParameter("date");
+        String actDate = request.getParameter("act-date");
+        String author = request.getParameter("author");
+        String avatar = request.getParameter("avatar-path");
+        String img = request.getParameter("real-img-path");
+        String panorama = request.getParameter("filename-panorama");
+        String x = request.getParameter("x");
+        String y = request.getParameter("y");
+        String country = request.getParameter("country");
+        String region = request.getParameter("region");
+        String district = request.getParameter("district");
+        String town = request.getParameter("town");
+        String markerType = "";
+        String filter = request.getParameter("filter-type-all");
+        String textEN = request.getParameter("textEN");
+        String textUA = request.getParameter("textUA");
+        String textHU = request.getParameter("textHU");
+        String textSK = request.getParameter("textSK");
+        String textPL = request.getParameter("textPL");
+        String textRO = request.getParameter("textRO");
+        String textGE = request.getParameter("textGE");
+        String textCZ = request.getParameter("textCZ");
+        String textSRB = request.getParameter("textSRB");
+        String result = MainArticles.insertArticle(titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author,
+                avatar, img, panorama, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
+                textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
+        Articles.publishArticle(id);
+        return new ModelAndView("redirect:" + "/system/panel");
+       
+    }
     /* File Upload Controllers */
     
     @RequestMapping(value = {"/system/archive/do/uploadfile", "/system/archive/do/uploadfile/"}, method = RequestMethod.POST)

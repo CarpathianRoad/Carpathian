@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.jsoup.Jsoup;
+import ua.aits.Carpath.model.ArchiveArticleModel;
 import ua.aits.Carpath.model.MenuModel;
 
 /**
@@ -23,6 +24,7 @@ import ua.aits.Carpath.model.MenuModel;
 public class Helpers extends FileMethods {
     
     MenuModel menu = new MenuModel();
+    
     public static String html2text(String html) {
         return Jsoup.parse(html).text();
     }
@@ -186,7 +188,7 @@ public class Helpers extends FileMethods {
             for(MenuModel temp : tempMenu) {
                 if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
                          html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
-                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles)</i>";
+                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i>";
                             html = html + "</a></li>"; 
                      }
                 else {
@@ -204,7 +206,7 @@ public class Helpers extends FileMethods {
                  if(temp.parentID == 2 || temp.parentID == 3) {
                      if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
                          html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
-                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles)</i>";
+                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i>";
                             html = html + "</a></li>"; 
                      }
                      else {
@@ -218,7 +220,7 @@ public class Helpers extends FileMethods {
                  }
                  else {
                     html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
-                            +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles)</i>";
+                            +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i>";
                     html = html + "</a></li>";
                  }
                 }

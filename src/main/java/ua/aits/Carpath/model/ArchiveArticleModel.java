@@ -234,6 +234,10 @@ public class ArchiveArticleModel {
             temp.setArticle_is_publish(result.getInt("article_is_publish"));
             temp.setArticle_dir(result.getString("article_dir"));
             temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 2));
+            String[] size = temp.article_file_size.split("\\s+");
+            if("0".equals(size[0])) {
+                temp.setArticle_file_size("");
+            }
             articleList.add(temp);
         }
         DB.closeCon();
@@ -267,6 +271,7 @@ public class ArchiveArticleModel {
                 + "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`, `article_dir`) VALUES ("
                 + "'"+StringEscapeUtils.escapeSql(titleEN)+"','"+StringEscapeUtils.escapeSql(titleUA)+"','"+StringEscapeUtils.escapeSql(textEN)+"','"+StringEscapeUtils.escapeSql(textUA)+
                 "','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0,'"+dir+"');");
+        DB.closeCon();
     } 
     
     public void updateArticle(String id, String titleEN, String titleUA, String textEN, String textUA, String author, String date) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -274,6 +279,7 @@ public class ArchiveArticleModel {
                 "`article_title_EN`='"+StringEscapeUtils.escapeSql(titleEN)+"',`article_title_UA`='"+StringEscapeUtils.escapeSql(titleUA)+"'," +
                 "`article_text_EN`='"+StringEscapeUtils.escapeSql(textEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(textUA)+"'," +
                 "`article_editor`='"+author+"',`article_edit_date`='"+date+"' WHERE article_id = "+id+";");
+        DB.closeCon();
     }
     
     public String deleteArticle(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
@@ -285,4 +291,10 @@ public class ArchiveArticleModel {
         DB.closeCon();
         return category;
     }
+    
+    public void publishArticle(String article_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `archive_articles` SET `article_is_publish` = 1 WHERE article_id = "+article_id+";");
+        DB.closeCon();
+    }
+    
 }

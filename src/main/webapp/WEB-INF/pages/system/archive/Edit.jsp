@@ -78,7 +78,7 @@
         </form>
         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save changes</button>
-            <a href="${Constants.URL}system/archive/articles/${category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
+            <a href="${Constants.URL}system/archive/articles/${article.article_category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
         </p>
     </div>
 </t:adminpage>
