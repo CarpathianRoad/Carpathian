@@ -86,7 +86,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="user-avatar" src="${Constants.URL}${sessionScope.user.user_avatar}" /> ${sessionScope.user.user_firstname} ${sessionScope.user.user_lastname} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>
+                        <li style="display:none;">
                             <a href="<c:url value="/system/users/settings/"/>${sessionScope.user.user_id}"><i class="fa fa-fw fa-cog"></i> Settings</a>
                         </li>
                         <li>
@@ -162,7 +162,7 @@
             else {
                 var url = window.location.href.split('/')[5];
             }
-            if(url === 'panel' || url === 'index' || url === 'main') {
+            if(url === 'panel' || url === 'index' || url === 'main' || url === 'articles') {
                 $("#index").addClass('active');
             }
             else {

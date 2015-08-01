@@ -13,7 +13,7 @@
         <h4>Delete article</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/archive/articles/${category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
             </li>
         </ol>
 	<div class="row add-row">
@@ -21,7 +21,7 @@
                     <div class="delete-row">Delete article <strong>"${article.article_title_en}"</strong> ?</div>
                     <p>
                         <a href="${Constants.URL}system/archive/do/deletearticle/${article.article_id}"><button class="btn btn-success margintop30 marginbottom30" id="sudmitDelete" type="submit">Delete article</button></a>
-                        <a href="${Constants.URL}system/archive/articles/${category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
+                        <a href="${Constants.URL}system/archive/articles/${article.article_category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
                     </p>
                 </div>
         </div>

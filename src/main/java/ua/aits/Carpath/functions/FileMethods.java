@@ -44,6 +44,10 @@ public class FileMethods {
         final boolean directory = new File(basePath).mkdirs();
         File dest = new File(basePath);
         FileUtils.copyDirectory(temp, dest);
+        File theDir = new File(basePath+"/files");
+        if (!theDir.exists()) {
+            theDir.mkdir();
+        }
         return category + "/" + title.replaceAll("\\s","_") + "_" + sdf.format(date_format);
     }
     

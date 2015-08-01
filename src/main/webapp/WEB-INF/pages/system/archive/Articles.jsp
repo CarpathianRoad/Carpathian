@@ -34,6 +34,7 @@
                                         <th class="text-center" style="width:10%">Files</th>
                                         <th class="text-center" style="width:13%">Edit date</th>
                                         <th class="text-center" style="width:5%">Editor</th>
+                                        <th class="text-center" style="width:5%">Publish</th>
                                         <th colspan="3" style="width:3%;"></th>
                                         <th style="width:3%; display: none;"></th>
                                         <th style="width:5%; display: none;"></th>
@@ -50,10 +51,15 @@
                                         <tr>
                                             <td class="text-center counter">${count}</td>
                                             <td>${item.article_title_en}</td>
-                                            <td class="text-center">0</td>
+                                            <td class="text-center"></td>
                                             <td class="text-center">${item.article_file_size}</td>
                                             <td class="text-center">${item.article_edit_date}</td>
                                             <td class="text-center">${item.article_editor}</td>
+                                            <td class="text-center">
+                                                <c:if test="${item.article_is_publish == 1}">
+                                                    <i class="fa fa-fw fa-check-circle"></i>
+                                                </c:if>
+                                            </td>
                                             <td class="text-center"><a href="<c:url value="/system/archive/edit/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/edit.png" /></a></td>
                                             <td class="text-center"><a href="<c:url value="/system/archive/delete/${item.article_id}"/>"><img class="article-buttons" src="${Constants.URL}img/delete.png" /></a></td>
                                             <td class="text-center"><button class="btn btn-success btn-xs" id="publishData" type="submit"><a href="<c:url value="/system/archive/publish/${item.article_id}"/>">Publish</a></button></td>

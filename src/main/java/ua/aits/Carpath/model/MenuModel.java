@@ -191,9 +191,18 @@ public class MenuModel {
     }
     
     public Integer countArticles(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ResultSet result = DB.getResultSet("select count(*) as cnt from content where menuCat = "+id+";");
+        ResultSet result = DB.getResultSet("select count(*) as cnt from archive_articles where article_category = "+id+";");
         result.first();
+        Integer coun = result.getInt("cnt");
         DB.closeCon();
-        return 0;
+        return coun;
+    }
+    
+    public Integer countPublish(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from archive_articles where article_category = "+id+" and article_is_publish = 1;");
+        result.first();
+        Integer coun = result.getInt("cnt");
+        DB.closeCon();
+        return coun;
     }
 }
