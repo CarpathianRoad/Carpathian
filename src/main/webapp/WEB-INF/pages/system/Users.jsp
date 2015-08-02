@@ -40,7 +40,7 @@
     
     <tr>
       <td class="text-center">${count}</td>
-      <td class="text-center"><img class="user-avatar" style="width: 20px;text-align: center;margin-left: 10px;" src="${Constants.URL}${user.user_avatar}"/></td>
+      <td class="text-center"><img class="user-avatar" style="height: 20px;width: 20px;text-align: center;margin-left: 10px;" src="${Constants.URL}${user.user_avatar}"/></td>
       <td class="text-center">${user.user_name}</td>
       <td class="text-center">${user.user_firstname}</td>
       <td class="text-center">${user.user_lastname}</td>

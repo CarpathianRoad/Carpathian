@@ -32,6 +32,7 @@
         </div>
                     <form action="${Constants.URL}system/user/do/deletedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
                         <input type="hidden" id="user_id" name="user_id" value="${user.user_id}"/>
+                        <input type="hidden" id="user_avatar" name="user_avatar" value="${user.user_avatar}"/>
                     </form>
     </div>
 </t:adminpage>

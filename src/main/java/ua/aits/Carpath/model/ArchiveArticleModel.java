@@ -236,7 +236,7 @@ public class ArchiveArticleModel {
             temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 2));
             String[] size = temp.article_file_size.split("\\s+");
             if("0".equals(size[0])) {
-                temp.setArticle_file_size("");
+                temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 3));
             }
             articleList.add(temp);
         }

@@ -29,6 +29,7 @@
                 <div class="col-lg-4 margintop10 field">
                     <label for="tlt">Short title:</label>
                     <input type="text" name="short_title" class="form-control" id="shortTitle">
+                    <div class="validation"></div>
                 </div>
                 <div class="col-lg-4 margintop10 field">
                     <label for="tlt">Full title:</label>
@@ -64,5 +65,18 @@
         if(isValidate) {
             $("#addFilter").submit();
         }
+    });
+    
+    $("#shortTitle").change(function() {
+        var check =  /^[a-z0-9_]+$/i.test($(this).val());
+        console.log(check);
+                if(check){
+                    $(".validation").html("");
+                   $("#sudmitData").removeClass("disabled");
+                }
+                else {
+                      $(".validation").html("<span style='color:red'>No white spaces in short title</span>");
+                      $("#sudmitData").addClass("disabled");
+                }
     });
 </script>

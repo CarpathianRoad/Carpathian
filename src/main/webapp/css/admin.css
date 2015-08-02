@@ -830,6 +830,7 @@ ul.alert-dropdown {
 }
 .user-avatar {
     width: 35px;
+    height: 35px;
     margin-right: 1em;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;

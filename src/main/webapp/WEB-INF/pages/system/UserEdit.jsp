@@ -16,9 +16,19 @@
                 <a href="${Constants.URL}system/users"> <i class="fa fa-fw fa-list-alt"></i> Back to users</a>
             </li>
         </ol>
-	<form action="${Constants.URL}system/user/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+	<form action="${Constants.URL}system/user/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" enctype="multipart/form-data" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
-            <input type="hidden" id="user_id" name="user_id" value="${user.user_id}"/>
+            <input type="hidden" id="user_id" name="user_id" value="${user.user_id}"/><div class="row add-row">
+            <input type="hidden" id="user_avatar_old" name="user_avatar_old" value="${user.user_avatar}"/>
+                <div class="col-lg-4 margintop10 field">
+                    <img style="width: 100px;" src="${Constants.URL}${user.user_avatar}" />
+                </div>
+                <div class="col-lg-4 margintop10 field">
+                    <label for="tlt">User avatar:</label>
+                    <input type="file" name="user_avatar" class="form-control" id="user_avatar" />
+                </div>
+            </div>
+            <hr>
             <div class="row add-row">
                 <div class="col-lg-4 margintop10 field">
                     <label for="tlt">User name<span class="red-star">*</span></label>
@@ -33,16 +43,16 @@
             <div class="row add-row">
                 <div class="col-lg-4 margintop10 field">
                     <label for="tlt">User role<span class="red-star">*</span></label>
-                    <select class="form-control" name="user_role" value="${user.user_role}">
-                      <option value="0" selected>Simple user</option>
+                    <select class="form-control" name="user_role" id="user_role" value="${user.user_role}">
+                      <option value="0">Simple user</option>
                       <option value="1">Administrator</option>
                     </select>
                 </div>
                 <div class="col-lg-4 margintop10 field">
                     <label for="tlt">User status<span class="red-star">*</span></label>
-                    <select class="form-control" name="user_enabled" value="${user.user_enabled}">
+                    <select class="form-control" name="user_enabled" id="user_enabled" value="${user.user_enabled}">
                       <option value="0">Disabled</option>
-                      <option value="1" selected>Enabled</option>
+                      <option value="1">Enabled</option>
                     </select>
                 </div>
             </div>
@@ -78,6 +88,8 @@
 </t:adminpage>
 <script> 
     $(document).ready(function () { 
+        $("#user_role").val("${user.user_role}");
+        $("#user_enabled").val("${user.user_enabled}");
     });
     $("#sudmitData").click(function(){
         $("div.validation").html('');
