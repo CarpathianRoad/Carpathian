@@ -117,6 +117,14 @@ public class ArchiveUserModel {
         return res;
     }
     
+    public String isExitsUserName(String user_name) throws SQLException{
+        ResultSet result = DB.getResultSet("SELECT * FROM archive_users WHERE user_name = '" + user_name +"';");
+        String res = null;
+        if(result.next()) { res = result.getString("user_id"); }
+        DB.closeCon();
+        return res;
+    }
+    
     public ArchiveUserModel getOneUserFull(String user_id, String user_name, String user_password)  throws SQLException{ 
         ResultSet result = DB.getResultSet("SELECT * FROM archive_users WHERE user_id = "+user_id+" AND user_name='"+user_name+"' AND user_password='"+user_password+"' AND user_enabled = 1;");
         ArchiveUserModel temp = new ArchiveUserModel();
@@ -189,9 +197,9 @@ public class ArchiveUserModel {
         DB.runQuery("DELETE FROM `archive_users` WHERE user_id='"+id+"'");
     }
     
-    public void addUser(String user_name, String user_password, String user_firstname, String user_lastname, String user_contacts, String user_role, String user_enabled, String user_descr) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void addUser(String user_name, String user_password, String user_firstname, String user_lastname, String user_contacts, String user_role, String user_enabled, String user_descr, String user_avatar) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DB.runQuery("INSERT INTO `archive_users`(`user_name`, `user_password`, `user_firstname`, `user_lastname`, `user_avatar`, `user_contacts`, `user_role`, `user_enabled`, `user_descr`) VALUES "
-                + "('"+user_name+"','"+user_password+"','"+user_firstname+"','"+user_lastname+"','','"+user_contacts+"',"+user_role+","+user_enabled+",'"+user_descr+"');");
+                + "('"+user_name+"','"+user_password+"','"+user_firstname+"','"+user_lastname+"','"+user_avatar+"','"+user_contacts+"',"+user_role+","+user_enabled+",'"+user_descr+"');");
     }
     
     public void editUser(String user_id, String user_name, String user_password, String user_firstname, String user_lastname, String user_contacts, String user_role, String user_enabled, String user_descr, String user_avatar) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

@@ -5,17 +5,22 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
@@ -216,7 +221,7 @@ public class SystemController {
     }
         
     @RequestMapping(value = "/system/user/do/insertdata.do", method = RequestMethod.POST)
-    public ModelAndView doAddUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+    public ModelAndView doAddUser(@RequestParam("user_avatar") MultipartFile file, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String user_name = request.getParameter("user_name");
         String user_password = request.getParameter("user_password");
@@ -226,12 +231,32 @@ public class SystemController {
         String user_lastname = request.getParameter("user_lastname");
         String user_descr = request.getParameter("user_descr");
         String user_contacts = request.getParameter("user_contacts");
-        Users.addUser(user_name, user_password, user_firstname, user_lastname, user_contacts, user_role, user_enabled, user_descr);
+        String name = file.getOriginalFilename();
+        String user_avatar = "";
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.home + "user_avatars/");
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + user_name+"."+FilenameUtils.getExtension(name));
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                user_avatar = "user_avatars/"+user_name+"."+FilenameUtils.getExtension(name);
+            } catch (Exception e) {
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
+            }
+        } else {
+            System.out.println("You failed to upload " + name + " because the file was empty.");
+        }
+        Users.addUser(user_name, user_password, user_firstname, user_lastname, user_contacts, user_role, user_enabled, user_descr, user_avatar);
         return new ModelAndView("redirect:" + "/system/users");
     } 
         
     @RequestMapping(value = "/system/user/do/updatedata.do", method = RequestMethod.POST)
-    public ModelAndView doEditUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+    public ModelAndView doEditUser(@RequestParam("user_avatar") MultipartFile file, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String user_id = request.getParameter("user_id");
         String user_name = request.getParameter("user_name");
@@ -242,7 +267,29 @@ public class SystemController {
         String user_lastname = request.getParameter("user_lastname");
         String user_descr = request.getParameter("user_descr");
         String user_contacts = request.getParameter("user_contacts");
-        Users.editUser(user_id, user_name, user_password, user_firstname, user_lastname, user_contacts, user_role, user_enabled, user_descr, "");
+        String name = file.getOriginalFilename();
+        String user_avatar = request.getParameter("user_avatar_old");
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.home + "user_avatars/");
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + user_name+"."+FilenameUtils.getExtension(name));
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                
+            } catch (Exception e) {
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
+            }
+            user_avatar = "user_avatars/"+user_name+"."+FilenameUtils.getExtension(name);
+        }
+        if("img/noavatar.png".equals(user_avatar)) {
+            user_avatar = "";
+        }
+        Users.editUser(user_id, user_name, user_password, user_firstname, user_lastname, user_contacts, user_role, user_enabled, user_descr, user_avatar);
         return new ModelAndView("redirect:" + "/system/users");
     }   
         
@@ -250,6 +297,11 @@ public class SystemController {
     public ModelAndView doDeleteUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String user_id = request.getParameter("user_id");
+        String user_avatar = request.getParameter("user_avatar");
+        if(!"".equals(user_avatar) && user_avatar != null && !"img/noavatar.png".equals(user_avatar)) {
+             File temp = new File(Constants.home + user_avatar);
+             temp.delete();
+        }
         Users.deleteUser(user_id);
         return new ModelAndView("redirect:" + "/system/users");
     }
@@ -300,5 +352,12 @@ public class SystemController {
         Boolean result = routes.deleteRoute(id);
         
         return new ModelAndView("redirect:" + "/system/routes");
+    }
+    
+    /* ajax */
+    @RequestMapping(value = {"/system/users/ajax/checkUserName", "/system/users/ajax/checkUserName/"}, method = RequestMethod.GET)
+    public @ResponseBody String archiveCheckUsername(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        return Users.isExitsUserName(request.getParameter("user_name"));
     }
 }

@@ -17,12 +17,20 @@
                 <a href="${Constants.URL}system/users"> <i class="fa fa-fw fa-list-alt"></i> Back to users</a>
             </li>
         </ol>
-	<form action="${Constants.URL}system/user/do/insertdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+	<form action="${Constants.URL}system/user/do/insertdata.do" name="addArticleForm" id="addForm" method="POST"  enctype="multipart/form-data" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
             <div class="row add-row">
                 <div class="col-lg-4 margintop10 field">
+                    <label for="tlt">User avatar</label>
+                    <input type="file" name="user_avatar" class="form-control" id="user_avatar" />
+                </div>
+            </div>
+            <hr>
+            <div class="row add-row">
+                <div class="col-lg-4 margintop10 field">
                     <label for="tlt">User name<span class="red-star">*</span></label>
-                    <input type="text" name="user_name" class="form-control">
+                    <input type="text" id="user_name" name="user_name" class="form-control">
+                    <div class="validation"></div>
                 </div>
                 <div class="col-lg-4 margintop10 field">
                     <label for="tlt">User password<span class="red-star">*</span></label>
@@ -86,5 +94,28 @@
         if(isValidate) {
             $("#addForm").submit();
         }
+    });
+    $("#user_name").change(function() {
+        console.log($(this).val());
+        $.ajax({
+            type: "get",
+            url: "${Constants.URL}system/users/ajax/checkUserName",
+            cache: false,    
+            data:'user_name='+ $(this).val(),
+            success: function(response){
+                console.log(response);
+                if(response === "" || response === null){
+                    $(".validation").html("");
+                   $("#sudmitData").removeClass("disabled");
+                }
+                else {
+                      $(".validation").html("<span style='color:red'>Username is already exist</span>");
+                      $("#sudmitData").addClass("disabled");
+                }
+            }, 
+            error: function(response){      
+                console.log(response);
+            }
+        });
     });
 </script>
