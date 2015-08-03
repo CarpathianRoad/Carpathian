@@ -318,7 +318,7 @@ width: 15%;
     -webkit-column-gap: 10px;
     column-count: 5;
     column-gap: 10px;  
-    margin-left: -35px;
+    margin-left: -40px;
 }
 .route-filters.list-block ul {
     -moz-column-count: 1;
@@ -957,4 +957,9 @@ a.list-group-item:hover {
 }
 a.main-item-text:focus, a.main-item-text:hover {
     background-color: #5AC297 !important;
+}
+#logout {
+    border-top: 2px solid #14A86B;
+    position: absolute;
+    bottom: 3%;
 }
