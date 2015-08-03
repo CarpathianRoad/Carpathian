@@ -66,7 +66,9 @@ public class ArchiveController {
     @RequestMapping(value = {"/system/archive/add/{id}", "/system/archive/add/{id}/"}, method = RequestMethod.GET)
     public ModelAndView archiveAdd(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Add");
-        modelAndView.addObject("folder", Helpers.createTempDir());
+        String folder = Helpers.createTempDir();
+        modelAndView.addObject("folder", folder);
+        modelAndView.addObject("folder_str", folder.replace('/', '|'));
         modelAndView.addObject("category", id);
         return modelAndView;
     }
@@ -227,4 +229,26 @@ public class ArchiveController {
         Boolean result = temp.delete();
         return result.toString();
     } 
+    @RequestMapping(value = {"/system/archive/do/uploadimage", "/system/archive/do/uploadimage/"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadImageHandler(@RequestParam("file") MultipartFile file, @RequestParam("path") String path,  HttpServletRequest request) {
+        String name = file.getOriginalFilename();
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.home+path);
+                if (!dir.exists())
+                    dir.mkdirs();
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+                try (BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile))) { 
+                    stream.write(bytes); 
+                }
+                return "";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
+    }
 }

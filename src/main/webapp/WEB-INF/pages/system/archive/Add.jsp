@@ -136,18 +136,18 @@
     
     function initCKE() {
         CKEDITOR.replace('editorEN', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorUA', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });

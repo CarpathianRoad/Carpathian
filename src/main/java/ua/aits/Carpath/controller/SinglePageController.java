@@ -226,6 +226,24 @@ public class SinglePageController {
 		return model;
     }
         
+    @RequestMapping(value = {"/tools/imageupload/{folder}/","/tools/imageupload/{folder}"}, method = RequestMethod.GET)
+        public ModelAndView fileManagerArchive (@PathVariable("folder") String folder,HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                String path = request.getParameter("path");
+                String type = request.getParameter("type");
+                String ckeditor = request.getParameter("CKEditor");
+                String num = request.getParameter("CKEditorFuncNum");
+		ModelAndView model = new ModelAndView("/tools/FileDrag");
+                model.addObject("ckeditor", ckeditor);
+                model.addObject("num", num);
+                model.addObject("type", type);
+                model.addObject("folder", folder.replace('|', '/'));
+                if("".equals(path)) {
+                    model.addObject("path",path.replace(",", "/"));
+                }
+		return model;
+    }
+       
     
     @RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
     public ModelAndView login(HttpServletRequest request,
