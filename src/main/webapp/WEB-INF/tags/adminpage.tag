@@ -128,6 +128,9 @@
                                 <a href="${Constants.URL}system/filters"><i class="fa fa-fw fa-filter"></i> Filters</a>
                             </li>
                             </c:if>
+                            <li id="logout">
+                                <a href="<c:url value="/system/do/logout.do"/>"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            </li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
