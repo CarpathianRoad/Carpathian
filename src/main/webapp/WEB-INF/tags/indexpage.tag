@@ -293,6 +293,9 @@
                                             </a>
                                         </div>
                     <div class="siteMap">
+                        <a style="margin-right: 15px;" href="${Constants.URL}login">
+                            Enter
+                        </a>
                         <a href="${Constants.URL}sitemap">
                             Site Map
                         </a>

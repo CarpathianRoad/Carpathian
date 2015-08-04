@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="${Constants.URL}css/ckeditor.css" type="text/css" />  
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
-        <h4>Add article</h4>
+        <h4>Edit article in category "${cat_name}"</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category "${cat_name}"</a>
             </li>
         </ol>
 	<form action="${Constants.URL}system/archive/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
@@ -146,8 +146,7 @@
     }
     
     function imageInserted(){ 
-    $("#cke_566_textInput").val("10");
-    $("#cke_669_textInput").val("10");
+    $("label.cke_dialog_ui_labeled_label:contains('HSpace')").next().find(".cke_dialog_ui_input_text").val("10");
     $(".cke_dialog_ui_button_ok span").click();
     }
     function initCKE() {
@@ -193,10 +192,19 @@
         });
         CKEDITOR.on('instanceReady', function() { 
         $("#cke_editorEN iframe").webkitimageresize().webkittableresize().webkittdresize();
-        console.log("ww");
-    $(".cke_button.cke_button__image.cke_button_off").click(function(){
-    $("a[title='Browse Server']").click();
-    } );    
+$(".cke_button.cke_button__image.cke_button_off").click(function(){
+        $(".cke_dialog_body").hide();
+        setTimeout(function() {   //calls click event after a certain time
+   
+    $(".cke_editor_editorEN_dialog .cke_dialog_body").addClass("image-dialog");
+    $(".cke_editor_editorUA_dialog .cke_dialog_body").addClass("image-dialog");
+    if($(".cke_editor_editorUA_dialog .cke_dialog_body").hasClass("image-dialog")) {
+    $(".cke_dialog_body").show();
+    }if($(".cke_editor_editorEN_dialog .cke_dialog_body").hasClass("image-dialog")) {
+    $(".cke_dialog_body").show();
+    }
+}, 500);
+    } );     
     });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");
          obj.click("click", function (e) {

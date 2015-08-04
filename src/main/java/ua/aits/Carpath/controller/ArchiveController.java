@@ -30,6 +30,7 @@ import ua.aits.Carpath.model.ArchiveArticleModel;
 import ua.aits.Carpath.model.ArchiveUserModel;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
+import ua.aits.Carpath.model.MenuModel;
 
 /**
  *
@@ -44,6 +45,7 @@ public class ArchiveController {
     ArchiveArticleModel Articles = new ArchiveArticleModel();
     FilterModel Filters = new FilterModel();
     ArticleModel MainArticles = new ArticleModel();
+    MenuModel Menu = new MenuModel();
     
     @RequestMapping(value = {"/system/archive/login", "/system/archive/login"})
     public ModelAndView archiveLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -61,6 +63,7 @@ public class ArchiveController {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Articles");
         modelAndView.addObject("articles", Articles.getAllArticlesInCategory(id));
         modelAndView.addObject("category", id);
+        modelAndView.addObject("cat_name", Menu.getCategoryName(id));
         return modelAndView;
     }
     @RequestMapping(value = {"/system/archive/add/{id}", "/system/archive/add/{id}/"}, method = RequestMethod.GET)
@@ -70,6 +73,7 @@ public class ArchiveController {
         modelAndView.addObject("folder", folder);
         modelAndView.addObject("folder_str", folder.replace('/', '|'));
         modelAndView.addObject("category", id);
+        modelAndView.addObject("cat_name", Menu.getCategoryName(id));
         return modelAndView;
     }
     @RequestMapping(value = {"/system/archive/edit/{id}", "/system/archive/edit/{id}/"}, method = RequestMethod.GET)
@@ -79,12 +83,14 @@ public class ArchiveController {
         modelAndView.addObject("article", Articles.getOneArticleByID(id));
         modelAndView.addObject("filesHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/files/"));
         modelAndView.addObject("folder_str", folder.replace('/', '|'));
+        modelAndView.addObject("cat_name", Menu.getCategoryName(Articles.getOneArticleByID(id).article_category.toString()));
         return modelAndView;
     }
     @RequestMapping(value = {"/system/archive/delete/{id}", "/system/archive/delete/{id}/"}, method = RequestMethod.GET)
     public ModelAndView archiveDelete(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Delete");
         modelAndView.addObject("article", Articles.getOneArticleByID(id));
+        modelAndView.addObject("cat_name", Menu.getCategoryName(Articles.getOneArticleByID(id).article_category.toString()));
         return modelAndView;
     }
     @RequestMapping(value = {"/system/archive/publish/{id}", "/system/archive/publish/{id}/"})
@@ -94,9 +100,15 @@ public class ArchiveController {
         modelAndView.addObject("article", Articles.getOneArticleByID(id));
         modelAndView.addObject("filters", Filters.FiltersHTML("0"));
         modelAndView.addObject("menuList", Helpers.getRowHtmlSelect("en", "0"));
+        modelAndView.addObject("cat_name", Menu.getCategoryName(Articles.getOneArticleByID(id).article_category.toString()));
         return modelAndView;
     }
     
+    @RequestMapping(value = {"/system/archive/search", "/system/archive/search/"}, method = RequestMethod.GET)
+    public ModelAndView archiveSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("/system/archive/Search");
+        return modelAndView;
+    }
     /* Ajax Controllers */
     
     @RequestMapping(value = {"/system/archive/ajax/checkUser", "/system/archive/ajax/checkUser/"}, method = RequestMethod.GET)
@@ -156,6 +168,11 @@ public class ArchiveController {
     public ModelAndView deleteArticle(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         return new ModelAndView("redirect:" + "/system/archive/articles/" + Articles.deleteArticle(id)); 
+    }
+    @RequestMapping(value = {"/system/archive/do/undeletearticle/{id}","/archive/do/undeletearticle/{id}/"})
+    public ModelAndView undeleteArticle(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        return new ModelAndView("redirect:" + "/system/archive/articles/" + Articles.undeleteArticle(id)); 
     }
     @RequestMapping(value = "/system/archive/do/publishdata.do", method = RequestMethod.POST)
     public ModelAndView doPublishArticle(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {

@@ -13,10 +13,10 @@
         
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
-        <h4>Add article</h4>
+        <h4>Add article to category "${cat_name}"</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/archive/articles/${category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="${Constants.URL}system/archive/articles/${category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category "${cat_name}"</a>
             </li>
         </ol>
 	<form action="${Constants.URL}system/archive/do/insertdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
@@ -35,8 +35,8 @@
                         <button type="button" id="titleRO" class="btn btn-default disabled">In Romanian</button>
                     </div>
                 </div>
-                <div class="col-lg-6 margintop10 field">
-                    <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt"  maxlength="55">
+                <div class="col-lg-6 margintop10 field titles">
+                    <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tltEN"  maxlength="55">
                     <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt"  maxlength="55">
                     <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt"  maxlength="55">
                     <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt"  maxlength="55">
@@ -117,7 +117,10 @@
     $("#sudmitData").click(function(){
         $("div.validation").html('');
         var isValidate = true;
-
+        if($("#tltEN").val() === "") {
+            isValidate = false;
+            $(".titles div.validation").html("<span style='color:red'>Title can't be empty!</span>");
+        }
         if(isValidate) {
             $("#addForm").submit();
         }
@@ -139,8 +142,9 @@
         });
     }
     function imageInserted(){ 
-    $("#cke_566_textInput").val("10");
-    $("#cke_669_textInput").val("10");
+    $("label.cke_dialog_ui_labeled_label:contains('HSpace')").next().find(".cke_dialog_ui_input_text").val("15");
+    $(".cke_editor_editorEN_dialog .cke_dialog_body").removeClass("image-dialog");
+    $(".cke_editor_editorUA_dialog .cke_dialog_body").removeClass("image-dialog");
     $(".cke_dialog_ui_button_ok span").click();
     }
        
@@ -187,9 +191,20 @@
         });
         CKEDITOR.on('instanceReady', function() { 
         $("#cke_editorEN iframe").webkitimageresize().webkittableresize().webkittdresize();
-        console.log("ww");
+        $("#cke_editorUA iframe").webkitimageresize().webkittableresize().webkittdresize();
+        
     $(".cke_button.cke_button__image.cke_button_off").click(function(){
-    $("a[title='Browse Server']").click();
+        $(".cke_dialog_body").hide();
+        setTimeout(function() {   //calls click event after a certain time
+   
+    $(".cke_editor_editorEN_dialog .cke_dialog_body").addClass("image-dialog");
+    $(".cke_editor_editorUA_dialog .cke_dialog_body").addClass("image-dialog");
+    if($(".cke_editor_editorUA_dialog .cke_dialog_body").hasClass("image-dialog")) {
+    $(".cke_dialog_body").show();
+    }if($(".cke_editor_editorEN_dialog .cke_dialog_body").hasClass("image-dialog")) {
+    $(".cke_dialog_body").show();
+    }
+}, 500);
     } );    
     });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");

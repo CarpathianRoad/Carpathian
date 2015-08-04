@@ -44,6 +44,7 @@ public class ArchiveArticleModel {
     public String article_dir;
     public String article_file_size;
     public String article_image_size;
+    public String article_lang;
 
     public Integer getArticle_id() {
         return article_id;
@@ -220,10 +221,18 @@ public class ArchiveArticleModel {
     public void setArticle_image_size(String article_image_size) {
         this.article_image_size = article_image_size;
     }
+
+    public String getArticle_lang() {
+        return article_lang;
+    }
+
+    public void setArticle_lang(String article_lang) {
+        this.article_lang = article_lang;
+    }
     Helpers Helpers = new Helpers();
     
     public List<ArchiveArticleModel> getAllArticlesInCategory(String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-        ResultSet result = DB.getResultSet("SELECT * FROM archive_articles WHERE archive_articles.article_category = " + catID + " AND archive_articles.article_is_delete = 0 ORDER BY archive_articles.article_id");
+        ResultSet result = DB.getResultSet("SELECT * FROM archive_articles WHERE archive_articles.article_category = " + catID + " ORDER BY archive_articles.article_id desc");
         List<ArchiveArticleModel> articleList = new LinkedList<>();
         while (result.next()) { 
             ArchiveArticleModel temp = new ArchiveArticleModel();
@@ -256,6 +265,10 @@ public class ArchiveArticleModel {
                 if("0".equals(temp.article_image_size.split("\\s+")[0])) {
                     temp.setArticle_image_size("");
                 }
+            }
+            temp.setArticle_lang("EN");
+            if(!"".equals(temp.article_title_ua) && temp.article_title_ua != null) {
+                temp.article_lang += ",UA";
             }
             articleList.add(temp);
         }
@@ -304,13 +317,19 @@ public class ArchiveArticleModel {
     public String deleteArticle(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
         ResultSet result = DB.getResultSet("SELECT archive_articles.article_id, archive_articles.article_category, archive_articles.article_dir FROM archive_articles WHERE archive_articles.article_id = " + id + ";");
         result.first();
-        Helpers.removeDir(Constants.home + "archive_content/" + result.getString("article_dir"));
         DB.runQuery("UPDATE `archive_articles` SET `article_is_delete`= 1 WHERE article_id = "+id+";");
         String category = result.getString("article_category");
         DB.closeCon();
         return category;
     }
-    
+    public String undeleteArticle(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+        ResultSet result = DB.getResultSet("SELECT archive_articles.article_id, archive_articles.article_category, archive_articles.article_dir FROM archive_articles WHERE archive_articles.article_id = " + id + ";");
+        result.first();
+        DB.runQuery("UPDATE `archive_articles` SET `article_is_delete`= 0 WHERE article_id = "+id+";");
+        String category = result.getString("article_category");
+        DB.closeCon();
+        return category;
+    }
     public void publishArticle(String article_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DB.runQuery("UPDATE `archive_articles` SET `article_is_publish` = 1 WHERE article_id = "+article_id+";");
         DB.closeCon();
