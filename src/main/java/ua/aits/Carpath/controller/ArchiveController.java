@@ -130,8 +130,9 @@ public class ArchiveController {
         String date = sdf.format(date_format);
         String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, titleEN, category);
         Helpers.removeDir(Constants.home + directory);
-        String replacedTextEN = textEN.replace(directory, dir);
-        String replacedTextUA = textUA.replace(directory, dir);
+        System.out.println(directory + "///" + dir);
+        String replacedTextEN = textEN.replace(directory, "archive_content"+dir);
+        String replacedTextUA = textUA.replace(directory, "archive_content"+dir);
         Articles.insertArticle(titleEN, titleUA, replacedTextEN, replacedTextUA, category, author, date, dir);
         return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
     }
