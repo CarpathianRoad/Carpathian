@@ -10,10 +10,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
     <div class="margintop20">
-        <h4>Delete article</h4>
+        <h4>Delete article in category "${cat_name}"</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category "${cat_name}"</a>
             </li>
         </ol>
 	<div class="row add-row">

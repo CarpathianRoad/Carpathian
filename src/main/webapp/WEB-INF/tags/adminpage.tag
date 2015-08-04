@@ -114,6 +114,9 @@
                             <li id="archive">
                                 <a href="${Constants.URL}system/archive/index"><i class="fa fa-fw fa-folder"></i> Archive</a>
                             </li>
+                            <li id="archive">
+                                <a href="${Constants.URL}system/archive/search"><i class="fa fa-fw fa-search"></i> Search</a>
+                            </li>
                             <c:if test="${sessionScope.user.user_role == 1}">
                             <li id="users">
                                 <a href="${Constants.URL}system/users"><i class="fa fa-fw fa-users"></i> Users</a>

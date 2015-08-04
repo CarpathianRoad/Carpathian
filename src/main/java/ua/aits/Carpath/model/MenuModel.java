@@ -205,4 +205,14 @@ public class MenuModel {
         DB.closeCon();
         return coun;
     }
+    public String getCategoryName(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        if("666".equals(id)) {
+            return "NEWS";
+        }
+        ResultSet result = DB.getResultSet("select titleEN from menu where id = "+id+";");
+        result.first();
+        String coun = result.getString("titleEN");
+        DB.closeCon();
+        return coun;
+    }
 }

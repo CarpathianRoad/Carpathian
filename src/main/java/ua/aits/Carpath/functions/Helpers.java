@@ -182,7 +182,8 @@ public class Helpers extends FileMethods {
                     html = html + this.getRowHtmlList(lang, temp.id.toString());
                     html = html + "</ul>";
                 }
-            html += "</li></ul>";
+            html += "</li><li id=\"news-li\" class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/666\">NEWS<i class=\"count-subs\">("+menu.countArticles("666").toString()+" articles, "+menu.countPublish("666").toString()+" published)</i>";
+                            html = html + "</a></li></ul>";
         }
         else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
