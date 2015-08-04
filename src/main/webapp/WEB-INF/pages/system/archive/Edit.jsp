@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
+    <link rel="stylesheet" href="${Constants.URL}css/ckeditor.css" type="text/css" />  
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
         <h4>Add article</h4>
@@ -82,6 +83,8 @@
         </p>
     </div>
 </t:adminpage>
+    <script src="${Constants.URL}js/jquery.webkitresize.js"></script>
+<script src="${Constants.URL}js/jquery.mb.browser.min.js"></script>
 <script> 
     $(document).ready(function () { 
         var currentLang = $(".lang-switch-text button.active").attr("id");
@@ -144,18 +147,18 @@
     
     function initCKE() {
         CKEDITOR.replace('editorEN', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorUA', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
@@ -183,7 +186,13 @@
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
-        
+        CKEDITOR.on('instanceReady', function() { 
+        $("#cke_editorEN iframe").webkitimageresize().webkittableresize().webkittdresize();
+        console.log("ww");
+    $(".cke_button.cke_button__image.cke_button_off").click(function(){
+    $("a[title='Browse Server']").click();
+    } );    
+    });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");
          obj.click("click", function (e) {
             $("#cke_71_textInput").val("s2as1");

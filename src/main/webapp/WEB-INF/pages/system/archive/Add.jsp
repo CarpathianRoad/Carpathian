@@ -9,6 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
+    <link rel="stylesheet" href="${Constants.URL}css/ckeditor.css" type="text/css" />  
+        
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
         <h4>Add article</h4>
@@ -81,6 +83,9 @@
         </p>
     </div>
 </t:adminpage>
+    
+<script src="${Constants.URL}js/jquery.webkitresize.js"></script>
+<script src="${Constants.URL}js/jquery.mb.browser.min.js"></script>
 <script> 
     $(document).ready(function () { 
         $("#my-awesome-dropzone").dropzone({ 
@@ -133,7 +138,10 @@
             }
         });
     }
-    
+    function imageInserted(){ 
+    $(".cke_dialog_ui_button_ok span").click();
+    }
+       
     function initCKE() {
         CKEDITOR.replace('editorEN', {
             filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
@@ -175,11 +183,19 @@
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
-        
+        CKEDITOR.on('instanceReady', function() { 
+        $("#cke_editorEN iframe").webkitimageresize().webkittableresize().webkittdresize();
+        console.log("ww");
+    $(".cke_button.cke_button__image.cke_button_off").click(function(){
+    $("a[title='Browse Server']").click();
+    } );    
+    });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");
          obj.click("click", function (e) {
             $("#cke_71_textInput").val("s2as1");
         });
+        
+    
     }
 </script>
 <script src="${Constants.URL}archive/js/plugins/dropzone.js"></script>
