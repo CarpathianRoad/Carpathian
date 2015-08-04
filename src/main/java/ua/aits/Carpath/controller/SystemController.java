@@ -93,6 +93,7 @@ public class SystemController {
         HttpSession session = request.getSession(true);
 	session.setAttribute("user",  user);
         if(user.user_role == 1) {  
+            helpers.deleteOldTemp(Constants.home + "archive_temp/");
             return new ModelAndView("redirect:" + "/system/panel");   
         }
         else {

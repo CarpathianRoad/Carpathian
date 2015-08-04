@@ -108,4 +108,20 @@ public class FileMethods {
         }
         return returnHTML;
     }
+    
+    public void deleteOldTemp(String path) throws IOException {
+        File file = new File(path);
+        String[] names = file.list();
+        for(String name : names)
+        {
+            if (new File(path + name).isDirectory())
+            {
+                Date date_format = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                if(!name.toLowerCase().contains(sdf.format(date_format).toLowerCase())){
+                    this.removeDir(path+name);
+                }
+            }
+        }
+    }
 }
