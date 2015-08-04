@@ -51,7 +51,7 @@
                                         <tr>
                                             <td class="text-center counter">${count}</td>
                                             <td>${item.article_title_en}</td>
-                                            <td class="text-center"></td>
+                                            <td class="text-center">${item.article_image_size}</td>
                                             <td class="text-center">${item.article_file_size}</td>
                                             <td class="text-center">${item.article_edit_date}</td>
                                             <td class="text-center">${item.article_editor}</td>

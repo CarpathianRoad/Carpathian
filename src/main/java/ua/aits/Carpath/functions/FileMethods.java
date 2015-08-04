@@ -66,20 +66,24 @@ public class FileMethods {
     }
     public String getReadableSize(String path, Integer format) {
         File folder = new File(path);
-        long size;
-        if(folder.isFile()){
-            size = folder.length();
+        String readableSize = "";
+        if(folder.exists()){
+            long size;
+            if(folder.isFile()){
+                size = folder.length();
+            }
+            else {
+                size = getFolderSize(folder);
+            }
+            String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
+            if(size == 0) {
+                return "0 " + units[format];
+            }
+            int unitIndex = (int) (Math.log10(size) / format);
+            double unitValue = 1 << (unitIndex * 10);
+            readableSize = new DecimalFormat("#,##0.#").format(size / unitValue) + " " + units[unitIndex];
+            
         }
-        else {
-            size = getFolderSize(folder);
-        }
-        String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
-        if(size == 0) {
-            return "0 " + units[format];
-        }
-        int unitIndex = (int) (Math.log10(size) / format);
-        double unitValue = 1 << (unitIndex * 10);
-        String readableSize = new DecimalFormat("#,##0.#").format(size / unitValue) + " " + units[unitIndex];
         return readableSize;
     }
     public String filesInFolderHTML(String path){

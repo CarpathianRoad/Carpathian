@@ -43,6 +43,7 @@ public class ArchiveArticleModel {
     public Integer article_is_publish;
     public String article_dir;
     public String article_file_size;
+    public String article_image_size;
 
     public Integer getArticle_id() {
         return article_id;
@@ -212,6 +213,13 @@ public class ArchiveArticleModel {
         this.article_file_size = article_file_size;
     }
     
+    public String getArticle_image_size() {
+        return article_image_size;
+    }
+
+    public void setArticle_image_size(String article_image_size) {
+        this.article_image_size = article_image_size;
+    }
     Helpers Helpers = new Helpers();
     
     public List<ArchiveArticleModel> getAllArticlesInCategory(String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
@@ -237,6 +245,17 @@ public class ArchiveArticleModel {
             String[] size = temp.article_file_size.split("\\s+");
             if("0".equals(size[0])) {
                 temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 3));
+                if("0".equals(temp.article_file_size.split("\\s+")[0])) {
+                    temp.setArticle_file_size("");
+                }
+            }
+            temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/images", 2));
+            String[] sizeimage = temp.article_image_size.split("\\s+");
+            if("0".equals(sizeimage[0])) {
+                temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/images", 3));
+                if("0".equals(temp.article_image_size.split("\\s+")[0])) {
+                    temp.setArticle_image_size("");
+                }
             }
             articleList.add(temp);
         }
