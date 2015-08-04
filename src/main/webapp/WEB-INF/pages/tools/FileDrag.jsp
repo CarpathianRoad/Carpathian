@@ -17,11 +17,20 @@
         <link href="${Constants.URL}css/bootstrap.min.css" rel="stylesheet" />
         <link href="${Constants.URL}css/style.css" rel="stylesheet" />
         <link href="${Constants.URL}css/admin.css" rel="stylesheet" />
+        <link rel="stylesheet" href="${Constants.URL}archive/css/dropzone.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <style>
+            body{
+                margin: 10px;
+            }
+            form {
+                  height: 475px;
+            }
+        </style>
     </head>
     <body>
-         <div class="img-upl">
+         <div>
 <form action="${Constants.URL}archive/do/uploadimage" class="dropzone"  id="my-awesome-dropzone">
             <input type="hidden" name="path" value="${folder}/images" />
             <input type="file" name="file" style="display:none" />
@@ -47,6 +56,7 @@
         function completeAjaxCall(path){
         console.log(path);
                     window.opener.CKEDITOR.tools.callFunction("${num}", ""+"${Constants.URL}"+ path +"","");
+                    window.opener.imageInserted();
                     window.close();
         }
     </script>  
