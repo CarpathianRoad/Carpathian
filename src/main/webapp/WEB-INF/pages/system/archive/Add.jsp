@@ -139,6 +139,8 @@
         });
     }
     function imageInserted(){ 
+    $("#cke_566_textInput").val("10");
+    $("#cke_669_textInput").val("10");
     $(".cke_dialog_ui_button_ok span").click();
     }
        
