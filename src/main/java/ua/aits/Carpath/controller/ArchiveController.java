@@ -75,8 +75,10 @@ public class ArchiveController {
     @RequestMapping(value = {"/system/archive/edit/{id}", "/system/archive/edit/{id}/"}, method = RequestMethod.GET)
     public ModelAndView archiveEdit(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Edit");
+        String folder = Articles.getOneArticleByID(id).article_dir;
         modelAndView.addObject("article", Articles.getOneArticleByID(id));
         modelAndView.addObject("filesHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/files/"));
+        modelAndView.addObject("folder_str", folder.replace('/', '|'));
         return modelAndView;
     }
     @RequestMapping(value = {"/system/archive/delete/{id}", "/system/archive/delete/{id}/"}, method = RequestMethod.GET)
@@ -128,7 +130,9 @@ public class ArchiveController {
         String date = sdf.format(date_format);
         String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, titleEN, category);
         Helpers.removeDir(Constants.home + directory);
-        Articles.insertArticle(titleEN, titleUA, textEN, textUA, category, author, date, dir);
+        String replacedTextEN = textEN.replace(directory, dir);
+        String replacedTextUA = textUA.replace(directory, dir);
+        Articles.insertArticle(titleEN, titleUA, replacedTextEN, replacedTextUA, category, author, date, dir);
         return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
     }
     @RequestMapping(value = "/system/archive/do/updatedata.do", method = RequestMethod.POST)

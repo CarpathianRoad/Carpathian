@@ -25,7 +25,11 @@
                 margin: 10px;
             }
             form {
-                  height: 475px;
+                height: 475px;
+            }
+            .dz-message span {
+                font-size: 36px;
+                color: #5cb85c;
             }
         </style>
     </head>

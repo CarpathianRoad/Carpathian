@@ -9,47 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
-    <style>
-        #cke_dialog_tabs_304,#cke_dialog_tabs_408  {
-        display:none;
-        }
-        #cke_dialog_contents_304,#cke_dialog_contents_408{
-              height: 150px !important;
-        }
-        #cke_dialog_contents_304 + .cke_dialog_contents,#cke_dialog_contents_408 + .cke_dialog_contents {
-            display: none;
-        }
-    #cke_dialog_contents_304 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:not(:first-child),
-    #cke_dialog_contents_408 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:not(:first-child){
-    display: none;
-    }
-    #cke_dialog_contents_304 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_first,
-    #cke_dialog_contents_408 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_first{
-        display: none
-    }
-    #cke_dialog_contents_304 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a,
-    #cke_dialog_contents_408 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a{
-        width: 100%;
-  height: 50px;
-  padding-top: 35px;  border: 0 !important;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-  background-image: none;
-    }
-    #cke_dialog_contents_304 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a:hover, #cke_dialog_contents_304 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a:focus,
-    #cke_dialog_contents_408 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a:hover, #cke_dialog_contents_408 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a:focus{
-        text-decoration: blink;
-    }
-    #cke_dialog_contents_304 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a span,
-    #cke_dialog_contents_408 .cke_dialog_ui_vbox.cke_dialog_page_contents table tr:first-child .cke_dialog_ui_hbox_last a span{
-        font-size: 20px;
-  color: #fff;
-    }
-    #cke_dialog_footer_304,#cke_dialog_footer_408 {
-        display:none;
-    }
-    </style>
-    <link rel="stylesheet" href="${Constants.URL}css/jquery-resizeablex.css" type="text/css" />  
+    <link rel="stylesheet" href="${Constants.URL}css/ckeditor.css" type="text/css" />  
         
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
@@ -124,7 +84,8 @@
     </div>
 </t:adminpage>
     
-<script src="${Constants.URL}js/jquery-resizeablex.js"></script>
+<script src="${Constants.URL}js/jquery.webkitresize.js"></script>
+<script src="${Constants.URL}js/jquery.mb.browser.min.js"></script>
 <script> 
     $(document).ready(function () { 
         $("#my-awesome-dropzone").dropzone({ 
@@ -223,10 +184,10 @@
             filebrowserWindowHeight : 500
         });
         CKEDITOR.on('instanceReady', function() { 
-        $("#cke_editorEN iframe img").resizeablex();     
+        $("#cke_editorEN iframe").webkitimageresize().webkittableresize().webkittdresize();
         console.log("ww");
     $(".cke_button.cke_button__image.cke_button_off").click(function(){
-    $("a[title='Browse Server']").click()
+    $("a[title='Browse Server']").click();
     } );    
     });
         var obj = $("#cke_120_fileInput").contents().find(".returnImage");
