@@ -552,6 +552,10 @@ public class ArticleModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
             temp.setMenuCat(result.getString("menuCat")); 
+            if(temp.x == 0) {
+                temp.setX(50.4501);
+                temp.setY(30.523400000000038); 
+             }
         }
         DB.closeCon();
         return temp;

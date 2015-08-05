@@ -46,6 +46,12 @@ public class ArchiveArticleModel {
     public String article_file_size;
     public String article_image_size;
     public String article_lang;
+    public String article_country;
+    public String article_region;
+    public String article_district;
+    public String article_town;
+    public Double article_x;
+    public Double article_y;
 
     public Integer getArticle_id() {
         return article_id;
@@ -238,6 +244,56 @@ public class ArchiveArticleModel {
     public void setArticle_lang(String article_lang) {
         this.article_lang = article_lang;
     }
+
+    public String getArticle_country() {
+        return article_country;
+    }
+
+    public void setArticle_country(String article_country) {
+        this.article_country = article_country;
+    }
+
+    public String getArticle_region() {
+        return article_region;
+    }
+
+    public void setArticle_region(String article_region) {
+        this.article_region = article_region;
+    }
+
+    public String getArticle_district() {
+        return article_district;
+    }
+
+    public void setArticle_district(String article_district) {
+        this.article_district = article_district;
+    }
+
+    public String getArticle_town() {
+        return article_town;
+    }
+
+    public void setArticle_town(String article_town) {
+        this.article_town = article_town;
+    }
+
+    public Double getArticle_x() {
+        return article_x;
+    }
+
+    public void setArticle_x(Double article_x) {
+        this.article_x = article_x;
+    }
+
+    public Double getArticle_y() {
+        return article_y;
+    }
+
+    public void setArticle_y(Double article_y) {
+        this.article_y = article_y;
+    }
+    
+    
     Helpers Helpers = new Helpers();
     MenuModel Menu = new MenuModel();
     
@@ -304,22 +360,34 @@ public class ArchiveArticleModel {
         temp.setArticle_is_delete(result.getInt("article_is_delete"));
         temp.setArticle_is_publish(result.getInt("article_is_publish"));
         temp.setArticle_dir(result.getString("article_dir"));
+        temp.setArticle_country(result.getString("article_country"));
+        temp.setArticle_region(result.getString("article_region"));
+        temp.setArticle_district(result.getString("article_district"));
+        temp.setArticle_town(result.getString("article_town"));
+        temp.setArticle_x(result.getDouble("article_x"));
+        temp.setArticle_y(result.getDouble("article_y"));
+        if(temp.article_x == 0) {
+           temp.setArticle_x(50.4501);
+           temp.setArticle_y(30.523400000000038); 
+        }
         DB.closeCon();
         return temp;
     }
     
-    public void insertArticle(String titleEN, String titleUA, String textEN, String textUA, String category, String author, String date, String dir) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void insertArticle(String titleEN, String titleUA, String textEN, String textUA, String category, String author, String date, String dir, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}
         DB.runQuery("INSERT INTO `archive_articles`(`article_title_EN`, `article_title_UA`, `article_text_EN`, `article_text_UA`, "
-                + "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`, `article_dir`) VALUES ("
+                + "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`, `article_dir`, `article_country`, `article_region`, `article_district`, `article_town`, `article_x`, `article_y`) VALUES ("
                 + "'"+StringEscapeUtils.escapeSql(titleEN)+"','"+StringEscapeUtils.escapeSql(titleUA)+"','"+StringEscapeUtils.escapeSql(textEN)+"','"+StringEscapeUtils.escapeSql(textUA)+
-                "','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0,'"+dir+"');");
+                "','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0,'"+dir+"','"+StringEscapeUtils.escapeSql(country)+"','"+StringEscapeUtils.escapeSql(region)+"','"+StringEscapeUtils.escapeSql(district)+"','"+StringEscapeUtils.escapeSql(town)+"', "+x+", "+y+");");
         DB.closeCon();
     } 
     
-    public void updateArticle(String id, String titleEN, String titleUA, String textEN, String textUA, String author, String date) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void updateArticle(String id, String titleEN, String titleUA, String textEN, String textUA, String author, String date, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DB.runQuery("UPDATE `archive_articles` SET" +
                 "`article_title_EN`='"+StringEscapeUtils.escapeSql(titleEN)+"',`article_title_UA`='"+StringEscapeUtils.escapeSql(titleUA)+"'," +
                 "`article_text_EN`='"+StringEscapeUtils.escapeSql(textEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(textUA)+"'," +
+                "`article_x` = "+  x +", `article_y` = "+  y +", `article_country` = '"+ StringEscapeUtils.escapeSql(country) +"', `article_region` = '"+  StringEscapeUtils.escapeSql(region) +"', `article_district` = '"+ StringEscapeUtils.escapeSql(district) +"', `article_town` = '"+  StringEscapeUtils.escapeSql(town) + "'," +
                 "`article_editor`='"+author+"',`article_edit_date`='"+date+"' WHERE article_id = "+id+";");
         DB.closeCon();
     }

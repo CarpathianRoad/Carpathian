@@ -302,7 +302,7 @@ width: 15%;
     padding-right: 10px;
 }
 .add-button-panel {
-    width: 10%;
+    width: 85%;
     float: left;
     margin-top: -10px;
     margin-bottom: 20px;
@@ -968,4 +968,32 @@ a.main-item-text:focus, a.main-item-text:hover {
 }
 .sub-archive-item {
     font-size: 14px;
+}
+.modal-btn-warning {
+    margin-right: 5px;
+}
+.article-filters {
+    float: right;
+    margin-right: 5px;
+    padding-top: 11px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.article-filters-block {
+    width: 100%;
+    margin-bottom: 20px;  
+    display: none;
+}
+div.ui-datepicker{
+ font-size:13px;
+}
+.filter-apply-button .form-group {
+    text-align: center;
+}
+.filter-apply-button button {
+    margin-top: 25px;
+    color: #fff;
+}
+.filter-apply-button button a {
+    color: #fff;
 }

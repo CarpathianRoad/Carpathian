@@ -63,6 +63,7 @@ public class ArchiveController {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Articles");
         modelAndView.addObject("articles", Articles.getAllArticlesInCategory(id));
         modelAndView.addObject("category", id);
+        modelAndView.addObject("users", Users.getAllUsers());
         modelAndView.addObject("cat_name", Menu.getCategoryName(id));
         return modelAndView;
     }
@@ -142,6 +143,12 @@ public class ArchiveController {
         String author = request.getParameter("author");
         String category = request.getParameter("category");
         String directory = request.getParameter("dir");
+        String x = request.getParameter("x");
+        String y = request.getParameter("y");
+        String country = request.getParameter("country");
+        String region = request.getParameter("region");
+        String district = request.getParameter("district");
+        String town = request.getParameter("town");
         Date date_format = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String date = sdf.format(date_format);
@@ -150,7 +157,7 @@ public class ArchiveController {
         System.out.println(directory + "///" + dir);
         String replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
         String replacedTextUA = textUA.replace(directory, "archive_content/"+dir);
-        Articles.insertArticle(titleEN, titleUA, replacedTextEN, replacedTextUA, category, author, date, dir);
+        Articles.insertArticle(titleEN, titleUA, replacedTextEN, replacedTextUA, category, author, date, dir, country, region, district, town, x, y);
         return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
     }
     @RequestMapping(value = "/system/archive/do/updatedata.do", method = RequestMethod.POST)
@@ -163,10 +170,16 @@ public class ArchiveController {
         String textUA = request.getParameter("textUA");
         String author = request.getParameter("author");
         String category = request.getParameter("category");
+        String x = request.getParameter("x");
+        String y = request.getParameter("y");
+        String country = request.getParameter("country");
+        String region = request.getParameter("region");
+        String district = request.getParameter("district");
+        String town = request.getParameter("town");
         Date date_format = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String date = sdf.format(date_format);
-        Articles.updateArticle(id, titleEN, titleUA, textEN, textUA, author, date);
+        Articles.updateArticle(id, titleEN, titleUA, textEN, textUA, author, date, country, region, district, town, x, y);
         return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
     }
     @RequestMapping(value = {"/system/archive/do/deletearticle/{id}","/archive/do/deletearticle/{id}/"})
