@@ -118,8 +118,14 @@
                                     <div id="avatarDialog">
                                         <iframe id="avatarFrame" src=""></iframe>
                                     </div>
+                                    <div id="avatarDialogArchive">
+                                        <iframe id="avatarFrameArchive" src=""></iframe>
+                                    </div>
                                     <button type="button" id="avatarBtn" class="btn btn-primary img-input-box">
                                     Browse avatar
+                                    </button>
+                                    <button type="button" id="avatarBtnArchive" class="btn btn-primary img-input-box">
+                                    Browse archive
                                     </button>
                                 </div>    
                             </div>
@@ -137,8 +143,14 @@
                                 <div id="dialog">
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
+                                <div id="dialog-archive">
+                                    <iframe id="myIframeArchive" src=""></iframe>
+                                </div>
                                 <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
                                 Browse image
+                                </button>
+                                <button type="button" id="dialogBtnArchive" class="btn btn-primary img-input-box">
+                                Browse archive
                                 </button>
                             </div>    
                         </div>
@@ -421,12 +433,7 @@ $('.panorama-file').on('change', '#panorama-input', function() {
                     }
                     });
 });
-function imageInserted(){
-    $( "#dialog" ).dialog( "close" );
-    $( "#avatarDialog" ).dialog( "close" );
-    initRemove();
-    initDialog();
-}
+
 function removePanoramaInit(){
     $(".remove-panorama").click(function(){
         $(".load-panorama").show();
@@ -450,12 +457,21 @@ function removePanoramaInit(){
     });
     initCKE();
 }
+function imageInserted(){
+    $( "#dialog" ).dialog( "close" );
+    $( "#dialog-archive" ).dialog( "close" );
+    $( "#avatarDialog" ).dialog( "close" );
+    $( "#avatarDialogArchive" ).dialog( "close" );
+    initRemove();
+    initDialog();
+}
 function initDialog(){
     var current = "";
     var currentAva = "";
-    var home = "${Constants.FILE_URL}".replace(/\//g,",");
-    if($('#imageUpload .returnImage img:not(.remove-icon)').last().length > 0) {
-        var path = $('#imageUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+    var home = "img/content/".replace(/\//g,",");
+    $("#imageUpload .returnImage img:not(.remove-icon)").each(function( index ) {
+        if($(this).attr("alt").indexOf("archive_content") < 0){
+            var path = $(this).attr("alt").split("/").slice(0,-1);
         
         path = jQuery.grep(path, function(value) {
             return value !== "content";
@@ -464,9 +480,12 @@ function initDialog(){
             return value !== "img";
         });
         current = home+path.toString()+",";
-    }
-    if($('#avatarUpload .returnImage img:not(.remove-icon)').last().length > 0) {
-        var path = $('#avatarUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        }
+        
+    });
+    $("#avatarUpload .returnImage img:not(.remove-icon)").each(function( index ) {
+        if($(this).attr("alt").indexOf("archive_content") < 0){
+            var path = $(this).attr("alt").split("/").slice(0,-1);
         
         path = jQuery.grep(path, function(value) {
             return value !== "content";
@@ -475,6 +494,14 @@ function initDialog(){
             return value !== "img";
         });
         currentAva = home+path.toString()+",";
+        }
+        
+    });
+    if(current === "") {
+        current = "img,content,";
+    }
+    if(currentAva === "") {
+        currentAva = "img,content,";
     }
     $("#dialog").dialog({
             autoOpen: false,
@@ -483,7 +510,17 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path_main='+current);
+                  }
+        });
+    $("#dialog-archive").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#myIframeArchive').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,');
                   }
         });
        $("#avatarDialog").dialog({
@@ -493,14 +530,30 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path='+currentAva+'&type=avatar');
+                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path_main='+currentAva+'&type=avatar');
+                  }
+        }); 
+       $("#avatarDialogArchive").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,&type=avatar');
                   }
         }); 
         $('#dialogBtn').click(function(){
             $('#dialog').dialog('open');
         });
+        $('#dialogBtnArchive').click(function(){
+            $('#dialog-archive').dialog('open');
+        });
         $('#avatarBtn').click(function(){
             $('#avatarDialog').dialog('open');
+        });
+        $('#avatarBtnArchive').click(function(){
+            $('#avatarDialogArchive').dialog('open');
         });
 }
 function initRemove(){

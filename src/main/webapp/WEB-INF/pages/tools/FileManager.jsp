@@ -19,6 +19,11 @@
         <link href="${Constants.URL}css/admin.css" rel="stylesheet" />
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <style>
+            body {
+                margin-top: 0px;
+            }
+        </style>
     </head>
     <body>
          <div class="img-upl">
@@ -138,7 +143,7 @@
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
             
             $("#imageUpload .img-input-box", window.parent.document).remove();
-            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#myModal">Browse image</button>');
+            $('#imageUpload .image-upload', window.parent.document).append('<button type="button" id="dialogBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#myModal">Browse image</button><button type="button" id="dialogBtnArchive"  class="btn btn-primary img-input-box" data-toggle="modal" style="margin-left: 5px;" data-target="#myModal">Browse archive</button>');
             var real = $("#real-img-path", window.parent.document).val();        
             $("#real-img-path", window.parent.document).val(real + "," + path + name);
             initGalerry();
@@ -151,7 +156,7 @@
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
             
             $("#avatarUpload .img-input-box", window.parent.document).remove();
-            $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button>');
+            $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button><button type="button" id="avatarBtnArchive"  class="btn btn-primary img-input-box" data-toggle="modal" style="margin-left: 5px;" data-target="#avatarModalArchive">Browse archive</button>');
             $("#avatar-path", window.parent.document).val(path + name);
             initGalerry();
             $("#avatarUpload .img-content-show-all").removeAttr("current");
@@ -241,6 +246,7 @@
         });
         function getFiles(temp_fold, parent, isFolder) {
                 isFolder = isFolder || false;
+                var pat = "${path_main}".replace(/\//g,",");
                 $(".img-content-show-all").html("");
                 jQuery.ajax({
                     url: '${Constants.URL}showImages',
@@ -248,7 +254,7 @@
                     contentType: false,
                     processData: false,
                     type: 'GET',
-                    data: 'name='+temp_fold+'&parent='+parent,
+                    data: 'name='+temp_fold+'&parent='+parent+'&path='+pat,
                     success: function(data){
                        $(".img-content-show-all").append(data);
                        insertImage();

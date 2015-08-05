@@ -12,7 +12,9 @@ package ua.aits.Carpath.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FilenameUtils;
  
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +25,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ua.aits.Carpath.functions.Constants;
+import ua.aits.Carpath.model.MenuModel;
  
 /**
  * Handles requests for the application file upload requests
  */
 @Controller
 public class FileUploadController {
- 
+    
+    MenuModel Menu = new MenuModel();
+    
     private static final Logger logger = LoggerFactory
             .getLogger(FileUploadController.class);
  
@@ -170,12 +175,13 @@ public class FileUploadController {
     }
     @RequestMapping(value = "/showImages", method = RequestMethod.GET)
     public @ResponseBody
-    String showGalery(HttpServletRequest request) {
+    String showGalery(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String folder_name = request.getParameter("name");
         String parent = request.getParameter("parent");
+        String path = request.getParameter("path").replace(",", "/");
         String curll = "";
         if("".equals(parent) && "".equals(folder_name)){
-            curll = Constants.FILE_URL;
+            curll = Constants.home + path;
         }
         else if("".equals(folder_name) && !"".equals(parent)) {
             curll = parent;
@@ -190,9 +196,20 @@ public class FileUploadController {
         String link_path = curll.replace(Constants.home,"");
         for (File file : fList) {
             if (file.isFile()) {
-                htmlImg = htmlImg + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/></div>";
+                String ext = FilenameUtils.getExtension(file.getAbsolutePath());
+                if("png".equals(ext.toLowerCase()) || "jpeg".equals(ext.toLowerCase()) || "jpg".equals(ext.toLowerCase()) || "gif".equals(ext.toLowerCase())){
+                    htmlImg = htmlImg + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/><a href=\""+Constants.URL+link_path+file.getName()+"\" target=\"_blank\">Download file</a></div>";
+            
+                }
+                else {
+                    htmlImg = htmlImg + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img type=\"file\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+"img/file.png\"/><span class=\"file-name-manager\">"+file.getName()+"</span><a href=\""+Constants.URL+link_path+file.getName()+"\" target=\"_blank\">Download file</a></div>";
+                }
             } else if(file.isDirectory()){
-                htmlFolder = htmlFolder + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+file.getName()+"</span></div>";
+                String fold_name = file.getName();
+                if(curll.contains("archive_content") && "".equals(parent) && "".equals(folder_name)) {
+                    fold_name = Menu.getCategoryName(file.getName());
+                }
+                htmlFolder = htmlFolder + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+fold_name+"</span></div>";
             }
         }
         return htmlFolder+htmlImg;
