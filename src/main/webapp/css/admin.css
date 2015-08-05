@@ -248,11 +248,9 @@ padding-right: 10px;
 text-decoration: underline;
 }
 .admin-panel-filters .field {
-width: 15%;
   float: right
 }
 .admin-panel-filters select {
-    width:80px;
 }
 .admin-panel-th {
     text-align: center;
@@ -261,7 +259,6 @@ width: 15%;
       width: 55%;
   height: 55px;
   float: right;
-    margin-right: -8px;
 }
 .admin-table-cell{
     overflow: hidden;
@@ -302,7 +299,7 @@ width: 15%;
     padding-right: 10px;
 }
 .add-button-panel {
-    width: 85%;
+    width: 40%;
     float: left;
     margin-top: -10px;
     margin-bottom: 20px;
@@ -472,7 +469,17 @@ cke_contents{
     height: 100%;
     border: 0;
 }
+#myIframeArchive {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 #avatarFrame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+#avatarFrameArchive {
     width: 100%;
     height: 100%;
     border: 0;
@@ -485,7 +492,18 @@ cke_contents{
   height: 100%;
   position: fixed;
   width: 100%;
-  padding-right: 10px;
+  padding-right: 10px;  
+  padding-left: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.img-upl-archive {
+    padding: 0px;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  padding-right: 10px;  
+  padding-left: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -977,7 +995,9 @@ a.main-item-text:focus, a.main-item-text:hover {
     margin-right: 5px;
     padding-top: 11px;
     font-size: 18px;
+    width: 55%;
     cursor: pointer;
+    text-align: right;
 }
 .article-filters-block {
     width: 100%;
@@ -996,4 +1016,13 @@ div.ui-datepicker{
 }
 .filter-apply-button button a {
     color: #fff;
+}
+.file-name-manager {
+      position: absolute;
+  display: block !important;
+  margin-top: -20px !important;
+  overflow-y: hidden;
+  width: 110px;
+  color: #FFFFFF !important;
+  background-color: #56698F;
 }
