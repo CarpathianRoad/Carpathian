@@ -107,6 +107,11 @@ public class ArchiveController {
     @RequestMapping(value = {"/system/archive/search", "/system/archive/search/"}, method = RequestMethod.GET)
     public ModelAndView archiveSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Search");
+        String search_string = request.getParameter("search_string");
+        if(!"".equals(search_string) && search_string != null){
+            modelAndView.addObject("articles", Articles.getAllArticlesForSearch(search_string));
+            modelAndView.addObject("svalue", search_string); 
+        }
         return modelAndView;
     }
     /* Ajax Controllers */
