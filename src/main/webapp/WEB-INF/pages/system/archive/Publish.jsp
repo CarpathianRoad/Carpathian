@@ -165,10 +165,15 @@
             <hr>
             <div class="row add-row">
                 <div class="col-lg-3 field map-field">
+                    <div class="form-group marginbottom30">
+                        <button type="button" id="reset-map" class="btn btn-primary btn-mini">Reset map</button>
+                    </div>
                     <div class="form-group">
+                        <div class="form-group">
                         <label for="x">X</label>
                         <input type="text" class="form-control coordinate" value="${article.article_x}" name="x" id="latitude0">
                         <div class="validation"></div>
+                        </div>
                         <div class="form-group">
                         <label for="y">Y</label>
                         <input type="text" class="form-control coordinate" value="${article.article_y}"  name="y" id="longitude0">
@@ -395,6 +400,16 @@
              // $("#panorama-input").click();
           //});
 });
+
+    $("#reset-map").click(function(){
+        $("#latitude0").val("");
+        $("#longitude0").val("");
+        $("#address0").val("");
+        $("#cnt").val("");
+        $("#rgn").val("");
+        $("#dstr").val("");
+        $("#twn").val("");
+    });
 $('.panorama-file').on('change', '#panorama-input', function() {
         $(".load-panorama").show();
         var data = new FormData();

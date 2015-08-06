@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-6 margintop10 field titles">
                     <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tltEN" value="${article.article_title_en}" maxlength="55">
-                    <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt" value="${article.article_title_ua}" maxlength="55">
+                    <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tltUA" value="${article.article_title_ua}" maxlength="55">
                     <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt"  maxlength="55">
                     <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt"  maxlength="55">
                     <input type="text" name="titleRO" class="form-control input-title-lang" lang="titleRO" id="tlt"  maxlength="55">
@@ -47,10 +47,15 @@
             <hr>
             <div class="row add-row">
                 <div class="col-lg-3 field map-field">
+                    <div class="form-group marginbottom30">
+                        <button type="button" id="reset-map" class="btn btn-primary btn-mini">Reset map</button>
+                    </div>
                     <div class="form-group">
+                        <div class="form-group">
                         <label for="x">X</label>
                         <input type="text" class="form-control coordinate" value="${article.article_x}" name="x" id="latitude0">
                         <div class="validation"></div>
+                        </div>
                         <div class="form-group">
                         <label for="y">Y</label>
                         <input type="text" class="form-control coordinate" value="${article.article_y}"  name="y" id="longitude0">
@@ -190,12 +195,20 @@
         $(".input-title-lang").hide();
         $(".input-title-lang[lang='"+currentLangT+"']").show();
     });
-    
+    $("#reset-map").click(function(){
+        $("#latitude0").val("");
+        $("#longitude0").val("");
+        $("#address0").val("");
+        $("#cnt").val("");
+        $("#rgn").val("");
+        $("#dstr").val("");
+        $("#twn").val("");
+    });
     $(".sudmitData").click(function(e){
         $("div.validation").html('');
         $("div.validation").attr("id","");
         var isValidate = true;
-        if($("#tltEN").val() === "") {
+        if($("#tltEN").val() === "" && $("#tltUA").val() === "") {
             isValidate = false;
             $(".titles div.validation").attr("id","active-validation");
             $(".titles div.validation").html("<span style='color:red'>Title can't be empty!</span>");
