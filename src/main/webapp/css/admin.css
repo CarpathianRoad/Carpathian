@@ -231,7 +231,7 @@ margin-left: 20px;
     margin-left: 20px;
 }
 .map-field {
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 .remove-icon {
 width: 20px !important;
@@ -403,6 +403,7 @@ white-space: nowrap;
 border: 1px solid #FFF;
 box-shadow: none;
 cursor: default !important;
+   pointer-events: none;
 }
 .arrow-left-img {
     float: left;
@@ -871,7 +872,8 @@ ul.alert-dropdown {
     margin-left: 10px;
     color: #C2C2C2;
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 100;  
+    font-style: normal;
 }
 .input-title-lang {
   display: none;
@@ -983,6 +985,13 @@ a.main-item-text:focus, a.main-item-text:hover {
 }
 #news-li {
       margin-top: 30px;
+}
+
+#news-li a{
+    color: #fff;
+}
+#news-li .count-subs {
+    color: #fff;
 }
 .sub-archive-item {
     font-size: 14px;

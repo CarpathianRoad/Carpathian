@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
+import ua.aits.Carpath.functions.Transliterator;
 import ua.aits.Carpath.model.ArchiveArticleModel;
 import ua.aits.Carpath.model.ArchiveUserModel;
 import ua.aits.Carpath.model.ArticleModel;
@@ -42,6 +43,7 @@ public class ArchiveController {
     /* Classes init */
     ArchiveUserModel Users = new ArchiveUserModel();
     Helpers Helpers = new Helpers();
+    Transliterator TransliteratorClass = new Transliterator();
     ArchiveArticleModel Articles = new ArchiveArticleModel();
     FilterModel Filters = new FilterModel();
     ArticleModel MainArticles = new ArticleModel();
@@ -152,9 +154,15 @@ public class ArchiveController {
         Date date_format = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String date = sdf.format(date_format);
-        String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, titleEN, category);
+        String folder_name = "";
+        if(!"".equals(titleEN)) {
+            folder_name = titleEN;
+        }
+        else {
+            folder_name = TransliteratorClass.transliterate(titleUA);
+        }
+        String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, folder_name, category);
         Helpers.removeDir(Constants.home + directory);
-        System.out.println(directory + "///" + dir);
         String replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
         String replacedTextUA = textUA.replace(directory, "archive_content/"+dir);
         Articles.insertArticle(titleEN, titleUA, replacedTextEN, replacedTextUA, category, author, date, dir, country, region, district, town, x, y);

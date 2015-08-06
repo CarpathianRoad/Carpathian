@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.jsoup.Jsoup;
-import ua.aits.Carpath.model.ArchiveArticleModel;
 import ua.aits.Carpath.model.MenuModel;
 
 /**
@@ -182,7 +181,7 @@ public class Helpers extends FileMethods {
                     html = html + this.getRowHtmlList(lang, temp.id.toString());
                     html = html + "</ul>";
                 }
-            html += "</li><li id=\"news-li\" class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/666\">NEWS<i class=\"count-subs\">("+menu.countArticles("666").toString()+" articles, "+menu.countPublish("666").toString()+" published)</i>";
+            html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/666\">NEWS<i class=\"count-subs\">("+menu.countArticles("666").toString()+" articles, "+menu.countPublish("666").toString()+" published)</i>";
                             html = html + "</a></li></ul>";
         }
         else if("2".equals(id) || "3".equals(id)) {
@@ -195,7 +194,7 @@ public class Helpers extends FileMethods {
                 else {
                     html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item-text\" "
                             + "aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+ 
-                            "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories)</i><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
+                            "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories, "+menu.countArticlesInSubs(temp.id.toString()).toString()+" articles, "+menu.countPublishInSubs(temp.id.toString()).toString()+" published)</i><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
 "                                <ul id=\""+temp.id+"\" class=\"collapse parent-item\" aria-expanded=\"false\" style=\"height: 0px;\">";
                     html = html + this.getRowHtmlList(lang, temp.id.toString());
                     html = html + "</ul>";

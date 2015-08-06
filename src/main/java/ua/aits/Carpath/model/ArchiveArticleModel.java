@@ -332,9 +332,19 @@ public class ArchiveArticleModel {
                     temp.setArticle_image_size("");
                 }
             }
-            temp.setArticle_lang("EN");
+            String lang = "";
+            if(!"".equals(temp.article_title_en) && temp.article_title_en != null) {
+                lang += "EN,";
+            }
             if(!"".equals(temp.article_title_ua) && temp.article_title_ua != null) {
-                temp.article_lang += ",UA";
+                lang += "UA,";
+            }
+            if(lang.length() > 0) {
+                
+            temp.setArticle_lang(lang.substring(0, lang.length()-1));
+            }
+            if("".equals(temp.article_title_en) || temp.article_title_en == null) {
+                temp.article_title_en = temp.article_title_ua;
             }
             articleList.add(temp);
         }

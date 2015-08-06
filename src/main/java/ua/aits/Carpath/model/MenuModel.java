@@ -198,8 +198,24 @@ public class MenuModel {
         return coun;
     }
     
+    public Integer countArticlesInSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from archive_articles where article_category IN (SELECT id FROM menu WHERE parentID = "+id+") AND article_is_delete = 0;");
+        result.first();
+        Integer coun = result.getInt("cnt");
+        DB.closeCon();
+        return coun;
+    }
+    
     public Integer countPublish(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select count(*) as cnt from archive_articles where article_category = "+id+" and article_is_publish = 1 AND article_is_delete = 0;");
+        result.first();
+        Integer coun = result.getInt("cnt");
+        DB.closeCon();
+        return coun;
+    }
+    
+    public Integer countPublishInSubs(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select count(*) as cnt from archive_articles where article_category IN (SELECT id FROM menu WHERE parentID = "+id+") and article_is_publish = 1 AND article_is_delete = 0;");
         result.first();
         Integer coun = result.getInt("cnt");
         DB.closeCon();
