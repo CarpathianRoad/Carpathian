@@ -17,12 +17,14 @@
     <script>window.location.href = "${Constants.URL}login";</script>
 </c:if>
 <c:if test="${not fn:containsIgnoreCase(pageContext.request.servletPath, 'archive') && sessionScope.user.user_role == 0  && pageContext.request.servletPath.substring(pageContext.request.servletPath.lastIndexOf('/')) != '/UserSettings.jsp'}">
-        <style>
+    <c:if test="${sessionScope.user.user_name != 'matsko'}">
+    <style>
         body {
             display:none;
         }
     </style>
     <script>window.location.href = "${Constants.URL}system/archive/index";</script>
+    </c:if>    
 </c:if>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,11 +126,13 @@
                             <li id="slider">
                                 <a href="${Constants.URL}system/slider"><i class="fa fa-fw fa-picture-o"></i> Slider</a>
                             </li>
-                            <li id="routes">
-                                <a href="${Constants.URL}system/routes"><i class="fa fa-fw fa-road"></i> Routes</a>
-                            </li>
                             <li id="filters">
                                 <a href="${Constants.URL}system/filters"><i class="fa fa-fw fa-filter"></i> Filters</a>
+                            </li>
+                            </c:if>
+                            <c:if test="${sessionScope.user.user_role == 1 || sessionScope.user.user_name == 'matsko'}">
+                            <li id="routes">
+                                <a href="${Constants.URL}system/routes"><i class="fa fa-fw fa-road"></i> Routes</a>
                             </li>
                             </c:if>
                             <li id="logout">

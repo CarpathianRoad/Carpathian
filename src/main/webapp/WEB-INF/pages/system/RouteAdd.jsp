@@ -368,7 +368,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path_main='+current);
                   }
         });
         $('#dialogBtn').click(function(){
