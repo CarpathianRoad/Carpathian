@@ -130,7 +130,7 @@ $(document).ready(function () {
              initChecks();
              addSession();
              initPage();
-             if(${sessionScope.user.user_role} === 0) {
+             if(${sessionScope.user.user_role} === 0 && "${sessionScope.user.user_name}" !== "matsko") {
                  $( "td.publish" ).hide();
                  $("td.article-publish").hide();
                  $(".cell-publish").hide();
