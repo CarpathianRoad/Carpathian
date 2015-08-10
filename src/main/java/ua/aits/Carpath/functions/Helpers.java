@@ -170,7 +170,7 @@ public class Helpers extends FileMethods {
         }
         return html;
     }
-    public String getRowHtmlList(String lang, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public String getRowHtmlList(String lang, String id, String login_time) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         List<MenuModel> tempMenu = menu.getMenuRowSelect(lang, id);
         String html = "";
         if("0".equals(id)) {
@@ -178,25 +178,25 @@ public class Helpers extends FileMethods {
             for(MenuModel temp : tempMenu) {
                     html = html + "<a href=\"javascript:;\"  class=\"list-group-item parent-item-main main-item-text\" aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+" </a>\n" +
 "                                <ul id=\""+temp.titleEN.toUpperCase()+"\" class=\"main-item\">";
-                    html = html + this.getRowHtmlList(lang, temp.id.toString());
+                    html = html + this.getRowHtmlList(lang, temp.id.toString(), login_time);
                     html = html + "</ul>";
                 }
-            html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/666\">NEWS<i class=\"count-subs\">("+menu.countArticles("666").toString()+" articles, "+menu.countPublish("666").toString()+" published)</i>";
+            html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/666\">NEWS<i class=\"count-subs\">("+menu.countArticles("666").toString()+" articles, "+menu.countPublish("666").toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren("666", login_time)+"</span>";
                             html = html + "</a></li></ul>";
         }
         else if("2".equals(id) || "3".equals(id)) {
             for(MenuModel temp : tempMenu) {
                 if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
                          html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
-                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i>";
+                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span>";
                             html = html + "</a></li>"; 
                      }
                 else {
                     html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item-text\" "
                             + "aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+ 
-                            "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories, "+menu.countArticlesInSubs(temp.id.toString()).toString()+" articles, "+menu.countPublishInSubs(temp.id.toString()).toString()+" published)</i><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
+                            "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories, "+menu.countArticlesInSubs(temp.id.toString()).toString()+" articles, "+menu.countPublishInSubs(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticles(temp.id.toString(), login_time)+"</span><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
 "                                <ul id=\""+temp.id+"\" class=\"collapse parent-item\" aria-expanded=\"false\" style=\"height: 0px;\">";
-                    html = html + this.getRowHtmlList(lang, temp.id.toString());
+                    html = html + this.getRowHtmlList(lang, temp.id.toString(), login_time);
                     html = html + "</ul>";
                 }
                 }
@@ -206,21 +206,21 @@ public class Helpers extends FileMethods {
                  if(temp.parentID == 2 || temp.parentID == 3) {
                      if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
                          html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
-                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i>";
+                                 +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span>";
                             html = html + "</a></li>"; 
                      }
                      else {
                     html = html + "<a href=\"javascript:;\" data-toggle=\"collapse\" data-target=\"#"+temp.id+"\" class=\"collapsed list-group-item  parent-item-text\" "
                             + "aria-expanded=\"false\">"+temp.titleEN.toUpperCase()+
-                            "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories)</i><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
+                            "<i class=\"count-subs\">("+menu.countSubs(temp.id.toString()).toString()+" subcategories)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span><i class=\"fa fa-fw fa-caret-down\"></i></a>\n" +
 "                                <ul id=\""+temp.id+"\" class=\"collapse parent-item\" aria-expanded=\"false\" style=\"height: 0px;\">";
-                    html = html + this.getRowHtmlList(lang, temp.id.toString());
+                    html = html + this.getRowHtmlList(lang, temp.id.toString(), login_time);
                     html = html + "</ul>";
                      }
                  }
                  else {
                     html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase() 
-                            +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i>";
+                            +"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span>";
                     html = html + "</a></li>";
                  }
                 }

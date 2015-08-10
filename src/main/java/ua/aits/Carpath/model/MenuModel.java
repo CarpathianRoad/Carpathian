@@ -7,8 +7,12 @@ package ua.aits.Carpath.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.DB;
 
 /**
@@ -89,6 +93,7 @@ public class MenuModel {
     public void setImg(String img) {
         this.img = img;
     }
+   
     
     public List<MenuModel> getMenuRow(String lan, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from menu where parentId = "+id+" ORDER BY `menu`.`sort` ASC;");
@@ -230,5 +235,59 @@ public class MenuModel {
         String coun = result.getString("titleEN");
         DB.closeCon();
         return coun;
+    }
+    
+    public String getSubsId(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select id from menu where menu.parentID = "+id+";");
+        String result_str = "";
+        while (result.next()) { 
+            if("".equals(result_str)) {
+                result_str = result.getString("id");
+            }
+            else {
+                result_str += ","+result.getString("id");
+            }
+        }
+        DB.closeCon();
+        return result_str;
+    }
+    public String checkNewArticles(String id, String time)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
+        ResultSet result = DB.getResultSet("SELECT `article_add_date` FROM archive_articles WHERE archive_articles.article_category IN (" + this.getSubsId(id) + ") ORDER BY archive_articles.article_id desc");
+        if(time == null || "".equals(time)){
+            
+        DB.closeCon();
+        return "";
+        }
+        while (result.next()) { 
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date date1 = sdf.parse(result.getString("article_add_date"));
+            Date date2 = sdf.parse(time);
+            if(date1.after(date2)){
+                
+        DB.closeCon();
+                return "NEW";
+            }
+        }
+        
+        DB.closeCon();
+        return "";
+    }
+    public String checkNewArticlesForChildren(String id, String time)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
+        ResultSet result = DB.getResultSet("SELECT `article_add_date` FROM archive_articles WHERE archive_articles.article_category = " + id + " ORDER BY archive_articles.article_id desc");
+        if(time == null || "".equals(time)){
+        DB.closeCon();
+        return "";
+        }
+        while (result.next()) { 
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date date1 = sdf.parse(result.getString("article_add_date"));
+            Date date2 = sdf.parse(time);
+            if(date1.after(date2)){
+        DB.closeCon();
+                return "NEW";
+            }
+        }
+        DB.closeCon();
+        return "";
     }
 }

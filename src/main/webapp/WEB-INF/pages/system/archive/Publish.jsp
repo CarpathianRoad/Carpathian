@@ -117,8 +117,14 @@
                                     <div id="avatarDialog">
                                         <iframe id="avatarFrame" src=""></iframe>
                                     </div>
+                                    <div id="avatarDialogArchive">
+                                        <iframe id="avatarFrameArchive" src=""></iframe>
+                                    </div>
                                     <button type="button" id="avatarBtn" class="btn btn-primary img-input-box">
                                     Browse avatar
+                                    </button>
+                                    <button type="button" id="avatarBtnArchive" class="btn btn-primary img-input-box">
+                                    Browse archive
                                     </button>
                                 </div>    
                             </div>
@@ -136,8 +142,14 @@
                                 <div id="dialog">
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
+                                <div id="dialog-archive">
+                                    <iframe id="myIframeArchive" src=""></iframe>
+                                </div>
                                 <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
                                 Browse image
+                                </button>
+                                <button type="button" id="dialogBtnArchive" class="btn btn-primary img-input-box">
+                                Browse archive
                                 </button>
                             </div>    
                         </div>

@@ -26,6 +26,7 @@ public class ArchiveUserModel {
     public String user_descr;
     public Integer user_enabled;
     public Integer user_role;
+    public String user_time_login;
     
     
     public Integer getUser_id() {
@@ -107,6 +108,14 @@ public class ArchiveUserModel {
     public void setUser_role(Integer user_role) {
         this.user_role = user_role;
     }
+
+    public String getUser_time_login() {
+        return user_time_login;
+    }
+
+    public void setUser_time_login(String user_time_login) {
+        this.user_time_login = user_time_login;
+    }
     
     
     public String isExitsUser(String user_name, String user_password) throws SQLException{
@@ -142,6 +151,10 @@ public class ArchiveUserModel {
             temp.setUser_enabled(result.getInt("user_enabled"));
             temp.setUser_role(result.getInt("user_role"));
             temp.setUser_descr(result.getString("user_descr"));
+            temp.setUser_time_login(result.getString("user_time_login"));
+            if(temp.user_time_login == null || "".equals(temp.user_time_login)) {
+                temp.user_time_login = "";
+            }
         }
         DB.closeCon();
         return temp;
@@ -164,6 +177,10 @@ public class ArchiveUserModel {
             temp.setUser_enabled(result.getInt("user_enabled"));
             temp.setUser_role(result.getInt("user_role"));
             temp.setUser_descr(result.getString("user_descr"));
+            temp.setUser_time_login(result.getString("user_time_login"));
+            if(temp.user_time_login == null || "".equals(temp.user_time_login)) {
+                temp.user_time_login = "";
+            }
         }
         DB.closeCon();
         return temp;
@@ -184,6 +201,10 @@ public class ArchiveUserModel {
             temp.setUser_enabled(result.getInt("user_enabled"));
             temp.setUser_role(result.getInt("user_role"));
             temp.setUser_descr(result.getString("user_descr"));
+            temp.setUser_time_login(result.getString("user_time_login"));
+            if(temp.user_time_login == null || "".equals(temp.user_time_login)) {
+                temp.user_time_login = "";
+            }
             if(temp.getUser_avatar() == null || "".equals(temp.getUser_avatar())){
                 temp.setUser_avatar("img/noavatar.png");
             }
@@ -214,5 +235,18 @@ public class ArchiveUserModel {
                 + "`user_enabled`="+user_enabled+","
                 + "`user_descr`='"+user_descr+"' "
                 + "WHERE user_id = "+user_id+";");
+    }
+    public void updateLoginTime(String id, String user_time_login) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `archive_users` SET `user_time_login`='"+user_time_login+"'  WHERE user_id='"+id+"'");
+    }
+    public String getLoginTime(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("SELECT * FROM archive_users WHERE user_id = "+id+";");
+        result.first();
+        String time = result.getString("user_time_login");
+        if(time == null || "".equals(time)) {
+                time = "";
+            }
+        DB.closeCon();
+        return time;
     }
 }
