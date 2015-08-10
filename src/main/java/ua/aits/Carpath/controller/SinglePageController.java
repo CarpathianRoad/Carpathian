@@ -220,7 +220,12 @@ public class SinglePageController {
             	model.addObject("ckeditor", ckeditor);
             	model.addObject("num", num);
             	model.addObject("type", type);
-            	model.addObject("path_main", path_main.replace(",", "/"));
+                if( !"".equals(path_main) && path_main != null) {
+                    model.addObject("path_main", path_main.replace(",", "/"));
+                }
+                else {
+                    model.addObject("path_main", "img/content/");
+                }
             	if("".equals(path)) {
                 	model.addObject("path",path.replace(",", "/"));
             	}

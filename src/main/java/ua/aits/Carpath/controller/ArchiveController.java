@@ -13,15 +13,23 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Constants;
@@ -38,6 +46,7 @@ import ua.aits.Carpath.model.MenuModel;
  * @author kiwi
  */
 @Controller
+@SessionAttributes({"user"})
 public class ArchiveController {
     
     /* Classes init */
@@ -57,12 +66,21 @@ public class ArchiveController {
     @RequestMapping(value = {"/system/archive/index", "/system/archive/index/"})
     public ModelAndView archiveIndex(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Index");
-        modelAndView.addObject("menuList", Helpers.getRowHtmlList("en", "0"));
+        HttpSession session = request.getSession(true);
+        ArchiveUserModel user = (ArchiveUserModel)session.getAttribute("user");
+        String time_login = Users.getLoginTime(user.user_id.toString());
+        modelAndView.addObject("menuList", Helpers.getRowHtmlList("en", "0", time_login));
         return modelAndView;
     }
     @RequestMapping(value = {"/system/archive/articles/{id}", "/system/archive/articles/{id}/"}, method = RequestMethod.GET)
     public ModelAndView archiveArticles(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/system/archive/Articles");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        Date date_format = new Date();
+        String date = sdf.format(date_format);
+        HttpSession session = request.getSession(true);
+        ArchiveUserModel user = (ArchiveUserModel)session.getAttribute("user");
+        Users.updateLoginTime(user.user_id.toString(), date);
         modelAndView.addObject("articles", Articles.getAllArticlesInCategory(id));
         modelAndView.addObject("category", id);
         modelAndView.addObject("users", Users.getAllUsers());
@@ -121,6 +139,12 @@ public class ArchiveController {
     
     @RequestMapping(value = {"/system/archive/ajax/checkUser", "/system/archive/ajax/checkUser/"}, method = RequestMethod.GET)
     public @ResponseBody String archiveCheckUser(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        return Users.isExitsUser(request.getParameter("user_name"), request.getParameter("user_password"));
+    }
+    
+    @RequestMapping(value = {"/system/archive/ajax/getdate", "/system/archive/ajax/getdate/"}, method = RequestMethod.GET)
+    public @ResponseBody String archiveCkeckArticleDate(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         return Users.isExitsUser(request.getParameter("user_name"), request.getParameter("user_password"));
     }

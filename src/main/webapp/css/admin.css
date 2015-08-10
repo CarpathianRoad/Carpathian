@@ -1035,3 +1035,9 @@ div.ui-datepicker{
   color: #FFFFFF !important;
   background-color: #56698F;
 }
+.new-articles {
+    color: #E60F0F;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 20px;
+}
