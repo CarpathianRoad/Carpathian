@@ -100,10 +100,10 @@
                             	<thead>
                                 	<tr>
                                     	<th class="text-center" style="width:3%">#</th>
-                                    	<th style="width:45%">Title</th>
+                                    	<th style="width:40%">Title</th>
                                     	<th class="text-center" style="width:10%">Lang</th>
-                                    	<th class="text-center" style="width:7%">Images</th>
-                                    	<th class="text-center" style="width:7%">Files</th>
+                                    	<th class="text-center" style="width:10%">Images</th>
+                                    	<th class="text-center" style="width:10%">Files</th>
                                     	<th class="text-center" style="width:17%">Add date</th>
                                     	<th class="text-center" style="width:17%">Edit date</th>
                                     	<th class="text-center" style="width:5%">Author</th>

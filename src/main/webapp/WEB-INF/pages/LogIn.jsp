@@ -82,7 +82,13 @@
         $("#user_password").val("");
         $("#user_id").val("");
     });
-    
+    $('#user_password').keypress(function (e) {
+    var key = e.which;
+    if(key == 13)  // the enter key code
+    {
+       $(".submit-button").click();
+    }
+    }); 
     $(".submit-button").click(function(){
         $("#user_id").val("");
         $(".validation").html("");

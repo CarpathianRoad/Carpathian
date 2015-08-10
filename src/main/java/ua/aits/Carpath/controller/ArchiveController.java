@@ -103,6 +103,7 @@ public class ArchiveController {
         String folder = Articles.getOneArticleByID(id).article_dir;
         modelAndView.addObject("article", Articles.getOneArticleByID(id));
         modelAndView.addObject("filesHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/files/"));
+        modelAndView.addObject("galeryHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/galery/"));
         modelAndView.addObject("folder_str", folder.replace('/', '|'));
         modelAndView.addObject("cat_name", Menu.getCategoryName(Articles.getOneArticleByID(id).article_category.toString()));
         return modelAndView;

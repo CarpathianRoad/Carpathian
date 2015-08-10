@@ -499,7 +499,7 @@
                             ${route.public_country}
                         </div>
                         <div class="markerPageCountry downloadRouteFile">
-                            <a href="${Constants.URL}routes/${route.file}" download>Download track file</a>
+                            <a class="not-add-lan" href="${Constants.URL}routes/${route.file}" download>Download track file</a>
                         </div>
                     </div>
                     <div id="holder" style="width: 100%;height:200px;margin-top:30px;"></div>
