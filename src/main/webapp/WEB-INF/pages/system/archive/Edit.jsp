@@ -131,6 +131,15 @@
         </form>
         <div class="row add-row">
             <div class="col-lg-12 margintop30 field">
+                <label for="tlt">Images for galery</label><br/>
+            </div>
+        </div>
+        <form action="${Constants.URL}archive/do/uploadfile" class="dropzone"  id="my-awesome-dropzone-gal">
+            <input type="hidden" name="path" value="archive_content/${article.article_dir}/galery" />
+            <input type="file" name="file" style="display:none" />
+        </form>
+        <div class="row add-row">
+            <div class="col-lg-12 margintop30 field">
                 <label for="tlt">Article files</label><br/>
             </div>
         </div>
@@ -174,9 +183,17 @@
             url: "${Constants.URL}system/archive/do/uploadfile",
             addRemoveLinks: true
         });
+        $("#my-awesome-dropzone-gal").dropzone({ 
+            url: "${Constants.URL}system/archive/do/uploadfile",
+            addRemoveLinks: true
+        });
         if('${filesHTML}' !== null && '${filesHTML}' !== ''){
-            $(".dz-message").hide();
+            $("#my-awesome-dropzone .dz-message").hide();
             $("#my-awesome-dropzone").append('${filesHTML}');
+        }    
+        if('${galeryHTML}' !== null && '${galeryHTML}' !== ''){
+            $("#my-awesome-dropzone-gal .dz-message").hide();
+            $("#my-awesome-dropzone-gal").append('${galeryHTML}');
         }    
         initCKE();
     });
@@ -221,8 +238,13 @@
     });
     
     function deleteFile(temp){
-        var path = $("#dir-name").val() + "/files/" + $(temp).parent().find(".dz-details .dz-filename span").text();
-        console.log(path);
+        if($(temp).parent().parent().attr("id") === "my-awesome-dropzone-gal") {
+            var path = $("#dir-name").val() + "/galery/" + $(temp).parent().find(".dz-details .dz-filename span").text();
+        }
+        else {
+            var path = $("#dir-name").val() + "/files/" + $(temp).parent().find(".dz-details .dz-filename span").text();
+        }
+        
         jQuery.ajax({
             url: '${Constants.URL}system/archive/do/removefile',
             cache: false,
@@ -233,6 +255,9 @@
             success: function(data){
                 $(temp).parent().remove();
                 if (!$("#my-awesome-dropzone").find("div.dz-file-preview").length) { 
+                    $(".dz-message").show();
+                }
+                if (!$("#my-awesome-dropzone-gal").find("div.dz-file-preview").length) { 
                     $(".dz-message").show();
                 }
             }

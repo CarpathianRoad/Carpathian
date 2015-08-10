@@ -131,6 +131,15 @@
         </form>
         <div class="row add-row">
             <div class="col-lg-12 margintop30 field">
+                <label for="tlt">Images for galery</label><br/>
+            </div>
+        </div>
+        <form action="${Constants.URL}archive/do/uploadfile" class="dropzone"  id="my-awesome-dropzone-gal">
+            <input type="hidden" name="path" value="${folder}/galery" />
+            <input type="file" name="file" style="display:none" />
+        </form>
+        <div class="row add-row">
+            <div class="col-lg-12 margintop30 field">
                 <label for="tlt">Article files</label><br/>
             </div>
         </div>
@@ -168,6 +177,10 @@
 <script> 
     $(document).ready(function () { 
         $("#my-awesome-dropzone").dropzone({ 
+            url: "${Constants.URL}system/archive/do/uploadfile",
+            addRemoveLinks: true
+        });
+        $("#my-awesome-dropzone-gal").dropzone({ 
             url: "${Constants.URL}system/archive/do/uploadfile",
             addRemoveLinks: true
         });
@@ -218,8 +231,13 @@
     });
     
     function deleteFile(temp){
-        var path = $("#dir-name").val() + "/files/" + $(temp).parent().find(".dz-details .dz-filename span").text();
-        console.log(path);
+        if($(temp).parent().parent().attr("id") === "my-awesome-dropzone-gal") {
+            var path = $("#dir-name").val() + "/galery/" + $(temp).parent().find(".dz-details .dz-filename span").text();
+        }
+        else {
+            var path = $("#dir-name").val() + "/files/" + $(temp).parent().find(".dz-details .dz-filename span").text();
+        }
+        
         jQuery.ajax({
             url: '${Constants.URL}system/archive/do/removefile',
             cache: false,
