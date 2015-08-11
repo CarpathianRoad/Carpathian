@@ -711,6 +711,9 @@ public class ArticleModel {
                 case 3: temp.setTextType("Article"); break;
             }
             temp.setMenuText(result.getString("menuText"));
+            if("".equals(temp.menuText) || temp.menuText == null) {
+                temp.menuText = temp.textType.toUpperCase();
+            }
             contentList.add(temp);
         } 
         DB.closeCon();
