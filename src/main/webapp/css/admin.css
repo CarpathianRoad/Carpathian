@@ -248,15 +248,14 @@ padding-right: 10px;
 text-decoration: underline;
 }
 .admin-panel-filters .field {
-  float: right
-}
+  float: right}
 .admin-panel-filters select {
 }
 .admin-panel-th {
     text-align: center;
 }
 .admin-panel-filters {
-      width: 55%;
+      width: 70%;
   height: 55px;
   float: right;
 }
@@ -299,7 +298,7 @@ text-decoration: underline;
     padding-right: 10px;
 }
 .add-button-panel {
-    width: 40%;
+    width: 10%;
     float: left;
     margin-top: -10px;
     margin-bottom: 20px;
