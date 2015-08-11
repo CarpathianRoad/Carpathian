@@ -23,7 +23,13 @@
                                <div class="admin-panel-filters marginbottom30">
                                    <div class="row add-row">
                                        
-                                	<div class="col-lg-3 field">
+                                	<div class="col-lg-2 field">
+                                                    <div class="form-group">
+                                                
+                                                ${menuList}
+                                              </div>
+                                                </div>
+                                	<div class="col-lg-2 field">
                                     	<div class="form-group">
                                                 <label for="sel1">Country</label>
                                                 <select class="filter-select form-control" name="type" id="public_country">
@@ -35,7 +41,7 @@
                                                   <option value="Poland">Poland</option>
                                                 </select></div>
                                 	</div>
-                                	<div class="col-lg-3 field">
+                                	<div class="col-lg-2 field">
                                     	<div class="form-group">
                                             
                                                 <label for="sel1">Type</label>
@@ -48,16 +54,18 @@
                                                 </select>
                                         </div>
                                 	</div>
-                                	<div class="col-lg-3 field">
+                                	<div class="col-lg-2 field">
                                     	<div class="form-group">
-                                            
                                                 <label for="sel1">Author</label>
                                                 <select class="filter-select form-control"  name="type" id="author">
                                                   <option value="all">All</option>
+                                                  <c:forEach items="${users}" var="user">
+                                                	<option value="${user.user_name}">${user.user_name}</option>  
+                                            	</c:forEach>
                                                 </select>
                                         </div>
                                 	</div>
-                                	<div class="col-lg-3 field">
+                                	<div class="col-lg-2 field">
                                     	<div class="form-group">
                                             
                                                 <label for="sel1">Publish</label>
@@ -109,6 +117,8 @@
     <script>
         
 $(document).ready(function () {
+    $("#menuCat").addClass("filter-select form-control");
+    $("#menuCat").addClass("form-control");
     var url = window.location.href; 
     if(url.indexOf("jsessionid")){
         var arr = url.split(";");

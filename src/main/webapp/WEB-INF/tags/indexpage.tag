@@ -18,9 +18,21 @@
             <meta property="og:description" content="${descrvar}"/>
         </c:when>
         <c:otherwise>
-            <meta property="og:image" content="http://www.carpathianroad.com/img/logo.png"/>
-            <meta property="og:title" content="Carpathion Road"/>
-            <meta property="og:description" content="Carpathion Road"/>
+            <!-- for Google -->
+        <meta name="description" content="Carpathian Road" />
+        <meta name="keywords" content="Carpathian Road" />
+
+        <meta name="author" content="Carpathian Road" />
+        <meta name="copyright" content="Carpathian Road" />
+        <meta name="application-name" content="Carpathian Road" />
+
+        <!-- for Facebook -->          
+        <meta property="og:title" content="Carpathian Road" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="http://www.carpathianroad.com/img/logo1.png" />
+        <meta property="og:url" content="http://www.carpathianroad.com/ua/index" />
+        <meta property="og:description" content="Carpathian Road" />
+
         </c:otherwise>
     </c:choose>
     <c:if test="${avatarvar != null}">

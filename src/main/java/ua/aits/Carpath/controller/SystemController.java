@@ -85,7 +85,7 @@ public class SystemController {
 		HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/Panel");
-            //modelAndView.addObject("users", users.getAllUsers());
+            modelAndView.addObject("users", Users.getAllUsers());
             modelAndView.addObject("menuList", helpers.getRowHtmlSelectSmall("en", "0"));
             return modelAndView;
     }
