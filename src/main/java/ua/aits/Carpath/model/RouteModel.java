@@ -302,13 +302,19 @@ public class RouteModel {
         DB.closeCon();
     return routeList;
     }
-     public RouteModel getOneRoute(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+     public RouteModel getOneRoute(String id, String lan) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ResultSet result = DB.getResultSet("select * from routes where id = "+ id +";");
         RouteModel temp = new RouteModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
-            temp.setTitle(result.getString("titleEN"));
-            temp.setTextUA(Helpers.html2text(result.getString("textUA")));
+            temp.setTitle(result.getString("title" + lan.toUpperCase()));
+            temp.setTextUA(result.getString("text" + lan.toUpperCase()));
+            if("".equals(temp.title) || temp.title == null){
+                temp.title = result.getString("titleEN");
+            }
+            if("".equals(temp.textUA) || temp.textUA == null){
+                temp.textUA = result.getString("textEN");
+            }
             temp.setFile(result.getString("file"));
             temp.setPublic_country(result.getString("public_country")); 
             temp.setDate(result.getString("date")); 
@@ -324,15 +330,15 @@ public class RouteModel {
             temp.setId(result.getInt("id"));
             temp.setPublic_country(result.getString("public_country"));
             
-            temp.setTitleEN(result.getString("titleEN"));
-            temp.setTitleUA(result.getString("titleUA"));
-            temp.setTitleHU(result.getString("titleHU"));
-            temp.setTitleSK(result.getString("titleSK"));
-            temp.setTitleRO(result.getString("titleRO"));
-            temp.setTitlePL(result.getString("titlePL"));
-            temp.setTitleGE(result.getString("titleGE"));
-            temp.setTitleCZ(result.getString("titleCZ"));
-            temp.setTitleSRB(result.getString("titleSRB"));
+            temp.setTitleEN(result.getString("titleEN").replace("\"","&quot;"));
+            temp.setTitleUA(result.getString("titleUA").replace("\"","&quot;"));
+            temp.setTitleHU(result.getString("titleHU").replace("\"","&quot;"));
+            temp.setTitleSK(result.getString("titleSK").replace("\"","&quot;"));
+            temp.setTitleRO(result.getString("titleRO").replace("\"","&quot;"));
+            temp.setTitlePL(result.getString("titlePL").replace("\"","&quot;"));
+            temp.setTitleGE(result.getString("titleGE").replace("\"","&quot;"));
+            temp.setTitleCZ(result.getString("titleCZ").replace("\"","&quot;"));
+            temp.setTitleSRB(result.getString("titleSRB").replace("\"","&quot;"));
             
             temp.setTextEN(result.getString("textEN"));
             temp.setTextUA(result.getString("textUA"));
