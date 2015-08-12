@@ -477,6 +477,7 @@
         console.log('${route.images}');
     
         </script>
+	<script src="${Constants.URL}js/lemmon-slider.js"></script> 
     <div id="sliderDiv" class="sliderDivRoute">
         <label id="sliderLabel" onclick="changeStyle()">
             <input type="checkbox" />
@@ -506,24 +507,20 @@
                     <div class="markerPageText">
                         ${route.textUA}
                     </div>
-                            <script type="text/javascript" src="${Constants.URL}js/article_gallery.js"></script>
-                                        <div id="article_slider1_container" style="position: relative; top: 0px; left: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                            <div id="imageHolder" u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 640px; height: 150px; overflow: hidden;">
-                                                
-                                            </div>
-                                            <span u="arrowleft" class="markerPageArrowLeft jssora03l" style="width: 50px; height: 95px; top: 28px; left: 20px;">
-                                            </span>
-                                            <span u="arrowright" class="markerPageArrowRight jssora03r" style="width: 50px; height: 95px; top: 28px; right: 20px">
-                                            </span>
-                                        </div>
-                                        <div class="article_main_image">
-                                            <div id="mainImageBlock"></div>
-                                            <div class="mainImageSliderLine">
-                                                <div id="imageCount">1</div><div id="maxImages"></div>
-                                                &nbsp;&nbsp;
-                                                    ${route.title} Gallery
-                                            </div>
-                                        </div>
+                    <div class="wrapSlider">
+                            <div id="slider1" class="slider">
+                                    <ul id="iamgesBlock" style="height: 150px;">     
+                                    </ul>
+                            </div>
+                            <div class="controls">
+                                    <a href="#" class="prev-page"></a>
+                                    <div class="prev-slide"></div>
+                                    <div style="display:none" class="next-slide"></div>
+                                    <div class="next-page"></div>
+                            </div>
+                    </div>
+                                    <div class="article_main_image">
+                                    </div>
                 </div>
             </div>
         </div>
@@ -536,12 +533,19 @@
                     openEffect	: 'none',
                     closeEffect	: 'none'
                 });
+            $('.article_main_image').html('<a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}'+images[0]+'">'+
+                                                        '<img id="main_image" src="${Constants.URL}'+images[0]+'">'+
+                                                    '</a>'+
+                                        '<div class="mainImageSliderLine">'+
+                                            '<div id="imageCount">1</div>/'+images.length+
+                                            '&nbsp;&nbsp;'+
+                                                '${route.title} Gallery'+
+                                        '</div>');
             });
             
             var images = '${route.images}'.split(",");
             var imagesBlock = '';
             $('#maxImages').html("/"+images.length);
-            $('#mainImageBlock').html('<a class="fancybox not-add-lan" id="mainPictureFancybox" href="${Constants.URL}'+images[0]+'"><img id="main_image" src="${Constants.URL}'+images[0]+'"/></a>');
             if(images[0]==""){
                 $('#article_slider1_container').css('display','none');
                 $('#mainImageBlock').css('display','none');
@@ -553,18 +557,61 @@
             
             for(var i = 0; i < images.length; i++){
                 
-                imagesBlock += '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\',\''+i+'\');tellFancyBox(\'${Constants.URL}'+images[i]+'\');">'+
-                        '<div class="sliderHover">'+
-                        '<div class="imageHoverMarkerPage"></div><img u="image" src="${Constants.URL}'+images[i]+'" style="height: 150px"/>'+
-                        '</div>'+
-                        '</div>';
+                imagesBlock += '<li style="cursor:pointer">'+
+                                                '<div onclick="set_main_picture(\'${Constants.URL}'+images[i]+'\','+i+');tellFancyBox(\'${Constants.URL}'+images[i]+'\')">'+
+                                                    '<div class="sliderHover">'+
+                                                        '<img rel="gallery1" u="image" src="${Constants.URL}'+images[i]+'" style="height: 150px"/>'+
+                                                '</div>'+
+                                            '</li>';
             }
-            $('#imageHolder').html(imagesBlock);
+            $('#iamgesBlock').html(imagesBlock);
             
             function tellFancyBox(image){
-                console.log('1');
                 $('#main_image').parent().attr('href',image);
             }
+        jQuery(document).ready(function ($) {
+            window.onload = function(){
+                $( '#slider1' ).lemmonSlider({center:false}); 
+            }
+        });
         </script>
     
+        
+        <style>
+            
+        .prev-slide{
+            background: url(${Constants.URL}img/arrow_left.png) center center no-repeat;
+            width: 48px;
+            height: 90px;
+            cursor: pointer;
+            position: absolute;
+            left: 50;
+        }
+        .next-slide,.next-page{
+            background: url(${Constants.URL}img/arrow_right.png) center center no-repeat;
+            width: 48px;
+            height: 90px;
+            cursor: pointer;
+            position: absolute;
+            right: 50;
+        }
+        .prev-slide:hover {
+            background: url(${Constants.URL}img/arrow_left_hover.png) center center no-repeat;
+        }
+        .next-slide:hover ,.next-page:hover{
+            background: url(${Constants.URL}img/arrow_right_hover.png) center center no-repeat;
+        }
+        .wrapSlider { width:100%; height: 150 !important; margin-top: 0px;}
+	body div.slider    { overflow:hidden; position:relative; width:100%; height:150px !important; }
+	body div.slider ul { margin:0; padding:0; height:150px; }
+	body div.slider li { float:left; list-style:none; margin:0; }
+	body div.slider li { text-align:center; line-height:160px; font-size:25px; }
+        .slider img{
+            height: 150px;
+        }
+        .controls{
+            position: relative;
+            margin-top: -120px;
+        }
+        </style>
 </t:indexpage>
