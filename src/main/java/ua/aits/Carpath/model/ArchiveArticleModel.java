@@ -299,7 +299,7 @@ public class ArchiveArticleModel {
 	MenuModel Menu = new MenuModel();
     
 	public List<ArchiveArticleModel> getAllArticlesInCategory(String catID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-    	ResultSet result = DB.getResultSet("SELECT * FROM archive_articles WHERE archive_articles.article_category = " + catID + " ORDER BY archive_articles.article_id desc");
+    	ResultSet result = DB.getResultSet("SELECT * FROM archive_articles WHERE archive_articles.article_category = " + catID + " ORDER BY archive_articles.article_is_delete ASC");
     	List<ArchiveArticleModel> articleList = new LinkedList<>();
     	while (result.next()) {
         	ArchiveArticleModel temp = new ArchiveArticleModel();
