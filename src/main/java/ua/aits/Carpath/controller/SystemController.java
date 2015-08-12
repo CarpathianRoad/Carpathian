@@ -5,25 +5,34 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Constants;
 import ua.aits.Carpath.functions.Helpers;
+import ua.aits.Carpath.model.ArchiveUserModel;
 import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.FilterModel;
 import ua.aits.Carpath.model.MarkerModel;
 import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.SliderModel;
-import ua.aits.Carpath.model.UserModel;
 
 /**
  *
@@ -34,28 +43,28 @@ public class SystemController {
     
     ArticleModel article = new ArticleModel();
     MenuModel menu = new MenuModel();
-    UserModel users = new UserModel();
+    ArchiveUserModel Users = new ArchiveUserModel();
     MarkerModel markers = new MarkerModel();
     FilterModel filters = new FilterModel();
     RouteModel routes = new RouteModel();
     Helpers helpers = new Helpers();
     SliderModel slider = new SliderModel();
     
-    @RequestMapping(value = {"/system/add", "/system/add/","/Carpath/system/add", "/Carpath/system/add/"})
+    @RequestMapping(value = {"/system/articles/add", "/system/articles/add/","/Carpath/system/articles/add", "/Carpath/system/articles/add/"})
         public ModelAndView addArticle (HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
-            ModelAndView modelAndView = new ModelAndView("/system/AddArticle");
+            ModelAndView modelAndView = new ModelAndView("/system/ArticleAdd");
             modelAndView.addObject("markers", markers.getAllMarkers());
             modelAndView.addObject("filters", filters.FiltersHTML("0"));
             modelAndView.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
             return modelAndView;
 	}
-    @RequestMapping(value = {"/system/edit/{id}", "/system/edit/{id}/","/Carpath/system/edit/{id}", "/Carpath/system/edit/{id}/"})
+    @RequestMapping(value = {"/system/articles/edit/{id}", "/system/articles/edit/{id}/","/Carpath/system/articles/edit/{id}", "/Carpath/system/articles/edit/{id}/"})
         public ModelAndView editArticle (@PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
-            ModelAndView modelAndView = new ModelAndView("/system/EditArticle");
+            ModelAndView modelAndView = new ModelAndView("/system/ArticleEdit");
             modelAndView.addObject("menuList", helpers.getRowHtmlSelect("en", "0"));
             modelAndView.addObject("article",article.getOneArticleForEdit(id));
             modelAndView.addObject("markers", markers.getAllMarkers());
@@ -63,64 +72,71 @@ public class SystemController {
             return modelAndView;
 	}
     
-    @RequestMapping(value = {"/system/delete/{id}/","/system/delete/{id}","/Carpath/system/delete/{id}/","/Carpath/system/delete/{id}"})
+    @RequestMapping(value = {"/system/articles/delete/{id}/","/system/articles/delete/{id}","/Carpath/system/articles/delete/{id}/","/Carpath/system/articles/delete/{id}"})
     public ModelAndView deleteArticle(@PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-        ArticleModel art = article.getOneArticleForEdit(id);
-        if(!"".equals(art.panorama) && art.panorama != null) {
-            File temp = new File(Constants.home+"files/panoramas/"+art.panorama);
-            Boolean result = temp.delete();
-        }
-        Boolean result = article.deleteArticle(id);
-        
-        return new ModelAndView("redirect:" + "/system/panel");
+        request.setCharacterEncoding("UTF-8");
+            ModelAndView modelAndView = new ModelAndView("/system/ArticleDelete");
+            modelAndView.addObject("article",article.getOneArticleForEdit(id));
+            return modelAndView;
     }
-    @RequestMapping(value = {"/system/panel", "/system/panel/", "/system/index/", "/system/index","/Carpath/system/panel", "/Carpath/system/panel/", "/Carpath/system/index/", "/Carpath/system/index"})
+    @RequestMapping(value = {"/system/panel", "/system/panel/", "/system/articles", "/system/articles/", "/system/index/", "/system/index","/Carpath/system/panel", "/Carpath/system/panel/", "/Carpath/system/index/", "/Carpath/system/index"})
     public ModelAndView systemPanel(HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/Panel");
-            modelAndView.addObject("users", users.getAllUsers());
+            modelAndView.addObject("users", Users.getAllUsers());
             modelAndView.addObject("menuList", helpers.getRowHtmlSelectSmall("en", "0"));
             return modelAndView;
     }
     @RequestMapping(value = {"/system/login.do","/system/login.do/"}, method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("username") String login, @RequestParam("password") String passwd, 
-            HttpServletRequest request,
-		HttpServletResponse response) throws Exception {
-        request.setCharacterEncoding("UTF-8");
-                UserModel user = users.getUser(login, passwd); 
-                HttpSession session = request.getSession(true);
-		session.setAttribute("user",  user);
-                return new ModelAndView("redirect:" + "/system/panel");
-                
-	}
-    @RequestMapping(value = {"/system/logout","/system/logout/","/Carpath/system/logout","/Carpath/system/logout/"})
-    public ModelAndView logout(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-        request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession(false);
-                if (session != null) {
-                    session.invalidate();
-                }
-                
-                return new ModelAndView("redirect:" + "/login");
-	}
+    public ModelAndView login(@RequestParam("user_id") String user_id, @RequestParam("user_name") String user_name, @RequestParam("user_password") String user_password, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ArchiveUserModel user = Users.getOneUserFull(user_id, user_name, user_password); 
+        HttpSession session = request.getSession(true);
+	session.setAttribute("user",  user);
+        if(user.user_role == 1) {  
+            helpers.deleteOldTemp(Constants.home + "archive_temp/");
+            return new ModelAndView("redirect:" + "/system/panel");   
+        }
+        else {
+            return new ModelAndView("redirect:" + "/system/archive/index");   
+        }
+    }
     @RequestMapping(value = {"/system/users", "/system/users/", "/Carpath/system/users", "/Carpath/system/users/"})
     public ModelAndView showUsers(HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
             ModelAndView modelAndView = new ModelAndView("/system/Users");
-            modelAndView.addObject("users", users.getAllUsers());
+            modelAndView.addObject("users", Users.getAllUsers());
             return modelAndView;
     }
-    @RequestMapping(value = {"/system/users/delete/{username}", "/system/users/delete/{username}/","/Carpath/system/users/delete/{username}", "/Carpath/system/users/delete{username}/"})
-    public ModelAndView deleteUser (@PathVariable("username") String username, HttpServletRequest request,
+    @RequestMapping(value = {"/system/users/add", "/system/users/add/"})
+    public ModelAndView addUser(HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
-                if(!"admin".equals(username)){
-            users.deleteUser(username);
-                }
-            return new ModelAndView("redirect:" + "/system/users");
+            request.setCharacterEncoding("UTF-8");
+            ModelAndView modelAndView = new ModelAndView("/system/UserAdd");
+            return modelAndView;
+    }
+    @RequestMapping(value = {"/system/users/edit/{id}", "/system/users/edit/{id}/","/Carpath/system/users/edit/{id}", "/Carpath/system/users/edit/{id}/"})
+    public ModelAndView editUser (@PathVariable("id") String id, HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                ModelAndView modelAndView = new ModelAndView("/system/UserEdit");
+                modelAndView.addObject("user", Users.getOneUserFullById(id));
+            return modelAndView;
+    }
+    @RequestMapping(value = {"/system/users/settings/{id}", "/system/users/settings/{id}/","/Carpath/system/users/settings/{id}", "/Carpath/system/users/settings/{id}/"})
+    public ModelAndView settingsUser (@PathVariable("id") String id, HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                ModelAndView modelAndView = new ModelAndView("/system/UserSettings");
+                modelAndView.addObject("user", Users.getOneUserFullById(id));
+            return modelAndView;
+    }
+    @RequestMapping(value = {"/system/users/delete/{id}", "/system/users/delete/{id}/","/Carpath/system/users/delete/{id}", "/Carpath/system/users/delete{id}/"})
+    public ModelAndView deleteUser (@PathVariable("id") String id, HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+                ModelAndView modelAndView = new ModelAndView("/system/UserDelete");
+                modelAndView.addObject("user", Users.getOneUserFullById(id));
+            return modelAndView;
     }
     @RequestMapping(value = {"/system/routes", "/system/routes/", "/Carpath/system/routes", "/Carpath/system/routes/"})
     public ModelAndView showRoutes(HttpServletRequest request,
@@ -132,26 +148,21 @@ public class SystemController {
         public ModelAndView addRoute (HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
-            ModelAndView modelAndView = new ModelAndView("/system/AddRoute");
+            ModelAndView modelAndView = new ModelAndView("/system/RouteAdd");
             return modelAndView;
 	}
     @RequestMapping(value = {"/system/routes/delete/{id}/","/system/routes/delete/{id}","/Carpath/system/routes/delete/{id}/","/Carpath/system/routes/delete/{id}"})
     public ModelAndView deleteRoute(@PathVariable("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-        RouteModel rout = routes.getOneRouteForEdit(id);
-        if(!"".equals(rout.file) && rout.file != null) {
-            File temp = new File(Constants.FILE_URL_ROUTES+rout.file);
-            Boolean result = temp.delete();
-        }
-        Boolean result = routes.deleteRoute(id);
-        
-        return new ModelAndView("redirect:" + "/system/routes");
+       ModelAndView modelAndView = new ModelAndView("/system/RouteDelete");
+            modelAndView.addObject("route",routes.getOneRouteForEdit(id));
+            return modelAndView;
     }
     @RequestMapping(value = {"/system/routes/edit/{id}", "/system/routes/edit/{id}/","/Carpath/system/routes/edit/{id}", "/Carpath/system/routes/edit/{id}/"})
         public ModelAndView editRoute(@PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
-            ModelAndView modelAndView = new ModelAndView("/system/EditRoute");
+            ModelAndView modelAndView = new ModelAndView("/system/RouteEdit");
             modelAndView.addObject("route",routes.getOneRouteForEdit(id));
             return modelAndView;
 	}
@@ -176,17 +187,31 @@ public class SystemController {
             modelAndView.addObject("filters", filters.getAllFilters());
             return modelAndView;
     }
+    @RequestMapping(value = {"/system/filters/add", "/system/filters/add", "/Carpath/system/filters/add", "/Carpath/system/filters/add"})
+    public ModelAndView addFilters(HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            ModelAndView modelAndView = new ModelAndView("/system/FilterAdd");
+            return modelAndView;
+    }
+    @RequestMapping(value = {"/system/filters/edit/{id}", "/system/filters/edit/{id}", "/Carpath/system/filters/edit/{id}", "/Carpath/system/filters/edit/{id}"})
+    public ModelAndView editFilters(@PathVariable("id") String id,HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            ModelAndView modelAndView = new ModelAndView("/system/FilterEdit");
+            modelAndView.addObject("filter", filters.getOneFilter(id));
+            return modelAndView;
+    }
+    @RequestMapping(value = {"/system/filters/delete/{id}", "/system/filters/delete/{id}", "/Carpath/system/filters/delete/{id}", "/Carpath/system/filters/delete/{id}"})
+    public ModelAndView deleteFilters(@PathVariable("id") String id,HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            ModelAndView modelAndView = new ModelAndView("/system/FilterDelete");
+            modelAndView.addObject("filter", filters.getOneFilter(id));
+            return modelAndView;
+    }
     @RequestMapping(value = {"/system/markers/delete/{id}", "/system/markers/delete/{id}/","/Carpath/system/markers/delete/{id}", "/Carpath/system/markers/delete{id}/"})
     public ModelAndView deleteMarkers (@PathVariable("id") String id, HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             markers.deleteMarker(id);
             return new ModelAndView("redirect:" + "/system/markers");
-    }
-    @RequestMapping(value = {"/system/filters/delete/{id}", "/system/filters/delete/{id}/","/Carpath/system/filters/delete/{id}", "/Carpath/system/filters/delete{id}/"})
-    public ModelAndView deleteFilters (@PathVariable("id") String id, HttpServletRequest request,
-		HttpServletResponse response) throws Exception {
-            filters.deleteFilter(id);
-            return new ModelAndView("redirect:" + "/system/filters");
     }
     
     @RequestMapping(value = {"/system/slider", "/system/slider/","/Carpath/system/slider", "/Carpath/system/slider/"})
@@ -196,5 +221,146 @@ public class SystemController {
             ModelAndView modelAndView = new ModelAndView("/system/Slider");
             modelAndView.addObject("slides", slider.getAllSlidesForEdit());
             return modelAndView;
+    }
+        
+    @RequestMapping(value = "/system/user/do/insertdata.do", method = RequestMethod.POST)
+    public ModelAndView doAddUser(@RequestParam("user_avatar") MultipartFile file, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        String user_name = request.getParameter("user_name");
+        String user_password = request.getParameter("user_password");
+        String user_role = request.getParameter("user_role");
+        String user_enabled = request.getParameter("user_enabled");
+        String user_firstname = request.getParameter("user_firstname");
+        String user_lastname = request.getParameter("user_lastname");
+        String user_descr = request.getParameter("user_descr");
+        String user_contacts = request.getParameter("user_contacts");
+        String name = file.getOriginalFilename();
+        String user_avatar = "";
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.home + "user_avatars/");
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + user_name+"."+FilenameUtils.getExtension(name));
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                user_avatar = "user_avatars/"+user_name+"."+FilenameUtils.getExtension(name);
+            } catch (Exception e) {
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
+            }
+        } else {
+            System.out.println("You failed to upload " + name + " because the file was empty.");
+        }
+        Users.addUser(user_name, user_password, user_firstname, user_lastname, user_contacts, user_role, user_enabled, user_descr, user_avatar);
+        return new ModelAndView("redirect:" + "/system/users");
+    } 
+        
+    @RequestMapping(value = "/system/user/do/updatedata.do", method = RequestMethod.POST)
+    public ModelAndView doEditUser(@RequestParam("user_avatar") MultipartFile file, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        String user_id = request.getParameter("user_id");
+        String user_name = request.getParameter("user_name");
+        String user_password = request.getParameter("user_password");
+        String user_role = request.getParameter("user_role");
+        String user_enabled = request.getParameter("user_enabled");
+        String user_firstname = request.getParameter("user_firstname");
+        String user_lastname = request.getParameter("user_lastname");
+        String user_descr = request.getParameter("user_descr");
+        String user_contacts = request.getParameter("user_contacts");
+        String name = file.getOriginalFilename();
+        String user_avatar = request.getParameter("user_avatar_old");
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.home + "user_avatars/");
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + user_name+"."+FilenameUtils.getExtension(name));
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                
+            } catch (Exception e) {
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
+            }
+            user_avatar = "user_avatars/"+user_name+"."+FilenameUtils.getExtension(name);
+        }
+        if("img/noavatar.png".equals(user_avatar)) {
+            user_avatar = "";
+        }
+        Users.editUser(user_id, user_name, user_password, user_firstname, user_lastname, user_contacts, user_role, user_enabled, user_descr, user_avatar);
+        return new ModelAndView("redirect:" + "/system/users");
+    }   
+        
+    @RequestMapping(value = "/system/user/do/deletedata.do", method = RequestMethod.POST)
+    public ModelAndView doDeleteUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        String user_id = request.getParameter("user_id");
+        String user_avatar = request.getParameter("user_avatar");
+        if(!"".equals(user_avatar) && user_avatar != null && !"img/noavatar.png".equals(user_avatar)) {
+             File temp = new File(Constants.home + user_avatar);
+             temp.delete();
+        }
+        Users.deleteUser(user_id);
+        return new ModelAndView("redirect:" + "/system/users");
+    }
+    
+    @RequestMapping(value = {"/system/do/logout.do","/archive/do/logout.do/"})
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        if (session != null) { session.invalidate(); }
+        return new ModelAndView("redirect:" + "/en/login"); 
+    } 
+    
+    
+    @RequestMapping(value = {"/system/filters/do/deletedata.do"})
+    public ModelAndView doDeleteFilters ( HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            String id = request.getParameter("id");
+            String short_title = filters.deleteFilter(id);
+            File temp = new File(Constants.FILE_URL_ROUTES+short_title+".png");
+            return new ModelAndView("redirect:" + "/system/filters");
+    }
+    
+    
+    @RequestMapping(value = {"/system/article/do/deletedata.do"})
+    public ModelAndView doDeleteArticles( HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            String id = request.getParameter("article_id");
+            ArticleModel art = article.getOneArticleForEdit(id);
+        if(!"".equals(art.panorama) && art.panorama != null) {
+            File temp = new File(Constants.home+"files/panoramas/"+art.panorama);
+            Boolean result = temp.delete();
+        }
+        Boolean result = article.deleteArticle(id);
+        
+        return new ModelAndView("redirect:" + "/system/panel");
+    }
+    
+    
+    @RequestMapping(value = {"/system/route/do/deletedata.do"})
+    public ModelAndView doDeleteRoutes( HttpServletRequest request,
+		HttpServletResponse response) throws Exception {
+            String id = request.getParameter("route_id");
+         RouteModel rout = routes.getOneRouteForEdit(id);
+        if(!"".equals(rout.file) && rout.file != null) {
+            File temp = new File(Constants.FILE_URL_ROUTES+rout.file);
+            Boolean result = temp.delete();
+        }
+        Boolean result = routes.deleteRoute(id);
+        
+        return new ModelAndView("redirect:" + "/system/routes");
+    }
+    
+    /* ajax */
+    @RequestMapping(value = {"/system/users/ajax/checkUserName", "/system/users/ajax/checkUserName/"}, method = RequestMethod.GET)
+    public @ResponseBody String archiveCheckUsername(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        return Users.isExitsUserName(request.getParameter("user_name"));
     }
 }

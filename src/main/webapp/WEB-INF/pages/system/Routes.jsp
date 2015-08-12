@@ -8,11 +8,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:adminpage>
-    	<div class="container admin-panel-container routes-list">
-		<div class="row">
-                            <div>
-                                <div class="add-button-panel"><button class="btn btn-primary btn-mini" type="submit"><a href="<c:url value="/system/routes/add"/>">Add route</a></button></div>
-                        <div class="admin-panel-filters" style="display: none">
+    <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Routes
+                        </h1>
+                    </div>
+                </div>
+	<div class="row">
+                    <div class="col-lg-10">
+                        <div class="table-responsive">
+                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/routes/add/"/>">+ Add route</a></button></div>
+                            <div class="admin-panel-filters" style="display: none">
                         <div class="field">
                                                     <div class="form-group">
                                                 <label for="sel1">Country</label>
@@ -53,16 +60,16 @@
                             
   
     <div class="loader-block"><img src="${Constants.URL}img/loader.gif"/></div>                                  
-<table class="table table-bordered">
+<table class="table table-bordered table-hover table-striped">
   <thead>
     <tr>
       <th class="admin-table-count">#</th>
       <th class="admin-table-cell-title">Title</th>
       <th class="admin-panel-th">Country</th>
       <th class="admin-panel-th">Type</th>
-      <th class="admin-panel-th cell-publish is-publish-only"></th>
-      <th class="is-publish-only"></th>
-      <th class="is-publish-only"></th>
+      <th class="admin-panel-th cell-publish is-publish-only" style="width:5%;"></th>
+      <th class="text-center" colspan="2" style="width:3%;"></th>
+      <th class="text-center" style="width:3%; display: none;"></th>
     </tr>
   </thead>
   <tbody>
@@ -73,11 +80,14 @@
     <option value="20">20</option>
     <option value="50">50</option>
     <option value="100">100</option>
- </select>     
+ </select>                            
+      
                            
 			</div>
-		</div>
-	</div>
+		</div> 
+        </div>
+</t:adminpage>
+    
     <script>
         
 $(document).ready(function () {
@@ -120,7 +130,7 @@ $(document).ready(function () {
              initChecks();
              addSession();
              initPage();
-             if(${sessionScope.user.role} === 0) {
+             if(${sessionScope.user.user_role} === 0 && "${sessionScope.user.user_name}" !== "matsko") {
                  $( "td.publish" ).hide();
                  $("td.article-publish").hide();
                  $(".cell-publish").hide();
@@ -185,8 +195,6 @@ $(document).ready(function () {
     
 });   
     </script> 
-</t:adminpage>
-    
     
         
  

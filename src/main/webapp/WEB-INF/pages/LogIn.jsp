@@ -19,7 +19,7 @@
             color: #fff;
             border: none;
         }
-        .btn-login.cncl {
+        .btn-login.clean-button {
             background: rgb(189, 48, 48);
         }
         .login-block {
@@ -44,14 +44,13 @@
     </style>
     <section id="content">
         <div class="login-block">
-            <form action="${Constants.URL}system/login.do" method="POST" id="loginForm" name="auth">
-          
+            <form role="form" name="login-form" id="login-form" action="${Constants.URL}system/login.do" method="POST">
+                            <input name="user_id" id="user_id" type="hidden"/>
                                         <div class="row add-row">
 						<div class="field">
                                                     <div class="form-group">
                                                         <label for="username">Username</label>
-                                                        <input type="text" name="username" class="form-control" id="username">
-                                                      
+                                                        <input class="form-control" id="user_name" name="user_name" type="text" placeholder="Enter login">
                                                     </div>
 						</div>
                                         </div>
@@ -59,16 +58,16 @@
 						<div class="field">
                                                     <div class="form-group">
                                                         <label for="passwd">Password</label>
-                                                        <input type="password" name="password" class="form-control" id="passwd">
-                                                        <div class="validation"></div>
+                                                        <input class="form-control" id="user_password" name="user_password" type="password" placeholder="Enter password">
                                                     </div>
 						</div>
                                         </div>
               </form>
                 <div class="row add-row">
                     <div class="field">
-                        <button class="btn-login cncl" type="reset" >Cancel</button>
-                        <button class="btn-login" id="log-button">Log In</button>
+                        <button class="btn-login btn btn-primary submit-button">Log In</button>
+                            <button class="btn-login btn btn-danger clean-button">Clean</button>
+                            <div class="validation"></div>
                         
                     </div>
                                         
@@ -76,33 +75,42 @@
         </div>
     </section>
 <script>
-    $( document ).ready(function() {
-        
-    $(".btn-login.cncl").click(function(){
-        $("#username").val("");
-        $("#passwd").val("");
+    $(document).ready(function() {});
+    
+    $(".clean-button").click(function(){
+        $("#user_name").val("");
+        $("#user_password").val("");
+        $("#user_id").val("");
     });
-    $("#log-button").click(function(){
+    $('#user_password').keypress(function (e) {
+    var key = e.which;
+    if(key == 13)  // the enter key code
+    {
+       $(".submit-button").click();
+    }
+    }); 
+    $(".submit-button").click(function(){
+        $("#user_id").val("");
         $(".validation").html("");
         $.ajax({
-         type: "get",
-         url: "${Constants.URL}system/checkLoginPass/",
-         cache: false,    
-         data:'login='+ $("#username").val() +'&password='+$("#passwd").val(),
-         success: function(response){
-             console.log(response);
-          if(response === "false"){
-              $(".validation").html("<span style='color:red'>Bad login or password</span>");
-          }
-          else {
-              $("#loginForm").submit();
-          }
-         },
-         error: function(response){      
-          console.log(response);
-         }
+            type: "get",
+            url: "${Constants.URL}system/archive/ajax/checkUser",
+            cache: false,    
+            data:'user_name='+ $("#user_name").val() +'&user_password='+$("#user_password").val(),
+            success: function(response){
+                console.log(response);
+                if(response === "" || response === null){
+                      $(".validation").html("<span style='color:red'>Bad login or password</span>");
+                }
+                else {
+                    $("#user_id").val(response);
+                    $("#login-form").submit();
+                }
+            }, 
+            error: function(response){      
+                console.log(response);
+            }
         });
     });  
-    });
 </script>
 </t:indexpage>

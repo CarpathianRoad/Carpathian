@@ -6,81 +6,94 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <t:adminpage>
-	<div class="container admin-panel-container">
-		<div class="row">
-                            <div>
-                                <div class="add-button-panel"><button class="btn btn-primary btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/add"/>">Add article</a></button></div>
-                        <div class="admin-panel-filters">
-                        <div class="field">
+        <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Articles
+                        </h1>
+                    </div>
+                </div>
+	<div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/articles/add/"/>${category}">+ Add article</a></button></div>
+                               <div class="admin-panel-filters marginbottom30">
+                                   <div class="row add-row">
+                                       
+                                	<div class="col-lg-2 field">
                                                     <div class="form-group">
+                                                
+                                                ${menuList}
+                                              </div>
+                                                </div>
+                                	<div class="col-lg-2 field">
+                                    	<div class="form-group">
                                                 <label for="sel1">Country</label>
-                                                <select class="filter-select" name="type" id="public_country">
+                                                <select class="filter-select form-control" name="type" id="public_country">
                                                   <option value="all">All</option>
                                                   <option value="Ukraine">Ukraine</option>
                                                   <option value="Romania">Romania</option>
                                                   <option value="Hungary">Hungary</option>
                                                   <option value="Slovakia">Slovakia</option>
                                                   <option value="Poland">Poland</option>
-                                                </select>
-                                              </div>
-                                                </div>
-						<div class="field">
-                                                    <div class="form-group">
+                                                </select></div>
+                                	</div>
+                                	<div class="col-lg-2 field">
+                                    	<div class="form-group">
+                                            
                                                 <label for="sel1">Type</label>
-                                                <select class="filter-select" name="type" id="type">
+                                                <select class="filter-select form-control" name="type" id="type">
                                                   <option value="all">All</option>
                                                   <option value="0">News</option>
                                                   <option value="1">Anons</option>
                                                   <option value="2">Marker</option>
                                                   <option value="3">Simple Article</option>
                                                 </select>
-                                              </div>
-                                                </div>
-                            <div class="field">
-                                                    <div class="form-group">
-                                                ${menuList}
-                                              </div>
-                                                </div>
-                            <div class="field">
-                                                    <div class="form-group">
+                                        </div>
+                                	</div>
+                                	<div class="col-lg-2 field">
+                                    	<div class="form-group">
                                                 <label for="sel1">Author</label>
-                                                <select class="filter-select"  name="type" id="author">
+                                                <select class="filter-select form-control"  name="type" id="author">
                                                   <option value="all">All</option>
-                                                    <c:forEach items="${users}" var="user">
-                                                        <option value="${user.username}">${user.username}</option>
-                                                    </c:forEach>
+                                                  <c:forEach items="${users}" var="user">
+                                                	<option value="${user.user_name}">${user.user_name}</option>  
+                                            	</c:forEach>
                                                 </select>
-                                              </div>
-                                </div>
-                            <div class="field">
-                                                    <div class="form-group">
+                                        </div>
+                                	</div>
+                                	<div class="col-lg-2 field">
+                                    	<div class="form-group">
+                                            
                                                 <label for="sel1">Publish</label>
-                                                <select class="filter-select"  name="type" id="publish">
+                                                <select class="filter-select form-control"  name="type" id="publish">
                                                   <option value="all">All</option>
                                                   <option value="1">Publish</option>
                                                   <option value="0">Unpublish</option>
                                                 </select>
-                                              </div>
-                                                </div>
+                                        </div>
+                                	</div>
+                                   </div>
                         </div>
                             
   
     <div class="loader-block"><img src="${Constants.URL}img/loader.gif"/></div>                                  
-<table class="table table-bordered">
+<table class="article-table table table-bordered table-hover table-striped">
   <thead>
     <tr>
-      <th class="admin-table-count">#</th>
-      <th class="admin-panel-th date-cell">Date</th>
-      <th class="admin-table-cell-title">Title</th>
-      <th class="admin-panel-th">Country</th>
-      <th class="admin-panel-th">Type</th>
-      <th class="admin-panel-th">Menu</th>
-      <th class="admin-panel-th">Author</th>
-      <th class="admin-panel-th cell-publish is-publish-only"></th>
-      <th class="is-publish-only"></th>
-      <th class="is-publish-only"></th>
+      <th style="width:3%">#</th>
+      <th class="admin-panel-th date-cell" style="width:3%">Date</th>
+      <th class="admin-table-cell-title" style="width:35%">Title</th>
+      <th class="admin-panel-th" style="width:10%">Country</th>
+      <th class="admin-panel-th" style="width:10%">Type</th>
+      <th class="admin-panel-th" style="width:13%">Menu</th>
+      <th class="admin-panel-th" style="width:5%">Author</th>
+      <th class="admin-panel-th cell-publish is-publish-only" colspan="3" style="width:3%;"></th>
+      <th class="is-publish-only" style="width:3%; display: none;"></th>
+      <th class="is-publish-only" style="width:3%; display: none;"></th>
     </tr>
   </thead>
   <tbody>
@@ -91,20 +104,27 @@
     <option value="20">20</option>
     <option value="50">50</option>
     <option value="100">100</option>
- </select>     
+ </select>              
+      
                            
 			</div>
-		</div>
-	</div>
+		</div> 
+        </div>
+</t:adminpage>
+    
+    
+        
     <script>
         
 $(document).ready(function () {
+    $("#menuCat").addClass("filter-select form-control");
+    $("#menuCat").addClass("form-control");
     var url = window.location.href; 
     if(url.indexOf("jsessionid")){
         var arr = url.split(";");
         $.cookie("sessionid", arr[1]);   
     }
-    loadContent("${sessionScope.user.username}", "default", "default", $("#page_number").val(), 1);
+    loadContent("${sessionScope.user.user_name}", "default", "default", $("#page_number").val(), 1);
     
     $(".filter-select" ).change(function() {
         var val = $(this).val();
@@ -122,7 +142,7 @@ $(document).ready(function () {
                 values = values+","+$(this).val();
         });
         
-        loadContent("${sessionScope.user.username}", filters, values, $("#page_number").val(), 1);
+        loadContent("${sessionScope.user.user_name}", filters, values, $("#page_number").val(), 1);
       });
     $("#page_number" ).change(function() {
         if($(".active-filter").length){
@@ -138,7 +158,7 @@ $(document).ready(function () {
                 var values = "default";
             }
             console.log(filters + "/" + values);
-        loadContent("${sessionScope.user.username}",  filters, values, $("#page_number").val(), 1);
+        loadContent("${sessionScope.user.user_name}",  filters, values, $("#page_number").val(), 1);
     });
     function loadContent(username, filterType, filterValue, count, page) {
         $(".loader-block").show();
@@ -159,7 +179,7 @@ $(document).ready(function () {
              initChecks();
              addSession();
              initPage();
-             if(${sessionScope.user.role} === 0) {
+             if(${sessionScope.user.user_role} === 0) {
                  $( "td.publish" ).hide();
                  $("td.article-publish").hide();
                  $(".cell-publish").hide();
@@ -193,7 +213,7 @@ $(document).ready(function () {
                 var filters = "default";
                 var values = "default";
             }
-            loadContent("${sessionScope.user.username}",  filters, values, $("#page_number").val(), currPage);
+            loadContent("${sessionScope.user.user_name}",  filters, values, $("#page_number").val(), currPage);
         });  
       }
         function cutDate(){
@@ -228,7 +248,6 @@ $(document).ready(function () {
     }
     function initChecks(){
        $('.publish-checkbox').on('switchChange.bootstrapSwitch', function(event, state) {
-        console.log($(this).attr("data-id")); 
         var id = $(this).attr("data-id");
                 //console.log(state); // true | false
         $.ajax({
@@ -248,8 +267,4 @@ $(document).ready(function () {
     
 });   
     </script> 
-</t:adminpage>
-    
-    
-        
  

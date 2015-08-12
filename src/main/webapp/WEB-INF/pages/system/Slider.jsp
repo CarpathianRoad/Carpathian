@@ -9,18 +9,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:adminpage>
-        <div class="container admin-panel-container">
-            <div class="row">
-                <form name="sliderEdit" method="POST" action="${Constants.URL}system/slideredit.do" id="sliderEdit">
-                <div class="row add-row">
-                    <div class="col-lg-12 field">
+    <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Users
+                        </h1>
+                    </div>
+                </div>
+	<div class="row">
+                    <div class="col-lg-10 slider-page">
+	<form name="sliderEdit" method="POST" action="${Constants.URL}system/slideredit.do" id="sliderEdit">
+            <div class="col-lg-12 field">
                         <div id="imageUpload" class="form-group">
                             <div class="img-content">
                                 <div class="image-upload slide-upload-button">
                                     <div id="dialog">
                                         <iframe id="myIframe" src=""></iframe>
                                     </div>
-                                    <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
+                                    <button type="button" id="dialogBtn" class="btn btn-primary img-input-box marginbottom30">
                                     Browse image for slide
                                     </button>
                                 </div>  
@@ -28,15 +34,11 @@
                         </div>
                     </div>
                 </div>
-                </form>
-                <p>
-                    <button class="btn btn-primary btn-mini margintop30 marginbottom30" id="sudmitData" type="submit">Save</button>
-                </p>
-            </div>
-		<div class="row">
-			<div class="col-lg-5">
-                        </div>
-		</div> 
+        </form>
+        <p>
+            <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save changes</button>
+        </p>
+    </div>
         </div>
 </t:adminpage>
 <script>

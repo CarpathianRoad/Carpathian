@@ -207,14 +207,65 @@ public class FormController {
          return new ModelAndView("redirect:" + "/system/users");
     }
     @RequestMapping(value = "/system/addfilter.do", method = RequestMethod.POST)
-    public ModelAndView doAddFilter(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String short_title = request.getParameter("short_title");
-        String full_title = request.getParameter("full_title");
-        String group_id = request.getParameter("group_id");
+    public ModelAndView doAddFilter(
+            @RequestParam("filter_icon") MultipartFile file, @RequestParam("short_title") String short_title, 
+            @RequestParam("full_title") String full_title, @RequestParam("group_id") String group_id, @RequestParam("sort_number") String sort_number, 
+            HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+        String name = file.getOriginalFilename();
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.FILE_URL_ICON);
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + short_title+".png");
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                
+            } catch (Exception e) {
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
+            }
+        } else {
+            System.out.println("You failed to upload " + name + " because the file was empty.");
+        }
+        
         if(group_id == null || "".equals(group_id)) {
             group_id = "0";
         }
-        filters.addFilter(short_title, full_title, group_id);
+        filters.addFilter(short_title, full_title, group_id, sort_number);
+        return new ModelAndView("redirect:" + "/system/filters");
+    }
+    @RequestMapping(value = "/system/editfilter.do", method = RequestMethod.POST)
+    public ModelAndView doUpdateFilter(
+            @RequestParam("filter_icon") MultipartFile file, @RequestParam("id") String id,  
+            @RequestParam("short_title") String short_title, @RequestParam("full_title") String full_title, 
+            @RequestParam("group_id") String group_id, @RequestParam("sort_number") String sort_number, 
+            HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+        String name = file.getOriginalFilename();
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(Constants.FILE_URL_ICON);
+                
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + short_title+".png");
+                try (BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+                
+            } catch (Exception e) {
+                System.out.println("You failed to upload " + name + " => " + e.getMessage());
+            }
+        }
+        if(group_id == null || "".equals(group_id)) {
+            group_id = "0";
+        }
+        filters.updateFilter(id, short_title, full_title, group_id, sort_number);
         return new ModelAndView("redirect:" + "/system/filters");
     }
     @RequestMapping(value = "/system/addmarker.do", method = RequestMethod.POST)
@@ -246,6 +297,8 @@ public class FormController {
     public ModelAndView doEditMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, @RequestParam("id") String id, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String name = "";
         if (!file.isEmpty()) {
+            File temp = new File(Constants.FILE_URL_ROUTES+short_title+".png");
+            Boolean result = temp.delete();
         name = file.getOriginalFilename();
             try {
                 File files = new File(Constants.FILE_URL_ICON+short_title+".png");

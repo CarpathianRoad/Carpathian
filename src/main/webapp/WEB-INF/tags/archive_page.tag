@@ -4,12 +4,17 @@
     Author     : kiwi
 --%>
 
-<%@tag description="Archive page" pageEncoding="UTF-8"%>
+<%@tag description="Admin page" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
 
 <c:if test="${sessionScope.user == null && pageContext.request.servletPath.substring(pageContext.request.servletPath.lastIndexOf('/')) != '/Login.jsp'}">
-    <script>window.location.href = "${Constants.URL}archive/login";</script>
+    <style>
+        body {
+            display:none;
+        }
+    </style>
+    <script>window.location.href = "${Constants.URL}login";</script>
 </c:if>
 
 <!DOCTYPE html>
@@ -18,18 +23,17 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="${Constants.URL}img/favicon2.ico" rel="shortcut icon" type="image/x-icon" />
-    <title>Archive page</title>
+    <title>Admin page</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="${Constants.URL}archive/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${Constants.URL}css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="${Constants.URL}archive/css/sb-admin.css" rel="stylesheet">
+    <link href="${Constants.URL}css/admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="${Constants.URL}archive/css/plugins/morris.css" rel="stylesheet">
@@ -37,13 +41,18 @@
     <!-- Custom Fonts -->
     <link href="${Constants.URL}archive/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="${Constants.URL}archive/css/dropzone.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link href="${Constants.URL}css/bootstrap-switch.css" rel="stylesheet" />
 
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <style>
+        @font-face {
+            font-family: 'Circe';
+            src: url('${Constants.URL}fonts/Circe.otf');
+        }
+    </style>
 </head>
 
 <body>
@@ -60,7 +69,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"> 
+                <a class="navbar-brand" href="${Constants.URL}system/index"> 
                     <img src="${Constants.URL}img/logo_4.png"></a>
             </div>
             <!-- Top Menu Items -->
@@ -71,7 +80,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="user-avatar" src="${Constants.URL}${sessionScope.user.user_avatar}" /> ${sessionScope.user.user_firstname} ${sessionScope.user.user_lastname} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="<c:url value="/archive/do/logout.do"/>"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<c:url value="/system/users/settings/"/>${sessionScope.user.user_id}"><i class="fa fa-fw fa-cog"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a href="<c:url value="/system/do/logout.do"/>"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -87,24 +99,26 @@
                             </li>
                         </c:when>    
                         <c:otherwise>
+                            <c:if test="${sessionScope.user.user_role == 1}">
                             <li class="active">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-list-alt"></i> Main page</a>
+                                <a href="${Constants.URL}system/index"><i class="fa fa-fw fa-list-alt"></i> Main page</a>
+                            </li>
+                            </c:if>
+                            <li class="">
+                                <a href="${Constants.URL}system/archive/index"><i class="fa fa-fw fa-folder"></i> Archive</a>
                             </li>
                             <c:if test="${sessionScope.user.user_role == 1}">
                             <li class="">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-users"></i> Users</a>
+                                <a href="${Constants.URL}system/users"><i class="fa fa-fw fa-users"></i> Users</a>
                             </li>
                             <li class="">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-picture-o"></i> Slider</a>
+                                <a href="${Constants.URL}system/slider"><i class="fa fa-fw fa-picture-o"></i> Slider</a>
                             </li>
                             <li class="">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-road"></i> Routes</a>
+                                <a href="${Constants.URL}system/routes"><i class="fa fa-fw fa-road"></i> Routes</a>
                             </li>
                             <li class="">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-filter"></i> Filters</a>
-                            </li>
-                            <li class="">
-                                <a href="${Constants.URL}archive/index"><i class="fa fa-fw fa-map-marker"></i> Markers</a>
+                                <a href="${Constants.URL}system/filters"><i class="fa fa-fw fa-filter"></i> Filters</a>
                             </li>
                             </c:if>
                         </c:otherwise>
@@ -125,18 +139,14 @@
         <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
+            
     <script src="${Constants.URL}archive/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${Constants.URL}archive/js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="${Constants.URL}archive/js/plugins/morris/raphael.min.js"></script>
-    <script src="${Constants.URL}archive/js/plugins/morris/morris.min.js"></script>
-    <script src="${Constants.URL}archive/js/plugins/morris/morris-data.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="${Constants.URL}js/bootstrap.min.js"></script>
+    <script src="${Constants.URL}js/bootstrap-select.js"></script>
+    <script src="${Constants.URL}js/bootstrap-switch.js"></script>
+    <script src="${Constants.URL}js/jquery.cookie.js"></script>
 
 </body>
 

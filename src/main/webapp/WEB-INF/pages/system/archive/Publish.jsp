@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Partners
-    Created on : Jan 13, 2015, 9:59:12 PM
+    Document   : Publish
+    Created on : Jul 22, 2015, 8:00:02 PM
     Author     : kiwi
 --%>
 
@@ -9,14 +9,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <t:adminpage>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
-    <div class="container margintop20">
-            <h4>Add article</h4>
-				<!-- Place inside the <head> of your HTML -->
-
-                                <form action="${Constants.URL}system/insertdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
-                                    
+    <div class="margintop20">
+        <h4>Add article</h4>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+            </li>
+        </ol>
+                                <form action="${Constants.URL}system/archive/do/publishdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+                                    <input type="hidden" name="article_id" value="${article.article_id}"/>
             <div class="row add-row"><div class="col-lg-12 margintop30 field">
                                                         <label for="tlt">Title<span class="red-star">*</span></label><br/>
                                             <div class="btn-group lang-switch-title" role="group" aria-label="...">
@@ -32,8 +34,8 @@
                                               </div>
                                         </div>
 						<div class="col-lg-6 margintop10 field">
-                                                <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt"  maxlength="55">
-                                                <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt" value="${article.article_title_en}" maxlength="55">
+                                                <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt" value="${article.article_title_ua}"  maxlength="55">
                                                 <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt"  maxlength="55">
                                                 <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt"  maxlength="55">
                                                 <input type="text" name="titlePL" class="form-control input-title-lang" lang="titlePL" id="tlt"  maxlength="55">
@@ -89,13 +91,13 @@
                                     </div>
                 <hr>
                                     
-                                                <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.username}"/>">
+                                                <input type="hidden" class="form-control" id="auth" name="author" value="${article.article_editor}">
                                     
                                     <div class="row add-row">
 						<div class="col-lg-3 field">
                                                     <div class="form-group">
                                                 <label for="datepicker">Date<span class="red-star">*</span></label>
-                                                <input type="text" class="form-control" name="date" id="datepicker">
+                                                <input type="text" class="form-control" name="date" id="datepicker" value="${article.article_edit_date}">
                                                     </div>
                                                 </div>
 						<div class="col-lg-3 field">
@@ -115,8 +117,14 @@
                                     <div id="avatarDialog">
                                         <iframe id="avatarFrame" src=""></iframe>
                                     </div>
+                                    <div id="avatarDialogArchive">
+                                        <iframe id="avatarFrameArchive" src=""></iframe>
+                                    </div>
                                     <button type="button" id="avatarBtn" class="btn btn-primary img-input-box">
                                     Browse avatar
+                                    </button>
+                                    <button type="button" id="avatarBtnArchive" class="btn btn-primary img-input-box">
+                                    Browse archive
                                     </button>
                                 </div>    
                             </div>
@@ -134,8 +142,14 @@
                                 <div id="dialog">
                                     <iframe id="myIframe" src=""></iframe>
                                 </div>
+                                <div id="dialog-archive">
+                                    <iframe id="myIframeArchive" src=""></iframe>
+                                </div>
                                 <button type="button" id="dialogBtn" class="btn btn-primary img-input-box">
                                 Browse image
+                                </button>
+                                <button type="button" id="dialogBtnArchive" class="btn btn-primary img-input-box">
+                                Browse archive
                                 </button>
                             </div>    
                         </div>
@@ -160,64 +174,67 @@
                                                     <div class="load-panorama"><img src="${Constants.URL}img/loader.gif"/></div>
                                                 </div>
                                     </div>
-                <hr>
-                                    <div class="row add-row">
-                                        <div class="col-lg-3 field map-field">
-                                                    <div class="form-group">
-                                                <label for="x">X</label>
-                                                <input type="text" class="form-control coordinate" name="x" id="latitude0">
-                                                <div class="validation"></div>
-                                                <div class="form-group">
-                                                <label for="y">Y</label>
-                                                <input type="text" class="form-control coordinate"  name="y" id="longitude0">
-                                                <div class="validation"></div>
-                                              </div>
-                                                <div class="div-addres div-addres-0">
-                                                <div class="form-group">
-                                                <label for="auth">Search adress</label>
-                                                <input type="text" class="form-control"  name="googleaddress_0" id="address0"/>
-                                                    </div>
-					</div>
-                                              </div>
-                                                </div>
-                                        <div class="col-lg-5 field map-block">
-                                              <div id="map_canvas"></div><br/>
-				<input type="hidden" id="mass-count-marker" name="mass_count_marker" value="~0~," >
-				<input type="hidden" id="address-number" value="0" >
-				<!--<div class="main-button">
-					<input type="button" onclick="viewMarker(0);" value="?????? 0" class="marker-view marker-view-0" >
-				</div>-->
-                                        </div>
-                                        
-                                            </div>
-             
+            <hr>
             <div class="row add-row">
-                                             <div class="col-lg-3 field">
-                                                    <div class="form-group">
-                                                <label for="cnt">Country</label>
-                                                <input type="text" class="form-control disabled-input" name="country" id="cnt">
-                                              </div>
-                                                </div>
-						<div class="col-lg-3 field">
-                                                    <div class="form-group">
-                                                <label for="rgn">Region</label>
-                                                <input type="text" class="form-control disabled-input" name="region" id="rgn">
-                                              </div>
-						</div>
-						<div class="col-lg-3 field">
-                                                    <div class="form-group">
-                                                <label for="dstr">District</label>
-                                                <input type="text" class="form-control disabled-input" name="district" id="dstr">
-                                              </div>
-						</div>
-						<div class="col-lg-3 field">
-                                                    <div class="form-group">
-                                                <label for="twn">Town</label>
-                                                <input type="text" class="form-control disabled-input" name="town" id="twn">
-                                              </div>
-						</div>
-                                            </div> 
-                
+                <div class="col-lg-3 field map-field">
+                    <div class="form-group marginbottom30">
+                        <button type="button" id="reset-map" class="btn btn-primary btn-mini">Reset map</button>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                        <label for="x">X</label>
+                        <input type="text" class="form-control coordinate" value="${article.article_x}" name="x" id="latitude0">
+                        <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                        <label for="y">Y</label>
+                        <input type="text" class="form-control coordinate" value="${article.article_y}"  name="y" id="longitude0">
+                        <div class="validation"></div>
+                        </div>
+                        <div class="div-addres div-addres-0">
+                            <div class="form-group">
+                                <label for="auth">Search adress</label>
+                                <input type="text" class="form-control"  name="googleaddress_0"value="${article.article_country}, ${article.article_region}, ${article.article_district}, ${article.article_town}" id="address0"/>
+                            </div>
+			</div>
+                    </div>
+                </div>
+                <div class="col-lg-5 field map-block">
+                    <div id="map_canvas"></div><br/>
+                        <input type="hidden" id="mass-count-marker" name="mass_count_marker" value="~0~," >
+                        <input type="hidden" id="address-number" value="0" >
+                        <!--<div class="main-button">
+                                <input type="button" onclick="viewMarker(0);" value="?????? 0" class="marker-view marker-view-0" >
+                        </div>-->
+                </div>
+            </div>
+            <hr>
+            <div class="row add-row">
+                <div class="col-lg-3 field">
+                    <div class="form-group">
+                        <label for="cnt">Country</label>
+                        <input type="text" class="form-control disabled-input" name="country" id="cnt" value="${article.article_country}">
+                    </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div class="form-group">
+                            <label for="rgn">Region</label>
+                            <input type="text" class="form-control disabled-input" name="region" id="rgn" value="${article.article_region}">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                         <div class="form-group">
+                             <label for="dstr">District</label>
+                             <input type="text" class="form-control disabled-input" name="district" id="dstr" value="${article.article_district}">
+                         </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div class="form-group">
+                            <label for="twn">Town</label>
+                            <input type="text" class="form-control disabled-input" name="town" id="twn" value="${article.article_town}">
+                        </div>
+                    </div>
+            </div> 
                 <hr>
             <div class="row add-row list-block filters">
                 <div class="col-lg-10 field">
@@ -251,8 +268,8 @@
                                                         <div class="ck-data-box" id="CKdata">
                                                             
                                                         </div>
-                                                    <div lang="textEN" class="textarea-msg"><textarea name="textEN" id="editorEN" rows="10" cols="80" class="input-block-level"></textarea></div>
-                                                    <div lang="textUA" class="textarea-msg"><textarea name="textUA" id="editorUA" rows="10" cols="80" class="input-block-level"></textarea></div>
+                                                    <div lang="textEN" class="textarea-msg"><textarea name="textEN" id="editorEN" rows="10" cols="80" class="input-block-level">${article.article_text_en}</textarea></div>
+                                                    <div lang="textUA" class="textarea-msg"><textarea name="textUA" id="editorUA" rows="10" cols="80" class="input-block-level">${article.article_text_ua}</textarea></div>
                                                     <div lang="textHU" class="textarea-msg"><textarea name="textHU" id="editorHU" rows="10" cols="80" class="input-block-level"></textarea></div>
                                                     <div lang="textSK" class="textarea-msg"><textarea name="textSK" id="editorSK" rows="10" cols="80" class="input-block-level"></textarea></div>
                                                     <div lang="textRO" class="textarea-msg"><textarea name="textRO" id="editorRO" rows="10" cols="80" class="input-block-level"></textarea></div>
@@ -265,9 +282,13 @@
 						</div>
 					</div>
         </form>
-							<p>
-								<button class="btn btn-primary btn-mini margintop30 marginbottom30" id="sudmitData" type="submit">Save</button>
-							</p>
+                                                        <p>
+            <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Publish article</button>
+            <a href="${Constants.URL}system/archive/articles/${article.article_category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
+        </p>
+        </div>
+</t:adminpage>
+
             <script> 
                 function initCKE() {
                     CKEDITOR.replace('editorEN', {
@@ -345,7 +366,7 @@
                 }
                 
                 
-    $(document).ready(function () { 
+    $(document).ready(function () {
         initCKE();
         alert = function() {};
         initDialog();
@@ -359,10 +380,10 @@
         var currentDate = myDate.getDate();
         if (currentMonth < 10) { currentMonth = '0' + currentMonth; }
         if (currentDate < 10) { currentDate = '0' + currentDate; }
-        var prettyDate = currentDate + '.' +currentMonth + '.' +  myDate.getFullYear();
         $( "#datepicker" ).datepicker();
         $( "#datepicker" ).datepicker("option", "dateFormat", "dd.mm.yy");
-        $("#datepicker").val(prettyDate);
+        var dat = '${article.article_edit_date}'.split(" ");
+        $("#datepicker").val(dat[0]);
         $( "#datepicker-act" ).datepicker();
         $( "#datepicker-act" ).datepicker("option", "dateFormat", "dd.mm.yy");
         $('.selectpicker').selectpicker({
@@ -391,6 +412,16 @@
              // $("#panorama-input").click();
           //});
 });
+
+    $("#reset-map").click(function(){
+        $("#latitude0").val("");
+        $("#longitude0").val("");
+        $("#address0").val("");
+        $("#cnt").val("");
+        $("#rgn").val("");
+        $("#dstr").val("");
+        $("#twn").val("");
+    });
 $('.panorama-file').on('change', '#panorama-input', function() {
         $(".load-panorama").show();
         var data = new FormData();
@@ -413,12 +444,6 @@ $('.panorama-file').on('change', '#panorama-input', function() {
                     }
                     });
 });
-function imageInserted(){
-    $( "#dialog" ).dialog( "close" );
-    $( "#avatarDialog" ).dialog( "close" );
-    initRemove();
-    initDialog();
-}
 function removePanoramaInit(){
     $(".remove-panorama").click(function(){
         $(".load-panorama").show();
@@ -442,12 +467,23 @@ function removePanoramaInit(){
     });
     initCKE();
 }
+function imageInserted(){
+    $( "#dialog" ).dialog( "close" );
+    $( "#dialog-archive" ).dialog( "close" );
+    $( "#avatarDialog" ).dialog( "close" );
+    $( "#avatarDialogArchive" ).dialog( "close" );
+    initRemove();
+    initDialog();
+}
 function initDialog(){
     var current = "";
+    var currentArchive ="";
     var currentAva = "";
-    var home = "${Constants.FILE_URL}".replace(/\//g,",");
-    if($('#imageUpload .returnImage img:not(.remove-icon)').last().length > 0) {
-        var path = $('#imageUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+    var currentArchiveAvatar ="";
+    var home = "img/content/".replace(/\//g,",");
+    $("#imageUpload .returnImage img:not(.remove-icon)").each(function( index ) {
+        if($(this).attr("alt").indexOf("archive_content") < 0){
+            var path = $(this).attr("alt").split("/").slice(0,-1);
         
         path = jQuery.grep(path, function(value) {
             return value !== "content";
@@ -456,9 +492,16 @@ function initDialog(){
             return value !== "img";
         });
         current = home+path.toString()+",";
-    }
-    if($('#avatarUpload .returnImage img:not(.remove-icon)').last().length > 0) {
-        var path = $('#avatarUpload .returnImage img:not(.remove-icon)').last().attr("alt").split("/").slice(0,-1);
+        }
+        else {
+            var path = $(this).attr("alt").split("/").slice(0,-1);
+            currentArchive = path.toString()+",";
+        }
+        
+    });
+    $("#avatarUpload .returnImage img:not(.remove-icon)").each(function( index ) {
+        if($(this).attr("alt").indexOf("archive_content") < 0){
+            var path = $(this).attr("alt").split("/").slice(0,-1);
         
         path = jQuery.grep(path, function(value) {
             return value !== "content";
@@ -467,6 +510,24 @@ function initDialog(){
             return value !== "img";
         });
         currentAva = home+path.toString()+",";
+        }
+        else {
+            var path = $(this).attr("alt").split("/").slice(0,-1);
+            currentArchiveAvatar = path.toString()+",";
+        }
+        
+    });
+    if(current === "") {
+        current = "img,content,";
+    }
+    if(currentArchive === "") {
+        currentArchive = "archive_content,";
+    }
+    if(currentAva === "") {
+        currentAva = "img,content,";
+    }
+    if(currentArchiveAvatar === "") {
+        currentArchiveAvatar = "archive_content,";
     }
     $("#dialog").dialog({
             autoOpen: false,
@@ -475,7 +536,17 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current);
+                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path_main='+current);
+                  }
+        });
+    $("#dialog-archive").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#myIframeArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchive);
                   }
         });
        $("#avatarDialog").dialog({
@@ -485,14 +556,30 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path='+currentAva+'&type=avatar');
+                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path_main='+currentAva+'&type=avatar');
+                  }
+        }); 
+       $("#avatarDialogArchive").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar');
                   }
         }); 
         $('#dialogBtn').click(function(){
             $('#dialog').dialog('open');
         });
+        $('#dialogBtnArchive').click(function(){
+            $('#dialog-archive').dialog('open');
+        });
         $('#avatarBtn').click(function(){
             $('#avatarDialog').dialog('open');
+        });
+        $('#avatarBtnArchive').click(function(){
+            $('#avatarDialogArchive').dialog('open');
         });
 }
 function initRemove(){
@@ -597,60 +684,66 @@ $("#sudmitData").click(function(){
     }
     });
     
-    var geocoder;
+     var geocoder;
     var map;
     var marker = []; 
-    var markerOnMap = null;
     function initialize()
             {
+                    //Определение карты
+                    var latlng = new google.maps.LatLng(50.4501,30.523400000000038);
                     var options = {
                             zoom: 5,
-                            center: new google.maps.LatLng(50.4501,30.523400000000038),
+                            center: latlng,
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    map = new google.maps.Map(document.getElementById("map_canvas"), options);
+                    var myLatlng = new google.maps.LatLng($("#latitude0").val(),$("#longitude0").val());
+                     map = new google.maps.Map(document.getElementById("map_canvas"), options);
+                        var marker = new google.maps.Marker({
+                            position: myLatlng,
+                            draggable: true,
+                            map: map
+                        });
+                    google.maps.event.addListener(marker, 'dragend', function() 
+                    {
+                        geocodePosition(marker.getPosition());
+                    });
+                    //Определение геокодера
                     geocoder = new google.maps.Geocoder();
-                    google.maps.event.addListener(map, 'click', function(event) {
-                        addMarker(event.latLng);
-                    });
-                    marker[0] = new google.maps.Marker({
-                        draggable: true,
-                        map: map
-                    });
             }
             
-            function addMarker(location) {
-                marker[0].setPosition(location);
-                geocodePosition(location);
-                google.maps.event.addListener(marker[0],'dragend',function(event) {
-                    geocodePosition(marker[0].getPosition());
-                });
-            }
-             
             function geocodePosition(location) {
-                $('#latitude0').val(location.lat());
-                $('#longitude0').val(location.lng());
                 var infowindow = new google.maps.InfoWindow();
                 geocoder.geocode({'latLng': location}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var address = results[0].address_components;
                         $('#address0').val(results[1].formatted_address);
+                        //console.log("GPS = " + location);
+                        //console.log("Formatted adrees = " + results[1].formatted_address);
                         for (var p = address.length-1; p >= 0; p--) {
                             if (address[p].types.indexOf("country") != -1) {
+                                //console.log("country = " + address[p].long_name);
                                 $('#cnt').attr("value",address[p].long_name);
-                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("locality") != -1) {
+                                //console.log("town = " + address[p].long_name);
                                 $('#twn').attr("value",address[p].long_name);
-                                //console.log(address[p].long_name+'ok');
+                            }
+                            if (address[p].types.indexOf("route") != -1) {
+                                //console.log("route = " + address[p].long_name);
                             }
                             if (address[p].types.indexOf("administrative_area_level_2") != -1) {
+                                //console.log("district = " + address[p].long_name);
                                 $('#dstr').attr("value",address[p].long_name);
-                                //console.log(address[p].long_name+'ok');
                             }
                             if (address[p].types.indexOf("administrative_area_level_1") != -1) {
+                                //console.log("region = " + address[p].long_name);
                                 $('#rgn').attr("value",address[p].long_name);
-                                //console.log(address[p].long_name+'ok');
+                            }
+                            if (address[p].types.indexOf("street_number") != -1) {
+                                //console.log("street number = " + address[p].long_name);
+                            }
+                            if (address[p].types.indexOf("postal_code") != -1) {
+                                //console.log("postal code = " + address[p].long_name);
                             }
                         }
                         if (results[1]) {
@@ -662,38 +755,116 @@ $("#sudmitData").click(function(){
                     }
                 });
                 map.setCenter(location);
+                //dam(location);
+                $('#latitude0').val(location.lat());
+                $('#longitude0').val(location.lng());
             }
             
+            function dam(num)
+                    {
+                            var text = 'marker '+num;
+                            marker[num] = new google.maps.Marker({
+                            map: map,
+                            draggable: true,
+                            title: text
+                      });
+                    $(function() {
+                    $("#address"+num).autocomplete({
+                      //Определяем значение для адреса при геокодировании
+                      source: function(request, response) {
+                            geocoder.geocode( {'address': request.term}, function(results, status) {
+                              response($.map(results, function(item) {
+                                    return {
+                                      label:  item.formatted_address,
+                                      value: item.formatted_address,
+                                      latitude: item.geometry.location.lat(),
+                                      longitude: item.geometry.location.lng()
+                                    }
+                              }));
+                            })
+                      },
+                      //Выполняется при выборе конкретного адреса
+                      select: function(event, ui) {
+                            $("#latitude"+num).val(ui.item.latitude);
+                            $("#longitude"+num).val(ui.item.longitude);
+                            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+                            marker[num].setPosition(location);
+                            map.setCenter(location);
+                      }
+                    });
+              });
+              //Добавляем слушателя события обратного геокодирования для маркера при его перемещении  
+              google.maps.event.addListener(marker[num], 'drag', function() {
+                    geocoder.geocode({'latLng': marker[num].getPosition()}, function(results, status) {
+                      if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                              $('#address'+num).val(results[0].formatted_address);
+                              $('#latitude'+num).val(marker[num].getPosition().lat());
+                              $('#longitude'+num).val(marker[num].getPosition().lng());
+                                    jQuery(".marker-view").show();
+                                    jQuery(".div-addres").hide();
+                                    jQuery(".div-addres-"+num).show();
+                            }
+                      }
+                    });
+              });
+                    }
             $(document).ready(function(){ 
               initialize();
+              dam(0);
               jQuery(".coordinate").keyup(function(){
                     setMarkerPosition(this);
               });
             });
-            
+            function addAdress()
+                    {
+                            var number = jQuery("#address-number").val();
+                            /*number++;
+                            jQuery(".main-address").append(
+                                            '<div class="div-addres div-addres-'+number+'">'+number+'<label>Адрес для поиска: </label>'+
+                                            '<input name="googleaddress_'+number+'" id="address'+number+'" style="width:600px;" type="text"/>'+
+                                            '<input type="button" value="удалить" onclick="deleteMarker('+number+');" ><br/>'+
+                                            '<span>Широта (latitude): </span><input name="coordinate_x_'+number+'" class="coordinate" id="latitude'+number+'" type="text"/>'+
+                                            '<span>Длогота (longitude): </span><input name="coordinate_y_'+number+'" class="coordinate" id="longitude'+number+'" type="text"/></div>'
+                                    );
+                            jQuery(".main-button").append(
+                                            '<input type="button" onclick="viewMarker('+number+');" value="Маркер '+number+'" '+
+                                            ' class="marker-view marker-view-'+number+'">');*/
+                            //initialize(number);
+                            dam(number);
+                            jQuery(".coordinate").keyup(function(){
+                                    setMarkerPosition(this);
+                              });
+                            //jQuery(".marker-view").show();
+                            //jQuery(".div-addres").hide();
+                            //jQuery(".div-addres-"+number).show();
+                            //jQuery("#address-number").val(number);
+                            var massCount = jQuery("#mass-count-marker").val();
+                            massCount += "~"+ number + "~,";
+                            jQuery("#mass-count-marker").val(massCount);
+                    }
+            function viewMarker(number)
+                    {
+                            jQuery(".marker-view").show();
+                            jQuery(".div-addres").hide();
+                            jQuery(".div-addres-"+number).show();
+                    }
             function setMarkerPosition(input)
                     {
-                        var x = $("#latitude0").val();
-                        var y = $("#longitude0").val();
-                        var xArr = x.split('.');
-                        var yArr = y.split('.');
-                        if((!(xArr.length>2))&&(!(yArr.length>2))){
-                            if((x.indexOf(',')!=-1)||(y.indexOf(','))!=-1){
-                                x = x.replace(',','.');
-                                y = y.replace(',','.');
-                            }
-                            
                             var id= jQuery(input).attr('id');
                             var numS = id.split('tude');
                             var num = numS[1];
-                            
-                            myLatlng = new google.maps.LatLng(x,y);
-                            if((x.slice(-1)!='.')&&(y.slice(-1)!='.')){
-                                geocodePosition(myLatlng);
-                                marker[num].setPosition(myLatlng);
-                            }
-                        }
+                            console.log(marker[num]);
+                            myLatlng = new google.maps.LatLng(jQuery("#latitude"+num).val(),jQuery("#longitude"+num).val());
+                            marker[num].setPosition(myLatlng);
                     }
+            function deleteMarker(number)
+                    {
+                            marker[number].setMap(null);
+                            jQuery(".div-addres-"+number).remove();
+                            jQuery(".marker-view-"+number).remove();
+                            var massCount = jQuery("#mass-count-marker").val();
+                            var massCountEnd = massCount.replace("~"+number+"~,","");
+                            jQuery("#mass-count-marker").val(massCountEnd);
+                    } 
              </script>
-        </div>
-</t:adminpage>

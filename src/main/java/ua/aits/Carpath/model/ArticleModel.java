@@ -519,15 +519,15 @@ public class ArticleModel {
             temp.setY(result.getDouble("y"));
             temp.setType(result.getInt("type"));
             temp.setPublic_country(result.getString("public_country"));
-            temp.setTitleEN(result.getString("titleEN"));
-            temp.setTitleUA(result.getString("titleUA"));
-            temp.setTitleHU(result.getString("titleHU"));
-            temp.setTitleSK(result.getString("titleSK"));
-            temp.setTitleRO(result.getString("titleRO"));
-            temp.setTitlePL(result.getString("titlePL"));
-            temp.setTitleGE(result.getString("titleGE"));
-            temp.setTitleCZ(result.getString("titleCZ"));
-            temp.setTitleSRB(result.getString("titleSRB"));
+            temp.setTitleEN(result.getString("titleEN").replace("\"","&quot;"));
+            temp.setTitleUA(result.getString("titleUA").replace("\"","&quot;"));
+            temp.setTitleHU(result.getString("titleHU").replace("\"","&quot;"));
+            temp.setTitleSK(result.getString("titleSK").replace("\"","&quot;"));
+            temp.setTitleRO(result.getString("titleRO").replace("\"","&quot;"));
+            temp.setTitlePL(result.getString("titlePL").replace("\"","&quot;"));
+            temp.setTitleGE(result.getString("titleGE").replace("\"","&quot;"));
+            temp.setTitleCZ(result.getString("titleCZ").replace("\"","&quot;"));
+            temp.setTitleSRB(result.getString("titleSRB").replace("\"","&quot;"));
             
             temp.setTextEN(result.getString("textEN"));
             temp.setTextUA(result.getString("textUA"));
@@ -552,6 +552,10 @@ public class ArticleModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
             temp.setMenuCat(result.getString("menuCat")); 
+            if(temp.x == 0) {
+                temp.setX(50.4501);
+                temp.setY(30.523400000000038); 
+             }
         }
         DB.closeCon();
         return temp;
@@ -707,6 +711,9 @@ public class ArticleModel {
                 case 3: temp.setTextType("Article"); break;
             }
             temp.setMenuText(result.getString("menuText"));
+            if("".equals(temp.menuText) || temp.menuText == null) {
+                temp.menuText = temp.textType.toUpperCase();
+            }
             contentList.add(temp);
         } 
         DB.closeCon();
