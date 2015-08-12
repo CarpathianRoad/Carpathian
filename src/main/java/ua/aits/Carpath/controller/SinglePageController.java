@@ -85,7 +85,7 @@ public class SinglePageController {
 
    	 RouteModel route = new RouteModel();
         	ModelAndView modelAndView = new ModelAndView("Routes");
-        	modelAndView.addObject("route", route.getOneRoute(id));
+        	modelAndView.addObject("route", route.getOneRoute(id, lan));
         	modelAndView.addObject("imagesRoute", route.getRouteImages(id));
         	return modelAndView;
     }

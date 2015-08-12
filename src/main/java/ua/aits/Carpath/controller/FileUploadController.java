@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ua.aits.Carpath.functions.Constants;
+import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.model.MenuModel;
  
 /**
@@ -206,7 +207,7 @@ public class FileUploadController {
                 }
             } else if(file.isDirectory()){
                 String fold_name = file.getName();
-                if(curll.contains("archive_content") && "".equals(parent) && "".equals(folder_name)) {
+                if(curll.contains("archive_content") && Helpers.isNumeric(file.getName())) {
                     fold_name = Menu.getCategoryName(file.getName());
                 }
                 htmlFolder = htmlFolder + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+fold_name+"</span></div>";

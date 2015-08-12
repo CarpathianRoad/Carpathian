@@ -86,8 +86,8 @@
                 <div class="markerPageText">
                     ${marker.textEN}
                 </div>
-                <div class="markerPageBottomLine"></div>
                 <c:if test="${marker.panorama !=''}">
+                <div class="markerPageBottomLine"></div>
                 <div class="panorama">
                     <a class="panorama-link"
                        onmouseover="$(this).find('img').attr('src','${Constants.URL}img/newTabIcon.png');" 
@@ -142,8 +142,8 @@
                                                 ${marker.title} Gallery
                                         </div>
                                     </div>
-                </c:if>
                                     <div class="markerPageBottomLine"></div>
+                </c:if>
                                     
                                    <div class="social_networks">
                                         <div class="face">
