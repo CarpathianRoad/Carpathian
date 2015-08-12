@@ -242,4 +242,16 @@ public class Helpers extends FileMethods {
                 Date today = new Date();
                 return actual.before(today);
     }
+    public static boolean isNumeric(String str)  
+    {  
+      try  
+      {  
+        double d = Double.parseDouble(str);  
+      }  
+      catch(NumberFormatException nfe)  
+      {  
+        return false;  
+      }  
+      return true;  
+    }
 }

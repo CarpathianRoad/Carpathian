@@ -203,7 +203,9 @@ margin-bottom: 20px;
   margin-top: -12px;
   display: block;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 700;    
+  width: 100px;
+  overflow-x: scroll;
 }
 .modal-dialog {
     width: 710px;

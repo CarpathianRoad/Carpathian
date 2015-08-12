@@ -477,7 +477,9 @@ function imageInserted(){
 }
 function initDialog(){
     var current = "";
+    var currentArchive ="";
     var currentAva = "";
+    var currentArchiveAvatar ="";
     var home = "img/content/".replace(/\//g,",");
     $("#imageUpload .returnImage img:not(.remove-icon)").each(function( index ) {
         if($(this).attr("alt").indexOf("archive_content") < 0){
@@ -490,6 +492,10 @@ function initDialog(){
             return value !== "img";
         });
         current = home+path.toString()+",";
+        }
+        else {
+            var path = $(this).attr("alt").split("/").slice(0,-1);
+            currentArchive = path.toString()+",";
         }
         
     });
@@ -505,13 +511,23 @@ function initDialog(){
         });
         currentAva = home+path.toString()+",";
         }
+        else {
+            var path = $(this).attr("alt").split("/").slice(0,-1);
+            currentArchiveAvatar = path.toString()+",";
+        }
         
     });
     if(current === "") {
         current = "img,content,";
     }
+    if(currentArchive === "") {
+        currentArchive = "archive_content,";
+    }
     if(currentAva === "") {
         currentAva = "img,content,";
+    }
+    if(currentArchiveAvatar === "") {
+        currentArchiveAvatar = "archive_content,";
     }
     $("#dialog").dialog({
             autoOpen: false,
@@ -530,7 +546,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframeArchive').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,');
+                     $('#myIframeArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchive);
                   }
         });
        $("#avatarDialog").dialog({
@@ -550,7 +566,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,&type=avatar');
+                     $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar');
                   }
         }); 
         $('#dialogBtn').click(function(){
