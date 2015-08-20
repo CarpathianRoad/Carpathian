@@ -188,6 +188,7 @@ public class ArchiveController {
     	}
     	folder_name = Helpers.replaceChars(folder_name);
         folder_name = folder_name.replace("’", "");
+        folder_name = folder_name.replace("–", "-");
     	String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, folder_name, category);
     	Helpers.removeDir(Constants.home + directory);
     	String replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
