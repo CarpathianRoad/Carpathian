@@ -16,7 +16,7 @@
                 behavior:url(#default#VML);
             }
             #map {
-                margin-top: -30px;
+                margin-top: -10px;
                 margin-bottom: 10px;
             }
         </style>
