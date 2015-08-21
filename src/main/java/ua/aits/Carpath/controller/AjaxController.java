@@ -99,7 +99,7 @@ public class AjaxController {
         if(temp.publish == 0){ check = ""; is_publish = "";}
         returnHTML = returnHTML + "<tr><td>"+count.toString()+"</td>" +
 "      <td class=\"admin-table-cell date-cell\">"+temp.date+"</td>" +
-"      <td class=\"admin-table-cell-title\"><a href=\"http://www.carpathianroad.com/en/"+ur+temp.id+"\" target=\"_blank\">"+temp_title+"</a></td>" +
+"      <td class=\"admin-table-cell-title\"><a href=\"http://www.carpathianroad.com/ua/"+ur+temp.id+"\" target=\"_blank\">"+temp_title+"</a></td>" +
 "      <td class=\"admin-table-cell\">"+temp.public_country+"</td>" +
 "      <td class=\"article-type admin-table-cell\">"+temp.textType+"</td>" +
 "      <td class=\"catID admin-table-cell\">"+temp.menuText+"</td>" +

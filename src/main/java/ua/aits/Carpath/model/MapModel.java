@@ -236,7 +236,7 @@ public class MapModel {
     return newsList;
     }
     public MapModel getMarker(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        ResultSet result = DB.getResultSet("select * from content where id = "+ id +" and publish = 1;");
+        ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
         MapModel temp = new MapModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
