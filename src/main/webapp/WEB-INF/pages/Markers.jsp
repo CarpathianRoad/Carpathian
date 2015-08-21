@@ -86,8 +86,8 @@
                 <div class="markerPageText">
                     ${marker.textEN}
                 </div>
-                <div class="markerPageBottomLine"></div>
-                <c:if test="${marker.panorama !=''}">
+                <c:if test="${marker.panorama !='' && maker.panorama != null}">
+                <div class="markerPageBottomLine" style="display:none"></div>
                 <div class="panorama">
                     <a class="panorama-link"
                        onmouseover="$(this).find('img').attr('src','${Constants.URL}img/newTabIcon.png');" 
@@ -99,7 +99,7 @@
                                 </div>
                 </div>
                 </c:if>
-                <c:if test="${images[0]!=''}">
+                <c:if test="${images[0]!='' && images[0] != null}">
                     <div class="wrapSlider">
                             <div id="slider1" class="slider">
                                     <ul style="height: 150px;">
@@ -142,8 +142,8 @@
                                                 ${marker.title} Gallery
                                         </div>
                                     </div>
+                                    <div class="markerPageBottomLine" style="display:none"></div>
                 </c:if>
-                                    <div class="markerPageBottomLine"></div>
                                     
                                    <div class="social_networks">
                                         <div class="face">
