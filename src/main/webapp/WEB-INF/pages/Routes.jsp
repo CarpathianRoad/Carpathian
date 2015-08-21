@@ -484,7 +484,6 @@
             <span id="slider"></span>
         </label>
     </div>
-        ${route.images}
         <div class="markerPageTable routeWidth">
         <div id="map" style="width: 100%;float: left;"></div>
             <div class="routesLinks routeDescription">

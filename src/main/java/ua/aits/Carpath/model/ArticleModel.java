@@ -455,8 +455,11 @@ public class ArticleModel {
                 f_title = f_title.substring(0,55);
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
-            if("".equals(text) || text == null){
+            if(text == null || "".equals(text)){
                 text = Helpers.html2text(result.getString("textEN"));
+                if(text == null || "".equals(text) || "ua".equals(lan.toUpperCase())) {
+                    continue;
+                }
             }
             if(text.length() > 175){
                 text = text.substring(0,175);
@@ -582,9 +585,7 @@ public class ArticleModel {
                 f_title = result.getString("titleEN");
             }
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
-            if("".equals(text) || text == null){
-                text = result.getString("textEN");
-            }
+            
             if(text.length() > 400){
                 text = text.substring(0,400) + "...";
             }
@@ -601,7 +602,9 @@ public class ArticleModel {
             temp.setActDate(result.getString("actual"));
             temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setAuthor(result.getString("author"));
-            contentList.add(temp);
+            if(!"".equals(text) && text != null) {
+                contentList.add(temp);
+            }
         } 
         DB.closeCon();
     return contentList;
