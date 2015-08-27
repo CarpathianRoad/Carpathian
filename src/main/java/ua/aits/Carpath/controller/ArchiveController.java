@@ -165,8 +165,14 @@ public class ArchiveController {
     	request.setCharacterEncoding("UTF-8");
     	String titleEN = request.getParameter("titleEN");
     	String titleUA = request.getParameter("titleUA");
+    	String titleSK = request.getParameter("titleSK");
+    	String titleHU = request.getParameter("titleHU");
+    	String titleRO = request.getParameter("titleRO");
     	String textEN = request.getParameter("textEN");
     	String textUA = request.getParameter("textUA");
+    	String textSK = request.getParameter("textSK");
+    	String textRO = request.getParameter("textRO");
+    	String textHU = request.getParameter("textHU");
     	String author = request.getParameter("author");
     	String category = request.getParameter("category");
     	String directory = request.getParameter("dir");
@@ -193,7 +199,10 @@ public class ArchiveController {
     	Helpers.removeDir(Constants.home + directory);
     	String replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
     	String replacedTextUA = textUA.replace(directory, "archive_content/"+dir);
-    	Articles.insertArticle(titleEN, titleUA, replacedTextEN, replacedTextUA, category, author, date, dir, country, region, district, town, x, y);
+    	String replacedTextSK = textSK.replace(directory, "archive_content/"+dir);
+    	String replacedTextHU = textHU.replace(directory, "archive_content/"+dir);
+    	String replacedTextRO = textRO.replace(directory, "archive_content/"+dir);
+    	Articles.insertArticle(titleEN, titleUA, titleHU, titleSK, titleRO, replacedTextEN, replacedTextUA, replacedTextHU, replacedTextSK, replacedTextRO, category, author, date, dir, country, region, district, town, x, y);
     	return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
 	}
 	@RequestMapping(value = "/system/archive/do/updatedata.do", method = RequestMethod.POST)
@@ -202,8 +211,14 @@ public class ArchiveController {
     	String id = request.getParameter("id");
     	String titleEN = request.getParameter("titleEN");
     	String titleUA = request.getParameter("titleUA");
+    	String titleSK = request.getParameter("titleSK");
+    	String titleHU = request.getParameter("titleHU");
+    	String titleRO = request.getParameter("titleRO");
     	String textEN = request.getParameter("textEN");
     	String textUA = request.getParameter("textUA");
+    	String textSK = request.getParameter("textSK");
+    	String textRO = request.getParameter("textRO");
+    	String textHU = request.getParameter("textHU");
     	String author = request.getParameter("author");
     	String category = request.getParameter("category");
     	String x = request.getParameter("x");
@@ -215,7 +230,7 @@ public class ArchiveController {
     	Date date_format = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     	String date = sdf.format(date_format);
-    	Articles.updateArticle(id, titleEN, titleUA, textEN, textUA, author, date, country, region, district, town, x, y);
+    	Articles.updateArticle(id, titleEN, titleUA, titleHU, titleSK, titleRO, textEN, textUA, textHU, textSK, textRO, author, date, country, region, district, town, x, y);
     	return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
 	}
 	@RequestMapping(value = {"/system/archive/do/deletearticle/{id}","/archive/do/deletearticle/{id}/"})
