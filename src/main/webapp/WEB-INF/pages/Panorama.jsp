@@ -19,11 +19,11 @@
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     </head>
-    <body>
+    <body style="margin-top: 0">
          <div class="img-upl" style="text-align: center">
              <object width="100%" height="94%">
-                            <param name="movie" value="${Constants.URL}files/panoramas/${name}">
-                            <embed src="${Constants.URL}files/panoramas/${name}" width="800" height="535">
+                            <param name="movie" value="${Constants.URL}${name}">
+                            <embed src="${Constants.URL}${name}" width="800" height="535">
                             </embed>
                         </object>
                             <button type="button" id="close-modal" class="btn btn-danger" data-dismiss="modal">Close</button>

@@ -11,7 +11,8 @@
 
 <t:indexpage>
 	<script src="${Constants.URL}js/lemmon-slider.js"></script> 
-    <c:if test="${article.type == 3}">
+    <c:if test="${article.menuCat == null || article.menuCat == 0 }">
+        <c:if test="${article.type != 0 && article.type != 1 }">
         <style>
             .markerLeftDescr {
                 width: 980px;
@@ -43,6 +44,7 @@
                 }
             }
         </style>
+        </c:if>
     </c:if>
     <meta name="title" content="${article.title}">
     <script>
