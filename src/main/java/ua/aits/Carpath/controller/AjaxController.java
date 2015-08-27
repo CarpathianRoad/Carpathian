@@ -221,7 +221,7 @@ public class AjaxController {
                 if(countPage == 0) {
                     lanURL = Constants.URL;
                 }
-                if(temp.type == 2) {
+                if(temp.type == 2 || temp.type == 3) {
                     lanURL +="map/markers/";
                 }
                 else {
