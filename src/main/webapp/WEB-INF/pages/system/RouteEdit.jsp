@@ -287,8 +287,9 @@
                 }
                 
     $(document).ready(function () { 
-        initCKE();
         initDialog();
+        initRemove();
+        initCKE();
         var currentLang = $(".lang-switch-text button.active").attr("id");
         $(".textareas .textarea-msg[lang='"+currentLang+"']").show();
         var currentLangT = $(".lang-switch-title button.active").attr("id");
@@ -310,9 +311,9 @@
        $.each(images, function( index, value ) {
             $("#imageUpload .img-content").append('<a class="returnImage" data-url="${Constants.URL}'+value+'"><img src="${Constants.URL}'+value+'" alt="'+value+'"><img src="${Constants.URL}img/remove.png" class="remove-icon"></a>');
 
-    var real = $("#real-img-path").val();        
-    $("#real-img-path").val(real + "," + value);       
-});
+            var real = $("#real-img-path").val();        
+            $("#real-img-path").val(real + "," + value);       
+        });
         }
       if("${route.file}" !== "" && "${route.file}" !== null) {
             $("#fullname-route").val("${route.file}");

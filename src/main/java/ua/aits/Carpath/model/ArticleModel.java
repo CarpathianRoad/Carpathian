@@ -470,6 +470,7 @@ public class ArticleModel {
             temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setAvatar(result.getString("avatar"));
+            temp.setType(result.getInt("type"));
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){
                 arr[0] = "img/zak.png";

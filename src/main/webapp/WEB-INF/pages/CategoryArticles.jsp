@@ -11,7 +11,7 @@
     <div class="s-new widthClass">
         <div class="s-new">
             <div class="countriesFilter countriesFilterRoute">
-                <input type="hidden" id="type" value="2"/>
+                <input type="hidden" id="type" value="2,3"/>
                 <input type="hidden" id="lan" value="${lan}"/>
                 <input type="hidden" id="menu" value="${menu_id}"/>
                 <a id="all" class="selected_country country-filter" >${titles.countryALL}</a>

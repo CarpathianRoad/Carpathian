@@ -35,6 +35,8 @@ margin-left: -40px;
                 <li><a target="_blank" class="not-add-lan" href="http://kst.sk/">Klub slovenských turistov</a></li>
                 <li><a target="_blank" class="not-add-lan" href="http://www.mara-tour.ro/">Mara International Tour</a></li>
                 <li><a target="_blank" class="not-add-lan" href="http://rradz.sk/">Regionálna rozvojová agentúra Dolný Zemplín je členom IS RRA</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://www.csillagvidek.hu/">Eger Térsége Turisztikai Desztináció Menedzsment Egyesület</a></li>
+                <li><a target="_blank" class="not-add-lan" href="http://ternotour.com.ua/">Департамент екології та туризму Чернівецької обласної державної адміністрації</a></li>
                 
             </ul>
         </div>
