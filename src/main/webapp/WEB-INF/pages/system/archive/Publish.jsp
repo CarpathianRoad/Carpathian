@@ -36,10 +36,10 @@
 						<div class="col-lg-6 margintop10 field">
                                                 <input type="text" name="titleEN" class="form-control input-title-lang" lang="titleEN" id="tlt" value="${article.article_title_en}" maxlength="55">
                                                 <input type="text" name="titleUA" class="form-control input-title-lang" lang="titleUA" id="tlt" value="${article.article_title_ua}"  maxlength="55">
-                                                <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt"  maxlength="55">
-                                                <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleHU" class="form-control input-title-lang" lang="titleHU" id="tlt" value="${article.article_title_hu}"  maxlength="55">
+                                                <input type="text" name="titleSK" class="form-control input-title-lang" lang="titleSK" id="tlt" value="${article.article_title_sk}"  maxlength="55">
                                                 <input type="text" name="titlePL" class="form-control input-title-lang" lang="titlePL" id="tlt"  maxlength="55">
-                                                <input type="text" name="titleRO" class="form-control input-title-lang" lang="titleRO" id="tlt"  maxlength="55">
+                                                <input type="text" name="titleRO" class="form-control input-title-lang" lang="titleRO" id="tlt" value="${article.article_title_ro}"  maxlength="55">
                                                 <input type="text" name="titleGE" class="form-control input-title-lang" lang="titleGE" id="tlt"  maxlength="55">
                                                 <input type="text" name="titleCZ" class="form-control input-title-lang" lang="titleCZ" id="tlt"  maxlength="55">
                                                 <input type="text" name="titleSRB" class="form-control input-title-lang" lang="titleSRB" id="tlt"  maxlength="55">
@@ -270,9 +270,9 @@
                                                         </div>
                                                     <div lang="textEN" class="textarea-msg"><textarea name="textEN" id="editorEN" rows="10" cols="80" class="input-block-level">${article.article_text_en}</textarea></div>
                                                     <div lang="textUA" class="textarea-msg"><textarea name="textUA" id="editorUA" rows="10" cols="80" class="input-block-level">${article.article_text_ua}</textarea></div>
-                                                    <div lang="textHU" class="textarea-msg"><textarea name="textHU" id="editorHU" rows="10" cols="80" class="input-block-level"></textarea></div>
-                                                    <div lang="textSK" class="textarea-msg"><textarea name="textSK" id="editorSK" rows="10" cols="80" class="input-block-level"></textarea></div>
-                                                    <div lang="textRO" class="textarea-msg"><textarea name="textRO" id="editorRO" rows="10" cols="80" class="input-block-level"></textarea></div>
+                                                    <div lang="textHU" class="textarea-msg"><textarea name="textHU" id="editorHU" rows="10" cols="80" class="input-block-level">${article.article_text_hu}</textarea></div>
+                                                    <div lang="textSK" class="textarea-msg"><textarea name="textSK" id="editorSK" rows="10" cols="80" class="input-block-level">${article.article_text_sk}</textarea></div>
+                                                    <div lang="textRO" class="textarea-msg"><textarea name="textRO" id="editorRO" rows="10" cols="80" class="input-block-level">${article.article_text_ro}</textarea></div>
                                                     <div lang="textPL" class="textarea-msg"><textarea name="textPL" id="editorPL" rows="10" cols="80" class="input-block-level"></textarea></div>
                                                     <div lang="textGE" class="textarea-msg"><textarea name="textGE" id="editorGE" rows="10" cols="80" class="input-block-level"></textarea></div>
                                                     <div lang="textCZ" class="textarea-msg"><textarea name="textCZ" id="editorCZ" rows="10" cols="80" class="input-block-level"></textarea></div>

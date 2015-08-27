@@ -304,10 +304,16 @@ public class ArchiveArticleModel {
     	while (result.next()) {
         	ArchiveArticleModel temp = new ArchiveArticleModel();
         	temp.setArticle_id(result.getInt("article_id"));
-        	temp.setArticle_title_en(result.getString("article_title_en").replace("\\\"","\""));
-        	temp.setArticle_title_ua(result.getString("article_title_ua").replace("\\\"","\""));
-        	temp.setArticle_text_en(result.getString("article_text_en"));
-        	temp.setArticle_text_ua(result.getString("article_text_ua"));
+                temp.setArticle_title_en(result.getString("article_title_en").replace("\"","&quot;"));
+                temp.setArticle_title_ua(result.getString("article_title_ua").replace("\"","&quot;"));
+                temp.setArticle_title_hu(result.getString("article_title_hu").replace("\"","&quot;"));
+                temp.setArticle_title_sk(result.getString("article_title_SK").replace("\"","&quot;"));
+                temp.setArticle_title_ro(result.getString("article_title_RO").replace("\"","&quot;"));
+        	temp.setArticle_text_en(result.getString("article_text_EN"));
+                temp.setArticle_text_ua(result.getString("article_text_UA"));
+                temp.setArticle_text_hu(result.getString("article_text_HU"));
+                temp.setArticle_text_sk(result.getString("article_text_SK"));
+                temp.setArticle_text_ro(result.getString("article_text_RO"));
         	temp.setArticle_category(result.getInt("article_category"));
         	temp.setArticle_author(result.getString("article_author"));
         	temp.setArticle_editor(result.getString("article_editor"));
@@ -340,6 +346,15 @@ public class ArchiveArticleModel {
         	if(!"".equals(temp.article_text_ua) && temp.article_text_ua != null) {
             	lang += "UA,";
         	}
+        	if(!"".equals(temp.article_text_sk) && temp.article_text_sk != null) {
+            	lang += "SK,";
+        	}
+        	if(!"".equals(temp.article_text_hu) && temp.article_text_hu != null) {
+            	lang += "HU,";
+        	}
+        	if(!"".equals(temp.article_text_ro) && temp.article_text_ro != null) {
+            	lang += "RO,";
+        	}
         	if(lang.length() > 0) {
            	 
         	temp.setArticle_lang(lang.substring(0, lang.length()-1));
@@ -358,10 +373,16 @@ public class ArchiveArticleModel {
     	result.first();
     	ArchiveArticleModel temp = new ArchiveArticleModel();
     	temp.setArticle_id(result.getInt("article_id"));
-    	temp.setArticle_title_en(result.getString("article_title_en").replace("\"","&quot;"));
-    	temp.setArticle_title_ua(result.getString("article_title_ua").replace("\"","&quot;"));
-    	temp.setArticle_text_en(result.getString("article_text_en"));
-    	temp.setArticle_text_ua(result.getString("article_text_ua"));
+        temp.setArticle_title_en(result.getString("article_title_EN").replace("\"","&quot;"));
+        temp.setArticle_title_ua(result.getString("article_title_UA").replace("\"","&quot;"));
+        temp.setArticle_title_hu(result.getString("article_title_HU").replace("\"","&quot;"));
+        temp.setArticle_title_sk(result.getString("article_title_SK").replace("\"","&quot;"));
+        temp.setArticle_title_ro(result.getString("article_title_RO").replace("\"","&quot;"));
+        temp.setArticle_text_en(result.getString("article_text_EN"));
+        temp.setArticle_text_ua(result.getString("article_text_UA"));
+        temp.setArticle_text_hu(result.getString("article_text_HU"));
+        temp.setArticle_text_sk(result.getString("article_text_SK"));
+        temp.setArticle_text_ro(result.getString("article_text_RO"));
     	temp.setArticle_category(result.getInt("article_category"));
     	temp.setArticle_author(result.getString("article_author"));
     	temp.setArticle_editor(result.getString("article_editor"));
@@ -385,19 +406,20 @@ public class ArchiveArticleModel {
     	return temp;
 	}
     
-	public void insertArticle(String titleEN, String titleUA, String textEN, String textUA, String category, String author, String date, String dir, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public void insertArticle(String titleEN, String titleUA, String titleHU, String titleSK, String titleRO, String textEN, String textUA, String textHU, String textSK, String textRO, String category, String author, String date, String dir, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
     	if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}
-    	DB.runQuery("INSERT INTO `archive_articles`(`article_title_EN`, `article_title_UA`, `article_text_EN`, `article_text_UA`, "
+    	DB.runQuery("INSERT INTO `archive_articles`(`article_title_EN`, `article_title_UA`, `article_title_HU`, `article_title_SK`, `article_title_RO`, `article_text_EN`, `article_text_UA`, `article_text_HU`, `article_text_SK`, `article_text_RO`, "
             	+ "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`, `article_dir`, `article_country`, `article_region`, `article_district`, `article_town`, `article_x`, `article_y`) VALUES ("
-            	+ "'"+StringEscapeUtils.escapeSql(titleEN)+"','"+StringEscapeUtils.escapeSql(titleUA)+"','"+StringEscapeUtils.escapeSql(textEN)+"','"+StringEscapeUtils.escapeSql(textUA)+
+            	+ "'"+StringEscapeUtils.escapeSql(titleEN)+"','"+StringEscapeUtils.escapeSql(titleUA)+"','"+StringEscapeUtils.escapeSql(titleHU)+"','"+StringEscapeUtils.escapeSql(titleSK)+"','"+StringEscapeUtils.escapeSql(titleRO)+"','"+StringEscapeUtils.escapeSql(textEN)+"','"+StringEscapeUtils.escapeSql(textUA)+"','"+StringEscapeUtils.escapeSql(textHU) + "','"+StringEscapeUtils.escapeSql(textSK) + "','"+StringEscapeUtils.escapeSql(textRO) +
             	"','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0,'"+dir+"','"+StringEscapeUtils.escapeSql(country)+"','"+StringEscapeUtils.escapeSql(region)+"','"+StringEscapeUtils.escapeSql(district)+"','"+StringEscapeUtils.escapeSql(town)+"', "+x+", "+y+");");
     	DB.closeCon();
 	}
     
-	public void updateArticle(String id, String titleEN, String titleUA, String textEN, String textUA, String author, String date, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public void updateArticle(String id, String titleEN, String titleUA, String titleHU, String titleSK, String titleRO, String textEN, String textUA, String textHU, String textSK, String textRO, String author, String date, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
     	DB.runQuery("UPDATE `archive_articles` SET" +
             	"`article_title_EN`='"+StringEscapeUtils.escapeSql(titleEN)+"',`article_title_UA`='"+StringEscapeUtils.escapeSql(titleUA)+"'," +
-            	"`article_text_EN`='"+StringEscapeUtils.escapeSql(textEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(textUA)+"'," +
+            	"`article_title_HU`='"+StringEscapeUtils.escapeSql(titleHU)+"',`article_title_SK`='"+StringEscapeUtils.escapeSql(titleSK)+"',`article_title_RO`='"+StringEscapeUtils.escapeSql(titleRO)+"'," +
+            	"`article_text_EN`='"+StringEscapeUtils.escapeSql(textEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(textUA)+"',`article_text_SK`='"+StringEscapeUtils.escapeSql(textSK)+"',`article_text_HU`='"+StringEscapeUtils.escapeSql(textHU)+"',`article_text_RO`='"+StringEscapeUtils.escapeSql(textRO)+"'," +
             	"`article_x` = "+  x +", `article_y` = "+  y +", `article_country` = '"+ StringEscapeUtils.escapeSql(country) +"', `article_region` = '"+  StringEscapeUtils.escapeSql(region) +"', `article_district` = '"+ StringEscapeUtils.escapeSql(district) +"', `article_town` = '"+  StringEscapeUtils.escapeSql(town) + "'," +
             	"`article_editor`='"+author+"',`article_edit_date`='"+date+"' WHERE article_id = "+id+";");
     	DB.closeCon();
@@ -426,10 +448,16 @@ public class ArchiveArticleModel {
     
 	public List<ArchiveArticleModel> getAllArticlesForSearch(String str) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
     	ResultSet result = DB.getResultSet("select * from archive_articles where  ("
-            	+ "article_title_en LIKE '%"+str+"%' OR "
-            	+ "article_title_ua LIKE '%"+str+"%' OR "
-            	+ "article_text_en LIKE '%"+str+"%' OR "
-            	+ "article_text_ua LIKE '%"+str+"%' OR "
+            	+ "article_title_EN LIKE '%"+str+"%' OR "
+            	+ "article_title_UA LIKE '%"+str+"%' OR "
+            	+ "article_title_HU LIKE '%"+str+"%' OR "
+            	+ "article_title_SK LIKE '%"+str+"%' OR "
+            	+ "article_title_RO LIKE '%"+str+"%' OR "
+            	+ "article_text_EN LIKE '%"+str+"%' OR "
+            	+ "article_text_UA LIKE '%"+str+"%' OR "
+            	+ "article_text_HU LIKE '%"+str+"%' OR "
+            	+ "article_text_SK LIKE '%"+str+"%' OR "
+            	+ "article_text_RO LIKE '%"+str+"%' OR "
             	+ "article_author LIKE '%"+str+"%' OR "
             	+ "article_editor LIKE '%"+str+"%'"
             	+ ") order by article_id desc;");
@@ -437,10 +465,16 @@ public class ArchiveArticleModel {
     	while (result.next()) {
         	ArchiveArticleModel temp = new ArchiveArticleModel();
         	temp.setArticle_id(result.getInt("article_id"));
-        	temp.setArticle_title_en(result.getString("article_title_en"));
-        	temp.setArticle_title_ua(result.getString("article_title_ua"));
-        	temp.setArticle_text_en(result.getString("article_text_en"));
-        	temp.setArticle_text_ua(result.getString("article_text_ua"));
+                temp.setArticle_title_en(result.getString("article_title_EN").replace("\"","&quot;"));
+                temp.setArticle_title_ua(result.getString("article_title_UA").replace("\"","&quot;"));
+                temp.setArticle_title_hu(result.getString("article_title_HU").replace("\"","&quot;"));
+                temp.setArticle_title_sk(result.getString("article_title_SK").replace("\"","&quot;"));
+                temp.setArticle_title_ro(result.getString("article_title_RO").replace("\"","&quot;"));
+        	temp.setArticle_text_en(result.getString("article_text_EN"));
+                temp.setArticle_text_ua(result.getString("article_text_UA"));
+                temp.setArticle_text_hu(result.getString("article_text_HU"));
+                temp.setArticle_text_sk(result.getString("article_text_SK"));
+                temp.setArticle_text_ro(result.getString("article_text_RO"));
         	temp.setArticle_category(result.getInt("article_category"));
         	temp.setArticle_category_text(Menu.getCategoryName(result.getString("article_category")));
         	temp.setArticle_author(result.getString("article_author"));
