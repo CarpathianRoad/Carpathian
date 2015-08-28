@@ -230,10 +230,18 @@ public class Helpers extends FileMethods {
     }
     public static String replaceChars(String text) {
         text = text.replaceAll("[\\x00-\\x1F]", "");
-            text = text.replaceAll("'\\<.*?>","");
-            text = text.replaceAll("'", "\\\\'");
-            text = text.replaceAll("\\\"", "");
-            return text;
+        text = text.replaceAll("'\\<.*?>","");
+        text = text.replaceAll("'", "\\\\'");
+        text = text.replaceAll("\\\"", "");
+        text = text.replace("’", "");
+        text = text.replace("–", "-");
+        text = text.replace(",", "");
+        text = text.replace(".", "");
+        text = text.replace("/", "");
+        text = text.replace("\\", "");
+        text = text.replace("“", "");
+        text = text.replace("„", "");
+        return text;
     }
     public static Boolean checkOldArticle(String actual_date) throws ParseException{
                 String date_str = actual_date.replace("/", ".");

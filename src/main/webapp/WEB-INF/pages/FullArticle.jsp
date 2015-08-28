@@ -46,7 +46,7 @@
         </style>
         </c:if>
     </c:if>
-    <meta name="title" content="${article.title}">
+   
     <script>
         $(document).ready(function() {
             $(".fancybox").fancybox({
