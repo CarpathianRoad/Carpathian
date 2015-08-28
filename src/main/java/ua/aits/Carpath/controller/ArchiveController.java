@@ -193,8 +193,6 @@ public class ArchiveController {
         	folder_name = TransliteratorClass.transliterate(titleUA);
     	}
     	folder_name = Helpers.replaceChars(folder_name);
-        folder_name = folder_name.replace("’", "");
-        folder_name = folder_name.replace("–", "-");
     	String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, folder_name, category);
     	Helpers.removeDir(Constants.home + directory);
     	String replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
@@ -282,6 +280,9 @@ public class ArchiveController {
     	String textGE = request.getParameter("textGE");
     	String textCZ = request.getParameter("textCZ");
     	String textSRB = request.getParameter("textSRB");
+        if( "0".equals(type) || "1".equals(type)){
+            menuCat = "0";
+        }
     	String result = MainArticles.insertArticle(titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author,
             	avatar, img, panorama, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
             	textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
