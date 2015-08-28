@@ -506,18 +506,20 @@
                     <div class="markerPageText">
                         ${route.textUA}
                     </div>
-                    <div class="wrapSlider">
-                            <div id="slider1" class="slider">
-                                    <ul id="iamgesBlock" style="height: 150px;">     
-                                    </ul>
+                        <c:if test="${route.images != ''}">
+                            <div class="wrapSlider">
+                                    <div id="slider1" class="slider">
+                                            <ul id="iamgesBlock" style="height: 150px;">     
+                                            </ul>
+                                    </div>
+                                    <div class="controls">
+                                            <a href="#" class="prev-page"></a>
+                                            <div class="prev-slide"></div>
+                                            <div style="display:none" class="next-slide"></div>
+                                            <div class="next-page"></div>
+                                    </div>
                             </div>
-                            <div class="controls">
-                                    <a href="#" class="prev-page"></a>
-                                    <div class="prev-slide"></div>
-                                    <div style="display:none" class="next-slide"></div>
-                                    <div class="next-page"></div>
-                            </div>
-                    </div>
+                        </c:if>
                                     <div class="article_main_image">
                                     </div>
                 </div>
@@ -552,7 +554,7 @@
                                         '</div>');
             
             $('#maxImages').html("/"+images.length);
-            if(images[0]==""){
+            if(images[0]==="" || images[0] === "/" || images[0] === " "){
                 $('#article_slider1_container').css('display','none');
                 $('#mainImageBlock').css('display','none');
                 $('.mainImageSliderLine').css('display','none');

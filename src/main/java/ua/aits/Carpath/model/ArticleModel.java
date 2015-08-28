@@ -489,7 +489,7 @@ public class ArticleModel {
     return newsList;
     }
     public ArticleModel getOneArticle(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
+        ResultSet result = DB.getResultSet("select * from content where id = "+ id +" and isDelete = 0;");
         ArticleModel temp = new ArticleModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
