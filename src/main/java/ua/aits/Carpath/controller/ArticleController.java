@@ -89,6 +89,9 @@ public class ArticleController {
                 }
             modelAndView.addObject("articles", articles);
             ArticleModel tempArt  = news.getOneArticle(lan, id);
+            if(tempArt == null) {
+                 return new ModelAndView("redirect:" + "/404");
+            }
             String[] tempImg = tempArt.getImage().split(",");
             if("".equals(tempArt.avatar) || tempArt.avatar == null) {
                 if("".equals(tempImg[0]) || tempImg[0] == null) {
