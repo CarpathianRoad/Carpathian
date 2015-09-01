@@ -403,6 +403,10 @@ public class ArticleModel {
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if("".equals(text) || text == null){
                 text = Helpers.html2text(result.getString("textEN"));
+                
+                if("".equals(Helpers.html2text(result.getString("textEN"))) && !"".equals(result.getString("textEN"))){
+                    text = f_title;
+                }
             }
             if(text.length() > 175){
                 text = text.substring(0,175);
@@ -457,6 +461,9 @@ public class ArticleModel {
             String text = Helpers.html2text(result.getString("text"+lan.toUpperCase()));
             if(text == null || "".equals(text)){
                 text = Helpers.html2text(result.getString("textEN"));
+                if("".equals(Helpers.html2text(result.getString("textEN"))) && !"".equals(result.getString("textEN"))){
+                    text = f_title;
+                }
                 if(text == null || "".equals(text) || "ua".equals(lan.toUpperCase())) {
                     continue;
                 }
@@ -470,6 +477,7 @@ public class ArticleModel {
             temp.setCountry(translate.translateCountryByLan(lan,result.getString("country"))); 
             temp.setDate(result.getString("date").replace("/", "."));
             temp.setAvatar(result.getString("avatar"));
+            temp.setType(result.getInt("type"));
             String [] arr = result.getString("image").split(",");
             if("".equals(arr[0])){
                 arr[0] = "img/zak.png";
@@ -481,13 +489,18 @@ public class ArticleModel {
     return newsList;
     }
     public ArticleModel getOneArticle(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
+        ResultSet result = DB.getResultSet("select * from content where id = "+ id +" and isDelete = 0;");
         ArticleModel temp = new ArticleModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
             temp.setX(result.getDouble("x"));
             temp.setY(result.getDouble("y"));
+            if(result.getString("type") == null) {
+            temp.setType(0);
+            }
+            else {
             temp.setType(result.getInt("type"));
+            }
             temp.setPublic_country(result.getString("public_country"));
             temp.setTitle(result.getString("title"+lan));
             temp.setTextEN(result.getString("text"+lan));
@@ -509,6 +522,7 @@ public class ArticleModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
             temp.setMenuCat(result.getString("menuCat")); 
+            System.out.println(temp.textEN);
         }
         DB.closeCon();
         return temp;

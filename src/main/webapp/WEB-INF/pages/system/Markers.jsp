@@ -86,7 +86,7 @@
                 <div class="markerPageText">
                     ${marker.textEN}
                 </div>
-                <c:if test="${marker.panorama !=''}">
+                <c:if test="${marker.panorama !='' && marker.panorama != null}">
                 <div class="markerPageBottomLine"></div>
                 <div class="panorama">
                     <a class="panorama-link"
@@ -99,7 +99,7 @@
                                 </div>
                 </div>
                 </c:if>
-                <c:if test="${images[0]!=''}">
+                <c:if test="${images[0]!='' && images[0] != null}">
                     <div class="wrapSlider">
                             <div id="slider1" class="slider">
                                     <ul style="height: 150px;">

@@ -178,8 +178,8 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(f_title);
-            temp.setTextEN(text);
+            temp.setTitle(f_title.replace("'",""));
+            temp.setTextEN(text.replace("'",""));
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setFilters(result.getString("filters")); 
             temp.setPublic_country(result.getString("public_country"));
@@ -236,7 +236,7 @@ public class MapModel {
     return newsList;
     }
     public MapModel getMarker(String lan, String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        ResultSet result = DB.getResultSet("select * from content where id = "+ id +";");
+        ResultSet result = DB.getResultSet("select * from content where id = "+ id +" and isDelete = 0;");
         MapModel temp = new MapModel();
         while (result.next()) { 
             temp.setId(result.getInt("id"));
@@ -267,6 +267,9 @@ public class MapModel {
     public String getPanoramaName(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ResultSet result = DB.getResultSet("select panorama from content where id = "+ id +" and publish = 1;");
         result.first();
-        return result.getString("panorama");
+        if(result.getString("panorama").contains("archive_content")){
+            return result.getString("panorama");
+        }
+        return "files/panoramas/"+result.getString("panorama");
     }
 }

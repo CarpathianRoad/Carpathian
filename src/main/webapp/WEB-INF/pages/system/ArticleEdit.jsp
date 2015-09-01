@@ -160,9 +160,15 @@
                                                         <label for="img">Panorama</label>
                                                     
                                                         <div id="panorama-upload-block">
+                                                            <div id="dialog-archive-panorama">
+                                                                <iframe id="myIframeArchivePanorama" src=""></iframe>
+                                                            </div>
                                                             <span class="btn btn-primary btn-file">
-                                                                Browse <input class="" id="panorama-input" type="file" multiple/>
+                                                                Browse panorama<input class="" id="panorama-input" type="file" multiple/>
                                                             </span>
+                                                            <button type="button" id="dialogBtnArchivePanorama" class="btn btn-primary img-input-box">
+                                                            Browse archive
+                                                            </button>
                                                         </div>
                                                     </div>
                                                     <input type="hidden" id="fullname-panorama" name="filename-panorama"/>
@@ -416,6 +422,12 @@
             $("#fullname-panorama").val("${article.panorama}");
             $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+"${article.panorama}"+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block");
             $("#panorama-upload-block .btn-file").hide();
+            if("${article.panorama}".indexOf("archive_content") >= 0) {
+                $(".remove-panorama").attr("panorama-type", "from-archive");
+            }
+            else {
+                $(".remove-panorama").attr("panorama-type", "from-upload");
+            }
             $(".remove-panorama").attr("panorama-name", "${article.panorama}");
             removePanoramaInit();
         }
@@ -433,11 +445,12 @@ $('.panorama-file').on('change', '#panorama-input', function() {
                     processData: false,
                     type: 'POST',
                     success: function(data){
-                        $(".load-panorama").hide();
+                         $(".load-panorama").hide();
                         $("#fullname-panorama").val(data);
                         $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+data+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block");
                         $("#panorama-upload-block .btn-file").hide();
                         $(".remove-panorama").attr("panorama-name", data);
+                        $(".remove-panorama").attr("panorama-type", "from-upload");
                         removePanoramaInit();
                     }
                     });
@@ -446,6 +459,7 @@ function removePanoramaInit(){
     $(".remove-panorama").click(function(){
         $(".load-panorama").show();
         var filename = $(this).attr("panorama-name");
+        if($(this).attr("panorama-type") === "from-upload"){
         $.ajax({
             type: "get",
             url: "${Constants.URL}system/deletePanoramaFile",
@@ -457,11 +471,20 @@ function removePanoramaInit(){
                         $(".remove-panorama").remove();
                         $(".upload-success").remove();
                         $("#panorama-upload-block .btn-file").show();
+                        $("#dialogBtnArchivePanorama").show();
             },
             error: function(response){      
                 console.log(response);
             }
         });
+        }
+        else if($(this).attr("panorama-type") === "from-archive"){
+            $(".load-panorama").hide();
+            $("#fullname-panorama").val("");
+            $(".remove-panorama").remove();
+            $(".upload-success").remove();
+            $("#panorama-upload-block .btn-file").show();
+        }
     });
     initCKE();
 }
@@ -470,8 +493,9 @@ function imageInserted(){
     $( "#dialog-archive" ).dialog( "close" );
     $( "#avatarDialog" ).dialog( "close" );
     $( "#avatarDialogArchive" ).dialog( "close" );
+    $( "#dialog-archive-panorama" ).dialog( "close" );
     initRemove();
-    initDialog();
+    initDialog();removePanoramaInit();
 }
 function initDialog(){
     var current = "";
@@ -567,6 +591,16 @@ function initDialog(){
                      $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar');
                   }
         }); 
+        $("#dialog-archive-panorama").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 600,
+            width: 800,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#myIframeArchivePanorama').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,&type=panorama-file');
+                  }
+        });
         $('#dialogBtn').click(function(){
             $('#dialog').dialog('open');
         });
@@ -578,6 +612,9 @@ function initDialog(){
         });
         $('#avatarBtnArchive').click(function(){
             $('#avatarDialogArchive').dialog('open');
+        });
+        $('#dialogBtnArchivePanorama').click(function(){
+            $('#dialog-archive-panorama').dialog('open');
         });
 }
 function initRemove(){

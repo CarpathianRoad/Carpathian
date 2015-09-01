@@ -30,9 +30,9 @@
                     <div class="btn-group lang-switch-title" role="group" aria-label="...">
                         <button type="button" id="titleEN" class="btn btn-default active">In English</button>
                         <button type="button" id="titleUA" class="btn btn-default">In Ukrainian</button>
-                        <button type="button" id="titleHU" class="btn btn-default disabled">In Hungarian</button>
-                        <button type="button" id="titleSK" class="btn btn-default disabled">In Slovak</button>
-                        <button type="button" id="titleRO" class="btn btn-default disabled">In Romanian</button>
+                        <button type="button" id="titleHU" class="btn btn-default">In Hungarian</button>
+                        <button type="button" id="titleSK" class="btn btn-default">In Slovak</button>
+                        <button type="button" id="titleRO" class="btn btn-default">In Romanian</button>
                     </div>
                 </div>
                 <div class="col-lg-6 margintop10 field titles">
@@ -112,9 +112,9 @@
                     <div class="btn-group lang-switch-text" role="group" aria-label="...">
                         <button type="button" id="textEN" class="btn btn-default active">In English</button>
                         <button type="button" id="textUA" class="btn btn-default">In Ukrainian</button>
-                        <button type="button" id="textHU" class="btn btn-default disabled">In Hungarian</button>
-                        <button type="button" id="textSK" class="btn btn-default disabled">In Slovak</button>
-                        <button type="button" id="textRO" class="btn btn-default disabled">In Romanian</button>
+                        <button type="button" id="textHU" class="btn btn-default">In Hungarian</button>
+                        <button type="button" id="textSK" class="btn btn-default">In Slovak</button>
+                        <button type="button" id="textRO" class="btn btn-default">In Romanian</button>
                     </div>
                 </div>
                 <div class="col-lg-12 margintop10 field textareas">
@@ -281,32 +281,35 @@
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorHU', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorSK', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorRO', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.on('instanceReady', function() { 
         $("#cke_editorEN iframe").webkitimageresize().webkittableresize().webkittdresize();
         $("#cke_editorUA iframe").webkitimageresize().webkittableresize().webkittdresize();
+        $("#cke_editorHU iframe").webkitimageresize().webkittableresize().webkittdresize();
+        $("#cke_editorSK iframe").webkitimageresize().webkittableresize().webkittdresize();
+        $("#cke_editorRO iframe").webkitimageresize().webkittableresize().webkittdresize();
         
     $(".cke_button.cke_button__image.cke_button_off").click(function(){
         $(".cke_dialog_body").hide();
@@ -314,10 +317,24 @@
    
     $(".cke_editor_editorEN_dialog .cke_dialog_body").addClass("image-dialog");
     $(".cke_editor_editorUA_dialog .cke_dialog_body").addClass("image-dialog");
+    $(".cke_editor_editorHU_dialog .cke_dialog_body").addClass("image-dialog");
+    $(".cke_editor_editorSK_dialog .cke_dialog_body").addClass("image-dialog");
+    $(".cke_editor_editorRO_dialog .cke_dialog_body").addClass("image-dialog");
+    
     if($(".cke_editor_editorUA_dialog .cke_dialog_body").hasClass("image-dialog")) {
-    $(".cke_dialog_body").show();
-    }if($(".cke_editor_editorEN_dialog .cke_dialog_body").hasClass("image-dialog")) {
-    $(".cke_dialog_body").show();
+        $(".cke_dialog_body").show();
+    }
+    if($(".cke_editor_editorEN_dialog .cke_dialog_body").hasClass("image-dialog")) {
+        $(".cke_dialog_body").show();
+    }
+    if($(".cke_editor_editorHU_dialog .cke_dialog_body").hasClass("image-dialog")) {
+        $(".cke_dialog_body").show();
+    }
+    if($(".cke_editor_editorSK_dialog .cke_dialog_body").hasClass("image-dialog")) {
+        $(".cke_dialog_body").show();
+    }
+    if($(".cke_editor_editorRO_dialog .cke_dialog_body").hasClass("image-dialog")) {
+        $(".cke_dialog_body").show();
     }
 }, 500);
     } );    

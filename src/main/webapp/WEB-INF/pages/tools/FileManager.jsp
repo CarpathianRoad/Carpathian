@@ -110,6 +110,12 @@
                     $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button>');
                     $("#avatar-path", window.parent.document).val(path.slice(0,-1));  
                 }
+                else if("${type}" === "panorama-file"){
+                    $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+data+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block", window.parent.document);
+                    $("#panorama-upload-block .btn-file", window.parent.document).hide();
+                    $(".remove-panorama", window.parent.document).attr("panorama-name", path.slice(0,-1));
+                    $("#fullname-panorama", window.parent.document).val(path.slice(0,-1)); 
+                }
                 else {
                     $("#imageUpload .img-content", window.parent.document).append($("#returnedhtml").html());
                     $("#imageUpload .img-input-box", window.parent.document).remove();
@@ -163,6 +169,14 @@
             $("#avatarUpload .img-content-show-all").removeAttr("realpath");
             window.parent.imageInserted();
             }
+            else if("${type}" === "panorama-file") {
+                $("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+data+")</span> </span> <span class='remove-panorama'>Remove</span>").appendTo("#panorama-upload-block", window.parent.document);
+                    $("#panorama-upload-block .btn-file", window.parent.document).hide();
+                    $(".remove-panorama", window.parent.document).attr("panorama-name", path.slice(0,-1));
+                    $("#fullname-panorama", window.parent.document).val(path.slice(0,-1));
+                    window.parent.imageInserted();
+                    
+            }
             else if("${type}" === "slider") {
                         $("#imageUpload .img-content", window.parent.document).append("<div class='col-lg-4 slider-block'><a class='returnImage' data-url='"+"${Constants.URL}" + path+name + "'>"
                                 + "<img src='"+"${Constants.URL}"+ path+name + "' alt='" + path+name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>"
@@ -204,6 +218,15 @@
                     window.close();
                     //return window.parent.CKEDITOR.tools.callFunction("${ckeditor}", ""+"${Constants.URL}"+ path + name +"","");
                 }
+                }
+                else if($(this).attr("type") === "file" && "${type}" === "panorama-file") {
+                $("#panorama-upload-block", window.parent.document).append("<span class='upload-success'><img src='"+"${Constants.URL}"+"img/symbol_check.png'/> Uploaded! <span class='panorama-name'>("+$(this).attr("name")+")</span> </span> <span class='remove-panorama'>Remove</span>");
+                    $("#panorama-upload-block .btn-file", window.parent.document).hide();
+                    $("#dialogBtnArchivePanorama", window.parent.document).hide();
+                    $(".remove-panorama", window.parent.document).attr("panorama-name", path+$(this).attr("name"));
+                    $(".remove-panorama", window.parent.document).attr("panorama-type", "from-archive");
+                    $("#fullname-panorama", window.parent.document).val(path+$(this).attr("name"));
+                    window.parent.imageInserted();
                 }
             else {
                 getFiles($(this).attr("name"), $(this).attr("parent"));

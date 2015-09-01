@@ -89,6 +89,9 @@ public class ArticleController {
                 }
             modelAndView.addObject("articles", articles);
             ArticleModel tempArt  = news.getOneArticle(lan, id);
+            if(tempArt == null) {
+                 return new ModelAndView("redirect:" + "/404");
+            }
             String[] tempImg = tempArt.getImage().split(",");
             if("".equals(tempArt.avatar) || tempArt.avatar == null) {
                 if("".equals(tempImg[0]) || tempImg[0] == null) {
@@ -98,12 +101,16 @@ public class ArticleController {
                     tempArt.avatar = tempImg[0];
                 }
             }
-            modelAndView.addObject("main_image", tempImg[0]);
+            String face_text = Helpers.html2text(tempArt.textEN);
+            if("".equals(Helpers.html2text(tempArt.textEN)) && !"".equals(tempArt.textEN)){
+                    face_text = tempArt.title;
+            }
             modelAndView.addObject("article", tempArt);
+            modelAndView.addObject("main_image", tempImg[0]);
             modelAndView.addObject("images", tempImg);
             modelAndView.addObject("avatarvar", tempArt.avatar);
-            modelAndView.addObject("titlevar", tempArt.title);
-            modelAndView.addObject("descrvar", Helpers.html2text(tempArt.textEN));
+            modelAndView.addObject("titlevar", Helpers.replaceChars(tempArt.title));
+            modelAndView.addObject("descrvar", Helpers.replaceChars(face_text));
             return modelAndView;
  
 	}

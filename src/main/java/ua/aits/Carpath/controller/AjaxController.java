@@ -204,16 +204,6 @@ public class AjaxController {
         String menuCat = request.getParameter("menuCat");
         int countPage = Integer.parseInt(request.getParameter("count"));
         int countNeed = countPage + 9;
-        String lanURL = Constants.URL + lan + "/";
-        if(countPage == 0) {
-            lanURL = Constants.URL;
-        }
-        if("2".equals(type)) {
-            lanURL +="map/markers/";
-        }
-        else {
-            lanURL += "article/full/";
-        }
         List<ArticleModel> tempw =  content.getArticleByFilters(lan, country, type, menuCat);
         if(tempw == null) { 
         return new ResponseEntity<>("", responseHeaders, HttpStatus.CREATED);
@@ -227,6 +217,16 @@ public class AjaxController {
         String returnHTML = "";
         for (ArticleModel temp : tempC) 
             {
+                String lanURL = Constants.URL + lan + "/";
+                if(countPage == 0) {
+                    lanURL = Constants.URL;
+                }
+                if(temp.type == 2 || temp.type == 3) {
+                    lanURL +="map/markers/";
+                }
+                else {
+                    lanURL += "article/full/";
+                }
                 if(!"".equals(temp.avatar) && temp.avatar != null){
                         temp.setImage(temp.avatar);
                 }
