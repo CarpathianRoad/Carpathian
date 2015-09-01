@@ -52,6 +52,7 @@
                                     <div class="imageHover">
                                         <div class="imageHoverDate">
                                             ${route.date}
+                                ${route.file}
                                         </div>
                                         <div class="imageHoverCountry">
                                             <div class="newsCountryText">${route.public_country}</div><img src="${Constants.URL}img/newsImageHover.png">
@@ -157,7 +158,6 @@
                             xmlhttp.open("GET","${Constants.URL}routes/"+files_array[count],false);
                             xmlhttp.send();
                             xmlDoc=xmlhttp.responseXML;
-                            console.log("item = "+files_array[count]);
                             $.ajax({
                                 type: "GET",
                                 url: "${Constants.URL}routes/"+files_array[count],
@@ -165,6 +165,7 @@
                                 success: parseXml
                             });
                     }   
+                console.log(files);
                 }
                 function parseXml(xml){
                         height = [];  
@@ -195,7 +196,6 @@
                         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
                       }
                     };
-                    console.log("count route = " + countRoute);
                     map[countRoute] = new google.maps.Map(document.getElementById("map"+countRoute),
                         mapOptions);
                     map[countRoute].mapTypes.set('map_style', styledMap);
