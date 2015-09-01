@@ -178,8 +178,8 @@ public class MapModel {
             temp.setId(result.getInt("id"));
             temp.setX(result.getString("x"));
             temp.setY(result.getString("y"));
-            temp.setTitle(f_title);
-            temp.setTextEN(text);
+            temp.setTitle(f_title.replace("'",""));
+            temp.setTextEN(text.replace("'",""));
             temp.setMarkerIcon(result.getString("markerIcon")); 
             temp.setFilters(result.getString("filters")); 
             temp.setPublic_country(result.getString("public_country"));

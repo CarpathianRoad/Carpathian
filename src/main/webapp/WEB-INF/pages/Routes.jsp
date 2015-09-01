@@ -519,9 +519,9 @@
                                             <div class="next-page"></div>
                                     </div>
                             </div>
-                        </c:if>
                                     <div class="article_main_image">
                                     </div>
+                        </c:if>
                 </div>
             </div>
         </div>
