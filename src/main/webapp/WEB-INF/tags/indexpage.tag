@@ -403,7 +403,7 @@
          	}*/
          	addLangToLink(lang.toLowerCase());
          	if(window.innerWidth<780){
-                    $('a[href*="/Carpath/ua/routesList"]').parent().hide();
+                    //$('a[href*="/Carpath/ua/routesList"]').parent().hide();
                 }
         	},
         	error: function(response){ 	 
