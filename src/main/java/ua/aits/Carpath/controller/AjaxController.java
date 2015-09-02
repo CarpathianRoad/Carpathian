@@ -356,7 +356,7 @@ public class AjaxController {
                 returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
         "                        <div class=\"s-block newsHeight\">\n" +
         "                            <div class=\"newsImage\">\n" +
-        "                                <a href=\""+Constants.URL+"routes/"+route.id+"\">\n" +
+        "                                <a href=\""+Constants.URL+lan+"/routes/"+route.id+"\">\n" +
         "                                    <div class=\"imageHover\">\n" +
         "                                        <div class=\"imageHoverDate\">\n" +
         "                                            "+route.date+"\n" +
