@@ -369,7 +369,7 @@
 	}
     
 	function showSmallMenu(){
-    	$('#mapMenu').parent().parent().css('display','none');
+    	$('#routesMenu').parent().parent().css('display','none');
     	$('#homeMenu').parent().css('pointer-events','none');
     	if(!(showMenu)){
         	if(showLang)langSelectMenu();
