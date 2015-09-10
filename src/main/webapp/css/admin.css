@@ -196,16 +196,20 @@ margin-bottom: 20px;
     float: left;
     height: 115px;
     text-align: center;
-    margin: 0px 22px 5px 5px;
+    margin: 0px 22px 40px 5px;
 }
 .galery-item span {
-    color: #428BCA;
-  margin-top: -12px;
-  display: block;
-  font-size: 12px;
-  font-weight: 700;    
-  width: 100px;
-  overflow-x: scroll;
+  color: #428BCA;
+    margin-top: -12px;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    width: 100px;
+    overflow-x: scroll;
+    height: 40px;
+    float: left;
+    padding-top: 5px;
+    white-space: nowrap;
 }
 .modal-dialog {
     width: 710px;

@@ -234,13 +234,15 @@ public class Helpers extends FileMethods {
         text = text.replaceAll("'", "\\\\'");
         text = text.replaceAll("\\\"", "");
         text = text.replace("’", "");
-        text = text.replace("–", "-");
-        text = text.replace(",", "");
-        text = text.replace(".", "");
-        text = text.replace("/", "");
-        text = text.replace("\\", "");
-        text = text.replace("“", "");
-        text = text.replace("„", "");
+    	text = text.replace("–", "-");
+    	text = text.replace(",", "");
+    	text = text.replace("”", "");
+    	text = text.replace(".", "");
+    	text = text.replace("/", "");
+    	text = text.replace("\\", "");
+    	text = text.replace("“", "");
+    	text = text.replace("„", "");
+    	text = text.replace("‘", "");
         return text;
     }
     public static Boolean checkOldArticle(String actual_date) throws ParseException{
