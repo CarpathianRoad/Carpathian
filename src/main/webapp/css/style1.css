@@ -2816,6 +2816,10 @@ a:visited:hover {
 }
 
 @media (max-width: 1020px){
+    .markerPageText img{
+    width: 100% !important;
+    height: auto !important;
+    }
     .s-new .s-rightNavBarSmall {
     }
     .s-new{
@@ -3432,6 +3436,10 @@ a:visited:hover {
 }
 
 @media (max-device-width: 1020px){
+    .markerPageText img{
+        width: 100% !important;
+        height: auto !important;
+        }
     .s-new .s-rightNavBarSmall {
     }
     .s-new{
