@@ -15,6 +15,24 @@
         var categories = [];
         var countries = [];
     </script>
+    <style>
+        @media (max-device-width: 780px){
+            .newsImage{
+                display: none;
+            }
+            .newsImageUnderline{
+                display: none;
+            }
+        }
+        @media (max-width: 360px){
+            .newsImage{
+                display: none;
+            }
+            .newsImageUnderline{
+                display: none;
+            }
+        }
+    </style>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
         <input type="hidden" id="last_item" value="9" />
