@@ -233,19 +233,18 @@ public class Helpers extends FileMethods {
     	text = text.replaceAll("'\\<.*?>","");
     	text = text.replaceAll("'", "\\\\'");
     	text = text.replaceAll("\\\"", "");
-    	text = text.replaceAll("’", "");
+    	text = text.replaceAll("’", "\'");
    	 text = text.replaceAll("–", "-");
-   	 text = text.replaceAll(",", "");
-   	 text = text.replaceAll("”", "");
-   	 text = text.replace(".", "");
+   	 text = text.replaceAll(",", ",");
+   	 text = text.replaceAll(".", "");
    	 text = text.replaceAll("/", "");
-   	 text = text.replace("\\", "");
-   	 text = text.replaceAll("“", "");
-   	 text = text.replaceAll("„", "");
-   	 text = text.replaceAll("‘", "");
-    	text = text.replaceAll("«", "");
-    	text = text.replaceAll("»", "");
-    	text = text.replaceAll("”","");
+   	 text = text.replaceAll("“", "\"");
+   	 text = text.replaceAll("„", "\"");
+   	 text = text.replaceAll("‘", "\'");
+    	text = text.replaceAll("«", "\"");
+    	text = text.replaceAll("»", "\"");
+    	text = text.replaceAll("”","\'");
+    	text = text.replaceAll("'","\'");
     	return text;
 	}
 	public static Boolean checkOldArticle(String actual_date) throws ParseException{
