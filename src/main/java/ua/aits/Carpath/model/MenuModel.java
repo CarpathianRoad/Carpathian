@@ -236,6 +236,16 @@ public class MenuModel {
         DB.closeCon();
         return coun;
     }
+    public String getArticleName(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("select article_title_EN, article_title_UA from archive_articles where article_dir= '"+id+"';");
+        result.first();
+        String coun = result.getString("article_title_EN");
+        if("".equals(coun) || coun == null){
+            coun = result.getString("article_title_UA");
+        }
+        DB.closeCon();
+        return coun;
+    }
     
     public String getSubsId(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select id from menu where menu.parentID = "+id+";");
