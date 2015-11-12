@@ -406,13 +406,18 @@ public class ArchiveArticleModel {
     	return temp;
 	}
     
-	public void insertArticle(String titleEN, String titleUA, String titleHU, String titleSK, String titleRO, String textEN, String textUA, String textHU, String textSK, String textRO, String category, String author, String date, String dir, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public String insertArticle(String titleEN, String titleUA, String titleHU, String titleSK, String titleRO, String textEN, String textUA, String textHU, String textSK, String textRO, String category, String author, String date, String dir, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
     	if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}
     	DB.runQuery("INSERT INTO `archive_articles`(`article_title_EN`, `article_title_UA`, `article_title_HU`, `article_title_SK`, `article_title_RO`, `article_text_EN`, `article_text_UA`, `article_text_HU`, `article_text_SK`, `article_text_RO`, "
             	+ "`article_category`, `article_author`, `article_editor`, `article_add_date`, `article_edit_date`, `article_is_edit`, `article_is_delete`, `article_is_publish`, `article_dir`, `article_country`, `article_region`, `article_district`, `article_town`, `article_x`, `article_y`) VALUES ("
             	+ "'"+StringEscapeUtils.escapeSql(titleEN)+"','"+StringEscapeUtils.escapeSql(titleUA)+"','"+StringEscapeUtils.escapeSql(titleHU)+"','"+StringEscapeUtils.escapeSql(titleSK)+"','"+StringEscapeUtils.escapeSql(titleRO)+"','"+StringEscapeUtils.escapeSql(textEN)+"','"+StringEscapeUtils.escapeSql(textUA)+"','"+StringEscapeUtils.escapeSql(textHU) + "','"+StringEscapeUtils.escapeSql(textSK) + "','"+StringEscapeUtils.escapeSql(textRO) +
             	"','"+category+"','"+author+"','"+author+"','"+date+"','"+date+"',1,0,0,'"+dir+"','"+StringEscapeUtils.escapeSql(country)+"','"+StringEscapeUtils.escapeSql(region)+"','"+StringEscapeUtils.escapeSql(district)+"','"+StringEscapeUtils.escapeSql(town)+"', "+x+", "+y+");");
+        String id = "";
+        ResultSet result = DB.getResultSet("SELECT article_id FROM archive_articles WHERE archive_articles.article_title_EN = '" + StringEscapeUtils.escapeSql(titleEN) + "' AND archive_articles.article_text_EN = '"+StringEscapeUtils.escapeSql(textEN)+"' AND archive_articles.article_add_date = '"+date+"';");
+        result.first();
+        id = result.getString("article_id");
     	DB.closeCon();
+        return id;
 	}
     
 	public void updateArticle(String id, String titleEN, String titleUA, String titleHU, String titleSK, String titleRO, String textEN, String textUA, String textHU, String textSK, String textRO, String author, String date, String country, String region, String district, String town, String x, String y) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -509,5 +514,9 @@ public class ArchiveArticleModel {
     	}
     	DB.closeCon();
     	return articleList;
+	}
+        public void runQuery(String query)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    	DB.runQuery(query);
+    	DB.closeCon();
 	}
 }

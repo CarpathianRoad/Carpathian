@@ -231,20 +231,20 @@ public class Helpers extends FileMethods {
 	public static String replaceChars(String text) {
     	text = text.replaceAll("[\\x00-\\x1F]", "");
     	text = text.replaceAll("'\\<.*?>","");
-    	text = text.replaceAll("'", "\\\\'");
+    	text = text.replaceAll("'", "'");
     	text = text.replaceAll("\\\"", "");
-    	text = text.replaceAll("’", "\'");
+    	text = text.replaceAll("’", "");
    	 text = text.replaceAll("–", "-");
    	 text = text.replaceAll(",", ",");
    	 text = text.replaceAll(".", "");
    	 text = text.replaceAll("/", "");
-   	 text = text.replaceAll("“", "\"");
-   	 text = text.replaceAll("„", "\"");
-   	 text = text.replaceAll("‘", "\'");
-    	text = text.replaceAll("«", "\"");
-    	text = text.replaceAll("»", "\"");
-    	text = text.replaceAll("”","\'");
-    	text = text.replaceAll("'","\'");
+   	 text = text.replaceAll("“", "");
+   	 text = text.replaceAll("„", "");
+   	 text = text.replaceAll("‘", "");
+    	text = text.replaceAll("«", "");
+    	text = text.replaceAll("»", "");
+    	text = text.replaceAll("”","");
+    	text = text.replaceAll("'","");
     	return text;
 	}
 	public static Boolean checkOldArticle(String actual_date) throws ParseException{
@@ -256,15 +256,15 @@ public class Helpers extends FileMethods {
 	}
 	public static boolean isNumeric(String str)  
 	{  
-  	try  
-  	{  
-    	double d = Double.parseDouble(str);  
-  	}  
-  	catch(NumberFormatException nfe)  
-  	{  
-    	return false;  
-  	}  
-  	return true;  
+            try  
+            {  
+                double d = Double.parseDouble(str);  
+            }  
+            catch(NumberFormatException nfe)  
+            {  
+                return false;  
+            }  
+            return true;  
 	}
 }
 
