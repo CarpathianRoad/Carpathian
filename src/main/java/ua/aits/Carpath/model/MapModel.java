@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.springframework.web.util.HtmlUtils;
 import ua.aits.Carpath.functions.DB;
 import ua.aits.Carpath.functions.Helpers;
 import ua.aits.Carpath.functions.PageFiltersTranslate;
@@ -169,8 +171,8 @@ public class MapModel {
             if("".equals(text) || text == null){
                 text = result.getString("textEN");
             }
-            text = Helpers.replaceChars(text);
-            f_title = Helpers.replaceChars(f_title);
+            text = Helpers.html2text(text).replace("\"", "");
+            f_title = Helpers.html2text(f_title).replace("\"", "");
             if(text.length() > 400){
                 text = text.substring(0,400);
             }
@@ -192,7 +194,7 @@ public class MapModel {
             if(temp.getMarkerIcon() == null || "".equals(temp.getMarkerIcon())) {
                 temp.setMarkerIcon("gardens");
             }
-            if(temp.getTextEN() == null || "".equals(temp.getTextEN())) {
+            if(temp.textEN == null || "".equals(temp.textEN)) {
                 temp.setTextEN("Lorem ipsum dolor sit amet consectetur adipiscing elit Donec vitae pulvinar massa Cras urna enim, ornare vel mollis id, maximus quis tellus. Aliquam ac ante tristique lectus molestie auctor in id felis. Aliquam tempus nulla at interdum lobortis. Donec et suscipit nibh, vel consequat lectus.");
             }            
             mapList.add(temp);
