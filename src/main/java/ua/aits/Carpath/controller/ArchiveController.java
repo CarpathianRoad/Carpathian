@@ -17,6 +17,7 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -192,16 +193,25 @@ public class ArchiveController {
     	else {
         	folder_name = TransliteratorClass.transliterate(titleUA);
     	}
-    	folder_name = Helpers.replaceChars(folder_name);
-    	String dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, folder_name, category);
+        String dir = "";
+    	String replacedTextEN = "";
+    	String replacedTextUA = "";
+    	String replacedTextSK = "";
+    	String replacedTextHU = "";
+    	String replacedTextRO = "";
+    	
+    	folder_name = Articles.insertArticle(titleEN, titleUA, titleHU, titleSK, titleRO, replacedTextEN, replacedTextUA, replacedTextHU, replacedTextSK, replacedTextRO, category, author, date, dir, country, region, district, town, x, y);
+    	dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, folder_name, category);
     	Helpers.removeDir(Constants.home + directory);
-    	String replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
-    	String replacedTextUA = textUA.replace(directory, "archive_content/"+dir);
-    	String replacedTextSK = textSK.replace(directory, "archive_content/"+dir);
-    	String replacedTextHU = textHU.replace(directory, "archive_content/"+dir);
-    	String replacedTextRO = textRO.replace(directory, "archive_content/"+dir);
-    	Articles.insertArticle(titleEN, titleUA, titleHU, titleSK, titleRO, replacedTextEN, replacedTextUA, replacedTextHU, replacedTextSK, replacedTextRO, category, author, date, dir, country, region, district, town, x, y);
-    	return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
+        replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
+    	replacedTextUA = textUA.replace(directory, "archive_content/"+dir);
+    	replacedTextSK = textSK.replace(directory, "archive_content/"+dir);
+    	replacedTextHU = textHU.replace(directory, "archive_content/"+dir);
+    	replacedTextRO = textRO.replace(directory, "archive_content/"+dir);
+        Articles.runQuery("UPDATE `archive_articles` SET" +
+            	"`article_text_EN`='"+StringEscapeUtils.escapeSql(replacedTextEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(replacedTextUA)+"',`article_text_SK`='"+StringEscapeUtils.escapeSql(replacedTextSK)+"',`article_text_HU`='"+StringEscapeUtils.escapeSql(replacedTextHU)+"',`article_text_RO`='"+StringEscapeUtils.escapeSql(replacedTextRO)+"'," +
+            	"`article_dir` = '"+dir+"' WHERE article_id = "+folder_name+";");
+        return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
 	}
 	@RequestMapping(value = "/system/archive/do/updatedata.do", method = RequestMethod.POST)
 	public ModelAndView editArticle(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {

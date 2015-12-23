@@ -46,7 +46,7 @@
                 <button class="btn btn-danger" id="close-add-folder" type="button">Cancel</button>  
             </div>
           <hr>
-          <span class="info-folder">Maximum download size - 3 MB</span>
+          <span class="info-folder">Maximum upload size - 3 MB</span>
           <div class="img-content-show-all"></div>
       </div>
     </div>
@@ -140,7 +140,7 @@
 
         function insertImage(){
 
-        $(".img-content-show-all img:not(.remove-icon)").click(function() {
+        $(".img-content-show-all img:not(.remove-icon), .clickable-name").click(function() {
             var name = $(this).attr("name");
             var path = $(this).attr("realpath");
             if($(this).attr("type") === "img"){
@@ -306,7 +306,7 @@
         }
         function initRemoveFile(){
         $(".img-content-show-all img.remove-icon").click(function(){
-            var name = $(this).next("img").attr("name");
+            var name = $(this).parent().prev().prev().find("img").attr("name");
             var path = $(".img-content-show-all").attr("current");
                 jQuery.ajax({
                     url: '${Constants.URL}removeFileOrDir',

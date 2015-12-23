@@ -199,21 +199,26 @@ public class FileUploadController {
             if (file.isFile()) {
                 String ext = FilenameUtils.getExtension(file.getAbsolutePath());
                 if("png".equals(ext.toLowerCase()) || "jpeg".equals(ext.toLowerCase()) || "jpg".equals(ext.toLowerCase()) || "gif".equals(ext.toLowerCase())){
-                    htmlImg = htmlImg + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/><a href=\""+Constants.URL+link_path+file.getName()+"\" target=\"_blank\">Download file</a></div>";
+                    htmlImg = htmlImg + "<tr class='galery-item'><td><img type=\"img\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+link_path+file.getName()+"\"/></td><td><span>"+file.getName()+"</span><a href=\""+Constants.URL+link_path+file.getName()+"\" target=\"_blank\">Download file</a></td><td><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></td></tr>";
             
                 }
                 else {
-                    htmlImg = htmlImg + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img type=\"file\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+"img/file.png\"/><span class=\"file-name-manager\">"+file.getName()+"</span><a href=\""+Constants.URL+link_path+file.getName()+"\" target=\"_blank\">Download file</a></div>";
+                    htmlImg = htmlImg + "<tr class='galery-item'><td><img type=\"file\" realpath='"+link_path+"' parent='"+curll+"' name=\""+file.getName()+"\" src=\""+Constants.URL+"img/file.png\"/></td><td><span>"+file.getName()+"</span><a href=\""+Constants.URL+link_path+file.getName()+"\" target=\"_blank\">Download file</a></td><td><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></td></tr>";
                 }
             } else if(file.isDirectory()){
                 String fold_name = file.getName();
-                if(curll.contains("archive_content") && Helpers.isNumeric(file.getName())) {
-                    fold_name = Menu.getCategoryName(file.getName());
+                if(curll.contains("archive_content") && Helpers.isNumeric(fold_name)) {
+                    fold_name = Menu.getCategoryName(fold_name);
                 }
-                htmlFolder = htmlFolder + "<div class='galery-item'><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/><span>"+fold_name+"</span></div>";
+                else if(curll.contains("archive_content") && fold_name.contains("_")){
+                    fold_name  = Menu.getArticleName(curll.split("/")[curll.split("/").length-1] + "/" + fold_name);
+                }
+                htmlFolder = htmlFolder + "<tr class='galery-item'><td><img parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" src=\""+Constants.URL+"img/folder-green-icon.png\"/></td><td><span class=\"clickable-name\" parent='"+curll+"' realpath='"+link_path+"' type=\"folder\" name=\""+file.getName()+"\" >"+fold_name+"</span></td><td><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></td></tr>";
             }
         }
-        return htmlFolder+htmlImg;
+        return "<table class=\"article-table table table-bordered table-hover\"><thead><tr><th class=\"text-center\" style=\"width:30%\">Preview</th><th class=\"text-center\">Name</th><th class=\"text-center\" style=\"width:5%\"></th></tr></thead><tbody>" + 
+                htmlFolder+htmlImg +
+                "</table>";
     }
     @RequestMapping(value = "/addFolder", method = RequestMethod.GET)
     public @ResponseBody
