@@ -535,17 +535,18 @@ function initDialog(){
         }
         
     });
+    var arch_path = "${article.article_dir}".split("/");
     if(current === "") {
         current = "img,content,";
     }
     if(currentArchive === "") {
-        currentArchive = "archive_content,";
+        currentArchive = "archive_content,"+arch_path[0] + "," + arch_path[1]+",";
     }
     if(currentAva === "") {
         currentAva = "img,content,";
     }
     if(currentArchiveAvatar === "") {
-        currentArchiveAvatar = "archive_content,";
+        currentArchiveAvatar = "archive_content,"+arch_path[0] + "," + arch_path[1]+",";
     }
     $("#dialog").dialog({
             autoOpen: false,
@@ -594,7 +595,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframeArchivePanorama').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,&type=panorama-file');
+                     $('#myIframeArchivePanorama').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=panorama-file');
                   }
         });
         $('#dialogBtn').click(function(){

@@ -56,14 +56,27 @@
     </body>
     <script>
         $(document).ready(function () {
+            
+                if(getParameterByName("CKEditor") !== "") {
+                    $(".img-content-show-all").html('<table class="article-table table table-bordered table-hover"><thead><tr><th class="text-center" style="width:30%">Preview</th><th class="text-center">Name</th><th class="text-center" style="width:5%"></th></tr></thead><tbody><tr class="galery-item"><td><img parent="${Constants.home}img/" realpath="img/" type="folder" name="content" src="${Constants.URL}img/folder-green-icon.png"></td><td><span class="clickable-name" parent="${Constants.home}img/" realpath="img/" type="folder" name="content">Images</span></td><td></td></tr><tr class="galery-item"><td><img parent="${Constants.home}" realpath="" type="folder" name="archive_content" src="${Constants.URL}img/folder-green-icon.png"></td><td><span class="clickable-name"  parent="${Constants.home}" realpath="" type="folder" name="archive_content">Archive</span></td><td></td></tr></tbody></table>');
+                insertImage();
+                }
+                else {
+                    
             initGalerry();
+                }
         });
         
         $("#createfolder").click(function(){
             $(".image-upload-folder").toggle("slow");
         });
         $("#close-modal").click(function(){
-            window.parent.imageInserted(); 
+            if("${ckeditor}" === "" && "${num}" === "") { 
+                window.parent.imageInserted();
+            }
+            else {
+                window.close();
+            }
         });
         $("#close-add-folder").click(function(){
             $(".image-upload-folder").toggle("slow");
@@ -248,7 +261,10 @@
               });
            $(".img-content-show-all").attr("current",back);
            $(".img-content-show-all").attr("realpath",back2);
+           console.log(back + "////" + back2);
+           if(back2 !== "") {
            getFiles("", back, true);
+            }
         });
         $("#create-folder").click(function(){
         var name = $("#foldernametext").val();
@@ -295,7 +311,7 @@
                         }
                         }
                         $(".arrow-left-img").show();
-                       if($(".img-content-show-all").attr("realpath") === "img/content/"){
+                       if($(".img-content-show-all").attr("realpath") === "img/content/" || $(".img-content-show-all").attr("realpath") === "archive_content/"){
                            $(".arrow-left-img").hide();
                        }
                        $(".img-breadcrumps").remove();

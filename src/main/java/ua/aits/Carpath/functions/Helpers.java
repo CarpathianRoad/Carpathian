@@ -181,7 +181,7 @@ public class Helpers extends FileMethods {
                 	html = html + this.getRowHtmlList(lang, temp.id.toString(), login_time);
                 	html = html + "</ul>";
             	}
-        	html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/666\">NEWS<i class=\"count-subs\">("+menu.countArticles("666").toString()+" articles, "+menu.countPublish("666").toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren("666", login_time)+"</span>";
+        	html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/4\">NEWS<i class=\"count-subs\">("+menu.countArticles("4").toString()+" articles, "+menu.countPublish("4").toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren("4", login_time)+"</span>";
                         	html = html + "</a></li></ul>";
     	}
     	else if("2".equals(id) || "3".equals(id)) {
