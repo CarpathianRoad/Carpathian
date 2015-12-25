@@ -69,8 +69,7 @@ public class ArchiveController {
     	ModelAndView modelAndView = new ModelAndView("/system/archive/Index");
     	HttpSession session = request.getSession(true);
     	ArchiveUserModel user = (ArchiveUserModel)session.getAttribute("user");
-    	String time_login = Users.getLoginTime(user.user_id.toString());
-    	modelAndView.addObject("menuList", Helpers.getRowHtmlList("en", "0", time_login));
+    	modelAndView.addObject("menuList", Helpers.getRowHtmlList("en", "0", user.user_id.toString()));
     	return modelAndView;
 	}
 	@RequestMapping(value = {"/system/archive/articles/{id}", "/system/archive/articles/{id}/"}, method = RequestMethod.GET)
@@ -81,7 +80,7 @@ public class ArchiveController {
     	String date = sdf.format(date_format);
     	HttpSession session = request.getSession(true);
     	ArchiveUserModel user = (ArchiveUserModel)session.getAttribute("user");
-    	Users.updateLoginTime(user.user_id.toString(), date);
+        Menu.updateCategoryUsers(id, user.user_id.toString());
     	modelAndView.addObject("articles", Articles.getAllArticlesInCategory(id));
     	modelAndView.addObject("category", id);
     	modelAndView.addObject("users", Users.getAllUsers());
@@ -211,6 +210,7 @@ public class ArchiveController {
         Articles.runQuery("UPDATE `archive_articles` SET" +
             	"`article_text_EN`='"+StringEscapeUtils.escapeSql(replacedTextEN)+"',`article_text_UA`='"+StringEscapeUtils.escapeSql(replacedTextUA)+"',`article_text_SK`='"+StringEscapeUtils.escapeSql(replacedTextSK)+"',`article_text_HU`='"+StringEscapeUtils.escapeSql(replacedTextHU)+"',`article_text_RO`='"+StringEscapeUtils.escapeSql(replacedTextRO)+"'," +
             	"`article_dir` = '"+dir+"' WHERE article_id = "+folder_name+";");
+        Menu.cleanCategoryUsers(category);
         return new ModelAndView("redirect:" + "/system/archive/articles/"+category);
 	}
 	@RequestMapping(value = "/system/archive/do/updatedata.do", method = RequestMethod.POST)
