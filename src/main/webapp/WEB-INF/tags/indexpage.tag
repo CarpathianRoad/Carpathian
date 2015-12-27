@@ -369,7 +369,7 @@
 	}
     
 	function showSmallMenu(){
-    	$('#mapMenu').parent().parent().css('display','none');
+    	$('#routesMenu').parent().parent().css('display','none');
     	$('#homeMenu').parent().css('pointer-events','none');
     	if(!(showMenu)){
         	if(showLang)langSelectMenu();
@@ -402,6 +402,9 @@
              	$("#cssmenu").css("width","106%");
          	}*/
          	addLangToLink(lang.toLowerCase());
+         	if(window.innerWidth<780){
+                    //$('a[href*="/Carpath/ua/routesList"]').parent().hide();
+                }
         	},
         	error: function(response){ 	 
          	buildMenu($(".lang-sw.active").html());
@@ -434,7 +437,6 @@
 	var countryChooser;
 	$( document ).ready(function() {
         	console.log("${avatarvar}");    
-           	 
         	var str_url = window.location.href.split('/');
         	$("li.paddingLang a").removeClass("active");
         	console.log(str_url[3]);
@@ -523,76 +525,6 @@
 	}
     
 	function addCssToMenu(){
- 	/*countryChooser = document.URL.substr(document.URL.lastIndexOf('/')+1,document.URL.length);
-    	switch(countryChooser){
-        	case "index":
-            	$('#homeMenu').addClass('menuLine');
-            	break;
-        	case "2":
-            	$('#infoMenu').addClass('menuLine');
-            	break;
-        	case "3":
-            	$('#leisureMenu').addClass('menuLine');
-            	break;
-        	case "news":
-            	$('#newsMenu').addClass('menuLine');
-            	break;
-        	case "map":
-            	mapPageMenu();
-            	center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
-            	countryChooser = "allMap";
-            	zoomMap = 7;
-            	break;
-        	case "map#":
-            	mapPageMenu();
-            	center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
-            	countryChooser = "allMap";
-            	break;
-        	case "allMap":
-            	mapPageMenu();
-            	zoomMap = 7;
-            	center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
-            	break;
-        	case "Romania":
-            	mapPageMenu();
-            	zoomMap = 8;
-            	center = new google.maps.LatLng(46.07323062540838,24.708251953125);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerRomania.png');
-            	break;
-        	case "Poland":
-            	mapPageMenu();
-            	zoomMap = 8;
-            	center = new google.maps.LatLng(50.00067775723633,21.4068603515625);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerPoland.png');
-            	break;
-        	case "Ukraine":
-            	mapPageMenu();
-            	zoomMap = 9;
-            	center = new google.maps.LatLng(48.705462895790596,23.895263671875);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerUkraine.png');
-            	break;
-        	case "Slovakia":
-            	mapPageMenu();
-            	zoomMap = 8;
-            	center = new google.maps.LatLng(48.828565527993234,19.9346923828125);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerSlovakia.png');
-            	break;
-        	case "Hungary":
-            	mapPageMenu();
-            	zoomMap = 8;
-            	center = new google.maps.LatLng(47.21210577562242,19.5611572265625);
-            	$('#mapControlsImage').attr('src','${Constants.URL}img/markerHungary.png');
-            	break;
-        	case "routesList":
-            	$('#routesMenu').addClass('menuLine');
-            	break;
-        	case "contact":
-            	$('#contactsMenu').addClass('menuLine');
-            	break;
-    	}*/
  }
 	function mapPageMenu(){
             	//$('#contactsMenu').addClass('menuLine');
@@ -608,9 +540,6 @@
             	$('.siteMap').addClass('siteMapSmall');
             	$('.mainMenuIntend').addClass('mainMenuIntendSmall');
             	$('.contentIntend').css('height','30');
-           	 
-            	console.log(window.innerWidth);
-            	console.log(window.outerWidth);
            	 
             	if((window.innerWidth<1024)&&(window.innerWidth>780)){
                 	$('#googleMap').height(window.innerHeight-104);
@@ -659,24 +588,6 @@
             	}else{
                 	$('.hideMenu').css('display','none');
             	}
-            	/*$('.s-top').hide();
-            	$('.topMenu').addClass('topMenuSmall');
-            	$('.topMenu').addClass('mapMenuSmall');
-            	$('.s-logoIndex').addClass('s-logoIndexSmall');
-            	$('.s-logoIndex').addClass('mapLogoSmall');
-            	$('.s-logoIndexSmall').removeClass('s-logoIndex');
-            	$('.s-rightNavBar').addClass('s-rightNavBarSmall');
-            	$('.s-rightNavBar').addClass('menuMapCenterSmall');
-            	$('.s-rightNavBarSmall').removeClass('s-rightNavBar');
-            	$('.dropDownMenu a').addClass('scrollSmallerText');
-            	$('.menuLineSmall').addClass('menuLineExtraSmall');
-            	$('#mainMenuWidth').addClass('s-newMap');
-            	$('.mainMenuIntend').addClass('mainMenuIntendMap');
-            	$('.contentIntend').addClass('contentIntendMap');
-            	$('.contentIntendMap').removeClass('contentIntend');
-            	$('.mainMenuIntend').removeClass('mainMenuIntend');
-            	$('.carpathName').addClass('carpathNameSmall');
-            	$('.carpathNameSmall').removeClass('carpathName');*/
 	}
     
 	function borderButton(button){
@@ -705,53 +616,6 @@
     	$(button+"Border").fadeIn(700);
     	$(button+"Map").addClass( "buttonBorderClass" );
 	}
-    
-	/*
-	function stopIntervalFunc(){
-    	clearInterval(mapSlider);
-	}
-    
-	function startIntervalFunc(){
-    	mapSlider = setInterval(function(){
-        	for(var i = 0; i < countries.length; i++)
-        	{
-            	$('#'+countries[i]+'Border').fadeOut(800);
-            	$('#'+countries[i]+'Map').removeClass( "buttonBorderClass" );
-        	}
-        	if(counter == 5){
-            	frame.animate(
-                	{
-                    	left : $('li#'+countries[0]+'Menu').position().left,
-                    	width : $('li#'+countries[0]+'Menu').width()
-                	},
-                	{
-                    	duration : 500,
-                    	queue : false
-                	}
-            	);
-                   	 
-            	$('#'+countries[0]+'Border').fadeIn(700);
-            	$('#'+countries[0]+'Map').addClass( "buttonBorderClass" );
-            	counter = 0;
-        	}
-        	else{
-                   	 
-            	frame.animate(
-            	{
-                	left : $('li#'+countries[counter+1]+'Menu').position().left,
-                	width : $('li#'+countries[counter+1]+'Menu').width()
-            	},
-            	{
-                	duration : 500,
-                	queue : false
-            	});
-            	$('#'+countries[counter+1]+'Border').fadeIn(700);
-            	$('#'+countries[counter+1]+'Map').addClass( "buttonBorderClass" );
-            	counter++;
-        	}
-    	}, 5000);
-	}
-	*/
    
 	function showButton(){
     	$('#searchButtonActive').css('visibility','visible');

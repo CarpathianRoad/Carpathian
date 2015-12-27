@@ -19,6 +19,28 @@
             border: 0;
         }
         .ui-dialog-titlebar {display:none}
+        @media (max-width: 1020px){
+            .markerLeftDescr {
+                width: 90%;
+            }
+            .markerPageTable{
+                display: block !important;
+            }
+            .markerRightDescr {
+                display: table !important;
+            }
+        }
+        @media (max-device-width: 1020px){
+            .markerLeftDescr {
+                width: 90%;
+            }
+            .markerPageTable{
+                display: block !important;
+            }
+            .markerRightDescr {
+                display: table !important;
+            }
+        }
     </style>
     <script>
         $(document).ready(function() {

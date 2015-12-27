@@ -9,12 +9,78 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:indexpage>
+    <link rel="stylesheet" href="${Constants.URL}css/jquery.dataTables.min.css">
+    <script src="${Constants.URL}js/jquery.dataTables.min.js"></script>
     <script>
         var files = [];
         var types = [];
         var categories = [];
         var countries = [];
     </script>
+    <style>
+        @media (max-device-width: 780px){
+            .newsImage{
+                display: none;
+            }
+            .newsImageUnderline{
+                display: none;
+            }
+        }
+        @media (max-width: 360px){
+            .newsImage{
+                display: none;
+            }
+            .newsImageUnderline{
+                display: none;
+            }
+        }
+        .dataTables_length, .dataTables_filter{
+            display: none;
+        }
+        thead, tfoot{
+            font: 12pt 'Open Sans';
+            font-weight: 100;
+            color: rgb(86,105,143);
+        }
+        tbody{
+            font: 10pt 'Open Sans';
+            font-weight: 100;
+            color: rgb(86,105,143);
+        }
+        table a{
+            font: 10pt 'Open Sans';
+            font-weight: 100;
+            color: rgb(86,105,143);
+        }
+        th{
+            font: 10pt 'Open Sans';
+            font-weight: 100;
+            color: rgb(86,105,143);
+        }
+        .dataTables_info, .dataTables_paginate,.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active{
+            color: rgb(86,105,143) !important;
+        }
+        table.dataTable tfoot th, table.dataTable tfoot td{
+            border-top: none;
+        }
+        .all_news{
+            width: 980px;
+            margin: 0 auto;
+        }
+        thead{
+            display: none;
+        }
+        tfoot {
+            display: table-header-group;
+        }
+        .breadcrumbsMarker{
+            display: none;
+        }
+        tfoot input{
+            margin: 0 -15px;
+            width: 100px;
+        }
+    </style>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
         <input type="hidden" id="last_item" value="9" />
@@ -44,7 +110,32 @@
             </div>
         </div>
             <div class="all_news" id="routesList">        
+                <table class="table table-bordered" id="table-pagination" data-height="400" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>File</th>
+                            <th>Country</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>File</th>
+                            <th>Country</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
                 <c:forEach items="${routesList}" var="route" varStatus="loop">
+                    <!--
                     <div class="s-cell" id="routeBlock${loop.index}">
                         <div class="s-block newsHeight">
                             <div class="newsImage">
@@ -52,6 +143,7 @@
                                     <div class="imageHover">
                                         <div class="imageHoverDate">
                                             ${route.date}
+                                ${route.file}
                                         </div>
                                         <div class="imageHoverCountry">
                                             <div class="newsCountryText">${route.public_country}</div><img src="${Constants.URL}img/newsImageHover.png">
@@ -70,12 +162,23 @@
                                 </a>
                             </div>
                         </div>
-                    </div>   
+                    </div> -->  
                     <script>files.push("${route.file}");</script>
                     <script>types.push("${route.type}");</script>
                     <script>categories.push("${route.category}");</script>
                     <script>countries.push("${route.public_country}");</script>
+                        <tr id="routeBlock${loop.index}">
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.date}</a></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.file}</a></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.public_country}</a></th>
+                            <th class="routeTypeSplit"><a href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
+                            <th class="routeCategorySplit"><a href="${Constants.URL}routes/${route.id}">${route.category}</a></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.textUA}</a></th>
+                        </tr>
                 </c:forEach>
+                    </tbody>
+                </table>
             </div>
                  <div class="loading_block">
                     <img src="${Constants.URL}img/status.gif" />
@@ -89,7 +192,100 @@
 					<a href="#" class="inactive">3</a>
 				</div>
         <script>
-            
+            $(document).ready(function() {
+    
+    $(".routeTypeSplit").each(function(){
+        var temp = $(this).text().split(',');
+        for(var i = 0; i < temp.length; i++){
+            $(this).text("");
+            switch(temp[i]){
+                    case "1":
+                        $(this).text($(this).text()+'Walking route');
+                        break;
+                    case "2":
+                        $(this).text($(this).text()+'Bicycle route');
+                        break;
+                    case "3":
+                        $(this).text($(this).text()+'Ski route');
+                        break;
+                    case "4":
+                        $(this).text($(this).text()+'Horses route');
+                        break;
+                    case "5":
+                        $(this).text($(this).text()+'Water route');
+                        break;
+                }
+        }
+    });
+    $(".routeCategorySplit").each(function(){
+        var temp = $(this).text().split(',');
+        for(var i = 0; i < temp.length; i++){
+            $(this).text("");
+                switch(temp[i]){
+                    case "4":
+                        $(this).text($(this).text()+'International tourist road (E or R)');
+                        break;
+                    case "1":
+                        $(this).text($(this).text()+'National tourist road');
+                        break;
+                    case "2":
+                        $(this).text($(this).text()+'Regional tourist road');
+                        break;
+                    case "3":
+                        $(this).text($(this).text()+'District tourist road');
+                        break;
+                    case "0":
+                        $(this).text($(this).text()+'Local (excursion) tourist road');
+                        break;
+                }
+        }
+    });
+    // Setup - add a text input to each footer cell
+    $('#table-pagination tfoot th').each( function () {
+        var title = $(this).text();
+        if(title=="Country"){
+            $(this).html( '<input class="searchBoxInvisible" type="text" placeholder="Countries" />' );
+        }else if(title=="Type"){
+            $(this).html( '<input class="searchBoxInvisible" type="text" placeholder="Types" />' );
+        }
+        else if(title=="Category"){
+            $(this).html( '<input class="searchBoxInvisible" type="text" placeholder="Categories" />' );
+        }
+    } );
+ 
+    // DataTable
+    var table = $('#table-pagination').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+} );
+    
+    
+    /*
+    
+                $(this).html( '<select>\n\
+                    <option value="All">All countries</option>\n\
+                    <option value="Ukraine">Ukraine</option>\n\
+                    <option value="Hungary">Hungary</option>\n\
+                    <option value="Poland">Poland</option>\n\
+                    <option value="Romania">Romania</option>\n\
+                    <option value="Slovakia">Slovakia</option>\n\
+                    </select>' );
+    
+    */
+    
+    
+    /*
             var countRoute = 0;
             var map = [];
             var height = [];  
@@ -157,7 +353,6 @@
                             xmlhttp.open("GET","${Constants.URL}routes/"+files_array[count],false);
                             xmlhttp.send();
                             xmlDoc=xmlhttp.responseXML;
-                            console.log("item = "+files_array[count]);
                             $.ajax({
                                 type: "GET",
                                 url: "${Constants.URL}routes/"+files_array[count],
@@ -165,6 +360,7 @@
                                 success: parseXml
                             });
                     }   
+                console.log(files);
                 }
                 function parseXml(xml){
                         height = [];  
@@ -195,7 +391,6 @@
                         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
                       }
                     };
-                    console.log("count route = " + countRoute);
                     map[countRoute] = new google.maps.Map(document.getElementById("map"+countRoute),
                         mapOptions);
                     map[countRoute].mapTypes.set('map_style', styledMap);
@@ -271,6 +466,6 @@
                     if(country=='all')
                         $('#routeBlock'+n).css('display','block');
                 }
-            }
+            }*/
         </script>
 </t:indexpage>

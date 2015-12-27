@@ -16,7 +16,7 @@
                 behavior:url(#default#VML);
             }
             #map {
-                margin-top: -30px;
+                margin-top: -10px;
                 margin-bottom: 10px;
             }
         </style>
@@ -534,18 +534,25 @@
                     openEffect	: 'none',
                     closeEffect	: 'none'
                 });
+            var images = '${route.images}'.split(",");
+            var imagesBlock = '';
+            var imagesSlider = '';
+            for(var i = 1; i < images.length; i++){
+                imagesSlider+='<a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}'+images[i]+'" />">'+
+                                                    '<img id="main_image" src="${Constants.URL}'+images[i]+'" />" />'
+            }
             $('.article_main_image').html('<a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}'+images[0]+'">'+
                                                         '<img id="main_image" src="${Constants.URL}'+images[0]+'">'+
                                                     '</a>'+
+                                        '<div style="display:none" >'+
+                                        imagesSlider+
+                                        '</div>'+
                                         '<div class="mainImageSliderLine">'+
                                             '<div id="imageCount">1</div>/'+images.length+
                                             '&nbsp;&nbsp;'+
                                                 '${route.title} Gallery'+
                                         '</div>');
-            });
             
-            var images = '${route.images}'.split(",");
-            var imagesBlock = '';
             $('#maxImages').html("/"+images.length);
             if(images[0]==="" || images[0] === "/" || images[0] === " "){
                 $('#article_slider1_container').css('display','none');
@@ -567,6 +574,7 @@
             }
             $('#iamgesBlock').html(imagesBlock);
             
+            });
             function tellFancyBox(image){
                 $('#main_image').parent().attr('href',image);
             }

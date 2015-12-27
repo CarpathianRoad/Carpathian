@@ -31,8 +31,31 @@
                 .markerLeftDescr {
                     width: 90%;
                 }
+                .s-new .markerPageTable{
+                    display: block !important;
+                }
+            }
+            @media (max-device-width: 1020px){
+                .markerLeftDescr {
+                    width: 90%;
+                }
+                .s-new .markerPageTable{
+                    display: block !important;
+                }
+            }
+        </style>
+        </c:if>
+    </c:if>
+        <style>
+            @media (max-width: 1020px){
+                .markerLeftDescr {
+                    width: 90%;
+                }
                 .markerPageTable{
-                    display: block;
+                    display: block !important;
+                }
+                .markerRightDescr{
+                    display: table;
                 }
             }
             @media (max-device-width: 1020px){
@@ -40,12 +63,13 @@
                     width: 90%;
                 }
                 .markerPageTable{
-                    display: block;
+                    display: block !important;
+                }
+                .markerRightDescr{
+                    display: table;
                 }
             }
         </style>
-        </c:if>
-    </c:if>
    
     <script>
         $(document).ready(function() {
