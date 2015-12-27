@@ -67,7 +67,6 @@
                                     </div>
                 <hr>
                 <div class="row add-row">
-                <div class="row add-row">
                 <div class="col-lg-10 field">
                     <div id="imageUpload" class="form-group">
                         <label for="img">Images</label>
@@ -90,7 +89,6 @@
                         <input type="hidden" name="real-img-path" id="real-img-path" />                           
                     </div>
                 </div>
-            </div>
             </div>
                 <hr>
                                     <div class="row add-row">
@@ -121,6 +119,20 @@
                                                   <option value="Hungary">Hungary</option>
                                                   <option value="Romania">Romania</option>
                                                   <option value="Slovakia">Slovakia</option>
+                                                </select>
+                                                <div class="validation">
+							</div>
+                                              </div>
+                                                </div>
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel3">Difficulty<span class="red-star">*</span></label>
+                                                <select class="form-control" name="difficulty" id="sel3">
+                                                  <option value="option" disabled selected>Select option</option>
+                                                  <option value="1">Very easy</option>
+                                                  <option value="2">Easy</option>
+                                                  <option value="3">Hard</option>
+                                                  <option value="4">Very hard</option>
                                                 </select>
                                                 <div class="validation">
 							</div>
@@ -302,6 +314,7 @@
         });
         $("#sel1").val('${route.type}');
         $("#sel2").val('${route.public_country}');
+        $("#sel3").val('${route.difficulty}');
         var filters  = "${route.category}".split(",");
         $.each(filters, function( index, value ) {
             $(".route-filters :checkbox[value='"+value+"']").attr("checked","true");

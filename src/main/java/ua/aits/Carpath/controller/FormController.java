@@ -161,9 +161,10 @@ public class FormController {
         String textGE = request.getParameter("textGE");
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
+        String difficulty = request.getParameter("difficulty");
         String result = route.insertRoute(
                 titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, 
-                filename, img, date, type, public_country, filter,
+                filename, img, date, type, public_country, filter, difficulty,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/routes");
     }
@@ -195,9 +196,10 @@ public class FormController {
         String textGE = request.getParameter("textGE");
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
+        String difficulty = request.getParameter("difficulty");
         String result = route.updateRoute(id, 
                 titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, 
-                filename, img, date, type, public_country, filter,
+                filename, img, date, type, public_country, filter, difficulty,
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/routes");
     }
