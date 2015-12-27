@@ -94,6 +94,9 @@
             color: rgba(0,0,0,0) !important;
         }
         .routeTypeSplit{
+            display: block;
+            white-space: nowrap;
+            width: 43px;
             color: rgba(0,0,0,0) !important;
         }
         .routeTypeSplit:hover{
@@ -246,19 +249,19 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).html('<img src="${Constants.URL}img/walk.png">1');
+                        $(this).html('<img src="${Constants.URL}img/walk.png">Walking');
                         break;
                     case "2":
-                        $(this).html('<img src="${Constants.URL}img/bike.png">2');
+                        $(this).html('<img src="${Constants.URL}img/bike.png">Bicycle');
                         break;
                     case "3":
-                        $(this).html('<img src="${Constants.URL}img/ski.png">3');
+                        $(this).html('<img src="${Constants.URL}img/ski.png">Ski');
                         break;
                     case "4":
-                        $(this).html('<img src="${Constants.URL}img/horse.png">4');
+                        $(this).html('<img src="${Constants.URL}img/horse.png">Horse');
                         break;
                     case "5":
-                        $(this).html('<img src="${Constants.URL}img/canoe.png">5');
+                        $(this).html('<img src="${Constants.URL}img/canoe.png">Water');
                         break;
                 }
         }
