@@ -11,6 +11,7 @@
 <t:indexpage>
     <link rel="stylesheet" href="${Constants.URL}css/jquery.dataTables.min.css">
     <script src="${Constants.URL}js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="${Constants.URL}js/date-de.js"></script>
     <script>
         var files = [];
         var types = [];
@@ -78,6 +79,48 @@
         #table-pagination_info{
             display: none;
         }
+        .difficultyBlock a{
+            width: 100%;
+            display: block;
+            color: rgba(0,0,0,0);
+        }
+        .difficultyBlock a:hover{
+            color: rgba(0,0,0,0) !important;
+        }
+        .difficultyBlock a:focus{
+            color: rgba(0,0,0,0) !important;
+        }
+        .difficultyBlock a:visited{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:hover{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:focus{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:visited{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:visited:hover{
+            color: rgba(0,0,0,0) !important;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border: 1px solid rgb(84, 182, 157);
+            background-color: none;
+            background: none;
+            color: rgb(84, 182, 157) !important;
+        }
+        table.dataTable thead th{
+            padding: 10px 15px 10px 5px !important;
+            text-align: center;
+        }
+        table.dataTable tbody th, table.dataTable tbody td{
+            padding: 8px 5px;
+        }
     </style>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
@@ -116,6 +159,9 @@
                             <th>Date</th>
                             <th>Country</th>
                             <th>Category</th>
+                            <th>Difficulty</th>
+                            <th>Duration</th>
+                            <th>Length</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -126,6 +172,9 @@
                             <th>Date</th>
                             <th>Country</th>
                             <th>Category</th>
+                            <th>Difficulty</th>
+                            <th>Duration</th>
+                            <th>Length</th>
                             <th>Description</th>
                         </tr>
                     </tfoot>
@@ -160,11 +209,14 @@
                         </div>
                     </div> -->  
                         <tr id="routeBlock${loop.index}">
-                            <th class="routeTypeSplit"><a href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
+                            <th><a class="routeTypeSplit" href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.date}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.public_country}</a></th>
-                            <th class="routeCategorySplit"><a href="${Constants.URL}routes/${route.id}">${route.category}</a></th>
+                            <th><a class="routeCategorySplit" href="${Constants.URL}routes/${route.id}">${route.category}</a></th>
+                            <th><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}routes/${route.id}">${route.difficulty}</a></div></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.duration}</a></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.length}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.textUA}</a></th>
                         </tr>
                 </c:forEach>
@@ -194,22 +246,39 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).text($(this).text()+'Walking route');
+                        $(this).html('<img src="${Constants.URL}img/walk.png">1');
                         break;
                     case "2":
-                        $(this).text($(this).text()+'Bicycle route');
+                        $(this).html('<img src="${Constants.URL}img/bike.png">2');
                         break;
                     case "3":
-                        $(this).text($(this).text()+'Ski route');
+                        $(this).html('<img src="${Constants.URL}img/ski.png">3');
                         break;
                     case "4":
-                        $(this).text($(this).text()+'Horses route');
+                        $(this).html('<img src="${Constants.URL}img/horse.png">4');
                         break;
                     case "5":
-                        $(this).text($(this).text()+'Water route');
+                        $(this).html('<img src="${Constants.URL}img/canoe.png">5');
                         break;
                 }
         }
+    });
+    $(".difficultyLink").each(function(){
+        switch($(this).text()){
+            case "1":
+                $(this).parent().css('background','#00CC33');
+                break;
+            case "2":
+                $(this).parent().css('background','#CCFF33');
+                break;
+            case "3":
+                $(this).parent().css('background','#FF9900');
+                break;
+            case "4":
+                $(this).parent().css('background','#CC0000');
+                break;
+        }
+        
     });
     $(".routeCategorySplit").each(function(){
         var temp = $(this).text().split(',');
@@ -236,7 +305,12 @@
     });
  
     // DataTable
-    table = $('#table-pagination').DataTable();
+    table = $('#table-pagination').DataTable({
+                        columnDefs: [
+                            { type: 'date-eu', targets: 3,orderable: false, targets: -1  }
+                        ],
+                        "dom": 'Zlfrtip'
+                    });
     $('#table-pagination tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input id="'+title+'Search" type="text" placeholder="Search '+title+'" />' );
