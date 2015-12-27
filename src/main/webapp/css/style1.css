@@ -2646,6 +2646,9 @@ a:visited:hover {
     .news_text_box{
         height: auto;
     }
+    iframe{
+        width: 100% !important;
+    }
 }
 @media (max-width: 680px){
     .footerLeftMain{
@@ -3725,6 +3728,9 @@ a:visited:hover {
     }
     .routeDescrOverflow{
         width: 100%;
+    }
+    iframe{
+        width: 100% !important;
     }
 }
 @media (max-device-width: 360px){
