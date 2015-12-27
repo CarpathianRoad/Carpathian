@@ -91,6 +91,27 @@
                 </div>
             </div>
                 <hr>
+                <div class="row add-row">
+                                        
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel1">Duration<span class="red-star">*</span></label>
+                                                <input type="text" name="duration" class="form-control" value="${route.duration}" id="duration">
+                                                <div class="validation">
+							</div>
+                                              </div>
+							
+                                                </div>
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel3">Length<span class="red-star">*</span></label>
+                                                <input type="text" name="length" class="form-control" value="${route.length}" id="length">
+                                                <div class="validation">
+							</div>
+                                              </div>
+                                                </div>
+                                    </div>
+                <hr>
                                     <div class="row add-row">
                                         
 						<div class="col-lg-3 field">
@@ -523,6 +544,20 @@ $("#sudmitData").click(function(){
     }
     else {
         $("#tlt").next("div.validation").html("");
+    }
+    if($("#duration").val() === "") {
+        $("#duration").next("div.validation").html('<span style="color:red">Enter duration of route</span>');
+        isValidate = false;
+    }
+    else {
+        $("#duration").next("div.validation").html("");
+    }
+    if($("#length").val() === "") {
+        $("#length").next("div.validation").html('<span style="color:red">Enter length of route</span>');
+        isValidate = false;
+    }
+    else {
+        $("#length").next("div.validation").html("");
     }
     if(isValidate) {
         var real = $("#real-img-path").val();
