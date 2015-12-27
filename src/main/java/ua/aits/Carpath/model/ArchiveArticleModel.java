@@ -331,10 +331,10 @@ public class ArchiveArticleModel {
                 	temp.setArticle_file_size("");
             	}
         	}
-        	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/images", 2));
+        	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/galery", 2));
         	String[] sizeimage = temp.article_image_size.split("\\s+");
         	if("0".equals(sizeimage[0])) {
-            	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/images", 3));
+            	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/galery", 3));
             	if("0".equals(temp.article_image_size.split("\\s+")[0])) {
                 	temp.setArticle_image_size("");
             	}

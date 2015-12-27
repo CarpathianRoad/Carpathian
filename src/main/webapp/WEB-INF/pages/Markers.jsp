@@ -227,7 +227,7 @@
             modal: true,
             height: 600,
             width: 800,
-            position: { my: "center top", at: "center top", of: window },
+            position: { my: "center center", at: "center center", of: $("section") },
             open: function(ev, ui){
                      $('#myIframe').attr('src','${Constants.URL}panorama/${marker.id}');
                   },
@@ -245,7 +245,6 @@
         }
     </script>
         <style>
-            
         .prev-slide{
             background: url(${Constants.URL}img/arrow_left.png) center center no-repeat;
             width: 48px;

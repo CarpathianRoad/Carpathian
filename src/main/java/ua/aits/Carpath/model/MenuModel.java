@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -267,43 +268,53 @@ public class MenuModel {
         DB.closeCon();
         return result_str;
     }
-    public String checkNewArticles(String id, String time)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-        ResultSet result = DB.getResultSet("SELECT `article_add_date` FROM archive_articles WHERE archive_articles.article_category IN (" + this.getSubsId(id) + ") ORDER BY archive_articles.article_id desc");
-        if(time == null || "".equals(time)){
-            
-        DB.closeCon();
-        return "";
-        }
-        while (result.next()) { 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-            Date date1 = sdf.parse(result.getString("article_add_date"));
-            Date date2 = sdf.parse(time);
-            if(date1.after(date2)){
-                
-        DB.closeCon();
+    public String checkNewArticles(String id, String user_id)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
+        ResultSet result = DB.getResultSet("SELECT users FROM `menu` WHERE id in (SELECT id from menu where parentID = "+id+");");
+        while(result.next()) {
+            String users = result.getString("users");
+            if(users == null) {
+            return "NEW";
+            }
+            List<String> user_list = Arrays.asList(users.split("|"));
+            if(!user_list.contains(user_id)) {
                 return "NEW";
             }
         }
-        
-        DB.closeCon();
         return "";
     }
-    public String checkNewArticlesForChildren(String id, String time)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-        ResultSet result = DB.getResultSet("SELECT `article_add_date` FROM archive_articles WHERE archive_articles.article_category = " + id + " ORDER BY archive_articles.article_id desc");
-        if(time == null || "".equals(time)){
+    public String checkNewArticlesForChildren(String id, String user_id)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
+        ResultSet result = DB.getResultSet("SELECT `users` FROM `menu` WHERE `id` = "+id+";");
+        result.first();
+        String users = result.getString("users");
         DB.closeCon();
-        return "";
+        if(users == null) {
+        return "NEW";
         }
-        while (result.next()) { 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-            Date date1 = sdf.parse(result.getString("article_add_date"));
-            Date date2 = sdf.parse(time);
-            if(date1.after(date2)){
-        DB.closeCon();
-                return "NEW";
-            }
+        List<String> user_list = Arrays.asList(users.split("|"));
+        if(!user_list.contains(user_id)) {
+            return "NEW";
         }
-        DB.closeCon();
         return "";
+    }
+    public void updateCategoryUsers(String id, String user_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet result = DB.getResultSet("SELECT `users` FROM `menu` WHERE `id` = "+id+";");
+        result.first();
+        String users = result.getString("users");
+        DB.closeCon();
+        if(users != null) {
+        List<String> user_list = Arrays.asList(users.split("|"));
+        if(!user_list.contains(user_id)) {
+            DB.runQuery("UPDATE `menu` SET `users`='"+users+"|"+user_id+"' WHERE id='"+id+"'");
+            DB.closeCon();
+        }
+        }
+        else {
+            DB.runQuery("UPDATE `menu` SET `users`='|"+user_id+"' WHERE id='"+id+"'");DB.closeCon();
+        }
+    }
+    
+    public void cleanCategoryUsers(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DB.runQuery("UPDATE `menu` SET `users`='' WHERE id='"+id+"'");
+        DB.closeCon();
     }
 }
