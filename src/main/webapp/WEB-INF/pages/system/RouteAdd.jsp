@@ -10,7 +10,7 @@
 <t:adminpage>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
-    <div class="container margintop20">
+    <div class=" margintop20">
             <h4>Route edit</h4>
         <ol class="breadcrumb">
             <li class="active">
@@ -66,7 +66,6 @@
                                     </div>
                 <hr>
                 <div class="row add-row">
-                <div class="row add-row">
                 <div class="col-lg-10 field">
                     <div id="imageUpload" class="form-group">
                         <label for="img">Images</label>
@@ -89,7 +88,6 @@
                         <input type="hidden" name="real-img-path" id="real-img-path" />                           
                     </div>
                 </div>
-            </div>
             </div>
                 <hr>
                                     <div class="row add-row">
@@ -120,6 +118,20 @@
                                                   <option value="Hungary">Hungary</option>
                                                   <option value="Romania">Romania</option>
                                                   <option value="Slovakia">Slovakia</option>
+                                                </select>
+                                                <div class="validation">
+							</div>
+                                              </div>
+                                                </div>
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel3">Difficulty<span class="red-star">*</span></label>
+                                                <select class="form-control" name="difficulty" id="sel2">
+                                                  <option value="option" disabled selected>Select option</option>
+                                                  <option value="1">Very easy</option>
+                                                  <option value="2">Easy</option>
+                                                  <option value="3">Hard</option>
+                                                  <option value="4">Very hard</option>
                                                 </select>
                                                 <div class="validation">
 							</div>
