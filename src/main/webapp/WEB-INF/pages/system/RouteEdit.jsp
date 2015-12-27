@@ -67,7 +67,6 @@
                                     </div>
                 <hr>
                 <div class="row add-row">
-                <div class="row add-row">
                 <div class="col-lg-10 field">
                     <div id="imageUpload" class="form-group">
                         <label for="img">Images</label>
@@ -91,7 +90,27 @@
                     </div>
                 </div>
             </div>
-            </div>
+                <hr>
+                <div class="row add-row">
+                                        
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel1">Duration<span class="red-star">*</span></label>
+                                                <input type="text" name="duration" class="form-control" value="${route.duration}" id="duration">
+                                                <div class="validation">
+							</div>
+                                              </div>
+							
+                                                </div>
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel3">Length<span class="red-star">*</span></label>
+                                                <input type="text" name="length" class="form-control" value="${route.length}" id="length">
+                                                <div class="validation">
+							</div>
+                                              </div>
+                                                </div>
+                                    </div>
                 <hr>
                                     <div class="row add-row">
                                         
@@ -121,6 +140,20 @@
                                                   <option value="Hungary">Hungary</option>
                                                   <option value="Romania">Romania</option>
                                                   <option value="Slovakia">Slovakia</option>
+                                                </select>
+                                                <div class="validation">
+							</div>
+                                              </div>
+                                                </div>
+						<div class="col-lg-3 field">
+                                                    <div class="form-group">
+                                                <label for="sel3">Difficulty<span class="red-star">*</span></label>
+                                                <select class="form-control" name="difficulty" id="sel3">
+                                                  <option value="option" disabled selected>Select option</option>
+                                                  <option value="1">Very easy</option>
+                                                  <option value="2">Easy</option>
+                                                  <option value="3">Hard</option>
+                                                  <option value="4">Very hard</option>
                                                 </select>
                                                 <div class="validation">
 							</div>
@@ -302,6 +335,7 @@
         });
         $("#sel1").val('${route.type}');
         $("#sel2").val('${route.public_country}');
+        $("#sel3").val('${route.difficulty}');
         var filters  = "${route.category}".split(",");
         $.each(filters, function( index, value ) {
             $(".route-filters :checkbox[value='"+value+"']").attr("checked","true");
@@ -510,6 +544,20 @@ $("#sudmitData").click(function(){
     }
     else {
         $("#tlt").next("div.validation").html("");
+    }
+    if($("#duration").val() === "") {
+        $("#duration").next("div.validation").html('<span style="color:red">Enter duration of route</span>');
+        isValidate = false;
+    }
+    else {
+        $("#duration").next("div.validation").html("");
+    }
+    if($("#length").val() === "") {
+        $("#length").next("div.validation").html('<span style="color:red">Enter length of route</span>');
+        isValidate = false;
+    }
+    else {
+        $("#length").next("div.validation").html("");
     }
     if(isValidate) {
         var real = $("#real-img-path").val();

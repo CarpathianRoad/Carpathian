@@ -43,11 +43,14 @@ public class RouteModel {
     public String country;
     public Integer type;
     public String textType;
-    public Integer dificult;
     public String images; 
     public String public_country;
     public String date;  
     public Integer publish;
+    public Integer difficulty;
+    public String textDifficulty;
+    public String duration;
+    public String length;
     
     public Integer getId() {
         return id;
@@ -248,6 +251,38 @@ public class RouteModel {
     public void setFile(String file) {
         this.file = file;
     }
+
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getTextDifficulty() {
+        return textDifficulty;
+    }
+
+    public void setTextDifficulty(String textDifficulty) {
+        this.textDifficulty = textDifficulty;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
     
      private static List<RouteModel> routeList;
      public List<RouteModel> getAllRoutes() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -270,6 +305,7 @@ public class RouteModel {
             temp.setDate(result.getString("date")); 
             temp.setCategory(result.getString("category"));
             temp.setType(result.getInt("type"));
+            temp.setDifficulty(result.getInt("difficulty"));
             routeList.add(temp);
         } 
         DB.closeCon();
@@ -297,6 +333,9 @@ public class RouteModel {
                 case 5: temp.setTextType("Water"); break;
             }
             temp.setPublish(result.getInt("publish"));
+            temp.setDifficulty(result.getInt("difficulty"));
+            temp.setDuration(result.getString("duration"));
+            temp.setLength(result.getString("length"));
             routeList.add(temp);
         } 
         DB.closeCon();
@@ -319,6 +358,9 @@ public class RouteModel {
             temp.setPublic_country(result.getString("public_country")); 
             temp.setDate(result.getString("date")); 
             temp.setImages(result.getString("images"));  
+            temp.setDifficulty(result.getInt("difficulty"));
+            temp.setDuration(result.getString("duration"));
+            temp.setLength(result.getString("length"));
         }
         DB.closeCon();
         return temp;
@@ -355,6 +397,9 @@ public class RouteModel {
             temp.setImages(result.getString("images")); 
             temp.setCategory(result.getString("category"));
             temp.setFile(result.getString("file"));
+            temp.setDifficulty(result.getInt("difficulty"));
+            temp.setDuration(result.getString("duration"));
+            temp.setLength(result.getString("length"));
         }
         DB.closeCon();
         return temp;
@@ -373,11 +418,11 @@ public class RouteModel {
             return true;
     }
     public String insertRoute(String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, 
-            String filename, String img, String date, String type, String public_country, String filter,
+            String filename, String img, String date, String type, String public_country, String filter, String difficulty, String duration, String length,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         DB.runQuery("INSERT INTO routes (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, "
-                + "file, images, date, type, public_country, category, publish, "
+                + "file, images, date, type, public_country, category, difficulty, duration, length, publish, "
                 + "textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, isDelete)"
                     + "values ('"+ StringEscapeUtils.escapeSql(titleEN) +"','"
                 + StringEscapeUtils.escapeSql(titleUA) +"','"
@@ -388,7 +433,7 @@ public class RouteModel {
                 + StringEscapeUtils.escapeSql(titleGE) +"','"
                 + StringEscapeUtils.escapeSql(titleCZ) +"','"
                 + StringEscapeUtils.escapeSql(titleSRB) +"','"
-                + filename +"','"+ img +"','"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ 
+                + filename +"','"+ img +"','"+ date +"',"+  type +",'"+  public_country +"','"+  filter +"',"+ difficulty +",'"+ duration+"','" + length + "',"+ 
                 "0, '"+  
                 StringEscapeUtils.escapeSql(textEN) +"', '"
                 +  StringEscapeUtils.escapeSql(textUA) +"', '"
@@ -407,7 +452,7 @@ public class RouteModel {
             return temp.toString();
     } 
     public String updateRoute(String id, String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, 
-            String filename, String img, String date, String type, String public_country, String filter,
+            String filename, String img, String date, String type, String public_country, String filter, String difficulty, String duration, String length,
             String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         DB.runQuery("UPDATE routes SET titleEN = '"+ StringEscapeUtils.escapeSql(titleEN) 
@@ -423,7 +468,7 @@ public class RouteModel {
                 +"', type = "+  type
                  +", file = '"+  filename
                  +"', images = '"+  img
-                +"', category = '"+  filter +"', public_country = '"+ public_country +"', publish  = 0"+ 
+                +"', category = '"+  filter +"', difficulty = "+  difficulty +", duration = '"+ duration +"', length = '"+ length +"', public_country = '"+ public_country +"', publish  = 0"+ 
                 ", textEN = '"+ StringEscapeUtils.escapeSql(textEN) +"', textUA = '"+ StringEscapeUtils.escapeSql(textUA) +
                 "', textHU = '"+ StringEscapeUtils.escapeSql(textHU) +
                 "', textSK = '"+ StringEscapeUtils.escapeSql(textSK) +
@@ -469,7 +514,6 @@ public class RouteModel {
         
         query = query + " order by id desc; ";
         ResultSet result = DB.getResultSet(query);
-        System.out.println("query = "+result.toString());
         routeList = new LinkedList<>();
         while (result.next()) { 
             String str  = result.getString("textUA").replaceAll("'\\<.*?>","");
@@ -488,6 +532,9 @@ public class RouteModel {
             temp.setDate(result.getString("date")); 
             temp.setCategory(result.getString("category"));
             temp.setType(result.getInt("type"));
+            temp.setDifficulty(result.getInt("difficulty"));
+            temp.setDuration(result.getString("duration"));
+            temp.setLength(result.getString("length"));
             routeList.add(temp);
         } 
         DB.closeCon();
@@ -509,7 +556,6 @@ public class RouteModel {
         
         query = query + " order by id desc; ";
         ResultSet result = DB.getResultSet(query);
-        System.out.println("query = "+result.toString());
         int count = 0;
     while(result.next()){
         count = result.getInt("count");
