@@ -272,10 +272,10 @@
                 $(this).parent().css('background','#CCFF33');
                 break;
             case "3":
-                $(this).parent().css('background','#FF9900');
+                $(this).parent().css('background','#CC0000');
                 break;
             case "4":
-                $(this).parent().css('background','#CC0000');
+                $(this).parent().css('background','#000000');
                 break;
         }
         
