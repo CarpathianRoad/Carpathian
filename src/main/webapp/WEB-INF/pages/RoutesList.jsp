@@ -11,6 +11,7 @@
 <t:indexpage>
     <link rel="stylesheet" href="${Constants.URL}css/jquery.dataTables.min.css">
     <script src="${Constants.URL}js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="${Constants.URL}js/date-de.js"></script>
     <script>
         var files = [];
         var types = [];
@@ -56,6 +57,7 @@
             font: 10pt 'Open Sans';
             font-weight: 100;
             color: rgb(86,105,143);
+            text-align: justify;
         }
         .dataTables_info, .dataTables_paginate,.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active{
             color: rgb(86,105,143) !important;
@@ -67,18 +69,57 @@
             width: 980px;
             margin: 0 auto;
         }
-        thead{
-            display: none;
-        }
         tfoot {
-            display: table-header-group;
-        }
-        .breadcrumbsMarker{
             display: none;
         }
         tfoot input{
             margin: 0 -15px;
             width: 100px;
+        }
+        #table-pagination_info{
+            display: none;
+        }
+        .difficultyBlock a{
+            width: 100%;
+            display: block;
+            color: rgba(0,0,0,0);
+        }
+        .difficultyBlock a:hover{
+            color: rgba(0,0,0,0) !important;
+        }
+        .difficultyBlock a:focus{
+            color: rgba(0,0,0,0) !important;
+        }
+        .difficultyBlock a:visited{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:hover{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:focus{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:visited{
+            color: rgba(0,0,0,0) !important;
+        }
+        .routeTypeSplit:visited:hover{
+            color: rgba(0,0,0,0) !important;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border: 1px solid rgb(84, 182, 157);
+            background-color: none;
+            background: none;
+            color: rgb(84, 182, 157) !important;
+        }
+        table.dataTable thead th{
+            padding: 10px 15px 10px 5px !important;
+            text-align: center;
+        }
+        table.dataTable tbody th, table.dataTable tbody td{
+            padding: 8px 5px;
         }
     </style>
     <div class="s-new widthClass">
@@ -91,7 +132,7 @@
             <div class="breadcrumbsMarker">
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
-                    <div class="filterRoutesFin"><a id="all" onclick="countryFilter('all');" class="selected_country" >${titles.countryALL}</a></div>
+                    <div class="filterRoutesFin"><a id="all" onclick="countryFilter('');" class="selected_country" >${titles.countryALL}</a></div>
                     <div class="filterRoutesFin"><a id="Ukraine" onclick="countryFilter('Ukraine');" >${titles.countryUA}</a></div>
                     <div class="filterRoutesFin"><a id="Poland" onclick="countryFilter('Poland');" >${titles.countryPL}</a></div>
                     <div class="filterRoutesFin"><a id="Hungary" onclick="countryFilter('Hungary');" >${titles.countryHU}</a></div>
@@ -99,13 +140,13 @@
                     <div class="filterRoutesFin"><a id="Slovakia" onclick="countryFilter('Slovakia');" >${titles.countrySK}</a></div>
                 </div>
                 <div class="tripMethod">
-                    <input type="hidden" id="selected_type" value="all_type"/>
-                    <div id="5" class="tripFilterText"><a onclick="change_routes_type('5');">${titles.routeWAT}</a></div>
-                    <div id="4" class="tripFilterText"><a onclick="change_routes_type('4');">${titles.routeHOR}</a></div>
-                    <div id="3" class="tripFilterText"><a onclick="change_routes_type('3');">${titles.routeSKI}</a></div>
-                    <div id="2" class="tripFilterText"><a onclick="change_routes_type('2');">${titles.routeBIC}</a></div>
-                    <div id="1" class="tripFilterText"><a onclick="change_routes_type('1');">${titles.routeWAL}</a></div>
-                    <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="change_routes_type('all_type');">${titles.routeALL}</a></div>
+                    <input type="hidden" id="selected_type" onclick="typeFilter('');"/>
+                    <div id="Water" class="tripFilterText"><a onclick="typeFilter('Water');">${titles.routeWAT}</a></div>
+                    <div id="Horse" class="tripFilterText"><a onclick="typeFilter('Horse');">${titles.routeHOR}</a></div>
+                    <div id="Ski" class="tripFilterText"><a onclick="typeFilter('Ski');">${titles.routeSKI}</a></div>
+                    <div id="Bicycle" class="tripFilterText"><a onclick="typeFilter('Bicycle');">${titles.routeBIC}</a></div>
+                    <div id="Walking" class="tripFilterText"><a onclick="typeFilter('Walking');">${titles.routeWAL}</a></div>
+                    <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="typeFilter('');">${titles.routeALL}</a></div>
                 </div>
             </div>
         </div>
@@ -113,23 +154,27 @@
                 <table class="table table-bordered" id="table-pagination" data-height="400" data-pagination="true">
                     <thead>
                         <tr>
+                            <th>Type</th>
                             <th>Title</th>
                             <th>Date</th>
-                            <th>File</th>
                             <th>Country</th>
-                            <th>Type</th>
                             <th>Category</th>
+                            <th>Difficulty</th>
+                            <th>Duration</th>
+                            <th>Length</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>Type</th>
                             <th>Title</th>
                             <th>Date</th>
-                            <th>File</th>
                             <th>Country</th>
-                            <th>Type</th>
                             <th>Category</th>
+                            <th>Difficulty</th>
+                            <th>Duration</th>
+                            <th>Length</th>
                             <th>Description</th>
                         </tr>
                     </tfoot>
@@ -163,17 +208,15 @@
                             </div>
                         </div>
                     </div> -->  
-                    <script>files.push("${route.file}");</script>
-                    <script>types.push("${route.type}");</script>
-                    <script>categories.push("${route.category}");</script>
-                    <script>countries.push("${route.public_country}");</script>
                         <tr id="routeBlock${loop.index}">
+                            <th><a class="routeTypeSplit" href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.date}</a></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.file}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.public_country}</a></th>
-                            <th class="routeTypeSplit"><a href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
-                            <th class="routeCategorySplit"><a href="${Constants.URL}routes/${route.id}">${route.category}</a></th>
+                            <th><a class="routeCategorySplit" href="${Constants.URL}routes/${route.id}">${route.category}</a></th>
+                            <th><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}routes/${route.id}">${route.difficulty}</a></div></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.duration}</a></th>
+                            <th><a href="${Constants.URL}routes/${route.id}">${route.length}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.textUA}</a></th>
                         </tr>
                 </c:forEach>
@@ -192,6 +235,9 @@
 					<a href="#" class="inactive">3</a>
 				</div>
         <script>
+            var table;
+            var countrySelected = "";
+            var typeSelected = "";
             $(document).ready(function() {
     
     $(".routeTypeSplit").each(function(){
@@ -200,22 +246,39 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).text($(this).text()+'Walking route');
+                        $(this).html('<img src="${Constants.URL}img/walk.png">1');
                         break;
                     case "2":
-                        $(this).text($(this).text()+'Bicycle route');
+                        $(this).html('<img src="${Constants.URL}img/bike.png">2');
                         break;
                     case "3":
-                        $(this).text($(this).text()+'Ski route');
+                        $(this).html('<img src="${Constants.URL}img/ski.png">3');
                         break;
                     case "4":
-                        $(this).text($(this).text()+'Horses route');
+                        $(this).html('<img src="${Constants.URL}img/horse.png">4');
                         break;
                     case "5":
-                        $(this).text($(this).text()+'Water route');
+                        $(this).html('<img src="${Constants.URL}img/canoe.png">5');
                         break;
                 }
         }
+    });
+    $(".difficultyLink").each(function(){
+        switch($(this).text()){
+            case "1":
+                $(this).parent().css('background','#00CC33');
+                break;
+            case "2":
+                $(this).parent().css('background','#CCFF33');
+                break;
+            case "3":
+                $(this).parent().css('background','#CC0000');
+                break;
+            case "4":
+                $(this).parent().css('background','#000000');
+                break;
+        }
+        
     });
     $(".routeCategorySplit").each(function(){
         var temp = $(this).text().split(',');
@@ -240,23 +303,18 @@
                 }
         }
     });
-    // Setup - add a text input to each footer cell
-    $('#table-pagination tfoot th').each( function () {
-        var title = $(this).text();
-        if(title=="Country"){
-            $(this).html( '<input class="searchBoxInvisible" type="text" placeholder="Countries" />' );
-        }else if(title=="Type"){
-            $(this).html( '<input class="searchBoxInvisible" type="text" placeholder="Types" />' );
-        }
-        else if(title=="Category"){
-            $(this).html( '<input class="searchBoxInvisible" type="text" placeholder="Categories" />' );
-        }
-    } );
  
     // DataTable
-    var table = $('#table-pagination').DataTable();
- 
-    // Apply the search
+    table = $('#table-pagination').DataTable({
+                        columnDefs: [
+                            { type: 'date-eu', targets: 3,orderable: false, targets: -1  }
+                        ],
+                        "dom": 'Zlfrtip'
+                    });
+    $('#table-pagination tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input id="'+title+'Search" type="text" placeholder="Search '+title+'" />' );
+    } );
     table.columns().every( function () {
         var that = this;
  
@@ -270,21 +328,33 @@
     } );
 } );
     
+    function countryFilter(filter){
+        countrySelected = filter;
+        $('#Ukraine').removeClass('selected_country');
+        $('#all').removeClass('selected_country');
+        $('#Poland').removeClass('selected_country');
+        $('#Romania').removeClass('selected_country');
+        $('#Slovakia').removeClass('selected_country');
+        $('#Hungary').removeClass('selected_country');
+        $('#'+filter).addClass('selected_country');
+        if(filter == '')
+            $('#all').addClass('selected_country');
+        table.search(typeSelected + " " + countrySelected).draw();
+    }
     
-    /*
-    
-                $(this).html( '<select>\n\
-                    <option value="All">All countries</option>\n\
-                    <option value="Ukraine">Ukraine</option>\n\
-                    <option value="Hungary">Hungary</option>\n\
-                    <option value="Poland">Poland</option>\n\
-                    <option value="Romania">Romania</option>\n\
-                    <option value="Slovakia">Slovakia</option>\n\
-                    </select>' );
-    
-    */
-    
-    
+    function typeFilter(filter){
+        typeSelected = filter;
+        $('#Water').removeClass('selectedCountryTrip');
+        $('#Walking').removeClass('selectedCountryTrip');
+        $('#Bicycle').removeClass('selectedCountryTrip');
+        $('#Horse').removeClass('selectedCountryTrip');
+        $('#Ski').removeClass('selectedCountryTrip');
+        $('#all_type').removeClass('selectedCountryTrip');
+        $('#'+filter).addClass('selectedCountryTrip');
+        if(filter == '')
+            $('#all_type').addClass('selectedCountryTrip');
+        table.search(typeSelected + " " + countrySelected).draw();
+    }
     /*
             var countRoute = 0;
             var map = [];
