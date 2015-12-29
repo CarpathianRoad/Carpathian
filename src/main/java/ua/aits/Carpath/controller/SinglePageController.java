@@ -255,6 +255,15 @@ public class SinglePageController {
             	}
    	 return model;
 	}
+   	 
+	@RequestMapping(value = {"/tools/imageCrop/","/tools/imageCrop"}, method = RequestMethod.GET)
+    	public ModelAndView imageCrop (HttpServletRequest request,
+   	HttpServletResponse response) throws Exception {
+            	String file = request.getParameter("file");
+                ModelAndView model = new ModelAndView("/tools/ImageCrop");
+            	model.addObject("file", file.replace(',', '/'));
+                return model;
+	}
   	 
     
 	@RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})

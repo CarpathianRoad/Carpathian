@@ -1,13 +1,20 @@
+<%-- 
+    Document   : imageCrop
+    Created on : Dec 27, 2015, 5:11:29 PM
+    Author     : kiwi
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="Constants" class="ua.aits.Carpath.functions.Constants" scope="session"/>
 <html>
 <head>
-  <title>jQuery-cropbox</title>
+  <title>Image crop</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
   <link type="text/css" media="screen" rel="stylesheet" href="${Constants.URL}js/jquery.cropbox.css">
+        <link href="${Constants.URL}css/bootstrap.min.css" rel="stylesheet" />
   <style type="text/css">
     body {
       font-family : sans-serif;
@@ -59,21 +66,36 @@
 
 
   <img class="cropimage" alt="" src="${Constants.URL}${file}" cropwidth="300" cropheight="195"/>
-  <div class="results">
+  <div style="display:none" class="results">
     <b>X</b>: <span class="cropX"></span>
     <b>Y</b>: <span class="cropY"></span>
     <b>W</b>: <span class="cropW"></span>
     <b>H</b>: <span class="cropH"></span>
   </div>
 
-  <div class="download">
+  <div class="download" style="display:none" >
     <a href="#" download="crop.png">Download</a>
   </div>
-
+  <button type="button" id="saveBtn" class="btn btn-primary">Save</button>
   <br/>
 
-  <select id="select">
+  <select style="display:none" id="select">
     <option value="200" selected>200</option>
     <option value="300">300</option>
   </select>
 </body>
+<script>
+    $("#saveBtn").click(function(){
+        $("#avatarUpload .returnImage").remove();
+           $("#avatarUpload .img-content", window.parent.document).append("<a class='returnImage'>"
+                                + "<img src='"+ $(".download a").attr("href") + "' alt='" + $(".download a").attr("href") + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
+            
+            $("#avatarUpload .img-input-box", window.parent.document).remove();
+            $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button><button type="button" id="avatarBtnArchive"  class="btn btn-primary img-input-box" data-toggle="modal" style="margin-left: 5px;" data-target="#avatarModalArchive">Browse archive</button>');
+            $("#avatar-path", window.parent.document).val($(".download a").attr("href") );
+            
+            $("#avatarUpload .img-content-show-all").removeAttr("current");
+            $("#avatarUpload .img-content-show-all").removeAttr("realpath");
+            window.parent.imageInserted();
+    });
+</script>
