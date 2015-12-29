@@ -121,6 +121,26 @@
         table.dataTable tbody th, table.dataTable tbody td{
             padding: 8px 5px;
         }
+        table.dataTable thead th, table.dataTable thead td {
+            border-bottom: none;
+        }
+        .paginate_button.previous img, .paginate_button.next img {
+            width: 10px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: none;    
+            color: #FFF !important;
+    border: 1px solid #56698F;
+    /* color: #fff; */
+    background-color: #56698F;
+    border-radius: 3px;
+        }
+        .paging_simple_numbers {
+           margin-top: 15px; 
+        }
     </style>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
@@ -141,11 +161,11 @@
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" onclick="typeFilter('');"/>
-                    <div id="Water" class="tripFilterText"><a onclick="typeFilter('Water');">${titles.routeWAT}</a></div>
-                    <div id="Horse" class="tripFilterText"><a onclick="typeFilter('Horse');">${titles.routeHOR}</a></div>
-                    <div id="Ski" class="tripFilterText"><a onclick="typeFilter('Ski');">${titles.routeSKI}</a></div>
-                    <div id="Bicycle" class="tripFilterText"><a onclick="typeFilter('Bicycle');">${titles.routeBIC}</a></div>
-                    <div id="Walking" class="tripFilterText"><a onclick="typeFilter('Walking');">${titles.routeWAL}</a></div>
+                    <div id="Water" class="tripFilterText"><a onclick="typeFilter('water.png');">${titles.routeWAT}</a></div>
+                    <div id="Horse" class="tripFilterText"><a onclick="typeFilter('horse.png');">${titles.routeHOR}</a></div>
+                    <div id="Ski" class="tripFilterText"><a onclick="typeFilter('ski.png');">${titles.routeSKI}</a></div>
+                    <div id="Bicycle" class="tripFilterText"><a onclick="typeFilter('bicycle.png');">${titles.routeBIC}</a></div>
+                    <div id="Walking" class="tripFilterText"><a onclick="typeFilter('walking.png');">${titles.routeWAL}</a></div>
                     <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="typeFilter('');">${titles.routeALL}</a></div>
                 </div>
             </div>
@@ -154,28 +174,24 @@
                 <table class="table table-bordered" id="table-pagination" data-height="400" data-pagination="true">
                     <thead>
                         <tr>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>Date</th>
-                            <th>Country</th>
-                            <th>Category</th>
-                            <th>Difficulty</th>
-                            <th>Duration</th>
-                            <th>Length</th>
-                            <th>Description</th>
+                            <th class="centred">${titles.country}</th>
+                            <th>${titles.type}</th>
+                            <th class="route-title">${titles.title}</th>
+                            <th>${titles.difficulty}</th>
+                            <th>${titles.duration}</th>
+                            <th>${titles.length}</th>
+                            <th>${titles.description}</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>Date</th>
-                            <th>Country</th>
-                            <th>Category</th>
-                            <th>Difficulty</th>
-                            <th>Duration</th>
-                            <th>Length</th>
-                            <th>Description</th>
+                            <th>${titles.country}</th>
+                            <th>${titles.type}</th>
+                            <th class="route-title">${titles.title}</th>
+                            <th>${titles.difficulty}</th>
+                            <th>${titles.duration}</th>
+                            <th>${titles.length}</th>
+                            <th>${titles.description}</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -208,15 +224,13 @@
                             </div>
                         </div>
                     </div> -->  
-                        <tr id="routeBlock${loop.index}">
-                            <th><a class="routeTypeSplit" href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.date}</a></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.public_country}</a></th>
-                            <th><a class="routeCategorySplit" href="${Constants.URL}routes/${route.id}">${route.category}</a></th>
-                            <th><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}routes/${route.id}">${route.difficulty}</a></div></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.duration}</a></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.length}</a></th>
+                        <tr title="Read more" style="cursor: pointer" id="routeBlock${loop.index}">
+                            <th style="text-align: center;vertical-align: middle;"><a style="font-size: 18px;" href="${Constants.URL}routes/${route.id}"><strong>${route.public_country}</strong></a></th>
+                            <th style="text-align: center"><a class="routeTypeSplit" href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
+                            <th style="text-align: center; vertical-align: middle;"><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
+                            <th style="text-align: center"><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}routes/${route.id}">${route.difficulty}</a></div></th>
+                            <th style="text-align: center"><a href="${Constants.URL}routes/${route.id}">${route.duration}</a></th>
+                            <th style="text-align: center"><a href="${Constants.URL}routes/${route.id}">${route.length}</a></th>
                             <th><a href="${Constants.URL}routes/${route.id}">${route.textUA}</a></th>
                         </tr>
                 </c:forEach>
@@ -246,19 +260,19 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).html('<img src="${Constants.URL}img/walk.png">1');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png">1');
                         break;
                     case "2":
-                        $(this).html('<img src="${Constants.URL}img/bike.png">2');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png">2');
                         break;
                     case "3":
-                        $(this).html('<img src="${Constants.URL}img/ski.png">3');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png">3');
                         break;
                     case "4":
-                        $(this).html('<img src="${Constants.URL}img/horse.png">4');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png">4');
                         break;
                     case "5":
-                        $(this).html('<img src="${Constants.URL}img/canoe.png">5');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png">5');
                         break;
                 }
         }
@@ -266,16 +280,16 @@
     $(".difficultyLink").each(function(){
         switch($(this).text()){
             case "1":
-                $(this).parent().css('background','#00CC33');
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' />");
                 break;
             case "2":
-                $(this).parent().css('background','#CCFF33');
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' />");
                 break;
             case "3":
-                $(this).parent().css('background','#CC0000');
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' />");
                 break;
             case "4":
-                $(this).parent().css('background','#000000');
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' />");
                 break;
         }
         
@@ -326,8 +340,9 @@
             }
         } );
     } );
+    $(".route-title").css("width","140px");
 } );
-    
+
     function countryFilter(filter){
         countrySelected = filter;
         $('#Ukraine').removeClass('selected_country');
@@ -353,7 +368,7 @@
         $('#'+filter).addClass('selectedCountryTrip');
         if(filter == '')
             $('#all_type').addClass('selectedCountryTrip');
-        table.search(typeSelected + " " + countrySelected).draw();
+        table.search(typeSelected).draw();
     }
     /*
             var countRoute = 0;

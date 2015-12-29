@@ -30,6 +30,14 @@ public class PageFiltersTranslate {
     public String routeALL;
     
     
+    public String country;
+    public String type;
+    public String title;
+    public String duration;
+    public String length;
+    public String description;
+    public String difficulty;
+    
     
     public String getCountryALL() {
         return countryALL;
@@ -110,6 +118,64 @@ public class PageFiltersTranslate {
     public void setRouteBIC(String routeBIC) {
         this.routeBIC = routeBIC;
     }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+    
+    
     
     public PageFiltersTranslate getTranslateFilters(String lang) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         lang = lang.toUpperCase();
@@ -138,6 +204,15 @@ public class PageFiltersTranslate {
         titles.setRouteWAL(myMap.get("setRouteWAL"));
         titles.setRouteWAT(myMap.get("setRouteWAT"));
         
+        titles.setCountry(myMap.get("country"));
+        titles.setTitle(myMap.get("title"));
+        titles.setType(myMap.get("type"));
+        titles.setDuration(myMap.get("duration"));
+        titles.setCountry(myMap.get("country"));
+        titles.setLength(myMap.get("length"));
+        titles.setDifficulty(myMap.get("difficulty"));
+        titles.setDescription(myMap.get("description"));
+        
         DB.closeCon();
         return titles;
     }
@@ -163,6 +238,17 @@ public class PageFiltersTranslate {
             translate = titles.getCountryUA();
         }
         return translate;
+    }
+    
+    public String longToShortCountry(String country) {
+        switch(country) {
+            case "Ukraine": return "UA";
+            case "Poland": return "PL";
+            case "Hungary": return "HU";
+            case "Romania": return "RO";
+            case "Slovakia": return "SK";
+            default: return "UA";
+        }
     }
 }
 

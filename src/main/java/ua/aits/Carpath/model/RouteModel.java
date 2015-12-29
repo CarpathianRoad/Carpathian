@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
 import ua.aits.Carpath.functions.DB;
 import ua.aits.Carpath.functions.Helpers;
+import ua.aits.Carpath.functions.PageFiltersTranslate;
 
 /**
  *
@@ -284,6 +285,8 @@ public class RouteModel {
         this.length = length;
     }
     
+    PageFiltersTranslate translate = new PageFiltersTranslate();
+    
      private static List<RouteModel> routeList;
      public List<RouteModel> getAllRoutes() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ResultSet result = DB.getResultSet("select * from routes where publish = 1 and isDelete = 0 order by id desc;");
@@ -301,7 +304,8 @@ public class RouteModel {
             temp.setTextUA(Helpers.html2text(str3));
             temp.setFile(result.getString("file"));
             temp.setImages(result.getString("images")); 
-            temp.setPublic_country(result.getString("public_country")); 
+            String countryN = translate.longToShortCountry(result.getString("public_country"));
+            temp.setPublic_country(countryN); 
             temp.setDate(result.getString("date")); 
             temp.setCategory(result.getString("category"));
             temp.setType(result.getInt("type"));
