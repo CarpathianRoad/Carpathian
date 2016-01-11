@@ -149,6 +149,15 @@
         .routeTypeSplit span{
             display: none;
         }
+        .difficultyLink span{
+            display: none;
+        }
+        .difficultyLink{
+            display: table;
+        }
+        #table-pagination{
+            visibility: hidden;
+        }
     </style>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
@@ -241,6 +250,7 @@
                             <th style="text-align: center"><a href="${Constants.URL}${lan}routes/${route.id}">${route.length}</a></th>
                             <th><a href="${Constants.URL}${lan}routes/${route.id}">${route.textUA}</a></th>
                         </tr>
+                        <script>console.log("${Constants.URL}${lan}routes/${route.id}");</script>
                 </c:forEach>
                     </tbody>
                 </table>
@@ -288,16 +298,16 @@
     $(".difficultyLink").each(function(){
         switch($(this).text()){
             case "1":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' />1");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' /><span>1</span>");
                 break;
             case "2":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' />2");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' /><span>2</span>");
                 break;
             case "3":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' />3");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' /><span>3</span>");
                 break;
             case "4":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' />4");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' /><span>4</span>");
                 break;
         }
         
@@ -327,6 +337,7 @@
     });
  
     // DataTable
+    setTimeout(function(){
     table = $('#table-pagination').DataTable({
                         columnDefs: [
                             { type: 'date-eu', targets: 3,orderable: false, targets: -1  }
@@ -348,6 +359,8 @@
             }
         } );
     } );
+    $('#table-pagination').css('visibility', 'visible');
+    }, 500);
     $(".route-title").css("width","140px");
 } );
 
@@ -561,5 +574,5 @@
                         $('#routeBlock'+n).css('display','block');
                 }
             }*/
-        </script>
+        </script> 
 </t:indexpage>

@@ -310,6 +310,8 @@ public class RouteModel {
             temp.setCategory(result.getString("category"));
             temp.setType(result.getInt("type"));
             temp.setDifficulty(result.getInt("difficulty"));
+            temp.setDuration(result.getString("duration"));
+            temp.setLength(result.getString("length"));
             routeList.add(temp);
         } 
         DB.closeCon();
