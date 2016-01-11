@@ -288,16 +288,16 @@
     $(".difficultyLink").each(function(){
         switch($(this).text()){
             case "1":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' />");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' />1");
                 break;
             case "2":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' />");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' />2");
                 break;
             case "3":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' />");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' />3");
                 break;
             case "4":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' />");
+                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' />4");
                 break;
         }
         
