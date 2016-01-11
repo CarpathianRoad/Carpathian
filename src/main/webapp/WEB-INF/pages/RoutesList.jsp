@@ -120,6 +120,8 @@
         }
         table.dataTable tbody th, table.dataTable tbody td{
             padding: 8px 5px;
+            vertical-align: middle;
+            display: table-cell;
         }
         table.dataTable thead th, table.dataTable thead td {
             border-bottom: none;
@@ -231,13 +233,13 @@
                         </div>
                     </div> -->  
                         <tr title="Read more" style="cursor: pointer" id="routeBlock${loop.index}">
-                            <th style="text-align: center;vertical-align: middle;"><a style="font-size: 18px;" href="${Constants.URL}routes/${route.id}"><strong>${route.public_country}<span>CountryFilter</span></strong></a></th>
-                            <th style="text-align: center"><a class="routeTypeSplit" href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
-                            <th style="text-align: center; vertical-align: middle;"><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
-                            <th style="text-align: center"><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}routes/${route.id}">${route.difficulty}</a></div></th>
-                            <th style="text-align: center"><a href="${Constants.URL}routes/${route.id}">${route.duration}</a></th>
-                            <th style="text-align: center"><a href="${Constants.URL}routes/${route.id}">${route.length}</a></th>
-                            <th><a href="${Constants.URL}routes/${route.id}">${route.textUA}</a></th>
+                            <th style="text-align: center;vertical-align: middle;"><a style="font-size: 18px;" href="${Constants.URL}${lan}routes/${route.id}"><strong>${route.public_country}<span>CountryFilter</span></strong></a></th>
+                            <th style="text-align: center"><a class="routeTypeSplit" href="${Constants.URL}${lan}routes/${route.id}">${route.type}</a></th>
+                            <th style="text-align: center; vertical-align: middle;"><a href="${Constants.URL}${lan}routes/${route.id}">${route.title}</a></th>
+                            <th style="text-align: center"><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}${lan}routes/${route.id}">${route.difficulty}</a></div></th>
+                            <th style="text-align: center"><a href="${Constants.URL}${lan}routes/${route.id}">${route.duration}</a></th>
+                            <th style="text-align: center"><a href="${Constants.URL}${lan}routes/${route.id}">${route.length}</a></th>
+                            <th><a href="${Constants.URL}${lan}routes/${route.id}">${route.textUA}</a></th>
                         </tr>
                 </c:forEach>
                     </tbody>
