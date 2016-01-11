@@ -141,6 +141,12 @@
         .paging_simple_numbers {
            margin-top: 15px; 
         }
+        strong span{
+            display: none;
+        }
+        .routeTypeSplit span{
+            display: none;
+        }
     </style>
     <div class="s-new widthClass">
         <input type="hidden" id="page_type" value="routes" />
@@ -153,19 +159,19 @@
                 <div class="countriesFilter countriesFilterRoute">
                     <input type="hidden" id="selected_country" value="all"/>
                     <div class="filterRoutesFin"><a id="all" onclick="countryFilter('');" class="selected_country" >${titles.countryALL}</a></div>
-                    <div class="filterRoutesFin"><a id="Ukraine" onclick="countryFilter('Ukraine');" >${titles.countryUA}</a></div>
-                    <div class="filterRoutesFin"><a id="Poland" onclick="countryFilter('Poland');" >${titles.countryPL}</a></div>
-                    <div class="filterRoutesFin"><a id="Hungary" onclick="countryFilter('Hungary');" >${titles.countryHU}</a></div>
-                    <div class="filterRoutesFin"><a id="Romania" onclick="countryFilter('Romania');" >${titles.countryRO}</a></div>
-                    <div class="filterRoutesFin"><a id="Slovakia" onclick="countryFilter('Slovakia');" >${titles.countrySK}</a></div>
+                    <div class="filterRoutesFin"><a id="UACountryFilter" onclick="countryFilter('UA');" >${titles.countryUA}</a></div>
+                    <div class="filterRoutesFin"><a id="PLCountryFilter" onclick="countryFilter('PL');" >${titles.countryPL}</a></div>
+                    <div class="filterRoutesFin"><a id="HUCountryFilter" onclick="countryFilter('HU');" >${titles.countryHU}</a></div>
+                    <div class="filterRoutesFin"><a id="ROCountryFilter" onclick="countryFilter('RO');" >${titles.countryRO}</a></div>
+                    <div class="filterRoutesFin"><a id="SKCountryFilter" onclick="countryFilter('SK');" >${titles.countrySK}</a></div>
                 </div>
                 <div class="tripMethod">
                     <input type="hidden" id="selected_type" onclick="typeFilter('');"/>
-                    <div id="Water" class="tripFilterText"><a onclick="typeFilter('water.png');">${titles.routeWAT}</a></div>
-                    <div id="Horse" class="tripFilterText"><a onclick="typeFilter('horse.png');">${titles.routeHOR}</a></div>
-                    <div id="Ski" class="tripFilterText"><a onclick="typeFilter('ski.png');">${titles.routeSKI}</a></div>
-                    <div id="Bicycle" class="tripFilterText"><a onclick="typeFilter('bicycle.png');">${titles.routeBIC}</a></div>
-                    <div id="Walking" class="tripFilterText"><a onclick="typeFilter('walking.png');">${titles.routeWAL}</a></div>
+                    <div id="canoe" class="tripFilterText"><a onclick="typeFilter('canoe');">${titles.routeWAT}</a></div>
+                    <div id="horse" class="tripFilterText"><a onclick="typeFilter('horse');">${titles.routeHOR}</a></div>
+                    <div id="ski" class="tripFilterText"><a onclick="typeFilter('ski');">${titles.routeSKI}</a></div>
+                    <div id="bike" class="tripFilterText"><a onclick="typeFilter('bike');">${titles.routeBIC}</a></div>
+                    <div id="walk" class="tripFilterText"><a onclick="typeFilter('walk');">${titles.routeWAL}</a></div>
                     <div id="all_type" class="tripFilterText selectedCountryTrip"><a onclick="typeFilter('');">${titles.routeALL}</a></div>
                 </div>
             </div>
@@ -225,7 +231,7 @@
                         </div>
                     </div> -->  
                         <tr title="Read more" style="cursor: pointer" id="routeBlock${loop.index}">
-                            <th style="text-align: center;vertical-align: middle;"><a style="font-size: 18px;" href="${Constants.URL}routes/${route.id}"><strong>${route.public_country}</strong></a></th>
+                            <th style="text-align: center;vertical-align: middle;"><a style="font-size: 18px;" href="${Constants.URL}routes/${route.id}"><strong>${route.public_country}<span>CountryFilter</span></strong></a></th>
                             <th style="text-align: center"><a class="routeTypeSplit" href="${Constants.URL}routes/${route.id}">${route.type}</a></th>
                             <th style="text-align: center; vertical-align: middle;"><a href="${Constants.URL}routes/${route.id}">${route.title}</a></th>
                             <th style="text-align: center"><div class="difficultyBlock"><a class="difficultyLink" href="${Constants.URL}routes/${route.id}">${route.difficulty}</a></div></th>
@@ -260,19 +266,19 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png">1');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png"><span>walk.png</span>');
                         break;
                     case "2":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png">2');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png"><span>bike.png</span>');
                         break;
                     case "3":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png">3');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png"><span>ski.png</span>');
                         break;
                     case "4":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png">4');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png"><span>horse.png</span>');
                         break;
                     case "5":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png">5');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png"><span>canoe.png</span>');
                         break;
                 }
         }
@@ -345,30 +351,31 @@
 
     function countryFilter(filter){
         countrySelected = filter;
-        $('#Ukraine').removeClass('selected_country');
+        $('#UACountryFilter').removeClass('selected_country');
         $('#all').removeClass('selected_country');
-        $('#Poland').removeClass('selected_country');
-        $('#Romania').removeClass('selected_country');
-        $('#Slovakia').removeClass('selected_country');
-        $('#Hungary').removeClass('selected_country');
-        $('#'+filter).addClass('selected_country');
+        $('#PLCountryFilter').removeClass('selected_country');
+        $('#ROCountryFilter').removeClass('selected_country');
+        $('#SKCountryFilter').removeClass('selected_country');
+        $('#HUCountryFilter').removeClass('selected_country');
+        $('#'+filter+'CountryFilter').addClass('selected_country');
         if(filter == '')
             $('#all').addClass('selected_country');
-        table.search(typeSelected + " " + countrySelected).draw();
+        table.search(typeSelected + " " + countrySelected+"CountryFilter").draw();
     }
     
     function typeFilter(filter){
-        typeSelected = filter;
-        $('#Water').removeClass('selectedCountryTrip');
-        $('#Walking').removeClass('selectedCountryTrip');
-        $('#Bicycle').removeClass('selectedCountryTrip');
-        $('#Horse').removeClass('selectedCountryTrip');
-        $('#Ski').removeClass('selectedCountryTrip');
+        typeSelected = filter+'.png';
+        $('#canoe').removeClass('selectedCountryTrip');
+        $('#walk').removeClass('selectedCountryTrip');
+        $('#bike').removeClass('selectedCountryTrip');
+        $('#horse').removeClass('selectedCountryTrip');
+        $('#ski').removeClass('selectedCountryTrip');
         $('#all_type').removeClass('selectedCountryTrip');
         $('#'+filter).addClass('selectedCountryTrip');
+        console.log(filter);
         if(filter == '')
             $('#all_type').addClass('selectedCountryTrip');
-        table.search(typeSelected).draw();
+        table.search(typeSelected + " " + countrySelected+"CountryFilter").draw();
     }
     /*
             var countRoute = 0;
