@@ -5,9 +5,16 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -463,4 +470,21 @@ public class AjaxController {
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
     }
+    @RequestMapping(value = {"/dowloadcropedfile"}, method = RequestMethod.GET)
+    public @ResponseBody
+    String dowloadImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        URL url = new URL(request.getParameter("url"));
+        String[] path = request.getParameter("file").split(",");
+        String filename = path[path.length-1];
+        String[] newPath =  (String[])ArrayUtils.remove(path, path.length-1);
+        String p = "";
+        for(String temp : newPath){
+        p += temp+"/";
+        }
+        File newI = new File(Constants.home + p + "croped-"+filename);
+        FileUtils.copyURLToFile(url, newI);
+        return "s";
+    }
+    
 }

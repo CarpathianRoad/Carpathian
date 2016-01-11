@@ -73,7 +73,7 @@
     <b>H</b>: <span class="cropH"></span>
   </div>
 
-  <div class="download" style="display:none" >
+  <div class="download" >
     <a href="#" download="crop.png">Download</a>
   </div>
   <button type="button" id="saveBtn" class="btn btn-primary">Save</button>
@@ -89,11 +89,11 @@
         $("#avatarUpload .returnImage").remove();
            $("#avatarUpload .img-content", window.parent.document).append("<a class='returnImage'>"
                                 + "<img src='"+ $(".download a").attr("href") + "' alt='" + $(".download a").attr("href") + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
-            
+
             $("#avatarUpload .img-input-box", window.parent.document).remove();
             $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button><button type="button" id="avatarBtnArchive"  class="btn btn-primary img-input-box" data-toggle="modal" style="margin-left: 5px;" data-target="#avatarModalArchive">Browse archive</button>');
             $("#avatar-path", window.parent.document).val($(".download a").attr("href") );
-            
+
             $("#avatarUpload .img-content-show-all").removeAttr("current");
             $("#avatarUpload .img-content-show-all").removeAttr("realpath");
             window.parent.imageInserted();
