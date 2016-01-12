@@ -612,8 +612,8 @@ function initCrop(file){
        $("#imageCrop").dialog({
             autoOpen: false,
             modal: true,
-            height: 600,
-            width: 800,
+            height: 350,
+            width: 500,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
                      $('#cropFrame').attr('src','${Constants.URL}tools/imageCrop?file='+file.replace(/\//g,","));

@@ -171,6 +171,8 @@
             window.parent.imageInserted();
             }
             else if("${type}" === "avatar")   {
+        $("#avatarUpload .returnImage", window.parent.document).remove();
+             $("#crop-this", window.parent.document).remove();
                $("#avatarUpload .img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a><span id='crop-this'>Crop image</span>");
             window.parent.initCrop(path + name);

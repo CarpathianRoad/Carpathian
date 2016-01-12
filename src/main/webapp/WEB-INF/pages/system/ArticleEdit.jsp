@@ -115,6 +115,9 @@
                                     <div id="avatarDialogArchive">
                                         <iframe id="avatarFrameArchive" src=""></iframe>
                                     </div>
+                                    <div id="imageCrop">
+                                        <iframe id="cropFrame" src=""></iframe>
+                                    </div>
                                     <button type="button" id="avatarBtn" class="btn btn-primary img-input-box">
                                     Browse avatar
                                     </button>
@@ -494,6 +497,7 @@ function imageInserted(){
     $( "#avatarDialog" ).dialog( "close" );
     $( "#avatarDialogArchive" ).dialog( "close" );
     $( "#dialog-archive-panorama" ).dialog( "close" );
+    $( "#imageCrop" ).dialog( "close" );
     initRemove();
     initDialog();removePanoramaInit();
 }
@@ -615,6 +619,22 @@ function initDialog(){
         });
         $('#dialogBtnArchivePanorama').click(function(){
             $('#dialog-archive-panorama').dialog('open');
+        });
+}
+function initCrop(file){
+       $("#imageCrop").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 350,
+            width: 500,
+            position: { my: "center top", at: "center top", of: window },
+            open: function(ev, ui){
+                     $('#cropFrame').attr('src','${Constants.URL}tools/imageCrop?file='+file.replace(/\//g,","));
+                  }
+        }); 
+        
+        $('#crop-this').click(function(){
+            $('#imageCrop').dialog('open');
         });
 }
 function initRemove(){

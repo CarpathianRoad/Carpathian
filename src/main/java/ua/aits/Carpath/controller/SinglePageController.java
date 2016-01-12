@@ -262,6 +262,7 @@ public class SinglePageController {
             	String file = request.getParameter("file");
                 ModelAndView model = new ModelAndView("/tools/ImageCrop");
             	model.addObject("file", file.replace(',', '/'));
+            	model.addObject("fileR", file);
                 return model;
 	}
   	 
