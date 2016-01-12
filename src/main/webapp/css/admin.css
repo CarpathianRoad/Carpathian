@@ -491,8 +491,22 @@ cke_contents{
 }
 #cropFrame {
     width: 100%;
-    height: 100%;
+    height: 95%;
     border: 0;
+}
+#imageCrop {
+    display: none;
+}
+#crop-this {
+    display: block;
+    float: left;
+    position: relative;
+    margin-top: 70px;
+    margin-left: -122px;
+    color: #fff;
+    background-color: rgba(20, 168, 107, 0.84);
+    padding: 0 10px 0 10px;
+    cursor: pointer;
 }
 .ui-dialog .ui-dialog-content {
     padding: 0;
