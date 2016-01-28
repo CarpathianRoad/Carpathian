@@ -213,11 +213,11 @@
             	<div class="s-clear"></div>
                 	<div id="langSmallMenu">
                     	<ul class="smallMenuLangSelector">
-   			 <li class="paddingLang"><a id="lang-switch-ua" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-ro" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-ua-sm" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-en-sm" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-sk-sm" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-hu-sm" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-ro-sm" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
    			 <!--
                                 	<li class="paddingLang"><a href="#">PL</a></li>
                                 	<li class="paddingLang"><a href="#">RO</a></li>
@@ -336,6 +336,13 @@
 	addCssToMenu();
     
 	function langSelectMenu(){
+         var currentlan  = $("#languageSelectorSmall").text();
+       	 
+        	$("#lang-switch-ua-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ua"));
+        	$("#lang-switch-en-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/en"));
+        	$("#lang-switch-sk-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/sk"));
+        	$("#lang-switch-hu-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
+        	$("#lang-switch-ro-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ro"));   
     	if(!(showLang)){
         	if(showSearch)searchSmallMenu();
         	if(showMenu)showSmallMenu();
