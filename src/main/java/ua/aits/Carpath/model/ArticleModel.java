@@ -60,6 +60,7 @@ public class ArticleModel {
     public String town;
     public String menuCat;
     public String menuText;
+    public String publishPath;
     
     public Integer getId() {
         return id;
@@ -341,6 +342,14 @@ public class ArticleModel {
     public void setMenuText(String menuText) {
         this.menuText = menuText;
     }
+
+    public String getPublishPath() {
+        return publishPath;
+    }
+
+    public void setPublishPath(String publishPath) {
+        this.publishPath = publishPath;
+    }
     
     PageFiltersTranslate translate = new PageFiltersTranslate();
     
@@ -522,6 +531,7 @@ public class ArticleModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
             temp.setMenuCat(result.getString("menuCat")); 
+            temp.setPublishPath(result.getString("publish_path"));
             System.out.println(temp.textEN);
         }
         DB.closeCon();
@@ -569,6 +579,7 @@ public class ArticleModel {
             temp.setDistrict(result.getString("district")); 
             temp.setTown(result.getString("town")); 
             temp.setMenuCat(result.getString("menuCat")); 
+            temp.setPublishPath(result.getString("publish_path"));
             if(temp.x == 0) {
                 temp.setX(50.4501);
                 temp.setY(30.523400000000038); 
@@ -740,9 +751,9 @@ public class ArticleModel {
     public String insertArticle(String titleEN, String titleUA, String titleHU, String titleSK, String titlePL,String titleRO,String titleGE,String titleCZ,String titleSRB, String date, String actDate, String type, String author,
             String avatar, String img, String panorama, String x, String y, 
             String public_country, String country, String region, String district, String town, String markerType, String filters, String menuCat,
-            String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+            String textEN, String textUA, String textHU, String textSK, String textRO, String textPL, String textGE, String textCZ, String textSRB, String path) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if("".equals(x)){ x = "0";}if("".equals(y)){ y = "0";}    
-        DB.runQuery("INSERT INTO content (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, type, author, avatar, image, panorama, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete)"
+        DB.runQuery("INSERT INTO content (titleEN,titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, type, author, avatar, image, panorama, x, y, public_country, country, region, district, town, markerIcon, filters, publish, textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, actual, menuCat, isDelete, publish_path)"
                     + "values ('"+ StringEscapeUtils.escapeSql(titleEN) +"','"
                 + StringEscapeUtils.escapeSql(titleUA) +"','"
                 + StringEscapeUtils.escapeSql(titleHU) +"','"
@@ -763,7 +774,7 @@ public class ArticleModel {
                 +  StringEscapeUtils.escapeSql(textGE) +"', '"
                 +  StringEscapeUtils.escapeSql(textCZ) +"', '"
                 +  StringEscapeUtils.escapeSql(textSRB) +"','"
-                +  actDate +"','"+  menuCat +"', 0);");
+                +  actDate +"','"+  menuCat +"', 0, '"+path+"');");
             ResultSet result = DB.getResultSet("SELECT * FROM content WHERE type="+  type +" AND date='"+  date +"' AND author='"+  author +"' ORDER BY id DESC LIMIT 1;");
             Integer temp = 1;
             while (result.next()) {

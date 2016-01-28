@@ -290,12 +290,13 @@ public class ArchiveController {
     	String textGE = request.getParameter("textGE");
     	String textCZ = request.getParameter("textCZ");
     	String textSRB = request.getParameter("textSRB");
+        String path = request.getParameter("publish_path");
         if( "0".equals(type) || "1".equals(type)){
             menuCat = "0";
         }
     	String result = MainArticles.insertArticle(titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author,
             	avatar, img, panorama, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
-            	textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
+            	textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, path);
     	Articles.publishArticle(id);
     	return new ModelAndView("redirect:" + "/system/panel");
   	 

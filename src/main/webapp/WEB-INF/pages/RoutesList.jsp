@@ -82,16 +82,16 @@
         .difficultyBlock a{
             width: 100%;
             display: block;
-            color: rgba(0,0,0,0);
+            //color: rgba(0,0,0,0);
         }
         .difficultyBlock a:hover{
-            color: rgba(0,0,0,0) !important;
+            //color: rgba(0,0,0,0) !important;
         }
         .difficultyBlock a:focus{
-            color: rgba(0,0,0,0) !important;
+            //color: rgba(0,0,0,0) !important;
         }
         .difficultyBlock a:visited{
-            color: rgba(0,0,0,0) !important;
+            //color: rgba(0,0,0,0) !important;
         }
         .routeTypeSplit{
             color: rgba(0,0,0,0) !important;
@@ -278,19 +278,19 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png"><span>walk.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png"><span>walk.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_yellow.png" />');
                         break;
                     case "2":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png"><span>bike.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png"><span>bike.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_green.png" />');
                         break;
                     case "3":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png"><span>ski.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png"><span>ski.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_red.png" />');
                         break;
                     case "4":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png"><span>horse.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png"><span>horse.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_brown.png" />');
                         break;
                     case "5":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png"><span>canoe.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png"><span>canoe.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_blue.png" />');
                         break;
                 }
         }
@@ -298,16 +298,16 @@
     $(".difficultyLink").each(function(){
         switch($(this).text()){
             case "1":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' /><span>1</span>");
+                $(this).html("<strong>1</strong>");
                 break;
             case "2":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' /><span>2</span>");
+                $(this).html("<strong>2</strong>");
                 break;
             case "3":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' /><span>3</span>");
+                $(this).html("<strong>3</strong>");
                 break;
             case "4":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' /><span>4</span>");
+                $(this).html("<strong>4</strong>");
                 break;
         }
         
