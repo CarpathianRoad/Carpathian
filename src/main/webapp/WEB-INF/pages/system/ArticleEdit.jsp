@@ -543,18 +543,34 @@ function initDialog(){
         }
         
     });
-    var arch_path = "${article.publishPath}".split("/");
+    
+    
     if(current === "") {
         current = "img,content,";
-    }
-    if(currentArchive === "") {
-        currentArchive = "archive_content,"+arch_path[0] + "," + arch_path[1]+",";
     }
     if(currentAva === "") {
         currentAva = "img,content,";
     }
+    
+    if("${article.publishPath}" !== null && "${article.publishPath}" !== "") {
+    
+    var arch_path = "${article.publishPath}".split("/");
+    
+    if(currentArchive === "") {
+        currentArchive = "archive_content,"+arch_path[0] + "," + arch_path[1]+",";
+    }
     if(currentArchiveAvatar === "") {
         currentArchiveAvatar = "archive_content,"+arch_path[0] + "," + arch_path[1]+",";
+    }
+    }
+    else {
+        
+    if(currentArchive === "") {
+        currentArchive = "archive_content,";
+    }
+    if(currentArchiveAvatar === "") {
+        currentArchiveAvatar = "archive_content,";
+    }
     }
     $("#dialog").dialog({
             autoOpen: false,
