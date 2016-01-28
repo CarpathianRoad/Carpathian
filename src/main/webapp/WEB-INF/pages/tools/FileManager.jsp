@@ -249,6 +249,11 @@
         });
         }
         $(".arrow-left-img").click(function(){
+        if($(this).attr("back-to-main") !== "" && getParameterByName("CKEditor") !== "") {
+           location.reload();
+        }
+        else {
+            
             var path = $(".img-content-show-all").attr("current");
             var real = $(".img-content-show-all").attr("realpath");
             var spl =  path.split("/");
@@ -267,6 +272,7 @@
            if(back2 !== "") {
            getFiles("", back, true);
             }
+        }
         });
         $("#create-folder").click(function(){
         var name = $("#foldernametext").val();
@@ -289,6 +295,7 @@
                 isFolder = isFolder || false;
                 var pat = "${path_main}".replace(/\//g,",");
                 $(".img-content-show-all").html("");
+                console.log('name='+temp_fold+'&parent='+parent+'&path='+pat);
                 jQuery.ajax({
                     url: '${Constants.URL}showImages',
                     cache: false,
@@ -312,9 +319,16 @@
                             $(".img-content-show-all").attr("realpath",$(".img-content-show-all").attr("realpath")+temp_fold+"/");
                         }
                         }
+                        $(".arrow-left-img").attr("back-to-main", "");
                         $(".arrow-left-img").show();
                        if($(".img-content-show-all").attr("realpath") === "img/content/" || $(".img-content-show-all").attr("realpath") === "archive_content/"){
-                           $(".arrow-left-img").hide();
+                           if(getParameterByName("CKEditor") !== "") {
+                               
+                           $(".arrow-left-img").attr("back-to-main", "go");
+                           }
+                           else {
+                            $(".arrow-left-img").hide();
+                            }
                        }
                        $(".img-breadcrumps").remove();
                        $("<span class='img-breadcrumps'>"+$(".img-content-show-all").attr("realpath").replace(/\//g," > ")+"</span>").insertBefore(".img-content-show-all");
