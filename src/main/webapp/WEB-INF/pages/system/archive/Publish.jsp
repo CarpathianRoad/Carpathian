@@ -19,6 +19,7 @@
         </ol>
                                 <form action="${Constants.URL}system/archive/do/publishdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
                                     <input type="hidden" name="article_id" value="${article.article_id}"/>
+                                    <input type="hidden" name="publish_path" value="${article.article_dir}"/>
             <div class="row add-row"><div class="col-lg-12 margintop30 field">
                                                         <label for="tlt">Title<span class="red-star">*</span></label><br/>
                                             <div class="btn-group lang-switch-title" role="group" aria-label="...">
