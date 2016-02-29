@@ -8,6 +8,8 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<title>${marker.title} | Carpathian Tourist Road</title>
+<meta property="og:title" content="${marker.title} | Carpathian Tourist Road"/>
 <t:indexpage>
 	<script src="${Constants.URL}js/lemmon-slider.js"></script> 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -50,40 +52,6 @@
             });
         });
     </script> 
-    <script>
-        //if("${article.avatar}"!=""){
-          //  $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${marker.avatar}");
-        //}else if("${images[0]}"!=""){
-        //   $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/${images[0]}");
-        //}else{
-         //   $("meta[property='og\\:image']").attr("content", "http://www.carpathianroad.com/img/content/NEWS/Anons/fest.jpg");
-       // }
-       // console.log($("meta[property='og\\:image']").attr("content"));
-        $('#fbShare').attr('data-href',document.URL);
-    
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '904133936315428',
-      xfbml      : true,
-      cookie: true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-   FB.ui({
-  method: 'feed',
-  link: 'https://developers.facebook.com/docs/',
-  caption: 'An example caption',
-}, function(response){});
-</script>
-    <script src="${Constants.URL}js/social_networks.js"></script>
     <section>
         <div class="s-new markerPageTable">
             <div class="markerLeftDescr">
@@ -172,7 +140,8 @@
                                             <div id="fb-post" class="fb-share-button" data-href="" data-layout="button" data-width="500"></div>
                                         </div>
                                         <div class="twitter">
-                                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> 
+                                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                                         </div>
                                     </div>
             </div>
