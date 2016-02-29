@@ -125,6 +125,23 @@
 	<script type="text/javascript" src="${Constants.URL}js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 </head>
 <body>
+    <script>
+window.fbAsyncInit = function() {
+FB.init({
+appId : '150866855300139',
+xfbml : true,
+version : 'v2.5'
+});
+};
+
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 	<div class="minHeight">
     <div class="row indexNavbar topMenu">
         	<div class='s-new smallMenuWidth' id="mainMenuWidth">
@@ -421,7 +438,7 @@
 	}
     
 	function addLangToLink(lang){
-	$( "a:not(.lang-sw, .shareLinks, .not-add-lan, .markerPageText a)" ).each(function( index ) {
+	$( "a:not(.lang-sw, .shareLinks, .not-add-lan, .twitter-share-button, .markerPageText a)" ).each(function( index ) {
        	 
         	if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){
         	if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){

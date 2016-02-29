@@ -203,7 +203,7 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(helpers.getRowHtml(request.getParameter("lang"), "0"), responseHeaders, HttpStatus.CREATED);
     }
-    @RequestMapping(value = {"/articles/loadсontent"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/articles/loadcontent"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> load_content(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
