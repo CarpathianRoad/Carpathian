@@ -121,9 +121,9 @@ public class SliderModel {
             temp.setId(result.getInt("id"));
             temp.setImage(result.getString("image"));
             temp.setUrlEN(result.getString("url"+lan.toUpperCase()));
-            temp.setTextEN(result.getString("text"+lan.toUpperCase()));
+            temp.setTextEN(result.getString("text"+lan.toUpperCase()).replaceAll("\"","\\\\\""));
             if("".equals(temp.getTextEN()) || temp.getTextEN() == null ){
-               temp.setTextEN(result.getString("textEN")); 
+               temp.setTextEN(result.getString("textEN").replaceAll("\"","\\\\\"")); 
             }
             if("".equals(temp.getUrlEN()) || temp.getUrlEN() == null ){
                temp.setUrlEN(result.getString("urlEN")); 
@@ -149,11 +149,11 @@ public class SliderModel {
             temp.setUrlHU(result.getString("urlHU"));
             temp.setUrlSK(result.getString("urlSK"));
             temp.setUrlRO(result.getString("urlRO"));
-            temp.setTextEN(result.getString("textEN"));
-            temp.setTextUA(result.getString("textUA"));
-            temp.setTextHU(result.getString("textHU"));
-            temp.setTextSK(result.getString("textSK"));
-            temp.setTextRO(result.getString("textRO"));
+            temp.setTextEN(result.getString("textEN").replaceAll("\"","\\\\\""));
+            temp.setTextUA(result.getString("textUA").replaceAll("\"","\\\\\""));
+            temp.setTextHU(result.getString("textHU").replaceAll("\"","\\\\\""));
+            temp.setTextSK(result.getString("textSK").replaceAll("\"","\\\\\""));
+            temp.setTextRO(result.getString("textRO").replaceAll("\"","\\\\\""));
             resultList.add(temp);
         } 
         DB.closeCon();
@@ -166,7 +166,7 @@ public class SliderModel {
         DB.runQuery("INSERT INTO `slider`(`image`, `urlEN`, `urlUA`, `urlHU`, `urlSK`, `urlRO`,"
                 + " `textEN`, `textUA`, `textHU`, `textSK`, `textRO`) VALUES ("
                 + "'"+image+"','"+urlEN+"','"+urlUA+"','"+urlHU+"','"+urlSK+"','"+urlRO+"',"
-                + "'"+textEN+"','"+textUA+"','"+textHU+"','"+textSK+"','"+textRO+"');");
+                + "'"+textEN.replaceAll("\"","\\\\\"")+"','"+textUA.replaceAll("\"","\\\\\"")+"','"+textHU.replaceAll("\"","\\\\\"")+"','"+textSK.replaceAll("\"","\\\\\"")+"','"+textRO.replaceAll("\"","\\\\\"")+"');");
     }
     
     public void clearTable()throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
