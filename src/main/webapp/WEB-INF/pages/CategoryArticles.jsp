@@ -56,7 +56,7 @@ function loadContent(country, count){
     $(".loader-block").show();
     $.ajax({
             type: "get",
-            url: "${Constants.URL}articles/loadсontent",
+            url: "${Constants.URL}articles/loadcontent",
             cache: false,    
             data:'lan='+lan+'&count='+count+'&country='+country+'&type='+type+'&menuCat='+menuCat,
             mimeType:"text/html; charset=UTF-8",

@@ -62,7 +62,7 @@
     } );
   </script>
 </head>
-<body>
+<body style="text-align: center;">
 
 
   <img class="cropimage" alt="" src="${Constants.URL}${file}" cropwidth="300" cropheight="195"/>
@@ -76,7 +76,10 @@
   <div class="download" style="display:none" >
     <a href="#" download="crop.png">Download</a>
   </div>
-  <button type="button" id="saveBtn" class="btn btn-primary">Save</button>
+  <button style="display: block;
+    margin: auto;
+    width: 100px;
+    margin-top: 10px;" type="button" id="saveBtn" class="btn btn-primary">Save</button>
   <br/>
 
   <select style="display:none" id="select">
@@ -86,16 +89,33 @@
 </body>
 <script>
     $("#saveBtn").click(function(){
-        $("#avatarUpload .returnImage").remove();
+        $(".download a").attr("href");
+         var data = new FormData();
+        data.append('path', '${fileR}');
+        data.append('url', $(".download a").attr("href"));
+        
+        jQuery.ajax({
+                    url: '${Constants.URL}system/downloadimage',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data){
+                        
+        $("#avatarUpload .returnImage", window.parent.document).remove();
+        $("#crop-this", window.parent.document).remove();
            $("#avatarUpload .img-content", window.parent.document).append("<a class='returnImage'>"
-                                + "<img src='"+ $(".download a").attr("href") + "' alt='" + $(".download a").attr("href") + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
+                                + "<img src='"+"${Constants.URL}"+ data + "' alt='" + data + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a>");
             
             $("#avatarUpload .img-input-box", window.parent.document).remove();
             $('#avatarUpload .image-upload', window.parent.document).append('<button type="button" id="avatarBtn"  class="btn btn-primary img-input-box" data-toggle="modal" data-target="#avatarModal">Browse avatar</button><button type="button" id="avatarBtnArchive"  class="btn btn-primary img-input-box" data-toggle="modal" style="margin-left: 5px;" data-target="#avatarModalArchive">Browse archive</button>');
-            $("#avatar-path", window.parent.document).val($(".download a").attr("href") );
+            $("#avatar-path", window.parent.document).val(data);
             
-            $("#avatarUpload .img-content-show-all").removeAttr("current");
-            $("#avatarUpload .img-content-show-all").removeAttr("realpath");
-            window.parent.imageInserted();
+            $("#avatarUpload .img-content-show-all", window.parent.document).removeAttr("current");
+            $("#avatarUpload .img-content-show-all", window.parent.document).removeAttr("realpath");
+            window.parent.imageInserted(); 
+                    }
+                    });
     });
 </script>

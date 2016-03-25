@@ -77,12 +77,13 @@ public class FormController {
         String textGE = request.getParameter("textGE");
         String textCZ = request.getParameter("textCZ");
         String textSRB = request.getParameter("textSRB");
+        String path = "";
         if( "0".equals(type) || "1".equals(type)){
             menuCat = "0";
         }
         String result = article.insertArticle(titleEN, titleUA, titleHU, titleSK, titlePL, titleRO, titleGE, titleCZ, titleSRB, date, actDate, type, author,
                 avatar, img, panorama, x, y, public_country, country, region, district, town, markerType, filter, menuCat,
-                textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
+                textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB, path);
         return new ModelAndView("redirect:" + "/system/panel");
        
     }

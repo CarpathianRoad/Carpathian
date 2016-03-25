@@ -125,6 +125,23 @@
 	<script type="text/javascript" src="${Constants.URL}js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 </head>
 <body>
+    <script>
+window.fbAsyncInit = function() {
+FB.init({
+appId : '150866855300139',
+xfbml : true,
+version : 'v2.5'
+});
+};
+
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 	<div class="minHeight">
     <div class="row indexNavbar topMenu">
         	<div class='s-new smallMenuWidth' id="mainMenuWidth">
@@ -213,11 +230,11 @@
             	<div class="s-clear"></div>
                 	<div id="langSmallMenu">
                     	<ul class="smallMenuLangSelector">
-   			 <li class="paddingLang"><a id="lang-switch-ua" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-en" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-sk" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-hu" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
-   			 <li class="paddingLang"><a id="lang-switch-ro" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-ua-sm" class="lang-sw" href="${Constants.URL}ua/index">UA</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-en-sm" class="lang-sw" href="${Constants.URL}en/index">EN</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-sk-sm" class="lang-sw" href="${Constants.URL}sk/index">SK</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-hu-sm" class="lang-sw" href="${Constants.URL}hu/index">HU</a></li>
+   			 <li class="paddingLang"><a id="lang-switch-ro-sm" class="lang-sw" href="${Constants.URL}hu/index">RO</a></li>
    			 <!--
                                 	<li class="paddingLang"><a href="#">PL</a></li>
                                 	<li class="paddingLang"><a href="#">RO</a></li>
@@ -336,6 +353,13 @@
 	addCssToMenu();
     
 	function langSelectMenu(){
+         var currentlan  = $("#languageSelectorSmall").text();
+       	 
+        	$("#lang-switch-ua-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ua"));
+        	$("#lang-switch-en-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/en"));
+        	$("#lang-switch-sk-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/sk"));
+        	$("#lang-switch-hu-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/hu"));
+        	$("#lang-switch-ro-sm").attr("href",window.location.href.replace("/"+currentlan.toLowerCase(),"/ro"));   
     	if(!(showLang)){
         	if(showSearch)searchSmallMenu();
         	if(showMenu)showSmallMenu();
@@ -414,7 +438,7 @@
 	}
     
 	function addLangToLink(lang){
-	$( "a:not(.lang-sw, .shareLinks, .not-add-lan, .markerPageText a)" ).each(function( index ) {
+	$( "a:not(.lang-sw, .shareLinks, .not-add-lan, .twitter-share-button, .markerPageText a)" ).each(function( index ) {
        	 
         	if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){
         	if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){

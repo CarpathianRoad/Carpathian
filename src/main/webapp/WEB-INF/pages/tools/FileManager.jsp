@@ -58,7 +58,7 @@
         $(document).ready(function () {
             
                 if(getParameterByName("CKEditor") !== "") {
-                    $(".img-content-show-all").html('<table class="article-table table table-bordered table-hover"><thead><tr><th class="text-center" style="width:30%">Preview</th><th class="text-center">Name</th><th class="text-center" style="width:5%"></th></tr></thead><tbody><tr class="galery-item"><td><img parent="${Constants.home}img/" realpath="img/" type="folder" name="content" src="${Constants.URL}img/folder-green-icon.png"></td><td><span class="clickable-name" parent="${Constants.home}img/" realpath="img/" type="folder" name="content">Images</span></td><td></td></tr><tr class="galery-item"><td><img parent="${Constants.home}" realpath="" type="folder" name="archive_content" src="${Constants.URL}img/folder-green-icon.png"></td><td><span class="clickable-name"  parent="${Constants.home}" realpath="" type="folder" name="archive_content">Archive</span></td><td></td></tr></tbody></table>');
+                    $(".img-content-show-all").html('<table class="article-table table table-bordered table-hover"><thead><tr><th class="text-center" style="width:30%">Preview</th><th class="text-center">Name</th><th class="text-center" style="width:5%"></th></tr></thead><tbody><tr class="galery-item"><td><img parent="${Constants.HOME}img/" realpath="img/" type="folder" name="content" src="${Constants.URL}img/folder-green-icon.png"></td><td><span class="clickable-name" parent="${Constants.HOME}img/" realpath="img/" type="folder" name="content">Images</span></td><td></td></tr><tr class="galery-item"><td><img parent="${Constants.HOME}" realpath="" type="folder" name="archive_content" src="${Constants.URL}img/folder-green-icon.png"></td><td><span class="clickable-name"  parent="${Constants.HOME}" realpath="" type="folder" name="archive_content">Archive</span></td><td></td></tr></tbody></table>');
                 insertImage();
                 }
                 else {
@@ -171,6 +171,8 @@
             window.parent.imageInserted();
             }
             else if("${type}" === "avatar")   {
+        $("#avatarUpload .returnImage", window.parent.document).remove();
+             $("#crop-this", window.parent.document).remove();
                $("#avatarUpload .img-content", window.parent.document).append("<a class='returnImage' data-url='"+"${Constants.URL}"+"img/markerImages/" + name + "'>"
                                 + "<img src='"+"${Constants.URL}"+ path + name + "' alt='" + path + name + "'  /><img src='"+"${Constants.URL}"+"img/remove.png' class='remove-icon'/></a><span id='crop-this'>Crop image</span>");
             window.parent.initCrop(path + name);
@@ -247,6 +249,11 @@
         });
         }
         $(".arrow-left-img").click(function(){
+        if($(this).attr("back-to-main") !== "" && getParameterByName("CKEditor") !== "") {
+           location.reload();
+        }
+        else {
+            
             var path = $(".img-content-show-all").attr("current");
             var real = $(".img-content-show-all").attr("realpath");
             var spl =  path.split("/");
@@ -265,6 +272,7 @@
            if(back2 !== "") {
            getFiles("", back, true);
             }
+        }
         });
         $("#create-folder").click(function(){
         var name = $("#foldernametext").val();
@@ -287,6 +295,7 @@
                 isFolder = isFolder || false;
                 var pat = "${path_main}".replace(/\//g,",");
                 $(".img-content-show-all").html("");
+                console.log('name='+temp_fold+'&parent='+parent+'&path='+pat);
                 jQuery.ajax({
                     url: '${Constants.URL}showImages',
                     cache: false,
@@ -310,9 +319,16 @@
                             $(".img-content-show-all").attr("realpath",$(".img-content-show-all").attr("realpath")+temp_fold+"/");
                         }
                         }
+                        $(".arrow-left-img").attr("back-to-main", "");
                         $(".arrow-left-img").show();
                        if($(".img-content-show-all").attr("realpath") === "img/content/" || $(".img-content-show-all").attr("realpath") === "archive_content/"){
-                           $(".arrow-left-img").hide();
+                           if(getParameterByName("CKEditor") !== "") {
+                               
+                           $(".arrow-left-img").attr("back-to-main", "go");
+                           }
+                           else {
+                            $(".arrow-left-img").hide();
+                            }
                        }
                        $(".img-breadcrumps").remove();
                        $("<span class='img-breadcrumps'>"+$(".img-content-show-all").attr("realpath").replace(/\//g," > ")+"</span>").insertBefore(".img-content-show-all");

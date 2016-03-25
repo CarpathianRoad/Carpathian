@@ -16,8 +16,10 @@
                 behavior:url(#default#VML);
             }
             #map {
-                margin-top: -10px;
+                margin-top: -30px;
                 margin-bottom: 10px;
+            }
+            .contentIntend {
             }
         </style>
         <script type="text/javascript"

@@ -5,9 +5,18 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +30,9 @@ import ua.aits.Carpath.model.ArticleModel;
 import ua.aits.Carpath.model.MenuModel;
 import ua.aits.Carpath.model.RouteModel;
 import ua.aits.Carpath.model.UserModel;
-
+import java.io.ByteArrayInputStream;
+import javax.imageio.ImageIO;
+import sun.misc.BASE64Decoder;
 /**
  *
  * @author kiwi
@@ -192,7 +203,7 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(helpers.getRowHtml(request.getParameter("lang"), "0"), responseHeaders, HttpStatus.CREATED);
     }
-    @RequestMapping(value = {"/articles/loadсontent"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/articles/loadcontent"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> load_content(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -462,5 +473,32 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
+    }
+    
+    @RequestMapping(value = {"/system/downloadimage/", "/system/downloadimage"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String downloadimage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String imageString = request.getParameter("url").substring(request.getParameter("url").indexOf(",")+1);
+BufferedImage image = null;
+byte[] imageByte;
+
+BASE64Decoder decoder = new BASE64Decoder();
+imageByte = decoder.decodeBuffer(imageString);
+ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+image = ImageIO.read(bis);
+bis.close();
+
+        String ur = request.getParameter("url");
+        String[] path = request.getParameter("path").split(",");
+        String filename = path[path.length-1].split("\\.")[0];
+        String[] newPath = (String[]) ArrayUtils.remove(path, path.length-1);
+        String pathW = "";
+        for(String temp : newPath) {
+            pathW += temp + "/";
+        }
+        File outputfile = new File(Constants.home + pathW + "cropped-"+filename+".png");
+        ImageIO.write(image, "png", outputfile);
+        return pathW + "cropped-"+filename+".png";
     }
 }

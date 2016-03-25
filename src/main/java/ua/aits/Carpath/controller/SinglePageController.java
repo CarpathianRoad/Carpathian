@@ -167,6 +167,10 @@ public class SinglePageController {
 	public ModelAndView marker(@PathVariable("lan") String lan, @PathVariable("id") String id, HttpServletRequest request,
    		 HttpServletResponse response) throws Exception {
     	MapModel ret  = map.getMarker(lan, id);
+        if(ret.title == null) {
+            ModelAndView model = new ModelAndView("/error/404");
+            return model;
+        }
     	if(ret.getMarkerIcon() == null || "".equals(ret.getMarkerIcon())) {
                         	ret.setMarkerIcon("gardens");
                     	}
@@ -262,6 +266,7 @@ public class SinglePageController {
             	String file = request.getParameter("file");
                 ModelAndView model = new ModelAndView("/tools/ImageCrop");
             	model.addObject("file", file.replace(',', '/'));
+            	model.addObject("fileR", file);
                 return model;
 	}
   	 

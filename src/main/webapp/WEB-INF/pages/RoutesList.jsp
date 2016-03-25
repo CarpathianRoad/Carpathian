@@ -82,16 +82,16 @@
         .difficultyBlock a{
             width: 100%;
             display: block;
-            color: rgba(0,0,0,0);
+            //color: rgba(0,0,0,0);
         }
         .difficultyBlock a:hover{
-            color: rgba(0,0,0,0) !important;
+            //color: rgba(0,0,0,0) !important;
         }
         .difficultyBlock a:focus{
-            color: rgba(0,0,0,0) !important;
+            //color: rgba(0,0,0,0) !important;
         }
         .difficultyBlock a:visited{
-            color: rgba(0,0,0,0) !important;
+            //color: rgba(0,0,0,0) !important;
         }
         .routeTypeSplit{
             color: rgba(0,0,0,0) !important;
@@ -148,6 +148,15 @@
         }
         .routeTypeSplit span{
             display: none;
+        }
+        .difficultyLink span{
+            display: none;
+        }
+        .difficultyLink{
+            display: table;
+        }
+        #table-pagination{
+            visibility: hidden;
         }
     </style>
     <div class="s-new widthClass">
@@ -241,6 +250,7 @@
                             <th style="text-align: center"><a href="${Constants.URL}${lan}routes/${route.id}">${route.length}</a></th>
                             <th><a href="${Constants.URL}${lan}routes/${route.id}">${route.textUA}</a></th>
                         </tr>
+                        <script>console.log("${Constants.URL}${lan}routes/${route.id}");</script>
                 </c:forEach>
                     </tbody>
                 </table>
@@ -268,19 +278,19 @@
             $(this).text("");
             switch(temp[i]){
                     case "1":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png"><span>walk.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/walk.png"><span>walk.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_yellow.png" />');
                         break;
                     case "2":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png"><span>bike.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/bike.png"><span>bike.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_green.png" />');
                         break;
                     case "3":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png"><span>ski.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/ski.png"><span>ski.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_red.png" />');
                         break;
                     case "4":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png"><span>horse.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/horse.png"><span>horse.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_brown.png" />');
                         break;
                     case "5":
-                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png"><span>canoe.png</span>');
+                        $(this).html('<img style="width: 40px;" src="${Constants.URL}img/canoe.png"><span>canoe.png</span><img style="width: 55px;margin-left: 10px;" src="${Constants.URL}img/sq_blue.png" />');
                         break;
                 }
         }
@@ -288,16 +298,16 @@
     $(".difficultyLink").each(function(){
         switch($(this).text()){
             case "1":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_green.png' />1");
+                $(this).html("<strong>1</strong>");
                 break;
             case "2":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_blue.png' />2");
+                $(this).html("<strong>2</strong>");
                 break;
             case "3":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_yellow.png' />3");
+                $(this).html("<strong>3</strong>");
                 break;
             case "4":
-                $(this).html("<img style='width: 55px;' src='${Constants.URL}img/sq_red.png' />4");
+                $(this).html("<strong>4</strong>");
                 break;
         }
         
@@ -327,6 +337,7 @@
     });
  
     // DataTable
+    setTimeout(function(){
     table = $('#table-pagination').DataTable({
                         columnDefs: [
                             { type: 'date-eu', targets: 3,orderable: false, targets: -1  }
@@ -348,6 +359,8 @@
             }
         } );
     } );
+    $('#table-pagination').css('visibility', 'visible');
+    }, 500);
     $(".route-title").css("width","140px");
 } );
 
@@ -561,5 +574,5 @@
                         $('#routeBlock'+n).css('display','block');
                 }
             }*/
-        </script>
+        </script> 
 </t:indexpage>
