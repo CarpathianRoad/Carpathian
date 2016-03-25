@@ -89,6 +89,10 @@ public class ArticleController {
                 }
             modelAndView.addObject("articles", articles);
             ArticleModel tempArt  = news.getOneArticle(lan, id);
+            if(tempArt.title == null) {
+                ModelAndView model = new ModelAndView("/error/404");
+                return model;
+            }
             if(tempArt == null) {
                  return new ModelAndView("redirect:" + "/404");
             }
