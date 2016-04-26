@@ -89,7 +89,7 @@ public class SystemController {
             modelAndView.addObject("menuList", helpers.getRowHtmlSelectSmall("en", "0"));
             return modelAndView;
     }
-    @RequestMapping(value = {"/system/login.do","/system/login.do/"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/login.do","/system/login.do/", "/Carpath/system/login.do","/Carpath/system/login.do/"}, method = RequestMethod.POST)
     public ModelAndView login(@RequestParam("user_id") String user_id, @RequestParam("user_name") String user_name, @RequestParam("user_password") String user_password, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArchiveUserModel user = Users.getOneUserFull(user_id, user_name, user_password); 
         HttpSession session = request.getSession(true);
@@ -110,7 +110,7 @@ public class SystemController {
             modelAndView.addObject("users", Users.getAllUsers());
             return modelAndView;
     }
-    @RequestMapping(value = {"/system/users/add", "/system/users/add/"})
+    @RequestMapping(value = {"/system/users/add", "/system/users/add/", "/Carpath/system/users/add", "/Carpath/system/users/add/"})
     public ModelAndView addUser(HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             request.setCharacterEncoding("UTF-8");
@@ -223,7 +223,7 @@ public class SystemController {
             return modelAndView;
     }
         
-    @RequestMapping(value = "/system/user/do/insertdata.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/user/do/insertdata.do", "/Carpath/system/user/do/insertdata.do"}, method = RequestMethod.POST)
     public ModelAndView doAddUser(@RequestParam("user_avatar") MultipartFile file, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String user_name = request.getParameter("user_name");
@@ -258,7 +258,7 @@ public class SystemController {
         return new ModelAndView("redirect:" + "/system/users");
     } 
         
-    @RequestMapping(value = "/system/user/do/updatedata.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/user/do/updatedata.do", "/Carpath/system/user/do/updatedata.do"}, method = RequestMethod.POST)
     public ModelAndView doEditUser(@RequestParam("user_avatar") MultipartFile file, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String user_id = request.getParameter("user_id");
@@ -296,7 +296,7 @@ public class SystemController {
         return new ModelAndView("redirect:" + "/system/users");
     }   
         
-    @RequestMapping(value = "/system/user/do/deletedata.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/user/do/deletedata.do", "/Carpath/system/user/do/deletedata.do"}, method = RequestMethod.POST)
     public ModelAndView doDeleteUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String user_id = request.getParameter("user_id");
@@ -309,7 +309,7 @@ public class SystemController {
         return new ModelAndView("redirect:" + "/system/users");
     }
     
-    @RequestMapping(value = {"/system/do/logout.do","/archive/do/logout.do/"})
+    @RequestMapping(value = {"/system/do/logout.do","/archive/do/logout.do/","/Carpath/system/do/logout.do","/Carpath/archive/do/logout.do/"})
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
@@ -318,7 +318,7 @@ public class SystemController {
     } 
     
     
-    @RequestMapping(value = {"/system/filters/do/deletedata.do"})
+    @RequestMapping(value = {"/system/filters/do/deletedata.do", "/Carpath/system/filters/do/deletedata.do"})
     public ModelAndView doDeleteFilters ( HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             String id = request.getParameter("id");
@@ -328,7 +328,7 @@ public class SystemController {
     }
     
     
-    @RequestMapping(value = {"/system/article/do/deletedata.do"})
+    @RequestMapping(value = {"/system/article/do/deletedata.do", "/Carpath/system/article/do/deletedata.do"})
     public ModelAndView doDeleteArticles( HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             String id = request.getParameter("article_id");
@@ -343,7 +343,7 @@ public class SystemController {
     }
     
     
-    @RequestMapping(value = {"/system/route/do/deletedata.do"})
+    @RequestMapping(value = {"/system/route/do/deletedata.do", "/Carpath/system/route/do/deletedata.do"})
     public ModelAndView doDeleteRoutes( HttpServletRequest request,
 		HttpServletResponse response) throws Exception {
             String id = request.getParameter("route_id");
@@ -358,7 +358,7 @@ public class SystemController {
     }
     
     /* ajax */
-    @RequestMapping(value = {"/system/users/ajax/checkUserName", "/system/users/ajax/checkUserName/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/users/ajax/checkUserName", "/system/users/ajax/checkUserName/", "/Carpath/system/users/ajax/checkUserName", "/Carpath/system/users/ajax/checkUserName/"}, method = RequestMethod.GET)
     public @ResponseBody String archiveCheckUsername(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         return Users.isExitsUserName(request.getParameter("user_name"));

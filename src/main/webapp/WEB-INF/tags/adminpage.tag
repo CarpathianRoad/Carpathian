@@ -104,35 +104,35 @@
                     <c:choose>
                         <c:when test="${sessionScope.user == null}">
                             <li class="active">
-                                <a href="${Constants.URL}archive/login"><i class="fa fa-fw fa-sign-in"></i> Login page</a>
+                                <a href="<c:url value="/archive/login"/>"><i class="fa fa-fw fa-sign-in"></i> Login page</a>
                             </li>
                         </c:when>    
                         <c:otherwise>
                             <c:if test="${sessionScope.user.user_role == 1}">
                             <li id="index">
-                                <a href="${Constants.URL}system/index"><i class="fa fa-fw fa-list-alt"></i> Main page</a>
+                                <a href="<c:url value="/system/index"/>"><i class="fa fa-fw fa-list-alt"></i> Main page</a>
                             </li>
                             </c:if>
                             <li id="archive">
-                                <a href="${Constants.URL}system/archive/index"><i class="fa fa-fw fa-folder"></i> Archive</a>
+                                <a href="<c:url value="/system/archive/index"/>"><i class="fa fa-fw fa-folder"></i> Archive</a>
                             </li>
                             <li id="archive">
-                                <a href="${Constants.URL}system/archive/search"><i class="fa fa-fw fa-search"></i> Search</a>
+                                <a href="<c:url value="/system/archive/search"/>"><i class="fa fa-fw fa-search"></i> Search</a>
                             </li>
                             <c:if test="${sessionScope.user.user_role == 1}">
                             <li id="users">
-                                <a href="${Constants.URL}system/users"><i class="fa fa-fw fa-users"></i> Users</a>
+                                <a href="<c:url value="/system/users"/>"><i class="fa fa-fw fa-users"></i> Users</a>
                             </li>
                             <li id="slider">
-                                <a href="${Constants.URL}system/slider"><i class="fa fa-fw fa-picture-o"></i> Slider</a>
+                                <a href="<c:url value="/system/slider"/>"><i class="fa fa-fw fa-picture-o"></i> Slider</a>
                             </li>
                             <li id="filters">
-                                <a href="${Constants.URL}system/filters"><i class="fa fa-fw fa-filter"></i> Filters</a>
+                                <a href="<c:url value="/system/filters"/>"><i class="fa fa-fw fa-filter"></i> Filters</a>
                             </li>
                             </c:if>
                             <c:if test="${sessionScope.user.user_role == 1 || sessionScope.user.user_name == 'matsko'}">
                             <li id="routes">
-                                <a href="${Constants.URL}system/routes"><i class="fa fa-fw fa-road"></i> Routes</a>
+                                <a href="<c:url value="/system/routes"/>"><i class="fa fa-fw fa-road"></i> Routes</a>
                             </li>
                             </c:if>
                             <li id="logout">
