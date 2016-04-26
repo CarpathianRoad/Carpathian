@@ -274,7 +274,7 @@ public class SinglePageController {
 	@RequestMapping(value = {"/login","/login/","/Carpath/login","/Carpath/login/"})
 	public ModelAndView login(HttpServletRequest request,
    		 HttpServletResponse response) throws Exception {
-    	String redir = "http://88.81.239.23:59180/";
+    	String redir = "/Carpath/";
     	if("/Carpath/".equals(Constants.URL)) {
         	redir = "/";
     	}

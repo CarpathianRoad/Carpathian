@@ -15,11 +15,11 @@
         <h4>Route edit</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/routes"> <i class="fa fa-fw fa-list-alt"></i> Back to routes</a>
+                <a href="<c:url value="/system/routes" />"> <i class="fa fa-fw fa-list-alt"></i> Back to routes</a>
             </li>
         </ol>
 
-                                <form action="${Constants.URL}system/routes/updatedata.do" name="addRouteForm" id="editForm" method="POST" type="multipart/form-data">
+                                <form action="<c:url value="/system/routes/updatedata.do" />" name="addRouteForm" id="editForm" method="POST" type="multipart/form-data">
                                     <input type="hidden" name="id" value="${route.id}"/>    
             <div class="row add-row"><div class="col-lg-12 margintop30 field">
                                                         <label for="tlt">Title<span class="red-star">*</span></label><br/>
@@ -238,7 +238,7 @@
         </form>
         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save changes</button>
-            <a href="${Constants.URL}system/routes"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to routes</button></a>
+            <a href="<c:url value="/system/routes" />"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to routes</button></a>
         </p>
         </div>
 </t:adminpage>

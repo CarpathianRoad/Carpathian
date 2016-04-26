@@ -70,13 +70,13 @@
                     <div class="markerPageDate">
                         ${marker.date}
                     </div>
-                    <a href="${Constants.URL}map/${marker.id}">
+                    <a href="<c:url value="/map/${marker.id}" />">
                         <div class="markerPageCountry">
                             <img src="${Constants.URL}img/mapControlsImageSelected.png"/>
                             ${marker.country}
                         </div>
                     </a>
-                            <a class="show-map-block" href="${Constants.URL}map/${marker.id}">
+                            <a class="show-map-block" href="<c:url value="/map/${marker.id}" />">
                         <div>
                             <img src="${Constants.URL}img/show_map.png"/>
                         </div>
@@ -124,13 +124,13 @@
                     </div>
                                     
                                     <div class="article_main_image">
-                                        <a class="fancybox not-add-lan" id="mainPictureFancybox" rel="gallery1" href="${Constants.URL}<c:out value="${images[0]}" />">
+                                        <a class="fancybox not-add-lan" id="mainPictureFancybox" rel="gallery1" href="<c:url value="/${images[0]}" />">
                                             <img id="main_image" src="${Constants.URL}<c:out value="${images[0]}" />" />
                                         </a>
                                         <div style="display:none" >
                                             <c:forEach items="${images}" var="image" varStatus="loop">
                                                 <c:if test="${image != images[0]}">
-                                                     <a class="fancybox not-add-lan" rel="gallery1" href="${Constants.URL}${image}" />">
+                                                     <a class="fancybox not-add-lan" rel="gallery1" href="<c:url value="/${image}" />" />">
                                                     <img id="main_image" src="${Constants.URL}${image}" />" />
                                                 </a>
                                                 </c:if>

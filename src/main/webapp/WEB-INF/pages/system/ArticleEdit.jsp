@@ -15,10 +15,10 @@
         <h4>Article edit</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/index"> <i class="fa fa-fw fa-list-alt"></i> Back to articles</a>
+                <a href="<c:url value="/system/index" />"> <i class="fa fa-fw fa-list-alt"></i> Back to articles</a>
             </li>
         </ol>
-                                <form action="${Constants.URL}system/updatedata.do" name="editArticleForm" id="editForm" method="POST" type="multipart/form-data">
+                                <form action="<c:url value="/system/updatedata.do" />" name="editArticleForm" id="editForm" method="POST" type="multipart/form-data">
                                     <input type="hidden" value="${article.id}" name="id" />
             <div class="row add-row"><div class="col-lg-12 margintop30 field">
                                                         <label for="tlt">Title<span class="red-star">*</span></label><br/>
@@ -276,7 +276,7 @@
         </form>					
         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save changes</button>
-            <a href="${Constants.URL}system/index"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to articles</button></a>
+            <a href="<c:url value="/system/index" />"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to articles</button></a>
         </p>
         </div>
 </t:adminpage>

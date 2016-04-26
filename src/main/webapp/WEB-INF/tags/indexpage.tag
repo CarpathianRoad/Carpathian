@@ -332,7 +332,7 @@ fjs.parentNode.insertBefore(js, fjs);
                                         	</a>
                                     	</div>
                 	<div class="siteMap">
-                    	<a style="margin-right: 15px;" class="not-add-lan" href="${Constants.URL}login">
+                    	<a style="margin-right: 15px;" class="not-add-lan" href="${Constants.URL}en/login">
                         	Enter
                     	</a>
                     	<a href="${Constants.URL}sitemap">

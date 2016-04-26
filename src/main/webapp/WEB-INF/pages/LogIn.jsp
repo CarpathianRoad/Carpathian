@@ -8,9 +8,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <t:indexpage>
-     <c:if test="${fn:containsIgnoreCase(pageContext.request.requestURL, 'carpathianroad.com')}">
-        <script>window.location.href = "http://88.81.239.23:59180/en/login";</script>
-    </c:if>
     <style>
         .btn-login {
             background: rgb(86,105,143);
@@ -44,7 +41,7 @@
     </style>
     <section id="content">
         <div class="login-block">
-            <form role="form" name="login-form" id="login-form" action="${Constants.URL}system/login.do" method="POST">
+            <form role="form" name="login-form" id="login-form" action="<c:url value="/system/login.do"/>" method="POST">
                             <input name="user_id" id="user_id" type="hidden"/>
                                         <div class="row add-row">
 						<div class="field">

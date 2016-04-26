@@ -18,7 +18,7 @@
         <h4>Delete article</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/index"> <i class="fa fa-fw fa-list-alt"></i> Back to articles</a>
+                <a href="<c:url value="/system/index" />"> <i class="fa fa-fw fa-list-alt"></i> Back to articles</a>
             </li>
         </ol>
 	<div class="row add-row">
@@ -26,11 +26,11 @@
                     <div class="delete-row">Delete article <strong>"${article.titleEN}"</strong> ?</div>
                     <p>
                         <button class="btn btn-success margintop30 marginbottom30" id="sudmitDelete" type="submit">Delete article</button>
-                        <a href="${Constants.URL}system/index"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to articles</button></a>
+                        <a href="<c:url value="/system/index" />"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to articles</button></a>
                     </p>
                 </div>
         </div>
-                    <form action="${Constants.URL}system/article/do/deletedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+                    <form action="<c:url value="/system/article/do/deletedata.do" />" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
                         <input type="hidden" id="article_id" name="article_id" value="${article.id}"/>
                     </form>
     </div>

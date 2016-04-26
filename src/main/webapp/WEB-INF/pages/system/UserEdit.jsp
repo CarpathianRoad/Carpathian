@@ -13,10 +13,10 @@
         <h4>Edit user</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/users"> <i class="fa fa-fw fa-list-alt"></i> Back to users</a>
+                <a href="<c:url value="/system/users" />"> <i class="fa fa-fw fa-list-alt"></i> Back to users</a>
             </li>
         </ol>
-	<form action="${Constants.URL}system/user/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" enctype="multipart/form-data" type="multipart/form-data">
+	<form action="<c:url value="/system/user/do/updatedata.do" />" name="addArticleForm" id="addForm" method="POST" enctype="multipart/form-data" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
             <input type="hidden" id="user_id" name="user_id" value="${user.user_id}"/><div class="row add-row">
             <input type="hidden" id="user_avatar_old" name="user_avatar_old" value="${user.user_avatar}"/>
@@ -82,7 +82,7 @@
         </form>
         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Save user</button>
-            <a href="${Constants.URL}system/users"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to users</button></a>
+            <a href="<c:url value="/system/users" />"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to users</button></a>
         </p>
     </div>
 </t:adminpage>

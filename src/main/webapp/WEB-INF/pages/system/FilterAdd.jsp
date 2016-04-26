@@ -13,10 +13,10 @@
         <h4>Add filter</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/filters"> <i class="fa fa-fw fa-list-alt"></i> Back to filters</a>
+                <a href="<c:url value="/system/filters" />"> <i class="fa fa-fw fa-list-alt"></i> Back to filters</a>
             </li>
         </ol>
-	<form name="filterAdd" method="POST" action="${Constants.URL}system/addfilter.do" id="addFilter" enctype="multipart/form-data" type="multipart/form-data">
+	<form name="filterAdd" method="POST" action="<c:url value="/system/addfilter.do" />" id="addFilter" enctype="multipart/form-data" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
             <div class="row add-row">
                 <div class="col-lg-4 margintop10 field">
@@ -51,7 +51,7 @@
         </form>
         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Add filter</button>
-            <a href="${Constants.URL}system/filters"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to filters</button></a>
+            <a href="<c:url value="/system/filters" />"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to filters</button></a>
         </p>
     </div>
 </t:adminpage>

@@ -18,7 +18,7 @@
                 </div>
 	<div class="row">
                     <div class="col-lg-10 slider-page">
-	<form name="sliderEdit" method="POST" action="${Constants.URL}system/slideredit.do" id="sliderEdit">
+	<form name="sliderEdit" method="POST" action="<c:url value="/system/slideredit.do" />" id="sliderEdit">
             <div class="col-lg-12 field">
                         <div id="imageUpload" class="form-group">
                             <div class="img-content">

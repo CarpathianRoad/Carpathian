@@ -10,7 +10,7 @@
 <t:adminpage>
     <div class="container admin-panel-container">
             
-            <form name="markerAdd" method="POST" enctype="multipart/form-data" action="${Constants.URL}system/editmarker.do" id="addMarker" type="multipart/form-data">
+            <form name="markerAdd" method="POST" enctype="multipart/form-data" action="<c:url value="/system/editmarker.do" />" id="addMarker" type="multipart/form-data">
                 
                <div class="row">
 						<div class="col-lg-2 field">
