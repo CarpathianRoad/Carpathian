@@ -14,7 +14,7 @@
             display:none;
         }
     </style>
-    <script>window.location.href = "${Constants.URL}login";</script>
+    <script>window.location.href = "${Constants.URL}en/login";</script>
 </c:if>
 <c:if test="${not fn:containsIgnoreCase(pageContext.request.servletPath, 'archive') && sessionScope.user.user_role == 0  && pageContext.request.servletPath.substring(pageContext.request.servletPath.lastIndexOf('/')) != '/UserSettings.jsp'}">
     <c:if test="${sessionScope.user.user_name != 'matsko'}">

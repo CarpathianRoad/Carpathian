@@ -28,5 +28,9 @@
 <script>
     $(document).ready(function() {
         console.log("${sessionScope.user.user_name}");
+        $( ".content-list a" ).each(function( index ) {
+            var current = $(this).attr("href") + ";" + $.cookie("sessionid");
+            $(this).attr("href", current);
+        });
     });
 </script>
