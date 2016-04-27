@@ -14,10 +14,10 @@
         <h4>Add article</h4>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="${Constants.URL}system/archive/articles/${article.article_category}"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
+                <a href="<c:url value="/system/archive/articles/${article.article_category}" />"> <i class="fa fa-fw fa-list-alt"></i> Back to category</a>
             </li>
         </ol>
-                                <form action="${Constants.URL}system/archive/do/publishdata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+                                <form action="<c:url value="/system/archive/do/publishdata.do" />" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
                                     <input type="hidden" name="article_id" value="${article.article_id}"/>
                                     <input type="hidden" name="publish_path" value="${article.article_dir}"/>
             <div class="row add-row"><div class="col-lg-12 margintop30 field">
@@ -294,7 +294,7 @@
         </form>
                                                         <p>
             <button class="btn btn-success margintop30 marginbottom30" id="sudmitData" type="submit">Publish article</button>
-            <a href="${Constants.URL}system/archive/articles/${article.article_category}"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
+            <a href="<c:url value="/system/archive/articles/${article.article_category}" />"><button class="btn btn-danger margintop30 marginbottom30" id="sudmitData" type="submit">Back to category</button></a>
         </p>
         </div>
 </t:adminpage>

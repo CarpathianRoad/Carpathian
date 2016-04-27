@@ -15,7 +15,7 @@
                     	</h1>
                     	<ol class="breadcrumb">
                         	<li class="active">
-                            	<a href="${Constants.URL}system/archive/index"> <i class="fa fa-fw fa-list-alt"></i> Back to categories</a>
+                            	<a href="<c:url value="/system/archive/index" />"> <i class="fa fa-fw fa-list-alt"></i> Back to categories</a>
                         	</li>
                     	</ol>
                 	</div>
@@ -24,7 +24,7 @@
             	<div class="row">
                 	<div class="col-lg-12">
                     	<div class="table-responsive">
-                        	<div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/archive/add/"/>${category}">+ Add article</a></button></div>
+                        	<div class="add-button-panel"><button class="btn btn-success btn-mini" id="sudmitData" type="submit"><a href="<c:url value="/system/archive/add/${category}"/>">+ Add article</a></button></div>
                         	<div class="article-filters">
                             	<a class="disabled filter-button">Show/hide filters</a>
                         	</div>

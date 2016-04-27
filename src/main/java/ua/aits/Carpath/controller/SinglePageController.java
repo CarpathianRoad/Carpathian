@@ -271,7 +271,7 @@ public class SinglePageController {
 	public ModelAndView login(HttpServletRequest request,
    		 HttpServletResponse response) throws Exception {
     	String redir = "/Carpath/";
-    	if("/Carpath/".equals(Constants.URL)) {
+    	if("/".equals(Constants.URL)) {
         	redir = "/";
     	}
    	 return new ModelAndView("redirect:" + redir+"en/login");

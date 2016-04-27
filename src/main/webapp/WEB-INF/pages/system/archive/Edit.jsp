@@ -18,7 +18,7 @@
                 <a href="#" data-toggle="modal" data-target="#shureModal"> <i class="fa fa-fw fa-list-alt"></i> Back to category "${cat_name}"</a>
             </li>
         </ol>
-	<form action="${Constants.URL}system/archive/do/updatedata.do" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
+	<form action="<c:url value="/system/archive/do/updatedata.do" />" name="addArticleForm" id="addForm" method="POST" type="multipart/form-data">
             <input type="hidden" class="form-control" id="auth" name="author" value="<c:out value="${sessionScope.user.user_name}"/>">
             <input type="hidden" class="form-control" name="category" value="${article.article_category}">
             <input type="hidden" class="form-control" name="id" value="${article.article_id}">
@@ -134,7 +134,7 @@
                 <label for="tlt">Images for galery</label><br/>
             </div>
         </div>
-        <form action="${Constants.URL}archive/do/uploadfile" class="dropzone"  id="my-awesome-dropzone-gal">
+        <form action="<c:url value="/system/archive/do/uploadfile" />" class="dropzone"  id="my-awesome-dropzone-gal">
             <input type="hidden" name="path" value="archive_content/${article.article_dir}/galery" />
             <input type="file" name="file" style="display:none" />
         </form>
@@ -143,7 +143,7 @@
                 <label for="tlt">Article files</label><br/>
             </div>
         </div>
-        <form action="${Constants.URL}archive/do/uploadfile" class="dropzone"  id="my-awesome-dropzone">
+        <form action="<c:url value="/system/archive/do/uploadfile" />" class="dropzone"  id="my-awesome-dropzone">
             <input type="hidden" name="path" value="archive_content/${article.article_dir}/files" />
             <input type="file" name="file" style="display:none" />
         </form>
@@ -165,7 +165,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-success btn-mini sudmitData" data-dismiss="modal" type="submit">Save changes</button>
                     <button class="btn btn-warning btn-mini modal-btn-warning" type="submit" data-dismiss="modal">Cancel</button>
-                    <a href="${Constants.URL}system/archive/articles/${article.article_category}"><button type="button" class="btn btn-danger btn-mini">Back to category</button></a>
+                    <a href="<c:url value="/system/archive/articles/${article.article_category}" />"><button type="button" class="btn btn-danger btn-mini">Back to category</button></a>
                 </div>
           </div>
         </div>
@@ -180,11 +180,11 @@
         var currentLangT = $(".lang-switch-title button.active").attr("id");
         $(".input-title-lang[lang='"+currentLangT+"']").show();
         $("#my-awesome-dropzone").dropzone({ 
-            url: "${Constants.URL}system/archive/do/uploadfile",
+            url: '<c:url value="/system/archive/do/uploadfile" />',
             addRemoveLinks: true
         });
         $("#my-awesome-dropzone-gal").dropzone({ 
-            url: "${Constants.URL}system/archive/do/uploadfile",
+            url: '<c:url value="/system/archive/do/uploadfile" />',
             addRemoveLinks: true
         });
         if('${filesHTML}' !== null && '${filesHTML}' !== ''){

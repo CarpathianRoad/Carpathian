@@ -12,7 +12,7 @@
     <script src="${Constants.URL}js/ckeditor/ckeditor.js"></script>
     <div class="margintop20">
         <h4>Search articles</h4>
-	<form action="${Constants.URL}system/archive/search" name="addArticleForm" id="addForm" method="GET">
+	<form action="<c:url value="/system/archive/search" />" name="addArticleForm" id="addForm" method="GET">
             <div class="row add-row">
                 <div class="col-lg-4 margintop10 field">
                     <input type="text" id="search" name="search_string" value="${svalue}" class="form-control">
@@ -68,7 +68,7 @@
                                                         <td <c:if test="${item.article_author != item.article_editor}">style="color:#622B2B"</c:if>>
                                                             ${item.article_title_en}
                                                         </td>
-                                                        <td class="text-center"><a href="${Constants.URL}system/archive/articles/${item.article_category}">${item.article_category_text}</a></td>
+                                                        <td class="text-center"><a href="<c:url value="/system/archive/articles/${item.article_category}"/>">${item.article_category_text}</a></td>
                                                         <td class="text-center">${item.article_image_size}</td>
                                                         <td class="text-center">${item.article_file_size}</td>
                                                         <td class="text-center">${item.article_edit_date}</td>
@@ -97,7 +97,7 @@
                                                             </td>
                                                             </c:otherwise>
                                                         </c:choose>
-                                                        <td class="text-center"><a href="${Constants.URL}system/archive/articles/${item.article_category}">${item.article_category_text}</a></td>
+                                                        <td class="text-center"><a href="<c:url value="/system/archive/articles/${item.article_category}"/>">${item.article_category_text}</a></td>
                                                         
                                                         <td class="text-center">${item.article_image_size}</td>
                                                         <td class="text-center">${item.article_file_size}</td>

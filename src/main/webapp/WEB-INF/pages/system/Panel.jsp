@@ -120,10 +120,8 @@ $(document).ready(function () {
     $("#menuCat").addClass("filter-select form-control");
     $("#menuCat").addClass("form-control");
     var url = window.location.href; 
-    if(url.indexOf("jsessionid")){
-        var arr = url.split(";");
-        $.cookie("sessionid", arr[1]);   
-    }
+        $.cookie("sessionid", 'jsessionid=<c:out value="${pageContext.session.id}"/>');   
+    
     loadContent("${sessionScope.user.user_name}", "default", "default", $("#page_number").val(), 1);
     
     $(".filter-select" ).change(function() {
