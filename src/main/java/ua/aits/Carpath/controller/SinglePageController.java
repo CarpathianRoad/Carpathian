@@ -5,12 +5,15 @@
  */
 package ua.aits.Carpath.controller;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.aits.Carpath.functions.Constants;
@@ -43,12 +46,20 @@ public class SinglePageController {
 	public ModelAndView error404(HttpServletRequest request,
    		 HttpServletResponse response)  {
    	 ModelAndView model = new ModelAndView("/error/404");
+             	model.addObject("lan", "en");
    	 return model;
     }
 	@RequestMapping(value = {"/500", "/Carpath/500"})
 	public ModelAndView error500(HttpServletRequest request,
    		 HttpServletResponse response)  {
+            Throwable exception = (Throwable) request.getAttribute("javax.servlet.error.exception");
+            String url = request.getRequestURL().toString() + "?" + request.getQueryString();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            exception.printStackTrace(pw);
+            //helpers.sendMail(url, sw.toString());
    	 ModelAndView model = new ModelAndView("/error/500");
+             	model.addObject("lan", "en");
    	 return model;
     }
 	@RequestMapping(value = {"/{lan}/index", "/{lan}/main", "/{lan}/home"}, method = RequestMethod.GET)
