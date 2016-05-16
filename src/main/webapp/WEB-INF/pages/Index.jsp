@@ -102,10 +102,10 @@
         <div class="s-clear"></div>
         <div class="slider1">
             <c:forEach items="${points}" var="markers">
-                <div class="s-cell slide">
+                <div class="s-cell slide article-block">
                     <div class="s-block">
                         <div class="newsImage" onmouseover="" onmouseout="">
-                            <a href="${Constants.URL}map/markers/${markers.id}">
+                            <a href="${Constants.URL}${lan}/map/markers/${markers.id}">
                                 <div class="imageHover">
                                     <div class="imageHoverDate">
                                         ${markers.date}
@@ -119,8 +119,8 @@
                         </div>
 
                         <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png">
-                        <div class="newsName"><a href="${Constants.URL}map/markers/${markers.id}">${markers.title}</a></div>
-                        <a href="${Constants.URL}map/markers/${markers.id}"><div class="newsText">${markers.textEN}</div></a>
+                        <div class="newsName"><a href="${Constants.URL}${lan}/map/markers/${markers.id}">${markers.title}</a></div>
+                        <a href="${Constants.URL}${lan}/map/markers/${markers.id}"><div class="newsText">${markers.textEN}</div></a>
                     </div>
                 </div>
             </c:forEach>
@@ -132,10 +132,10 @@
         </div>
         <div class="slider2">
             <c:forEach items="${content}" var="item">
-                <div class="s-cell slide">
+                <div class="s-cell slide article-block">
                     <div class="s-block">
                         <div class="newsImage">
-                            <a href="${Constants.URL}article/full/${item.id}">
+                            <a href="${Constants.URL}${lan}/article/full/${item.id}">
                                 <div class="imageHover">
                                     <div class="imageHoverDate">
                                         ${item.date}
@@ -149,8 +149,8 @@
                         </div>
 
                         <img class="newsImageUnderline" src="${Constants.URL}img/newsLine.png" alt="image">
-                        <div class="newsName"><a href="${Constants.URL}article/full/${item.id}">${item.title}</a></div>
-                        <a href="${Constants.URL}article/full/${item.id}"><div class="newsText">${item.textEN}</div></a>
+                        <div class="newsName"><a href="${Constants.URL}${lan}/article/full/${item.id}">${item.title}</a></div>
+                        <a href="${Constants.URL}${lan}/article/full/${item.id}"><div class="newsText">${item.textEN}</div></a>
                     </div>
                 </div>
             </c:forEach>

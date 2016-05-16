@@ -203,7 +203,7 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(helpers.getRowHtml(request.getParameter("lang"), "0"), responseHeaders, HttpStatus.CREATED);
     }
-    @RequestMapping(value = {"/articles/loadcontent"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/articles/loadcontent","/Carpath/articles/loadcontent"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> load_content(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -229,9 +229,7 @@ public class AjaxController {
         for (ArticleModel temp : tempC) 
             {
                 String lanURL = Constants.URL + lan + "/";
-                if(countPage == 0) {
-                    lanURL = Constants.URL;
-                }
+                
                 if(temp.type == 2 || temp.type == 3) {
                     lanURL +="map/markers/";
                 }
@@ -242,7 +240,7 @@ public class AjaxController {
                         temp.setImage(temp.avatar);
                 }
                 String[] tempImg = temp.image.split(",");
-                returnHTML = returnHTML + "<div class=\"s-cell\">\n" +
+                returnHTML = returnHTML + "<div class=\"s-cell article-block\">\n" +
 "                        <div class=\"s-block newsHeight\">\n" +
 "                            <div class=\"newsImage\">\n" +
 "                                <a href=\""+lanURL+temp.id+"\">\n" +

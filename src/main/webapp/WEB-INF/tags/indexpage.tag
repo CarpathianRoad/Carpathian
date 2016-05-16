@@ -410,6 +410,9 @@ fjs.parentNode.insertBefore(js, fjs);
     
 	function buildMenu(lang){
     	console.log(lang);
+        if(lang === undefined) {
+            lang = "en";
+        }
     	$.ajax({
         	type: "get",
         	url: "${Constants.URL}build/menu",
@@ -438,7 +441,7 @@ fjs.parentNode.insertBefore(js, fjs);
 	}
     
 	function addLangToLink(lang){
-	$( "a:not(.lang-sw, .shareLinks, .not-add-lan, .twitter-share-button, .markerPageText a)" ).each(function( index ) {
+	$( "a:not(.lang-sw, .shareLinks, .not-add-lan, .twitter-share-button, .markerPageText a, .article-block a)" ).each(function( index ) {
        	 
         	if($(this).attr("href") !== undefined && $(this).attr("href") !== ""){
         	if($(this).attr("href").toLowerCase().indexOf("/carpath/") !== -1){
