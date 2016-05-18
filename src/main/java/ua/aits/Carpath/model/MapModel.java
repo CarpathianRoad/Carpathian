@@ -269,6 +269,9 @@ public class MapModel {
     public String getPanoramaName(String id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         ResultSet result = DB.getResultSet("select panorama from content where id = "+ id +" and publish = 1;");
         result.first();
+        if(!result.next()) {
+            return "";
+        }
         if(result.getString("panorama").contains("archive_content")){
             return result.getString("panorama");
         }
