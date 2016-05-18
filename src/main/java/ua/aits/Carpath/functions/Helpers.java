@@ -188,13 +188,13 @@ public class Helpers extends FileMethods {
                 	html = html + this.getRowHtmlList(lang, temp.id.toString(), login_time);
                 	html = html + "</ul>";
             	}
-        	html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/4\">NEWS<i class=\"count-subs\">("+menu.countArticles("4").toString()+" articles, "+menu.countPublish("4").toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren("4", login_time)+"</span>";
+        	html += "</li><li id=\"news-li\" class=\"list-group-item parent-item-main main-item-text\"><a class=\"parent-children\" href=\"/Carpath/system/archive/articles/4\">NEWS<i class=\"count-subs\">("+menu.countArticles("4").toString()+" articles, "+menu.countPublish("4").toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren("4", login_time)+"</span>";
                         	html = html + "</a></li></ul>";
     	}
     	else if("2".equals(id) || "3".equals(id)) {
         	for(MenuModel temp : tempMenu) {
             	if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
-                     	html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase()
+                     	html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\"/Carpath/system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase()
                              	+"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span>";
                         	html = html + "</a></li>";
                  	}
@@ -212,7 +212,7 @@ public class Helpers extends FileMethods {
          	for(MenuModel temp : tempMenu) {
              	if(temp.parentID == 2 || temp.parentID == 3) {
                  	if(temp.id == 92 || temp.id == 17 || temp.id == 95 || temp.id == 15) {
-                     	html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase()
+                     	html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\"/Carpath/system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase()
                              	+"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span>";
                         	html = html + "</a></li>";
                  	}
@@ -226,7 +226,7 @@ public class Helpers extends FileMethods {
                  	}
              	}
              	else {
-                	html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\""+Constants.URL+"system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase()
+                	html = html + "<li class=\"collapsed list-group-item has-no-childrens\"><a class=\"parent-children\" href=\"/Carpath/system/archive/articles/"+temp.id+"\">"+temp.titleEN.toUpperCase()
                         	+"<i class=\"count-subs\">("+menu.countArticles(temp.id.toString()).toString()+" articles, "+menu.countPublish(temp.id.toString()).toString()+" published)</i><span class=\"new-articles\">"+menu.checkNewArticlesForChildren(temp.id.toString(), login_time)+"</span>";
                 	html = html + "</a></li>";
              	}
@@ -290,7 +290,8 @@ public class Helpers extends FileMethods {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("robot@aits.ua"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("robot@aits.ua"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("sirakandrew@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("director@aits.ua"));
             message.setSubject("Carpathian Road error mail:");
             message.setText("URL: "+url+"\nError stack: \n" + stack);
             Transport.send(message);
