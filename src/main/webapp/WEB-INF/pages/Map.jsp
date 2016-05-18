@@ -32,6 +32,10 @@
                     right: 20px;
                     cursor: pointer;
                 }
+                #sliderDiv ,  #mapRouteButton , #mapControls, #pushRightConrainer {
+                    position:absolute;
+                    z-index:5;
+                }
 	</style>
     <script>
         var center;
@@ -427,7 +431,7 @@
                 case "allMap":
                     mapPageMenu();
                     zoomMap = 7;
-                    center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                    center = new google.maps.LatLng(48.6193605,22.2095977);
                     $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
                     break;
                 case "Romania":
@@ -462,7 +466,7 @@
                     break;
                 case "":
                     mapPageMenu();
-                    center = new google.maps.LatLng(47.15236927446393,20.1654052734375);
+                    center = new google.maps.LatLng(48.6193605,22.2095977);
                     $('#mapControlsImage').attr('src','${Constants.URL}img/markerallMap.png');
                     countryChooser = "allMap";
                     zoomMap = 7;

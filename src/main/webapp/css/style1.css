@@ -1276,7 +1276,7 @@ p{
 }
 .mapControls{
     right: 50px !important;
-    top: 145px !important;
+    top: 195px !important;
     width: 45px;
     height: 45px;
     background: rgb(86,105,143);
@@ -1284,7 +1284,7 @@ p{
 }
 .mapRoute{
     right: 50px !important;
-    top: 95px !important;
+    top: 145px !important;
     width: 45px;
     height: 45px;
     background: rgb(86,105,143);
@@ -1321,7 +1321,7 @@ p{
 .sliderDiv {
     background: rgb(86,105,143);
     right: 50px !important;
-    top: 45px !important;
+    top: 95px !important;
     transition: 0.5s;
     width: 45px;
     height: 45px;
@@ -1370,7 +1370,7 @@ p{
 }
 .pushRightConrainer{
     right: 50px !important;
-    top: 195px !important;
+    top: 245px !important;
     width: 45px;
     height: 45px;
     background: rgb(86,105,143);
