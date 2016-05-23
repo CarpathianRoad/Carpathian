@@ -495,7 +495,7 @@ bis.close();
         for(String temp : newPath) {
             pathW += temp + "/";
         }
-        File outputfile = new File(Constants.home + pathW + "cropped-"+filename+".png");
+        File outputfile = new File(Constants.HOME + pathW + "cropped-"+filename+".png");
         ImageIO.write(image, "png", outputfile);
         return pathW + "cropped-"+filename+".png";
     }
