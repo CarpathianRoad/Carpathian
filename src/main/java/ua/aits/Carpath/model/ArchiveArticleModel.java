@@ -323,18 +323,18 @@ public class ArchiveArticleModel {
         	temp.setArticle_is_delete(result.getInt("article_is_delete"));
         	temp.setArticle_is_publish(result.getInt("article_is_publish"));
         	temp.setArticle_dir(result.getString("article_dir"));
-        	temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 2));
+        	temp.setArticle_file_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/files", 2));
         	String[] size = temp.article_file_size.split("\\s+");
         	if("0".equals(size[0])) {
-            	temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 3));
+            	temp.setArticle_file_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/files", 3));
             	if("0".equals(temp.article_file_size.split("\\s+")[0])) {
                 	temp.setArticle_file_size("");
             	}
         	}
-        	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/galery", 2));
+        	temp.setArticle_image_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/galery", 2));
         	String[] sizeimage = temp.article_image_size.split("\\s+");
         	if("0".equals(sizeimage[0])) {
-            	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/galery", 3));
+            	temp.setArticle_image_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/galery", 3));
             	if("0".equals(temp.article_image_size.split("\\s+")[0])) {
                 	temp.setArticle_image_size("");
             	}
@@ -490,18 +490,18 @@ public class ArchiveArticleModel {
         	temp.setArticle_is_delete(result.getInt("article_is_delete"));
         	temp.setArticle_is_publish(result.getInt("article_is_publish"));
         	temp.setArticle_dir(result.getString("article_dir"));
-        	temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 2));
+        	temp.setArticle_file_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/files", 2));
         	String[] size = temp.article_file_size.split("\\s+");
         	if("0".equals(size[0])) {
-            	temp.setArticle_file_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/files", 3));
+            	temp.setArticle_file_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/files", 3));
             	if("0".equals(temp.article_file_size.split("\\s+")[0])) {
                 	temp.setArticle_file_size("");
             	}
         	}
-        	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/images", 2));
+        	temp.setArticle_image_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/images", 2));
         	String[] sizeimage = temp.article_image_size.split("\\s+");
         	if("0".equals(sizeimage[0])) {
-            	temp.setArticle_image_size(Helpers.getReadableSize(Constants.home + "archive_content/" + temp.article_dir + "/images", 3));
+            	temp.setArticle_image_size(Helpers.getReadableSize(Constants.HOME + "archive_content/" + temp.article_dir + "/images", 3));
             	if("0".equals(temp.article_image_size.split("\\s+")[0])) {
                 	temp.setArticle_image_size("");
             	}
