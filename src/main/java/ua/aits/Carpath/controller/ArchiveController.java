@@ -102,8 +102,8 @@ public class ArchiveController {
     	ModelAndView modelAndView = new ModelAndView("/system/archive/Edit");
     	String folder = Articles.getOneArticleByID(id).article_dir;
     	modelAndView.addObject("article", Articles.getOneArticleByID(id));
-    	modelAndView.addObject("filesHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/files/"));
-    	modelAndView.addObject("galeryHTML", Helpers.filesInFolderHTML(Constants.home + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/galery/"));
+    	modelAndView.addObject("filesHTML", Helpers.filesInFolderHTML(Constants.HOME + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/files/"));
+    	modelAndView.addObject("galeryHTML", Helpers.filesInFolderHTML(Constants.HOME + "archive_content/" + Articles.getOneArticleByID(id).article_dir + "/galery/"));
     	modelAndView.addObject("folder_str", folder.replace('/', '|'));
     	modelAndView.addObject("cat_name", Menu.getCategoryName(Articles.getOneArticleByID(id).article_category.toString()));
     	return modelAndView;
@@ -200,8 +200,8 @@ public class ArchiveController {
     	String replacedTextRO = "";
     	
     	folder_name = Articles.insertArticle(titleEN, titleUA, titleHU, titleSK, titleRO, replacedTextEN, replacedTextUA, replacedTextHU, replacedTextSK, replacedTextRO, category, author, date, dir, country, region, district, town, x, y);
-    	dir = Helpers.moveAllFilesFromArchiveDir(Constants.home + directory, folder_name, category);
-    	Helpers.removeDir(Constants.home + directory);
+    	dir = Helpers.moveAllFilesFromArchiveDir(Constants.HOME + directory, folder_name, category);
+    	Helpers.removeDir(Constants.HOME + directory);
         replacedTextEN = textEN.replace(directory, "archive_content/"+dir);
     	replacedTextUA = textUA.replace(directory, "archive_content/"+dir);
     	replacedTextSK = textSK.replace(directory, "archive_content/"+dir);
@@ -310,7 +310,7 @@ public class ArchiveController {
     	if (!file.isEmpty()) {
         	try {
             	byte[] bytes = file.getBytes();
-            	File dir = new File(Constants.home+path);
+            	File dir = new File(Constants.HOME+path);
             	if (!dir.exists())
                 	dir.mkdirs();
             	File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
@@ -328,7 +328,7 @@ public class ArchiveController {
 	@RequestMapping(value = {"/system/archive/do/removefile","/Carpath/system/archive/do/removefile"}, method = RequestMethod.GET)
 	public @ResponseBody String removeFileOrDir(HttpServletRequest request) {
     	String path = request.getParameter("path");
-    	File temp = new File(Constants.home + path);
+    	File temp = new File(Constants.HOME + path);
     	Boolean result = temp.delete();
     	return result.toString();
 	}
@@ -339,7 +339,7 @@ public class ArchiveController {
     	if (!file.isEmpty()) {
         	try {
             	byte[] bytes = file.getBytes();
-            	File dir = new File(Constants.home+path);
+            	File dir = new File(Constants.HOME+path);
             	if (!dir.exists())
                 	dir.mkdirs();
             	File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
