@@ -95,7 +95,7 @@ public class SystemController {
         HttpSession session = request.getSession(true);
 	session.setAttribute("user",  user);
         if(user.user_role == 1) {  
-            helpers.deleteOldTemp(Constants.HOME + "archive_temp/");
+            helpers.deleteOldTemp(Constants.home + "archive_temp/");
             return new ModelAndView("redirect:" + "/system/panel");   
         }
         else {
@@ -239,7 +239,7 @@ public class SystemController {
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
-                File dir = new File(Constants.HOME + "user_avatars/");
+                File dir = new File(Constants.home + "user_avatars/");
                 
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + user_name+"."+FilenameUtils.getExtension(name));
@@ -275,7 +275,7 @@ public class SystemController {
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
-                File dir = new File(Constants.HOME + "user_avatars/");
+                File dir = new File(Constants.home + "user_avatars/");
                 
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + user_name+"."+FilenameUtils.getExtension(name));
@@ -302,7 +302,7 @@ public class SystemController {
         String user_id = request.getParameter("user_id");
         String user_avatar = request.getParameter("user_avatar");
         if(!"".equals(user_avatar) && user_avatar != null && !"img/noavatar.png".equals(user_avatar)) {
-             File temp = new File(Constants.HOME + user_avatar);
+             File temp = new File(Constants.home + user_avatar);
              temp.delete();
         }
         Users.deleteUser(user_id);
@@ -334,7 +334,7 @@ public class SystemController {
             String id = request.getParameter("article_id");
             ArticleModel art = article.getOneArticleForEdit(id);
         if(!"".equals(art.panorama) && art.panorama != null) {
-            File temp = new File(Constants.HOME+"files/panoramas/"+art.panorama);
+            File temp = new File(Constants.home+"files/panoramas/"+art.panorama);
             Boolean result = temp.delete();
         }
         Boolean result = article.deleteArticle(id);

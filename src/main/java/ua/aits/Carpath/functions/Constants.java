@@ -12,11 +12,11 @@ package ua.aits.Carpath.functions;
  */
 public class Constants
 {
-    public static final String HOME = "/home/kiwi/Development/NetBeansProjects/Production/src/main/webapp/"; // change /home/project/Kiwi to your project folder path
-    public static final String URL = "/Carpath/";
-    public static final String FILE_URL = HOME+"img/content/";
-    public static final String FILE_URL_ICON = HOME+"img/markers/";
-    public static final String FILE_URL_ROUTES = HOME+"routes/";
+    public static final String home = "/usr/share/tomcat8/webapps/ROOT/"; // change /home/project/Kiwi to your project folder path
+    public static final String URL = "/";
+    public static final String FILE_URL = home+"img/content/";
+    public static final String FILE_URL_ICON = home+"img/markers/";
+    public static final String FILE_URL_ROUTES = home+"routes/";
     
     public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
     public static final String DB_CONNECTION_STRING = "jdbc:mysql://localhost:3306/carpath?characterEncoding=UTF-8";
@@ -51,10 +51,6 @@ public class Constants
     public String getDB_PASSWORD()
     {
         return DB_PASSWORD;
-    }
-
-    public String getHOME() {
-        return HOME;
     }
     
 }

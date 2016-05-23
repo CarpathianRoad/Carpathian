@@ -23,7 +23,7 @@ public class FileMethods {
     	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH-mm-SS");
     	String folder = "archive_temp/temp-"+sdf.format(date_format);
     	try {
-        	final boolean directory = new File(Constants.HOME + folder).mkdirs();
+        	final boolean directory = new File(Constants.home + folder).mkdirs();
         	return folder;
     	}
     	catch(SecurityException se) {
@@ -40,7 +40,7 @@ public class FileMethods {
     	Date date_format = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH-mm-SS");
     	File temp = new File(path);
-    	String basePath = Constants.HOME + "archive_content/" + category + "/" + title.replaceAll("\\s","_") + "_" + sdf.format(date_format);
+    	String basePath = Constants.home + "archive_content/" + category + "/" + title.replaceAll("\\s","_") + "_" + sdf.format(date_format);
     	final boolean directory = new File(basePath).mkdirs();
     	File dest = new File(basePath);
     	FileUtils.copyDirectory(temp, dest);

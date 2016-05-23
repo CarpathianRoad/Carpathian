@@ -55,7 +55,7 @@ public class FileUploadController {
             try {
                 byte[] bytes = file.getBytes();
                 // Creating the directory to store file
-                File dir = new File(Constants.HOME+path);
+                File dir = new File(Constants.home+path);
                 if (!dir.exists())
                     dir.mkdirs();
  
@@ -66,7 +66,7 @@ public class FileUploadController {
                         new FileOutputStream(serverFile))) {
                     stream.write(bytes);
                 }
-                String link_path = serverFile.getAbsolutePath().replace(Constants.HOME,"");
+                String link_path = serverFile.getAbsolutePath().replace(Constants.home,"");
                 return "<a href=\"#\" class=\"returnImage\" data-url='"+Constants.URL+path + name + "'>"
                         + "<img src=\""+Constants.URL+link_path+"\" realpath='"+link_path+"'  alt='" + link_path+file.getName() + "'  /><img src='"+Constants.URL+"img/remove.png' class='remove-icon'/></a>";
             } catch (Exception e) {
@@ -149,7 +149,7 @@ public class FileUploadController {
             try {
                 byte[] bytes = file.getBytes();
                 // Creating the directory to store file
-                File dir = new File(Constants.HOME+"files/panoramas/");
+                File dir = new File(Constants.home+"files/panoramas/");
                 
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + name);
@@ -170,7 +170,7 @@ public class FileUploadController {
     public @ResponseBody
     String removePanoramaFile(HttpServletRequest request) {
         String name = request.getParameter("name");
-            File temp = new File(Constants.HOME+"files/panoramas/"+name);
+            File temp = new File(Constants.home+"files/panoramas/"+name);
             Boolean result = temp.delete();
         return result.toString();
     }
@@ -182,7 +182,7 @@ public class FileUploadController {
         String path = request.getParameter("path").replace(",", "/");
         String curll = "";
         if("".equals(parent) && "".equals(folder_name)){
-            curll = Constants.HOME + path;
+            curll = Constants.home + path;
         }
         else if("".equals(folder_name) && !"".equals(parent)) {
             curll = parent;
@@ -194,7 +194,7 @@ public class FileUploadController {
         File[] fList = directory.listFiles();
         String htmlImg = "";
         String htmlFolder = "";
-        String link_path = curll.replace(Constants.HOME,"");
+        String link_path = curll.replace(Constants.home,"");
         for (File file : fList) {
             if (file.isFile()) {
                 String ext = FilenameUtils.getExtension(file.getAbsolutePath());
