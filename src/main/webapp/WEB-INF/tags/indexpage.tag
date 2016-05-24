@@ -50,7 +50,7 @@
 	<script src="${Constants.URL}js/slider/jquery.bxslider.min.js"></script>
 	<script src="${Constants.URL}js/filter_by_country.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
+	<script src="https://rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js" type="text/javascript"></script>
 	<script src="http://swip.codylindley.com/jquery.popupWindow.js"></script>
 	<link href="${Constants.URL}js/slider/jquery.bxslider.css" rel="stylesheet" />
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
