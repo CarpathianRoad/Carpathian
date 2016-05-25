@@ -92,7 +92,7 @@
         data.append('upload', $(this).get(0).files[i]);
         data.append("path", $(".img-content-show-all").attr("realpath"));
         jQuery.ajax({
-                    url: '${Constants.URL}uploadFile',
+                    url: '/Carpath/uploadFile;jsessionid=<c:out value="${pageContext.session.id}"/>',
                     data: data,
                     cache: false,
                     contentType: false,
@@ -278,7 +278,7 @@
         var name = $("#foldernametext").val();
         var path = $(".img-content-show-all").attr("current");
                 jQuery.ajax({
-                    url: '${Constants.URL}addFolder',
+                    url: '/Carpath/addFolder;jsessionid=<c:out value="${pageContext.session.id}"/>',
                     cache: false,
                     contentType: false,
                     processData: false,
@@ -297,7 +297,7 @@
                 $(".img-content-show-all").html("");
                 console.log('name='+temp_fold+'&parent='+parent+'&path='+pat);
                 jQuery.ajax({
-                    url: '${Constants.URL}showImages',
+                    url: '/Carpath/showImages;jsessionid=<c:out value="${pageContext.session.id}"/>',
                     cache: false,
                     contentType: false,
                     processData: false,
@@ -341,7 +341,7 @@
             var name = $(this).parent().prev().prev().find("img").attr("name");
             var path = $(".img-content-show-all").attr("current");
                 jQuery.ajax({
-                    url: '${Constants.URL}removeFileOrDir',
+                    url: '/Carpath/removeFileOrDir;jsessionid=<c:out value="${pageContext.session.id}"/>',
                     cache: false,
                     contentType: false,
                     processData: false,

@@ -46,7 +46,7 @@ public class FileUploadController {
      * @param request
      * @return 
      */
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    @RequestMapping(value = {"/uploadFile","/Carpath/uploadFile",}, method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandler(@RequestParam("upload") MultipartFile file, @RequestParam("path") String path,  HttpServletRequest request) {
         
@@ -78,7 +78,7 @@ public class FileUploadController {
         }
     }
  
-    @RequestMapping(value = "/uploadIcon", method = RequestMethod.POST)
+    @RequestMapping(value = {"/uploadIcon","/Carpath/uploadIcon"}, method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandlerMarker(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
  
@@ -105,7 +105,7 @@ public class FileUploadController {
                     + " because the file was empty.";
         }
     }
-    @RequestMapping(value = "/system/uploadRoute", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/uploadRoute","/Carpath/system/uploadRoute"}, method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandlerRoute(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
  
@@ -131,7 +131,7 @@ public class FileUploadController {
                     + " because the file was empty.";
         }
     }
-    @RequestMapping(value = "/system/deleteRouteFile", method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/deleteRouteFile", "/Carpath/system/deleteRouteFile"}, method = RequestMethod.GET)
     public @ResponseBody
     String removeRouteFile(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -140,7 +140,7 @@ public class FileUploadController {
         return result.toString();
     }
     
-    @RequestMapping(value = "/system/uploadPanorama", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/uploadPanorama", "/Carpath/system/uploadPanorama"}, method = RequestMethod.POST)
     public @ResponseBody
     String uploadFileHandlerPanorama(@RequestParam("upload") MultipartFile file, HttpServletRequest request) {
         
@@ -166,7 +166,7 @@ public class FileUploadController {
                     + " because the file was empty.";
         }
     }
-    @RequestMapping(value = "/system/deletePanoramaFile", method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/deletePanoramaFile", "/Carpath/system/deletePanoramaFile"}, method = RequestMethod.GET)
     public @ResponseBody
     String removePanoramaFile(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -174,7 +174,7 @@ public class FileUploadController {
             Boolean result = temp.delete();
         return result.toString();
     }
-    @RequestMapping(value = "/showImages", method = RequestMethod.GET)
+    @RequestMapping(value = {"/showImages", "/Carpath/showImages"}, method = RequestMethod.GET)
     public @ResponseBody
     String showGalery(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String folder_name = request.getParameter("name");
@@ -220,7 +220,7 @@ public class FileUploadController {
                 htmlFolder+htmlImg +
                 "</table>";
     }
-    @RequestMapping(value = "/addFolder", method = RequestMethod.GET)
+    @RequestMapping(value = {"/addFolder","/Carpath/addFolder"}, method = RequestMethod.GET)
     public @ResponseBody
     String addfolder(HttpServletRequest request) {
         String folder_name = request.getParameter("name");
@@ -239,7 +239,7 @@ public class FileUploadController {
              }
         return "work";
     }
-    @RequestMapping(value = "/removeFileOrDir", method = RequestMethod.GET)
+    @RequestMapping(value = {"/removeFileOrDir","/Carpath/removeFileOrDir"}, method = RequestMethod.GET)
     public @ResponseBody
     String removeFileOrDir(HttpServletRequest request) {
         String name = request.getParameter("name");

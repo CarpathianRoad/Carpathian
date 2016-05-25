@@ -39,7 +39,7 @@ function loadContent(country, count){
     $(".loader-block").show();
     $.ajax({
             type: "get",
-            url: "${Constants.URL}articles/loadсontentforsearch",
+            url: "/Carpath/articles/loadсontentforsearch;jsessionid=<c:out value="${pageContext.session.id}"/>",
             cache: false,    
             data:'lan='+lan+'&count='+count+'&find=${find}',
             mimeType:"text/html; charset=UTF-8",

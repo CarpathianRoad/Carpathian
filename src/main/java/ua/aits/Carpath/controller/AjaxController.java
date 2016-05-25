@@ -45,7 +45,7 @@ public class AjaxController {
     Helpers helpers = new Helpers();
     MenuModel menu = new MenuModel();
     
-    @RequestMapping(value = {"/system/checkLoginPass/", "/system/checkLoginPass"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/checkLoginPass/", "/system/checkLoginPass","/system/checkLoginPass/", "/system/checkLoginPass"}, method = RequestMethod.GET)
     public @ResponseBody
     String checkLoginPass(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -57,7 +57,7 @@ public class AjaxController {
             return "false";
         }
     }
-    @RequestMapping(value = {"/system/returnCatTitle/", "/system/returnCatTitle"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/returnCatTitle/", "/system/returnCatTitle","/system/returnCatTitle/", "/system/returnCatTitle"}, method = RequestMethod.GET)
     public @ResponseBody
     String returnCatTitle(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -65,7 +65,7 @@ public class AjaxController {
         return temp;
     }
     
-    @RequestMapping(value = {"/system/changePublish/", "/system/changePublish"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/changePublish/", "/system/changePublish","/system/changePublish/", "/system/changePublish"}, method = RequestMethod.GET)
     public @ResponseBody
     String changePublish(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -74,7 +74,7 @@ public class AjaxController {
         if(content.publishArticle(id, status)) {return "true";}
         else {return "false";}
     }
-    @RequestMapping(value = {"/system/contentByType/", "/system/contentByType"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/contentByType/", "/system/contentByType","/Carpath/system/contentByType/", "/Carpath/system/contentByType"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> contentByType(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -117,10 +117,10 @@ public class AjaxController {
 "      <td class=\"admin-table-cell\">"+temp.author+"</td>" +
 "      <td class=\"article-publish "+is_publish+"\"><input type=\"checkbox\" data-size=\"mini\" class=\"publish-checkbox\" data-id=\""+temp.id+"\" name=\"my-checkbox\" "+check+"></td>"
                 + "<td class=\""+is_publish+"\">" +
-"          <a class=\"edit-button\" href=\""+Constants.URL+"system/articles/edit/"+temp.id+"\"><img class=\"edit-delete\" src=\""+Constants.URL+"img/edit.png\" /></a>" +
+"          <a class=\"edit-button\" href=\"/Carpath/system/articles/edit/"+temp.id+";jsessionid="+request.getSession().getId()+"\"><img class=\"edit-delete\" src=\""+Constants.URL+"img/edit.png\" /></a>" +
 "      </td>" +
 "      <td class=\""+is_publish+"\">" +
-"          <a href=\""+Constants.URL+"system/articles/delete/"+temp.id+"\"><img class=\"edit-delete\" src=\""+Constants.URL+"img/delete.png\" /></a>" +
+"          <a href=\"/Carpath/system/articles/delete/"+temp.id+";jsessionid="+request.getSession().getId()+"\"><img class=\"edit-delete\" src=\""+Constants.URL+"img/delete.png\" /></a>" +
 "      </td>"+
 "    </tr>";
         count--;
@@ -137,7 +137,7 @@ public class AjaxController {
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
     
     }
-    @RequestMapping(value = {"/system/changePublishRoute/", "/system/changePublishRoute"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/changePublishRoute/", "/system/changePublishRoute","/Carpath/system/changePublishRoute/", "/Carpath/system/changePublishRoute"}, method = RequestMethod.GET)
     public @ResponseBody
     String changePublishRoute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -146,7 +146,7 @@ public class AjaxController {
         if(routes.publishRoute(id, status)) {return "true";}
         else {return "false";}
     }
-    @RequestMapping(value = {"/system/routesByType/", "/system/routesByType"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/routesByType/", "/system/routesByType","/Carpath/system/routesByType/", "/Carpath/system/routesByType"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> routesByType(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -195,7 +195,7 @@ public class AjaxController {
         responseHeaders.add("Content-Type", "application/json; charset=utf-8");
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
     }
-    @RequestMapping(value = {"/build/menu/", "/build/menu"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/build/menu/", "/build/menu","/Carpath/build/menu/", "/Carpath/build/menu"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> returnMenuHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -272,7 +272,7 @@ public class AjaxController {
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
     }
-    @RequestMapping(value = {"/articles/loadсontentforsearch"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/articles/loadсontentforsearch","/Carpath/articles/loadсontentforsearch"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> load_content_for_search(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -342,7 +342,7 @@ public class AjaxController {
         return new ResponseEntity<>(returnHTML, responseHeaders, HttpStatus.CREATED);
         //return returnHTML;
     }
-    @RequestMapping(value = {"/filter_by_country_routes"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/filter_by_country_routes","/Carpath/filter_by_country_routes"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> routes_content_filter(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -408,7 +408,7 @@ public class AjaxController {
     }
     
     
-    @RequestMapping(value = {"/filter_by_type_routes"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/filter_by_type_routes","/Carpath/filter_by_type_routes"}, method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<String> routes_type_filter(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -473,7 +473,7 @@ public class AjaxController {
         //return returnHTML;
     }
     
-    @RequestMapping(value = {"/system/downloadimage/", "/system/downloadimage"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/downloadimage/", "/system/downloadimage","/Carpath/system/downloadimage/", "/Carpath/system/downloadimage"}, method = RequestMethod.POST)
     public @ResponseBody
     String downloadimage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");

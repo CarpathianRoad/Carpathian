@@ -166,7 +166,7 @@ $(document).ready(function () {
         filterValue = filterValue !== "" ? filterValue : 'default';
         $.ajax({
             type: "get",
-            url: "${Constants.URL}system/contentByType",
+            url: "/Carpath/system/contentByType;jsessionid=<c:out value="${pageContext.session.id}"/>",
             cache: false,    
             data:'username='+username+'&type='+filterType+'&value='+filterValue+'&count='+count+'&page='+page,
             mimeType:"text/html; charset=UTF-8",
@@ -250,7 +250,7 @@ $(document).ready(function () {
                 //console.log(state); // true | false
         $.ajax({
             type: "get",
-            url: "${Constants.URL}system/changePublish",
+            url: "/Carpath/system/changePublish;jsessionid=<c:out value="${pageContext.session.id}"/>",
             cache: false,    
             data:'id='+id+'&status='+state,
             success: function(response){

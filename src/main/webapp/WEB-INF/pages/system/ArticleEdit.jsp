@@ -283,74 +283,74 @@
             <script> 
                 function initCKE() {
                     CKEDITOR.replace('editorEN', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorUA', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorHU', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorSK', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorPL', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorRO', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorGE', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorCZ', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
                     CKEDITOR.replace('editorSRB', {
-                        filebrowserBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserUploadUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageBrowseUrl : '${Constants.URL}tools/fileManager',
-                        filebrowserImageUploadUrl : '${Constants.URL}tools/fileManager',
+                        filebrowserBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageBrowseUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
+                        filebrowserImageUploadUrl : '/Carpath/tools/fileManager;jsessionid=<c:out value="${pageContext.session.id}"/>',
                         filebrowserWindowWidth  : 800,
                         filebrowserWindowHeight : 500
                     });
@@ -441,7 +441,7 @@ $('.panorama-file').on('change', '#panorama-input', function() {
         data.append('upload', jQuery('#panorama-input')[0].files[0]);
         
         jQuery.ajax({
-                    url: '${Constants.URL}system/uploadPanorama',
+                    url: '/Carpath/system/uploadPanorama;jsessionid=<c:out value="${pageContext.session.id}"/>',
                     data: data,
                     cache: false,
                     contentType: false,
@@ -465,7 +465,7 @@ function removePanoramaInit(){
         if($(this).attr("panorama-type") === "from-upload"){
         $.ajax({
             type: "get",
-            url: "${Constants.URL}system/deletePanoramaFile",
+            url: "/Carpath/system/deletePanoramaFile;jsessionid=<c:out value="${pageContext.session.id}"/>",
             cache: false,    
             data:'name='+filename,
             success: function(response){
@@ -579,7 +579,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path_main='+current);
+                     $('#myIframe').attr('src','/Carpath/tools/fileManager?path_main='+current+';jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         });
     $("#dialog-archive").dialog({
@@ -589,7 +589,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframeArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchive);
+                     $('#myIframeArchive').attr('src','/Carpath/tools/fileManager?path_main='+currentArchive+';jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         });
        $("#avatarDialog").dialog({
@@ -599,7 +599,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path_main='+currentAva+'&type=avatar');
+                     $('#avatarFrame').attr('src','/Carpath/tools/fileManager?path_main='+currentAva+'&type=avatar;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         }); 
        $("#avatarDialogArchive").dialog({
@@ -609,7 +609,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar');
+                     $('#avatarFrameArchive').attr('src','/Carpath/tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         }); 
         $("#dialog-archive-panorama").dialog({
@@ -619,7 +619,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframeArchivePanorama').attr('src','${Constants.URL}tools/fileManager?path_main=archive_content,&type=panorama-file');
+                     $('#myIframeArchivePanorama').attr('src','/Carpath/tools/fileManager?path_main=archive_content,&type=panorama-file;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         });
         $('#dialogBtn').click(function(){
@@ -646,7 +646,7 @@ function initCrop(file){
             width: 500,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#cropFrame').attr('src','${Constants.URL}tools/imageCrop?file='+file.replace(/\//g,","));
+                     $('#cropFrame').attr('src','/Carpath/tools/imageCrop?file='+file.replace(/\//g,",")+';jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         }); 
         
