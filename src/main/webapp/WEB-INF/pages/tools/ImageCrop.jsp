@@ -95,7 +95,7 @@
         data.append('url', $(".download a").attr("href"));
         
         jQuery.ajax({
-                    url: '${Constants.URL}system/downloadimage',
+                    url: '/Carpath/system/downloadimage;jsessionid=<c:out value="${pageContext.session.id}"/>',
                     data: data,
                     cache: false,
                     contentType: false,

@@ -223,7 +223,7 @@ public class SinglePageController {
             	model.addObject("name",map.getPanoramaName(id));
    	 return model;
     }
-	@RequestMapping(value = {"/tools/fileManager","/tools/fileManager/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/tools/fileManager","/tools/fileManager/","/Carpath/tools/fileManager","/Carpath/tools/fileManager/"}, method = RequestMethod.GET)
     	public ModelAndView fileManager (HttpServletRequest request,
    	 HttpServletResponse response) throws Exception {
             	String path = request.getParameter("path");
@@ -247,7 +247,7 @@ public class SinglePageController {
    	 return model;
 	}
    	 
-	@RequestMapping(value = {"/tools/imageupload/{folder}/","/tools/imageupload/{folder}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/tools/imageupload/{folder}/","/tools/imageupload/{folder}","/Carpath/tools/imageupload/{folder}/","/Carpath/tools/imageupload/{folder}"}, method = RequestMethod.GET)
     	public ModelAndView fileManagerArchive (@PathVariable("folder") String folder,HttpServletRequest request,
    	 HttpServletResponse response) throws Exception {
             	String path = request.getParameter("path");
@@ -271,7 +271,7 @@ public class SinglePageController {
    	 return model;
 	}
    	 
-	@RequestMapping(value = {"/tools/imageCrop/","/tools/imageCrop"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/tools/imageCrop/","/tools/imageCrop","/Carpath/tools/imageCrop/","/Carpath/tools/imageCrop"}, method = RequestMethod.GET)
     	public ModelAndView imageCrop (HttpServletRequest request,
    	HttpServletResponse response) throws Exception {
             	String file = request.getParameter("file");

@@ -39,7 +39,7 @@ public class FormController {
     RouteModel route = new RouteModel();
     SliderModel slider = new SliderModel();
     
-     @RequestMapping(value = "/system/insertdata.do", method = RequestMethod.POST)
+     @RequestMapping(value = {"/system/insertdata.do","/Carpath/system/insertdata.do"}, method = RequestMethod.POST)
     public ModelAndView doInsertData(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String titleEN = request.getParameter("titleEN");
@@ -87,7 +87,7 @@ public class FormController {
         return new ModelAndView("redirect:" + "/system/panel");
        
     }
-      @RequestMapping(value = "/system/updatedata.do", method = RequestMethod.POST)
+      @RequestMapping(value = {"/system/updatedata.do","/Carpath/system/updatedata.do"}, method = RequestMethod.POST)
     public ModelAndView doUpdateData(HttpServletRequest request,HttpServletResponse response) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
@@ -135,7 +135,7 @@ public class FormController {
         return new ModelAndView("redirect:" + "/system/panel");
        
     }
-     @RequestMapping(value = "/system/routes/insertdata.do", method = RequestMethod.POST)
+     @RequestMapping(value = {"/system/routes/insertdata.do","/Carpath/system/routes/insertdata.do"}, method = RequestMethod.POST)
     public ModelAndView doInsertRoute(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String titleEN = request.getParameter("titleEN");
@@ -171,7 +171,7 @@ public class FormController {
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/routes");
     }
-     @RequestMapping(value = "/system/routes/updatedata.do", method = RequestMethod.POST)
+     @RequestMapping(value = {"/system/routes/updatedata.do","/Carpath/system/routes/updatedata.do"}, method = RequestMethod.POST)
     public ModelAndView doUpdateRoute(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
@@ -208,7 +208,7 @@ public class FormController {
                 textEN, textUA, textHU, textSK, textRO, textPL, textGE, textCZ, textSRB);
         return new ModelAndView("redirect:" + "/system/routes");
     }
-    @RequestMapping(value = "/system/adduser.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/adduser.do","/Carpath/system/adduser.do"}, method = RequestMethod.POST)
     public ModelAndView doAddUser(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
@@ -219,7 +219,7 @@ public class FormController {
         String result = users.addUser(username, password, role, enabled, descr);
          return new ModelAndView("redirect:" + "/system/users");
     }
-    @RequestMapping(value = "/system/addfilter.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/addfilter.do","/Carpath/system/addfilter.do"}, method = RequestMethod.POST)
     public ModelAndView doAddFilter(
             @RequestParam("filter_icon") MultipartFile file, @RequestParam("short_title") String short_title, 
             @RequestParam("full_title") String full_title, @RequestParam("group_id") String group_id, @RequestParam("sort_number") String sort_number, 
@@ -251,7 +251,7 @@ public class FormController {
         filters.addFilter(short_title, full_title, group_id, sort_number);
         return new ModelAndView("redirect:" + "/system/filters");
     }
-    @RequestMapping(value = "/system/editfilter.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/editfilter.do","/Carpath/system/editfilter.do"}, method = RequestMethod.POST)
     public ModelAndView doUpdateFilter(
             @RequestParam("filter_icon") MultipartFile file, @RequestParam("id") String id,  
             @RequestParam("short_title") String short_title, @RequestParam("full_title") String full_title, 
@@ -281,7 +281,7 @@ public class FormController {
         filters.updateFilter(id, short_title, full_title, group_id, sort_number);
         return new ModelAndView("redirect:" + "/system/filters");
     }
-    @RequestMapping(value = "/system/addmarker.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/addmarker.do","/Carpath/system/addmarker.do"}, method = RequestMethod.POST)
     public ModelAndView doAddMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
        
         String name = file.getOriginalFilename();
@@ -306,7 +306,7 @@ public class FormController {
         markers.addMarker(short_title);
         return new ModelAndView("redirect:" + "/system/markers");
     }
-    @RequestMapping(value = "/system/editmarker.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/editmarker.do","/Carpath/system/editmarker.do"}, method = RequestMethod.POST)
     public ModelAndView doEditMarker(@RequestParam("marker_icon") MultipartFile file, @RequestParam("short_title") String short_title, @RequestParam("id") String id, HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String name = "";
         if (!file.isEmpty()) {
@@ -339,7 +339,7 @@ public class FormController {
         markers.updateMarker(id, short_title);
         return new ModelAndView("redirect:" + "/system/markers");
     }
-    @RequestMapping(value = "/system/slideredit.do", method = RequestMethod.POST)
+    @RequestMapping(value = {"/system/slideredit.do","/Carpath/system/slideredit.do"}, method = RequestMethod.POST)
     public ModelAndView doUpdateSlider(HttpServletRequest request) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         
