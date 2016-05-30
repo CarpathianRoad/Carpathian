@@ -120,7 +120,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path='+current+'&type=slider');
+                     $('#myIframe').attr('src','/Carpath/tools/fileManager?path='+current+'&type=slider;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
     });
     $('#dialogBtn').click(function(){

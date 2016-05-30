@@ -166,16 +166,16 @@ $(document).ready(function () {
         filterValue = filterValue !== "" ? filterValue : 'default';
         $.ajax({
             type: "get",
-            url: "/Carpath/system/contentByType;jsessionid=<c:out value="${pageContext.session.id}"/>",
+            url: "/Carpath/system/contentByType",
             cache: false,    
-            data:'username='+username+'&type='+filterType+'&value='+filterValue+'&count='+count+'&page='+page,
+            data:'username='+username+'&type='+filterType+'&value='+filterValue+'&count='+count+'&page='+page+';jsessionid=<c:out value="${pageContext.session.id}"/>',
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
              $("tbody").html(response);
              cutDate();
              $(".publish-checkbox").bootstrapSwitch();
              initChecks();
-             addSession();
+             //addSession();
              initPage();
              if(${sessionScope.user.user_role} === 0) {
                  $( "td.publish" ).hide();
@@ -250,9 +250,9 @@ $(document).ready(function () {
                 //console.log(state); // true | false
         $.ajax({
             type: "get",
-            url: "/Carpath/system/changePublish;jsessionid=<c:out value="${pageContext.session.id}"/>",
+            url: "/Carpath/system/changePublish",
             cache: false,    
-            data:'id='+id+'&status='+state,
+            data:';jsessionid=<c:out value="${pageContext.session.id}"/>',
             success: function(response){
             },
             error: function(response){      

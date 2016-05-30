@@ -56,8 +56,8 @@
       <td>${title.fullTitle}</td>
       <td>${title.groupID}</td>
       <td>${title.sortNumber}</td>
-      <td><a href="<c:url value="/system/filters/edit/${title.id}"/>"><img class="edit-delete" src="${Constants.URL}img/edit.png" /></a></td>
-      <td><a href="<c:url value="/system/filters/delete/${title.id}"/>"><img class="edit-delete" src="${Constants.URL}img/delete.png" /></a></td>
+      <td><a href="<c:url value="/system/filters/edit/${title.id}"/>;jsessionid=<c:out value="${pageContext.session.id}"/>"><img class="edit-delete" src="${Constants.URL}img/edit.png" /></a></td>
+      <td><a href="<c:url value="/system/filters/delete/${title.id}"/>;jsessionid=<c:out value="${pageContext.session.id}"/>"><img class="edit-delete" src="${Constants.URL}img/delete.png" /></a></td>
     </tr>
     </c:forEach>
   </tbody>
