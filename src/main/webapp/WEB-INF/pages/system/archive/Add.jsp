@@ -239,12 +239,12 @@
         }
         
         jQuery.ajax({
-            url: '${Constants.URL}system/archive/do/removefile',
+            url: '/Carpath/system/archive/do/removefile',
             cache: false,
             contentType: false,
             processData: false,
             type: 'GET',
-            data: 'path='+path,
+            data: 'path='+path+';jsessionid=<c:out value="${pageContext.session.id}"/>',
             success: function(data){
                 console.log(data);
             }
@@ -265,42 +265,42 @@
        
     function initCKE() {
         CKEDITOR.replace('editorEN', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorUA', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorHU', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorSK', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
         CKEDITOR.replace('editorRO', {
-            filebrowserBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageBrowseUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
-            filebrowserImageUploadUrl : '${Constants.URL}tools/imageupload/${folder_str}/',
+            filebrowserBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageBrowseUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
+            filebrowserImageUploadUrl : '<c:url value="/tools/imageupload/${folder_str}/" />',
             filebrowserWindowWidth  : 800,
             filebrowserWindowHeight : 500
         });
