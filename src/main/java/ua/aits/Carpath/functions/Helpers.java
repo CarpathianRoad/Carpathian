@@ -290,7 +290,7 @@ public class Helpers extends FileMethods {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("robot@aits.ua"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("sirakandrew@gmail.com"));
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress("sirakandrew@gmail.com"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress("director@aits.ua"));
             message.setSubject("Carpathian Road error mail:");
             message.setText("URL: "+url+"\nError stack: \n" + stack);
