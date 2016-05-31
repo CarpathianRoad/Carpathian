@@ -465,9 +465,9 @@ function removePanoramaInit(){
         if($(this).attr("panorama-type") === "from-upload"){
         $.ajax({
             type: "get",
-            url: "/Carpath/system/deletePanoramaFile;jsessionid=<c:out value="${pageContext.session.id}"/>",
+            url: "<c:url value="/system/deletePanoramaFile" />",
             cache: false,    
-            data:'name='+filename+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data:'name='+filename,
             success: function(response){
                         $(".load-panorama").hide();
                         $("#fullname-panorama").val("");
