@@ -29,7 +29,7 @@
     $(document).ready(function() {
         console.log("${sessionScope.user.user_name}");
         $( ".content-list a" ).each(function( index ) {
-            var current = $(this).attr("href") + ";" + $.cookie("sessionid");
+            var current = "<c:out value="${pageContext.session.id}"/>";
             $(this).attr("href", current);
         });
     });

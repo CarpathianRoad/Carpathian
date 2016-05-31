@@ -366,9 +366,9 @@ function removeRouteInit(){
         var filename = $(this).attr("route-name");
         $.ajax({
             type: "get",
-            url: "/Carpath/system/deleteRouteFile",
+            url: "<c:url value="/system/deleteRouteFile" />",
             cache: false,    
-            data:'name='+filename+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data:'name='+filename,
             success: function(response){
                         $(".load-route").hide();
                         $("#fullname-route").val("");

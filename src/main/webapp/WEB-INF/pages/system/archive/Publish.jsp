@@ -462,9 +462,9 @@ function removePanoramaInit(){
         if($(this).attr("panorama-type") === "from-upload"){
         $.ajax({
             type: "get",
-            url: "/Carpath/system/deletePanoramaFile",
+            url: "<c:url value="/system/deletePanoramaFile" />",
             cache: false,    
-            data:'name='+filename+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data:'name='+filename,
             success: function(response){
                         $(".load-panorama").hide();
                         $("#fullname-panorama").val("");
@@ -560,7 +560,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframe').attr('src','${Constants.URL}tools/fileManager?path_main='+current+';jsessionid=<c:out value="${pageContext.session.id}"/>');
+                     $('#myIframe').attr('src','/Carpath/tools/fileManager?path_main='+current+';jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         });
     $("#dialog-archive").dialog({
@@ -570,7 +570,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframeArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchive+';jsessionid=<c:out value="${pageContext.session.id}"/>';
+                     $('#myIframeArchive').attr('src','/Carpath/tools/fileManager?path_main='+currentArchive+';jsessionid=<c:out value="${pageContext.session.id}"/>';
                   }
         });
        $("#avatarDialog").dialog({
@@ -580,7 +580,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrame').attr('src','${Constants.URL}tools/fileManager?path_main='+currentAva+'&type=avatar;jsessionid=<c:out value="${pageContext.session.id}"/>');
+                     $('#avatarFrame').attr('src','/Carpath/tools/fileManager?path_main='+currentAva+'&type=avatar;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         }); 
        $("#avatarDialogArchive").dialog({
@@ -590,7 +590,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#avatarFrameArchive').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar;jsessionid=<c:out value="${pageContext.session.id}"/>');
+                     $('#avatarFrameArchive').attr('src','/Carpath/tools/fileManager?path_main='+currentArchiveAvatar+'&type=avatar;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         }); 
         $("#dialog-archive-panorama").dialog({
@@ -600,7 +600,7 @@ function initDialog(){
             width: 800,
             position: { my: "center top", at: "center top", of: window },
             open: function(ev, ui){
-                     $('#myIframeArchivePanorama').attr('src','${Constants.URL}tools/fileManager?path_main='+currentArchiveAvatar+'&type=panorama-file;jsessionid=<c:out value="${pageContext.session.id}"/>');
+                     $('#myIframeArchivePanorama').attr('src','/Carpath/tools/fileManager?path_main='+currentArchiveAvatar+'&type=panorama-file;jsessionid=<c:out value="${pageContext.session.id}"/>');
                   }
         });
         $('#dialogBtn').click(function(){
