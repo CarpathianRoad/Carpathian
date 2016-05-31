@@ -45,7 +45,7 @@
 	<script>
     	$(document).ready(function () {
         	$("#my-awesome-dropzone").dropzone({
-            	url: "/Carpath/system/archive/do/uploadimage;jsessionid=<c:out value="${pageContext.session.id}"/>",
+            	url: "<c:url value="/system/archive/do/uploadimage" />",
             	addRemoveLinks: true,
             	init: function () {
 	this.on("complete", function (file) {

@@ -246,12 +246,12 @@
         }
         
         jQuery.ajax({
-            url: '/Carpath/system/archive/do/removefile',
+            url: '<c:url value="/system/archive/do/removefile" />',
             cache: false,
             contentType: false,
             processData: false,
             type: 'GET',
-            data: 'path='+path+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data: 'path='+path,
             success: function(data){
                 $(temp).parent().remove();
                 if (!$("#my-awesome-dropzone").find("div.dz-file-preview").length) { 

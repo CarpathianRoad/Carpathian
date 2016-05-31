@@ -99,9 +99,9 @@
         console.log($(this).val());
         $.ajax({
             type: "get",
-            url: "/Carpath/system/users/ajax/checkUserName",
+            url: "<c:url value="/system/users/ajax/checkUserName" />",
             cache: false,    
-            data:'user_name='+ $(this).val()+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data:'user_name='+ $(this).val(),
             success: function(response){
                 console.log(response);
                 if(response === "" || response === null){

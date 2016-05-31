@@ -120,9 +120,9 @@ $(document).ready(function () {
         filterValue = typeof filterValue !== 'undefined' ? filterValue : 'default';
         $.ajax({
             type: "get",
-            url: "/Carpath/system/routesByType",
+            url: "<c:url value="/system/routesByType" />",
             cache: false,    
-            data:'type='+filterType+'&value='+filterValue+'&count='+count+'&page='+page+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data:'type='+filterType+'&value='+filterValue+'&count='+count+'&page='+page,
             mimeType:"text/html; charset=UTF-8",
             success: function(response){
              $("tbody").html(response);
@@ -180,9 +180,9 @@ $(document).ready(function () {
                 //console.log(state); // true | false
         $.ajax({
             type: "get",
-            url: "/Carpath/system/changePublishRoute",
+            url: "<c:url value="/system/changePublishRoute" />",
             cache: false,    
-            data:'id='+id+'&status='+state+';jsessionid=<c:out value="${pageContext.session.id}"/>',
+            data:'id='+id+'&status='+state,
             success: function(response){
             },
             error: function(response){      
