@@ -45,7 +45,7 @@ public class AjaxController {
     Helpers helpers = new Helpers();
     MenuModel menu = new MenuModel();
     
-    @RequestMapping(value = {"/system/checkLoginPass/", "/system/checkLoginPass","/system/checkLoginPass/", "/system/checkLoginPass"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/checkLoginPass/", "/system/checkLoginPass","/Carpath/system/checkLoginPass/", "/Carpath/system/checkLoginPass"}, method = RequestMethod.GET)
     public @ResponseBody
     String checkLoginPass(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -57,7 +57,7 @@ public class AjaxController {
             return "false";
         }
     }
-    @RequestMapping(value = {"/system/returnCatTitle/", "/system/returnCatTitle","/system/returnCatTitle/", "/system/returnCatTitle"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/returnCatTitle/", "/system/returnCatTitle","/Carpath/system/returnCatTitle/", "/Carpath/system/returnCatTitle"}, method = RequestMethod.GET)
     public @ResponseBody
     String returnCatTitle(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
@@ -65,7 +65,7 @@ public class AjaxController {
         return temp;
     }
     
-    @RequestMapping(value = {"/system/changePublish/", "/system/changePublish","/system/changePublish/", "/system/changePublish"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/system/changePublish/", "/system/changePublish","/Carpath/system/changePublish/", "/Carpath/system/changePublish"}, method = RequestMethod.GET)
     public @ResponseBody
     String changePublish(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
